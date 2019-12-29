@@ -123,7 +123,7 @@ describe('shinkansen-transmission/transmission', () => {
         },
         numberTypeSubSchema: {
           title: 'Number type sub schema',
-          type: 'string',
+          type: 'number',
           min: 1,
           max: 10
         },
@@ -131,7 +131,9 @@ describe('shinkansen-transmission/transmission', () => {
           title: 'Array type sub schema',
           type: 'array',
           items: [
-            { type: 'string' }
+            {
+              type: 'string'
+            }
           ]
         },
         objectTypeSubSchema: {
@@ -142,7 +144,7 @@ describe('shinkansen-transmission/transmission', () => {
             two: { type: 'number' }
           }
         },
-        booleanTypeScubSchema: {
+        booleanTypeSubSchema: {
           title: 'Boolean type sub schema',
           type: 'boolean'
         },
@@ -170,20 +172,83 @@ describe('shinkansen-transmission/transmission', () => {
 
     return expect(transform(schema))
       .to.eql({
+        meta: {
+          schema: {
+            $id: 'https://example.com/geographical-location.schema.json',
+            $schema: 'http://json-schema.org/draft-07/schema#',
+            description: 'A geographical coordinate',
+            properties: {
+              stringTypeSubSchema: {
+                maxLength: 10,
+                minLength: 1,
+                title: 'String type sub schema',
+                type: 'string'
+              },
+              numberTypeSubSchema: {
+                max: 10,
+                min: 1,
+                title: 'Number type sub schema',
+                type: 'number'
+              },
+              arrayTypeSubSchema: {
+                items: [
+                  {
+                    type: 'string'
+                  }
+                ],
+                title: 'Array type sub schema',
+                type: 'array'
+              },
+              objectTypeSubSchema: {
+                properties: {
+                  one: {
+                    type: 'string'
+                  },
+                  two: {
+                    type: 'number'
+                  }
+                },
+                title: 'Object type sub schema',
+                type: 'object'
+              },
+              booleanTypeSubSchema: {
+                title: 'Boolean type sub schema',
+                type: 'boolean'
+              },
+              nullTypeSubSchema: {
+                title: 'Null type sub schema',
+                type: 'null'
+              },
+              latitude: {
+                maximum: 90,
+                minimum: -90,
+                multipleOf: 42,
+                title: 'Latitude',
+                type: 'number'
+              },
+              longitude: {
+                exclusiveMaximum: true,
+                exclusiveMinimum: true,
+                maximum: 180,
+                minimum: -180,
+                title: 'Longitude',
+                type: 'number'
+              }
+            },
+            required: [
+              'latitude',
+              'longitude'
+            ],
+            title: 'Latitude and Longitude',
+            type: 'object'
+          },
+          type: 'object',
+          uri: '#/'
+        },
         elements: {
           description: 'A geographical coordinate',
           fields: [
             {
-              elements: {
-                field: {
-                  maxLength: 10,
-                  minLength: 1,
-                  name: 'stringTypeSubSchema',
-                  required: false,
-                  type: 'string'
-                },
-                title: 'String type sub schema'
-              },
               meta: {
                 maxLength: 10,
                 minLength: 1,
@@ -196,18 +261,21 @@ describe('shinkansen-transmission/transmission', () => {
                   title: 'String type sub schema',
                   type: 'string'
                 },
-                type: 'string'
-              }
-            },
-            {
+                type: 'string',
+                uri: '#/stringTypeSubSchema'
+              },
               elements: {
                 field: {
-                  name: 'numberTypeSubSchema',
+                  maxLength: 10,
+                  minLength: 1,
+                  name: 'stringTypeSubSchema',
                   required: false,
                   type: 'string'
                 },
-                title: 'Number type sub schema'
-              },
+                title: 'String type sub schema'
+              }
+            },
+            {
               meta: {
                 name: 'numberTypeSubSchema',
                 required: false,
@@ -216,34 +284,21 @@ describe('shinkansen-transmission/transmission', () => {
                   max: 10,
                   min: 1,
                   title: 'Number type sub schema',
-                  type: 'string'
+                  type: 'number'
                 },
-                type: 'string'
+                type: 'number',
+                uri: '#/numberTypeSubSchema'
+              },
+              elements: {
+                field: {
+                  name: 'numberTypeSubSchema',
+                  required: false,
+                  type: 'number'
+                },
+                title: 'Number type sub schema'
               }
             },
             {
-              elements: {
-                fields: [
-                  {
-                    elements: {
-                      field: {
-                        required: false,
-                        type: 'string'
-                      }
-                    },
-                    meta: {
-                      arrayName: 'arrayTypeSubSchema',
-                      required: false,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      type: 'string'
-                    }
-                  }
-                ],
-                title: 'Array type sub schema'
-              },
               meta: {
                 name: 'arrayTypeSubSchema',
                 required: false,
@@ -257,51 +312,34 @@ describe('shinkansen-transmission/transmission', () => {
                   title: 'Array type sub schema',
                   type: 'array'
                 },
-                type: 'array'
-              }
-            },
-            {
+                type: 'array',
+                uri: '#/arrayTypeSubSchema'
+              },
               elements: {
                 fields: [
                   {
-                    elements: {
-                      field: {
-                        name: 'one',
-                        required: false,
-                        type: 'string'
-                      }
-                    },
                     meta: {
-                      name: 'one',
                       required: false,
                       rootSchema: schema,
                       schema: {
                         type: 'string'
                       },
-                      type: 'string'
-                    }
-                  },
-                  {
+                      type: 'string',
+                      uri: '#/arrayTypeSubSchema/0',
+                      item: 0
+                    },
                     elements: {
                       field: {
-                        name: 'two',
                         required: false,
-                        type: 'number'
+                        type: 'string'
                       }
-                    },
-                    meta: {
-                      name: 'two',
-                      required: false,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'number'
-                      },
-                      type: 'number'
                     }
                   }
                 ],
-                title: 'Object type sub schema'
-              },
+                title: 'Array type sub schema'
+              }
+            },
+            {
               meta: {
                 name: 'objectTypeSubSchema',
                 required: false,
@@ -314,38 +352,75 @@ describe('shinkansen-transmission/transmission', () => {
                   title: 'Object type sub schema',
                   type: 'object'
                 },
-                type: 'object'
+                type: 'object',
+                uri: '#/objectTypeSubSchema'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      name: 'one',
+                      required: false,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string'
+                      },
+                      type: 'string',
+                      uri: '#/objectTypeSubSchema/one'
+                    },
+                    elements: {
+                      field: {
+                        name: 'one',
+                        required: false,
+                        type: 'string'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      name: 'two',
+                      required: false,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'number'
+                      },
+                      type: 'number',
+                      uri: '#/objectTypeSubSchema/two'
+                    },
+                    elements: {
+                      field: {
+                        name: 'two',
+                        required: false,
+                        type: 'number'
+                      }
+                    }
+                  }
+                ],
+                title: 'Object type sub schema'
               }
             },
             {
-              elements: {
-                field: {
-                  name: 'booleanTypeScubSchema',
-                  required: false,
-                  type: 'boolean'
-                },
-                title: 'Boolean type sub schema'
-              },
               meta: {
-                name: 'booleanTypeScubSchema',
+                name: 'booleanTypeSubSchema',
                 required: false,
                 rootSchema: schema,
                 schema: {
                   title: 'Boolean type sub schema',
                   type: 'boolean'
                 },
-                type: 'boolean'
+                type: 'boolean',
+                uri: '#/booleanTypeSubSchema'
+              },
+              elements: {
+                field: {
+                  name: 'booleanTypeSubSchema',
+                  required: false,
+                  type: 'boolean'
+                },
+                title: 'Boolean type sub schema'
               }
             },
             {
-              elements: {
-                field: {
-                  name: 'nullTypeSubSchema',
-                  required: false,
-                  type: 'null'
-                },
-                title: 'Null type sub schema'
-              },
               meta: {
                 name: 'nullTypeSubSchema',
                 required: false,
@@ -354,21 +429,19 @@ describe('shinkansen-transmission/transmission', () => {
                   title: 'Null type sub schema',
                   type: 'null'
                 },
-                type: 'null'
+                type: 'null',
+                uri: '#/nullTypeSubSchema'
+              },
+              elements: {
+                field: {
+                  name: 'nullTypeSubSchema',
+                  required: false,
+                  type: 'null'
+                },
+                title: 'Null type sub schema'
               }
             },
             {
-              elements: {
-                field: {
-                  max: 90,
-                  min: -90,
-                  name: 'latitude',
-                  required: true,
-                  step: 42,
-                  type: 'number'
-                },
-                title: 'Latitude'
-              },
               meta: {
                 max: 90,
                 min: -90,
@@ -383,20 +456,22 @@ describe('shinkansen-transmission/transmission', () => {
                   type: 'number'
                 },
                 step: 42,
-                type: 'number'
+                type: 'number',
+                uri: '#/latitude'
+              },
+              elements: {
+                field: {
+                  max: 90,
+                  min: -90,
+                  name: 'latitude',
+                  required: true,
+                  step: 42,
+                  type: 'number'
+                },
+                title: 'Latitude'
               }
             },
             {
-              elements: {
-                field: {
-                  max: 180,
-                  min: -180,
-                  name: 'longitude',
-                  required: true,
-                  type: 'number'
-                },
-                title: 'Longitude'
-              },
               meta: {
                 isExclusiveMax: true,
                 isExclusiveMin: true,
@@ -413,83 +488,22 @@ describe('shinkansen-transmission/transmission', () => {
                   title: 'Longitude',
                   type: 'number'
                 },
-                type: 'number'
+                type: 'number',
+                uri: '#/longitude'
+              },
+              elements: {
+                field: {
+                  max: 180,
+                  min: -180,
+                  name: 'longitude',
+                  required: true,
+                  type: 'number'
+                },
+                title: 'Longitude'
               }
             }
           ],
           title: 'Latitude and Longitude'
-        },
-        meta: {
-          schema: {
-            $id: 'https://example.com/geographical-location.schema.json',
-            $schema: 'http://json-schema.org/draft-07/schema#',
-            description: 'A geographical coordinate',
-            properties: {
-              arrayTypeSubSchema: {
-                items: [
-                  {
-                    type: 'string'
-                  }
-                ],
-                title: 'Array type sub schema',
-                type: 'array'
-              },
-              booleanTypeScubSchema: {
-                title: 'Boolean type sub schema',
-                type: 'boolean'
-              },
-              latitude: {
-                maximum: 90,
-                minimum: -90,
-                multipleOf: 42,
-                title: 'Latitude',
-                type: 'number'
-              },
-              longitude: {
-                exclusiveMaximum: true,
-                exclusiveMinimum: true,
-                maximum: 180,
-                minimum: -180,
-                title: 'Longitude',
-                type: 'number'
-              },
-              nullTypeSubSchema: {
-                title: 'Null type sub schema',
-                type: 'null'
-              },
-              numberTypeSubSchema: {
-                max: 10,
-                min: 1,
-                title: 'Number type sub schema',
-                type: 'string'
-              },
-              objectTypeSubSchema: {
-                properties: {
-                  one: {
-                    type: 'string'
-                  },
-                  two: {
-                    type: 'number'
-                  }
-                },
-                title: 'Object type sub schema',
-                type: 'object'
-              },
-              stringTypeSubSchema: {
-                maxLength: 10,
-                minLength: 1,
-                title: 'String type sub schema',
-                type: 'string'
-              }
-            },
-            required: [
-              'latitude',
-              'longitude'
-            ],
-            title: 'Latitude and Longitude',
-            type: 'object'
-          },
-          type: 'object'
         }
       })
   })
@@ -501,7 +515,8 @@ describe('shinkansen-transmission/transmission', () => {
       .to.eql({
         meta: {
           type: 'number',
-          schema
+          schema,
+          uri: '#/'
         },
         elements: {
           field: {
@@ -518,7 +533,8 @@ describe('shinkansen-transmission/transmission', () => {
       .to.eql({
         meta: {
           type: 'string',
-          schema
+          schema,
+          uri: '#/'
         },
         elements: {
           field: {
@@ -544,7 +560,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -555,7 +572,9 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'number'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     field: {
@@ -583,7 +602,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -594,7 +614,9 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'string'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     field: {
@@ -622,7 +644,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -633,7 +656,9 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'array'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     fields: []
@@ -658,7 +683,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -669,7 +695,9 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'object'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     fields: []
@@ -696,7 +724,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -711,7 +740,9 @@ describe('shinkansen-transmission/transmission', () => {
                         two: { type: 'string' }
                       }
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     fields: [
@@ -721,7 +752,8 @@ describe('shinkansen-transmission/transmission', () => {
                           required: false,
                           type: 'string',
                           schema: { type: 'string' },
-                          rootSchema: schema
+                          rootSchema: schema,
+                          uri: '#/0/one'
                         },
                         elements: {
                           field: {
@@ -737,7 +769,8 @@ describe('shinkansen-transmission/transmission', () => {
                           required: false,
                           type: 'string',
                           schema: { type: 'string' },
-                          rootSchema: schema
+                          rootSchema: schema,
+                          uri: '#/0/two'
                         },
                         elements: {
                           field: {
@@ -774,7 +807,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -792,7 +826,9 @@ describe('shinkansen-transmission/transmission', () => {
                         'one'
                       ]
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     fields: [
@@ -802,7 +838,8 @@ describe('shinkansen-transmission/transmission', () => {
                           required: true,
                           type: 'string',
                           schema: { type: 'string' },
-                          rootSchema: schema
+                          rootSchema: schema,
+                          uri: '#/0/one'
                         },
                         elements: {
                           field: {
@@ -818,7 +855,8 @@ describe('shinkansen-transmission/transmission', () => {
                           required: false,
                           type: 'string',
                           schema: { type: 'string' },
-                          rootSchema: schema
+                          rootSchema: schema,
+                          uri: '#/0/two'
                         },
                         elements: {
                           field: {
@@ -850,7 +888,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -861,7 +900,9 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'boolean'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     field: {
@@ -889,7 +930,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
@@ -900,7 +942,9 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'null'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/0',
+                    item: 0
                   },
                   elements: {
                     field: {
@@ -923,7 +967,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'array',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: []
@@ -948,18 +993,12 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'object',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
                 {
-                  elements: {
-                    field: {
-                      name: 'one',
-                      required: false,
-                      type: 'string'
-                    }
-                  },
                   meta: {
                     name: 'one',
                     required: false,
@@ -967,17 +1006,18 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'string'
                     },
-                    rootSchema: schema
-                  }
-                },
-                {
+                    rootSchema: schema,
+                    uri: '#/one'
+                  },
                   elements: {
                     field: {
-                      name: 'two',
+                      name: 'one',
                       required: false,
                       type: 'string'
                     }
-                  },
+                  }
+                },
+                {
                   meta: {
                     name: 'two',
                     required: false,
@@ -985,7 +1025,15 @@ describe('shinkansen-transmission/transmission', () => {
                     schema: {
                       type: 'string'
                     },
-                    rootSchema: schema
+                    rootSchema: schema,
+                    uri: '#/two'
+                  },
+                  elements: {
+                    field: {
+                      name: 'two',
+                      required: false,
+                      type: 'string'
+                    }
                   }
                 }
               ]
@@ -1009,40 +1057,43 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'object',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: [
                 {
+                  meta: {
+                    name: 'one',
+                    required: true,
+                    rootSchema: schema,
+                    schema: { type: 'string' },
+                    type: 'string',
+                    uri: '#/one'
+                  },
                   elements: {
                     field: {
                       name: 'one',
                       required: true,
                       type: 'string'
                     }
-                  },
-                  meta: {
-                    name: 'one',
-                    required: true,
-                    rootSchema: schema,
-                    schema: { type: 'string' },
-                    type: 'string'
                   }
                 },
                 {
+                  meta: {
+                    name: 'two',
+                    required: false,
+                    rootSchema: schema,
+                    schema: { type: 'string' },
+                    type: 'string',
+                    uri: '#/two'
+                  },
                   elements: {
                     field: {
                       name: 'two',
                       required: false,
                       type: 'string'
                     }
-                  },
-                  meta: {
-                    name: 'two',
-                    required: false,
-                    rootSchema: schema,
-                    schema: { type: 'string' },
-                    type: 'string'
                   }
                 }
               ]
@@ -1059,7 +1110,8 @@ describe('shinkansen-transmission/transmission', () => {
           .to.eql({
             meta: {
               type: 'object',
-              schema
+              schema,
+              uri: '#/'
             },
             elements: {
               fields: []
@@ -1076,7 +1128,8 @@ describe('shinkansen-transmission/transmission', () => {
       .to.eql({
         meta: {
           type: 'boolean',
-          schema
+          schema,
+          uri: '#/'
         },
         elements: {
           field: {
@@ -1093,7 +1146,8 @@ describe('shinkansen-transmission/transmission', () => {
       .to.eql({
         meta: {
           type: 'null',
-          schema
+          schema,
+          uri: '#/'
         },
         elements: {
           field: {
