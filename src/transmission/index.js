@@ -14,17 +14,17 @@ export const toNumber = (v) => {
   return NaN
 }
 
-export const hasEnum = (schema) => Reflect.has(schema, 'enum')
-export const getEnum = (schema) => Reflect.get(schema, 'enum')
+export const hasEnum = (schema = {}) => Reflect.has(schema, 'enum')
+export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')
 
-export const hasOneOf = (schema) => Reflect.has(schema, 'oneOf')
-export const getOneOf = (schema) => Reflect.get(schema, 'oneOf')
+export const hasOneOf = (schema = {}) => Reflect.has(schema, 'oneOf')
+export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 
-export const hasAnyOf = (schema) => Reflect.has(schema, 'anyOf')
-export const getAnyOf = (schema) => Reflect.get(schema, 'anyOf')
+export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
+export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
 
-export const hasAllOf = (schema) => Reflect.has(schema, 'allOf')
-export const getAllOf = (schema) => Reflect.get(schema, 'allOf')
+export const hasAllOf = (schema = {}) => Reflect.has(schema, 'allOf')
+export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
 export const getUri = (uri = '#', resource = '') => uri.concat('/').concat(resource)
 
@@ -501,7 +501,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, isRequired, par
   }
 }
 
-export function transformObjectSchema (schema = {}, rootSchema = schema, isRequired = false, parentUri = '#', fieldKey) {
+export function transformObjectSchema (schema = {}, rootSchema = schema, isRequired = false, parentUri = '#', fieldKey = '') {
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
