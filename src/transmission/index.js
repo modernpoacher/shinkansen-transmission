@@ -1,12 +1,26 @@
-export const getTitle = ({ title }) => (title ? { title } : {})
+export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
-export const getDescription = ({ description }) => (description ? { description } : {})
+export const getDescription = ({ description } = {}) => (description ? { description } : {})
 
-export const getIsReadOnly = ({ readOnly = false }) => (readOnly ? { readOnly } : {})
+export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOnly } : {})
 
-export const getIsWriteOnly = ({ writeOnly = false }) => (writeOnly ? { writeOnly } : {})
+export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export const getDefaultValue = (schema) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
+export const getDefaultValue = (schema = {}) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
+
+export const getControlType = (params = {}, uri = '#') => {
+  if (Reflect.has(params, 'controlTypeMap')) {
+    const {
+      [uri]: controlType
+    } = Reflect.get(params, 'controlTypeMap')
+
+    return (
+      controlType ? { controlType } : {}
+    )
+  }
+
+  return {}
+}
 
 export const toNumber = (v) => {
   if (typeof v === 'number') return v
@@ -49,43 +63,43 @@ if (hasEnum(schema)) {
 }
 */
 
-export const getMin = ({ minimum }) => {
+export const getMin = ({ minimum } = {}) => {
   const value = toNumber(minimum)
 
   return isNaN(value) ? {} : { min: value }
 }
 
-export const getMax = ({ maximum }) => {
+export const getMax = ({ maximum } = {}) => {
   const value = toNumber(maximum)
 
   return isNaN(value) ? {} : { max: value }
 }
 
-export const getMinLength = ({ minLength }) => {
+export const getMinLength = ({ minLength } = {}) => {
   const value = toNumber(minLength)
 
   return isNaN(value) ? {} : { minLength: value }
 }
 
-export const getMaxLength = ({ maxLength }) => {
+export const getMaxLength = ({ maxLength } = {}) => {
   const value = toNumber(maxLength)
 
   return isNaN(value) ? {} : { maxLength: value }
 }
 
-export const getMinItems = ({ minItems }) => {
+export const getMinItems = ({ minItems } = {}) => {
   const value = toNumber(minItems)
 
   return isNaN(value) ? {} : { minItems: value }
 }
 
-export const getMaxItems = ({ maxItems }) => {
+export const getMaxItems = ({ maxItems } = {}) => {
   const value = toNumber(maxItems)
 
   return isNaN(value) ? {} : { maxItems: value }
 }
 
-export const getHasUniqueItems = (schema) => {
+export const getHasUniqueItems = (schema = {}) => {
   if (Reflect.has(schema, 'uniqueItems')) {
     const value = Reflect.get(schema, 'uniqueItems')
 
@@ -95,31 +109,31 @@ export const getHasUniqueItems = (schema) => {
   return {}
 }
 
-export const getMinContains = ({ minContains }) => {
+export const getMinContains = ({ minContains } = {}) => {
   const value = toNumber(minContains)
 
   return isNaN(value) ? {} : { minContains: value }
 }
 
-export const getMaxContains = ({ maxContains }) => {
+export const getMaxContains = ({ maxContains } = {}) => {
   const value = toNumber(maxContains)
 
   return isNaN(value) ? {} : { maxContains: value }
 }
 
-export const getMinProperties = ({ minProperties }) => {
+export const getMinProperties = ({ minProperties } = {}) => {
   const value = toNumber(minProperties)
 
   return isNaN(value) ? {} : { minProperties: value }
 }
 
-export const getMaxProperties = ({ maxProperties }) => {
+export const getMaxProperties = ({ maxProperties } = {}) => {
   const value = toNumber(maxProperties)
 
   return isNaN(value) ? {} : { maxProperties: value }
 }
 
-export const getIsExclusiveMin = (schema) => {
+export const getIsExclusiveMin = (schema = {}) => {
   if (Reflect.has(schema, 'exclusiveMinimum')) {
     const value = Reflect.get(schema, 'exclusiveMinimum')
 
@@ -129,7 +143,7 @@ export const getIsExclusiveMin = (schema) => {
   return {}
 }
 
-export const getIsExclusiveMax = (schema) => {
+export const getIsExclusiveMax = (schema = {}) => {
   if (Reflect.has(schema, 'exclusiveMaximum')) {
     const value = Reflect.get(schema, 'exclusiveMaximum')
 
@@ -139,23 +153,32 @@ export const getIsExclusiveMax = (schema) => {
   return {}
 }
 
-export const getPattern = ({ pattern }) => (pattern ? { pattern } : {})
+export const getPattern = ({ pattern } = {}) => (pattern ? { pattern } : {})
 
-export const getStep = ({ multipleOf }) => {
+export const getStep = ({ multipleOf } = {}) => {
   const value = toNumber(multipleOf)
 
   return isNaN(value) ? {} : { step: value }
 }
 
-export function transformObjectSchemaNull (schema, rootSchema, { required: isRequired, uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaNull (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
+  const uri = getUri(parentUri, fieldKey)
+
   return {
     meta: {
-      uri: getUri(parentUri, fieldKey),
+      uri,
       name: fieldKey,
       type: 'null',
       schema,
       rootSchema,
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -169,15 +192,24 @@ export function transformObjectSchemaNull (schema, rootSchema, { required: isReq
   }
 }
 
-export function transformObjectSchemaBoolean (schema, rootSchema, { required: isRequired, uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaBoolean (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
+  const uri = getUri(parentUri, fieldKey)
+
   return {
     meta: {
-      uri: getUri(parentUri, fieldKey),
+      uri,
       name: fieldKey,
       type: 'boolean',
       schema,
       rootSchema,
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -192,7 +224,13 @@ export function transformObjectSchemaBoolean (schema, rootSchema, { required: is
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformObjectSchemaObject (schema, rootSchema, { required: isRequired, uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaObject (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
   const uri = getUri(parentUri, fieldKey)
 
   const meta = {
@@ -203,7 +241,8 @@ export function transformObjectSchemaObject (schema, rootSchema, { required: isR
     rootSchema,
     ...getMaxProperties(schema),
     ...getMinProperties(schema),
-    required: isRequired
+    required: isRequired,
+    ...getControlType(params, uri)
   }
 
   let elements
@@ -227,7 +266,7 @@ export function transformObjectSchemaObject (schema, rootSchema, { required: isR
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index })), []),
           name: fieldKey,
           type: 'object',
           required: isRequired
@@ -241,7 +280,7 @@ export function transformObjectSchemaObject (schema, rootSchema, { required: isR
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index })), []),
             name: fieldKey,
             type: 'object',
             required: isRequired
@@ -262,7 +301,7 @@ export function transformObjectSchemaObject (schema, rootSchema, { required: isR
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { required: required.includes(key), uri, key })), [])
+                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key })), [])
             )
           }
         }
@@ -277,7 +316,13 @@ export function transformObjectSchemaObject (schema, rootSchema, { required: isR
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformObjectSchemaArray (schema, rootSchema, { required: isRequired, uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaArray (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
   const uri = getUri(parentUri, fieldKey)
 
   const {
@@ -296,18 +341,25 @@ export function transformObjectSchemaArray (schema, rootSchema, { required: isRe
       ...getHasUniqueItems(schema),
       ...getMaxContains(schema),
       ...getMinContains(schema),
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
       ...getDescription(schema),
-      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), [])
+      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index })), [])
     }
   }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformObjectSchemaString (schema, rootSchema, { required: isRequired, uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaString (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
   const uri = getUri(parentUri, fieldKey)
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
@@ -322,7 +374,8 @@ export function transformObjectSchemaString (schema, rootSchema, { required: isR
     ...minLength,
     ...maxLength,
     ...pattern,
-    required: isRequired
+    required: isRequired,
+    ...getControlType(params, uri)
   }
 
   let elements
@@ -350,7 +403,7 @@ export function transformObjectSchemaString (schema, rootSchema, { required: isR
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index })), []),
           name: fieldKey,
           type: 'string',
           ...minLength,
@@ -367,7 +420,7 @@ export function transformObjectSchemaString (schema, rootSchema, { required: isR
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index })), []),
             name: fieldKey,
             type: 'string',
             ...minLength,
@@ -404,7 +457,13 @@ export function transformObjectSchemaString (schema, rootSchema, { required: isR
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber (schema, rootSchema, { required: isRequired, uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaNumber (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
   const uri = getUri(parentUri, fieldKey)
   const min = getMin(schema)
   const max = getMax(schema)
@@ -421,7 +480,8 @@ export function transformObjectSchemaNumber (schema, rootSchema, { required: isR
     ...min,
     ...max,
     ...step,
-    required: isRequired
+    required: isRequired,
+    ...getControlType(params, uri)
   }
 
   let elements
@@ -449,7 +509,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, { required: isR
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index })), []),
           name: fieldKey,
           type: 'number',
           ...min,
@@ -466,7 +526,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, { required: isR
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index })), []),
             name: fieldKey,
             type: 'number',
             ...min,
@@ -502,43 +562,57 @@ export function transformObjectSchemaNumber (schema, rootSchema, { required: isR
   }
 }
 
-export function transformObjectSchema (schema = {}, rootSchema = schema, { required = false, uri = '#', key = '' }) {
+export function transformObjectSchema (schema = {}, rootSchema = schema, params = {}) {
   const { type } = schema
+  const {
+    required = false,
+    uri = '#',
+    key = ''
+  } = params
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformObjectSchemaNull(schema, rootSchema, { required, uri, key })
+      return transformObjectSchemaNull(schema, rootSchema, { ...params, required, uri, key })
 
     case 'boolean':
-      return transformObjectSchemaBoolean(schema, rootSchema, { required, uri, key })
+      return transformObjectSchemaBoolean(schema, rootSchema, { ...params, required, uri, key })
 
     case 'object':
-      return transformObjectSchemaObject(schema, rootSchema, { required, uri, key })
+      return transformObjectSchemaObject(schema, rootSchema, { ...params, required, uri, key })
 
     case 'array':
-      return transformObjectSchemaArray(schema, rootSchema, { required, uri, key })
+      return transformObjectSchemaArray(schema, rootSchema, { ...params, required, uri, key })
 
     case 'string':
-      return transformObjectSchemaString(schema, rootSchema, { required, uri, key })
+      return transformObjectSchemaString(schema, rootSchema, { ...params, required, uri, key })
 
     case 'number':
-      return transformObjectSchemaNumber(schema, rootSchema, { required, uri, key })
+      return transformObjectSchemaNumber(schema, rootSchema, { ...params, required, uri, key })
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformArraySchemaNull (schema, rootSchema, { required: isRequired, uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaNull (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
+  const uri = getUri(parentUri, arrayIndex)
+
   return {
     meta: {
-      uri: getUri(parentUri, arrayIndex),
+      uri,
       item: arrayIndex,
       type: 'null',
       schema,
       rootSchema,
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -551,15 +625,24 @@ export function transformArraySchemaNull (schema, rootSchema, { required: isRequ
   }
 }
 
-export function transformArraySchemaBoolean (schema, rootSchema, { required: isRequired, uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaBoolean (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
+  const uri = getUri(parentUri, arrayIndex)
+
   return {
     meta: {
-      uri: getUri(parentUri, arrayIndex),
+      uri,
       item: arrayIndex,
       type: 'boolean',
       schema,
       rootSchema,
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -573,7 +656,13 @@ export function transformArraySchemaBoolean (schema, rootSchema, { required: isR
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformArraySchemaObject (schema, rootSchema, { required: isRequired, uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaObject (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
   const uri = getUri(parentUri, arrayIndex)
 
   const meta = {
@@ -584,7 +673,8 @@ export function transformArraySchemaObject (schema, rootSchema, { required: isRe
     rootSchema,
     ...getMaxProperties(schema),
     ...getMinProperties(schema),
-    required: isRequired
+    required: isRequired,
+    ...getControlType(params, uri)
   }
 
   let elements
@@ -608,7 +698,7 @@ export function transformArraySchemaObject (schema, rootSchema, { required: isRe
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index })), []),
           type: 'object',
           required: isRequired
         }
@@ -621,7 +711,7 @@ export function transformArraySchemaObject (schema, rootSchema, { required: isRe
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), []),
+            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index })), []),
             type: 'object',
             required: isRequired
           }
@@ -641,7 +731,7 @@ export function transformArraySchemaObject (schema, rootSchema, { required: isRe
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { required: required.includes(key), uri, key })), [])
+                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key })), [])
             )
           }
         }
@@ -656,7 +746,13 @@ export function transformArraySchemaObject (schema, rootSchema, { required: isRe
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformArraySchemaArray (schema, rootSchema, { required: isRequired, uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaArray (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
   const uri = getUri(parentUri, arrayIndex)
 
   const {
@@ -675,25 +771,33 @@ export function transformArraySchemaArray (schema, rootSchema, { required: isReq
       ...getHasUniqueItems(schema),
       ...getMaxContains(schema),
       ...getMinContains(schema),
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
       ...getDescription(schema),
-      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { required: isRequired, uri, index })), [])
+      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index })), [])
     }
   }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString (schema, rootSchema, { required: isRequired, uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaString (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
+  const uri = getUri(parentUri, arrayIndex)
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
   const pattern = getPattern(schema)
 
   return {
     meta: {
-      uri: getUri(parentUri, arrayIndex),
+      uri,
       item: arrayIndex,
       type: 'string',
       schema,
@@ -701,7 +805,8 @@ export function transformArraySchemaString (schema, rootSchema, { required: isRe
       ...minLength,
       ...maxLength,
       ...pattern,
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -718,14 +823,21 @@ export function transformArraySchemaString (schema, rootSchema, { required: isRe
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformArraySchemaNumber (schema, rootSchema, { required: isRequired, uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaNumber (schema, rootSchema, params) {
+  const {
+    required: isRequired,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
+  const uri = getUri(parentUri, arrayIndex)
   const min = getMin(schema)
   const max = getMax(schema)
   const step = getStep(schema)
 
   return {
     meta: {
-      uri: getUri(parentUri, arrayIndex),
+      uri,
       item: arrayIndex,
       type: 'number',
       schema,
@@ -735,7 +847,8 @@ export function transformArraySchemaNumber (schema, rootSchema, { required: isRe
       ...min,
       ...max,
       ...step,
-      required: isRequired
+      required: isRequired,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -751,40 +864,49 @@ export function transformArraySchemaNumber (schema, rootSchema, { required: isRe
   }
 }
 
-export function transformArraySchema (schema = {}, rootSchema = schema, { required = false, uri = '#', index = 0 }) {
+export function transformArraySchema (schema = {}, rootSchema = schema, params = {}) {
   const { type } = schema
+
+  const {
+    required = false,
+    uri = '#',
+    index = 0
+  } = params
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformArraySchemaNull(schema, rootSchema, { required, uri, index })
+      return transformArraySchemaNull(schema, rootSchema, { ...params, required, uri, index })
 
     case 'boolean':
-      return transformArraySchemaBoolean(schema, rootSchema, { required, uri, index })
+      return transformArraySchemaBoolean(schema, rootSchema, { ...params, required, uri, index })
 
     case 'object':
-      return transformArraySchemaObject(schema, rootSchema, { required, uri, index })
+      return transformArraySchemaObject(schema, rootSchema, { ...params, required, uri, index })
 
     case 'array':
-      return transformArraySchemaArray(schema, rootSchema, { required, uri, index })
+      return transformArraySchemaArray(schema, rootSchema, { ...params, required, uri, index })
 
     case 'string':
-      return transformArraySchemaString(schema, rootSchema, { required, uri, index })
+      return transformArraySchemaString(schema, rootSchema, { ...params, required, uri, index })
 
     case 'number':
-      return transformArraySchemaNumber(schema, rootSchema, { required, uri, index })
+      return transformArraySchemaNumber(schema, rootSchema, { ...params, required, uri, index })
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformNull (rootSchema) {
+export function transformNull (rootSchema, params) {
+  const uri = getUri()
+
   return {
     meta: {
-      uri: getUri(),
+      uri,
       type: 'null',
-      schema: rootSchema
+      schema: rootSchema,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -796,12 +918,15 @@ export function transformNull (rootSchema) {
   }
 }
 
-export function transformBoolean (rootSchema) {
+export function transformBoolean (rootSchema, params) {
+  const uri = getUri()
+
   return {
     meta: {
-      uri: getUri(),
+      uri,
       type: 'boolean',
-      schema: rootSchema
+      schema: rootSchema,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -813,16 +938,19 @@ export function transformBoolean (rootSchema) {
   }
 }
 
-export function transformObject (rootSchema) {
+export function transformObject (rootSchema, params) {
   const {
     properties = {},
     required = []
   } = rootSchema
 
+  const uri = getUri()
+
   const meta = {
-    uri: getUri(),
+    uri,
     type: 'object',
-    schema: rootSchema
+    schema: rootSchema,
+    ...getControlType(params, uri)
   }
 
   let elements
@@ -845,7 +973,7 @@ export function transformObject (rootSchema) {
         ...getTitle(rootSchema),
         ...getDescription(rootSchema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { index })), []),
+          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index })), []),
           type: 'object'
         }
       }
@@ -857,7 +985,7 @@ export function transformObject (rootSchema) {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { index })), []),
+            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index })), []),
             type: 'object'
           }
         }
@@ -871,7 +999,7 @@ export function transformObject (rootSchema) {
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { required: required.includes(key), key })), [])
+                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), key })), [])
             )
           }
         }
@@ -885,43 +1013,48 @@ export function transformObject (rootSchema) {
   }
 }
 
-export function transformArray (rootSchema) {
+export function transformArray (rootSchema, params) {
   const {
     items = [] // array or object
   } = rootSchema
 
+  const uri = getUri()
+
   return {
     meta: {
-      uri: getUri(),
+      uri,
       type: 'array',
       schema: rootSchema,
       ...getMinItems(rootSchema),
       ...getMaxItems(rootSchema),
       ...getHasUniqueItems(rootSchema),
       ...getMaxContains(rootSchema),
-      ...getMinContains(rootSchema)
+      ...getMinContains(rootSchema),
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
-      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { index })), [])
+      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index })), [])
     }
   }
 }
 
-export function transformString (rootSchema) {
+export function transformString (rootSchema, params) {
+  const uri = getUri()
   const minLength = getMinLength(rootSchema)
   const maxLength = getMaxLength(rootSchema)
   const pattern = getPattern(rootSchema)
 
   return {
     meta: {
-      uri: getUri(),
+      uri,
       type: 'string',
       schema: rootSchema,
       ...minLength,
       ...maxLength,
-      ...pattern
+      ...pattern,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -936,21 +1069,23 @@ export function transformString (rootSchema) {
   }
 }
 
-export function transformNumber (rootSchema) {
+export function transformNumber (rootSchema, params) {
+  const uri = getUri()
   const min = getMin(rootSchema)
   const max = getMax(rootSchema)
   const step = getStep(rootSchema)
 
   return {
     meta: {
-      uri: getUri(),
+      uri,
       type: 'number',
       schema: rootSchema,
       ...getIsExclusiveMin(rootSchema),
       ...getIsExclusiveMax(rootSchema),
       ...min,
       ...max,
-      ...step
+      ...step,
+      ...getControlType(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -965,28 +1100,28 @@ export function transformNumber (rootSchema) {
   }
 }
 
-export default function transform (rootSchema = {}, controlMap = {}) {
+export default function transform (rootSchema = {}, params = {}) {
   const { type } = rootSchema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformNull(rootSchema, controlMap)
+      return transformNull(rootSchema, params)
 
     case 'boolean':
-      return transformBoolean(rootSchema, controlMap)
+      return transformBoolean(rootSchema, params)
 
     case 'object':
-      return transformObject(rootSchema, controlMap)
+      return transformObject(rootSchema, params)
 
     case 'array':
-      return transformArray(rootSchema, controlMap)
+      return transformArray(rootSchema, params)
 
     case 'number':
-      return transformNumber(rootSchema, controlMap)
+      return transformNumber(rootSchema, params)
 
     case 'string':
-      return transformString(rootSchema, controlMap)
+      return transformString(rootSchema, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')

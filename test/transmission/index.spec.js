@@ -20,7 +20,8 @@ import transform, {
   getIsExclusiveMin,
   getIsExclusiveMax,
   getPattern,
-  getStep
+  getStep,
+  getControlType
 } from 'shinkansen-transmission/transmission'
 
 describe('shinkansen-transmission/transmission', () => {
@@ -106,226 +107,507 @@ describe('shinkansen-transmission/transmission', () => {
     })
   })
 
-  it('transforms', () => {
-    const schema = {
-      $id: 'https://example.com/geographical-location.schema.json',
-      $schema: 'http://json-schema.org/draft-07/schema#',
-      title: 'Latitude and Longitude',
-      description: 'A geographical coordinate',
-      required: ['latitude', 'longitude'],
-      type: 'object',
-      properties: {
-        stringTypeSubSchema: {
-          title: 'String type sub schema',
-          type: 'string',
-          minLength: 1,
-          maxLength: 10
-        },
-        numberTypeSubSchema: {
-          title: 'Number type sub schema',
-          type: 'number',
-          min: 1,
-          max: 10
-        },
-        arrayTypeSubSchema: {
-          title: 'Array type sub schema',
-          type: 'array',
-          items: [
-            {
-              type: 'string'
+  describe('`getControlType`', () => {
+    it('is a function', () => {
+      expect(getControlType)
+        .to.be.a('function')
+    })
+  })
+
+  describe('With params', () => {
+    it('transforms', () => {
+      const schema = {
+        $id: 'https://example.com/geographical-location.schema.json',
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        title: 'Latitude and Longitude',
+        description: 'A geographical coordinate',
+        required: ['latitude', 'longitude'],
+        type: 'object',
+        properties: {
+          stringTypeSubSchema: {
+            title: 'String type sub schema',
+            type: 'string',
+            minLength: 1,
+            maxLength: 10
+          },
+          numberTypeSubSchema: {
+            title: 'Number type sub schema',
+            type: 'number',
+            min: 1,
+            max: 10
+          },
+          arrayTypeSubSchema: {
+            title: 'Array type sub schema',
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              }
+            ]
+          },
+          objectTypeSubSchema: {
+            title: 'Object type sub schema',
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'number' }
             }
-          ]
-        },
-        objectTypeSubSchema: {
-          title: 'Object type sub schema',
-          type: 'object',
-          properties: {
-            one: { type: 'string' },
-            two: { type: 'number' }
+          },
+          booleanTypeSubSchema: {
+            title: 'Boolean type sub schema',
+            type: 'boolean'
+          },
+          nullTypeSubSchema: {
+            title: 'Null type sub schema',
+            type: 'null'
+          },
+          latitude: {
+            title: 'Latitude',
+            type: 'number',
+            minimum: -90,
+            maximum: 90,
+            multipleOf: 42.0
+          },
+          longitude: {
+            title: 'Longitude',
+            type: 'number',
+            minimum: -180,
+            maximum: 180,
+            exclusiveMinimum: true,
+            exclusiveMaximum: true
           }
-        },
-        booleanTypeSubSchema: {
-          title: 'Boolean type sub schema',
-          type: 'boolean'
-        },
-        nullTypeSubSchema: {
-          title: 'Null type sub schema',
-          type: 'null'
-        },
-        latitude: {
-          title: 'Latitude',
-          type: 'number',
-          minimum: -90,
-          maximum: 90,
-          multipleOf: 42.0
-        },
-        longitude: {
-          title: 'Longitude',
-          type: 'number',
-          minimum: -180,
-          maximum: 180,
-          exclusiveMinimum: true,
-          exclusiveMaximum: true
         }
       }
-    }
 
-    return expect(transform(schema))
-      .to.eql({
-        meta: {
-          schema: {
-            $id: 'https://example.com/geographical-location.schema.json',
-            $schema: 'http://json-schema.org/draft-07/schema#',
-            description: 'A geographical coordinate',
-            properties: {
-              stringTypeSubSchema: {
-                maxLength: 10,
-                minLength: 1,
-                title: 'String type sub schema',
-                type: 'string'
-              },
-              numberTypeSubSchema: {
-                max: 10,
-                min: 1,
-                title: 'Number type sub schema',
-                type: 'number'
-              },
-              arrayTypeSubSchema: {
-                items: [
-                  {
-                    type: 'string'
-                  }
-                ],
-                title: 'Array type sub schema',
-                type: 'array'
-              },
-              objectTypeSubSchema: {
-                properties: {
-                  one: {
-                    type: 'string'
-                  },
-                  two: {
-                    type: 'number'
-                  }
-                },
-                title: 'Object type sub schema',
-                type: 'object'
-              },
-              booleanTypeSubSchema: {
-                title: 'Boolean type sub schema',
-                type: 'boolean'
-              },
-              nullTypeSubSchema: {
-                title: 'Null type sub schema',
-                type: 'null'
-              },
-              latitude: {
-                maximum: 90,
-                minimum: -90,
-                multipleOf: 42,
-                title: 'Latitude',
-                type: 'number'
-              },
-              longitude: {
-                exclusiveMaximum: true,
-                exclusiveMinimum: true,
-                maximum: 180,
-                minimum: -180,
-                title: 'Longitude',
-                type: 'number'
-              }
-            },
-            required: [
-              'latitude',
-              'longitude'
-            ],
-            title: 'Latitude and Longitude',
-            type: 'object'
+      const params = {
+        controlTypeMap: {
+          '#/stringTypeSubSchema': 'mock string type control',
+          '#/numberTypeSubSchema': 'mock number type control',
+          '#/arrayTypeSubSchema': 'mock array type control',
+          '#/arrayTypeSubSchema/0': 'mock array type index control',
+          '#/objectTypeSubSchema': 'mock object type control',
+          '#/objectTypeSubSchema/one': 'mock object type key control',
+          '#/objectTypeSubSchema/two': 'mock object type key control',
+          '#/booleanTypeSubSchema': 'mock boolean type control',
+          '#/nullTypeSubSchema': 'mock null type control'
+        }
+      }
+
+      return expect(transform(schema, params))
+        .to.eql({
+          meta: {
+            schema,
+            type: 'object',
+            uri: '#/'
           },
-          type: 'object',
-          uri: '#/'
-        },
-        elements: {
-          description: 'A geographical coordinate',
-          fields: [
-            {
-              meta: {
-                maxLength: 10,
-                minLength: 1,
-                name: 'stringTypeSubSchema',
-                required: false,
-                rootSchema: schema,
-                schema: {
-                  maxLength: 10,
-                  minLength: 1,
-                  title: 'String type sub schema',
-                  type: 'string'
-                },
-                type: 'string',
-                uri: '#/stringTypeSubSchema'
-              },
-              elements: {
-                field: {
+          elements: {
+            description: 'A geographical coordinate',
+            fields: [
+              {
+                meta: {
                   maxLength: 10,
                   minLength: 1,
                   name: 'stringTypeSubSchema',
                   required: false,
-                  type: 'string'
+                  rootSchema: schema,
+                  schema: {
+                    maxLength: 10,
+                    minLength: 1,
+                    title: 'String type sub schema',
+                    type: 'string'
+                  },
+                  type: 'string',
+                  uri: '#/stringTypeSubSchema',
+                  controlType: 'mock string type control'
                 },
-                title: 'String type sub schema'
-              }
-            },
-            {
-              meta: {
-                name: 'numberTypeSubSchema',
-                required: false,
-                rootSchema: schema,
-                schema: {
-                  max: 10,
-                  min: 1,
-                  title: 'Number type sub schema',
-                  type: 'number'
-                },
-                type: 'number',
-                uri: '#/numberTypeSubSchema'
+                elements: {
+                  field: {
+                    maxLength: 10,
+                    minLength: 1,
+                    name: 'stringTypeSubSchema',
+                    required: false,
+                    type: 'string'
+                  },
+                  title: 'String type sub schema'
+                }
               },
-              elements: {
-                field: {
+              {
+                meta: {
                   name: 'numberTypeSubSchema',
                   required: false,
-                  type: 'number'
+                  rootSchema: schema,
+                  schema: {
+                    max: 10,
+                    min: 1,
+                    title: 'Number type sub schema',
+                    type: 'number'
+                  },
+                  type: 'number',
+                  uri: '#/numberTypeSubSchema',
+                  controlType: 'mock number type control'
                 },
-                title: 'Number type sub schema'
-              }
-            },
-            {
-              meta: {
-                name: 'arrayTypeSubSchema',
-                required: false,
-                rootSchema: schema,
-                schema: {
-                  items: [
+                elements: {
+                  field: {
+                    name: 'numberTypeSubSchema',
+                    required: false,
+                    type: 'number'
+                  },
+                  title: 'Number type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'arrayTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    items: [
+                      {
+                        type: 'string'
+                      }
+                    ],
+                    title: 'Array type sub schema',
+                    type: 'array'
+                  },
+                  type: 'array',
+                  uri: '#/arrayTypeSubSchema',
+                  controlType: 'mock array type control'
+                },
+                elements: {
+                  fields: [
                     {
-                      type: 'string'
+                      meta: {
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        type: 'string',
+                        uri: '#/arrayTypeSubSchema/0',
+                        controlType: 'mock array type index control',
+                        item: 0
+                      },
+                      elements: {
+                        field: {
+                          required: false,
+                          type: 'string'
+                        }
+                      }
                     }
                   ],
-                  title: 'Array type sub schema',
-                  type: 'array'
+                  title: 'Array type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'objectTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    properties: {
+                      one: { type: 'string' },
+                      two: { type: 'number' }
+                    },
+                    title: 'Object type sub schema',
+                    type: 'object'
+                  },
+                  type: 'object',
+                  uri: '#/objectTypeSubSchema',
+                  controlType: 'mock object type control'
                 },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        name: 'one',
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        type: 'string',
+                        uri: '#/objectTypeSubSchema/one',
+                        controlType: 'mock object type key control'
+                      },
+                      elements: {
+                        field: {
+                          name: 'one',
+                          required: false,
+                          type: 'string'
+                        }
+                      }
+                    },
+                    {
+                      meta: {
+                        name: 'two',
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number'
+                        },
+                        type: 'number',
+                        uri: '#/objectTypeSubSchema/two',
+                        controlType: 'mock object type key control'
+                      },
+                      elements: {
+                        field: {
+                          name: 'two',
+                          required: false,
+                          type: 'number'
+                        }
+                      }
+                    }
+                  ],
+                  title: 'Object type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'booleanTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    title: 'Boolean type sub schema',
+                    type: 'boolean'
+                  },
+                  type: 'boolean',
+                  uri: '#/booleanTypeSubSchema',
+                  controlType: 'mock boolean type control'
+                },
+                elements: {
+                  field: {
+                    name: 'booleanTypeSubSchema',
+                    required: false,
+                    type: 'boolean'
+                  },
+                  title: 'Boolean type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'nullTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    title: 'Null type sub schema',
+                    type: 'null'
+                  },
+                  type: 'null',
+                  uri: '#/nullTypeSubSchema',
+                  controlType: 'mock null type control'
+                },
+                elements: {
+                  field: {
+                    name: 'nullTypeSubSchema',
+                    required: false,
+                    type: 'null'
+                  },
+                  title: 'Null type sub schema'
+                }
+              },
+              {
+                meta: {
+                  max: 90,
+                  min: -90,
+                  name: 'latitude',
+                  required: true,
+                  rootSchema: schema,
+                  schema: {
+                    maximum: 90,
+                    minimum: -90,
+                    multipleOf: 42,
+                    title: 'Latitude',
+                    type: 'number'
+                  },
+                  step: 42,
+                  type: 'number',
+                  uri: '#/latitude'
+                },
+                elements: {
+                  field: {
+                    max: 90,
+                    min: -90,
+                    name: 'latitude',
+                    required: true,
+                    step: 42,
+                    type: 'number'
+                  },
+                  title: 'Latitude'
+                }
+              },
+              {
+                meta: {
+                  isExclusiveMax: true,
+                  isExclusiveMin: true,
+                  max: 180,
+                  min: -180,
+                  name: 'longitude',
+                  required: true,
+                  rootSchema: schema,
+                  schema: {
+                    exclusiveMaximum: true,
+                    exclusiveMinimum: true,
+                    maximum: 180,
+                    minimum: -180,
+                    title: 'Longitude',
+                    type: 'number'
+                  },
+                  type: 'number',
+                  uri: '#/longitude'
+                },
+                elements: {
+                  field: {
+                    max: 180,
+                    min: -180,
+                    name: 'longitude',
+                    required: true,
+                    type: 'number'
+                  },
+                  title: 'Longitude'
+                }
+              }
+            ],
+            title: 'Latitude and Longitude'
+          }
+        })
+    })
+
+    it('transforms `number` schemas', () => {
+      const schema = { type: 'number' }
+
+      const params = {
+        controlTypeMap: {
+          '#/': 'mock number type control'
+        }
+      }
+
+      return expect(transform(schema, params))
+        .to.eql({
+          meta: {
+            type: 'number',
+            schema,
+            uri: '#/',
+            controlType: 'mock number type control'
+          },
+          elements: {
+            field: {
+              type: 'number'
+            }
+          }
+        })
+    })
+
+    it('transforms `string` schemas', () => {
+      const schema = { type: 'string' }
+
+      const params = {
+        controlTypeMap: {
+          '#/': 'mock string type control'
+        }
+      }
+
+      return expect(transform(schema, params))
+        .to.eql({
+          meta: {
+            type: 'string',
+            schema,
+            uri: '#/',
+            controlType: 'mock string type control'
+          },
+          elements: {
+            field: {
+              type: 'string'
+            }
+          }
+        })
+    })
+
+    describe('Transforming `array` schemas', () => {
+      describe('With `items`', () => {
+        it('transforms `array` schemas (`items` is type `number`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'number'
+              }
+            ]
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
                 type: 'array',
-                uri: '#/arrayTypeSubSchema'
+                schema,
+                uri: '#/'
               },
               elements: {
                 fields: [
                   {
                     meta: {
                       required: false,
+                      type: 'number',
+                      schema: {
+                        type: 'number'
+                      },
                       rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'number'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `string`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              }
+            ]
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'string',
                       schema: {
                         type: 'string'
                       },
-                      type: 'string',
-                      uri: '#/arrayTypeSubSchema/0',
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
                       item: 0
                     },
                     elements: {
@@ -335,25 +617,442 @@ describe('shinkansen-transmission/transmission', () => {
                       }
                     }
                   }
-                ],
-                title: 'Array type sub schema'
+                ]
               }
-            },
-            {
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `array`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
               meta: {
-                name: 'objectTypeSubSchema',
-                required: false,
-                rootSchema: schema,
-                schema: {
-                  properties: {
-                    one: { type: 'string' },
-                    two: { type: 'number' }
-                  },
-                  title: 'Object type sub schema',
-                  type: 'object'
-                },
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'array',
+                      schema: {
+                        type: 'array'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      fields: []
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `object`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'object'
+              }
+            ]
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'object',
+                      schema: {
+                        type: 'object'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      fields: []
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `object` with `properties`)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                one: { type: 'string' },
+                two: { type: 'string' }
+              }
+            }
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control',
+              '#/0/one': 'mock array type index object type key control',
+              '#/0/two': 'mock array type index object type key control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'object',
+                      schema: {
+                        type: 'object',
+                        properties: {
+                          one: { type: 'string' },
+                          two: { type: 'string' }
+                        }
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            name: 'one',
+                            required: false,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/one',
+                            controlType: 'mock array type index object type key control'
+                          },
+                          elements: {
+                            field: {
+                              name: 'one',
+                              required: false,
+                              type: 'string'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            name: 'two',
+                            required: false,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/two',
+                            controlType: 'mock array type index object type key control'
+                          },
+                          elements: {
+                            field: {
+                              name: 'two',
+                              required: false,
+                              type: 'string'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `object` with `properties` and `required`)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                one: { type: 'string' },
+                two: { type: 'string' }
+              },
+              required: [
+                'one'
+              ]
+            }
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control',
+              '#/0/one': 'mock array type index object type key control',
+              '#/0/two': 'mock array type index object type key control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'object',
+                      schema: {
+                        type: 'object',
+                        properties: {
+                          one: { type: 'string' },
+                          two: { type: 'string' }
+                        },
+                        required: [
+                          'one'
+                        ]
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            name: 'one',
+                            required: true,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/one',
+                            controlType: 'mock array type index object type key control'
+                          },
+                          elements: {
+                            field: {
+                              name: 'one',
+                              required: true,
+                              type: 'string'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            name: 'two',
+                            required: false,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/two',
+                            controlType: 'mock array type index object type key control'
+                          },
+                          elements: {
+                            field: {
+                              name: 'two',
+                              required: false,
+                              type: 'string'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `boolean`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'boolean'
+              }
+            ]
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'boolean',
+                      schema: {
+                        type: 'boolean'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'boolean'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `null`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'null'
+              }
+            ]
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/0': 'mock array type index control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'null',
+                      schema: {
+                        type: 'null'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      controlType: 'mock array type index control',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'null'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+      })
+
+      describe('Without `items`', () => {
+        it('transforms `array` schemas', () => {
+          const schema = { type: 'array' }
+
+          const params = {
+            controlTypeMap: {
+              '#/': 'mock array type control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/',
+                controlType: 'mock array type control'
+              },
+              elements: {
+                fields: []
+              }
+            })
+        })
+      })
+    })
+
+    describe('Transforming `object` schemas', () => {
+      describe('With `properties`', () => {
+        it('transforms `object` schemas (with `properties`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'string' }
+            }
+          }
+
+          const params = {
+            controlTypeMap: {
+              '#/': 'mock object type control',
+              '#/one': 'mock object type control',
+              '#/two': 'mock object type control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
                 type: 'object',
-                uri: '#/objectTypeSubSchema'
+                schema,
+                uri: '#/',
+                controlType: 'mock object type control'
               },
               elements: {
                 fields: [
@@ -361,12 +1060,13 @@ describe('shinkansen-transmission/transmission', () => {
                     meta: {
                       name: 'one',
                       required: false,
-                      rootSchema: schema,
+                      type: 'string',
                       schema: {
                         type: 'string'
                       },
-                      type: 'string',
-                      uri: '#/objectTypeSubSchema/one'
+                      rootSchema: schema,
+                      uri: '#/one',
+                      controlType: 'mock object type control'
                     },
                     elements: {
                       field: {
@@ -380,418 +1080,29 @@ describe('shinkansen-transmission/transmission', () => {
                     meta: {
                       name: 'two',
                       required: false,
-                      rootSchema: schema,
+                      type: 'string',
                       schema: {
-                        type: 'number'
+                        type: 'string'
                       },
-                      type: 'number',
-                      uri: '#/objectTypeSubSchema/two'
+                      rootSchema: schema,
+                      uri: '#/two',
+                      controlType: 'mock object type control'
                     },
                     elements: {
                       field: {
                         name: 'two',
                         required: false,
-                        type: 'number'
+                        type: 'string'
                       }
                     }
                   }
-                ],
-                title: 'Object type sub schema'
+                ]
               }
-            },
-            {
-              meta: {
-                name: 'booleanTypeSubSchema',
-                required: false,
-                rootSchema: schema,
-                schema: {
-                  title: 'Boolean type sub schema',
-                  type: 'boolean'
-                },
-                type: 'boolean',
-                uri: '#/booleanTypeSubSchema'
-              },
-              elements: {
-                field: {
-                  name: 'booleanTypeSubSchema',
-                  required: false,
-                  type: 'boolean'
-                },
-                title: 'Boolean type sub schema'
-              }
-            },
-            {
-              meta: {
-                name: 'nullTypeSubSchema',
-                required: false,
-                rootSchema: schema,
-                schema: {
-                  title: 'Null type sub schema',
-                  type: 'null'
-                },
-                type: 'null',
-                uri: '#/nullTypeSubSchema'
-              },
-              elements: {
-                field: {
-                  name: 'nullTypeSubSchema',
-                  required: false,
-                  type: 'null'
-                },
-                title: 'Null type sub schema'
-              }
-            },
-            {
-              meta: {
-                max: 90,
-                min: -90,
-                name: 'latitude',
-                required: true,
-                rootSchema: schema,
-                schema: {
-                  maximum: 90,
-                  minimum: -90,
-                  multipleOf: 42,
-                  title: 'Latitude',
-                  type: 'number'
-                },
-                step: 42,
-                type: 'number',
-                uri: '#/latitude'
-              },
-              elements: {
-                field: {
-                  max: 90,
-                  min: -90,
-                  name: 'latitude',
-                  required: true,
-                  step: 42,
-                  type: 'number'
-                },
-                title: 'Latitude'
-              }
-            },
-            {
-              meta: {
-                isExclusiveMax: true,
-                isExclusiveMin: true,
-                max: 180,
-                min: -180,
-                name: 'longitude',
-                required: true,
-                rootSchema: schema,
-                schema: {
-                  exclusiveMaximum: true,
-                  exclusiveMinimum: true,
-                  maximum: 180,
-                  minimum: -180,
-                  title: 'Longitude',
-                  type: 'number'
-                },
-                type: 'number',
-                uri: '#/longitude'
-              },
-              elements: {
-                field: {
-                  max: 180,
-                  min: -180,
-                  name: 'longitude',
-                  required: true,
-                  type: 'number'
-                },
-                title: 'Longitude'
-              }
-            }
-          ],
-          title: 'Latitude and Longitude'
-        }
-      })
-  })
+            })
+        })
 
-  it('transforms `number` schemas', () => {
-    const schema = { type: 'number' }
-
-    return expect(transform(schema))
-      .to.eql({
-        meta: {
-          type: 'number',
-          schema,
-          uri: '#/'
-        },
-        elements: {
-          field: {
-            type: 'number'
-          }
-        }
-      })
-  })
-
-  it('transforms `string` schemas', () => {
-    const schema = { type: 'string' }
-
-    return expect(transform(schema))
-      .to.eql({
-        meta: {
-          type: 'string',
-          schema,
-          uri: '#/'
-        },
-        elements: {
-          field: {
-            type: 'string'
-          }
-        }
-      })
-  })
-
-  describe('Transforming `array` schemas', () => {
-    describe('With `items`', () => {
-      it('transforms `array` schemas (`items` is type `number`)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'number'
-            }
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'number',
-                    schema: {
-                      type: 'number'
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    field: {
-                      required: false,
-                      type: 'number'
-                    }
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `string`)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'string'
-            }
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'string',
-                    schema: {
-                      type: 'string'
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    field: {
-                      required: false,
-                      type: 'string'
-                    }
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `array`)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'array'
-            }
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'array',
-                    schema: {
-                      type: 'array'
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    fields: []
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `object`)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'object'
-            }
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'object',
-                    schema: {
-                      type: 'object'
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    fields: []
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `object` with `properties`)', () => {
-        const schema = {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            }
-          }
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'object',
-                    schema: {
-                      type: 'object',
-                      properties: {
-                        one: { type: 'string' },
-                        two: { type: 'string' }
-                      }
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          name: 'one',
-                          required: false,
-                          type: 'string',
-                          schema: { type: 'string' },
-                          rootSchema: schema,
-                          uri: '#/0/one'
-                        },
-                        elements: {
-                          field: {
-                            name: 'one',
-                            required: false,
-                            type: 'string'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          name: 'two',
-                          required: false,
-                          type: 'string',
-                          schema: { type: 'string' },
-                          rootSchema: schema,
-                          uri: '#/0/two'
-                        },
-                        elements: {
-                          field: {
-                            name: 'two',
-                            required: false,
-                            type: 'string'
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `object` with `properties` and `required`)', () => {
-        const schema = {
-          type: 'array',
-          items: {
+        it('transforms `object` schemas (with `properties` and `required`)', () => {
+          const schema = {
             type: 'object',
             properties: {
               one: { type: 'string' },
@@ -801,360 +1112,1127 @@ describe('shinkansen-transmission/transmission', () => {
               'one'
             ]
           }
-        }
 
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'object',
-                    schema: {
-                      type: 'object',
-                      properties: {
-                        one: { type: 'string' },
-                        two: { type: 'string' }
-                      },
-                      required: [
-                        'one'
-                      ]
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          name: 'one',
-                          required: true,
-                          type: 'string',
-                          schema: { type: 'string' },
-                          rootSchema: schema,
-                          uri: '#/0/one'
-                        },
-                        elements: {
-                          field: {
-                            name: 'one',
-                            required: true,
-                            type: 'string'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          name: 'two',
-                          required: false,
-                          type: 'string',
-                          schema: { type: 'string' },
-                          rootSchema: schema,
-                          uri: '#/0/two'
-                        },
-                        elements: {
-                          field: {
-                            name: 'two',
-                            required: false,
-                            type: 'string'
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
+          const params = {
+            controlTypeMap: {
+              '#/': 'mock object type control',
+              '#/one': 'mock object type control',
+              '#/two': 'mock object type control'
             }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `boolean`)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'boolean'
-            }
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'boolean',
-                    schema: {
-                      type: 'boolean'
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    field: {
-                      required: false,
-                      type: 'boolean'
-                    }
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `array` schemas (`items` is type `null`)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'null'
-            }
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    required: false,
-                    type: 'null',
-                    schema: {
-                      type: 'null'
-                    },
-                    rootSchema: schema,
-                    uri: '#/0',
-                    item: 0
-                  },
-                  elements: {
-                    field: {
-                      required: false,
-                      type: 'null'
-                    }
-                  }
-                }
-              ]
-            }
-          })
-      })
-    })
-
-    describe('Without `items`', () => {
-      it('transforms `array` schemas', () => {
-        const schema = { type: 'array' }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'array',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: []
-            }
-          })
-      })
-    })
-  })
-
-  describe('Transforming `object` schemas', () => {
-    describe('With `properties`', () => {
-      it('transforms `object` schemas (with `properties`)', () => {
-        const schema = {
-          type: 'object',
-          properties: {
-            one: { type: 'string' },
-            two: { type: 'string' }
           }
-        }
 
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'object',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    name: 'one',
-                    required: false,
-                    type: 'string',
-                    schema: {
-                      type: 'string'
-                    },
-                    rootSchema: schema,
-                    uri: '#/one'
-                  },
-                  elements: {
-                    field: {
-                      name: 'one',
-                      required: false,
-                      type: 'string'
-                    }
-                  }
-                },
-                {
-                  meta: {
-                    name: 'two',
-                    required: false,
-                    type: 'string',
-                    schema: {
-                      type: 'string'
-                    },
-                    rootSchema: schema,
-                    uri: '#/two'
-                  },
-                  elements: {
-                    field: {
-                      name: 'two',
-                      required: false,
-                      type: 'string'
-                    }
-                  }
-                }
-              ]
-            }
-          })
-      })
-
-      it('transforms `object` schemas (with `properties` and `required`)', () => {
-        const schema = {
-          type: 'object',
-          properties: {
-            one: { type: 'string' },
-            two: { type: 'string' }
-          },
-          required: [
-            'one'
-          ]
-        }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'object',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: [
-                {
-                  meta: {
-                    name: 'one',
-                    required: true,
-                    rootSchema: schema,
-                    schema: { type: 'string' },
-                    type: 'string',
-                    uri: '#/one'
-                  },
-                  elements: {
-                    field: {
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/',
+                controlType: 'mock object type control'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
                       name: 'one',
                       required: true,
-                      type: 'string'
+                      rootSchema: schema,
+                      schema: { type: 'string' },
+                      type: 'string',
+                      uri: '#/one',
+                      controlType: 'mock object type control'
+                    },
+                    elements: {
+                      field: {
+                        name: 'one',
+                        required: true,
+                        type: 'string'
+                      }
                     }
-                  }
-                },
-                {
-                  meta: {
-                    name: 'two',
-                    required: false,
-                    rootSchema: schema,
-                    schema: { type: 'string' },
-                    type: 'string',
-                    uri: '#/two'
                   },
-                  elements: {
-                    field: {
+                  {
+                    meta: {
                       name: 'two',
                       required: false,
-                      type: 'string'
+                      rootSchema: schema,
+                      schema: { type: 'string' },
+                      type: 'string',
+                      uri: '#/two',
+                      controlType: 'mock object type control'
+                    },
+                    elements: {
+                      field: {
+                        name: 'two',
+                        required: false,
+                        type: 'string'
+                      }
                     }
                   }
+                ]
+              }
+            })
+        })
+      })
+
+      describe('Without `properties`', () => {
+        it('transforms `object` schemas', () => {
+          const schema = { type: 'object' }
+
+          const params = {
+            controlTypeMap: {
+              '#/': 'mock object type control'
+            }
+          }
+
+          return expect(transform(schema, params))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/',
+                controlType: 'mock object type control'
+              },
+              elements: {
+                fields: []
+              }
+            })
+        })
+      })
+    })
+
+    it('transforms `boolean` schemas', () => {
+      const schema = { type: 'boolean' }
+
+      const params = {
+        controlTypeMap: {
+          '#/': 'mock boolean type control'
+        }
+      }
+
+      return expect(transform(schema, params))
+        .to.eql({
+          meta: {
+            type: 'boolean',
+            schema,
+            uri: '#/',
+            controlType: 'mock boolean type control'
+          },
+          elements: {
+            field: {
+              type: 'boolean'
+            }
+          }
+        })
+    })
+
+    it('transforms `null` schemas', () => {
+      const schema = { type: 'null' }
+
+      const params = {
+        controlTypeMap: {
+          '#/': 'mock null type control'
+        }
+      }
+
+      return expect(transform(schema, params))
+        .to.eql({
+          meta: {
+            type: 'null',
+            schema,
+            uri: '#/',
+            controlType: 'mock null type control'
+          },
+          elements: {
+            field: {
+              type: 'null'
+            }
+          }
+        })
+    })
+  })
+
+  describe('Without params', () => {
+    it('transforms', () => {
+      const schema = {
+        $id: 'https://example.com/geographical-location.schema.json',
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        title: 'Latitude and Longitude',
+        description: 'A geographical coordinate',
+        required: ['latitude', 'longitude'],
+        type: 'object',
+        properties: {
+          stringTypeSubSchema: {
+            title: 'String type sub schema',
+            type: 'string',
+            minLength: 1,
+            maxLength: 10
+          },
+          numberTypeSubSchema: {
+            title: 'Number type sub schema',
+            type: 'number',
+            min: 1,
+            max: 10
+          },
+          arrayTypeSubSchema: {
+            title: 'Array type sub schema',
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              }
+            ]
+          },
+          objectTypeSubSchema: {
+            title: 'Object type sub schema',
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'number' }
+            }
+          },
+          booleanTypeSubSchema: {
+            title: 'Boolean type sub schema',
+            type: 'boolean'
+          },
+          nullTypeSubSchema: {
+            title: 'Null type sub schema',
+            type: 'null'
+          },
+          latitude: {
+            title: 'Latitude',
+            type: 'number',
+            minimum: -90,
+            maximum: 90,
+            multipleOf: 42.0
+          },
+          longitude: {
+            title: 'Longitude',
+            type: 'number',
+            minimum: -180,
+            maximum: 180,
+            exclusiveMinimum: true,
+            exclusiveMaximum: true
+          }
+        }
+      }
+
+      return expect(transform(schema))
+        .to.eql({
+          meta: {
+            schema,
+            type: 'object',
+            uri: '#/'
+          },
+          elements: {
+            description: 'A geographical coordinate',
+            fields: [
+              {
+                meta: {
+                  maxLength: 10,
+                  minLength: 1,
+                  name: 'stringTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    maxLength: 10,
+                    minLength: 1,
+                    title: 'String type sub schema',
+                    type: 'string'
+                  },
+                  type: 'string',
+                  uri: '#/stringTypeSubSchema'
+                },
+                elements: {
+                  field: {
+                    maxLength: 10,
+                    minLength: 1,
+                    name: 'stringTypeSubSchema',
+                    required: false,
+                    type: 'string'
+                  },
+                  title: 'String type sub schema'
                 }
+              },
+              {
+                meta: {
+                  name: 'numberTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    max: 10,
+                    min: 1,
+                    title: 'Number type sub schema',
+                    type: 'number'
+                  },
+                  type: 'number',
+                  uri: '#/numberTypeSubSchema'
+                },
+                elements: {
+                  field: {
+                    name: 'numberTypeSubSchema',
+                    required: false,
+                    type: 'number'
+                  },
+                  title: 'Number type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'arrayTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    items: [
+                      {
+                        type: 'string'
+                      }
+                    ],
+                    title: 'Array type sub schema',
+                    type: 'array'
+                  },
+                  type: 'array',
+                  uri: '#/arrayTypeSubSchema'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        type: 'string',
+                        uri: '#/arrayTypeSubSchema/0',
+                        item: 0
+                      },
+                      elements: {
+                        field: {
+                          required: false,
+                          type: 'string'
+                        }
+                      }
+                    }
+                  ],
+                  title: 'Array type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'objectTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    properties: {
+                      one: { type: 'string' },
+                      two: { type: 'number' }
+                    },
+                    title: 'Object type sub schema',
+                    type: 'object'
+                  },
+                  type: 'object',
+                  uri: '#/objectTypeSubSchema'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        name: 'one',
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        type: 'string',
+                        uri: '#/objectTypeSubSchema/one'
+                      },
+                      elements: {
+                        field: {
+                          name: 'one',
+                          required: false,
+                          type: 'string'
+                        }
+                      }
+                    },
+                    {
+                      meta: {
+                        name: 'two',
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number'
+                        },
+                        type: 'number',
+                        uri: '#/objectTypeSubSchema/two'
+                      },
+                      elements: {
+                        field: {
+                          name: 'two',
+                          required: false,
+                          type: 'number'
+                        }
+                      }
+                    }
+                  ],
+                  title: 'Object type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'booleanTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    title: 'Boolean type sub schema',
+                    type: 'boolean'
+                  },
+                  type: 'boolean',
+                  uri: '#/booleanTypeSubSchema'
+                },
+                elements: {
+                  field: {
+                    name: 'booleanTypeSubSchema',
+                    required: false,
+                    type: 'boolean'
+                  },
+                  title: 'Boolean type sub schema'
+                }
+              },
+              {
+                meta: {
+                  name: 'nullTypeSubSchema',
+                  required: false,
+                  rootSchema: schema,
+                  schema: {
+                    title: 'Null type sub schema',
+                    type: 'null'
+                  },
+                  type: 'null',
+                  uri: '#/nullTypeSubSchema'
+                },
+                elements: {
+                  field: {
+                    name: 'nullTypeSubSchema',
+                    required: false,
+                    type: 'null'
+                  },
+                  title: 'Null type sub schema'
+                }
+              },
+              {
+                meta: {
+                  max: 90,
+                  min: -90,
+                  name: 'latitude',
+                  required: true,
+                  rootSchema: schema,
+                  schema: {
+                    maximum: 90,
+                    minimum: -90,
+                    multipleOf: 42,
+                    title: 'Latitude',
+                    type: 'number'
+                  },
+                  step: 42,
+                  type: 'number',
+                  uri: '#/latitude'
+                },
+                elements: {
+                  field: {
+                    max: 90,
+                    min: -90,
+                    name: 'latitude',
+                    required: true,
+                    step: 42,
+                    type: 'number'
+                  },
+                  title: 'Latitude'
+                }
+              },
+              {
+                meta: {
+                  isExclusiveMax: true,
+                  isExclusiveMin: true,
+                  max: 180,
+                  min: -180,
+                  name: 'longitude',
+                  required: true,
+                  rootSchema: schema,
+                  schema: {
+                    exclusiveMaximum: true,
+                    exclusiveMinimum: true,
+                    maximum: 180,
+                    minimum: -180,
+                    title: 'Longitude',
+                    type: 'number'
+                  },
+                  type: 'number',
+                  uri: '#/longitude'
+                },
+                elements: {
+                  field: {
+                    max: 180,
+                    min: -180,
+                    name: 'longitude',
+                    required: true,
+                    type: 'number'
+                  },
+                  title: 'Longitude'
+                }
+              }
+            ],
+            title: 'Latitude and Longitude'
+          }
+        })
+    })
+
+    it('transforms `number` schemas', () => {
+      const schema = { type: 'number' }
+
+      return expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'number',
+            schema,
+            uri: '#/'
+          },
+          elements: {
+            field: {
+              type: 'number'
+            }
+          }
+        })
+    })
+
+    it('transforms `string` schemas', () => {
+      const schema = { type: 'string' }
+
+      return expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'string',
+            schema,
+            uri: '#/'
+          },
+          elements: {
+            field: {
+              type: 'string'
+            }
+          }
+        })
+    })
+
+    describe('Transforming `array` schemas', () => {
+      describe('With `items`', () => {
+        it('transforms `array` schemas (`items` is type `number`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'number'
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'number',
+                      schema: {
+                        type: 'number'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'number'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `string`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'string',
+                      schema: {
+                        type: 'string'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'string'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `array`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'array',
+                      schema: {
+                        type: 'array'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      fields: []
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `object`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'object'
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'object',
+                      schema: {
+                        type: 'object'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      fields: []
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `object` with `properties`)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                one: { type: 'string' },
+                two: { type: 'string' }
+              }
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'object',
+                      schema: {
+                        type: 'object',
+                        properties: {
+                          one: { type: 'string' },
+                          two: { type: 'string' }
+                        }
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            name: 'one',
+                            required: false,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/one'
+                          },
+                          elements: {
+                            field: {
+                              name: 'one',
+                              required: false,
+                              type: 'string'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            name: 'two',
+                            required: false,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/two'
+                          },
+                          elements: {
+                            field: {
+                              name: 'two',
+                              required: false,
+                              type: 'string'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `object` with `properties` and `required`)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                one: { type: 'string' },
+                two: { type: 'string' }
+              },
+              required: [
+                'one'
               ]
             }
-          })
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'object',
+                      schema: {
+                        type: 'object',
+                        properties: {
+                          one: { type: 'string' },
+                          two: { type: 'string' }
+                        },
+                        required: [
+                          'one'
+                        ]
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            name: 'one',
+                            required: true,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/one'
+                          },
+                          elements: {
+                            field: {
+                              name: 'one',
+                              required: true,
+                              type: 'string'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            name: 'two',
+                            required: false,
+                            type: 'string',
+                            schema: { type: 'string' },
+                            rootSchema: schema,
+                            uri: '#/0/two'
+                          },
+                          elements: {
+                            field: {
+                              name: 'two',
+                              required: false,
+                              type: 'string'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `boolean`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'boolean'
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'boolean',
+                      schema: {
+                        type: 'boolean'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'boolean'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `array` schemas (`items` is type `null`)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'null'
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      required: false,
+                      type: 'null',
+                      schema: {
+                        type: 'null'
+                      },
+                      rootSchema: schema,
+                      uri: '#/0',
+                      item: 0
+                    },
+                    elements: {
+                      field: {
+                        required: false,
+                        type: 'null'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+      })
+
+      describe('Without `items`', () => {
+        it('transforms `array` schemas', () => {
+          const schema = { type: 'array' }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: []
+              }
+            })
+        })
       })
     })
 
-    describe('Without `properties`', () => {
-      it('transforms `object` schemas', () => {
-        const schema = { type: 'object' }
-
-        return expect(transform(schema))
-          .to.eql({
-            meta: {
-              type: 'object',
-              schema,
-              uri: '#/'
-            },
-            elements: {
-              fields: []
+    describe('Transforming `object` schemas', () => {
+      describe('With `properties`', () => {
+        it('transforms `object` schemas (with `properties`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'string' }
             }
-          })
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      name: 'one',
+                      required: false,
+                      type: 'string',
+                      schema: {
+                        type: 'string'
+                      },
+                      rootSchema: schema,
+                      uri: '#/one'
+                    },
+                    elements: {
+                      field: {
+                        name: 'one',
+                        required: false,
+                        type: 'string'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      name: 'two',
+                      required: false,
+                      type: 'string',
+                      schema: {
+                        type: 'string'
+                      },
+                      rootSchema: schema,
+                      uri: '#/two'
+                    },
+                    elements: {
+                      field: {
+                        name: 'two',
+                        required: false,
+                        type: 'string'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` schemas (with `properties` and `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'string' }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      name: 'one',
+                      required: true,
+                      rootSchema: schema,
+                      schema: { type: 'string' },
+                      type: 'string',
+                      uri: '#/one'
+                    },
+                    elements: {
+                      field: {
+                        name: 'one',
+                        required: true,
+                        type: 'string'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      name: 'two',
+                      required: false,
+                      rootSchema: schema,
+                      schema: { type: 'string' },
+                      type: 'string',
+                      uri: '#/two'
+                    },
+                    elements: {
+                      field: {
+                        name: 'two',
+                        required: false,
+                        type: 'string'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+      })
+
+      describe('Without `properties`', () => {
+        it('transforms `object` schemas', () => {
+          const schema = { type: 'object' }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: []
+              }
+            })
+        })
       })
     })
-  })
 
-  it('transforms `boolean` schemas', () => {
-    const schema = { type: 'boolean' }
+    it('transforms `boolean` schemas', () => {
+      const schema = { type: 'boolean' }
 
-    return expect(transform(schema))
-      .to.eql({
-        meta: {
-          type: 'boolean',
-          schema,
-          uri: '#/'
-        },
-        elements: {
-          field: {
-            type: 'boolean'
+      return expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'boolean',
+            schema,
+            uri: '#/'
+          },
+          elements: {
+            field: {
+              type: 'boolean'
+            }
           }
-        }
-      })
-  })
+        })
+    })
 
-  it('transforms `null` schemas', () => {
-    const schema = { type: 'null' }
+    it('transforms `null` schemas', () => {
+      const schema = { type: 'null' }
 
-    return expect(transform(schema))
-      .to.eql({
-        meta: {
-          type: 'null',
-          schema,
-          uri: '#/'
-        },
-        elements: {
-          field: {
-            type: 'null'
+      return expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'null',
+            schema,
+            uri: '#/'
+          },
+          elements: {
+            field: {
+              type: 'null'
+            }
           }
-        }
-      })
+        })
+    })
   })
 
   describe('`getTitle()`', () => {
@@ -1568,6 +2646,31 @@ describe('shinkansen-transmission/transmission', () => {
     describe('Schema does not have a `multipleOf` field', () => {
       it('returns an object', () => {
         expect(getStep({}))
+          .to.eql({})
+      })
+    })
+  })
+
+  describe('`getControlType()`', () => {
+    describe('Params has a `controlTypeMap` field', () => {
+      describe('`controlTypeMap` has a control type for the uri', () => {
+        it('returns a `controlType` object', () => {
+          expect(getControlType({ controlTypeMap: { 'mock schema uri': 'mock control type' } }, 'mock schema uri'))
+            .to.eql({ controlType: 'mock control type' })
+        })
+      })
+
+      describe('`controlTypeMap` does not have a control type for the uri', () => {
+        it('returns a `step` object', () => {
+          expect(getControlType({ controlTypeMap: {} }, 'mock schema uri'))
+            .to.eql({})
+        })
+      })
+    })
+
+    describe('Params does not have a `controlTypeMap` field', () => {
+      it('returns an object', () => {
+        expect(getControlType({}, 'mock schema uri'))
           .to.eql({})
       })
     })
