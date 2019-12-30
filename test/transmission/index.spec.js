@@ -28,7 +28,11 @@ import transform, {
   getIsExclusiveMax,
   getPattern,
   getStep,
-  getParams
+  getMetaProps,
+  getElementsTitleProps,
+  getElementsDescriptionProps,
+  getElementsFieldProps,
+  getElementsFieldValue
 } from 'shinkansen-transmission/transmission'
 
 describe('shinkansen-transmission/transmission', () => {
@@ -226,9 +230,37 @@ describe('shinkansen-transmission/transmission', () => {
     })
   })
 
-  describe('`getParams`', () => {
+  describe('`getMetaProps`', () => {
     it('is a function', () => {
-      expect(getParams)
+      expect(getMetaProps)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getElementsTitleProps`', () => {
+    it('is a function', () => {
+      expect(getElementsTitleProps)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getElementsDescriptionProps`', () => {
+    it('is a function', () => {
+      expect(getElementsDescriptionProps)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getElementsFieldProps`', () => {
+    it('is a function', () => {
+      expect(getElementsFieldProps)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getElementsFieldValue`', () => {
+    it('is a function', () => {
+      expect(getElementsFieldValue)
         .to.be.a('function')
     })
   })
@@ -299,15 +331,15 @@ describe('shinkansen-transmission/transmission', () => {
       }
 
       const params = {
-        '#/stringTypeSubSchema': { controlType: 'mock string type control' },
-        '#/numberTypeSubSchema': { controlType: 'mock number type control' },
-        '#/arrayTypeSubSchema': { controlType: 'mock array type control' },
-        '#/arrayTypeSubSchema/0': { controlType: 'mock array type index control' },
-        '#/objectTypeSubSchema': { controlType: 'mock object type control' },
-        '#/objectTypeSubSchema/one': { controlType: 'mock object type key control' },
-        '#/objectTypeSubSchema/two': { controlType: 'mock object type key control' },
-        '#/booleanTypeSubSchema': { controlType: 'mock boolean type control' },
-        '#/nullTypeSubSchema': { controlType: 'mock null type control' }
+        '#/stringTypeSubSchema': { meta: { component: 'mock string component' } },
+        '#/numberTypeSubSchema': { meta: { component: 'mock number component' } },
+        '#/arrayTypeSubSchema': { meta: { component: 'mock array component' } },
+        '#/arrayTypeSubSchema/0': { meta: { component: 'mock array type index component' } },
+        '#/objectTypeSubSchema': { meta: { component: 'mock object component' } },
+        '#/objectTypeSubSchema/one': { meta: { component: 'mock object type key component' } },
+        '#/objectTypeSubSchema/two': { meta: { component: 'mock object type key component' } },
+        '#/booleanTypeSubSchema': { meta: { component: 'mock boolean component' } },
+        '#/nullTypeSubSchema': { meta: { component: 'mock null component' } }
       }
 
       return expect(transform(schema, params))
@@ -335,15 +367,14 @@ describe('shinkansen-transmission/transmission', () => {
                   },
                   type: 'string',
                   uri: '#/stringTypeSubSchema',
-                  controlType: 'mock string type control'
+                  component: 'mock string component'
                 },
                 elements: {
                   field: {
+                    name: '#/stringTypeSubSchema',
                     maxLength: 10,
                     minLength: 1,
-                    name: 'stringTypeSubSchema',
-                    required: false,
-                    type: 'string'
+                    required: false
                   },
                   title: 'String type sub schema'
                 }
@@ -361,13 +392,12 @@ describe('shinkansen-transmission/transmission', () => {
                   },
                   type: 'number',
                   uri: '#/numberTypeSubSchema',
-                  controlType: 'mock number type control'
+                  component: 'mock number component'
                 },
                 elements: {
                   field: {
-                    name: 'numberTypeSubSchema',
-                    required: false,
-                    type: 'number'
+                    name: '#/numberTypeSubSchema',
+                    required: false
                   },
                   title: 'Number type sub schema'
                 }
@@ -388,7 +418,7 @@ describe('shinkansen-transmission/transmission', () => {
                   },
                   type: 'array',
                   uri: '#/arrayTypeSubSchema',
-                  controlType: 'mock array type control'
+                  component: 'mock array component'
                 },
                 elements: {
                   fields: [
@@ -401,13 +431,13 @@ describe('shinkansen-transmission/transmission', () => {
                         },
                         type: 'string',
                         uri: '#/arrayTypeSubSchema/0',
-                        controlType: 'mock array type index control',
+                        component: 'mock array type index component',
                         item: 0
                       },
                       elements: {
                         field: {
-                          required: false,
-                          type: 'string'
+                          name: '#/arrayTypeSubSchema/0',
+                          required: false
                         }
                       }
                     }
@@ -430,7 +460,7 @@ describe('shinkansen-transmission/transmission', () => {
                   },
                   type: 'object',
                   uri: '#/objectTypeSubSchema',
-                  controlType: 'mock object type control'
+                  component: 'mock object component'
                 },
                 elements: {
                   fields: [
@@ -444,13 +474,12 @@ describe('shinkansen-transmission/transmission', () => {
                         },
                         type: 'string',
                         uri: '#/objectTypeSubSchema/one',
-                        controlType: 'mock object type key control'
+                        component: 'mock object type key component'
                       },
                       elements: {
                         field: {
-                          name: 'one',
-                          required: false,
-                          type: 'string'
+                          name: '#/objectTypeSubSchema/one',
+                          required: false
                         }
                       }
                     },
@@ -464,13 +493,12 @@ describe('shinkansen-transmission/transmission', () => {
                         },
                         type: 'number',
                         uri: '#/objectTypeSubSchema/two',
-                        controlType: 'mock object type key control'
+                        component: 'mock object type key component'
                       },
                       elements: {
                         field: {
-                          name: 'two',
-                          required: false,
-                          type: 'number'
+                          name: '#/objectTypeSubSchema/two',
+                          required: false
                         }
                       }
                     }
@@ -489,13 +517,12 @@ describe('shinkansen-transmission/transmission', () => {
                   },
                   type: 'boolean',
                   uri: '#/booleanTypeSubSchema',
-                  controlType: 'mock boolean type control'
+                  component: 'mock boolean component'
                 },
                 elements: {
                   field: {
-                    name: 'booleanTypeSubSchema',
-                    required: false,
-                    type: 'boolean'
+                    name: '#/booleanTypeSubSchema',
+                    required: false
                   },
                   title: 'Boolean type sub schema'
                 }
@@ -511,13 +538,12 @@ describe('shinkansen-transmission/transmission', () => {
                   },
                   type: 'null',
                   uri: '#/nullTypeSubSchema',
-                  controlType: 'mock null type control'
+                  component: 'mock null component'
                 },
                 elements: {
                   field: {
-                    name: 'nullTypeSubSchema',
-                    required: false,
-                    type: 'null'
+                    name: '#/nullTypeSubSchema',
+                    required: false
                   },
                   title: 'Null type sub schema'
                 }
@@ -542,12 +568,11 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
+                    name: '#/latitude',
                     max: 90,
                     min: -90,
-                    name: 'latitude',
                     required: true,
-                    step: 42,
-                    type: 'number'
+                    step: 42
                   },
                   title: 'Latitude'
                 }
@@ -574,11 +599,10 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
+                    name: '#/longitude',
                     max: 180,
                     min: -180,
-                    name: 'longitude',
-                    required: true,
-                    type: 'number'
+                    required: true
                   },
                   title: 'Longitude'
                 }
@@ -593,7 +617,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'number' }
 
       const params = {
-        '#/': { controlType: 'mock number type control' }
+        '#/': { meta: { component: 'mock number component' } }
       }
 
       return expect(transform(schema, params))
@@ -602,11 +626,11 @@ describe('shinkansen-transmission/transmission', () => {
             type: 'number',
             schema,
             uri: '#/',
-            controlType: 'mock number type control'
+            component: 'mock number component'
           },
           elements: {
             field: {
-              type: 'number'
+              name: '#/'
             }
           }
         })
@@ -616,7 +640,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'string' }
 
       const params = {
-        '#/': { controlType: 'mock string type control' }
+        '#/': { meta: { component: 'mock string component' } }
       }
 
       return expect(transform(schema, params))
@@ -625,11 +649,11 @@ describe('shinkansen-transmission/transmission', () => {
             type: 'string',
             schema,
             uri: '#/',
-            controlType: 'mock string type control'
+            component: 'mock string component'
           },
           elements: {
             field: {
-              type: 'string'
+              name: '#/'
             }
           }
         })
@@ -649,7 +673,7 @@ describe('shinkansen-transmission/transmission', () => {
 
           const params = {
 
-            '#/0': { controlType: 'mock array type index control' }
+            '#/0': { meta: { component: 'mock array type index component' } }
 
           }
 
@@ -671,13 +695,13 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'number'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -698,7 +722,7 @@ describe('shinkansen-transmission/transmission', () => {
 
           const params = {
 
-            '#/0': { controlType: 'mock array type index control' }
+            '#/0': { meta: { component: 'mock array type index component' } }
 
           }
 
@@ -720,13 +744,13 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'string'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -747,7 +771,7 @@ describe('shinkansen-transmission/transmission', () => {
 
           const params = {
 
-            '#/0': { controlType: 'mock array type index control' }
+            '#/0': { meta: { component: 'mock array type index component' } }
 
           }
 
@@ -769,7 +793,7 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
@@ -792,7 +816,7 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/0': { controlType: 'mock array type index control' }
+            '#/0': { meta: { component: 'mock array type index component' } }
           }
 
           return expect(transform(schema, params))
@@ -813,7 +837,7 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
@@ -838,9 +862,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/0': { controlType: 'mock array type index control' },
-            '#/0/one': { controlType: 'mock array type index object type key control' },
-            '#/0/two': { controlType: 'mock array type index object type key control' }
+            '#/0': { meta: { component: 'mock array type index component' } },
+            '#/0/one': { meta: { component: 'mock array type index object type key component' } },
+            '#/0/two': { meta: { component: 'mock array type index object type key component' } }
           }
 
           return expect(transform(schema, params))
@@ -865,7 +889,7 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
@@ -878,13 +902,12 @@ describe('shinkansen-transmission/transmission', () => {
                             schema: { type: 'string' },
                             rootSchema: schema,
                             uri: '#/0/one',
-                            controlType: 'mock array type index object type key control'
+                            component: 'mock array type index object type key component'
                           },
                           elements: {
                             field: {
-                              name: 'one',
-                              required: false,
-                              type: 'string'
+                              name: '#/0/one',
+                              required: false
                             }
                           }
                         },
@@ -896,13 +919,12 @@ describe('shinkansen-transmission/transmission', () => {
                             schema: { type: 'string' },
                             rootSchema: schema,
                             uri: '#/0/two',
-                            controlType: 'mock array type index object type key control'
+                            component: 'mock array type index object type key component'
                           },
                           elements: {
                             field: {
-                              name: 'two',
-                              required: false,
-                              type: 'string'
+                              name: '#/0/two',
+                              required: false
                             }
                           }
                         }
@@ -930,9 +952,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/0': { controlType: 'mock array type index control' },
-            '#/0/one': { controlType: 'mock array type index object type key control' },
-            '#/0/two': { controlType: 'mock array type index object type key control' }
+            '#/0': { meta: { component: 'mock array type index component' } },
+            '#/0/one': { meta: { component: 'mock array type index object type key component' } },
+            '#/0/two': { meta: { component: 'mock array type index object type key component' } }
           }
 
           return expect(transform(schema, params))
@@ -960,7 +982,7 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
@@ -973,13 +995,12 @@ describe('shinkansen-transmission/transmission', () => {
                             schema: { type: 'string' },
                             rootSchema: schema,
                             uri: '#/0/one',
-                            controlType: 'mock array type index object type key control'
+                            component: 'mock array type index object type key component'
                           },
                           elements: {
                             field: {
-                              name: 'one',
-                              required: true,
-                              type: 'string'
+                              name: '#/0/one',
+                              required: true
                             }
                           }
                         },
@@ -991,13 +1012,12 @@ describe('shinkansen-transmission/transmission', () => {
                             schema: { type: 'string' },
                             rootSchema: schema,
                             uri: '#/0/two',
-                            controlType: 'mock array type index object type key control'
+                            component: 'mock array type index object type key component'
                           },
                           elements: {
                             field: {
-                              name: 'two',
-                              required: false,
-                              type: 'string'
+                              name: '#/0/two',
+                              required: false
                             }
                           }
                         }
@@ -1020,7 +1040,7 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/0': { controlType: 'mock array type index control' }
+            '#/0': { meta: { component: 'mock array type index component' } }
           }
 
           return expect(transform(schema, params))
@@ -1041,13 +1061,13 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'boolean'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -1067,7 +1087,7 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/0': { controlType: 'mock array type index control' }
+            '#/0': { meta: { component: 'mock array type index component' } }
           }
 
           return expect(transform(schema, params))
@@ -1088,13 +1108,13 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/0',
-                      controlType: 'mock array type index control',
+                      component: 'mock array type index component',
                       item: 0
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'null'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -1109,7 +1129,7 @@ describe('shinkansen-transmission/transmission', () => {
           const schema = { type: 'array' }
 
           const params = {
-            '#/': { controlType: 'mock array type control' }
+            '#/': { meta: { component: 'mock array component' } }
           }
 
           return expect(transform(schema, params))
@@ -1118,7 +1138,7 @@ describe('shinkansen-transmission/transmission', () => {
                 type: 'array',
                 schema,
                 uri: '#/',
-                controlType: 'mock array type control'
+                component: 'mock array component'
               },
               elements: {
                 fields: []
@@ -1140,9 +1160,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/': { controlType: 'mock object type control' },
-            '#/one': { controlType: 'mock object type control' },
-            '#/two': { controlType: 'mock object type control' }
+            '#/': { meta: { component: 'mock object component' } },
+            '#/one': { meta: { component: 'mock object component' } },
+            '#/two': { meta: { component: 'mock object component' } }
           }
 
           return expect(transform(schema, params))
@@ -1151,7 +1171,7 @@ describe('shinkansen-transmission/transmission', () => {
                 type: 'object',
                 schema,
                 uri: '#/',
-                controlType: 'mock object type control'
+                component: 'mock object component'
               },
               elements: {
                 fields: [
@@ -1165,13 +1185,12 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/one',
-                      controlType: 'mock object type control'
+                      component: 'mock object component'
                     },
                     elements: {
                       field: {
-                        name: 'one',
-                        required: false,
-                        type: 'string'
+                        name: '#/one',
+                        required: false
                       }
                     }
                   },
@@ -1185,13 +1204,12 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       rootSchema: schema,
                       uri: '#/two',
-                      controlType: 'mock object type control'
+                      component: 'mock object component'
                     },
                     elements: {
                       field: {
-                        name: 'two',
-                        required: false,
-                        type: 'string'
+                        name: '#/two',
+                        required: false
                       }
                     }
                   }
@@ -1213,9 +1231,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            '#/': { controlType: 'mock object type control' },
-            '#/one': { controlType: 'mock object type control' },
-            '#/two': { controlType: 'mock object type control' }
+            '#/': { meta: { component: 'mock object component' } },
+            '#/one': { meta: { component: 'mock object component' } },
+            '#/two': { meta: { component: 'mock object component' } }
           }
 
           return expect(transform(schema, params))
@@ -1224,7 +1242,7 @@ describe('shinkansen-transmission/transmission', () => {
                 type: 'object',
                 schema,
                 uri: '#/',
-                controlType: 'mock object type control'
+                component: 'mock object component'
               },
               elements: {
                 fields: [
@@ -1236,13 +1254,12 @@ describe('shinkansen-transmission/transmission', () => {
                       schema: { type: 'string' },
                       type: 'string',
                       uri: '#/one',
-                      controlType: 'mock object type control'
+                      component: 'mock object component'
                     },
                     elements: {
                       field: {
-                        name: 'one',
-                        required: true,
-                        type: 'string'
+                        name: '#/one',
+                        required: true
                       }
                     }
                   },
@@ -1254,13 +1271,12 @@ describe('shinkansen-transmission/transmission', () => {
                       schema: { type: 'string' },
                       type: 'string',
                       uri: '#/two',
-                      controlType: 'mock object type control'
+                      component: 'mock object component'
                     },
                     elements: {
                       field: {
-                        name: 'two',
-                        required: false,
-                        type: 'string'
+                        name: '#/two',
+                        required: false
                       }
                     }
                   }
@@ -1275,7 +1291,7 @@ describe('shinkansen-transmission/transmission', () => {
           const schema = { type: 'object' }
 
           const params = {
-            '#/': { controlType: 'mock object type control' }
+            '#/': { meta: { component: 'mock object component' } }
           }
 
           return expect(transform(schema, params))
@@ -1284,7 +1300,7 @@ describe('shinkansen-transmission/transmission', () => {
                 type: 'object',
                 schema,
                 uri: '#/',
-                controlType: 'mock object type control'
+                component: 'mock object component'
               },
               elements: {
                 fields: []
@@ -1298,7 +1314,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'boolean' }
 
       const params = {
-        '#/': { controlType: 'mock boolean type control' }
+        '#/': { meta: { component: 'mock boolean component' } }
       }
 
       return expect(transform(schema, params))
@@ -1307,11 +1323,11 @@ describe('shinkansen-transmission/transmission', () => {
             type: 'boolean',
             schema,
             uri: '#/',
-            controlType: 'mock boolean type control'
+            component: 'mock boolean component'
           },
           elements: {
             field: {
-              type: 'boolean'
+              name: '#/'
             }
           }
         })
@@ -1321,7 +1337,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'null' }
 
       const params = {
-        '#/': { controlType: 'mock null type control' }
+        '#/': { meta: { component: 'mock null component' } }
       }
 
       return expect(transform(schema, params))
@@ -1330,11 +1346,11 @@ describe('shinkansen-transmission/transmission', () => {
             type: 'null',
             schema,
             uri: '#/',
-            controlType: 'mock null type control'
+            component: 'mock null component'
           },
           elements: {
             field: {
-              type: 'null'
+              name: '#/'
             }
           }
         })
@@ -1434,11 +1450,10 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
+                    name: '#/stringTypeSubSchema',
                     maxLength: 10,
                     minLength: 1,
-                    name: 'stringTypeSubSchema',
-                    required: false,
-                    type: 'string'
+                    required: false
                   },
                   title: 'String type sub schema'
                 }
@@ -1459,9 +1474,8 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
-                    name: 'numberTypeSubSchema',
-                    required: false,
-                    type: 'number'
+                    name: '#/numberTypeSubSchema',
+                    required: false
                   },
                   title: 'Number type sub schema'
                 }
@@ -1498,8 +1512,8 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       elements: {
                         field: {
-                          required: false,
-                          type: 'string'
+                          name: '#/arrayTypeSubSchema/0',
+                          required: false
                         }
                       }
                     }
@@ -1538,9 +1552,8 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       elements: {
                         field: {
-                          name: 'one',
-                          required: false,
-                          type: 'string'
+                          name: '#/objectTypeSubSchema/one',
+                          required: false
                         }
                       }
                     },
@@ -1557,9 +1570,8 @@ describe('shinkansen-transmission/transmission', () => {
                       },
                       elements: {
                         field: {
-                          name: 'two',
-                          required: false,
-                          type: 'number'
+                          name: '#/objectTypeSubSchema/two',
+                          required: false
                         }
                       }
                     }
@@ -1581,9 +1593,8 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
-                    name: 'booleanTypeSubSchema',
-                    required: false,
-                    type: 'boolean'
+                    name: '#/booleanTypeSubSchema',
+                    required: false
                   },
                   title: 'Boolean type sub schema'
                 }
@@ -1602,9 +1613,8 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
-                    name: 'nullTypeSubSchema',
-                    required: false,
-                    type: 'null'
+                    name: '#/nullTypeSubSchema',
+                    required: false
                   },
                   title: 'Null type sub schema'
                 }
@@ -1629,12 +1639,11 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
+                    name: '#/latitude',
                     max: 90,
                     min: -90,
-                    name: 'latitude',
                     required: true,
-                    step: 42,
-                    type: 'number'
+                    step: 42
                   },
                   title: 'Latitude'
                 }
@@ -1661,11 +1670,10 @@ describe('shinkansen-transmission/transmission', () => {
                 },
                 elements: {
                   field: {
+                    name: '#/longitude',
                     max: 180,
                     min: -180,
-                    name: 'longitude',
-                    required: true,
-                    type: 'number'
+                    required: true
                   },
                   title: 'Longitude'
                 }
@@ -1688,7 +1696,7 @@ describe('shinkansen-transmission/transmission', () => {
           },
           elements: {
             field: {
-              type: 'number'
+              name: '#/'
             }
           }
         })
@@ -1706,7 +1714,7 @@ describe('shinkansen-transmission/transmission', () => {
           },
           elements: {
             field: {
-              type: 'string'
+              name: '#/'
             }
           }
         })
@@ -1746,8 +1754,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'number'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -1788,8 +1796,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'string'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -1925,9 +1933,8 @@ describe('shinkansen-transmission/transmission', () => {
                           },
                           elements: {
                             field: {
-                              name: 'one',
-                              required: false,
-                              type: 'string'
+                              name: '#/0/one',
+                              required: false
                             }
                           }
                         },
@@ -1942,9 +1949,8 @@ describe('shinkansen-transmission/transmission', () => {
                           },
                           elements: {
                             field: {
-                              name: 'two',
-                              required: false,
-                              type: 'string'
+                              name: '#/0/two',
+                              required: false
                             }
                           }
                         }
@@ -2011,9 +2017,8 @@ describe('shinkansen-transmission/transmission', () => {
                           },
                           elements: {
                             field: {
-                              name: 'one',
-                              required: true,
-                              type: 'string'
+                              name: '#/0/one',
+                              required: true
                             }
                           }
                         },
@@ -2028,9 +2033,8 @@ describe('shinkansen-transmission/transmission', () => {
                           },
                           elements: {
                             field: {
-                              name: 'two',
-                              required: false,
-                              type: 'string'
+                              name: '#/0/two',
+                              required: false
                             }
                           }
                         }
@@ -2074,8 +2078,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'boolean'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -2116,8 +2120,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        required: false,
-                        type: 'null'
+                        name: '#/0',
+                        required: false
                       }
                     }
                   }
@@ -2179,9 +2183,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        name: 'one',
-                        required: false,
-                        type: 'string'
+                        name: '#/one',
+                        required: false
                       }
                     }
                   },
@@ -2198,9 +2201,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        name: 'two',
-                        required: false,
-                        type: 'string'
+                        name: '#/two',
+                        required: false
                       }
                     }
                   }
@@ -2241,9 +2243,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        name: 'one',
-                        required: true,
-                        type: 'string'
+                        name: '#/one',
+                        required: true
                       }
                     }
                   },
@@ -2258,9 +2259,8 @@ describe('shinkansen-transmission/transmission', () => {
                     },
                     elements: {
                       field: {
-                        name: 'two',
-                        required: false,
-                        type: 'string'
+                        name: '#/two',
+                        required: false
                       }
                     }
                   }
@@ -2301,7 +2301,7 @@ describe('shinkansen-transmission/transmission', () => {
           },
           elements: {
             field: {
-              type: 'boolean'
+              name: '#/'
             }
           }
         })
@@ -2319,7 +2319,7 @@ describe('shinkansen-transmission/transmission', () => {
           },
           elements: {
             field: {
-              type: 'null'
+              name: '#/'
             }
           }
         })
@@ -2863,17 +2863,17 @@ describe('shinkansen-transmission/transmission', () => {
     })
   })
 
-  describe('`getParams()`', () => {
+  describe('`getMetaProps()`', () => {
     describe('Params has a field for the uri', () => {
       it('returns an object', () => {
-        expect(getParams({ 'mock schema uri': { mockParamForUri: 'mock param for uri' } }, 'mock schema uri'))
+        expect(getMetaProps({ 'mock schema uri': { meta: { mockParamForUri: 'mock param for uri' } } }, 'mock schema uri'))
           .to.eql({ mockParamForUri: 'mock param for uri' })
       })
     })
 
     describe('Params does not have a field for the uri', () => {
       it('returns an object', () => {
-        expect(getParams({}, 'mock schema uri'))
+        expect(getMetaProps({}, 'mock schema uri'))
           .to.eql({})
       })
     })
