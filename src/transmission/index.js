@@ -8,8 +8,6 @@ export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { wri
 
 export const getDefaultValue = (schema = {}) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
 
-export const getParams = (params = {}, uri = '#') => (Reflect.has(params, uri)) ? Reflect.get(params, uri) : {}
-
 export const getMetaProps = (params = {}, uri = '#') => {
   let meta
   if (Reflect.has(params, uri)) {
@@ -60,7 +58,7 @@ export const getElementsFieldProps = (params = {}, uri = '#') => {
   return field || {}
 }
 
-export const getElementsFieldValue = (values = {}, uri = '#') => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : {})
+export const getElementsFieldValue = (values = {}, uri = '#', schema) => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : Reflect.has(schema, 'default') ? { value: Reflect.get(schema, 'default') } : {})
 
 export const toNumber = (v) => {
   if (typeof v === 'number') return v
@@ -202,7 +200,7 @@ export function transformObjectSchemaNull (schema, rootSchema, params, values) {
       field: {
         required: isRequired,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, schema),
         name: uri
       }
     }
@@ -234,7 +232,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, params, values
       field: {
         required: isRequired,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, schema),
         name: uri
       }
     }
@@ -442,7 +440,7 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
             ...pattern,
             required: isRequired,
             ...getElementsFieldProps(params, uri),
-            ...getElementsFieldValue(values, uri),
+            ...getElementsFieldValue(values, uri, schema),
             name: uri
           }
         }
@@ -539,7 +537,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
             ...step,
             required: isRequired,
             ...getElementsFieldProps(params, uri),
-            ...getElementsFieldValue(values, uri),
+            ...getElementsFieldValue(values, uri, schema),
             name: uri
           }
         }
@@ -606,7 +604,7 @@ export function transformArraySchemaNull (schema, rootSchema, params, values) {
       field: {
         required: isRequired,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, schema),
         name: uri
       }
     }
@@ -638,7 +636,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, params, values)
       field: {
         required: isRequired,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, schema),
         name: uri
       }
     }
@@ -800,7 +798,7 @@ export function transformArraySchemaString (schema, rootSchema, params, values) 
         ...pattern,
         required: isRequired,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, schema),
         name: uri
       }
     }
@@ -844,7 +842,7 @@ export function transformArraySchemaNumber (schema, rootSchema, params, values) 
         ...step,
         required: isRequired,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, schema),
         name: uri
       }
     }
@@ -894,7 +892,7 @@ export function transformNull (rootSchema, params, values) {
       ...getDescription(rootSchema),
       field: {
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, rootSchema),
         name: uri
       }
     }
@@ -916,7 +914,7 @@ export function transformBoolean (rootSchema, params, values) {
       ...getDescription(rootSchema),
       field: {
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, rootSchema),
         name: uri
       }
     }
@@ -1042,7 +1040,7 @@ export function transformString (rootSchema, params, values) {
         ...maxLength,
         ...pattern,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, rootSchema),
         name: uri
       }
     }
@@ -1075,7 +1073,7 @@ export function transformNumber (rootSchema, params, values) {
         ...max,
         ...step,
         ...getElementsFieldProps(params, uri),
-        ...getElementsFieldValue(values, uri),
+        ...getElementsFieldValue(values, uri, rootSchema),
         name: uri
       }
     }
