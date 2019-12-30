@@ -163,7 +163,7 @@ export const getStep = ({ multipleOf } = {}) => {
 
 export function transformObjectSchemaNull (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     key: fieldKey
   } = params
@@ -194,7 +194,7 @@ export function transformObjectSchemaNull (schema, rootSchema, params) {
 
 export function transformObjectSchemaBoolean (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     key: fieldKey
   } = params
@@ -226,7 +226,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObjectSchemaObject (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     key: fieldKey
   } = params
@@ -318,7 +318,7 @@ export function transformObjectSchemaObject (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformObjectSchemaArray (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     key: fieldKey
   } = params
@@ -355,7 +355,7 @@ export function transformObjectSchemaArray (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformObjectSchemaString (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     key: fieldKey
   } = params
@@ -459,7 +459,7 @@ export function transformObjectSchemaString (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformObjectSchemaNumber (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     key: fieldKey
   } = params
@@ -564,31 +564,26 @@ export function transformObjectSchemaNumber (schema, rootSchema, params) {
 
 export function transformObjectSchema (schema = {}, rootSchema = schema, params = {}) {
   const { type } = schema
-  const {
-    required = false,
-    uri = '#',
-    key = ''
-  } = params
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformObjectSchemaNull(schema, rootSchema, { ...params, required, uri, key })
+      return transformObjectSchemaNull(schema, rootSchema, params)
 
     case 'boolean':
-      return transformObjectSchemaBoolean(schema, rootSchema, { ...params, required, uri, key })
+      return transformObjectSchemaBoolean(schema, rootSchema, params)
 
     case 'object':
-      return transformObjectSchemaObject(schema, rootSchema, { ...params, required, uri, key })
+      return transformObjectSchemaObject(schema, rootSchema, params)
 
     case 'array':
-      return transformObjectSchemaArray(schema, rootSchema, { ...params, required, uri, key })
+      return transformObjectSchemaArray(schema, rootSchema, params)
 
     case 'string':
-      return transformObjectSchemaString(schema, rootSchema, { ...params, required, uri, key })
+      return transformObjectSchemaString(schema, rootSchema, params)
 
     case 'number':
-      return transformObjectSchemaNumber(schema, rootSchema, { ...params, required, uri, key })
+      return transformObjectSchemaNumber(schema, rootSchema, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
@@ -597,7 +592,7 @@ export function transformObjectSchema (schema = {}, rootSchema = schema, params 
 
 export function transformArraySchemaNull (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     index: arrayIndex
   } = params
@@ -627,7 +622,7 @@ export function transformArraySchemaNull (schema, rootSchema, params) {
 
 export function transformArraySchemaBoolean (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     index: arrayIndex
   } = params
@@ -658,7 +653,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformArraySchemaObject (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     index: arrayIndex
   } = params
@@ -748,7 +743,7 @@ export function transformArraySchemaObject (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArraySchemaArray (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     index: arrayIndex
   } = params
@@ -785,7 +780,7 @@ export function transformArraySchemaArray (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformArraySchemaString (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     index: arrayIndex
   } = params
@@ -825,7 +820,7 @@ export function transformArraySchemaString (schema, rootSchema, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformArraySchemaNumber (schema, rootSchema, params) {
   const {
-    required: isRequired,
+    required: isRequired = false,
     uri: parentUri,
     index: arrayIndex
   } = params
@@ -867,31 +862,25 @@ export function transformArraySchemaNumber (schema, rootSchema, params) {
 export function transformArraySchema (schema = {}, rootSchema = schema, params = {}) {
   const { type } = schema
 
-  const {
-    required = false,
-    uri = '#',
-    index = 0
-  } = params
-
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformArraySchemaNull(schema, rootSchema, { ...params, required, uri, index })
+      return transformArraySchemaNull(schema, rootSchema, params)
 
     case 'boolean':
-      return transformArraySchemaBoolean(schema, rootSchema, { ...params, required, uri, index })
+      return transformArraySchemaBoolean(schema, rootSchema, params)
 
     case 'object':
-      return transformArraySchemaObject(schema, rootSchema, { ...params, required, uri, index })
+      return transformArraySchemaObject(schema, rootSchema, params)
 
     case 'array':
-      return transformArraySchemaArray(schema, rootSchema, { ...params, required, uri, index })
+      return transformArraySchemaArray(schema, rootSchema, params)
 
     case 'string':
-      return transformArraySchemaString(schema, rootSchema, { ...params, required, uri, index })
+      return transformArraySchemaString(schema, rootSchema, params)
 
     case 'number':
-      return transformArraySchemaNumber(schema, rootSchema, { ...params, required, uri, index })
+      return transformArraySchemaNumber(schema, rootSchema, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
