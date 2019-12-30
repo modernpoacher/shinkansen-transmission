@@ -6,6 +6,13 @@ import transform, {
   getIsReadOnly,
   getIsWriteOnly,
   getDefaultValue,
+  hasEnum,
+  getEnum,
+  hasOneOf,
+  getOneOf,
+  hasAnyOf,
+  getAnyOf,
+  getUri,
   getMin,
   getMax,
   getMinLength,
@@ -65,6 +72,55 @@ describe('shinkansen-transmission/transmission', () => {
     })
   })
 
+  describe('`hasEnum`', () => {
+    it('is a function', () => {
+      expect(hasEnum)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getEnum`', () => {
+    it('is a function', () => {
+      expect(getEnum)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasOneOf`', () => {
+    it('is a function', () => {
+      expect(hasOneOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getOneOf`', () => {
+    it('is a function', () => {
+      expect(getOneOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasAnyOf`', () => {
+    it('is a function', () => {
+      expect(hasAnyOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getAnyOf`', () => {
+    it('is a function', () => {
+      expect(getAnyOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getUri`', () => {
+    it('is a function', () => {
+      expect(getUri)
+        .to.be.a('function')
+    })
+  })
+
   describe('`getMin`', () => {
     it('is a function', () => {
       expect(getMin)
@@ -75,6 +131,69 @@ describe('shinkansen-transmission/transmission', () => {
   describe('`getMax`', () => {
     it('is a function', () => {
       expect(getMax)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMinLength`', () => {
+    it('is a function', () => {
+      expect(getMinLength)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMaxLength`', () => {
+    it('is a function', () => {
+      expect(getMaxLength)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMinItems`', () => {
+    it('is a function', () => {
+      expect(getMinItems)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMaxItems`', () => {
+    it('is a function', () => {
+      expect(getMaxItems)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getHasUniqueItems`', () => {
+    it('is a function', () => {
+      expect(getHasUniqueItems)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMinContains`', () => {
+    it('is a function', () => {
+      expect(getMinContains)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMaxContains`', () => {
+    it('is a function', () => {
+      expect(getMaxContains)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMinProperties`', () => {
+    it('is a function', () => {
+      expect(getMinProperties)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMaxProperties`', () => {
+    it('is a function', () => {
+      expect(getMaxProperties)
         .to.be.a('function')
     })
   })
@@ -2281,6 +2400,127 @@ describe('shinkansen-transmission/transmission', () => {
       it('returns an object', () => {
         expect(getDescription({}))
           .to.eql({})
+      })
+    })
+  })
+
+  describe('`hasEnum()`', () => {
+    describe('Schema has an `enum` field', () => {
+      it('returns true', () => (
+        expect(hasEnum({ enum: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `enum` field', () => {
+      it('returns false', () => (
+        expect(hasEnum({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getEnum()`', () => {
+    describe('Schema has an `enum` field', () => {
+      it('returns an array', () => (
+        expect(getEnum({ enum: [] }))
+          .to.eql([])
+      ))
+    })
+
+    describe('Schema does not have an `enum` field', () => {
+      it('returns undefined', () => (
+        expect(getEnum({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`hasOneOf()`', () => {
+    describe('Schema has an `oneOf` field', () => {
+      it('returns true', () => (
+        expect(hasOneOf({ oneOf: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `oneOf` field', () => {
+      it('returns false', () => (
+        expect(hasOneOf({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getOneOf()`', () => {
+    describe('Schema has an `oneOf` field', () => {
+      it('returns an array', () => {
+        expect(getOneOf({ oneOf: [] }))
+          .to.eql([])
+      })
+    })
+
+    describe('Schema does not have an `oneOf` field', () => {
+      it('returns undefined', () => (
+        expect(getOneOf({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`hasAnyOf()`', () => {
+    describe('Schema has an `anyOf` field', () => {
+      it('returns true', () => (
+        expect(hasAnyOf({ anyOf: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `anyOf` field', () => {
+      it('returns false', () => (
+        expect(hasAnyOf({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getAnyOf()`', () => {
+    describe('Schema has an `anyOf` field', () => {
+      it('returns an array', () => {
+        expect(getAnyOf({ anyOf: [] }))
+          .to.eql([])
+      })
+    })
+
+    describe('Schema does not have an `anyOf` field', () => {
+      it('returns undefined', () => (
+        expect(getAnyOf({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`getUri()`', () => {
+    describe('A `uri` is defined', () => {
+      describe('A `resource` is defined', () => {
+        it('returns a string', () => {
+          expect(getUri('mock uri', 'mock resource'))
+            .to.equal('mock uri/mock resource')
+        })
+      })
+
+      describe('A `resource` is not defined', () => {
+        it('returns a string', () => {
+          expect(getUri('mock uri'))
+            .to.equal('mock uri/')
+        })
+      })
+    })
+
+    describe('A `uri` is not defined', () => {
+      it('returns a string', () => {
+        expect(getUri())
+          .to.equal('#/')
       })
     })
   })

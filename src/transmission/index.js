@@ -37,31 +37,7 @@ export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
 export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
 
-export const hasAllOf = (schema = {}) => Reflect.has(schema, 'allOf')
-export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
-
 export const getUri = (uri = '#', resource = '') => uri.concat('/').concat(resource)
-
-/*
-let elements
-if (hasEnum(schema)) {
-
-} else {
-  if (hasAnyOf(schema)) {
-
-  } else {
-    if (hasOneOf(schema)) {
-
-    } else {
-      if (hasAllOf(schema)) {
-
-      } else {
-
-      }
-    }
-  }
-}
-*/
 
 export const getMin = ({ minimum } = {}) => {
   const value = toNumber(minimum)
@@ -287,23 +263,19 @@ export function transformObjectSchemaObject (schema, rootSchema, params) {
           }
         }
       } else {
-        if (hasAllOf(schema)) {
-          // getAllOf(schema)
-        } else {
-          const {
-            properties = {},
-            required = []
-          } = schema
+        const {
+          properties = {},
+          required = []
+        } = schema
 
-          elements = {
-            ...getTitle(schema),
-            ...getDescription(schema),
-            fields: (
-              Object
-                .entries(properties)
-                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key })), [])
-            )
-          }
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          fields: (
+            Object
+              .entries(properties)
+              .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key })), [])
+          )
         }
       }
     }
@@ -430,20 +402,16 @@ export function transformObjectSchemaString (schema, rootSchema, params) {
           }
         }
       } else {
-        if (hasAllOf(schema)) {
-          // getAllOf(schema)
-        } else {
-          elements = {
-            ...getTitle(schema),
-            ...getDescription(schema),
-            field: {
-              name: fieldKey,
-              type: 'string',
-              ...minLength,
-              ...maxLength,
-              ...pattern,
-              required: isRequired
-            }
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            name: fieldKey,
+            type: 'string',
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            required: isRequired
           }
         }
       }
@@ -536,20 +504,16 @@ export function transformObjectSchemaNumber (schema, rootSchema, params) {
           }
         }
       } else {
-        if (hasAllOf(schema)) {
-          // getAllOf(schema)
-        } else {
-          elements = {
-            ...getTitle(schema),
-            ...getDescription(schema),
-            field: {
-              name: fieldKey,
-              type: 'number',
-              ...min,
-              ...max,
-              ...step,
-              required: isRequired
-            }
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            name: fieldKey,
+            type: 'number',
+            ...min,
+            ...max,
+            ...step,
+            required: isRequired
           }
         }
       }
@@ -712,23 +676,19 @@ export function transformArraySchemaObject (schema, rootSchema, params) {
           }
         }
       } else {
-        if (hasAllOf(schema)) {
-          // getAllOf(schema)
-        } else {
-          const {
-            properties = {},
-            required = []
-          } = schema
+        const {
+          properties = {},
+          required = []
+        } = schema
 
-          elements = {
-            ...getTitle(schema),
-            ...getDescription(schema),
-            fields: (
-              Object
-                .entries(properties)
-                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key })), [])
-            )
-          }
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          fields: (
+            Object
+              .entries(properties)
+              .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key })), [])
+          )
         }
       }
     }
@@ -979,18 +939,14 @@ export function transformObject (rootSchema, params) {
           }
         }
       } else {
-        if (hasAllOf(rootSchema)) {
-
-        } else {
-          elements = {
-            ...getTitle(rootSchema),
-            ...getDescription(rootSchema),
-            fields: (
-              Object
-                .entries(properties)
-                .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), key })), [])
-            )
-          }
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          fields: (
+            Object
+              .entries(properties)
+              .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), key })), [])
+          )
         }
       }
     }
