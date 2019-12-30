@@ -272,7 +272,6 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
       ...getDescription(schema),
       enum: {
         items,
-        type: 'object',
         required: isRequired
       }
     }
@@ -285,8 +284,6 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
-          name: fieldKey,
-          type: 'object',
           required: isRequired
         }
       }
@@ -299,8 +296,6 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
-            name: fieldKey,
-            type: 'object',
             required: isRequired
           }
         }
@@ -401,8 +396,6 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
       ...getDescription(schema),
       enum: {
         items,
-        name: fieldKey,
-        type: 'string',
         ...minLength,
         ...maxLength,
         ...pattern,
@@ -418,8 +411,6 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
-          name: fieldKey,
-          type: 'string',
           ...minLength,
           ...maxLength,
           ...pattern,
@@ -435,8 +426,6 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
-            name: fieldKey,
-            type: 'string',
             ...minLength,
             ...maxLength,
             ...pattern,
@@ -504,8 +493,6 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
       ...getDescription(schema),
       enum: {
         items,
-        name: fieldKey,
-        type: 'number',
         ...min,
         ...max,
         ...step,
@@ -521,8 +508,6 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), []),
-          name: fieldKey,
-          type: 'number',
           ...min,
           ...max,
           ...step,
@@ -538,8 +523,6 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), []),
-            name: fieldKey,
-            type: 'number',
             ...min,
             ...max,
             ...step,
@@ -693,7 +676,6 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
       ...getDescription(schema),
       enum: {
         items,
-        type: 'object',
         required: isRequired
       }
     }
@@ -706,7 +688,6 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values)), []),
-          type: 'object',
           required: isRequired
         }
       }
@@ -719,7 +700,6 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values)), []),
-            type: 'object',
             required: isRequired
           }
         }
@@ -966,8 +946,7 @@ export function transformObject (rootSchema, params, values) {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       enum: {
-        items,
-        type: 'object'
+        items
       }
     }
   } else {
@@ -978,8 +957,7 @@ export function transformObject (rootSchema, params, values) {
         ...getTitle(rootSchema),
         ...getDescription(rootSchema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), []),
-          type: 'object'
+          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), [])
         }
       }
     } else {
@@ -990,8 +968,7 @@ export function transformObject (rootSchema, params, values) {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), []),
-            type: 'object'
+            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), [])
           }
         }
       } else {
