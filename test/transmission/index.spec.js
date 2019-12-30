@@ -28,7 +28,7 @@ import transform, {
   getIsExclusiveMax,
   getPattern,
   getStep,
-  getControlType
+  getParams
 } from 'shinkansen-transmission/transmission'
 
 describe('shinkansen-transmission/transmission', () => {
@@ -226,9 +226,9 @@ describe('shinkansen-transmission/transmission', () => {
     })
   })
 
-  describe('`getControlType`', () => {
+  describe('`getParams`', () => {
     it('is a function', () => {
-      expect(getControlType)
+      expect(getParams)
         .to.be.a('function')
     })
   })
@@ -299,17 +299,15 @@ describe('shinkansen-transmission/transmission', () => {
       }
 
       const params = {
-        controlTypeMap: {
-          '#/stringTypeSubSchema': 'mock string type control',
-          '#/numberTypeSubSchema': 'mock number type control',
-          '#/arrayTypeSubSchema': 'mock array type control',
-          '#/arrayTypeSubSchema/0': 'mock array type index control',
-          '#/objectTypeSubSchema': 'mock object type control',
-          '#/objectTypeSubSchema/one': 'mock object type key control',
-          '#/objectTypeSubSchema/two': 'mock object type key control',
-          '#/booleanTypeSubSchema': 'mock boolean type control',
-          '#/nullTypeSubSchema': 'mock null type control'
-        }
+        '#/stringTypeSubSchema': { controlType: 'mock string type control' },
+        '#/numberTypeSubSchema': { controlType: 'mock number type control' },
+        '#/arrayTypeSubSchema': { controlType: 'mock array type control' },
+        '#/arrayTypeSubSchema/0': { controlType: 'mock array type index control' },
+        '#/objectTypeSubSchema': { controlType: 'mock object type control' },
+        '#/objectTypeSubSchema/one': { controlType: 'mock object type key control' },
+        '#/objectTypeSubSchema/two': { controlType: 'mock object type key control' },
+        '#/booleanTypeSubSchema': { controlType: 'mock boolean type control' },
+        '#/nullTypeSubSchema': { controlType: 'mock null type control' }
       }
 
       return expect(transform(schema, params))
@@ -595,9 +593,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'number' }
 
       const params = {
-        controlTypeMap: {
-          '#/': 'mock number type control'
-        }
+        '#/': { controlType: 'mock number type control' }
       }
 
       return expect(transform(schema, params))
@@ -620,9 +616,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'string' }
 
       const params = {
-        controlTypeMap: {
-          '#/': 'mock string type control'
-        }
+        '#/': { controlType: 'mock string type control' }
       }
 
       return expect(transform(schema, params))
@@ -654,9 +648,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control'
-            }
+
+            '#/0': { controlType: 'mock array type index control' }
+
           }
 
           return expect(transform(schema, params))
@@ -703,9 +697,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control'
-            }
+
+            '#/0': { controlType: 'mock array type index control' }
+
           }
 
           return expect(transform(schema, params))
@@ -752,9 +746,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control'
-            }
+
+            '#/0': { controlType: 'mock array type index control' }
+
           }
 
           return expect(transform(schema, params))
@@ -798,9 +792,7 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control'
-            }
+            '#/0': { controlType: 'mock array type index control' }
           }
 
           return expect(transform(schema, params))
@@ -846,11 +838,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control',
-              '#/0/one': 'mock array type index object type key control',
-              '#/0/two': 'mock array type index object type key control'
-            }
+            '#/0': { controlType: 'mock array type index control' },
+            '#/0/one': { controlType: 'mock array type index object type key control' },
+            '#/0/two': { controlType: 'mock array type index object type key control' }
           }
 
           return expect(transform(schema, params))
@@ -940,11 +930,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control',
-              '#/0/one': 'mock array type index object type key control',
-              '#/0/two': 'mock array type index object type key control'
-            }
+            '#/0': { controlType: 'mock array type index control' },
+            '#/0/one': { controlType: 'mock array type index object type key control' },
+            '#/0/two': { controlType: 'mock array type index object type key control' }
           }
 
           return expect(transform(schema, params))
@@ -1032,9 +1020,7 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control'
-            }
+            '#/0': { controlType: 'mock array type index control' }
           }
 
           return expect(transform(schema, params))
@@ -1081,9 +1067,7 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/0': 'mock array type index control'
-            }
+            '#/0': { controlType: 'mock array type index control' }
           }
 
           return expect(transform(schema, params))
@@ -1125,9 +1109,7 @@ describe('shinkansen-transmission/transmission', () => {
           const schema = { type: 'array' }
 
           const params = {
-            controlTypeMap: {
-              '#/': 'mock array type control'
-            }
+            '#/': { controlType: 'mock array type control' }
           }
 
           return expect(transform(schema, params))
@@ -1158,11 +1140,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/': 'mock object type control',
-              '#/one': 'mock object type control',
-              '#/two': 'mock object type control'
-            }
+            '#/': { controlType: 'mock object type control' },
+            '#/one': { controlType: 'mock object type control' },
+            '#/two': { controlType: 'mock object type control' }
           }
 
           return expect(transform(schema, params))
@@ -1233,11 +1213,9 @@ describe('shinkansen-transmission/transmission', () => {
           }
 
           const params = {
-            controlTypeMap: {
-              '#/': 'mock object type control',
-              '#/one': 'mock object type control',
-              '#/two': 'mock object type control'
-            }
+            '#/': { controlType: 'mock object type control' },
+            '#/one': { controlType: 'mock object type control' },
+            '#/two': { controlType: 'mock object type control' }
           }
 
           return expect(transform(schema, params))
@@ -1297,9 +1275,7 @@ describe('shinkansen-transmission/transmission', () => {
           const schema = { type: 'object' }
 
           const params = {
-            controlTypeMap: {
-              '#/': 'mock object type control'
-            }
+            '#/': { controlType: 'mock object type control' }
           }
 
           return expect(transform(schema, params))
@@ -1322,9 +1298,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'boolean' }
 
       const params = {
-        controlTypeMap: {
-          '#/': 'mock boolean type control'
-        }
+        '#/': { controlType: 'mock boolean type control' }
       }
 
       return expect(transform(schema, params))
@@ -1347,9 +1321,7 @@ describe('shinkansen-transmission/transmission', () => {
       const schema = { type: 'null' }
 
       const params = {
-        controlTypeMap: {
-          '#/': 'mock null type control'
-        }
+        '#/': { controlType: 'mock null type control' }
       }
 
       return expect(transform(schema, params))
@@ -2891,26 +2863,17 @@ describe('shinkansen-transmission/transmission', () => {
     })
   })
 
-  describe('`getControlType()`', () => {
-    describe('Params has a `controlTypeMap` field', () => {
-      describe('`controlTypeMap` has a control type for the uri', () => {
-        it('returns a `controlType` object', () => {
-          expect(getControlType({ controlTypeMap: { 'mock schema uri': 'mock control type' } }, 'mock schema uri'))
-            .to.eql({ controlType: 'mock control type' })
-        })
-      })
-
-      describe('`controlTypeMap` does not have a control type for the uri', () => {
-        it('returns a `step` object', () => {
-          expect(getControlType({ controlTypeMap: {} }, 'mock schema uri'))
-            .to.eql({})
-        })
+  describe('`getParams()`', () => {
+    describe('Params has a field for the uri', () => {
+      it('returns an object', () => {
+        expect(getParams({ 'mock schema uri': { mockParamForUri: 'mock param for uri' } }, 'mock schema uri'))
+          .to.eql({ mockParamForUri: 'mock param for uri' })
       })
     })
 
-    describe('Params does not have a `controlTypeMap` field', () => {
+    describe('Params does not have a field for the uri', () => {
       it('returns an object', () => {
-        expect(getControlType({}, 'mock schema uri'))
+        expect(getParams({}, 'mock schema uri'))
           .to.eql({})
       })
     })

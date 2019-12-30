@@ -8,19 +8,7 @@ export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { wri
 
 export const getDefaultValue = (schema = {}) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
 
-export const getControlType = (params = {}, uri = '#') => {
-  if (Reflect.has(params, 'controlTypeMap')) {
-    const {
-      [uri]: controlType
-    } = Reflect.get(params, 'controlTypeMap')
-
-    return (
-      controlType ? { controlType } : {}
-    )
-  }
-
-  return {}
-}
+export const getParams = (params = {}, uri = '#') => (Reflect.has(params, uri)) ? Reflect.get(params, uri) : {}
 
 export const toNumber = (v) => {
   if (typeof v === 'number') return v
@@ -154,7 +142,7 @@ export function transformObjectSchemaNull (schema, rootSchema, params) {
       schema,
       rootSchema,
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -185,7 +173,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, params) {
       schema,
       rootSchema,
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -218,7 +206,7 @@ export function transformObjectSchemaObject (schema, rootSchema, params) {
     ...getMaxProperties(schema),
     ...getMinProperties(schema),
     required: isRequired,
-    ...getControlType(params, uri)
+    ...getParams(params, uri)
   }
 
   let elements
@@ -314,7 +302,7 @@ export function transformObjectSchemaArray (schema, rootSchema, params) {
       ...getMaxContains(schema),
       ...getMinContains(schema),
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -347,7 +335,7 @@ export function transformObjectSchemaString (schema, rootSchema, params) {
     ...maxLength,
     ...pattern,
     required: isRequired,
-    ...getControlType(params, uri)
+    ...getParams(params, uri)
   }
 
   let elements
@@ -449,7 +437,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, params) {
     ...max,
     ...step,
     required: isRequired,
-    ...getControlType(params, uri)
+    ...getParams(params, uri)
   }
 
   let elements
@@ -571,7 +559,7 @@ export function transformArraySchemaNull (schema, rootSchema, params) {
       schema,
       rootSchema,
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -601,7 +589,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, params) {
       schema,
       rootSchema,
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -633,7 +621,7 @@ export function transformArraySchemaObject (schema, rootSchema, params) {
     ...getMaxProperties(schema),
     ...getMinProperties(schema),
     required: isRequired,
-    ...getControlType(params, uri)
+    ...getParams(params, uri)
   }
 
   let elements
@@ -727,7 +715,7 @@ export function transformArraySchemaArray (schema, rootSchema, params) {
       ...getMaxContains(schema),
       ...getMinContains(schema),
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -761,7 +749,7 @@ export function transformArraySchemaString (schema, rootSchema, params) {
       ...maxLength,
       ...pattern,
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -803,7 +791,7 @@ export function transformArraySchemaNumber (schema, rootSchema, params) {
       ...max,
       ...step,
       required: isRequired,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -855,7 +843,7 @@ export function transformNull (rootSchema, params) {
       uri,
       type: 'null',
       schema: rootSchema,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -875,7 +863,7 @@ export function transformBoolean (rootSchema, params) {
       uri,
       type: 'boolean',
       schema: rootSchema,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -899,7 +887,7 @@ export function transformObject (rootSchema, params) {
     uri,
     type: 'object',
     schema: rootSchema,
-    ...getControlType(params, uri)
+    ...getParams(params, uri)
   }
 
   let elements
@@ -975,7 +963,7 @@ export function transformArray (rootSchema, params) {
       ...getHasUniqueItems(rootSchema),
       ...getMaxContains(rootSchema),
       ...getMinContains(rootSchema),
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -999,7 +987,7 @@ export function transformString (rootSchema, params) {
       ...minLength,
       ...maxLength,
       ...pattern,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -1030,7 +1018,7 @@ export function transformNumber (rootSchema, params) {
       ...min,
       ...max,
       ...step,
-      ...getControlType(params, uri)
+      ...getParams(params, uri)
     },
     elements: {
       ...getTitle(rootSchema),
