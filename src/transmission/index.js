@@ -8,6 +8,8 @@ export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { wri
 
 export const getDefaultValue = (schema = {}) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
 
+export const getValue = (values = {}, uri = '#') => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : {})
+
 export const getMetaProps = (params = {}, uri = '#') => {
   let meta
   if (Reflect.has(params, uri)) {
@@ -192,7 +194,9 @@ export function transformObjectSchemaNull (schema, rootSchema, params, values) {
       schema,
       rootSchema,
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -224,7 +228,9 @@ export function transformObjectSchemaBoolean (schema, rootSchema, params, values
       schema,
       rootSchema,
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -258,7 +264,9 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
     ...getMaxProperties(schema),
     ...getMinProperties(schema),
     required: isRequired,
-    ...getMetaProps(params, uri)
+    ...getMetaProps(params, uri),
+    ...getDefaultValue(schema, uri),
+    ...getValue(values, uri)
   }
 
   let elements
@@ -349,7 +357,9 @@ export function transformObjectSchemaArray (schema, rootSchema, params, values) 
       ...getMaxContains(schema),
       ...getMinContains(schema),
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -382,7 +392,9 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
     ...maxLength,
     ...pattern,
     required: isRequired,
-    ...getMetaProps(params, uri)
+    ...getMetaProps(params, uri),
+    ...getDefaultValue(schema, uri),
+    ...getValue(values, uri)
   }
 
   let elements
@@ -479,7 +491,9 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
     ...max,
     ...step,
     required: isRequired,
-    ...getMetaProps(params, uri)
+    ...getMetaProps(params, uri),
+    ...getDefaultValue(schema, uri),
+    ...getValue(values, uri)
   }
 
   let elements
@@ -596,7 +610,9 @@ export function transformArraySchemaNull (schema, rootSchema, params, values) {
       schema,
       rootSchema,
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -628,7 +644,9 @@ export function transformArraySchemaBoolean (schema, rootSchema, params, values)
       schema,
       rootSchema,
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -662,7 +680,9 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
     ...getMaxProperties(schema),
     ...getMinProperties(schema),
     required: isRequired,
-    ...getMetaProps(params, uri)
+    ...getMetaProps(params, uri),
+    ...getDefaultValue(schema, uri),
+    ...getValue(values, uri)
   }
 
   let elements
@@ -753,7 +773,9 @@ export function transformArraySchemaArray (schema, rootSchema, params, values) {
       ...getMaxContains(schema),
       ...getMinContains(schema),
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -787,7 +809,9 @@ export function transformArraySchemaString (schema, rootSchema, params, values) 
       ...maxLength,
       ...pattern,
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -831,7 +855,9 @@ export function transformArraySchemaNumber (schema, rootSchema, params, values) 
       ...max,
       ...step,
       required: isRequired,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(schema),
@@ -885,7 +911,9 @@ export function transformNull (rootSchema, params, values) {
       uri,
       type: 'null',
       schema: rootSchema,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(rootSchema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -907,7 +935,9 @@ export function transformBoolean (rootSchema, params, values) {
       uri,
       type: 'boolean',
       schema: rootSchema,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(rootSchema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -933,7 +963,9 @@ export function transformObject (rootSchema, params, values) {
     uri,
     type: 'object',
     schema: rootSchema,
-    ...getMetaProps(params, uri)
+    ...getMetaProps(params, uri),
+    ...getDefaultValue(rootSchema, uri),
+    ...getValue(values, uri)
   }
 
   let elements
@@ -1006,7 +1038,9 @@ export function transformArray (rootSchema, params, values) {
       ...getHasUniqueItems(rootSchema),
       ...getMaxContains(rootSchema),
       ...getMinContains(rootSchema),
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(rootSchema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -1030,7 +1064,9 @@ export function transformString (rootSchema, params, values) {
       ...minLength,
       ...maxLength,
       ...pattern,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(rootSchema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(rootSchema),
@@ -1063,7 +1099,9 @@ export function transformNumber (rootSchema, params, values) {
       ...min,
       ...max,
       ...step,
-      ...getMetaProps(params, uri)
+      ...getMetaProps(params, uri),
+      ...getDefaultValue(rootSchema, uri),
+      ...getValue(values, uri)
     },
     elements: {
       ...getTitle(rootSchema),
