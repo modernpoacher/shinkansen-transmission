@@ -1,181 +1,34 @@
-export const getTitle = ({ title } = {}) => (title ? { title } : {})
-
-export const getDescription = ({ description } = {}) => (description ? { description } : {})
-
-export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOnly } : {})
-
-export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
-
-export const getDefaultValue = (schema = {}) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
-
-export const getValue = (values = {}, uri = '#') => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : {})
-
-export const getMetaProps = (params = {}, uri = '#') => {
-  let meta
-  if (Reflect.has(params, uri)) {
-    ({
-      meta
-    } = Reflect.get(params, uri))
-  }
-
-  return meta || {}
-}
-
-export const getElementsTitleProps = (params = {}, uri = '#') => {
-  let title
-  if (Reflect.has(params, uri)) {
-    ({
-      elements: {
-        title
-      } = {}
-    } = Reflect.get(params, uri))
-  }
-
-  return title || {}
-}
-
-export const getElementsDescriptionProps = (params = {}, uri = '#') => {
-  let description
-  if (Reflect.has(params, uri)) {
-    ({
-      elements: {
-        description
-      } = {}
-    } = Reflect.get(params, uri))
-  }
-
-  return description || {}
-}
-
-export const getElementsFieldProps = (params = {}, uri = '#') => {
-  let field
-  if (Reflect.has(params, uri)) {
-    ({
-      elements: {
-        field
-      } = {}
-    } = Reflect.get(params, uri))
-  }
-
-  return field || {}
-}
-
-export const getElementsFieldValue = (values = {}, uri = '#', schema) => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : Reflect.has(schema, 'default') ? { value: Reflect.get(schema, 'default') } : {})
-
-export const toNumber = (v) => {
-  if (typeof v === 'number') return v
-  if (typeof v === 'string') return Number(v)
-  return NaN
-}
-
-export const hasEnum = (schema = {}) => Reflect.has(schema, 'enum')
-export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')
-
-export const hasOneOf = (schema = {}) => Reflect.has(schema, 'oneOf')
-export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
-
-export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
-export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
-
-export const getUri = (uri = '#', resource = '') => uri.concat('/').concat(resource)
-
-export const getMin = ({ minimum } = {}) => {
-  const value = toNumber(minimum)
-
-  return isNaN(value) ? {} : { min: value }
-}
-
-export const getMax = ({ maximum } = {}) => {
-  const value = toNumber(maximum)
-
-  return isNaN(value) ? {} : { max: value }
-}
-
-export const getMinLength = ({ minLength } = {}) => {
-  const value = toNumber(minLength)
-
-  return isNaN(value) ? {} : { minLength: value }
-}
-
-export const getMaxLength = ({ maxLength } = {}) => {
-  const value = toNumber(maxLength)
-
-  return isNaN(value) ? {} : { maxLength: value }
-}
-
-export const getMinItems = ({ minItems } = {}) => {
-  const value = toNumber(minItems)
-
-  return isNaN(value) ? {} : { minItems: value }
-}
-
-export const getMaxItems = ({ maxItems } = {}) => {
-  const value = toNumber(maxItems)
-
-  return isNaN(value) ? {} : { maxItems: value }
-}
-
-export const getHasUniqueItems = (schema = {}) => {
-  if (Reflect.has(schema, 'uniqueItems')) {
-    const value = Reflect.get(schema, 'uniqueItems')
-
-    return (typeof value === 'boolean') ? { hasUniqueItems: value } : {}
-  }
-
-  return {}
-}
-
-export const getMinContains = ({ minContains } = {}) => {
-  const value = toNumber(minContains)
-
-  return isNaN(value) ? {} : { minContains: value }
-}
-
-export const getMaxContains = ({ maxContains } = {}) => {
-  const value = toNumber(maxContains)
-
-  return isNaN(value) ? {} : { maxContains: value }
-}
-
-export const getMinProperties = ({ minProperties } = {}) => {
-  const value = toNumber(minProperties)
-
-  return isNaN(value) ? {} : { minProperties: value }
-}
-
-export const getMaxProperties = ({ maxProperties } = {}) => {
-  const value = toNumber(maxProperties)
-
-  return isNaN(value) ? {} : { maxProperties: value }
-}
-
-export const getIsExclusiveMin = (schema = {}) => {
-  if (Reflect.has(schema, 'exclusiveMinimum')) {
-    const value = Reflect.get(schema, 'exclusiveMinimum')
-
-    return (typeof value === 'boolean') ? { isExclusiveMin: value } : {}
-  }
-
-  return {}
-}
-
-export const getIsExclusiveMax = (schema = {}) => {
-  if (Reflect.has(schema, 'exclusiveMaximum')) {
-    const value = Reflect.get(schema, 'exclusiveMaximum')
-
-    return (typeof value === 'boolean') ? { isExclusiveMax: value } : {}
-  }
-
-  return {}
-}
-
-export const getPattern = ({ pattern } = {}) => (pattern ? { pattern } : {})
-
-export const getStep = ({ multipleOf } = {}) => {
-  const value = toNumber(multipleOf)
-
-  return isNaN(value) ? {} : { step: value }
-}
+import {
+  getValue,
+  getTitle,
+  getDescription,
+  getDefaultValue,
+  hasEnum,
+  getEnum,
+  hasOneOf,
+  getOneOf,
+  hasAnyOf,
+  getAnyOf,
+  getUri,
+  getMin,
+  getMax,
+  getMinLength,
+  getMaxLength,
+  getMinItems,
+  getMaxItems,
+  getHasUniqueItems,
+  getMinContains,
+  getMaxContains,
+  getMinProperties,
+  getMaxProperties,
+  getIsExclusiveMin,
+  getIsExclusiveMax,
+  getPattern,
+  getStep,
+  getMetaProps,
+  getElementsFieldProps,
+  getElementsFieldValue
+} from 'shinkansen-transmission/transmission/common'
 
 export function transformObjectSchemaNull (schema, rootSchema, params, values) {
   const {
@@ -289,7 +142,9 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+          ), []),
           required: isRequired
         }
       }
@@ -301,7 +156,9 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+            ), []),
             required: isRequired
           }
         }
@@ -317,7 +174,9 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
           fields: (
             Object
               .entries(properties)
-              .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key }, values)), [])
+              .reduce((accumulator, [key, schema]) => (
+                accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key }, values))
+              ), [])
           )
         }
       }
@@ -344,6 +203,12 @@ export function transformObjectSchemaArray (schema, rootSchema, params, values) 
     items = [] // array or object
   } = schema
 
+  const fields = []
+    .concat(items)
+    .reduce((accumulator, schema, index) => (
+      accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+    ), [])
+
   return {
     meta: {
       uri,
@@ -364,7 +229,7 @@ export function transformObjectSchemaArray (schema, rootSchema, params, values) 
     elements: {
       ...getTitle(schema),
       ...getDescription(schema),
-      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), [])
+      fields
     }
   }
 }
@@ -420,7 +285,9 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+          ), []),
           ...minLength,
           ...maxLength,
           ...pattern,
@@ -435,7 +302,9 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values)), []),
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+            ), []),
             ...minLength,
             ...maxLength,
             ...pattern,
@@ -519,7 +388,9 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), []),
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+          ), []),
           ...min,
           ...max,
           ...step,
@@ -534,7 +405,9 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), []),
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+            ), []),
             ...min,
             ...max,
             ...step,
@@ -705,7 +578,9 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
         ...getTitle(schema),
         ...getDescription(schema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values)), []),
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values))
+          ), []),
           required: isRequired
         }
       }
@@ -717,7 +592,9 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values)), []),
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values))
+            ), []),
             required: isRequired
           }
         }
@@ -733,7 +610,9 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
           fields: (
             Object
               .entries(properties)
-              .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key }, values)), [])
+              .reduce((accumulator, [key, schema]) => (
+                accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key }, values))
+              ), [])
           )
         }
       }
@@ -760,6 +639,12 @@ export function transformArraySchemaArray (schema, rootSchema, params, values) {
     items = [] // array or object
   } = schema
 
+  const fields = []
+    .concat(items)
+    .reduce((accumulator, schema, index) => (
+      accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values))
+    ), [])
+
   return {
     meta: {
       uri,
@@ -780,7 +665,7 @@ export function transformArraySchemaArray (schema, rootSchema, params, values) {
     elements: {
       ...getTitle(schema),
       ...getDescription(schema),
-      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values)), [])
+      fields
     }
   }
 }
@@ -987,7 +872,9 @@ export function transformObject (rootSchema, params, values) {
         ...getTitle(rootSchema),
         ...getDescription(rootSchema),
         anyOf: {
-          items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), [])
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+          ), [])
         }
       }
     } else {
@@ -998,7 +885,9 @@ export function transformObject (rootSchema, params, values) {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
           oneOf: {
-            items: items.reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), [])
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+            ), [])
           }
         }
       } else {
@@ -1008,7 +897,9 @@ export function transformObject (rootSchema, params, values) {
           fields: (
             Object
               .entries(properties)
-              .reduce((accumulator, [key, schema]) => accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), key }, values)), [])
+              .reduce((accumulator, [key, schema]) => (
+                accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), key }, values))
+              ), [])
           )
         }
       }
@@ -1028,6 +919,12 @@ export function transformArray (rootSchema, params, values) {
 
   const uri = getUri()
 
+  const fields = []
+    .concat(items)
+    .reduce((accumulator, schema, index) => (
+      accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+    ), [])
+
   return {
     meta: {
       uri,
@@ -1045,7 +942,7 @@ export function transformArray (rootSchema, params, values) {
     elements: {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
-      fields: [].concat(items).reduce((accumulator, schema, index) => accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values)), [])
+      fields
     }
   }
 }
