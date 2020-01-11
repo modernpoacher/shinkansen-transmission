@@ -62,36 +62,6 @@ export const getElementsFieldProps = (params = {}, uri = '#') => {
 
 export const getElementsFieldValue = (values = {}, uri = '#', schema) => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : Reflect.has(schema, 'default') ? { value: Reflect.get(schema, 'default') } : {})
 
-export const toNull = (v) => {
-  if (v === null || v === 'null') return null
-
-  throw new Error('Invalid `null`')
-}
-
-export const toBoolean = (v) => {
-  if (typeof v === 'boolean') return v
-  if (v === 'true') return true
-  if (v === 'false') return false
-
-  throw new Error('Invalid `boolean`')
-}
-
-export const toString = (v) => {
-  if (typeof v === 'string') return v
-  if (typeof v === 'number') return String(v)
-
-  return JSON.stringify(v)
-}
-
-export const toNumber = (v) => {
-  if (typeof v === 'number') return v
-
-  const n = Number(v) // +v // unary operator
-  if (!isNaN(n)) return n
-
-  throw new Error('Invalid `number`')
-}
-
 export const hasEnum = (schema = {}) => Reflect.has(schema, 'enum')
 export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')
 
@@ -104,37 +74,37 @@ export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
 export const getUri = (uri = '#/', resource = '') => (uri === '#/' ? uri : uri.concat('/')).concat(resource)
 
 export const getMin = ({ minimum } = {}) => {
-  const value = toNumber(minimum)
+  const value = Number(minimum)
 
   return isNaN(value) ? {} : { min: value }
 }
 
 export const getMax = ({ maximum } = {}) => {
-  const value = toNumber(maximum)
+  const value = Number(maximum)
 
   return isNaN(value) ? {} : { max: value }
 }
 
 export const getMinLength = ({ minLength } = {}) => {
-  const value = toNumber(minLength)
+  const value = Number(minLength)
 
   return isNaN(value) ? {} : { minLength: value }
 }
 
 export const getMaxLength = ({ maxLength } = {}) => {
-  const value = toNumber(maxLength)
+  const value = Number(maxLength)
 
   return isNaN(value) ? {} : { maxLength: value }
 }
 
 export const getMinItems = ({ minItems } = {}) => {
-  const value = toNumber(minItems)
+  const value = Number(minItems)
 
   return isNaN(value) ? {} : { minItems: value }
 }
 
 export const getMaxItems = ({ maxItems } = {}) => {
-  const value = toNumber(maxItems)
+  const value = Number(maxItems)
 
   return isNaN(value) ? {} : { maxItems: value }
 }
@@ -150,25 +120,25 @@ export const getHasUniqueItems = (schema = {}) => {
 }
 
 export const getMinContains = ({ minContains } = {}) => {
-  const value = toNumber(minContains)
+  const value = Number(minContains)
 
   return isNaN(value) ? {} : { minContains: value }
 }
 
 export const getMaxContains = ({ maxContains } = {}) => {
-  const value = toNumber(maxContains)
+  const value = Number(maxContains)
 
   return isNaN(value) ? {} : { maxContains: value }
 }
 
 export const getMinProperties = ({ minProperties } = {}) => {
-  const value = toNumber(minProperties)
+  const value = Number(minProperties)
 
   return isNaN(value) ? {} : { minProperties: value }
 }
 
 export const getMaxProperties = ({ maxProperties } = {}) => {
-  const value = toNumber(maxProperties)
+  const value = Number(maxProperties)
 
   return isNaN(value) ? {} : { maxProperties: value }
 }
@@ -196,7 +166,7 @@ export const getIsExclusiveMax = (schema = {}) => {
 export const getPattern = ({ pattern } = {}) => (pattern ? { pattern } : {})
 
 export const getStep = ({ multipleOf } = {}) => {
-  const value = toNumber(multipleOf)
+  const value = Number(multipleOf)
 
   return isNaN(value) ? {} : { step: value }
 }

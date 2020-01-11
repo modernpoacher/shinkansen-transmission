@@ -1,10 +1,36 @@
 import {
-  getUri,
-  toNull,
-  toBoolean,
-  toString,
-  toNumber
+  getUri
 } from 'shinkansen-transmission/transmission/common'
+
+export const toNull = (v) => {
+  if (v === null || v === 'null') return null
+
+  throw new Error('Invalid `null`')
+}
+
+export const toBoolean = (v) => {
+  if (typeof v === 'boolean') return v
+  if (v === 'true') return true
+  if (v === 'false') return false
+
+  throw new Error('Invalid `boolean`')
+}
+
+export const toString = (v) => {
+  if (typeof v === 'string') return v
+  if (typeof v === 'number') return String(v)
+
+  return JSON.stringify(v)
+}
+
+export const toNumber = (v) => {
+  if (typeof v === 'number') return v
+
+  const n = Number(v) // +v // unary operator
+  if (!isNaN(n)) return n
+
+  throw new Error('Invalid `number`')
+}
 
 export function transformObjectSchemaNull (params, values) {
   const {
@@ -14,7 +40,7 @@ export function transformObjectSchemaNull (params, values) {
 
   const uri = getUri(parentUri, fieldKey)
 
-  return toNull(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
 export function transformObjectSchemaBoolean (params, values) {
@@ -25,7 +51,7 @@ export function transformObjectSchemaBoolean (params, values) {
 
   const uri = getUri(parentUri, fieldKey)
 
-  return toBoolean(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -88,7 +114,7 @@ export function transformObjectSchemaString (params, values) {
 
   const uri = getUri(parentUri, fieldKey)
 
-  return toString(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
@@ -100,7 +126,7 @@ export function transformObjectSchemaNumber (params, values) {
 
   const uri = getUri(parentUri, fieldKey)
 
-  return toNumber(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
 }
 
 export function transformObjectSchema (schema = {}, params = {}, values = {}) {
@@ -139,7 +165,7 @@ export function transformArraySchemaNull (params, values) {
 
   const uri = getUri(parentUri, arrayIndex)
 
-  return toNull(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
 export function transformArraySchemaBoolean (params, values) {
@@ -150,7 +176,7 @@ export function transformArraySchemaBoolean (params, values) {
 
   const uri = getUri(parentUri, arrayIndex)
 
-  return toBoolean(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -213,7 +239,7 @@ export function transformArraySchemaString (params, values) {
 
   const uri = getUri(parentUri, arrayIndex)
 
-  return toString(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
@@ -225,7 +251,7 @@ export function transformArraySchemaNumber (params, values) {
 
   const uri = getUri(parentUri, arrayIndex)
 
-  return toNumber(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
 }
 
 export function transformArraySchema (schema = {}, params = {}, values = {}) {
@@ -259,13 +285,13 @@ export function transformArraySchema (schema = {}, params = {}, values = {}) {
 export function transformNull (values) {
   const uri = getUri()
 
-  return toNull(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
 export function transformBoolean (values) {
   const uri = getUri()
 
-  return toBoolean(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 export function transformObject (rootSchema, values) {
@@ -310,13 +336,13 @@ export function transformArray (rootSchema, values) {
 export function transformString (values) {
   const uri = getUri()
 
-  return toString(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 export function transformNumber (values) {
   const uri = getUri()
 
-  return toNumber(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
 }
 
 export default function transform (rootSchema = {}, values = {}) {
