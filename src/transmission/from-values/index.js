@@ -32,39 +32,20 @@ export const toNumber = (v) => {
   throw new Error('Invalid `number`')
 }
 
-export function transformObjectSchemaNull (params, values) {
-  const {
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
+export function transformObjectSchemaNull ({ uri: parentUri, key: fieldKey }, values) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
-export function transformObjectSchemaBoolean (params, values) {
-  const {
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
+export function transformObjectSchemaBoolean ({ uri: parentUri, key: fieldKey }, values) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformObjectSchemaObject (schema, params, values) {
-  const {
-    properties = {}
-  } = schema
-
-  const {
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
+export function transformObjectSchemaObject ({ properties = {} }, { uri: parentUri, key: fieldKey }, values) {
   const uri = getUri(parentUri, fieldKey)
 
   return (
@@ -75,17 +56,8 @@ export function transformObjectSchemaObject (schema, params, values) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformObjectSchemaArray (schema, params, values) {
-  const {
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
+export function transformObjectSchemaArray ({ items = [] /* array or object */ }, { uri: parentUri, key: fieldKey }, values) {
   const uri = getUri(parentUri, fieldKey)
-
-  const {
-    items = [] // array or object
-  } = schema
 
   return (
     Object
@@ -106,24 +78,14 @@ export function transformObjectSchemaArray (schema, params, values) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformObjectSchemaString (params, values) {
-  const {
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
+export function transformObjectSchemaString ({ uri: parentUri, key: fieldKey }, values) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber (params, values) {
-  const {
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
+export function transformObjectSchemaNumber ({ uri: parentUri, key: fieldKey }, values) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
@@ -157,39 +119,20 @@ export function transformObjectSchema (schema = {}, params = {}, values = {}) {
   }
 }
 
-export function transformArraySchemaNull (params, values) {
-  const {
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
+export function transformArraySchemaNull ({ uri: parentUri, index: arrayIndex }, values) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
-export function transformArraySchemaBoolean (params, values) {
-  const {
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
+export function transformArraySchemaBoolean ({ uri: parentUri, index: arrayIndex }, values) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformArraySchemaObject (schema, params, values) {
-  const {
-    properties = {}
-  } = schema
-
-  const {
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
+export function transformArraySchemaObject ({ properties = {} }, { uri: parentUri, index: arrayIndex }, values) {
   const uri = getUri(parentUri, arrayIndex)
 
   return (
@@ -200,17 +143,8 @@ export function transformArraySchemaObject (schema, params, values) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformArraySchemaArray (schema, params, values) {
-  const {
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
+export function transformArraySchemaArray ({ items = [] /* array or object */ }, { uri: parentUri, index: arrayIndex }, values) {
   const uri = getUri(parentUri, arrayIndex)
-
-  const {
-    items = [] // array or object
-  } = schema
 
   return (
     Object
@@ -231,24 +165,14 @@ export function transformArraySchemaArray (schema, params, values) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString (params, values) {
-  const {
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
+export function transformArraySchemaString ({ uri: parentUri, index: arrayIndex }, values) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformArraySchemaNumber (params, values) {
-  const {
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
+export function transformArraySchemaNumber ({ uri: parentUri, index: arrayIndex }, values) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
@@ -294,11 +218,7 @@ export function transformBoolean (values) {
   if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
-export function transformObject (rootSchema, values) {
-  const {
-    properties = {}
-  } = rootSchema
-
+export function transformObject ({ properties = {} }, values) {
   const uri = getUri()
 
   return (
@@ -308,11 +228,7 @@ export function transformObject (rootSchema, values) {
   )
 }
 
-export function transformArray (rootSchema, values) {
-  const {
-    items = [] // array or object
-  } = rootSchema
-
+export function transformArray ({ items = [] /* array or object */ }, values) {
   const uri = getUri()
 
   return (
