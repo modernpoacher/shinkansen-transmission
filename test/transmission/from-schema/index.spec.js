@@ -76,12 +76,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         const values = {
           '#/stringTypeSubSchema': 'mock string',
-          '#/numberTypeSubSchema': 1,
+          '#/numberTypeSubSchema': '1',
           '#/arrayTypeSubSchema/0': 'mock string',
           '#/objectTypeSubSchema/one': 'mock string',
-          '#/objectTypeSubSchema/two': 1,
-          '#/booleanTypeSubSchema': true,
-          '#/nullTypeSubSchema': null
+          '#/objectTypeSubSchema/two': '2',
+          '#/booleanTypeSubSchema': 'true',
+          '#/nullTypeSubSchema': 'null'
         }
 
         const params = {
@@ -148,14 +148,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'number',
                     uri: '#/numberTypeSubSchema',
-                    value: 1,
+                    value: '1',
                     component: 'mock number component'
                   },
                   elements: {
                     field: {
                       name: '#/numberTypeSubSchema',
                       required: false,
-                      value: 1
+                      value: '1'
                     },
                     title: 'Number type sub schema'
                   }
@@ -255,14 +255,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'number',
                           uri: '#/objectTypeSubSchema/two',
-                          value: 1,
+                          value: '2',
                           component: 'mock object type key component'
                         },
                         elements: {
                           field: {
                             name: '#/objectTypeSubSchema/two',
                             required: false,
-                            value: 1
+                            value: '2'
                           }
                         }
                       }
@@ -281,14 +281,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'boolean',
                     uri: '#/booleanTypeSubSchema',
-                    value: true,
+                    value: 'true',
                     component: 'mock boolean component'
                   },
                   elements: {
                     field: {
                       name: '#/booleanTypeSubSchema',
                       required: false,
-                      value: true
+                      value: 'true'
                     },
                     title: 'Boolean type sub schema'
                   }
@@ -304,14 +304,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'null',
                     uri: '#/nullTypeSubSchema',
-                    value: null,
+                    value: 'null',
                     component: 'mock null component'
                   },
                   elements: {
                     field: {
                       name: '#/nullTypeSubSchema',
                       required: false,
-                      value: null
+                      value: 'null'
                     },
                     title: 'Null type sub schema'
                   }
@@ -385,7 +385,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const schema = { type: 'number' }
 
         const values = {
-          '#/': 1
+          '#/': '1'
         }
 
         const params = {
@@ -398,13 +398,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               type: 'number',
               schema,
               uri: '#/',
-              value: 1,
+              value: '1',
               component: 'mock number component'
             },
             elements: {
               field: {
                 name: '#/',
-                value: 1
+                value: '1'
               }
             }
           })
@@ -452,7 +452,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const values = {
-              '#/0': 1
+              '#/0': '1'
             }
 
             const params = {
@@ -477,7 +477,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: 1,
+                        value: '1',
                         component: 'mock array type index component',
                         item: 0
                       },
@@ -485,7 +485,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         field: {
                           name: '#/0',
                           required: false,
-                          value: 1
+                          value: '1'
                         }
                       }
                     }
@@ -557,9 +557,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               ]
             }
 
-            const values = {
-              '#/0': []
-            }
+            const values = {}
 
             const params = {
               '#/0': { meta: { component: 'mock array type index component' } }
@@ -583,7 +581,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: [],
                         component: 'mock array type index component',
                         item: 0
                       },
@@ -606,9 +603,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               ]
             }
 
-            const values = {
-              '#/0': {}
-            }
+            const values = {}
 
             const params = {
               '#/0': { meta: { component: 'mock array type index component' } }
@@ -632,7 +627,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: {},
                         component: 'mock array type index component',
                         item: 0
                       },
@@ -854,7 +848,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const values = {
-              '#/0': true
+              '#/0': 'true'
             }
 
             const params = {
@@ -879,7 +873,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: true,
+                        value: 'true',
                         component: 'mock array type index component',
                         item: 0
                       },
@@ -887,7 +881,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         field: {
                           name: '#/0',
                           required: false,
-                          value: true
+                          value: 'true'
                         }
                       }
                     }
@@ -907,7 +901,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const values = {
-              '#/0': null
+              '#/0': 'null'
             }
 
             const params = {
@@ -932,7 +926,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: null,
+                        value: 'null',
                         component: 'mock array type index component',
                         item: 0
                       },
@@ -940,7 +934,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         field: {
                           name: '#/0',
                           required: false,
-                          value: null
+                          value: 'null'
                         }
                       }
                     }
@@ -954,9 +948,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           it('transforms `array` schemas', () => {
             const schema = { type: 'array' }
 
-            const values = {
-              '#/': []
-            }
+            const values = {}
 
             const params = {
               '#/': { meta: { component: 'mock array component' } }
@@ -968,7 +960,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'array',
                   schema,
                   uri: '#/',
-                  value: [],
                   component: 'mock array component'
                 },
                 elements: {
@@ -1139,9 +1130,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           it('transforms `object` schemas', () => {
             const schema = { type: 'object' }
 
-            const values = {
-              '#/': {}
-            }
+            const values = {}
 
             const params = {
               '#/': { meta: { component: 'mock object component' } }
@@ -1153,7 +1142,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'object',
                   schema,
                   uri: '#/',
-                  value: {},
                   component: 'mock object component'
                 },
                 elements: {
@@ -1168,7 +1156,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const schema = { type: 'boolean' }
 
         const values = {
-          '#/': true
+          '#/': 'true'
         }
 
         const params = {
@@ -1181,13 +1169,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               type: 'boolean',
               schema,
               uri: '#/',
-              value: true,
+              value: 'true',
               component: 'mock boolean component'
             },
             elements: {
               field: {
                 name: '#/',
-                value: true
+                value: 'true'
               }
             }
           })
@@ -1197,7 +1185,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const schema = { type: 'null' }
 
         const values = {
-          '#/': null
+          '#/': 'null'
         }
 
         const params = {
@@ -1210,13 +1198,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               type: 'null',
               schema,
               uri: '#/',
-              value: null,
+              value: 'null',
               component: 'mock null component'
             },
             elements: {
               field: {
                 name: '#/',
-                value: null
+                value: 'null'
               }
             }
           })
@@ -1290,12 +1278,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         const values = {
           '#/stringTypeSubSchema': 'mock string',
-          '#/numberTypeSubSchema': 1,
+          '#/numberTypeSubSchema': '1',
           '#/arrayTypeSubSchema/0': 'mock string',
           '#/objectTypeSubSchema/one': 'mock string',
-          '#/objectTypeSubSchema/two': 1,
-          '#/booleanTypeSubSchema': true,
-          '#/nullTypeSubSchema': null
+          '#/objectTypeSubSchema/two': '2',
+          '#/booleanTypeSubSchema': 'true',
+          '#/nullTypeSubSchema': 'null'
         }
 
         return expect(transform(schema, values))
@@ -1349,13 +1337,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'number',
                     uri: '#/numberTypeSubSchema',
-                    value: 1
+                    value: '1'
                   },
                   elements: {
                     field: {
                       name: '#/numberTypeSubSchema',
                       required: false,
-                      value: 1
+                      value: '1'
                     },
                     title: 'Number type sub schema'
                   }
@@ -1451,13 +1439,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'number',
                           uri: '#/objectTypeSubSchema/two',
-                          value: 1
+                          value: '2'
                         },
                         elements: {
                           field: {
                             name: '#/objectTypeSubSchema/two',
                             required: false,
-                            value: 1
+                            value: '2'
                           }
                         }
                       }
@@ -1476,13 +1464,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'boolean',
                     uri: '#/booleanTypeSubSchema',
-                    value: true
+                    value: 'true'
                   },
                   elements: {
                     field: {
                       name: '#/booleanTypeSubSchema',
                       required: false,
-                      value: true
+                      value: 'true'
                     },
                     title: 'Boolean type sub schema'
                   }
@@ -1498,13 +1486,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'null',
                     uri: '#/nullTypeSubSchema',
-                    value: null
+                    value: 'null'
                   },
                   elements: {
                     field: {
                       name: '#/nullTypeSubSchema',
                       required: false,
-                      value: null
+                      value: 'null'
                     },
                     title: 'Null type sub schema'
                   }
@@ -1578,7 +1566,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const schema = { type: 'number' }
 
         const values = {
-          '#/': 1
+          '#/': '1'
         }
 
         return expect(transform(schema, values))
@@ -1587,12 +1575,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               type: 'number',
               schema,
               uri: '#/',
-              value: 1
+              value: '1'
             },
             elements: {
               field: {
                 name: '#/',
-                value: 1
+                value: '1'
               }
             }
           })
@@ -1635,7 +1623,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const values = {
-              '#/0': 1
+              '#/0': '1'
             }
 
             return expect(transform(schema, values))
@@ -1656,14 +1644,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: 1,
+                        value: '1',
                         item: 0
                       },
                       elements: {
                         field: {
                           name: '#/0',
                           required: false,
-                          value: 1
+                          value: '1'
                         }
                       }
                     }
@@ -1730,9 +1718,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               ]
             }
 
-            const values = {
-              '#/0': []
-            }
+            const values = {}
 
             return expect(transform(schema, values))
               .to.eql({
@@ -1752,7 +1738,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: [],
                         item: 0
                       },
                       elements: {
@@ -1774,9 +1759,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               ]
             }
 
-            const values = {
-              '#/0': {}
-            }
+            const values = {}
 
             return expect(transform(schema, values))
               .to.eql({
@@ -1796,7 +1779,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: {},
                         item: 0
                       },
                       elements: {
@@ -1999,7 +1981,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const values = {
-              '#/0': true
+              '#/0': 'true'
             }
 
             return expect(transform(schema, values))
@@ -2020,14 +2002,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: true,
+                        value: 'true',
                         item: 0
                       },
                       elements: {
                         field: {
                           name: '#/0',
                           required: false,
-                          value: true
+                          value: 'true'
                         }
                       }
                     }
@@ -2047,7 +2029,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const values = {
-              '#/0': null
+              '#/0': 'null'
             }
 
             return expect(transform(schema, values))
@@ -2068,14 +2050,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         rootSchema: schema,
                         uri: '#/0',
-                        value: null,
+                        value: 'null',
                         item: 0
                       },
                       elements: {
                         field: {
                           name: '#/0',
                           required: false,
-                          value: null
+                          value: 'null'
                         }
                       }
                     }
@@ -2089,17 +2071,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           it('transforms `array` schemas', () => {
             const schema = { type: 'array' }
 
-            const values = {
-              '#/': []
-            }
+            const values = {}
 
             return expect(transform(schema, values))
               .to.eql({
                 meta: {
                   type: 'array',
                   schema,
-                  uri: '#/',
-                  value: []
+                  uri: '#/'
                 },
                 elements: {
                   fields: []
@@ -2272,7 +2251,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const schema = { type: 'boolean' }
 
         const values = {
-          '#/': true
+          '#/': 'true'
         }
 
         return expect(transform(schema, values))
@@ -2281,12 +2260,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               type: 'boolean',
               schema,
               uri: '#/',
-              value: true
+              value: 'true'
             },
             elements: {
               field: {
                 name: '#/',
-                value: true
+                value: 'true'
               }
             }
           })
@@ -2296,7 +2275,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const schema = { type: 'null' }
 
         const values = {
-          '#/': null
+          '#/': 'null'
         }
 
         return expect(transform(schema, values))
@@ -2305,12 +2284,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               type: 'null',
               schema,
               uri: '#/',
-              value: null
+              value: 'null'
             },
             elements: {
               field: {
                 name: '#/',
-                value: null
+                value: 'null'
               }
             }
           })
@@ -3176,9 +3155,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           it('transforms `array` schemas', () => {
             const schema = { type: 'array' }
 
-            const values = {
-              '#/': []
-            }
+            const values = {}
 
             const params = {
               '#/': { meta: { component: 'mock array component' } }
@@ -3190,7 +3167,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'array',
                   schema,
                   uri: '#/',
-                  value: [],
                   component: 'mock array component'
                 },
                 elements: {
