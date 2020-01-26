@@ -81,7 +81,7 @@ describe('shinkansen-transmission/transmission/from-values', () => {
         '#/objectTypeSubSchema/two': '2',
         '#/booleanTypeSubSchema': 'true',
         '#/nullTypeSubSchema': 'null',
-        '#/latitude': '84.0',
+        '#/latitude': '84',
         '#/longitude': '-90'
       }
 

@@ -32,31 +32,31 @@ export const toNumber = (v) => {
   throw new Error('Invalid `number`')
 }
 
-export function transformObjectSchemaNull ({ uri: parentUri, key: fieldKey }, values) {
+export function transformObjectSchemaNull (values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
-export function transformObjectSchemaBoolean ({ uri: parentUri, key: fieldKey }, values) {
+export function transformObjectSchemaBoolean (values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformObjectSchemaObject ({ properties = {} }, { uri: parentUri, key: fieldKey }, values) {
+export function transformObjectSchemaObject ({ properties = {} }, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
   return (
     Object
       .entries(properties)
-      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, { uri, key }, values) }), {})
+      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri, key }) }), {})
   )
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformObjectSchemaArray ({ items = [] /* array or object */ }, { uri: parentUri, key: fieldKey }, values) {
+export function transformObjectSchemaArray ({ items = [] /* array or object */ }, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
   return (
@@ -69,7 +69,7 @@ export function transformObjectSchemaArray ({ items = [] /* array or object */ }
 
         if (!isNaN(index)) {
           const schema = Array.isArray(items) ? items[index] : items
-          accumulator[index] = transformArraySchema(schema, { uri, index }, values)
+          accumulator[index] = transformArraySchema(schema, values, { uri, index })
         }
 
         return accumulator
@@ -78,72 +78,72 @@ export function transformObjectSchemaArray ({ items = [] /* array or object */ }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformObjectSchemaString ({ uri: parentUri, key: fieldKey }, values) {
+export function transformObjectSchemaString (values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber ({ uri: parentUri, key: fieldKey }, values) {
+export function transformObjectSchemaNumber (values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
   if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
 }
 
-export function transformObjectSchema (schema = {}, params = {}, values = {}) {
+export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformObjectSchemaNull(params, values)
+      return transformObjectSchemaNull(values, params)
 
     case 'boolean':
-      return transformObjectSchemaBoolean(params, values)
+      return transformObjectSchemaBoolean(values, params)
 
     case 'object':
-      return transformObjectSchemaObject(schema, params, values)
+      return transformObjectSchemaObject(schema, values, params)
 
     case 'array':
-      return transformObjectSchemaArray(schema, params, values)
+      return transformObjectSchemaArray(schema, values, params)
 
     case 'string':
-      return transformObjectSchemaString(params, values)
+      return transformObjectSchemaString(values, params)
 
     case 'number':
-      return transformObjectSchemaNumber(params, values)
+      return transformObjectSchemaNumber(values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformArraySchemaNull ({ uri: parentUri, index: arrayIndex }, values) {
+export function transformArraySchemaNull (values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
 }
 
-export function transformArraySchemaBoolean ({ uri: parentUri, index: arrayIndex }, values) {
+export function transformArraySchemaBoolean (values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformArraySchemaObject ({ properties = {} }, { uri: parentUri, index: arrayIndex }, values) {
+export function transformArraySchemaObject ({ properties = {} }, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
   return (
     Object
       .entries(properties)
-      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, { uri, key }, values) }), {})
+      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri, key }) }), {})
   )
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformArraySchemaArray ({ items = [] /* array or object */ }, { uri: parentUri, index: arrayIndex }, values) {
+export function transformArraySchemaArray ({ items = [] /* array or object */ }, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
   return (
@@ -156,7 +156,7 @@ export function transformArraySchemaArray ({ items = [] /* array or object */ },
 
         if (!isNaN(index)) {
           const schema = Array.isArray(items) ? items[index] : items
-          accumulator[index] = transformArraySchema(schema, { uri, index }, values)
+          accumulator[index] = transformArraySchema(schema, values, { uri, index })
         }
 
         return accumulator
@@ -165,41 +165,41 @@ export function transformArraySchemaArray ({ items = [] /* array or object */ },
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString ({ uri: parentUri, index: arrayIndex }, values) {
+export function transformArraySchemaString (values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformArraySchemaNumber ({ uri: parentUri, index: arrayIndex }, values) {
+export function transformArraySchemaNumber (values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
   if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
 }
 
-export function transformArraySchema (schema = {}, params = {}, values = {}) {
+export function transformArraySchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformArraySchemaNull(params, values)
+      return transformArraySchemaNull(values, params)
 
     case 'boolean':
-      return transformArraySchemaBoolean(params, values)
+      return transformArraySchemaBoolean(values, params)
 
     case 'object':
-      return transformArraySchemaObject(schema, params, values)
+      return transformArraySchemaObject(schema, values, params)
 
     case 'array':
-      return transformArraySchemaArray(schema, params, values)
+      return transformArraySchemaArray(schema, values, params)
 
     case 'string':
-      return transformArraySchemaString(params, values)
+      return transformArraySchemaString(values, params)
 
     case 'number':
-      return transformArraySchemaNumber(params, values)
+      return transformArraySchemaNumber(values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
@@ -224,7 +224,7 @@ export function transformObject ({ properties = {} }, values) {
   return (
     Object
       .entries(properties)
-      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, { uri, key }, values) }), {})
+      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri, key }) }), {})
   )
 }
 
@@ -241,7 +241,7 @@ export function transformArray ({ items = [] /* array or object */ }, values) {
 
         if (!isNaN(index)) {
           const schema = Array.isArray(items) ? items[index] : items
-          accumulator[index] = transformArraySchema(schema, { uri, index }, values)
+          accumulator[index] = transformArraySchema(schema, values, { uri, index })
         }
 
         return accumulator

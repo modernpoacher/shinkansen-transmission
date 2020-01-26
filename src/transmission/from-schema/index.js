@@ -30,7 +30,7 @@ import {
   getElementsFieldValue
 } from 'shinkansen-transmission/transmission/common'
 
-export function transformObjectSchemaNull (schema, rootSchema, params, values) {
+export function transformObjectSchemaNull (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -56,15 +56,15 @@ export function transformObjectSchemaNull (schema, rootSchema, params, values) {
       ...getDescription(schema),
       field: {
         required: isRequired,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, schema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export function transformObjectSchemaBoolean (schema, rootSchema, params, values) {
+export function transformObjectSchemaBoolean (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -90,8 +90,8 @@ export function transformObjectSchemaBoolean (schema, rootSchema, params, values
       ...getDescription(schema),
       field: {
         required: isRequired,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, schema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
@@ -99,7 +99,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, params, values
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformObjectSchemaObject (schema, rootSchema, params, values) {
+export function transformObjectSchemaObject (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -143,7 +143,7 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired
         }
@@ -157,7 +157,7 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired
           }
@@ -175,7 +175,7 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
             Object
               .entries(properties)
               .reduce((accumulator, [key, schema]) => (
-                accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key }, values))
+                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), uri, key }))
               ), [])
           )
         }
@@ -190,7 +190,7 @@ export function transformObjectSchemaObject (schema, rootSchema, params, values)
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformObjectSchemaArray (schema, rootSchema, params, values) {
+export function transformObjectSchemaArray (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -206,7 +206,7 @@ export function transformObjectSchemaArray (schema, rootSchema, params, values) 
   const fields = []
     .concat(items)
     .reduce((accumulator, schema, index) => (
-      accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+      accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
     ), [])
 
   return {
@@ -235,7 +235,7 @@ export function transformObjectSchemaArray (schema, rootSchema, params, values) 
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformObjectSchemaString (schema, rootSchema, params, values) {
+export function transformObjectSchemaString (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -286,7 +286,7 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           ...minLength,
           ...maxLength,
@@ -303,7 +303,7 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, required: isRequired, uri, index }, values))
+              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             ...minLength,
             ...maxLength,
@@ -320,8 +320,8 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
             ...maxLength,
             ...pattern,
             required: isRequired,
-            ...getElementsFieldProps(params, uri),
             ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
             name: uri
           }
         }
@@ -336,7 +336,7 @@ export function transformObjectSchemaString (schema, rootSchema, params, values)
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber (schema, rootSchema, params, values) {
+export function transformObjectSchemaNumber (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -389,7 +389,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
           ), []),
           ...min,
           ...max,
@@ -406,7 +406,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
             ), []),
             ...min,
             ...max,
@@ -423,8 +423,8 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
             ...max,
             ...step,
             required: isRequired,
-            ...getElementsFieldProps(params, uri),
             ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
             name: uri
           }
         }
@@ -438,35 +438,35 @@ export function transformObjectSchemaNumber (schema, rootSchema, params, values)
   }
 }
 
-export function transformObjectSchema (schema = {}, rootSchema = schema, params = {}, values = {}) {
+export function transformObjectSchema (schema = {}, rootSchema = schema, values = {}, params = {}) {
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformObjectSchemaNull(schema, rootSchema, params, values)
+      return transformObjectSchemaNull(schema, rootSchema, values, params)
 
     case 'boolean':
-      return transformObjectSchemaBoolean(schema, rootSchema, params, values)
+      return transformObjectSchemaBoolean(schema, rootSchema, values, params)
 
     case 'object':
-      return transformObjectSchemaObject(schema, rootSchema, params, values)
+      return transformObjectSchemaObject(schema, rootSchema, values, params)
 
     case 'array':
-      return transformObjectSchemaArray(schema, rootSchema, params, values)
+      return transformObjectSchemaArray(schema, rootSchema, values, params)
 
     case 'string':
-      return transformObjectSchemaString(schema, rootSchema, params, values)
+      return transformObjectSchemaString(schema, rootSchema, values, params)
 
     case 'number':
-      return transformObjectSchemaNumber(schema, rootSchema, params, values)
+      return transformObjectSchemaNumber(schema, rootSchema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformArraySchemaNull (schema, rootSchema, params, values) {
+export function transformArraySchemaNull (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -492,15 +492,15 @@ export function transformArraySchemaNull (schema, rootSchema, params, values) {
       ...getDescription(schema),
       field: {
         required: isRequired,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, schema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export function transformArraySchemaBoolean (schema, rootSchema, params, values) {
+export function transformArraySchemaBoolean (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -526,8 +526,8 @@ export function transformArraySchemaBoolean (schema, rootSchema, params, values)
       ...getDescription(schema),
       field: {
         required: isRequired,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, schema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
@@ -535,7 +535,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, params, values)
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformArraySchemaObject (schema, rootSchema, params, values) {
+export function transformArraySchemaObject (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -579,7 +579,7 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
           ), []),
           required: isRequired
         }
@@ -593,7 +593,7 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values))
+              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
             ), []),
             required: isRequired
           }
@@ -611,7 +611,7 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
             Object
               .entries(properties)
               .reduce((accumulator, [key, schema]) => (
-                accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), uri, key }, values))
+                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), uri, key }))
               ), [])
           )
         }
@@ -626,7 +626,7 @@ export function transformArraySchemaObject (schema, rootSchema, params, values) 
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformArraySchemaArray (schema, rootSchema, params, values) {
+export function transformArraySchemaArray (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -642,7 +642,7 @@ export function transformArraySchemaArray (schema, rootSchema, params, values) {
   const fields = []
     .concat(items)
     .reduce((accumulator, schema, index) => (
-      accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, uri, index }, values))
+      accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
     ), [])
 
   return {
@@ -671,7 +671,7 @@ export function transformArraySchemaArray (schema, rootSchema, params, values) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString (schema, rootSchema, params, values) {
+export function transformArraySchemaString (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -706,8 +706,8 @@ export function transformArraySchemaString (schema, rootSchema, params, values) 
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, schema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
@@ -715,7 +715,7 @@ export function transformArraySchemaString (schema, rootSchema, params, values) 
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformArraySchemaNumber (schema, rootSchema, params, values) {
+export function transformArraySchemaNumber (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
     uri: parentUri,
@@ -752,43 +752,43 @@ export function transformArraySchemaNumber (schema, rootSchema, params, values) 
         ...max,
         ...step,
         required: isRequired,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, schema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export function transformArraySchema (schema = {}, rootSchema = schema, params = {}, values = {}) {
+export function transformArraySchema (schema = {}, rootSchema = schema, values = {}, params = {}) {
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformArraySchemaNull(schema, rootSchema, params, values)
+      return transformArraySchemaNull(schema, rootSchema, values, params)
 
     case 'boolean':
-      return transformArraySchemaBoolean(schema, rootSchema, params, values)
+      return transformArraySchemaBoolean(schema, rootSchema, values, params)
 
     case 'object':
-      return transformArraySchemaObject(schema, rootSchema, params, values)
+      return transformArraySchemaObject(schema, rootSchema, values, params)
 
     case 'array':
-      return transformArraySchemaArray(schema, rootSchema, params, values)
+      return transformArraySchemaArray(schema, rootSchema, values, params)
 
     case 'string':
-      return transformArraySchemaString(schema, rootSchema, params, values)
+      return transformArraySchemaString(schema, rootSchema, values, params)
 
     case 'number':
-      return transformArraySchemaNumber(schema, rootSchema, params, values)
+      return transformArraySchemaNumber(schema, rootSchema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformNull (rootSchema, params, values) {
+export function transformNull (rootSchema, values, params) {
   const uri = getUri()
 
   return {
@@ -804,15 +804,15 @@ export function transformNull (rootSchema, params, values) {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       field: {
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, rootSchema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export function transformBoolean (rootSchema, params, values) {
+export function transformBoolean (rootSchema, values, params) {
   const uri = getUri()
 
   return {
@@ -828,15 +828,15 @@ export function transformBoolean (rootSchema, params, values) {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       field: {
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, rootSchema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export function transformObject (rootSchema, params, values) {
+export function transformObject (rootSchema, values, params) {
   const {
     properties = {},
     required = []
@@ -873,7 +873,7 @@ export function transformObject (rootSchema, params, values) {
         ...getDescription(rootSchema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
           ), [])
         }
       }
@@ -886,7 +886,7 @@ export function transformObject (rootSchema, params, values) {
           ...getDescription(rootSchema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
             ), [])
           }
         }
@@ -898,7 +898,7 @@ export function transformObject (rootSchema, params, values) {
             Object
               .entries(properties)
               .reduce((accumulator, [key, schema]) => (
-                accumulator.concat(transformObjectSchema(schema, rootSchema, { ...params, required: required.includes(key), key }, values))
+                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), key }))
               ), [])
           )
         }
@@ -912,7 +912,7 @@ export function transformObject (rootSchema, params, values) {
   }
 }
 
-export function transformArray (rootSchema, params, values) {
+export function transformArray (rootSchema, values, params) {
   const {
     items = [] // array or object
   } = rootSchema
@@ -922,7 +922,7 @@ export function transformArray (rootSchema, params, values) {
   const fields = []
     .concat(items)
     .reduce((accumulator, schema, index) => (
-      accumulator.concat(transformArraySchema(schema, rootSchema, { ...params, index }, values))
+      accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
     ), [])
 
   return {
@@ -947,7 +947,7 @@ export function transformArray (rootSchema, params, values) {
   }
 }
 
-export function transformString (rootSchema, params, values) {
+export function transformString (rootSchema, values, params) {
   const uri = getUri()
   const minLength = getMinLength(rootSchema)
   const maxLength = getMaxLength(rootSchema)
@@ -972,15 +972,15 @@ export function transformString (rootSchema, params, values) {
         ...minLength,
         ...maxLength,
         ...pattern,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, rootSchema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export function transformNumber (rootSchema, params, values) {
+export function transformNumber (rootSchema, values, params) {
   const uri = getUri()
   const min = getMin(rootSchema)
   const max = getMax(rootSchema)
@@ -1007,36 +1007,36 @@ export function transformNumber (rootSchema, params, values) {
         ...min,
         ...max,
         ...step,
-        ...getElementsFieldProps(params, uri),
         ...getElementsFieldValue(values, uri, rootSchema),
+        ...getElementsFieldProps(params, uri),
         name: uri
       }
     }
   }
 }
 
-export default function transform (rootSchema = {}, params = {}, values = {}) {
+export default function transform (rootSchema = {}, values = {}, params = {}) {
   const { type } = rootSchema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformNull(rootSchema, params, values)
+      return transformNull(rootSchema, values, params)
 
     case 'boolean':
-      return transformBoolean(rootSchema, params, values)
+      return transformBoolean(rootSchema, values, params)
 
     case 'object':
-      return transformObject(rootSchema, params, values)
+      return transformObject(rootSchema, values, params)
 
     case 'array':
-      return transformArray(rootSchema, params, values)
+      return transformArray(rootSchema, values, params)
 
     case 'number':
-      return transformNumber(rootSchema, params, values)
+      return transformNumber(rootSchema, values, params)
 
     case 'string':
-      return transformString(rootSchema, params, values)
+      return transformString(rootSchema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')

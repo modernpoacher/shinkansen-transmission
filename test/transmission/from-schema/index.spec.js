@@ -85,7 +85,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         '#/nullTypeSubSchema': { meta: { component: 'mock null component' } }
       }
 
-      return expect(transform(schema, params))
+      return expect(transform(schema, {}, params))
         .to.eql({
           meta: {
             schema,
@@ -363,7 +363,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         '#/': { meta: { component: 'mock number component' } }
       }
 
-      return expect(transform(schema, params))
+      return expect(transform(schema, {}, params))
         .to.eql({
           meta: {
             type: 'number',
@@ -386,7 +386,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         '#/': { meta: { component: 'mock string component' } }
       }
 
-      return expect(transform(schema, params))
+      return expect(transform(schema, {}, params))
         .to.eql({
           meta: {
             type: 'string',
@@ -418,7 +418,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0': { meta: { component: 'mock array type index component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -465,7 +465,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0': { meta: { component: 'mock array type index component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -512,7 +512,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0': { meta: { component: 'mock array type index component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -556,7 +556,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0': { meta: { component: 'mock array type index component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -604,7 +604,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0/two': { meta: { component: 'mock array type index object type key component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -694,7 +694,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0/two': { meta: { component: 'mock array type index object type key component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -780,7 +780,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0': { meta: { component: 'mock array type index component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -827,7 +827,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/0': { meta: { component: 'mock array type index component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -869,7 +869,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/': { meta: { component: 'mock array component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'array',
@@ -902,7 +902,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/two': { meta: { component: 'mock object component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'object',
@@ -973,7 +973,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/two': { meta: { component: 'mock object component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'object',
@@ -1031,7 +1031,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             '#/': { meta: { component: 'mock object component' } }
           }
 
-          return expect(transform(schema, params))
+          return expect(transform(schema, {}, params))
             .to.eql({
               meta: {
                 type: 'object',
@@ -1054,7 +1054,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         '#/': { meta: { component: 'mock boolean component' } }
       }
 
-      return expect(transform(schema, params))
+      return expect(transform(schema, {}, params))
         .to.eql({
           meta: {
             type: 'boolean',
@@ -1077,7 +1077,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         '#/': { meta: { component: 'mock null component' } }
       }
 
-      return expect(transform(schema, params))
+      return expect(transform(schema, {}, params))
         .to.eql({
           meta: {
             type: 'null',
