@@ -1,8 +1,9 @@
 import {
+  getDefaultValue,
   getValue,
+  getSelectedIndex,
   getTitle,
   getDescription,
-  getDefaultValue,
   hasEnum,
   getEnum,
   hasOneOf,
@@ -108,22 +109,22 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
 
   const uri = getUri(parentUri, fieldKey)
 
-  const meta = {
-    uri,
-    name: fieldKey,
-    type: 'object',
-    schema,
-    rootSchema,
-    ...getMaxProperties(schema),
-    ...getMinProperties(schema),
-    required: isRequired,
-    ...getDefaultValue(schema, uri),
-    ...getValue(values, uri),
-    ...getMetaProps(params, uri)
-  }
-
+  let meta
   let elements
   if (hasEnum(schema)) {
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'object',
+      schema,
+      rootSchema,
+      ...getMaxProperties(schema),
+      ...getMinProperties(schema),
+      required: isRequired,
+      ...getSelectedIndex(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
@@ -131,10 +132,26 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       ...getDescription(schema),
       enum: {
         items,
-        required: isRequired
+        required: isRequired,
+        ...getSelectedIndex(values, uri),
+        name: uri
       }
     }
   } else {
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'object',
+      schema,
+      rootSchema,
+      ...getMaxProperties(schema),
+      ...getMinProperties(schema),
+      required: isRequired,
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     if (hasAnyOf(schema)) {
       const items = getAnyOf(schema)
 
@@ -247,23 +264,23 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
   const maxLength = getMaxLength(schema)
   const pattern = getPattern(schema)
 
-  const meta = {
-    uri,
-    name: fieldKey,
-    type: 'string',
-    schema,
-    rootSchema,
-    ...minLength,
-    ...maxLength,
-    ...pattern,
-    required: isRequired,
-    ...getDefaultValue(schema, uri),
-    ...getValue(values, uri),
-    ...getMetaProps(params, uri)
-  }
-
+  let meta
   let elements
   if (hasEnum(schema)) {
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'string',
+      schema,
+      rootSchema,
+      ...minLength,
+      ...maxLength,
+      ...pattern,
+      required: isRequired,
+      ...getSelectedIndex(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
@@ -274,10 +291,27 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...minLength,
         ...maxLength,
         ...pattern,
-        required: isRequired
+        required: isRequired,
+        ...getSelectedIndex(values, uri),
+        name: uri
       }
     }
   } else {
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'string',
+      schema,
+      rootSchema,
+      ...minLength,
+      ...maxLength,
+      ...pattern,
+      required: isRequired,
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     if (hasAnyOf(schema)) {
       const items = getAnyOf(schema)
 
@@ -348,25 +382,25 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
   const max = getMax(schema)
   const step = getStep(schema)
 
-  const meta = {
-    uri,
-    name: fieldKey,
-    type: 'number',
-    schema,
-    rootSchema,
-    ...getIsExclusiveMin(schema),
-    ...getIsExclusiveMax(schema),
-    ...min,
-    ...max,
-    ...step,
-    required: isRequired,
-    ...getDefaultValue(schema, uri),
-    ...getValue(values, uri),
-    ...getMetaProps(params, uri)
-  }
-
+  let meta
   let elements
   if (hasEnum(schema)) {
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'number',
+      schema,
+      rootSchema,
+      ...getIsExclusiveMin(schema),
+      ...getIsExclusiveMax(schema),
+      ...min,
+      ...max,
+      ...step,
+      required: isRequired,
+      ...getSelectedIndex(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
@@ -377,10 +411,29 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...min,
         ...max,
         ...step,
-        required: isRequired
+        required: isRequired,
+        ...getSelectedIndex(values, uri),
+        name: uri
       }
     }
   } else {
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'number',
+      schema,
+      rootSchema,
+      ...getIsExclusiveMin(schema),
+      ...getIsExclusiveMax(schema),
+      ...min,
+      ...max,
+      ...step,
+      required: isRequired,
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     if (hasAnyOf(schema)) {
       const items = getAnyOf(schema)
 
@@ -544,22 +597,22 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
 
   const uri = getUri(parentUri, arrayIndex)
 
-  const meta = {
-    uri,
-    item: arrayIndex,
-    type: 'object',
-    schema,
-    rootSchema,
-    ...getMaxProperties(schema),
-    ...getMinProperties(schema),
-    required: isRequired,
-    ...getDefaultValue(schema, uri),
-    ...getValue(values, uri),
-    ...getMetaProps(params, uri)
-  }
-
+  let meta
   let elements
   if (hasEnum(schema)) {
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'object',
+      schema,
+      rootSchema,
+      ...getMaxProperties(schema),
+      ...getMinProperties(schema),
+      required: isRequired,
+      ...getSelectedIndex(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
@@ -567,10 +620,26 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
       ...getDescription(schema),
       enum: {
         items,
-        required: isRequired
+        required: isRequired,
+        ...getSelectedIndex(values, uri),
+        name: uri
       }
     }
   } else {
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'object',
+      schema,
+      rootSchema,
+      ...getMaxProperties(schema),
+      ...getMinProperties(schema),
+      required: isRequired,
+      ...getDefaultValue(schema, uri),
+      ...getValue(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     if (hasAnyOf(schema)) {
       const items = getAnyOf(schema)
 
@@ -844,27 +913,38 @@ export function transformObject (rootSchema, values, params) {
 
   const uri = getUri()
 
-  const meta = {
-    uri,
-    type: 'object',
-    schema: rootSchema,
-    ...getDefaultValue(rootSchema, uri),
-    ...getValue(values, uri),
-    ...getMetaProps(params, uri)
-  }
-
+  let meta
   let elements
   if (hasEnum(rootSchema)) {
+    meta = {
+      uri,
+      type: 'object',
+      schema: rootSchema,
+      ...getSelectedIndex(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     const items = getEnum(rootSchema) // `enum` is a reserved word
 
     elements = {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       enum: {
-        items
+        items,
+        ...getSelectedIndex(values, uri),
+        name: uri
       }
     }
   } else {
+    meta = {
+      uri,
+      type: 'object',
+      schema: rootSchema,
+      ...getDefaultValue(rootSchema, uri),
+      ...getValue(values, uri),
+      ...getMetaProps(params, uri)
+    }
+
     if (hasAnyOf(rootSchema)) {
       const items = getAnyOf(rootSchema)
 

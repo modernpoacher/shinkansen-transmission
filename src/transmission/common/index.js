@@ -8,9 +8,20 @@ export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { wri
 
 export const getDefaultValue = (schema = {}) => (Reflect.has(schema, 'default') ? { defaultValue: Reflect.get(schema, 'default') } : {})
 
-export const getValue = (values = {}, uri = '#/') => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : {})
+export const getValue = (values = {}, uri = getUri()) => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : {})
 
-export const getMetaProps = (params = {}, uri = '#/') => {
+export const getSelectedIndex = (values = {}, uri = getUri()) => {
+  if (Reflect.has(values, uri)) {
+    const index = Reflect.get(values, uri)
+    const value = Number(index)
+
+    return isNaN(value) ? {} : { selectedIndex: value }
+  }
+
+  return {}
+}
+
+export const getMetaProps = (params = {}, uri = getUri()) => {
   let meta
   if (Reflect.has(params, uri)) {
     ({
@@ -21,7 +32,7 @@ export const getMetaProps = (params = {}, uri = '#/') => {
   return meta || {}
 }
 
-export const getElementsTitleProps = (params = {}, uri = '#/') => {
+export const getElementsTitleProps = (params = {}, uri = getUri()) => {
   let title
   if (Reflect.has(params, uri)) {
     ({
@@ -34,7 +45,7 @@ export const getElementsTitleProps = (params = {}, uri = '#/') => {
   return title || {}
 }
 
-export const getElementsDescriptionProps = (params = {}, uri = '#/') => {
+export const getElementsDescriptionProps = (params = {}, uri = getUri()) => {
   let description
   if (Reflect.has(params, uri)) {
     ({
@@ -47,7 +58,7 @@ export const getElementsDescriptionProps = (params = {}, uri = '#/') => {
   return description || {}
 }
 
-export const getElementsFieldProps = (params = {}, uri = '#/') => {
+export const getElementsFieldProps = (params = {}, uri = getUri()) => {
   let field
   if (Reflect.has(params, uri)) {
     ({
@@ -60,7 +71,7 @@ export const getElementsFieldProps = (params = {}, uri = '#/') => {
   return field || {}
 }
 
-export const getElementsFieldValue = (values = {}, uri = '#/', schema) => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : Reflect.has(schema, 'default') ? { value: Reflect.get(schema, 'default') } : {})
+export const getElementsFieldValue = (values = {}, uri = getUri(), schema) => (Reflect.has(values, uri) ? { value: Reflect.get(values, uri) } : Reflect.has(schema, 'default') ? { value: Reflect.get(schema, 'default') } : {})
 
 export const hasEnum = (schema = {}) => Reflect.has(schema, 'enum')
 export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')

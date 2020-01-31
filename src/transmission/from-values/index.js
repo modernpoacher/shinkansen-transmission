@@ -1,4 +1,6 @@
 import {
+  hasEnum,
+  getEnum,
   getUri
 } from 'shinkansen-transmission/transmission/common'
 
@@ -32,16 +34,38 @@ export const toNumber = (v) => {
   throw new Error('Invalid `number`')
 }
 
-export function transformObjectSchemaNull (values, { uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaNull (schema, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
-  if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNull(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toNull(value)
+    }
+
+    return toNull(Reflect.get(values, uri))
+  }
 }
 
-export function transformObjectSchemaBoolean (values, { uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaBoolean (schema, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
-  if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toBoolean(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toBoolean(value)
+    }
+
+    return toBoolean(Reflect.get(values, uri))
+  }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -78,17 +102,39 @@ export function transformObjectSchemaArray ({ items = [] /* array or object */ }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformObjectSchemaString (values, { uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaString (schema, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
-  if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toString(value)
+    }
+
+    return toString(Reflect.get(values, uri))
+  }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber (values, { uri: parentUri, key: fieldKey }) {
+export function transformObjectSchemaNumber (schema, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
-  if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toNumber(value)
+    }
+
+    return toNumber(Reflect.get(values, uri))
+  }
 }
 
 export function transformObjectSchema (schema = {}, values = {}, params = {}) {
@@ -97,10 +143,10 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformObjectSchemaNull(values, params)
+      return transformObjectSchemaNull(schema, values, params)
 
     case 'boolean':
-      return transformObjectSchemaBoolean(values, params)
+      return transformObjectSchemaBoolean(schema, values, params)
 
     case 'object':
       return transformObjectSchemaObject(schema, values, params)
@@ -109,26 +155,48 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
       return transformObjectSchemaArray(schema, values, params)
 
     case 'string':
-      return transformObjectSchemaString(values, params)
+      return transformObjectSchemaString(schema, values, params)
 
     case 'number':
-      return transformObjectSchemaNumber(values, params)
+      return transformObjectSchemaNumber(schema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformArraySchemaNull (values, { uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaNull (schema, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
-  if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toNull(value)
+    }
+
+    return toNull(Reflect.get(values, uri))
+  }
 }
 
-export function transformArraySchemaBoolean (values, { uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaBoolean (schema, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
-  if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toBoolean(value)
+    }
+
+    return toBoolean(Reflect.get(values, uri))
+  }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -165,17 +233,39 @@ export function transformArraySchemaArray ({ items = [] /* array or object */ },
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString (values, { uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaString (schema, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
-  if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toString(value)
+    }
+
+    return toString(Reflect.get(values, uri))
+  }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformArraySchemaNumber (values, { uri: parentUri, index: arrayIndex }) {
+export function transformArraySchemaNumber (schema, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
-  if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toNumber(value)
+    }
+
+    return toNumber(Reflect.get(values, uri))
+  }
 }
 
 export function transformArraySchema (schema = {}, values = {}, params = {}) {
@@ -184,10 +274,10 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformArraySchemaNull(values, params)
+      return transformArraySchemaNull(schema, values, params)
 
     case 'boolean':
-      return transformArraySchemaBoolean(values, params)
+      return transformArraySchemaBoolean(schema, values, params)
 
     case 'object':
       return transformArraySchemaObject(schema, values, params)
@@ -196,26 +286,48 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
       return transformArraySchemaArray(schema, values, params)
 
     case 'string':
-      return transformArraySchemaString(values, params)
+      return transformArraySchemaString(schema, values, params)
 
     case 'number':
-      return transformArraySchemaNumber(values, params)
+      return transformArraySchemaNumber(schema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
   }
 }
 
-export function transformNull (values) {
+export function transformNull (schema, values) {
   const uri = getUri()
 
-  if (Reflect.has(values, uri)) return toNull(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toNull(value)
+    }
+
+    return toNull(Reflect.get(values, uri))
+  }
 }
 
-export function transformBoolean (values) {
+export function transformBoolean (schema, values) {
   const uri = getUri()
 
-  if (Reflect.has(values, uri)) return toBoolean(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toBoolean(value)
+    }
+
+    return toBoolean(Reflect.get(values, uri))
+  }
 }
 
 export function transformObject ({ properties = {} }, values) {
@@ -249,16 +361,38 @@ export function transformArray ({ items = [] /* array or object */ }, values) {
   )
 }
 
-export function transformString (values) {
+export function transformString (schema, values) {
   const uri = getUri()
 
-  if (Reflect.has(values, uri)) return toString(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toString(value)
+    }
+
+    return toString(Reflect.get(values, uri))
+  }
 }
 
-export function transformNumber (values) {
+export function transformNumber (schema, values) {
   const uri = getUri()
 
-  if (Reflect.has(values, uri)) return toNumber(Reflect.get(values, uri))
+  if (Reflect.has(values, uri)) {
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      const index = toNumber(Reflect.get(values, uri))
+      const value = items[index]
+
+      return toNumber(value)
+    }
+
+    return toNumber(Reflect.get(values, uri))
+  }
 }
 
 export default function transform (rootSchema = {}, values = {}) {
@@ -267,10 +401,10 @@ export default function transform (rootSchema = {}, values = {}) {
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformNull(values)
+      return transformNull(rootSchema, values)
 
     case 'boolean':
-      return transformBoolean(values)
+      return transformBoolean(rootSchema, values)
 
     case 'object':
       return transformObject(rootSchema, values)
@@ -279,10 +413,10 @@ export default function transform (rootSchema = {}, values = {}) {
       return transformArray(rootSchema, values)
 
     case 'number':
-      return transformNumber(values)
+      return transformNumber(rootSchema, values)
 
     case 'string':
-      return transformString(values)
+      return transformString(rootSchema, values)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
