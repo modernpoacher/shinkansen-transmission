@@ -40,8 +40,36 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, fieldKey)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'null',
+      schema,
+      rootSchema,
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       name: fieldKey,
       type: 'null',
@@ -51,8 +79,9 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       field: {
@@ -62,6 +91,11 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -74,8 +108,36 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
 
   const uri = getUri(parentUri, fieldKey)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'boolean',
+      schema,
+      rootSchema,
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       name: fieldKey,
       type: 'boolean',
@@ -85,8 +147,9 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       field: {
@@ -96,6 +159,11 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -112,6 +180,8 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
   let meta
   let elements
   if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
     meta = {
       uri,
       name: fieldKey,
@@ -121,7 +191,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       ...getMaxProperties(schema),
       ...getMinProperties(schema),
       required: isRequired,
-      ...getSelectedIndex(values, uri),
+      ...selectedIndex,
       ...getMetaProps(params, uri)
     }
 
@@ -133,7 +203,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       enum: {
         items,
         required: isRequired,
-        ...getSelectedIndex(values, uri),
+        ...selectedIndex,
         name: uri
       }
     }
@@ -216,18 +286,50 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
 
   const uri = getUri(parentUri, fieldKey)
 
-  const {
-    items = [] // array or object
-  } = schema
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
 
-  const fields = []
-    .concat(items)
-    .reduce((accumulator, schema, index) => (
-      accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
-    ), [])
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'array',
+      schema,
+      rootSchema,
+      ...getMinItems(schema),
+      ...getMaxItems(schema),
+      ...getHasUniqueItems(schema),
+      ...getMaxContains(schema),
+      ...getMinContains(schema),
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
 
-  return {
-    meta: {
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    const {
+      items = [] // array or object
+    } = schema
+
+    const fields = []
+      .concat(items)
+      .reduce((accumulator, schema, index) => (
+        accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+      ), [])
+
+    meta = {
       uri,
       name: fieldKey,
       type: 'array',
@@ -242,12 +344,18 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       fields
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -260,6 +368,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(parentUri, fieldKey)
+
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
   const pattern = getPattern(schema)
@@ -267,6 +376,8 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
   let meta
   let elements
   if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
     meta = {
       uri,
       name: fieldKey,
@@ -277,7 +388,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
       ...maxLength,
       ...pattern,
       required: isRequired,
-      ...getSelectedIndex(values, uri),
+      ...selectedIndex,
       ...getMetaProps(params, uri)
     }
 
@@ -292,7 +403,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...getSelectedIndex(values, uri),
+        ...selectedIndex,
         name: uri
       }
     }
@@ -378,6 +489,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(parentUri, fieldKey)
+
   const min = getMin(schema)
   const max = getMax(schema)
   const step = getStep(schema)
@@ -385,6 +497,8 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
   let meta
   let elements
   if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
     meta = {
       uri,
       name: fieldKey,
@@ -397,7 +511,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
       ...max,
       ...step,
       required: isRequired,
-      ...getSelectedIndex(values, uri),
+      ...selectedIndex,
       ...getMetaProps(params, uri)
     }
 
@@ -412,7 +526,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...max,
         ...step,
         required: isRequired,
-        ...getSelectedIndex(values, uri),
+        ...selectedIndex,
         name: uri
       }
     }
@@ -528,8 +642,36 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, arrayIndex)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'null',
+      schema,
+      rootSchema,
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       item: arrayIndex,
       type: 'null',
@@ -539,8 +681,9 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       field: {
@@ -550,6 +693,11 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -562,8 +710,36 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
 
   const uri = getUri(parentUri, arrayIndex)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'boolean',
+      schema,
+      rootSchema,
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       item: arrayIndex,
       type: 'boolean',
@@ -573,8 +749,9 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       field: {
@@ -584,6 +761,11 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -704,18 +886,51 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, arrayIndex)
 
-  const {
-    items = [] // array or object
-  } = schema
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
 
-  const fields = []
-    .concat(items)
-    .reduce((accumulator, schema, index) => (
-      accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
-    ), [])
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'array',
+      schema,
+      rootSchema,
+      ...getMinItems(schema),
+      ...getMaxItems(schema),
+      ...getHasUniqueItems(schema),
+      ...getMaxContains(schema),
+      ...getMinContains(schema),
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
 
-  return {
-    meta: {
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    const {
+      items = [] // array or object
+    } = schema
+
+    const fields = []
+      .concat(items)
+      .reduce((accumulator, schema, index) => (
+        accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
+      ), [])
+
+    meta = {
       uri,
       item: arrayIndex,
       type: 'array',
@@ -730,12 +945,18 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       fields
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -748,12 +969,47 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
   } = params
 
   const uri = getUri(parentUri, arrayIndex)
+
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
   const pattern = getPattern(schema)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'string',
+      schema,
+      rootSchema,
+      ...minLength,
+      ...maxLength,
+      ...pattern,
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       item: arrayIndex,
       type: 'string',
@@ -766,8 +1022,9 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       field: {
@@ -781,6 +1038,11 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
       }
     }
   }
+
+  return {
+    meta,
+    elements
+  }
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
@@ -792,12 +1054,49 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
   } = params
 
   const uri = getUri(parentUri, arrayIndex)
+
   const min = getMin(schema)
   const max = getMax(schema)
   const step = getStep(schema)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'number',
+      schema,
+      rootSchema,
+      ...getIsExclusiveMin(schema),
+      ...getIsExclusiveMax(schema),
+      ...min,
+      ...max,
+      ...step,
+      required: isRequired,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(schema)
+
+    elements = {
+      ...getTitle(schema),
+      ...getDescription(schema),
+      enum: {
+        items,
+        ...min,
+        ...max,
+        ...step,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       item: arrayIndex,
       type: 'number',
@@ -812,8 +1111,9 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
       ...getDefaultValue(schema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(schema),
       ...getDescription(schema),
       field: {
@@ -826,6 +1126,11 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
@@ -860,16 +1165,41 @@ export function transformArraySchema (schema = {}, rootSchema = schema, values =
 export function transformNull (rootSchema, values, params) {
   const uri = getUri()
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(rootSchema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      type: 'null',
+      schema: rootSchema,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(rootSchema)
+
+    elements = {
+      ...getTitle(rootSchema),
+      ...getDescription(rootSchema),
+      enum: {
+        items,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       type: 'null',
       schema: rootSchema,
       ...getDefaultValue(rootSchema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       field: {
@@ -878,22 +1208,52 @@ export function transformNull (rootSchema, values, params) {
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 
 export function transformBoolean (rootSchema, values, params) {
   const uri = getUri()
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(rootSchema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      type: 'boolean',
+      schema: rootSchema,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(rootSchema)
+
+    elements = {
+      ...getTitle(rootSchema),
+      ...getDescription(rootSchema),
+      enum: {
+        items,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       type: 'boolean',
       schema: rootSchema,
       ...getDefaultValue(rootSchema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       field: {
@@ -903,24 +1263,26 @@ export function transformBoolean (rootSchema, values, params) {
       }
     }
   }
+
+  return {
+    meta,
+    elements
+  }
 }
 
 export function transformObject (rootSchema, values, params) {
-  const {
-    properties = {},
-    required = []
-  } = rootSchema
-
   const uri = getUri()
 
   let meta
   let elements
   if (hasEnum(rootSchema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
     meta = {
       uri,
       type: 'object',
       schema: rootSchema,
-      ...getSelectedIndex(values, uri),
+      ...selectedIndex,
       ...getMetaProps(params, uri)
     }
 
@@ -931,7 +1293,7 @@ export function transformObject (rootSchema, values, params) {
       ...getDescription(rootSchema),
       enum: {
         items,
-        ...getSelectedIndex(values, uri),
+        ...selectedIndex,
         name: uri
       }
     }
@@ -971,6 +1333,11 @@ export function transformObject (rootSchema, values, params) {
           }
         }
       } else {
+        const {
+          properties = {},
+          required = []
+        } = rootSchema
+
         elements = {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
@@ -993,20 +1360,44 @@ export function transformObject (rootSchema, values, params) {
 }
 
 export function transformArray (rootSchema, values, params) {
-  const {
-    items = [] // array or object
-  } = rootSchema
-
   const uri = getUri()
 
-  const fields = []
-    .concat(items)
-    .reduce((accumulator, schema, index) => (
-      accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
-    ), [])
+  let meta
+  let elements
+  if (hasEnum(rootSchema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
 
-  return {
-    meta: {
+    meta = {
+      uri,
+      type: 'array',
+      schema: rootSchema,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(rootSchema) // `enum` is a reserved word
+
+    elements = {
+      ...getTitle(rootSchema),
+      ...getDescription(rootSchema),
+      enum: {
+        items,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    const {
+      items = [] // array or object
+    } = rootSchema
+
+    const fields = []
+      .concat(items)
+      .reduce((accumulator, schema, index) => (
+        accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
+      ), [])
+
+    meta = {
       uri,
       type: 'array',
       schema: rootSchema,
@@ -1018,23 +1409,60 @@ export function transformArray (rootSchema, values, params) {
       ...getDefaultValue(rootSchema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       fields
     }
   }
+
+  return {
+    meta,
+    elements
+  }
 }
 
 export function transformString (rootSchema, values, params) {
   const uri = getUri()
+
   const minLength = getMinLength(rootSchema)
   const maxLength = getMaxLength(rootSchema)
   const pattern = getPattern(rootSchema)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(rootSchema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      type: 'string',
+      schema: rootSchema,
+      ...minLength,
+      ...maxLength,
+      ...pattern,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(rootSchema) // `enum` is a reserved word
+
+    elements = {
+      ...getTitle(rootSchema),
+      ...getDescription(rootSchema),
+      enum: {
+        items,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       type: 'string',
       schema: rootSchema,
@@ -1044,8 +1472,9 @@ export function transformString (rootSchema, values, params) {
       ...getDefaultValue(rootSchema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       field: {
@@ -1058,6 +1487,11 @@ export function transformString (rootSchema, values, params) {
       }
     }
   }
+
+  return {
+    meta,
+    elements
+  }
 }
 
 export function transformNumber (rootSchema, values, params) {
@@ -1066,8 +1500,40 @@ export function transformNumber (rootSchema, values, params) {
   const max = getMax(rootSchema)
   const step = getStep(rootSchema)
 
-  return {
-    meta: {
+  let meta
+  let elements
+  if (hasEnum(rootSchema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      type: 'number',
+      schema: rootSchema,
+      ...getIsExclusiveMin(rootSchema),
+      ...getIsExclusiveMax(rootSchema),
+      ...min,
+      ...max,
+      ...step,
+      ...selectedIndex,
+      ...getMetaProps(params, uri)
+    }
+
+    const items = getEnum(rootSchema) // `enum` is a reserved word
+
+    elements = {
+      ...getTitle(rootSchema),
+      ...getDescription(rootSchema),
+      enum: {
+        items,
+        ...min,
+        ...max,
+        ...step,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    meta = {
       uri,
       type: 'number',
       schema: rootSchema,
@@ -1079,8 +1545,9 @@ export function transformNumber (rootSchema, values, params) {
       ...getDefaultValue(rootSchema, uri),
       ...getValue(values, uri),
       ...getMetaProps(params, uri)
-    },
-    elements: {
+    }
+
+    elements = {
       ...getTitle(rootSchema),
       ...getDescription(rootSchema),
       field: {
@@ -1092,6 +1559,11 @@ export function transformNumber (rootSchema, values, params) {
         name: uri
       }
     }
+  }
+
+  return {
+    meta,
+    elements
   }
 }
 

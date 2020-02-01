@@ -161,7 +161,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
   describe('Transforming `array` type schemas', () => {
     describe('With `items`', () => {
       describe('With `enum`', () => {
-        it('transforms `array` type schemas (`items` is `number` type with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `number` type)', () => {
           const document = [3]
 
           const schema = {
@@ -180,7 +180,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is `string` type with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `string` type)', () => {
           const document = ['mock array type index string (two)']
 
           const schema = {
@@ -202,7 +202,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is type `array` with `items` is type `object` with `properties` with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `array` type with `items` is `object` type with `properties`)', () => {
           const document = [{ one: 'mock array type index string type (3)', two: 3 }]
 
           const schema = {
@@ -239,7 +239,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is type `array` with `items` is type `array` with `items` with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `array` type with `items` is `array` type with `items`)', () => {
           const document = [['mock array type index string type (3)', 3]]
 
           const schema = {
@@ -276,11 +276,11 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is type `object` with `properties` with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `object` type with `properties`)', () => {
           const document = [
             {
-              one: 'mock array type index object type key string (one)',
-              two: 'mock array type index object type key string (two)'
+              one: 'mock array type index object type key string (1)',
+              two: 'mock array type index object type key string (2)'
             }
           ]
 
@@ -293,15 +293,15 @@ describe('shinkansen-transmission/transmission/from-document', () => {
                   one: {
                     type: 'string',
                     enum: [
-                      'mock array type index object type key string (one)',
-                      'mock array type index object type key string (two)'
+                      'mock array type index object type key string (1)',
+                      'mock array type index object type key string (2)'
                     ]
                   },
                   two: {
                     type: 'string',
                     enum: [
-                      'mock array type index object type key string (one)',
-                      'mock array type index object type key string (two)'
+                      'mock array type index object type key string (1)',
+                      'mock array type index object type key string (2)'
                     ]
                   }
                 }
@@ -317,7 +317,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is `boolean` type with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `boolean` type)', () => {
           const document = [false]
 
           const schema = {
@@ -336,7 +336,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is `null` type with `enum`)', () => {
+        it('transforms `array` type schemas (`items` is `null` type)', () => {
           const document = [null]
 
           const schema = {
@@ -393,7 +393,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is type `array`)', () => {
+        it('transforms `array` type schemas (`items` is `array` type)', () => {
           const document = []
 
           const schema = {
@@ -409,7 +409,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             .to.eql({})
         })
 
-        it('transforms `array` type schemas (`items` is type `array` with `items` is type `array`)', () => {
+        it('transforms `array` type schemas (`items` is `array` type with `items` is `array` type)', () => {
           const document = [['mock array type index string type', 1]]
 
           const schema = {
@@ -436,7 +436,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is type `array` with `items` is type `object`)', () => {
+        it('transforms `array` type schemas (`items` is `array` type with `items` is `object` type)', () => {
           const document = [['mock array type index string type (0)', 'mock array type index string type (1)']]
 
           const schema = {
@@ -463,7 +463,7 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             })
         })
 
-        it('transforms `array` type schemas (`items` is type `object`)', () => {
+        it('transforms `array` type schemas (`items` is `object` type)', () => {
           const document = []
 
           const schema = {
@@ -482,11 +482,11 @@ describe('shinkansen-transmission/transmission/from-document', () => {
             .to.eql({})
         })
 
-        it('transforms `array` type schemas (`items` is type `object` with `properties`)', () => {
+        it('transforms `array` type schemas (`items` is `object` type with `properties`)', () => {
           const document = [
             {
-              one: 'mock array type index object type key string (one)',
-              two: 'mock array type index object type key string (two)'
+              one: 'mock array type index object type key string (1)',
+              two: 'mock array type index object type key string (2)'
             }
           ]
 
@@ -501,8 +501,8 @@ describe('shinkansen-transmission/transmission/from-document', () => {
 
           return expect(transform(document, schema))
             .to.eql({
-              '#/0/one': 'mock array type index object type key string (one)',
-              '#/0/two': 'mock array type index object type key string (two)'
+              '#/0/one': 'mock array type index object type key string (1)',
+              '#/0/two': 'mock array type index object type key string (2)'
             })
         })
 
@@ -561,15 +561,15 @@ describe('shinkansen-transmission/transmission/from-document', () => {
       describe('With `enum`', () => {
         it('transforms `object` type schemas (with `properties` and `enum`)', () => {
           const document = {
-            one: 'mock object type key string (one)',
-            two: 'mock object type key string (two)'
+            one: 'mock object type key string (1)',
+            two: 'mock object type key string (2)'
           }
 
           const schema = {
             type: 'object',
             properties: {
-              one: { type: 'string', enum: ['mock object type key string (one)', 'mock object type key string (two)'] },
-              two: { type: 'string', enum: ['mock object type key string (one)', 'mock object type key string (two)'] }
+              one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
+              two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
             }
           }
 
@@ -584,8 +584,8 @@ describe('shinkansen-transmission/transmission/from-document', () => {
       describe('Without `enum`', () => {
         it('transforms `object` type schemas (with `properties`)', () => {
           const document = {
-            one: 'mock object type key string (one)',
-            two: 'mock object type key string (two)'
+            one: 'mock object type key string (1)',
+            two: 'mock object type key string (2)'
           }
 
           const schema = {
@@ -598,8 +598,8 @@ describe('shinkansen-transmission/transmission/from-document', () => {
 
           return expect(transform(document, schema))
             .to.eql({
-              '#/one': 'mock object type key string (one)',
-              '#/two': 'mock object type key string (two)'
+              '#/one': 'mock object type key string (1)',
+              '#/two': 'mock object type key string (2)'
             })
         })
       })
