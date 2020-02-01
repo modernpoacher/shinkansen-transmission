@@ -31,6 +31,7 @@ import {
   getElementsFieldValue
 } from 'shinkansen-transmission/transmission/common'
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaNull (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
@@ -69,26 +70,82 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'null',
-      schema,
-      rootSchema,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      field: {
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'null',
+        schema,
+        rootSchema,
         required: isRequired,
-        ...getElementsFieldValue(values, uri, schema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+        ...getMetaProps(params, uri)
+      }
+
+      const items = getAnyOf(schema)
+
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'null',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'null',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -99,6 +156,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaBoolean (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
@@ -137,26 +195,82 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
       }
     }
   } else {
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'boolean',
-      schema,
-      rootSchema,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      field: {
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'boolean',
+        schema,
+        rootSchema,
         required: isRequired,
-        ...getElementsFieldValue(values, uri, schema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+        ...getMetaProps(params, uri)
+      }
+
+      const items = getAnyOf(schema)
+
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'boolean',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'boolean',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -208,21 +322,19 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       }
     }
   } else {
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'object',
-      schema,
-      rootSchema,
-      ...getMaxProperties(schema),
-      ...getMinProperties(schema),
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'object',
+        schema,
+        rootSchema,
+        ...getMaxProperties(schema),
+        ...getMinProperties(schema),
+        required: isRequired,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(schema)
 
       elements = {
@@ -230,23 +342,41 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
-          required: isRequired
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const items = getAnyOf(schema)
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'object',
+          schema,
+          rootSchema,
+          ...getMaxProperties(schema),
+          ...getMinProperties(schema),
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
 
         elements = {
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
-            required: isRequired
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
           }
         }
       } else {
@@ -254,6 +384,20 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           properties = {},
           required = []
         } = schema
+
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'object',
+          schema,
+          rootSchema,
+          ...getMaxProperties(schema),
+          ...getMinProperties(schema),
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
 
         elements = {
           ...getTitle(schema),
@@ -319,37 +463,103 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
       }
     }
   } else {
-    const {
-      items = [] // array or object
-    } = schema
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'array',
+        schema,
+        rootSchema,
+        ...getMinItems(schema),
+        ...getMaxItems(schema),
+        ...getHasUniqueItems(schema),
+        ...getMaxContains(schema),
+        ...getMinContains(schema),
+        required: isRequired,
+        ...getMetaProps(params, uri)
+      }
 
-    const fields = []
-      .concat(items)
-      .reduce((accumulator, schema, index) => (
-        accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
-      ), [])
+      const items = getAnyOf(schema)
 
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'array',
-      schema,
-      rootSchema,
-      ...getMinItems(schema),
-      ...getMaxItems(schema),
-      ...getHasUniqueItems(schema),
-      ...getMaxContains(schema),
-      ...getMinContains(schema),
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'array',
+          schema,
+          rootSchema,
+          ...getMinItems(schema),
+          ...getMaxItems(schema),
+          ...getHasUniqueItems(schema),
+          ...getMaxContains(schema),
+          ...getMinContains(schema),
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
 
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      fields
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'array',
+          schema,
+          rootSchema,
+          ...getMinItems(schema),
+          ...getMaxItems(schema),
+          ...getHasUniqueItems(schema),
+          ...getMaxContains(schema),
+          ...getMinContains(schema),
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        const {
+          items = [] // array or object
+        } = schema
+
+        const fields = []
+          .concat(items)
+          .reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), [])
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          fields
+        }
+      }
     }
   }
 
@@ -408,22 +618,20 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
       }
     }
   } else {
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'string',
-      schema,
-      rootSchema,
-      ...minLength,
-      ...maxLength,
-      ...pattern,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'string',
+        schema,
+        rootSchema,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        required: isRequired,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(schema)
 
       elements = {
@@ -431,16 +639,32 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           ...minLength,
           ...maxLength,
           ...pattern,
-          required: isRequired
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'string',
+          schema,
+          rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(schema)
 
         elements = {
@@ -448,15 +672,33 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             ...minLength,
             ...maxLength,
             ...pattern,
-            required: isRequired
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'string',
+          schema,
+          rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         elements = {
           ...getTitle(schema),
           ...getDescription(schema),
@@ -531,24 +773,22 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
       }
     }
   } else {
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'number',
-      schema,
-      rootSchema,
-      ...getIsExclusiveMin(schema),
-      ...getIsExclusiveMax(schema),
-      ...min,
-      ...max,
-      ...step,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'number',
+        schema,
+        rootSchema,
+        ...getIsExclusiveMin(schema),
+        ...getIsExclusiveMax(schema),
+        ...min,
+        ...max,
+        ...step,
+        required: isRequired,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(schema)
 
       elements = {
@@ -556,16 +796,34 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
           ), []),
           ...min,
           ...max,
           ...step,
-          required: isRequired
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'number',
+          schema,
+          rootSchema,
+          ...getIsExclusiveMin(schema),
+          ...getIsExclusiveMax(schema),
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(schema)
 
         elements = {
@@ -573,15 +831,35 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
             ), []),
             ...min,
             ...max,
             ...step,
-            required: isRequired
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'number',
+          schema,
+          rootSchema,
+          ...getIsExclusiveMin(schema),
+          ...getIsExclusiveMax(schema),
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         elements = {
           ...getTitle(schema),
           ...getDescription(schema),
@@ -633,6 +911,7 @@ export function transformObjectSchema (schema = {}, rootSchema = schema, values 
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformArraySchemaNull (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
@@ -671,26 +950,82 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'null',
-      schema,
-      rootSchema,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      field: {
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'null',
+        schema,
+        rootSchema,
         required: isRequired,
-        ...getElementsFieldValue(values, uri, schema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+        ...getMetaProps(params, uri)
+      }
+
+      const items = getAnyOf(schema)
+
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'null',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'null',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -701,6 +1036,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformArraySchemaBoolean (schema, rootSchema, values, params) {
   const {
     required: isRequired = false,
@@ -739,26 +1075,82 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
       }
     }
   } else {
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'boolean',
-      schema,
-      rootSchema,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      field: {
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'boolean',
+        schema,
+        rootSchema,
         required: isRequired,
-        ...getElementsFieldValue(values, uri, schema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+        ...getMetaProps(params, uri)
+      }
+
+      const items = getAnyOf(schema)
+
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'boolean',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'boolean',
+          schema,
+          rootSchema,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -808,21 +1200,19 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
       }
     }
   } else {
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'object',
-      schema,
-      rootSchema,
-      ...getMaxProperties(schema),
-      ...getMinProperties(schema),
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'object',
+        schema,
+        rootSchema,
+        ...getMaxProperties(schema),
+        ...getMinProperties(schema),
+        required: isRequired,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(schema)
 
       elements = {
@@ -830,26 +1220,58 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         ...getDescription(schema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
+            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
           ), []),
-          required: isRequired
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const items = getAnyOf(schema)
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'object',
+          schema,
+          rootSchema,
+          ...getMaxProperties(schema),
+          ...getMinProperties(schema),
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
 
         elements = {
           ...getTitle(schema),
           ...getDescription(schema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
+              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
             ), []),
-            required: isRequired
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'object',
+          schema,
+          rootSchema,
+          ...getMaxProperties(schema),
+          ...getMinProperties(schema),
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         const {
           properties = {},
           required = []
@@ -920,37 +1342,103 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
       }
     }
   } else {
-    const {
-      items = [] // array or object
-    } = schema
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'array',
+        schema,
+        rootSchema,
+        ...getMinItems(schema),
+        ...getMaxItems(schema),
+        ...getHasUniqueItems(schema),
+        ...getMaxContains(schema),
+        ...getMinContains(schema),
+        required: isRequired,
+        ...getMetaProps(params, uri)
+      }
 
-    const fields = []
-      .concat(items)
-      .reduce((accumulator, schema, index) => (
-        accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
-      ), [])
+      const items = getAnyOf(schema)
 
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'array',
-      schema,
-      rootSchema,
-      ...getMinItems(schema),
-      ...getMaxItems(schema),
-      ...getHasUniqueItems(schema),
-      ...getMaxContains(schema),
-      ...getMinContains(schema),
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'array',
+          schema,
+          rootSchema,
+          ...getMinItems(schema),
+          ...getMaxItems(schema),
+          ...getHasUniqueItems(schema),
+          ...getMaxContains(schema),
+          ...getMinContains(schema),
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
 
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      fields
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'array',
+          schema,
+          rootSchema,
+          ...getMinItems(schema),
+          ...getMaxItems(schema),
+          ...getHasUniqueItems(schema),
+          ...getMaxContains(schema),
+          ...getMinContains(schema),
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        const {
+          items = [] // array or object
+        } = schema
+
+        const fields = []
+          .concat(items)
+          .reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
+          ), [])
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          fields
+        }
+      }
     }
   }
 
@@ -1009,32 +1497,100 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
       }
     }
   } else {
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'string',
-      schema,
-      rootSchema,
-      ...minLength,
-      ...maxLength,
-      ...pattern,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      field: {
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'string',
+        schema,
+        rootSchema,
         ...minLength,
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...getElementsFieldValue(values, uri, schema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+        ...getMetaProps(params, uri)
+      }
+
+      const items = getAnyOf(schema)
+
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'string',
+          schema,
+          rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'string',
+          schema,
+          rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -1096,34 +1652,106 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
       }
     }
   } else {
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'number',
-      schema,
-      rootSchema,
-      ...getIsExclusiveMin(schema),
-      ...getIsExclusiveMax(schema),
-      ...min,
-      ...max,
-      ...step,
-      required: isRequired,
-      ...getDefaultValue(schema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
-    elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
-      field: {
+    if (hasAnyOf(schema)) {
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'number',
+        schema,
+        rootSchema,
+        ...getIsExclusiveMin(schema),
+        ...getIsExclusiveMax(schema),
         ...min,
         ...max,
         ...step,
         required: isRequired,
-        ...getElementsFieldValue(values, uri, schema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+        ...getMetaProps(params, uri)
+      }
+
+      const items = getAnyOf(schema)
+
+      elements = {
+        ...getTitle(schema),
+        ...getDescription(schema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+          ), []),
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...getElementsFieldValue(values, uri, schema),
+          ...getElementsFieldProps(params, uri),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'number',
+          schema,
+          rootSchema,
+          ...getIsExclusiveMin(schema),
+          ...getIsExclusiveMax(schema),
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...getMetaProps(params, uri)
+        }
+
+        const items = getOneOf(schema)
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            ), []),
+            ...min,
+            ...max,
+            ...step,
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
+      } else {
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'number',
+          schema,
+          rootSchema,
+          ...getIsExclusiveMin(schema),
+          ...getIsExclusiveMax(schema),
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...getDefaultValue(schema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        elements = {
+          ...getTitle(schema),
+          ...getDescription(schema),
+          field: {
+            ...min,
+            ...max,
+            ...step,
+            required: isRequired,
+            ...getElementsFieldValue(values, uri, schema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -1162,6 +1790,7 @@ export function transformArraySchema (schema = {}, rootSchema = schema, values =
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (rootSchema, values, params) {
   const uri = getUri()
 
@@ -1199,13 +1828,43 @@ export function transformNull (rootSchema, values, params) {
       ...getMetaProps(params, uri)
     }
 
-    elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
-      field: {
-        ...getElementsFieldValue(values, uri, rootSchema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+    if (hasAnyOf(rootSchema)) {
+      const items = getAnyOf(rootSchema)
+
+      elements = {
+        ...getTitle(rootSchema),
+        ...getDescription(rootSchema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
+          ), []),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(rootSchema)) {
+        const items = getOneOf(rootSchema)
+
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
+            ), []),
+            name: uri
+          }
+        }
+      } else {
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          field: {
+            ...getElementsFieldValue(values, uri, rootSchema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -1216,6 +1875,7 @@ export function transformNull (rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (rootSchema, values, params) {
   const uri = getUri()
 
@@ -1253,13 +1913,43 @@ export function transformBoolean (rootSchema, values, params) {
       ...getMetaProps(params, uri)
     }
 
-    elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
-      field: {
-        ...getElementsFieldValue(values, uri, rootSchema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+    if (hasAnyOf(rootSchema)) {
+      const items = getAnyOf(rootSchema)
+
+      elements = {
+        ...getTitle(rootSchema),
+        ...getDescription(rootSchema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
+          ), []),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(rootSchema)) {
+        const items = getOneOf(rootSchema)
+
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
+            ), []),
+            name: uri
+          }
+        }
+      } else {
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          field: {
+            ...getElementsFieldValue(values, uri, rootSchema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -1270,6 +1960,7 @@ export function transformBoolean (rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (rootSchema, values, params) {
   const uri = getUri()
 
@@ -1315,8 +2006,9 @@ export function transformObject (rootSchema, values, params) {
         ...getDescription(rootSchema),
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
-          ), [])
+            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
+          ), []),
+          name: uri
         }
       }
     } else {
@@ -1328,7 +2020,7 @@ export function transformObject (rootSchema, values, params) {
           ...getDescription(rootSchema),
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
             ), [])
           }
         }
@@ -1359,6 +2051,7 @@ export function transformObject (rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (rootSchema, values, params) {
   const uri = getUri()
 
@@ -1411,10 +2104,40 @@ export function transformArray (rootSchema, values, params) {
       ...getMetaProps(params, uri)
     }
 
-    elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
-      fields
+    if (hasAnyOf(rootSchema)) {
+      const items = getAnyOf(rootSchema)
+
+      elements = {
+        ...getTitle(rootSchema),
+        ...getDescription(rootSchema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
+          ), []),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(rootSchema)) {
+        const items = getOneOf(rootSchema)
+
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
+            ), []),
+            name: uri
+          }
+        }
+      } else {
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          fields
+        }
+      }
     }
   }
 
@@ -1424,6 +2147,7 @@ export function transformArray (rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (rootSchema, values, params) {
   const uri = getUri()
 
@@ -1474,16 +2198,46 @@ export function transformString (rootSchema, values, params) {
       ...getMetaProps(params, uri)
     }
 
-    elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
-      field: {
-        ...minLength,
-        ...maxLength,
-        ...pattern,
-        ...getElementsFieldValue(values, uri, rootSchema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+    if (hasAnyOf(rootSchema)) {
+      const items = getAnyOf(rootSchema)
+
+      elements = {
+        ...getTitle(rootSchema),
+        ...getDescription(rootSchema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
+          ), []),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(rootSchema)) {
+        const items = getOneOf(rootSchema)
+
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
+            ), []),
+            name: uri
+          }
+        }
+      } else {
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          field: {
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            ...getElementsFieldValue(values, uri, rootSchema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }
@@ -1494,6 +2248,7 @@ export function transformString (rootSchema, values, params) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
   const uri = getUri()
   const min = getMin(rootSchema)
@@ -1547,16 +2302,46 @@ export function transformNumber (rootSchema, values, params) {
       ...getMetaProps(params, uri)
     }
 
-    elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
-      field: {
-        ...min,
-        ...max,
-        ...step,
-        ...getElementsFieldValue(values, uri, rootSchema),
-        ...getElementsFieldProps(params, uri),
-        name: uri
+    if (hasAnyOf(rootSchema)) {
+      const items = getAnyOf(rootSchema)
+
+      elements = {
+        ...getTitle(rootSchema),
+        ...getDescription(rootSchema),
+        anyOf: {
+          items: items.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
+          ), []),
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(rootSchema)) {
+        const items = getOneOf(rootSchema)
+
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          oneOf: {
+            items: items.reduce((accumulator, schema, index) => (
+              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
+            ), []),
+            name: uri
+          }
+        }
+      } else {
+        elements = {
+          ...getTitle(rootSchema),
+          ...getDescription(rootSchema),
+          field: {
+            ...min,
+            ...max,
+            ...step,
+            ...getElementsFieldValue(values, uri, rootSchema),
+            ...getElementsFieldProps(params, uri),
+            name: uri
+          }
+        }
       }
     }
   }

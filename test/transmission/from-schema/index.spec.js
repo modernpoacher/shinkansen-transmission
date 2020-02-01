@@ -414,7 +414,179 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2'],
+                  component: 'mock number component'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  value: '1',
+                  component: 'mock number component'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -479,7 +651,179 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', anyOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock string component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2'],
+                  component: 'mock string component'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (1)' },
+                          item: 0,
+                          required: false,
+                          defaultValue: 'mock string (1)',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock string (1)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (2)' },
+                          item: 1,
+                          required: false,
+                          defaultValue: 'mock string (2)',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock string (2)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (3)' },
+                          item: 2,
+                          required: false,
+                          defaultValue: 'mock string (3)',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'mock string (3)'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', oneOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock string component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  value: '1',
+                  component: 'mock string component'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (1)' },
+                          item: 0,
+                          required: false,
+                          defaultValue: 'mock string (1)',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock string (1)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (2)' },
+                          item: 1,
+                          required: false,
+                          defaultValue: 'mock string (2)',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock string (2)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (3)' },
+                          item: 2,
+                          required: false,
+                          defaultValue: 'mock string (3)',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'mock string (3)'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -3784,7 +4128,179 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock boolean component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2'],
+                  component: 'mock boolean component'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock boolean component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  value: '1',
+                  component: 'mock boolean component'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -3849,7 +4365,179 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock null component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2'],
+                  component: 'mock null component'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'mock null component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  value: '1',
+                  component: 'mock null component'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
@@ -4261,7 +4949,169 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2']
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            const values = {
+              '#/': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  value: '2'
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -4316,7 +5166,169 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', anyOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2']
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (1)' },
+                          item: 0,
+                          required: false,
+                          defaultValue: 'mock string (1)',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock string (1)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (2)' },
+                          item: 1,
+                          required: false,
+                          defaultValue: 'mock string (2)',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock string (2)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (3)' },
+                          item: 2,
+                          required: false,
+                          defaultValue: 'mock string (3)',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'mock string (3)'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', oneOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  value: '1'
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (1)' },
+                          item: 0,
+                          required: false,
+                          defaultValue: 'mock string (1)',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock string (1)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (2)' },
+                          item: 1,
+                          required: false,
+                          defaultValue: 'mock string (2)',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock string (2)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (3)' },
+                          item: 2,
+                          required: false,
+                          defaultValue: 'mock string (3)',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'mock string (3)'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -7334,7 +8346,169 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2']
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  value: '1'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -7389,7 +8563,169 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
+
+            const values = {
+              '#/': ['0', '2']
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  value: ['0', '2']
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  value: '1'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
@@ -7798,7 +9134,173 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  component: 'mock number component'
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  component: 'mock number component'
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -7848,6 +9350,172 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 elements: {
                   enum: {
                     items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `anyOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', anyOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock string component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  component: 'mock string component'
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (1)' },
+                          item: 0,
+                          required: false,
+                          defaultValue: 'mock string (1)',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock string (1)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (2)' },
+                          item: 1,
+                          required: false,
+                          defaultValue: 'mock string (2)',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock string (2)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (3)' },
+                          item: 2,
+                          required: false,
+                          defaultValue: 'mock string (3)',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'mock string (3)'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', oneOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock string component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  component: 'mock string component'
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (1)' },
+                          item: 0,
+                          required: false,
+                          defaultValue: 'mock string (1)',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock string (1)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (2)' },
+                          item: 1,
+                          required: false,
+                          defaultValue: 'mock string (2)',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock string (2)'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 'mock string (3)' },
+                          item: 2,
+                          required: false,
+                          defaultValue: 'mock string (3)',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'mock string (3)'
+                          }
+                        }
+                      }
+                    ],
                     name: '#/'
                   }
                 }
@@ -10952,7 +12620,173 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock boolean component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  component: 'mock boolean component'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock boolean component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  component: 'mock boolean component'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -11009,7 +12843,173 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock null component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  component: 'mock null component'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'mock null component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  component: 'mock null component'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
@@ -11387,7 +13387,159 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -11430,7 +13582,159 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 1 },
+                          item: 0,
+                          required: false,
+                          defaultValue: 1,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 2 },
+                          item: 1,
+                          required: false,
+                          defaultValue: 2,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'string',
+                          rootSchema: schema,
+                          schema: { default: 3 },
+                          item: 2,
+                          required: false,
+                          defaultValue: 3,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 3
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -14162,7 +16466,159 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 0,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: false },
+                          item: 1,
+                          required: false,
+                          defaultValue: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'boolean',
+                          rootSchema: schema,
+                          schema: { default: true },
+                          item: 2,
+                          required: false,
+                          defaultValue: true,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: true
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -14205,7 +16661,159 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `anyOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  anyOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  oneOf: {
+                    name: '#/',
+                    items: [
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 0,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 1,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'null',
+                          rootSchema: schema,
+                          schema: { default: null },
+                          item: 2,
+                          required: false,
+                          defaultValue: null,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: null
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
