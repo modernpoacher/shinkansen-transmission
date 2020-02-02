@@ -970,6 +970,423 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '2'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        },
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          selectedIndex: 2,
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '2'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            type: 'string'
+                          },
+                          selectedIndex: 2,
+                          type: 'string',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  }
+
+                ]
+              }
+
+              const values = {
+                '#/0': '1'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [true, false],
+                            type: 'boolean'
+                          },
+                          selectedIndex: 1,
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 1
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '0'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [null],
+                            type: 'null'
+                          },
+                          selectedIndex: 0,
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  },
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  },
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  },
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '2',
+                '#/1': '2',
+                '#/2': '1',
+                '#/3': '0'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } },
+                '#/1': { meta: { component: 'mock array type index component' } },
+                '#/2': { meta: { component: 'mock array type index component' } },
+                '#/3': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        },
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          selectedIndex: 2,
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            type: 'string'
+                          },
+                          selectedIndex: 2,
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/1',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [true, false],
+                            type: 'boolean'
+                          },
+                          selectedIndex: 1,
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/2',
+                            required: false,
+                            selectedIndex: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [null],
+                            type: 'null'
+                          },
+                          selectedIndex: 0,
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/3',
+                            required: false,
+                            selectedIndex: 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
             it('transforms `array` type schemas (`items` is `array` type with `items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -1864,52 +2281,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
-              }
-
-              return expect(transform(schema, values, params))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          component: 'mock array type index component',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
             it('transforms `array` type schemas (`items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -2471,52 +2842,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `array` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'array'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
-              }
-
-              return expect(transform(schema, values, params))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'array',
-                          schema: {
-                            type: 'array'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          component: 'mock array type index component',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
             it('transforms `array` type schemas (`items` is `array` type with `items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -2736,6 +3061,349 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '1'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          value: '1',
+                          type: 'number',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': 'mock array type index string type'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          value: 'mock array type index string type',
+                          type: 'string',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock array type index string type'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': 'false'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          value: 'false',
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'false'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': 'null'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          value: 'null',
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'null'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  },
+                  {
+                    type: 'string'
+                  },
+                  {
+                    type: 'boolean'
+                  },
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '1',
+                '#/1': 'mock array type index string type',
+                '#/2': 'false',
+                '#/3': 'null'
+              }
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } },
+                '#/1': { meta: { component: 'mock array type index component' } },
+                '#/2': { meta: { component: 'mock array type index component' } },
+                '#/3': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          value: '1',
+                          type: 'number',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          value: 'mock array type index string type',
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock array type index string type'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          value: 'false',
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'false'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          value: 'null',
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/3',
+                            required: false,
+                            value: 'null'
+                          }
                         }
                       }
                     ]
@@ -3228,52 +3896,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
-              }
-
-              return expect(transform(schema, values, params))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          component: 'mock array type index component',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
                         }
                       }
                     ]
@@ -5748,6 +6370,390 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '2'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        },
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          selectedIndex: 2,
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '2'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          required: false,
+                          type: 'string',
+                          schema: {
+                            type: 'string',
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ]
+                          },
+                          rootSchema: schema,
+                          uri: '#/0',
+                          item: 0,
+                          selectedIndex: 2
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '1'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          required: false,
+                          type: 'boolean',
+                          schema: {
+                            type: 'boolean',
+                            enum: [true, false]
+                          },
+                          rootSchema: schema,
+                          uri: '#/0',
+                          item: 0,
+                          selectedIndex: 1
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 1
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '0'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          required: false,
+                          type: 'null',
+                          schema: {
+                            type: 'null',
+                            enum: [null]
+                          },
+                          rootSchema: schema,
+                          uri: '#/0',
+                          item: 0,
+                          selectedIndex: 0
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  },
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  },
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  },
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '2',
+                '#/1': '2',
+                '#/2': '1',
+                '#/3': '0'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          required: false,
+                          type: 'number',
+                          schema: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          },
+                          rootSchema: schema,
+                          uri: '#/0',
+                          item: 0,
+                          selectedIndex: 2
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          required: false,
+                          type: 'string',
+                          schema: {
+                            type: 'string',
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ]
+                          },
+                          rootSchema: schema,
+                          uri: '#/1',
+                          item: 1,
+                          selectedIndex: 2
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/1',
+                            required: false,
+                            selectedIndex: 2
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          required: false,
+                          type: 'boolean',
+                          schema: {
+                            type: 'boolean',
+                            enum: [true, false]
+                          },
+                          rootSchema: schema,
+                          uri: '#/2',
+                          item: 2,
+                          selectedIndex: 1
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/2',
+                            required: false,
+                            selectedIndex: 1
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          required: false,
+                          type: 'null',
+                          schema: {
+                            type: 'null',
+                            enum: [null]
+                          },
+                          rootSchema: schema,
+                          uri: '#/3',
+                          item: 3,
+                          selectedIndex: 0
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/3',
+                            required: false,
+                            selectedIndex: 0
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
             it('transforms `array` type schemas (`items` is `array` type with `items` is `array` type with `items` is `number` type)', () => {
               const schema = {
                 type: 'array',
@@ -6295,47 +7301,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              return expect(transform(schema, values))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
             it('transforms `array` type schemas (`items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -6848,17 +7813,67 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `array` type)', () => {
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
               const schema = {
                 type: 'array',
                 items: [
                   {
-                    type: 'array'
+                    type: 'number'
                   }
                 ]
               }
 
-              const values = {}
+              const values = {
+                '#/0': '1'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        },
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          value: '1',
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': 'mock array type index string type'
+              }
 
               return expect(transform(schema, values))
                 .to.eql({
@@ -6871,17 +7886,239 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
+                          item: 0,
                           required: false,
-                          type: 'array',
-                          schema: {
-                            type: 'array'
-                          },
                           rootSchema: schema,
-                          uri: '#/0',
-                          item: 0
+                          schema: {
+                            type: 'string'
+                          },
+                          value: 'mock array type index string type',
+                          type: 'string',
+                          uri: '#/0'
                         },
                         elements: {
-                          fields: []
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'mock array type index string type'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': 'false'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          value: 'false',
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'false'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': 'null'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          value: 'null',
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: 'null'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  },
+                  {
+                    type: 'string'
+                  },
+                  {
+                    type: 'boolean'
+                  },
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              const values = {
+                '#/0': '1',
+                '#/1': 'mock array type index string type',
+                '#/2': 'false',
+                '#/3': 'null'
+              }
+
+              return expect(transform(schema, values))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          value: '1',
+                          type: 'number',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          value: 'mock array type index string type',
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: 'mock array type index string type'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          value: 'false',
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: 'false'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          value: 'null',
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/3',
+                            required: false,
+                            value: 'null'
+                          }
                         }
                       }
                     ]
@@ -7541,47 +8778,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              return expect(transform(schema, values))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
                         }
                       }
                     ]
@@ -9950,6 +11146,392 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false
+                          }
+                        },
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [true, false],
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [null],
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  },
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  },
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  },
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } },
+                '#/1': { meta: { component: 'mock array type index component' } },
+                '#/2': { meta: { component: 'mock array type index component' } },
+                '#/3': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false
+                          }
+                        },
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/1',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [true, false],
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/2',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [null],
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/3',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
             it('transforms `array` type schemas (`items` is `array` type with `items` is `array` type with `items` is `number` type)', () => {
               const schema = {
                 type: 'array',
@@ -10509,52 +12091,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
-              }
-
-              return expect(transform(schema, values, params))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          component: 'mock array type index component',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
             it('transforms `array` type schemas (`items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -11073,12 +12609,61 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `array` type)', () => {
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
               const schema = {
                 type: 'array',
                 items: [
                   {
-                    type: 'array'
+                    type: 'number'
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        },
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string'
                   }
                 ]
               }
@@ -11100,18 +12685,237 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          required: false,
-                          type: 'array',
-                          schema: {
-                            type: 'array'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
                           component: 'mock array type index component',
-                          item: 0
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/0'
                         },
                         elements: {
-                          fields: []
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean'
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  },
+                  {
+                    type: 'string'
+                  },
+                  {
+                    type: 'boolean'
+                  },
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              const values = {}
+
+              const params = {
+                '#/0': { meta: { component: 'mock array type index component' } },
+                '#/1': { meta: { component: 'mock array type index component' } },
+                '#/2': { meta: { component: 'mock array type index component' } },
+                '#/3': { meta: { component: 'mock array type index component' } }
+              }
+
+              return expect(transform(schema, values, params))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          component: 'mock array type index component',
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/3',
+                            required: false
+                          }
                         }
                       }
                     ]
@@ -11787,52 +13591,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              const values = {}
-
-              const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
-              }
-
-              return expect(transform(schema, values, params))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          component: 'mock array type index component',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
                         }
                       }
                     ]
@@ -13848,6 +15606,351 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false
+                          }
+                        },
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [true, false],
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [null],
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  },
+                  {
+                    type: 'string',
+                    enum: [
+                      'mock array type index string type (1)',
+                      'mock array type index string type (2)',
+                      'mock array type index string type (3)'
+                    ]
+                  },
+                  {
+                    type: 'boolean',
+                    enum: [true, false]
+                  },
+                  {
+                    type: 'null',
+                    enum: [null]
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        elements: {
+                          enum: {
+                            items: [
+                              1,
+                              2,
+                              3
+                            ],
+                            name: '#/0',
+                            required: false
+                          }
+                        },
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ],
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          enum: {
+                            items: [
+                              'mock array type index string type (1)',
+                              'mock array type index string type (2)',
+                              'mock array type index string type (3)'
+                            ],
+                            name: '#/1',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [true, false],
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          enum: {
+                            items: [true, false],
+                            name: '#/2',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            enum: [null],
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          enum: {
+                            items: [null],
+                            name: '#/3',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
             it('transforms `array` type schemas (`items` is `array` type with `items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -14619,45 +16722,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              return expect(transform(schema))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
                         }
                       }
                     ]
@@ -15120,45 +17184,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 })
             })
 
-            it('transforms `array` type schemas (`items` is `array` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'array'
-                  }
-                ]
-              }
-
-              return expect(transform(schema))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'array',
-                          schema: {
-                            type: 'array'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
             it('transforms `array` type schemas (`items` is `array` type with `items` is `object` type with `properties`)', () => {
               const schema = {
                 type: 'array',
@@ -15342,6 +17367,279 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `string` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string'
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `boolean` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean'
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      }
+                    ]
+                  }
+                })
+            })
+
+            it('transforms `array` type schemas (`items` is `array` type with `items` is `number` type and `string` type and `boolean` type and `null` type)', () => {
+              const schema = {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  },
+                  {
+                    type: 'string'
+                  },
+                  {
+                    type: 'boolean'
+                  },
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+
+              return expect(transform(schema))
+                .to.eql({
+                  meta: {
+                    type: 'array',
+                    schema,
+                    uri: '#/'
+                  },
+                  elements: {
+                    fields: [
+                      {
+                        meta: {
+                          item: 0,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'number'
+                          },
+                          type: 'number',
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 1,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'string'
+                          },
+                          type: 'string',
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 2,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'boolean'
+                          },
+                          type: 'boolean',
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          item: 3,
+                          required: false,
+                          rootSchema: schema,
+                          schema: {
+                            type: 'null'
+                          },
+                          type: 'null',
+                          uri: '#/3'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/3',
+                            required: false
+                          }
                         }
                       }
                     ]
@@ -15754,45 +18052,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               }
                             }
                           ]
-                        }
-                      }
-                    ]
-                  }
-                })
-            })
-
-            it('transforms `array` type schemas (`items` is `object` type)', () => {
-              const schema = {
-                type: 'array',
-                items: [
-                  {
-                    type: 'object'
-                  }
-                ]
-              }
-
-              return expect(transform(schema))
-                .to.eql({
-                  meta: {
-                    type: 'array',
-                    schema,
-                    uri: '#/'
-                  },
-                  elements: {
-                    fields: [
-                      {
-                        meta: {
-                          required: false,
-                          type: 'object',
-                          schema: {
-                            type: 'object'
-                          },
-                          rootSchema: schema,
-                          uri: '#/0',
-                          item: 0
-                        },
-                        elements: {
-                          fields: []
                         }
                       }
                     ]
