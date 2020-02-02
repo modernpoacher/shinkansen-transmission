@@ -1,6 +1,6 @@
 {
   "name": "shinkansen-transmission",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Shinkansen Transmission",
   "main": "./index.js",
   "keywords": [
