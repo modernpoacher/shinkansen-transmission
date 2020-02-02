@@ -4,13 +4,13 @@ import {
   getUri
 } from 'shinkansen-transmission/transmission/common'
 
-export const toNull = (v) => {
+export function toNull (v) {
   if (v === null || v === 'null') return null
 
   throw new Error('Invalid `null`')
 }
 
-export const toBoolean = (v) => {
+export function toBoolean (v) {
   if (typeof v === 'boolean') return v
   if (v === 'true') return true
   if (v === 'false') return false
@@ -18,14 +18,14 @@ export const toBoolean = (v) => {
   throw new Error('Invalid `boolean`')
 }
 
-export const toString = (v) => {
+export function toString (v) {
   if (typeof v === 'string') return v
   if (typeof v === 'number') return String(v)
 
   return JSON.stringify(v)
 }
 
-export const toNumber = (v) => {
+export function toNumber (v) {
   if (typeof v === 'number') return v
 
   const n = Number(v) // +v // unary operator
@@ -35,109 +35,22 @@ export const toNumber = (v) => {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export function transformObjectSchemaNull (schema, values, { uri: parentUri, key: fieldKey }) {
-  const uri = getUri(parentUri, fieldKey)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNull(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toNull(value)
-    }
-
-    return toNull(Reflect.get(values, uri))
-  }
-}
+export const transformObjectSchemaNull = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNull(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export function transformObjectSchemaBoolean (schema, values, { uri: parentUri, key: fieldKey }) {
-  const uri = getUri(parentUri, fieldKey)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toBoolean(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toBoolean(value)
-    }
-
-    return toBoolean(Reflect.get(values, uri))
-  }
-}
+export const transformObjectSchemaBoolean = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformBoolean(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformObjectSchemaObject ({ properties = {} }, values, { uri: parentUri, key: fieldKey }) {
-  const uri = getUri(parentUri, fieldKey)
-
-  return (
-    Object
-      .entries(properties)
-      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri, key }) }), {})
-  )
-}
+export const transformObjectSchemaObject = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformObject(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformObjectSchemaArray ({ items = [] /* array or object */ }, values, { uri: parentUri, key: fieldKey }) {
-  const uri = getUri(parentUri, fieldKey)
-
-  return (
-    Object
-      .keys(values)
-      .filter((key) => key.startsWith(uri))
-      .reduce((accumulator, key) => {
-        const value = key.slice(uri.length + 1)
-        const index = Number(value.includes('/') ? value.slice(0, value.indexOf('/')) : value)
-
-        if (!isNaN(index)) {
-          const schema = Array.isArray(items) ? items[index] : items
-          accumulator[index] = transformArraySchema(schema, values, { uri, index })
-        }
-
-        return accumulator
-      }, [])
-  )
-}
+export const transformObjectSchemaArray = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformArray(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformObjectSchemaString (schema, values, { uri: parentUri, key: fieldKey }) {
-  const uri = getUri(parentUri, fieldKey)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toString(value)
-    }
-
-    return toString(Reflect.get(values, uri))
-  }
-}
+export const transformObjectSchemaString = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformString(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber (schema, values, { uri: parentUri, key: fieldKey }) {
-  const uri = getUri(parentUri, fieldKey)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toNumber(value)
-    }
-
-    return toNumber(Reflect.get(values, uri))
-  }
-}
+export const transformObjectSchemaNumber = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNumber(schema, values, uri)
 
 export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
@@ -168,109 +81,22 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export function transformArraySchemaNull (schema, values, { uri: parentUri, index: arrayIndex }) {
-  const uri = getUri(parentUri, arrayIndex)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toNull(value)
-    }
-
-    return toNull(Reflect.get(values, uri))
-  }
-}
+export const transformArraySchemaNull = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNull(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export function transformArraySchemaBoolean (schema, values, { uri: parentUri, index: arrayIndex }) {
-  const uri = getUri(parentUri, arrayIndex)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toBoolean(value)
-    }
-
-    return toBoolean(Reflect.get(values, uri))
-  }
-}
+export const transformArraySchemaBoolean = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformBoolean(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export function transformArraySchemaObject ({ properties = {} }, values, { uri: parentUri, index: arrayIndex }) {
-  const uri = getUri(parentUri, arrayIndex)
-
-  return (
-    Object
-      .entries(properties)
-      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri, key }) }), {})
-  )
-}
+export const transformArraySchemaObject = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformObject(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export function transformArraySchemaArray ({ items = [] /* array or object */ }, values, { uri: parentUri, index: arrayIndex }) {
-  const uri = getUri(parentUri, arrayIndex)
-
-  return (
-    Object
-      .keys(values)
-      .filter((key) => key.startsWith(uri))
-      .reduce((accumulator, key) => {
-        const value = key.slice(uri.length + 1)
-        const index = Number(value.includes('/') ? value.slice(0, value.indexOf('/')) : value)
-
-        if (!isNaN(index)) {
-          const schema = Array.isArray(items) ? items[index] : items
-          accumulator[index] = transformArraySchema(schema, values, { uri, index })
-        }
-
-        return accumulator
-      }, [])
-  )
-}
+export const transformArraySchemaArray = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformArray(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString (schema, values, { uri: parentUri, index: arrayIndex }) {
-  const uri = getUri(parentUri, arrayIndex)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toString(value)
-    }
-
-    return toString(Reflect.get(values, uri))
-  }
-}
+export const transformArraySchemaString = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformString(schema, values, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformArraySchemaNumber (schema, values, { uri: parentUri, index: arrayIndex }) {
-  const uri = getUri(parentUri, arrayIndex)
-
-  if (Reflect.has(values, uri)) {
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
-
-      return toNumber(value)
-    }
-
-    return toNumber(Reflect.get(values, uri))
-  }
-}
+export const transformArraySchemaNumber = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNumber(schema, values, uri)
 
 export function transformArraySchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
@@ -300,9 +126,7 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
   }
 }
 
-export function transformNull (schema, values) {
-  const uri = getUri()
-
+export function transformNull (schema, values, uri = getUri()) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -317,9 +141,7 @@ export function transformNull (schema, values) {
   }
 }
 
-export function transformBoolean (schema, values) {
-  const uri = getUri()
-
+export function transformBoolean (schema, values, uri = getUri()) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -334,9 +156,7 @@ export function transformBoolean (schema, values) {
   }
 }
 
-export function transformObject ({ properties = {} }, values) {
-  const uri = getUri()
-
+export function transformObject ({ properties = {} }, values, uri = getUri()) {
   return (
     Object
       .entries(properties)
@@ -344,15 +164,13 @@ export function transformObject ({ properties = {} }, values) {
   )
 }
 
-export function transformArray ({ items = [] /* array or object */ }, values) {
-  const uri = getUri()
-
+export function transformArray ({ items = [] /* array or object */ }, values, uri = getUri()) {
   return (
     Object
       .keys(values)
       .filter((key) => key.startsWith(uri))
       .reduce((accumulator, key) => {
-        const value = key.slice(uri.length)
+        const value = uri.endsWith('/') ? key.slice(uri.length) : key.slice(uri.length + 1)
         const index = Number(value.includes('/') ? value.slice(0, value.indexOf('/')) : value)
 
         if (!isNaN(index)) {
@@ -365,9 +183,7 @@ export function transformArray ({ items = [] /* array or object */ }, values) {
   )
 }
 
-export function transformString (schema, values) {
-  const uri = getUri()
-
+export function transformString (schema, values, uri = getUri()) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -382,9 +198,7 @@ export function transformString (schema, values) {
   }
 }
 
-export function transformNumber (schema, values) {
-  const uri = getUri()
-
+export function transformNumber (schema, values, uri = getUri()) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
