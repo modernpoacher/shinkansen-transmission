@@ -34,6 +34,7 @@ export const toNumber = (v) => {
   throw new Error('Invalid `number`')
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaNull (schema, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
@@ -51,6 +52,7 @@ export function transformObjectSchemaNull (schema, values, { uri: parentUri, key
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaBoolean (schema, values, { uri: parentUri, key: fieldKey }) {
   const uri = getUri(parentUri, fieldKey)
 
@@ -165,6 +167,7 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformArraySchemaNull (schema, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
@@ -182,6 +185,7 @@ export function transformArraySchemaNull (schema, values, { uri: parentUri, inde
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformArraySchemaBoolean (schema, values, { uri: parentUri, index: arrayIndex }) {
   const uri = getUri(parentUri, arrayIndex)
 
