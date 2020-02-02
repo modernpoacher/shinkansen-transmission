@@ -27,7 +27,8 @@ export function getArray (schema, uri, parentUri) {
     items = [] // array or object
   } = schema
 
-  return [].concat(items)
+  return []
+    .concat(items)
     .reduce((accumulator, schema, index) => {
       const schemaUri = getUri(parentUri, index)
       if (uri === schemaUri) return schema
