@@ -37,7 +37,7 @@ export const getSelectedIndex = (values = {}, uri = getUri()) => {
   return {}
 }
 
-export const getOneOfSelected = (values = {}, uri = getUri()) => {
+export const getSelectedOneOf = (values = {}, uri = getUri()) => {
   if (Reflect.has(values, uri)) {
     const selected = Reflect.get(values, uri)
 
@@ -47,7 +47,7 @@ export const getOneOfSelected = (values = {}, uri = getUri()) => {
   return {}
 }
 
-export const getAnyOfSelected = (values = {}, uri = getUri()) => {
+export const getSelectedAnyOf = (values = {}, uri = getUri()) => {
   const selected = (
     Object
       .entries(values)

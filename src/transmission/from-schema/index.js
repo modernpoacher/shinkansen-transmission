@@ -2,8 +2,8 @@ import {
   getDefaultValue,
   getValue,
   getSelectedIndex,
-  getOneOfSelected,
-  getAnyOfSelected,
+  getSelectedOneOf,
+  getSelectedAnyOf,
   getTitle,
   getDescription,
   hasEnum,
@@ -78,7 +78,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -107,7 +107,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -212,7 +212,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -241,7 +241,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -351,7 +351,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -382,7 +382,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -507,7 +507,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -541,7 +541,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -671,7 +671,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -706,7 +706,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -837,7 +837,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -874,7 +874,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1023,7 +1023,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1052,7 +1052,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1157,7 +1157,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1186,7 +1186,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1296,7 +1296,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1327,7 +1327,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1453,7 +1453,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1487,7 +1487,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1617,7 +1617,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1652,7 +1652,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1784,7 +1784,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1821,7 +1821,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
       }
     } else {
       if (hasOneOf(schema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -1960,7 +1960,7 @@ export function transformNull (rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -1985,7 +1985,7 @@ export function transformNull (rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -2072,7 +2072,7 @@ export function transformBoolean (rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -2097,7 +2097,7 @@ export function transformBoolean (rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -2184,7 +2184,7 @@ export function transformObject (rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -2209,7 +2209,7 @@ export function transformObject (rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -2314,7 +2314,7 @@ export function transformArray (rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -2344,7 +2344,7 @@ export function transformArray (rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -2457,7 +2457,7 @@ export function transformString (rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -2485,7 +2485,7 @@ export function transformString (rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
@@ -2596,7 +2596,7 @@ export function transformNumber (rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const selected = getAnyOfSelected(values, uri)
+      const selected = getSelectedAnyOf(values, uri)
 
       meta = {
         uri,
@@ -2626,7 +2626,7 @@ export function transformNumber (rootSchema, values, params) {
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const selected = getOneOfSelected(values, uri)
+        const selected = getSelectedOneOf(values, uri)
 
         meta = {
           uri,
