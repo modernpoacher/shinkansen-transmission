@@ -2,6 +2,8 @@ import {
   getDefaultValue,
   getValue,
   getSelectedIndex,
+  getOneOfSelected,
+  getAnyOfSelected,
   getTitle,
   getDescription,
   hasEnum,
@@ -71,6 +73,8 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         name: fieldKey,
@@ -78,6 +82,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
         schema,
         rootSchema,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -91,13 +96,14 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
             accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           name: fieldKey,
@@ -105,6 +111,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           schema,
           rootSchema,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -118,8 +125,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
               accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -196,6 +202,8 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         name: fieldKey,
@@ -203,6 +211,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         schema,
         rootSchema,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -216,13 +225,14 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
             accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           name: fieldKey,
@@ -230,6 +240,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
           schema,
           rootSchema,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -243,8 +254,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
               accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -323,6 +333,8 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         name: fieldKey,
@@ -332,6 +344,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         ...getMaxProperties(schema),
         ...getMinProperties(schema),
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -345,13 +358,14 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
             accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           name: fieldKey,
@@ -361,6 +375,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           ...getMaxProperties(schema),
           ...getMinProperties(schema),
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -374,8 +389,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
               accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -464,6 +478,8 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         name: fieldKey,
@@ -476,6 +492,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         ...getMaxContains(schema),
         ...getMinContains(schema),
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -489,13 +506,14 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
             accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           name: fieldKey,
@@ -508,6 +526,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           ...getMaxContains(schema),
           ...getMinContains(schema),
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -521,8 +540,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
               accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -619,6 +637,8 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         name: fieldKey,
@@ -629,6 +649,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...maxLength,
         ...pattern,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -645,13 +666,14 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...maxLength,
           ...pattern,
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           name: fieldKey,
@@ -662,6 +684,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...maxLength,
           ...pattern,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -678,8 +701,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
             ...maxLength,
             ...pattern,
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -774,6 +796,8 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         name: fieldKey,
@@ -786,6 +810,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...max,
         ...step,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -802,13 +827,14 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           ...max,
           ...step,
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           name: fieldKey,
@@ -821,6 +847,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           ...max,
           ...step,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -837,8 +864,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
             ...max,
             ...step,
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -951,6 +977,8 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         item: arrayIndex,
@@ -958,6 +986,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
         schema,
         rootSchema,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -971,13 +1000,14 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
             accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           item: arrayIndex,
@@ -985,6 +1015,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           schema,
           rootSchema,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -998,8 +1029,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
               accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -1076,6 +1106,8 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         item: arrayIndex,
@@ -1083,6 +1115,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         schema,
         rootSchema,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -1096,13 +1129,14 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
             accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           item: arrayIndex,
@@ -1110,6 +1144,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
           schema,
           rootSchema,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -1123,8 +1158,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
               accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -1201,6 +1235,8 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         item: arrayIndex,
@@ -1210,6 +1246,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         ...getMaxProperties(schema),
         ...getMinProperties(schema),
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -1223,13 +1260,14 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
             accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           item: arrayIndex,
@@ -1239,6 +1277,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
           ...getMaxProperties(schema),
           ...getMinProperties(schema),
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -1252,8 +1291,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
               accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -1343,6 +1381,8 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         item: arrayIndex,
@@ -1355,6 +1395,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         ...getMaxContains(schema),
         ...getMinContains(schema),
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -1368,13 +1409,14 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
             accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
           ), []),
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           item: arrayIndex,
@@ -1387,6 +1429,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           ...getMaxContains(schema),
           ...getMinContains(schema),
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -1400,8 +1443,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
               accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
             ), []),
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -1498,6 +1540,8 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         item: arrayIndex,
@@ -1508,6 +1552,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
         ...maxLength,
         ...pattern,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -1524,13 +1569,14 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           ...maxLength,
           ...pattern,
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           item: arrayIndex,
@@ -1541,6 +1587,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           ...maxLength,
           ...pattern,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -1557,8 +1604,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
             ...maxLength,
             ...pattern,
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -1653,6 +1699,8 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
     }
   } else {
     if (hasAnyOf(schema)) {
+      const selected = getAnyOfSelected(values, uri)
+
       meta = {
         uri,
         item: arrayIndex,
@@ -1665,6 +1713,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
         ...max,
         ...step,
         required: isRequired,
+        ...selected,
         ...getMetaProps(params, uri)
       }
 
@@ -1681,13 +1730,14 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           ...max,
           ...step,
           required: isRequired,
-          ...getElementsFieldValue(values, uri, schema),
-          ...getElementsFieldProps(params, uri),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
+        const selected = getOneOfSelected(values, uri)
+
         meta = {
           uri,
           item: arrayIndex,
@@ -1700,6 +1750,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           ...max,
           ...step,
           required: isRequired,
+          ...selected,
           ...getMetaProps(params, uri)
         }
 
@@ -1716,8 +1767,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
             ...max,
             ...step,
             required: isRequired,
-            ...getElementsFieldValue(values, uri, schema),
-            ...getElementsFieldProps(params, uri),
+            ...selected,
             name: uri
           }
         }
@@ -1819,16 +1869,17 @@ export function transformNull (rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      type: 'null',
-      schema: rootSchema,
-      ...getDefaultValue(rootSchema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(rootSchema)) {
+      const selected = getAnyOfSelected(values, uri)
+
+      meta = {
+        uri,
+        type: 'null',
+        schema: rootSchema,
+        ...selected,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(rootSchema)
 
       elements = {
@@ -1838,11 +1889,22 @@ export function transformNull (rootSchema, values, params) {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
           ), []),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
+        const selected = getOneOfSelected(values, uri)
+
+        meta = {
+          uri,
+          type: 'null',
+          schema: rootSchema,
+          ...selected,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(rootSchema)
 
         elements = {
@@ -1852,10 +1914,20 @@ export function transformNull (rootSchema, values, params) {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
             ), []),
+            ...selected,
             name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          type: 'null',
+          schema: rootSchema,
+          ...getDefaultValue(rootSchema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         elements = {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
@@ -1904,16 +1976,17 @@ export function transformBoolean (rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      type: 'boolean',
-      schema: rootSchema,
-      ...getDefaultValue(rootSchema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(rootSchema)) {
+      const selected = getAnyOfSelected(values, uri)
+
+      meta = {
+        uri,
+        type: 'boolean',
+        schema: rootSchema,
+        ...selected,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(rootSchema)
 
       elements = {
@@ -1923,11 +1996,22 @@ export function transformBoolean (rootSchema, values, params) {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
           ), []),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
+        const selected = getOneOfSelected(values, uri)
+
+        meta = {
+          uri,
+          type: 'boolean',
+          schema: rootSchema,
+          ...selected,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(rootSchema)
 
         elements = {
@@ -1937,10 +2021,20 @@ export function transformBoolean (rootSchema, values, params) {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
             ), []),
+            ...selected,
             name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          type: 'boolean',
+          schema: rootSchema,
+          ...getDefaultValue(rootSchema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         elements = {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
@@ -1989,16 +2083,17 @@ export function transformObject (rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      type: 'object',
-      schema: rootSchema,
-      ...getDefaultValue(rootSchema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(rootSchema)) {
+      const selected = getAnyOfSelected(values, uri)
+
+      meta = {
+        uri,
+        type: 'object',
+        schema: rootSchema,
+        ...selected,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(rootSchema)
 
       elements = {
@@ -2008,11 +2103,22 @@ export function transformObject (rootSchema, values, params) {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
           ), []),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
+        const selected = getOneOfSelected(values, uri)
+
+        meta = {
+          uri,
+          type: 'object',
+          schema: rootSchema,
+          ...selected,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(rootSchema)
 
         elements = {
@@ -2021,10 +2127,21 @@ export function transformObject (rootSchema, values, params) {
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
-            ), [])
+            ), []),
+            ...selected,
+            name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          type: 'object',
+          schema: rootSchema,
+          ...getDefaultValue(rootSchema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         const {
           properties = {},
           required = []
@@ -2080,31 +2197,22 @@ export function transformArray (rootSchema, values, params) {
       }
     }
   } else {
-    const {
-      items = [] // array or object
-    } = rootSchema
-
-    const fields = []
-      .concat(items)
-      .reduce((accumulator, schema, index) => (
-        accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
-      ), [])
-
-    meta = {
-      uri,
-      type: 'array',
-      schema: rootSchema,
-      ...getMinItems(rootSchema),
-      ...getMaxItems(rootSchema),
-      ...getHasUniqueItems(rootSchema),
-      ...getMaxContains(rootSchema),
-      ...getMinContains(rootSchema),
-      ...getDefaultValue(rootSchema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(rootSchema)) {
+      const selected = getAnyOfSelected(values, uri)
+
+      meta = {
+        uri,
+        type: 'array',
+        schema: rootSchema,
+        ...getMinItems(rootSchema),
+        ...getMaxItems(rootSchema),
+        ...getHasUniqueItems(rootSchema),
+        ...getMaxContains(rootSchema),
+        ...getMinContains(rootSchema),
+        ...selected,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(rootSchema)
 
       elements = {
@@ -2114,11 +2222,27 @@ export function transformArray (rootSchema, values, params) {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
           ), []),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
+        const selected = getOneOfSelected(values, uri)
+
+        meta = {
+          uri,
+          type: 'array',
+          schema: rootSchema,
+          ...getMinItems(rootSchema),
+          ...getMaxItems(rootSchema),
+          ...getHasUniqueItems(rootSchema),
+          ...getMaxContains(rootSchema),
+          ...getMinContains(rootSchema),
+          ...selected,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(rootSchema)
 
         elements = {
@@ -2128,10 +2252,35 @@ export function transformArray (rootSchema, values, params) {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
             ), []),
+            ...selected,
             name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          type: 'array',
+          schema: rootSchema,
+          ...getMinItems(rootSchema),
+          ...getMaxItems(rootSchema),
+          ...getHasUniqueItems(rootSchema),
+          ...getMaxContains(rootSchema),
+          ...getMinContains(rootSchema),
+          ...getDefaultValue(rootSchema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
+        const {
+          items = [] // array or object
+        } = rootSchema
+
+        const fields = []
+          .concat(items)
+          .reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
+          ), [])
+
         elements = {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
@@ -2186,19 +2335,20 @@ export function transformString (rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      type: 'string',
-      schema: rootSchema,
-      ...minLength,
-      ...maxLength,
-      ...pattern,
-      ...getDefaultValue(rootSchema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(rootSchema)) {
+      const selected = getAnyOfSelected(values, uri)
+
+      meta = {
+        uri,
+        type: 'string',
+        schema: rootSchema,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        ...selected,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(rootSchema)
 
       elements = {
@@ -2208,11 +2358,25 @@ export function transformString (rootSchema, values, params) {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
           ), []),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
+        const selected = getOneOfSelected(values, uri)
+
+        meta = {
+          uri,
+          type: 'string',
+          schema: rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          ...selected,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(rootSchema)
 
         elements = {
@@ -2222,10 +2386,23 @@ export function transformString (rootSchema, values, params) {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
             ), []),
+            ...selected,
             name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          type: 'string',
+          schema: rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          ...getDefaultValue(rootSchema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         elements = {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),
@@ -2288,21 +2465,22 @@ export function transformNumber (rootSchema, values, params) {
       }
     }
   } else {
-    meta = {
-      uri,
-      type: 'number',
-      schema: rootSchema,
-      ...getIsExclusiveMin(rootSchema),
-      ...getIsExclusiveMax(rootSchema),
-      ...min,
-      ...max,
-      ...step,
-      ...getDefaultValue(rootSchema, uri),
-      ...getValue(values, uri),
-      ...getMetaProps(params, uri)
-    }
-
     if (hasAnyOf(rootSchema)) {
+      const selected = getAnyOfSelected(values, uri)
+
+      meta = {
+        uri,
+        type: 'number',
+        schema: rootSchema,
+        ...getIsExclusiveMin(rootSchema),
+        ...getIsExclusiveMax(rootSchema),
+        ...min,
+        ...max,
+        ...step,
+        ...selected,
+        ...getMetaProps(params, uri)
+      }
+
       const items = getAnyOf(rootSchema)
 
       elements = {
@@ -2312,11 +2490,27 @@ export function transformNumber (rootSchema, values, params) {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
           ), []),
+          ...selected,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
+        const selected = getOneOfSelected(values, uri)
+
+        meta = {
+          uri,
+          type: 'number',
+          schema: rootSchema,
+          ...getIsExclusiveMin(rootSchema),
+          ...getIsExclusiveMax(rootSchema),
+          ...min,
+          ...max,
+          ...step,
+          ...selected,
+          ...getMetaProps(params, uri)
+        }
+
         const items = getOneOf(rootSchema)
 
         elements = {
@@ -2326,10 +2520,25 @@ export function transformNumber (rootSchema, values, params) {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
             ), []),
+            ...selected,
             name: uri
           }
         }
       } else {
+        meta = {
+          uri,
+          type: 'number',
+          schema: rootSchema,
+          ...getIsExclusiveMin(rootSchema),
+          ...getIsExclusiveMax(rootSchema),
+          ...min,
+          ...max,
+          ...step,
+          ...getDefaultValue(rootSchema, uri),
+          ...getValue(values, uri),
+          ...getMetaProps(params, uri)
+        }
+
         elements = {
           ...getTitle(rootSchema),
           ...getDescription(rootSchema),

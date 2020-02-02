@@ -75,25 +75,25 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         }
 
         const values = {
-          '#/stringTypeSubSchema': 'mock string',
+          '#/stringTypeSubSchema': 'string',
           '#/numberTypeSubSchema': '1',
-          '#/arrayTypeSubSchema/0': 'mock string',
-          '#/objectTypeSubSchema/one': 'mock string',
+          '#/arrayTypeSubSchema/0': 'string',
+          '#/objectTypeSubSchema/one': 'string',
           '#/objectTypeSubSchema/two': '2',
           '#/booleanTypeSubSchema': 'true',
           '#/nullTypeSubSchema': 'null'
         }
 
         const params = {
-          '#/stringTypeSubSchema': { meta: { component: 'mock string component' } },
-          '#/numberTypeSubSchema': { meta: { component: 'mock number component' } },
-          '#/arrayTypeSubSchema': { meta: { component: 'mock array component' } },
-          '#/arrayTypeSubSchema/0': { meta: { component: 'mock array type index component' } },
-          '#/objectTypeSubSchema': { meta: { component: 'mock object component' } },
-          '#/objectTypeSubSchema/one': { meta: { component: 'mock object type key component' } },
-          '#/objectTypeSubSchema/two': { meta: { component: 'mock object type key component' } },
-          '#/booleanTypeSubSchema': { meta: { component: 'mock boolean component' } },
-          '#/nullTypeSubSchema': { meta: { component: 'mock null component' } }
+          '#/stringTypeSubSchema': { meta: { component: 'string component' } },
+          '#/numberTypeSubSchema': { meta: { component: 'number component' } },
+          '#/arrayTypeSubSchema': { meta: { component: 'array component' } },
+          '#/arrayTypeSubSchema/0': { meta: { component: 'array type index component' } },
+          '#/objectTypeSubSchema': { meta: { component: 'object component' } },
+          '#/objectTypeSubSchema/one': { meta: { component: 'object type key component' } },
+          '#/objectTypeSubSchema/two': { meta: { component: 'object type key component' } },
+          '#/booleanTypeSubSchema': { meta: { component: 'boolean component' } },
+          '#/nullTypeSubSchema': { meta: { component: 'null component' } }
         }
 
         return expect(transform(schema, values, params))
@@ -121,8 +121,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'string',
                     uri: '#/stringTypeSubSchema',
-                    value: 'mock string',
-                    component: 'mock string component'
+                    value: 'string',
+                    component: 'string component'
                   },
                   elements: {
                     field: {
@@ -130,7 +130,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       maxLength: 10,
                       minLength: 1,
                       required: false,
-                      value: 'mock string'
+                      value: 'string'
                     },
                     title: 'String type sub schema'
                   }
@@ -149,7 +149,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'number',
                     uri: '#/numberTypeSubSchema',
                     value: '1',
-                    component: 'mock number component'
+                    component: 'number component'
                   },
                   elements: {
                     field: {
@@ -176,7 +176,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'array',
                     uri: '#/arrayTypeSubSchema',
-                    component: 'mock array component'
+                    component: 'array component'
                   },
                   elements: {
                     fields: [
@@ -189,15 +189,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'string',
                           uri: '#/arrayTypeSubSchema/0',
-                          value: 'mock string',
-                          component: 'mock array type index component',
+                          value: 'string',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           field: {
                             name: '#/arrayTypeSubSchema/0',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -220,7 +220,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'object',
                     uri: '#/objectTypeSubSchema',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -234,14 +234,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'string',
                           uri: '#/objectTypeSubSchema/one',
-                          value: 'mock string',
-                          component: 'mock object type key component'
+                          value: 'string',
+                          component: 'object type key component'
                         },
                         elements: {
                           field: {
                             name: '#/objectTypeSubSchema/one',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -256,7 +256,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'number',
                           uri: '#/objectTypeSubSchema/two',
                           value: '2',
-                          component: 'mock object type key component'
+                          component: 'object type key component'
                         },
                         elements: {
                           field: {
@@ -282,7 +282,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'boolean',
                     uri: '#/booleanTypeSubSchema',
                     value: 'true',
-                    component: 'mock boolean component'
+                    component: 'boolean component'
                   },
                   elements: {
                     field: {
@@ -305,7 +305,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'null',
                     uri: '#/nullTypeSubSchema',
                     value: 'null',
-                    component: 'mock null component'
+                    component: 'null component'
                   },
                   elements: {
                     field: {
@@ -391,7 +391,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -401,7 +401,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   selectedIndex: 2,
-                  component: 'mock number component'
+                  component: 'number component'
                 },
                 elements: {
                   enum: {
@@ -419,11 +419,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': '1',
+              '#/1': '2'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -432,12 +433,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  value: ['0', '2'],
-                  component: 'mock number component'
+                  selected: ['1', '2'],
+                  component: 'number component'
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -446,14 +446,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
+                          value: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -464,14 +465,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
+                          value: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -482,18 +484,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: ['1', '2']
                   }
                 }
               })
@@ -509,7 +513,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -518,12 +522,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  value: '1',
-                  component: 'mock number component'
+                  selected: '1',
+                  component: 'number component'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -532,14 +535,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -550,14 +553,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -568,18 +571,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: '1'
                   }
                 }
               })
@@ -595,7 +600,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -605,7 +610,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   value: '1',
-                  component: 'mock number component'
+                  component: 'number component'
                 },
                 elements: {
                   field: {
@@ -621,14 +626,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', enum: ['mock string (1)', 'mock string (2)', 'mock string (3)'] }
+            const schema = { type: 'string', enum: ['string (1)', 'string (2)', 'string (3)'] }
 
             const values = {
               '#/': '2'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -638,11 +643,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   selectedIndex: 2,
-                  component: 'mock string component'
+                  component: 'string component'
                 },
                 elements: {
                   enum: {
-                    items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                    items: ['string (1)', 'string (2)', 'string (3)'],
                     name: '#/',
                     selectedIndex: 2
                   }
@@ -653,14 +658,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         describe('With `anyOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', anyOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+            const schema = { type: 'string', anyOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': 'string (1)',
+              '#/1': 'string (2)'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -669,28 +675,28 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  value: ['0', '2'],
-                  component: 'mock string component'
+                  selected: ['string (1)', 'string (2)'],
+                  component: 'string component'
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (1)' },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: 'mock string (1)',
+                          defaultValue: 'string (1)',
+                          value: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string (1)'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -698,17 +704,18 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (2)' },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: 'mock string (2)',
+                          defaultValue: 'string (2)',
+                          value: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string (2)'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -716,21 +723,23 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (3)' },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: 'mock string (3)',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 'mock string (3)'
+                            value: 'string (3)'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: ['string (1)', 'string (2)']
                   }
                 }
               })
@@ -739,14 +748,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         describe('With `oneOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', oneOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+            const schema = { type: 'string', oneOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/': '1'
+              '#/': 'string (1)'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -755,28 +764,27 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  value: '1',
-                  component: 'mock string component'
+                  selected: 'string (1)',
+                  component: 'string component'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (1)' },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: 'mock string (1)',
+                          defaultValue: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string (1)'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -784,17 +792,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (2)' },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: 'mock string (2)',
+                          defaultValue: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string (2)'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -802,21 +810,23 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (3)' },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: 'mock string (3)',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 'mock string (3)'
+                            value: 'string (3)'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: 'string (1)'
                   }
                 }
               })
@@ -828,11 +838,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'string' }
 
             const values = {
-              '#/': 'mock string'
+              '#/': 'string'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -841,13 +851,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  value: 'mock string',
-                  component: 'mock string component'
+                  value: 'string',
+                  component: 'string component'
                 },
                 elements: {
                   field: {
                     name: '#/',
-                    value: 'mock string'
+                    value: 'string'
                   }
                 }
               })
@@ -874,7 +884,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -897,7 +907,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           selectedIndex: 2,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -920,7 +930,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 items: [
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   }
                 ]
               }
@@ -930,7 +940,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -948,17 +958,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/0',
                           selectedIndex: 2,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/0',
                             required: false,
                             selectedIndex: 2
@@ -990,7 +1000,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1016,7 +1026,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           }
                         },
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -1045,9 +1055,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   }
                 ]
@@ -1058,7 +1068,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1072,15 +1082,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
                           schema: {
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             type: 'string'
                           },
@@ -1091,9 +1101,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/0',
                             required: false,
@@ -1124,7 +1134,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1138,7 +1148,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -1180,7 +1190,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1194,7 +1204,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -1235,9 +1245,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   },
                   {
@@ -1259,10 +1269,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1288,7 +1298,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           }
                         },
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -1307,15 +1317,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1,
                           required: false,
                           rootSchema: schema,
                           schema: {
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             type: 'string'
                           },
@@ -1326,9 +1336,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/1',
                             required: false,
@@ -1338,7 +1348,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2,
                           required: false,
                           rootSchema: schema,
@@ -1361,7 +1371,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3,
                           required: false,
                           rootSchema: schema,
@@ -1397,9 +1407,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -1421,9 +1431,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1445,9 +1455,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -1462,7 +1472,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -1471,9 +1481,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: false,
@@ -1481,15 +1491,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -1512,7 +1522,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -1547,9 +1557,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -1574,9 +1584,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1598,9 +1608,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -1618,7 +1628,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -1627,9 +1637,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: true,
@@ -1637,15 +1647,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: true,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -1668,7 +1678,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -1718,8 +1728,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1750,7 +1760,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -1769,7 +1779,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -1804,9 +1814,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       }
                     ]
@@ -1819,8 +1829,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1842,31 +1852,31 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               }
                             ]
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -1877,9 +1887,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/0',
                                   required: false,
@@ -1916,8 +1926,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -1944,14 +1954,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -2001,8 +2011,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2029,14 +2039,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -2083,9 +2093,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       {
@@ -2109,11 +2119,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/1': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/2': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/3': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } },
+                '#/0/1': { meta: { component: 'array type index array type index component' } },
+                '#/0/2': { meta: { component: 'array type index array type index component' } },
+                '#/0/3': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2143,9 +2153,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               {
@@ -2160,7 +2170,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2179,7 +2189,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -2198,15 +2208,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 1,
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -2217,9 +2227,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/1',
                                   required: false,
@@ -2229,7 +2239,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 2,
                                 required: false,
                                 rootSchema: schema,
@@ -2252,7 +2262,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 3,
                                 required: false,
                                 rootSchema: schema,
@@ -2294,14 +2304,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2326,7 +2336,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2339,14 +2349,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -2358,14 +2368,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -2393,14 +2403,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2428,7 +2438,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2441,14 +2451,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: true,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -2460,14 +2470,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -2495,7 +2505,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2518,7 +2528,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           selectedIndex: 1,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2551,7 +2561,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2574,7 +2584,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           selectedIndex: 0,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2601,7 +2611,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   },
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   },
                   {
                     type: 'boolean',
@@ -2622,10 +2632,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2648,7 +2658,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           selectedIndex: 2,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2666,17 +2676,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/1',
                           selectedIndex: 2,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/1',
                             required: false,
                             selectedIndex: 2
@@ -2694,7 +2704,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/2',
                           selectedIndex: 1,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2
                         },
                         elements: {
@@ -2717,7 +2727,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/3',
                           selectedIndex: 0,
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3
                         },
                         elements: {
@@ -2751,7 +2761,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2773,7 +2783,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           value: '1',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2800,11 +2810,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0': 'mock string'
+                '#/0': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2825,15 +2835,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          value: 'mock string',
-                          component: 'mock array type index component',
+                          value: 'string',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -2861,14 +2871,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock array type index string type',
+                '#/0/one': 'string',
                 '#/0/two': '1'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -2897,7 +2907,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -2907,18 +2917,18 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/one',
                                   required: false,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/one'
                               }
@@ -2932,7 +2942,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -2974,14 +2984,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock array type index string type',
+                '#/0/one': 'string',
                 '#/0/two': '1'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3013,21 +3023,21 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: true,
                                 rootSchema: schema,
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/one'
                               },
@@ -3035,13 +3045,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/one',
                                   required: true,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               }
                             },
                             {
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -3083,7 +3093,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3097,7 +3107,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -3132,11 +3142,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0': 'mock array type index string type'
+                '#/0': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3150,14 +3160,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
                           schema: {
                             type: 'string'
                           },
-                          value: 'mock array type index string type',
+                          value: 'string',
                           type: 'string',
                           uri: '#/0'
                         },
@@ -3165,7 +3175,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock array type index string type'
+                            value: 'string'
                           }
                         }
                       }
@@ -3189,7 +3199,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3203,7 +3213,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -3242,7 +3252,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3256,7 +3266,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -3301,16 +3311,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
               const values = {
                 '#/0': '1',
-                '#/1': 'mock array type index string type',
+                '#/1': 'string',
                 '#/2': 'false',
                 '#/3': 'null'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3324,7 +3334,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -3345,14 +3355,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1,
                           required: false,
                           rootSchema: schema,
                           schema: {
                             type: 'string'
                           },
-                          value: 'mock array type index string type',
+                          value: 'string',
                           type: 'string',
                           uri: '#/1'
                         },
@@ -3360,13 +3370,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock array type index string type'
+                            value: 'string'
                           }
                         }
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2,
                           required: false,
                           rootSchema: schema,
@@ -3387,7 +3397,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3,
                           required: false,
                           rootSchema: schema,
@@ -3431,8 +3441,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3456,7 +3466,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -3483,7 +3493,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         }
                       }
@@ -3508,12 +3518,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/0': 'mock array type index string type'
+                '#/0/0': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3539,21 +3549,21 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/0'
                               },
@@ -3561,7 +3571,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/0',
                                   required: false,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -3593,8 +3603,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3620,14 +3630,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -3674,8 +3684,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3701,14 +3711,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -3761,17 +3771,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
               const values = {
                 '#/0/0': '1',
-                '#/0/1': 'mock array type index string type',
+                '#/0/1': 'string',
                 '#/0/2': 'false',
                 '#/0/3': 'null'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/1': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/2': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/3': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } },
+                '#/0/1': { meta: { component: 'array type index array type index component' } },
+                '#/0/2': { meta: { component: 'array type index array type index component' } },
+                '#/0/3': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3806,14 +3816,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -3834,14 +3844,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 1,
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/1'
                               },
@@ -3849,13 +3859,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/1',
                                   required: false,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               }
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 2,
                                 required: false,
                                 rootSchema: schema,
@@ -3876,7 +3886,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 3,
                                 required: false,
                                 rootSchema: schema,
@@ -3916,14 +3926,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -3948,7 +3958,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -3961,14 +3971,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -3980,14 +3990,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -4015,14 +4025,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4050,7 +4060,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -4063,14 +4073,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: true,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -4082,14 +4092,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string',
-                                component: 'mock array type index object type key component'
+                                value: 'string',
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -4116,7 +4126,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4138,7 +4148,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           value: 'true',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -4169,7 +4179,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4191,7 +4201,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           value: 'null',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -4228,16 +4238,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
               const values = {
                 '#/0': '1',
-                '#/1': 'mock string',
+                '#/1': 'string',
                 '#/2': 'true',
                 '#/3': 'null'
               }
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4259,7 +4269,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/0',
                           value: '1',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -4279,15 +4289,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/1',
-                          value: 'mock string',
-                          component: 'mock array type index component',
+                          value: 'string',
+                          component: 'array type index component',
                           item: 1
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -4301,7 +4311,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/2',
                           value: 'true',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2
                         },
                         elements: {
@@ -4322,7 +4332,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           uri: '#/3',
                           value: 'null',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3
                         },
                         elements: {
@@ -4347,7 +4357,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock array component' } }
+              '#/': { meta: { component: 'array component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4356,7 +4366,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'array',
                   schema,
                   uri: '#/',
-                  component: 'mock array component'
+                  component: 'array component'
                 },
                 elements: {
                   fields: []
@@ -4373,8 +4383,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 }
               }
 
@@ -4384,9 +4394,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4395,7 +4405,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -4406,16 +4416,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/one',
                           selectedIndex: 0,
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: false,
                             selectedIndex: 0
@@ -4429,16 +4439,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/two',
                           selectedIndex: 1,
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false,
                             selectedIndex: 1
@@ -4454,8 +4464,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 },
                 required: [
                   'one'
@@ -4468,9 +4478,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4479,7 +4489,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -4490,16 +4500,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/one',
                           selectedIndex: 0,
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: true,
                             selectedIndex: 0
@@ -4513,16 +4523,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/two',
                           selectedIndex: 1,
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false,
                             selectedIndex: 1
@@ -4546,14 +4556,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/one': 'mock string',
-                '#/two': 'mock string'
+                '#/one': 'string',
+                '#/two': 'string'
               }
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4562,7 +4572,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -4576,14 +4586,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/one',
-                          value: 'mock string',
-                          component: 'mock object component'
+                          value: 'string',
+                          component: 'object component'
                         },
                         elements: {
                           field: {
                             name: '#/one',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -4597,14 +4607,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/two',
-                          value: 'mock string',
-                          component: 'mock object component'
+                          value: 'string',
+                          component: 'object component'
                         },
                         elements: {
                           field: {
                             name: '#/two',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -4626,14 +4636,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/one': 'mock string',
-                '#/two': 'mock string'
+                '#/one': 'string',
+                '#/two': 'string'
               }
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -4642,7 +4652,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -4654,14 +4664,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { type: 'string' },
                           type: 'string',
                           uri: '#/one',
-                          value: 'mock string',
-                          component: 'mock object component'
+                          value: 'string',
+                          component: 'object component'
                         },
                         elements: {
                           field: {
                             name: '#/one',
                             required: true,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -4673,14 +4683,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { type: 'string' },
                           type: 'string',
                           uri: '#/two',
-                          value: 'mock string',
-                          component: 'mock object component'
+                          value: 'string',
+                          component: 'object component'
                         },
                         elements: {
                           field: {
                             name: '#/two',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -4698,7 +4708,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock object component' } }
+              '#/': { meta: { component: 'object component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4707,7 +4717,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'object',
                   schema,
                   uri: '#/',
-                  component: 'mock object component'
+                  component: 'object component'
                 },
                 elements: {
                   fields: []
@@ -4727,7 +4737,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4737,7 +4747,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   selectedIndex: 1,
-                  component: 'mock boolean component'
+                  component: 'boolean component'
                 },
                 elements: {
                   enum: {
@@ -4755,11 +4765,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': 'true',
+              '#/1': 'false'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4768,12 +4779,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  value: ['0', '2'],
-                  component: 'mock boolean component'
+                  selected: ['true', 'false'],
+                  component: 'boolean component'
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -4782,14 +4792,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
+                          value: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -4800,14 +4811,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
+                          value: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -4818,18 +4830,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: ['true', 'false']
                   }
                 }
               })
@@ -4841,11 +4855,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/': '1'
+              '#/': 'true'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4854,12 +4868,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  value: '1',
-                  component: 'mock boolean component'
+                  selected: 'true',
+                  component: 'boolean component'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -4868,14 +4881,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -4886,14 +4899,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -4904,18 +4917,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: 'true'
                   }
                 }
               })
@@ -4931,7 +4946,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4941,7 +4956,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   value: 'true',
-                  component: 'mock boolean component'
+                  component: 'boolean component'
                 },
                 elements: {
                   field: {
@@ -4964,7 +4979,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -4974,7 +4989,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   selectedIndex: 0,
-                  component: 'mock null component'
+                  component: 'null component'
                 },
                 elements: {
                   enum: {
@@ -4992,11 +5007,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': 'null',
+              '#/1': 'null'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -5005,12 +5021,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  value: ['0', '2'],
-                  component: 'mock null component'
+                  selected: ['null', 'null'],
+                  component: 'null component'
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -5019,14 +5034,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
+                          value: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -5037,14 +5053,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
+                          value: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -5055,18 +5072,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: ['null', 'null']
                   }
                 }
               })
@@ -5078,11 +5097,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/': '1'
+              '#/': 'null'
             }
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -5091,12 +5110,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  value: '1',
-                  component: 'mock null component'
+                  selected: 'null',
+                  component: 'null component'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -5105,14 +5123,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -5123,14 +5141,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -5141,18 +5159,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: 'null'
                   }
                 }
               })
@@ -5168,7 +5188,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             }
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -5178,7 +5198,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   schema,
                   uri: '#/',
                   value: 'null',
-                  component: 'mock null component'
+                  component: 'null component'
                 },
                 elements: {
                   field: {
@@ -5258,10 +5278,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         }
 
         const values = {
-          '#/stringTypeSubSchema': 'mock string',
+          '#/stringTypeSubSchema': 'string',
           '#/numberTypeSubSchema': '1',
-          '#/arrayTypeSubSchema/0': 'mock string',
-          '#/objectTypeSubSchema/one': 'mock string',
+          '#/arrayTypeSubSchema/0': 'string',
+          '#/objectTypeSubSchema/one': 'string',
           '#/objectTypeSubSchema/two': '2',
           '#/booleanTypeSubSchema': 'true',
           '#/nullTypeSubSchema': 'null'
@@ -5292,7 +5312,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'string',
                     uri: '#/stringTypeSubSchema',
-                    value: 'mock string'
+                    value: 'string'
                   },
                   elements: {
                     field: {
@@ -5300,7 +5320,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       maxLength: 10,
                       minLength: 1,
                       required: false,
-                      value: 'mock string'
+                      value: 'string'
                     },
                     title: 'String type sub schema'
                   }
@@ -5357,14 +5377,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'string',
                           uri: '#/arrayTypeSubSchema/0',
-                          value: 'mock string',
+                          value: 'string',
                           item: 0
                         },
                         elements: {
                           field: {
                             name: '#/arrayTypeSubSchema/0',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -5400,13 +5420,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'string',
                           uri: '#/objectTypeSubSchema/one',
-                          value: 'mock string'
+                          value: 'string'
                         },
                         elements: {
                           field: {
                             name: '#/objectTypeSubSchema/one',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -5576,7 +5596,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': '1',
+              '#/1': '2'
             }
 
             return expect(transform(schema, values))
@@ -5585,7 +5606,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  value: ['0', '2']
+                  selected: ['1', '2']
                 },
                 elements: {
                   anyOf: {
@@ -5597,14 +5618,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
+                          value: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -5615,14 +5637,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
+                          value: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -5633,19 +5656,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
                     ],
-                    name: '#/'
+                    name: '#/',
+                    selected: ['1', '2']
                   }
                 }
               })
@@ -5666,7 +5690,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  value: '2'
+                  selected: '2'
                 },
                 elements: {
                   oneOf: {
@@ -5678,14 +5702,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -5696,14 +5720,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -5714,19 +5738,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
                     ],
-                    name: '#/'
+                    name: '#/',
+                    selected: '2'
                   }
                 }
               })
@@ -5763,7 +5788,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', enum: ['mock string (1)', 'mock string (2)', 'mock string (3)'] }
+            const schema = { type: 'string', enum: ['string (1)', 'string (2)', 'string (3)'] }
 
             const values = {
               '#/': '2'
@@ -5779,7 +5804,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   enum: {
-                    items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                    items: ['string (1)', 'string (2)', 'string (3)'],
                     name: '#/',
                     selectedIndex: 2
                   }
@@ -5790,10 +5815,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         describe('With `anyOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', anyOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+            const schema = { type: 'string', anyOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': 'string (1)',
+              '#/1': 'string (2)'
             }
 
             return expect(transform(schema, values))
@@ -5802,7 +5828,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  value: ['0', '2']
+                  selected: [
+                    'string (1)',
+                    'string (2)'
+                  ]
                 },
                 elements: {
                   anyOf: {
@@ -5811,17 +5840,18 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (1)' },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: 'mock string (1)',
+                          defaultValue: 'string (1)',
+                          value: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string (1)'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -5829,17 +5859,18 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (2)' },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: 'mock string (2)',
+                          defaultValue: 'string (2)',
+                          value: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string (2)'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -5847,22 +5878,26 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (3)' },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: 'mock string (3)',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 'mock string (3)'
+                            value: 'string (3)'
                           }
                         }
                       }
                     ],
-                    name: '#/'
+                    name: '#/',
+                    selected: [
+                      'string (1)',
+                      'string (2)'
+                    ]
                   }
                 }
               })
@@ -5871,10 +5906,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         describe('With `oneOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', oneOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+            const schema = { type: 'string', oneOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/': '1'
+              '#/': 'string (1)'
             }
 
             return expect(transform(schema, values))
@@ -5883,7 +5918,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  value: '1'
+                  selected: 'string (1)'
                 },
                 elements: {
                   oneOf: {
@@ -5892,17 +5927,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (1)' },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: 'mock string (1)',
+                          defaultValue: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string (1)'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -5910,17 +5945,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (2)' },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: 'mock string (2)',
+                          defaultValue: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string (2)'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -5928,22 +5963,23 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (3)' },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: 'mock string (3)',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 'mock string (3)'
+                            value: 'string (3)'
                           }
                         }
                       }
                     ],
-                    name: '#/'
+                    name: '#/',
+                    selected: 'string (1)'
                   }
                 }
               })
@@ -5955,7 +5991,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'string' }
 
             const values = {
-              '#/': 'mock string'
+              '#/': 'string'
             }
 
             return expect(transform(schema, values))
@@ -5964,12 +6000,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  value: 'mock string'
+                  value: 'string'
                 },
                 elements: {
                   field: {
                     name: '#/',
-                    value: 'mock string'
+                    value: 'string'
                   }
                 }
               })
@@ -6037,7 +6073,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 items: [
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   }
                 ]
               }
@@ -6061,7 +6097,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/0',
@@ -6070,7 +6106,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/0',
                             required: false,
                             selectedIndex: 2
@@ -6092,9 +6128,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -6134,9 +6170,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -6159,9 +6195,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: false,
@@ -6174,9 +6210,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -6233,9 +6269,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -6278,9 +6314,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -6306,9 +6342,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: true,
@@ -6321,9 +6357,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -6440,9 +6476,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   }
                 ]
@@ -6468,9 +6504,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: {
                             type: 'string',
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ]
                           },
                           rootSchema: schema,
@@ -6481,9 +6517,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/0',
                             required: false,
@@ -6613,9 +6649,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   },
                   {
@@ -6682,9 +6718,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: {
                             type: 'string',
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ]
                           },
                           rootSchema: schema,
@@ -6695,9 +6731,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/1',
                             required: false,
@@ -6858,9 +6894,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       }
                     ]
@@ -6891,9 +6927,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               }
                             ]
@@ -6911,9 +6947,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -6924,9 +6960,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/0',
                                   required: false,
@@ -7116,9 +7152,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       {
@@ -7168,9 +7204,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               {
@@ -7226,9 +7262,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -7239,9 +7275,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/1',
                                   required: false,
@@ -7314,8 +7350,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               return expect(transform(schema, values))
@@ -7352,13 +7388,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -7370,13 +7406,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -7404,8 +7440,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               return expect(transform(schema, values))
@@ -7445,13 +7481,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: true,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -7463,13 +7499,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -7593,7 +7629,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   },
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   },
                   {
                     type: 'boolean',
@@ -7650,7 +7686,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/1',
@@ -7659,7 +7695,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/1',
                             required: false,
                             selectedIndex: 2
@@ -7776,7 +7812,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0': 'mock string'
+                '#/0': 'string'
               }
 
               return expect(transform(schema, values))
@@ -7797,14 +7833,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          value: 'mock string',
+                          value: 'string',
                           item: 0
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -7872,7 +7908,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0': 'mock array type index string type'
+                '#/0': 'string'
               }
 
               return expect(transform(schema, values))
@@ -7892,7 +7928,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: {
                             type: 'string'
                           },
-                          value: 'mock array type index string type',
+                          value: 'string',
                           type: 'string',
                           uri: '#/0'
                         },
@@ -7900,7 +7936,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock array type index string type'
+                            value: 'string'
                           }
                         }
                       }
@@ -8026,7 +8062,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
               const values = {
                 '#/0': '1',
-                '#/1': 'mock array type index string type',
+                '#/1': 'string',
                 '#/2': 'false',
                 '#/3': 'null'
               }
@@ -8069,7 +8105,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: {
                             type: 'string'
                           },
-                          value: 'mock array type index string type',
+                          value: 'string',
                           type: 'string',
                           uri: '#/1'
                         },
@@ -8077,7 +8113,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock array type index string type'
+                            value: 'string'
                           }
                         }
                       },
@@ -8145,7 +8181,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock array type index string type',
+                '#/0/one': 'string',
                 '#/0/two': '1'
               }
 
@@ -8184,7 +8220,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/one',
                                   required: false,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               },
                               meta: {
@@ -8194,7 +8230,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/one'
                               }
@@ -8249,7 +8285,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock array type index string type',
+                '#/0/one': 'string',
                 '#/0/two': '1'
               }
 
@@ -8294,7 +8330,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/one'
                               },
@@ -8302,7 +8338,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/one',
                                   required: true,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -8424,7 +8460,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/0': 'mock array type index string type'
+                '#/0/0': 'string'
               }
 
               return expect(transform(schema, values))
@@ -8462,7 +8498,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/0'
                               },
@@ -8470,7 +8506,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/0',
                                   required: false,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -8656,7 +8692,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
               const values = {
                 '#/0/0': '1',
-                '#/0/1': 'mock array type index string type',
+                '#/0/1': 'string',
                 '#/0/2': 'false',
                 '#/0/3': 'null'
               }
@@ -8725,7 +8761,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: {
                                   type: 'string'
                                 },
-                                value: 'mock array type index string type',
+                                value: 'string',
                                 type: 'string',
                                 uri: '#/0/1'
                               },
@@ -8733,7 +8769,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 field: {
                                   name: '#/0/1',
                                   required: false,
-                                  value: 'mock array type index string type'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -8798,8 +8834,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               return expect(transform(schema, values))
@@ -8836,13 +8872,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -8854,13 +8890,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -8888,8 +8924,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/0/one': 'mock string',
-                '#/0/two': 'mock string'
+                '#/0/one': 'string',
+                '#/0/two': 'string'
               }
 
               return expect(transform(schema, values))
@@ -8929,13 +8965,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/one',
                                   required: true,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             },
@@ -8947,13 +8983,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                value: 'mock string'
+                                value: 'string'
                               },
                               elements: {
                                 field: {
                                   name: '#/0/two',
                                   required: false,
-                                  value: 'mock string'
+                                  value: 'string'
                                 }
                               }
                             }
@@ -9082,7 +9118,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
               const values = {
                 '#/0': '1',
-                '#/1': 'mock string',
+                '#/1': 'string',
                 '#/2': 'true',
                 '#/3': 'null'
               }
@@ -9125,14 +9161,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/1',
-                          value: 'mock string',
+                          value: 'string',
                           item: 1
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -9211,8 +9247,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 }
               }
 
@@ -9237,7 +9273,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/one',
@@ -9245,7 +9281,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: false,
                             selectedIndex: 0
@@ -9259,7 +9295,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/two',
@@ -9267,7 +9303,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false,
                             selectedIndex: 1
@@ -9283,8 +9319,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 },
                 required: [
                   'one'
@@ -9312,7 +9348,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/one',
@@ -9320,7 +9356,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: true,
                             selectedIndex: 0
@@ -9334,7 +9370,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/two',
@@ -9342,7 +9378,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false,
                             selectedIndex: 1
@@ -9366,8 +9402,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/one': 'mock string',
-                '#/two': 'mock string'
+                '#/one': 'string',
+                '#/two': 'string'
               }
 
               return expect(transform(schema, values))
@@ -9389,13 +9425,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/one',
-                          value: 'mock string'
+                          value: 'string'
                         },
                         elements: {
                           field: {
                             name: '#/one',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -9409,13 +9445,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/two',
-                          value: 'mock string'
+                          value: 'string'
                         },
                         elements: {
                           field: {
                             name: '#/two',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -9437,8 +9473,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               }
 
               const values = {
-                '#/one': 'mock string',
-                '#/two': 'mock string'
+                '#/one': 'string',
+                '#/two': 'string'
               }
 
               return expect(transform(schema, values))
@@ -9458,13 +9494,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { type: 'string' },
                           type: 'string',
                           uri: '#/one',
-                          value: 'mock string'
+                          value: 'string'
                         },
                         elements: {
                           field: {
                             name: '#/one',
                             required: true,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       },
@@ -9476,13 +9512,13 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { type: 'string' },
                           type: 'string',
                           uri: '#/two',
-                          value: 'mock string'
+                          value: 'string'
                         },
                         elements: {
                           field: {
                             name: '#/two',
                             required: false,
-                            value: 'mock string'
+                            value: 'string'
                           }
                         }
                       }
@@ -9547,7 +9583,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': 'true',
+              '#/1': 'false'
             }
 
             return expect(transform(schema, values))
@@ -9556,11 +9593,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  value: ['0', '2']
+                  selected: ['true', 'false']
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -9569,14 +9605,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
+                          value: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -9587,14 +9624,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
+                          value: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -9605,18 +9643,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: ['true', 'false']
                   }
                 }
               })
@@ -9628,7 +9668,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/': '1'
+              '#/': 'true'
             }
 
             return expect(transform(schema, values))
@@ -9637,11 +9677,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  value: '1'
+                  selected: 'true'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -9650,14 +9689,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -9668,14 +9707,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -9686,18 +9725,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: 'true'
                   }
                 }
               })
@@ -9764,7 +9805,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/': ['0', '2']
+              '#/0': 'null',
+              '#/1': 'null'
             }
 
             return expect(transform(schema, values))
@@ -9773,11 +9815,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  value: ['0', '2']
+                  selected: ['null', 'null']
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -9786,14 +9827,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
+                          value: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -9804,14 +9846,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
+                          value: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -9822,18 +9865,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: ['null', 'null']
                   }
                 }
               })
@@ -9845,7 +9890,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/': '1'
+              '#/': 'null'
             }
 
             return expect(transform(schema, values))
@@ -9854,11 +9899,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  value: '1'
+                  selected: 'null'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -9867,14 +9911,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -9885,14 +9929,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -9903,18 +9947,20 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/',
+                    selected: 'null'
                   }
                 }
               })
@@ -10019,15 +10065,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
         const values = {}
 
         const params = {
-          '#/stringTypeSubSchema': { meta: { component: 'mock string component' } },
-          '#/numberTypeSubSchema': { meta: { component: 'mock number component' } },
-          '#/arrayTypeSubSchema': { meta: { component: 'mock array component' } },
-          '#/arrayTypeSubSchema/0': { meta: { component: 'mock array type index component' } },
-          '#/objectTypeSubSchema': { meta: { component: 'mock object component' } },
-          '#/objectTypeSubSchema/one': { meta: { component: 'mock object type key component' } },
-          '#/objectTypeSubSchema/two': { meta: { component: 'mock object type key component' } },
-          '#/booleanTypeSubSchema': { meta: { component: 'mock boolean component' } },
-          '#/nullTypeSubSchema': { meta: { component: 'mock null component' } }
+          '#/stringTypeSubSchema': { meta: { component: 'string component' } },
+          '#/numberTypeSubSchema': { meta: { component: 'number component' } },
+          '#/arrayTypeSubSchema': { meta: { component: 'array component' } },
+          '#/arrayTypeSubSchema/0': { meta: { component: 'array type index component' } },
+          '#/objectTypeSubSchema': { meta: { component: 'object component' } },
+          '#/objectTypeSubSchema/one': { meta: { component: 'object type key component' } },
+          '#/objectTypeSubSchema/two': { meta: { component: 'object type key component' } },
+          '#/booleanTypeSubSchema': { meta: { component: 'boolean component' } },
+          '#/nullTypeSubSchema': { meta: { component: 'null component' } }
         }
 
         return expect(transform(schema, values, params))
@@ -10055,7 +10101,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'string',
                     uri: '#/stringTypeSubSchema',
-                    component: 'mock string component'
+                    component: 'string component'
                   },
                   elements: {
                     field: {
@@ -10080,7 +10126,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'number',
                     uri: '#/numberTypeSubSchema',
-                    component: 'mock number component'
+                    component: 'number component'
                   },
                   elements: {
                     field: {
@@ -10106,7 +10152,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'array',
                     uri: '#/arrayTypeSubSchema',
-                    component: 'mock array component'
+                    component: 'array component'
                   },
                   elements: {
                     fields: [
@@ -10119,7 +10165,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'string',
                           uri: '#/arrayTypeSubSchema/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -10148,7 +10194,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'object',
                     uri: '#/objectTypeSubSchema',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -10162,7 +10208,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'string',
                           uri: '#/objectTypeSubSchema/one',
-                          component: 'mock object type key component'
+                          component: 'object type key component'
                         },
                         elements: {
                           field: {
@@ -10181,7 +10227,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           type: 'number',
                           uri: '#/objectTypeSubSchema/two',
-                          component: 'mock object type key component'
+                          component: 'object type key component'
                         },
                         elements: {
                           field: {
@@ -10205,7 +10251,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'boolean',
                     uri: '#/booleanTypeSubSchema',
-                    component: 'mock boolean component'
+                    component: 'boolean component'
                   },
                   elements: {
                     field: {
@@ -10226,7 +10272,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     },
                     type: 'null',
                     uri: '#/nullTypeSubSchema',
-                    component: 'mock null component'
+                    component: 'null component'
                   },
                   elements: {
                     field: {
@@ -10309,7 +10355,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10318,7 +10364,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  component: 'mock number component'
+                  component: 'number component'
                 },
                 elements: {
                   enum: {
@@ -10337,7 +10383,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10346,7 +10392,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  component: 'mock number component'
+                  component: 'number component'
                 },
                 elements: {
                   anyOf: {
@@ -10358,14 +10404,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -10376,14 +10422,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -10394,14 +10440,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
@@ -10420,7 +10466,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10429,7 +10475,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  component: 'mock number component'
+                  component: 'number component'
                 },
                 elements: {
                   oneOf: {
@@ -10441,14 +10487,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -10459,14 +10505,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -10477,14 +10523,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
@@ -10503,7 +10549,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock number component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10512,7 +10558,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  component: 'mock number component'
+                  component: 'number component'
                 },
                 elements: {
                   field: {
@@ -10527,12 +10573,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', enum: ['mock string (1)', 'mock string (2)', 'mock string (3)'] }
+            const schema = { type: 'string', enum: ['string (1)', 'string (2)', 'string (3)'] }
 
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10541,11 +10587,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  component: 'mock string component'
+                  component: 'string component'
                 },
                 elements: {
                   enum: {
-                    items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                    items: ['string (1)', 'string (2)', 'string (3)'],
                     name: '#/'
                   }
                 }
@@ -10555,12 +10601,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         describe('With `anyOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', anyOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+            const schema = { type: 'string', anyOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10569,7 +10615,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  component: 'mock string component'
+                  component: 'string component'
                 },
                 elements: {
                   anyOf: {
@@ -10578,17 +10624,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (1)' },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: 'mock string (1)',
+                          defaultValue: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string (1)'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -10596,17 +10642,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (2)' },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: 'mock string (2)',
+                          defaultValue: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string (2)'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -10614,17 +10660,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (3)' },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: 'mock string (3)',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 'mock string (3)'
+                            value: 'string (3)'
                           }
                         }
                       }
@@ -10638,12 +10684,12 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
 
         describe('With `oneOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', oneOf: [{ default: 'mock string (1)' }, { default: 'mock string (2)' }, { default: 'mock string (3)' }] }
+            const schema = { type: 'string', oneOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10652,7 +10698,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  component: 'mock string component'
+                  component: 'string component'
                 },
                 elements: {
                   oneOf: {
@@ -10661,17 +10707,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (1)' },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: 'mock string (1)',
+                          defaultValue: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 'mock string (1)'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -10679,17 +10725,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (2)' },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: 'mock string (2)',
+                          defaultValue: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 'mock string (2)'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -10697,17 +10743,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 'mock string (3)' },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: 'mock string (3)',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 'mock string (3)'
+                            value: 'string (3)'
                           }
                         }
                       }
@@ -10726,7 +10772,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock string component' } }
+              '#/': { meta: { component: 'string component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -10735,7 +10781,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  component: 'mock string component'
+                  component: 'string component'
                 },
                 elements: {
                   field: {
@@ -10764,7 +10810,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -10786,7 +10832,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -10808,7 +10854,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 items: [
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   }
                 ]
               }
@@ -10816,7 +10862,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -10834,16 +10880,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/0',
                             required: false
                           }
@@ -10864,9 +10910,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -10885,9 +10931,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -10909,9 +10955,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -10926,7 +10972,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -10935,24 +10981,24 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: false
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -10973,7 +11019,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -11007,9 +11053,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -11031,9 +11077,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11055,9 +11101,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -11075,7 +11121,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -11084,24 +11130,24 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: true
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: true,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -11122,7 +11168,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -11164,7 +11210,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11189,7 +11235,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           }
                         },
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -11217,9 +11263,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   }
                 ]
@@ -11228,7 +11274,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11242,15 +11288,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
                           schema: {
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             type: 'string'
                           },
@@ -11260,9 +11306,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/0',
                             required: false
@@ -11288,7 +11334,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11302,7 +11348,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -11340,7 +11386,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11354,7 +11400,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -11393,9 +11439,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   },
                   {
@@ -11412,10 +11458,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11440,7 +11486,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           }
                         },
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -11458,15 +11504,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1,
                           required: false,
                           rootSchema: schema,
                           schema: {
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             type: 'string'
                           },
@@ -11476,9 +11522,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/1',
                             required: false
@@ -11487,7 +11533,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2,
                           required: false,
                           rootSchema: schema,
@@ -11508,7 +11554,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3,
                           required: false,
                           rootSchema: schema,
@@ -11555,8 +11601,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11587,7 +11633,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -11605,7 +11651,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -11639,9 +11685,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       }
                     ]
@@ -11652,8 +11698,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11675,31 +11721,31 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               }
                             ]
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -11709,9 +11755,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/0',
                                   required: false
@@ -11745,8 +11791,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11773,14 +11819,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -11826,8 +11872,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11854,14 +11900,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -11906,9 +11952,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       {
@@ -11927,11 +11973,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/1': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/2': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/3': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } },
+                '#/0/1': { meta: { component: 'array type index array type index component' } },
+                '#/0/2': { meta: { component: 'array type index array type index component' } },
+                '#/0/3': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -11961,9 +12007,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               {
@@ -11978,7 +12024,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -11996,7 +12042,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -12014,15 +12060,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 1,
                                 required: false,
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -12032,9 +12078,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/1',
                                   required: false
@@ -12043,7 +12089,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 2,
                                 required: false,
                                 rootSchema: schema,
@@ -12064,7 +12110,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 3,
                                 required: false,
                                 rootSchema: schema,
@@ -12106,9 +12152,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12133,7 +12179,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12146,7 +12192,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -12163,7 +12209,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -12198,9 +12244,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12228,7 +12274,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12241,7 +12287,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -12258,7 +12304,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -12289,7 +12335,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12311,7 +12357,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12341,7 +12387,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12363,7 +12409,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12389,7 +12435,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   },
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   },
                   {
                     type: 'boolean',
@@ -12405,10 +12451,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12430,7 +12476,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12447,16 +12493,16 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/1',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/1',
                             required: false
                           }
@@ -12472,7 +12518,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/2',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2
                         },
                         elements: {
@@ -12493,7 +12539,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/3',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3
                         },
                         elements: {
@@ -12524,7 +12570,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12545,7 +12591,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12573,7 +12619,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12594,7 +12640,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12622,7 +12668,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12642,7 +12688,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           }
                         },
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -12671,7 +12717,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12685,7 +12731,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -12720,7 +12766,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12734,7 +12780,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -12769,7 +12815,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12783,7 +12829,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -12827,10 +12873,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12844,7 +12890,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     fields: [
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0,
                           required: false,
                           rootSchema: schema,
@@ -12863,7 +12909,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1,
                           required: false,
                           rootSchema: schema,
@@ -12882,7 +12928,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2,
                           required: false,
                           rootSchema: schema,
@@ -12901,7 +12947,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       },
                       {
                         meta: {
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3,
                           required: false,
                           rootSchema: schema,
@@ -12944,9 +12990,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -12975,7 +13021,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -12988,7 +13034,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: false,
                                 rootSchema: schema,
@@ -13007,7 +13053,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -13050,9 +13096,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13084,14 +13130,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'one',
                                 required: true,
                                 rootSchema: schema,
@@ -13110,7 +13156,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index object type key component',
+                                component: 'array type index object type key component',
                                 name: 'two',
                                 required: false,
                                 rootSchema: schema,
@@ -13153,8 +13199,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13177,7 +13223,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 }
                               },
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -13203,7 +13249,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         }
                       }
@@ -13230,8 +13276,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13257,14 +13303,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -13307,8 +13353,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13334,14 +13380,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -13384,8 +13430,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13411,14 +13457,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -13470,11 +13516,11 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/0': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/1': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/2': { meta: { component: 'mock array type index array type index component' } },
-                '#/0/3': { meta: { component: 'mock array type index array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/0': { meta: { component: 'array type index array type index component' } },
+                '#/0/1': { meta: { component: 'array type index array type index component' } },
+                '#/0/2': { meta: { component: 'array type index array type index component' } },
+                '#/0/3': { meta: { component: 'array type index array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13509,14 +13555,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
                           fields: [
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 0,
                                 required: false,
                                 rootSchema: schema,
@@ -13535,7 +13581,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 1,
                                 required: false,
                                 rootSchema: schema,
@@ -13554,7 +13600,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 2,
                                 required: false,
                                 rootSchema: schema,
@@ -13573,7 +13619,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                             },
                             {
                               meta: {
-                                component: 'mock array type index array type index component',
+                                component: 'array type index array type index component',
                                 item: 3,
                                 required: false,
                                 rootSchema: schema,
@@ -13613,9 +13659,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13640,7 +13686,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -13653,7 +13699,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -13670,7 +13716,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -13705,9 +13751,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/0/one': { meta: { component: 'mock array type index object type key component' } },
-                '#/0/two': { meta: { component: 'mock array type index object type key component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/0/one': { meta: { component: 'array type index object type key component' } },
+                '#/0/two': { meta: { component: 'array type index object type key component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13735,7 +13781,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -13748,7 +13794,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/one',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -13765,7 +13811,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 schema: { type: 'string' },
                                 rootSchema: schema,
                                 uri: '#/0/two',
-                                component: 'mock array type index object type key component'
+                                component: 'array type index object type key component'
                               },
                               elements: {
                                 field: {
@@ -13795,7 +13841,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13816,7 +13862,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -13844,7 +13890,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13865,7 +13911,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -13902,10 +13948,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/0': { meta: { component: 'mock array type index component' } },
-                '#/1': { meta: { component: 'mock array type index component' } },
-                '#/2': { meta: { component: 'mock array type index component' } },
-                '#/3': { meta: { component: 'mock array type index component' } }
+                '#/0': { meta: { component: 'array type index component' } },
+                '#/1': { meta: { component: 'array type index component' } },
+                '#/2': { meta: { component: 'array type index component' } },
+                '#/3': { meta: { component: 'array type index component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -13926,7 +13972,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/0',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 0
                         },
                         elements: {
@@ -13945,7 +13991,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/1',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 1
                         },
                         elements: {
@@ -13964,7 +14010,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/2',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 2
                         },
                         elements: {
@@ -13983,7 +14029,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/3',
-                          component: 'mock array type index component',
+                          component: 'array type index component',
                           item: 3
                         },
                         elements: {
@@ -14007,7 +14053,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock array component' } }
+              '#/': { meta: { component: 'array component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14016,7 +14062,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'array',
                   schema,
                   uri: '#/',
-                  component: 'mock array component'
+                  component: 'array component'
                 },
                 elements: {
                   fields: []
@@ -14033,17 +14079,17 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 }
               }
 
               const values = {}
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -14052,7 +14098,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -14063,15 +14109,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/one',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: false
                           }
@@ -14084,15 +14130,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/two',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false
                           }
@@ -14107,8 +14153,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 },
                 required: [
                   'one'
@@ -14118,9 +14164,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -14129,7 +14175,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -14140,15 +14186,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/one',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: true
                           }
@@ -14161,15 +14207,15 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/two',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false
                           }
@@ -14194,9 +14240,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -14205,7 +14251,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -14219,7 +14265,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/one',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           field: {
@@ -14238,7 +14284,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           },
                           rootSchema: schema,
                           uri: '#/two',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           field: {
@@ -14267,9 +14313,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const values = {}
 
               const params = {
-                '#/': { meta: { component: 'mock object component' } },
-                '#/one': { meta: { component: 'mock object component' } },
-                '#/two': { meta: { component: 'mock object component' } }
+                '#/': { meta: { component: 'object component' } },
+                '#/one': { meta: { component: 'object component' } },
+                '#/two': { meta: { component: 'object component' } }
               }
 
               return expect(transform(schema, values, params))
@@ -14278,7 +14324,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                     type: 'object',
                     schema,
                     uri: '#/',
-                    component: 'mock object component'
+                    component: 'object component'
                   },
                   elements: {
                     fields: [
@@ -14290,7 +14336,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { type: 'string' },
                           type: 'string',
                           uri: '#/one',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           field: {
@@ -14307,7 +14353,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { type: 'string' },
                           type: 'string',
                           uri: '#/two',
-                          component: 'mock object component'
+                          component: 'object component'
                         },
                         elements: {
                           field: {
@@ -14330,7 +14376,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock object component' } }
+              '#/': { meta: { component: 'object component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14339,7 +14385,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'object',
                   schema,
                   uri: '#/',
-                  component: 'mock object component'
+                  component: 'object component'
                 },
                 elements: {
                   fields: []
@@ -14357,7 +14403,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14366,7 +14412,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  component: 'mock boolean component'
+                  component: 'boolean component'
                 },
                 elements: {
                   enum: {
@@ -14385,7 +14431,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14394,11 +14440,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  component: 'mock boolean component'
+                  component: 'boolean component'
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -14407,14 +14452,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -14425,14 +14470,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -14443,18 +14488,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -14468,7 +14514,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14477,11 +14523,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  component: 'mock boolean component'
+                  component: 'boolean component'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -14490,14 +14535,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -14508,14 +14553,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -14526,18 +14571,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -14551,7 +14597,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock boolean component' } }
+              '#/': { meta: { component: 'boolean component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14560,7 +14606,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  component: 'mock boolean component'
+                  component: 'boolean component'
                 },
                 elements: {
                   field: {
@@ -14580,7 +14626,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14589,7 +14635,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  component: 'mock null component'
+                  component: 'null component'
                 },
                 elements: {
                   enum: {
@@ -14608,7 +14654,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14617,11 +14663,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  component: 'mock null component'
+                  component: 'null component'
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -14630,14 +14675,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -14648,14 +14693,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -14666,18 +14711,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -14691,7 +14737,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14700,11 +14746,10 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  component: 'mock null component'
+                  component: 'null component'
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -14713,14 +14758,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -14731,14 +14776,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -14749,18 +14794,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -14774,7 +14820,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
             const values = {}
 
             const params = {
-              '#/': { meta: { component: 'mock null component' } }
+              '#/': { meta: { component: 'null component' } }
             }
 
             return expect(transform(schema, values, params))
@@ -14783,7 +14829,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  component: 'mock null component'
+                  component: 'null component'
                 },
                 elements: {
                   field: {
@@ -15158,7 +15204,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -15167,14 +15212,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -15185,14 +15230,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -15203,18 +15248,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -15234,7 +15280,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -15243,14 +15288,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -15261,14 +15306,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -15279,18 +15324,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -15321,7 +15367,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', enum: ['mock string (1)', 'mock string (2)', 'mock string (3)'] }
+            const schema = { type: 'string', enum: ['string (1)', 'string (2)', 'string (3)'] }
 
             return expect(transform(schema))
               .to.eql({
@@ -15332,7 +15378,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   enum: {
-                    items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                    items: ['string (1)', 'string (2)', 'string (3)'],
                     name: '#/'
                   }
                 }
@@ -15353,7 +15399,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -15362,14 +15407,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -15380,14 +15425,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -15398,18 +15443,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -15429,7 +15475,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -15438,14 +15483,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 1 },
                           item: 0,
                           required: false,
-                          defaultValue: 1,
+                          defaultValue: '1',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: 1
+                            value: '1'
                           }
                         }
                       },
@@ -15456,14 +15501,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 2 },
                           item: 1,
                           required: false,
-                          defaultValue: 2,
+                          defaultValue: '2',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: 2
+                            value: '2'
                           }
                         }
                       },
@@ -15474,18 +15519,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: 3 },
                           item: 2,
                           required: false,
-                          defaultValue: 3,
+                          defaultValue: '3',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: 3
+                            value: '3'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -15567,7 +15613,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 items: [
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   }
                 ]
               }
@@ -15587,7 +15633,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/0',
@@ -15595,7 +15641,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/0',
                             required: false
                           }
@@ -15670,9 +15716,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   }
                 ]
@@ -15694,9 +15740,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             type: 'string'
                           },
@@ -15706,9 +15752,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/0',
                             required: false
@@ -15825,9 +15871,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   {
                     type: 'string',
                     enum: [
-                      'mock array type index string type (1)',
-                      'mock array type index string type (2)',
-                      'mock array type index string type (3)'
+                      'array type index string type (1)',
+                      'array type index string type (2)',
+                      'array type index string type (3)'
                     ]
                   },
                   {
@@ -15885,9 +15931,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             enum: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             type: 'string'
                           },
@@ -15897,9 +15943,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         elements: {
                           enum: {
                             items: [
-                              'mock array type index string type (1)',
-                              'mock array type index string type (2)',
-                              'mock array type index string type (3)'
+                              'array type index string type (1)',
+                              'array type index string type (2)',
+                              'array type index string type (3)'
                             ],
                             name: '#/1',
                             required: false
@@ -15961,9 +16007,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -15998,9 +16044,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -16023,9 +16069,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: false
@@ -16037,9 +16083,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -16093,9 +16139,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       one: {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       two: {
@@ -16133,9 +16179,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               one: {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               two: {
@@ -16161,9 +16207,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/one',
                                   required: true
@@ -16175,9 +16221,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -16319,9 +16365,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       }
                     ]
@@ -16348,9 +16394,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               }
                             ]
@@ -16368,9 +16414,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -16380,9 +16426,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/0',
                                   required: false
@@ -16559,9 +16605,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                       {
                         type: 'string',
                         enum: [
-                          'mock array type index string type (1)',
-                          'mock array type index string type (2)',
-                          'mock array type index string type (3)'
+                          'array type index string type (1)',
+                          'array type index string type (2)',
+                          'array type index string type (3)'
                         ]
                       },
                       {
@@ -16604,9 +16650,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               {
                                 type: 'string',
                                 enum: [
-                                  'mock array type index string type (1)',
-                                  'mock array type index string type (2)',
-                                  'mock array type index string type (3)'
+                                  'array type index string type (1)',
+                                  'array type index string type (2)',
+                                  'array type index string type (3)'
                                 ]
                               },
                               {
@@ -16660,9 +16706,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                                 rootSchema: schema,
                                 schema: {
                                   enum: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   type: 'string'
                                 },
@@ -16672,9 +16718,9 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                               elements: {
                                 enum: {
                                   items: [
-                                    'mock array type index string type (1)',
-                                    'mock array type index string type (2)',
-                                    'mock array type index string type (3)'
+                                    'array type index string type (1)',
+                                    'array type index string type (2)',
+                                    'array type index string type (3)'
                                   ],
                                   name: '#/0/1',
                                   required: false
@@ -16991,7 +17037,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                   },
                   {
                     type: 'string',
-                    enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                    enum: ['string (1)', 'string (2)', 'string (3)']
                   },
                   {
                     type: 'boolean',
@@ -17039,7 +17085,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock string (1)', 'mock string (2)', 'mock string (3)']
+                            enum: ['string (1)', 'string (2)', 'string (3)']
                           },
                           rootSchema: schema,
                           uri: '#/1',
@@ -17047,7 +17093,7 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                         },
                         elements: {
                           enum: {
-                            items: ['mock string (1)', 'mock string (2)', 'mock string (3)'],
+                            items: ['string (1)', 'string (2)', 'string (3)'],
                             name: '#/1',
                             required: false
                           }
@@ -18438,8 +18484,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 }
               }
 
@@ -18459,14 +18505,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/one'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: false
                           }
@@ -18479,14 +18525,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           type: 'string',
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           rootSchema: schema,
                           uri: '#/two'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false
                           }
@@ -18501,8 +18547,8 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
               const schema = {
                 type: 'object',
                 properties: {
-                  one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-                  two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+                  one: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] },
+                  two: { type: 'string', enum: ['object type key string (1)', 'object type key string (2)'] }
                 },
                 required: [
                   'one'
@@ -18525,14 +18571,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/one'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/one',
                             required: true
                           }
@@ -18545,14 +18591,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           rootSchema: schema,
                           schema: {
                             type: 'string',
-                            enum: ['mock object type key string (1)', 'mock object type key string (2)']
+                            enum: ['object type key string (1)', 'object type key string (2)']
                           },
                           type: 'string',
                           uri: '#/two'
                         },
                         elements: {
                           enum: {
-                            items: ['mock object type key string (1)', 'mock object type key string (2)'],
+                            items: ['object type key string (1)', 'object type key string (2)'],
                             name: '#/two',
                             required: false
                           }
@@ -18738,7 +18784,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -18747,14 +18792,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -18765,14 +18810,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -18783,18 +18828,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -18814,7 +18860,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -18823,14 +18868,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 0,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       },
@@ -18841,14 +18886,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: false },
                           item: 1,
                           required: false,
-                          defaultValue: false,
+                          defaultValue: 'false',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: false
+                            value: 'false'
                           }
                         }
                       },
@@ -18859,18 +18904,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: true },
                           item: 2,
                           required: false,
-                          defaultValue: true,
+                          defaultValue: 'true',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: true
+                            value: 'true'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -18933,7 +18979,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   anyOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -18942,14 +18987,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -18960,14 +19005,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -18978,18 +19023,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
@@ -19009,7 +19055,6 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                 },
                 elements: {
                   oneOf: {
-                    name: '#/',
                     items: [
                       {
                         meta: {
@@ -19018,14 +19063,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 0,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -19036,14 +19081,14 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 1,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       },
@@ -19054,18 +19099,19 @@ describe('shinkansen-transmission/transmission/from-schema', () => {
                           schema: { default: null },
                           item: 2,
                           required: false,
-                          defaultValue: null,
+                          defaultValue: 'null',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: null
+                            value: 'null'
                           }
                         }
                       }
-                    ]
+                    ],
+                    name: '#/'
                   }
                 }
               })
