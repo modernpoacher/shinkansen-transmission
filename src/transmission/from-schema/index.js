@@ -43,6 +43,11 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, fieldKey)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -56,14 +61,14 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
       rootSchema,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
@@ -83,14 +88,14 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
         rootSchema,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -112,14 +117,14 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           rootSchema,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -139,12 +144,12 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             required: isRequired,
             ...getElementsFieldValue(values, uri, schema),
@@ -172,6 +177,11 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
 
   const uri = getUri(parentUri, fieldKey)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -185,14 +195,14 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
       rootSchema,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
@@ -212,14 +222,14 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         rootSchema,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -241,14 +251,14 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
           rootSchema,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -268,12 +278,12 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             required: isRequired,
             ...getElementsFieldValue(values, uri, schema),
@@ -301,6 +311,14 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
 
   const uri = getUri(parentUri, fieldKey)
 
+  const maxProperties = getMaxProperties(schema)
+  const minProperties = getMinProperties(schema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -312,18 +330,18 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       type: 'object',
       schema,
       rootSchema,
-      ...getMaxProperties(schema),
-      ...getMinProperties(schema),
+      ...maxProperties,
+      ...minProperties,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
@@ -341,18 +359,18 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         type: 'object',
         schema,
         rootSchema,
-        ...getMaxProperties(schema),
-        ...getMinProperties(schema),
+        ...maxProperties,
+        ...minProperties,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -372,18 +390,18 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           type: 'object',
           schema,
           rootSchema,
-          ...getMaxProperties(schema),
-          ...getMinProperties(schema),
+          ...maxProperties,
+          ...minProperties,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -405,17 +423,17 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           type: 'object',
           schema,
           rootSchema,
-          ...getMaxProperties(schema),
-          ...getMinProperties(schema),
+          ...maxProperties,
+          ...minProperties,
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           fields: (
             Object
               .entries(properties)
@@ -444,6 +462,17 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
 
   const uri = getUri(parentUri, fieldKey)
 
+  const minItems = getMinItems(schema)
+  const maxItems = getMaxItems(schema)
+  const hasUniqueItems = getHasUniqueItems(schema)
+  const maxContains = getMaxContains(schema)
+  const minContains = getMinContains(schema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -455,21 +484,21 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
       type: 'array',
       schema,
       rootSchema,
-      ...getMinItems(schema),
-      ...getMaxItems(schema),
-      ...getHasUniqueItems(schema),
-      ...getMaxContains(schema),
-      ...getMinContains(schema),
+      ...minItems,
+      ...maxItems,
+      ...hasUniqueItems,
+      ...maxContains,
+      ...minContains,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...selectedIndex,
@@ -486,21 +515,21 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         type: 'array',
         schema,
         rootSchema,
-        ...getMinItems(schema),
-        ...getMaxItems(schema),
-        ...getHasUniqueItems(schema),
-        ...getMaxContains(schema),
-        ...getMinContains(schema),
+        ...minItems,
+        ...maxItems,
+        ...hasUniqueItems,
+        ...maxContains,
+        ...minContains,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -520,21 +549,21 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           type: 'array',
           schema,
           rootSchema,
-          ...getMinItems(schema),
-          ...getMaxItems(schema),
-          ...getHasUniqueItems(schema),
-          ...getMaxContains(schema),
-          ...getMinContains(schema),
+          ...minItems,
+          ...maxItems,
+          ...hasUniqueItems,
+          ...maxContains,
+          ...minContains,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -551,15 +580,15 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           type: 'array',
           schema,
           rootSchema,
-          ...getMinItems(schema),
-          ...getMaxItems(schema),
-          ...getHasUniqueItems(schema),
-          ...getMaxContains(schema),
-          ...getMinContains(schema),
+          ...minItems,
+          ...maxItems,
+          ...hasUniqueItems,
+          ...maxContains,
+          ...minContains,
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const {
@@ -573,8 +602,8 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           ), [])
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           fields
         }
       }
@@ -601,6 +630,11 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
   const maxLength = getMaxLength(schema)
   const pattern = getPattern(schema)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -617,14 +651,14 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
       ...pattern,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...minLength,
@@ -650,14 +684,14 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...pattern,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -685,14 +719,14 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...pattern,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -718,12 +752,12 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             ...minLength,
             ...maxLength,
@@ -758,6 +792,13 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
   const max = getMax(schema)
   const step = getStep(schema)
 
+  const isExclusiveMin = getIsExclusiveMin(schema)
+  const isExclusiveMax = getIsExclusiveMax(schema)
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -769,21 +810,21 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
       type: 'number',
       schema,
       rootSchema,
-      ...getIsExclusiveMin(schema),
-      ...getIsExclusiveMax(schema),
+      ...isExclusiveMin,
+      ...isExclusiveMax,
       ...min,
       ...max,
       ...step,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...min,
@@ -804,21 +845,21 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         type: 'number',
         schema,
         rootSchema,
-        ...getIsExclusiveMin(schema),
-        ...getIsExclusiveMax(schema),
+        ...isExclusiveMin,
+        ...isExclusiveMax,
         ...min,
         ...max,
         ...step,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
@@ -841,21 +882,21 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           type: 'number',
           schema,
           rootSchema,
-          ...getIsExclusiveMin(schema),
-          ...getIsExclusiveMax(schema),
+          ...isExclusiveMin,
+          ...isExclusiveMax,
           ...min,
           ...max,
           ...step,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
@@ -875,20 +916,20 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           type: 'number',
           schema,
           rootSchema,
-          ...getIsExclusiveMin(schema),
-          ...getIsExclusiveMax(schema),
+          ...isExclusiveMin,
+          ...isExclusiveMax,
           ...min,
           ...max,
           ...step,
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             ...min,
             ...max,
@@ -947,6 +988,11 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, arrayIndex)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -960,14 +1006,14 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
       rootSchema,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
@@ -987,14 +1033,14 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
         rootSchema,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1016,14 +1062,14 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           rootSchema,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1043,12 +1089,12 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             required: isRequired,
             ...getElementsFieldValue(values, uri, schema),
@@ -1076,6 +1122,11 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
 
   const uri = getUri(parentUri, arrayIndex)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -1089,14 +1140,14 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
       rootSchema,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
@@ -1116,14 +1167,14 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         rootSchema,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1145,14 +1196,14 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
           rootSchema,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1172,12 +1223,12 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             required: isRequired,
             ...getElementsFieldValue(values, uri, schema),
@@ -1205,31 +1256,41 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
 
   const uri = getUri(parentUri, arrayIndex)
 
+  const maxProperties = getMaxProperties(schema)
+  const minProperties = getMinProperties(schema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
+    const selectedIndex = getSelectedIndex(values, uri)
+
     meta = {
       uri,
       item: arrayIndex,
       type: 'object',
       schema,
       rootSchema,
-      ...getMaxProperties(schema),
-      ...getMinProperties(schema),
+      ...maxProperties,
+      ...minProperties,
       required: isRequired,
-      ...getSelectedIndex(values, uri),
-      ...getMetaProps(params, uri)
+      ...selectedIndex,
+      ...metaProps
     }
 
     const items = getEnum(schema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
-        ...getSelectedIndex(values, uri),
+        ...selectedIndex,
         name: uri
       }
     }
@@ -1243,18 +1304,18 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         type: 'object',
         schema,
         rootSchema,
-        ...getMaxProperties(schema),
-        ...getMinProperties(schema),
+        ...maxProperties,
+        ...minProperties,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
@@ -1274,18 +1335,18 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
           type: 'object',
           schema,
           rootSchema,
-          ...getMaxProperties(schema),
-          ...getMinProperties(schema),
+          ...maxProperties,
+          ...minProperties,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
@@ -1302,12 +1363,12 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
           type: 'object',
           schema,
           rootSchema,
-          ...getMaxProperties(schema),
-          ...getMinProperties(schema),
+          ...maxProperties,
+          ...minProperties,
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const {
@@ -1316,8 +1377,8 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         } = schema
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           fields: (
             Object
               .entries(properties)
@@ -1346,6 +1407,17 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, arrayIndex)
 
+  const minItems = getMinItems(schema)
+  const maxItems = getMaxItems(schema)
+  const hasUniqueItems = getHasUniqueItems(schema)
+  const maxContains = getMaxContains(schema)
+  const minContains = getMinContains(schema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -1357,21 +1429,21 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
       type: 'array',
       schema,
       rootSchema,
-      ...getMinItems(schema),
-      ...getMaxItems(schema),
-      ...getHasUniqueItems(schema),
-      ...getMaxContains(schema),
-      ...getMinContains(schema),
+      ...minItems,
+      ...maxItems,
+      ...hasUniqueItems,
+      ...maxContains,
+      ...minContains,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         required: isRequired,
@@ -1389,21 +1461,21 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         type: 'array',
         schema,
         rootSchema,
-        ...getMinItems(schema),
-        ...getMaxItems(schema),
-        ...getHasUniqueItems(schema),
-        ...getMaxContains(schema),
-        ...getMinContains(schema),
+        ...minItems,
+        ...maxItems,
+        ...hasUniqueItems,
+        ...maxContains,
+        ...minContains,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1423,21 +1495,21 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           type: 'array',
           schema,
           rootSchema,
-          ...getMinItems(schema),
-          ...getMaxItems(schema),
-          ...getHasUniqueItems(schema),
-          ...getMaxContains(schema),
-          ...getMinContains(schema),
+          ...minItems,
+          ...maxItems,
+          ...hasUniqueItems,
+          ...maxContains,
+          ...minContains,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1454,15 +1526,15 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           type: 'array',
           schema,
           rootSchema,
-          ...getMinItems(schema),
-          ...getMaxItems(schema),
-          ...getHasUniqueItems(schema),
-          ...getMaxContains(schema),
-          ...getMinContains(schema),
+          ...minItems,
+          ...maxItems,
+          ...hasUniqueItems,
+          ...maxContains,
+          ...minContains,
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const {
@@ -1476,8 +1548,8 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           ), [])
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           fields
         }
       }
@@ -1504,6 +1576,11 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
   const maxLength = getMaxLength(schema)
   const pattern = getPattern(schema)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
   let meta
   let elements
   if (hasEnum(schema)) {
@@ -1520,14 +1597,14 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
       ...pattern,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...minLength,
@@ -1553,14 +1630,14 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
         ...pattern,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1588,14 +1665,14 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           ...pattern,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1621,12 +1698,12 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             ...minLength,
             ...maxLength,
@@ -1657,9 +1734,17 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
 
   const uri = getUri(parentUri, arrayIndex)
 
+  const isExclusiveMin = getIsExclusiveMin(schema)
+  const isExclusiveMax = getIsExclusiveMax(schema)
+
   const min = getMin(schema)
   const max = getMax(schema)
   const step = getStep(schema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
 
   let meta
   let elements
@@ -1672,21 +1757,21 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
       type: 'number',
       schema,
       rootSchema,
-      ...getIsExclusiveMin(schema),
-      ...getIsExclusiveMax(schema),
+      ...isExclusiveMin,
+      ...isExclusiveMax,
       ...min,
       ...max,
       ...step,
       required: isRequired,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(schema)
 
     elements = {
-      ...getTitle(schema),
-      ...getDescription(schema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...min,
@@ -1707,21 +1792,21 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
         type: 'number',
         schema,
         rootSchema,
-        ...getIsExclusiveMin(schema),
-        ...getIsExclusiveMax(schema),
+        ...isExclusiveMin,
+        ...isExclusiveMax,
         ...min,
         ...max,
         ...step,
         required: isRequired,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(schema)
 
       elements = {
-        ...getTitle(schema),
-        ...getDescription(schema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1744,21 +1829,21 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           type: 'number',
           schema,
           rootSchema,
-          ...getIsExclusiveMin(schema),
-          ...getIsExclusiveMax(schema),
+          ...isExclusiveMin,
+          ...isExclusiveMax,
           ...min,
           ...max,
           ...step,
           required: isRequired,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(schema)
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
@@ -1778,20 +1863,20 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           type: 'number',
           schema,
           rootSchema,
-          ...getIsExclusiveMin(schema),
-          ...getIsExclusiveMax(schema),
+          ...isExclusiveMin,
+          ...isExclusiveMax,
           ...min,
           ...max,
           ...step,
           required: isRequired,
           ...getDefaultValue(schema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(schema),
-          ...getDescription(schema),
+          ...title,
+          ...description,
           field: {
             ...min,
             ...max,
@@ -1844,6 +1929,11 @@ export function transformArraySchema (schema = {}, rootSchema = schema, values =
 export function transformNull (rootSchema, values, params) {
   const uri = getUri()
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
+
   let meta
   let elements
   if (hasEnum(rootSchema)) {
@@ -1854,14 +1944,14 @@ export function transformNull (rootSchema, values, params) {
       type: 'null',
       schema: rootSchema,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(rootSchema)
 
     elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...selectedIndex,
@@ -1877,14 +1967,14 @@ export function transformNull (rootSchema, values, params) {
         type: 'null',
         schema: rootSchema,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(rootSchema)
 
       elements = {
-        ...getTitle(rootSchema),
-        ...getDescription(rootSchema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
@@ -1902,14 +1992,14 @@ export function transformNull (rootSchema, values, params) {
           type: 'null',
           schema: rootSchema,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(rootSchema)
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
@@ -1925,12 +2015,12 @@ export function transformNull (rootSchema, values, params) {
           schema: rootSchema,
           ...getDefaultValue(rootSchema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           field: {
             ...getElementsFieldValue(values, uri, rootSchema),
             ...getElementsFieldProps(params, uri),
@@ -1951,6 +2041,11 @@ export function transformNull (rootSchema, values, params) {
 export function transformBoolean (rootSchema, values, params) {
   const uri = getUri()
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
+
   let meta
   let elements
   if (hasEnum(rootSchema)) {
@@ -1961,14 +2056,14 @@ export function transformBoolean (rootSchema, values, params) {
       type: 'boolean',
       schema: rootSchema,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(rootSchema)
 
     elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...selectedIndex,
@@ -1984,14 +2079,14 @@ export function transformBoolean (rootSchema, values, params) {
         type: 'boolean',
         schema: rootSchema,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(rootSchema)
 
       elements = {
-        ...getTitle(rootSchema),
-        ...getDescription(rootSchema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
@@ -2009,14 +2104,14 @@ export function transformBoolean (rootSchema, values, params) {
           type: 'boolean',
           schema: rootSchema,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(rootSchema)
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
@@ -2032,12 +2127,12 @@ export function transformBoolean (rootSchema, values, params) {
           schema: rootSchema,
           ...getDefaultValue(rootSchema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           field: {
             ...getElementsFieldValue(values, uri, rootSchema),
             ...getElementsFieldProps(params, uri),
@@ -2058,6 +2153,11 @@ export function transformBoolean (rootSchema, values, params) {
 export function transformObject (rootSchema, values, params) {
   const uri = getUri()
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
+
   let meta
   let elements
   if (hasEnum(rootSchema)) {
@@ -2068,14 +2168,14 @@ export function transformObject (rootSchema, values, params) {
       type: 'object',
       schema: rootSchema,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(rootSchema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...selectedIndex,
@@ -2091,14 +2191,14 @@ export function transformObject (rootSchema, values, params) {
         type: 'object',
         schema: rootSchema,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(rootSchema)
 
       elements = {
-        ...getTitle(rootSchema),
-        ...getDescription(rootSchema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
@@ -2116,14 +2216,14 @@ export function transformObject (rootSchema, values, params) {
           type: 'object',
           schema: rootSchema,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(rootSchema)
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
@@ -2139,7 +2239,7 @@ export function transformObject (rootSchema, values, params) {
           schema: rootSchema,
           ...getDefaultValue(rootSchema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const {
@@ -2148,8 +2248,8 @@ export function transformObject (rootSchema, values, params) {
         } = rootSchema
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           fields: (
             Object
               .entries(properties)
@@ -2172,6 +2272,17 @@ export function transformObject (rootSchema, values, params) {
 export function transformArray (rootSchema, values, params) {
   const uri = getUri()
 
+  const minItems = getMinItems(rootSchema)
+  const maxItems = getMaxItems(rootSchema)
+  const hasUniqueItems = getHasUniqueItems(rootSchema)
+  const maxContains = getMaxContains(rootSchema)
+  const minContains = getMinContains(rootSchema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
+
   let meta
   let elements
   if (hasEnum(rootSchema)) {
@@ -2181,15 +2292,20 @@ export function transformArray (rootSchema, values, params) {
       uri,
       type: 'array',
       schema: rootSchema,
+      ...minItems,
+      ...maxItems,
+      ...hasUniqueItems,
+      ...maxContains,
+      ...minContains,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(rootSchema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...selectedIndex,
@@ -2204,20 +2320,20 @@ export function transformArray (rootSchema, values, params) {
         uri,
         type: 'array',
         schema: rootSchema,
-        ...getMinItems(rootSchema),
-        ...getMaxItems(rootSchema),
-        ...getHasUniqueItems(rootSchema),
-        ...getMaxContains(rootSchema),
-        ...getMinContains(rootSchema),
+        ...minItems,
+        ...maxItems,
+        ...hasUniqueItems,
+        ...maxContains,
+        ...minContains,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(rootSchema)
 
       elements = {
-        ...getTitle(rootSchema),
-        ...getDescription(rootSchema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
@@ -2234,20 +2350,20 @@ export function transformArray (rootSchema, values, params) {
           uri,
           type: 'array',
           schema: rootSchema,
-          ...getMinItems(rootSchema),
-          ...getMaxItems(rootSchema),
-          ...getHasUniqueItems(rootSchema),
-          ...getMaxContains(rootSchema),
-          ...getMinContains(rootSchema),
+          ...minItems,
+          ...maxItems,
+          ...hasUniqueItems,
+          ...maxContains,
+          ...minContains,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(rootSchema)
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
@@ -2261,14 +2377,14 @@ export function transformArray (rootSchema, values, params) {
           uri,
           type: 'array',
           schema: rootSchema,
-          ...getMinItems(rootSchema),
-          ...getMaxItems(rootSchema),
-          ...getHasUniqueItems(rootSchema),
-          ...getMaxContains(rootSchema),
-          ...getMinContains(rootSchema),
+          ...minItems,
+          ...maxItems,
+          ...hasUniqueItems,
+          ...maxContains,
+          ...minContains,
           ...getDefaultValue(rootSchema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const {
@@ -2282,8 +2398,8 @@ export function transformArray (rootSchema, values, params) {
           ), [])
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           fields
         }
       }
@@ -2304,6 +2420,11 @@ export function transformString (rootSchema, values, params) {
   const maxLength = getMaxLength(rootSchema)
   const pattern = getPattern(rootSchema)
 
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
+
   let meta
   let elements
   if (hasEnum(rootSchema)) {
@@ -2317,14 +2438,14 @@ export function transformString (rootSchema, values, params) {
       ...maxLength,
       ...pattern,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(rootSchema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...minLength,
@@ -2346,14 +2467,14 @@ export function transformString (rootSchema, values, params) {
         ...maxLength,
         ...pattern,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(rootSchema)
 
       elements = {
-        ...getTitle(rootSchema),
-        ...getDescription(rootSchema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
@@ -2374,14 +2495,14 @@ export function transformString (rootSchema, values, params) {
           ...maxLength,
           ...pattern,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(rootSchema)
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
@@ -2400,12 +2521,12 @@ export function transformString (rootSchema, values, params) {
           ...pattern,
           ...getDefaultValue(rootSchema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           field: {
             ...minLength,
             ...maxLength,
@@ -2428,9 +2549,18 @@ export function transformString (rootSchema, values, params) {
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
   const uri = getUri()
+
+  const isExclusiveMin = getIsExclusiveMin(rootSchema)
+  const isExclusiveMax = getIsExclusiveMax(rootSchema)
+
   const min = getMin(rootSchema)
   const max = getMax(rootSchema)
   const step = getStep(rootSchema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
 
   let meta
   let elements
@@ -2441,20 +2571,20 @@ export function transformNumber (rootSchema, values, params) {
       uri,
       type: 'number',
       schema: rootSchema,
-      ...getIsExclusiveMin(rootSchema),
-      ...getIsExclusiveMax(rootSchema),
+      ...isExclusiveMin,
+      ...isExclusiveMax,
       ...min,
       ...max,
       ...step,
       ...selectedIndex,
-      ...getMetaProps(params, uri)
+      ...metaProps
     }
 
     const items = getEnum(rootSchema) // `enum` is a reserved word
 
     elements = {
-      ...getTitle(rootSchema),
-      ...getDescription(rootSchema),
+      ...title,
+      ...description,
       enum: {
         items,
         ...min,
@@ -2472,20 +2602,20 @@ export function transformNumber (rootSchema, values, params) {
         uri,
         type: 'number',
         schema: rootSchema,
-        ...getIsExclusiveMin(rootSchema),
-        ...getIsExclusiveMax(rootSchema),
+        ...isExclusiveMin,
+        ...isExclusiveMax,
         ...min,
         ...max,
         ...step,
         ...selected,
-        ...getMetaProps(params, uri)
+        ...metaProps
       }
 
       const items = getAnyOf(rootSchema)
 
       elements = {
-        ...getTitle(rootSchema),
-        ...getDescription(rootSchema),
+        ...title,
+        ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
             accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
@@ -2502,20 +2632,20 @@ export function transformNumber (rootSchema, values, params) {
           uri,
           type: 'number',
           schema: rootSchema,
-          ...getIsExclusiveMin(rootSchema),
-          ...getIsExclusiveMax(rootSchema),
+          ...isExclusiveMin,
+          ...isExclusiveMax,
           ...min,
           ...max,
           ...step,
           ...selected,
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         const items = getOneOf(rootSchema)
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
               accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
@@ -2529,19 +2659,19 @@ export function transformNumber (rootSchema, values, params) {
           uri,
           type: 'number',
           schema: rootSchema,
-          ...getIsExclusiveMin(rootSchema),
-          ...getIsExclusiveMax(rootSchema),
+          ...isExclusiveMin,
+          ...isExclusiveMax,
           ...min,
           ...max,
           ...step,
           ...getDefaultValue(rootSchema, uri),
           ...getValue(values, uri),
-          ...getMetaProps(params, uri)
+          ...metaProps
         }
 
         elements = {
-          ...getTitle(rootSchema),
-          ...getDescription(rootSchema),
+          ...title,
+          ...description,
           field: {
             ...min,
             ...max,
