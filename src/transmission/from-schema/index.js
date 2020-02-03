@@ -412,11 +412,6 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           }
         }
       } else {
-        const {
-          properties = {},
-          required = []
-        } = schema
-
         meta = {
           uri,
           name: fieldKey,
@@ -430,6 +425,11 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           ...getValue(values, uri),
           ...metaProps
         }
+
+        const {
+          properties = {},
+          required = []
+        } = schema
 
         elements = {
           ...title,
