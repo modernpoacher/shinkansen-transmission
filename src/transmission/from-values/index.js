@@ -28,8 +28,10 @@ export function toString (v) {
 export function toNumber (v) {
   if (typeof v === 'number') return v
 
-  const n = Number(v) // +v // unary operator
-  if (!isNaN(n)) return n
+  if (v) {
+    const n = Number(v) // +v // unary operator
+    if (!isNaN(n)) return n
+  }
 
   throw new Error('Invalid `number`')
 }
