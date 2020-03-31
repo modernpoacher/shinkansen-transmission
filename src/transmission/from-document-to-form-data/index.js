@@ -4,9 +4,9 @@ import {
   getUri
 } from 'shinkansen-transmission/transmission/common'
 
-export const isArray = (v) => Array.isArray(v)
-
 export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
+
+export const isArray = (v) => Array.isArray(v)
 
 export function getObject (schema, parentUri, uri) {
   const {
