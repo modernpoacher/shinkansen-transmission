@@ -28,11 +28,12 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run:
           name: Publish package
-          command: |
+          command:
             set -e
 
+            NAME=$(node -p "require('./package.json').name")
             VERSION=$(node -p "require('./package.json').version")
-            PUBLISHED_VERSION=$(npm view @ministryofjustice/fb-editor-node version);
+            PUBLISHED_VERSION=$(npm view $NAME version)
 
             if [ "$VERSION" != "$PUBLISHED_VERSION" ]
             then
