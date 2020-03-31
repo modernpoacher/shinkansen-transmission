@@ -58,19 +58,19 @@ export function getSchema (schema = {}, parentUri, uri) {
 export default function transform (document, schema = {}, values = {}, params = {}, parentUri = '#', uri = getUri(parentUri)) {
   if (isObject(document)) {
     return Object.entries(document)
-      .reduce((accumulator, [key, value]) => {
+      .reduce((values, [key, value]) => {
         const schemaUri = getUri(parentUri, key)
 
-        return transform(value, getSchema(schema, parentUri, schemaUri), accumulator, params, schemaUri, schemaUri)
+        return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
       }, values)
   }
 
   if (isArray(document)) {
     return document
-      .reduce((accumulator, value, index) => {
+      .reduce((values, value, index) => {
         const schemaUri = getUri(parentUri, index)
 
-        return transform(value, getSchema(schema, parentUri, schemaUri), accumulator, params, schemaUri, schemaUri)
+        return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
       }, values)
   }
 
