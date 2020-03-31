@@ -1,13 +1,13 @@
 import common from './transmission/common'
-import fromDocument from './transmission/from-document'
-import fromSchema from './transmission/from-schema'
-import fromValues from './transmission/from-values'
+import fromDocumentToFormData from './transmission/from-document-to-form-data'
+import fromFormDataToDocument from './transmission/from-form-data-to-document'
+import toZashiki from './transmission/to-zashiki'
 
 export default {
   transmission: {
     common,
-    fromDocument,
-    fromSchema,
+    fromDocumentToFormData,
+    fromFormDataToDocument,
     fromValues
   }
 }

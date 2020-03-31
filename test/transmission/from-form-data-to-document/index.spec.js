@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 
-import transform from 'shinkansen-transmission/transmission/from-values'
+import transform from 'shinkansen-transmission/transmission/from-form-data-to-document'
 
-describe('shinkansen-transmission/transmission/from-values', () => {
+describe('shinkansen-transmission/transmission/from-form-data-to-document', () => {
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')
