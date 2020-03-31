@@ -98,7 +98,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -127,7 +127,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -232,7 +232,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -261,7 +261,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -373,7 +373,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -404,7 +404,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -438,7 +438,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
             Object
               .entries(properties)
               .reduce((accumulator, [key, schema]) => (
-                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), uri, key }))
+                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
               ), [])
           )
         }
@@ -532,7 +532,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -566,7 +566,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -598,7 +598,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         const fields = []
           .concat(items)
           .reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), [])
 
         elements = {
@@ -694,7 +694,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           ...minLength,
           ...maxLength,
@@ -729,7 +729,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             ...minLength,
             ...maxLength,
@@ -862,7 +862,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri, index }))
           ), []),
           ...min,
           ...max,
@@ -899,7 +899,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri, index }))
             ), []),
             ...min,
             ...max,
@@ -1043,7 +1043,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -1072,7 +1072,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -1177,7 +1177,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -1206,7 +1206,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -1318,7 +1318,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
+            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -1349,7 +1349,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, uri, index }))
+              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -1383,7 +1383,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
             Object
               .entries(properties)
               .reduce((accumulator, [key, schema]) => (
-                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), uri, key }))
+                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
               ), [])
           )
         }
@@ -1478,7 +1478,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           required: isRequired,
           ...selected,
@@ -1512,7 +1512,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             required: isRequired,
             ...selected,
@@ -1544,7 +1544,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         const fields = []
           .concat(items)
           .reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, uri, index }))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri, index }))
           ), [])
 
         elements = {
@@ -1640,7 +1640,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           ...minLength,
           ...maxLength,
@@ -1675,7 +1675,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             ...minLength,
             ...maxLength,
@@ -1809,7 +1809,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
           ), []),
           ...min,
           ...max,
@@ -1846,7 +1846,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, uri, index }))
+              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
             ), []),
             ...min,
             ...max,
@@ -1927,7 +1927,10 @@ export function transformArraySchema (schema = {}, rootSchema = schema, values =
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (rootSchema, values, params) {
-  const uri = getUri()
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
 
   const metaProps = getMetaProps(params, uri)
 
@@ -1977,7 +1980,7 @@ export function transformNull (rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), []),
           ...selected,
           name: uri
@@ -2002,7 +2005,7 @@ export function transformNull (rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
             ), []),
             ...selected,
             name: uri
@@ -2039,7 +2042,10 @@ export function transformNull (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (rootSchema, values, params) {
-  const uri = getUri()
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
 
   const metaProps = getMetaProps(params, uri)
 
@@ -2089,7 +2095,7 @@ export function transformBoolean (rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), []),
           ...selected,
           name: uri
@@ -2114,7 +2120,7 @@ export function transformBoolean (rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
             ), []),
             ...selected,
             name: uri
@@ -2151,7 +2157,10 @@ export function transformBoolean (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (rootSchema, values, params) {
-  const uri = getUri()
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
 
   const metaProps = getMetaProps(params, uri)
 
@@ -2201,7 +2210,7 @@ export function transformObject (rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), []),
           ...selected,
           name: uri
@@ -2226,7 +2235,7 @@ export function transformObject (rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
             ), []),
             ...selected,
             name: uri
@@ -2254,7 +2263,7 @@ export function transformObject (rootSchema, values, params) {
             Object
               .entries(properties)
               .reduce((accumulator, [key, schema]) => (
-                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), key }))
+                accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri: parentUri, key }))
               ), [])
           )
         }
@@ -2270,7 +2279,10 @@ export function transformObject (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (rootSchema, values, params) {
-  const uri = getUri()
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
 
   const minItems = getMinItems(rootSchema)
   const maxItems = getMaxItems(rootSchema)
@@ -2336,7 +2348,7 @@ export function transformArray (rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), []),
           ...selected,
           name: uri
@@ -2366,7 +2378,7 @@ export function transformArray (rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
             ), []),
             ...selected,
             name: uri
@@ -2394,7 +2406,7 @@ export function transformArray (rootSchema, values, params) {
         const fields = []
           .concat(items)
           .reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), [])
 
         elements = {
@@ -2414,7 +2426,10 @@ export function transformArray (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (rootSchema, values, params) {
-  const uri = getUri()
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
 
   const minLength = getMinLength(rootSchema)
   const maxLength = getMaxLength(rootSchema)
@@ -2477,7 +2492,7 @@ export function transformString (rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), []),
           ...selected,
           name: uri
@@ -2505,7 +2520,7 @@ export function transformString (rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
             ), []),
             ...selected,
             name: uri
@@ -2548,7 +2563,10 @@ export function transformString (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
-  const uri = getUri()
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
 
   const isExclusiveMin = getIsExclusiveMin(rootSchema)
   const isExclusiveMax = getIsExclusiveMax(rootSchema)
@@ -2618,7 +2636,7 @@ export function transformNumber (rootSchema, values, params) {
         ...description,
         anyOf: {
           items: items.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
           ), []),
           ...selected,
           name: uri
@@ -2648,7 +2666,7 @@ export function transformNumber (rootSchema, values, params) {
           ...description,
           oneOf: {
             items: items.reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, index }))
+              accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
             ), []),
             ...selected,
             name: uri

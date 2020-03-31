@@ -22,7 +22,11 @@ describe('shinkansen-transmission/transmission/from-document', () => {
       booleanTypeSubSchema: true,
       nullTypeSubSchema: null,
       latitude: 84,
-      longitude: -90
+      longitude: -90,
+      array: [[[1]]],
+      object: {
+        a: { b: { c: 'D' } }
+      }
     }
 
     const schema = {
@@ -84,6 +88,42 @@ describe('shinkansen-transmission/transmission/from-document', () => {
           maximum: 180,
           exclusiveMinimum: true,
           exclusiveMaximum: true
+        },
+        array: {
+          type: 'array',
+          items: [
+            {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        object: {
+          type: 'object',
+          properties: {
+            a: {
+              type: 'object',
+              properties: {
+                b: {
+                  type: 'object',
+                  properties: {
+                    c: {
+                      type: 'string'
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -98,7 +138,9 @@ describe('shinkansen-transmission/transmission/from-document', () => {
         '#/booleanTypeSubSchema': 'true',
         '#/nullTypeSubSchema': 'null',
         '#/latitude': '84',
-        '#/longitude': '-90'
+        '#/longitude': '-90',
+        '#/array/0/0/0': '1',
+        '#/object/a/b/c': 'D'
       })
   })
 

@@ -426,7 +426,7 @@ describe('shinkansen-transmission/transmission/common', () => {
     describe('A `uri` is not defined', () => {
       it('returns a string', () => {
         expect(getUri())
-          .to.equal('#/')
+          .to.equal('/')
       })
     })
   })

@@ -132,7 +132,7 @@ export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
 export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
 
-export const getUri = (uri = '#/', resource = '') => (uri === '#/' ? uri : uri.concat('/')).concat(resource)
+export const getUri = (uri = '', resource = '') => uri.concat('/').concat(resource)
 
 export const getMin = ({ minimum } = {}) => {
   const value = Number(minimum)

@@ -37,22 +37,22 @@ export function toNumber (v) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export const transformObjectSchemaNull = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNull(schema, values, uri)
+export const transformObjectSchemaNull = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNull(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export const transformObjectSchemaBoolean = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformBoolean(schema, values, uri)
+export const transformObjectSchemaBoolean = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformBoolean(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export const transformObjectSchemaObject = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformObject(schema, values, uri)
+export const transformObjectSchemaObject = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformObject(schema, values, uri, uri) // uri is parentUri and uri
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export const transformObjectSchemaArray = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformArray(schema, values, uri)
+export const transformObjectSchemaArray = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformArray(schema, values, uri, uri) // uri is parentUri and uri
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export const transformObjectSchemaString = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformString(schema, values, uri)
+export const transformObjectSchemaString = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformString(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export const transformObjectSchemaNumber = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNumber(schema, values, uri)
+export const transformObjectSchemaNumber = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNumber(schema, values, parentUri, uri)
 
 export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
@@ -83,22 +83,22 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export const transformArraySchemaNull = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNull(schema, values, uri)
+export const transformArraySchemaNull = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNull(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
-export const transformArraySchemaBoolean = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformBoolean(schema, values, uri)
+export const transformArraySchemaBoolean = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformBoolean(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export const transformArraySchemaObject = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformObject(schema, values, uri)
+export const transformArraySchemaObject = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformObject(schema, values, uri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
-export const transformArraySchemaArray = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformArray(schema, values, uri)
+export const transformArraySchemaArray = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformArray(schema, values, uri, uri) // uri is parentUri and uri
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export const transformArraySchemaString = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformString(schema, values, uri)
+export const transformArraySchemaString = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformString(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export const transformArraySchemaNumber = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNumber(schema, values, uri)
+export const transformArraySchemaNumber = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNumber(schema, values, parentUri, uri)
 
 export function transformArraySchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
@@ -128,7 +128,7 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
   }
 }
 
-export function transformNull (schema, values, uri = getUri()) {
+export function transformNull (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -143,7 +143,7 @@ export function transformNull (schema, values, uri = getUri()) {
   }
 }
 
-export function transformBoolean (schema, values, uri = getUri()) {
+export function transformBoolean (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -158,15 +158,15 @@ export function transformBoolean (schema, values, uri = getUri()) {
   }
 }
 
-export function transformObject ({ properties = {} }, values, uri = getUri()) {
+export function transformObject ({ properties = {} }, values, parentUri, uri) {
   return (
     Object
       .entries(properties)
-      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri, key }) }), {})
+      .reduce((accumulator, [key, schema]) => ({ ...accumulator, [key]: transformObjectSchema(schema, values, { uri: parentUri, key }) }), {})
   )
 }
 
-export function transformArray ({ items = [] /* array or object */ }, values, uri = getUri()) {
+export function transformArray ({ items = [] /* array or object */ }, values, parentUri, uri) {
   return (
     Object
       .keys(values)
@@ -177,7 +177,8 @@ export function transformArray ({ items = [] /* array or object */ }, values, ur
 
         if (!isNaN(index)) {
           const schema = Array.isArray(items) ? items[index] : items
-          accumulator[index] = transformArraySchema(schema, values, { uri, index })
+
+          accumulator[index] = transformArraySchema(schema, values, { uri: parentUri, index })
         }
 
         return accumulator
@@ -185,7 +186,7 @@ export function transformArray ({ items = [] /* array or object */ }, values, ur
   )
 }
 
-export function transformString (schema, values, uri = getUri()) {
+export function transformString (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -200,7 +201,7 @@ export function transformString (schema, values, uri = getUri()) {
   }
 }
 
-export function transformNumber (schema, values, uri = getUri()) {
+export function transformNumber (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
     if (hasEnum(schema)) {
       const items = getEnum(schema)
@@ -215,28 +216,28 @@ export function transformNumber (schema, values, uri = getUri()) {
   }
 }
 
-export default function transform (rootSchema = {}, values = {}) {
+export default function transform (rootSchema = {}, values = {}, parentUri = '#', uri = getUri(parentUri)) {
   const { type } = rootSchema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
     case 'null':
-      return transformNull(rootSchema, values)
+      return transformNull(rootSchema, values, parentUri, uri)
 
     case 'boolean':
-      return transformBoolean(rootSchema, values)
+      return transformBoolean(rootSchema, values, parentUri, uri)
 
     case 'object':
-      return transformObject(rootSchema, values)
+      return transformObject(rootSchema, values, parentUri, uri)
 
     case 'array':
-      return transformArray(rootSchema, values)
+      return transformArray(rootSchema, values, parentUri, uri)
 
     case 'number':
-      return transformNumber(rootSchema, values)
+      return transformNumber(rootSchema, values, parentUri, uri)
 
     case 'string':
-      return transformString(rootSchema, values)
+      return transformString(rootSchema, values, parentUri, uri)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')

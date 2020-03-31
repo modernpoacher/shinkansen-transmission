@@ -13,13 +13,16 @@ export function getObject (schema, uri, parentUri) {
     properties = {}
   } = schema
 
-  return Object
-    .entries(properties)
-    .reduce((accumulator, [key, schema]) => {
-      const schemaUri = getUri(parentUri, key)
-      if (uri === schemaUri) return schema
-      return accumulator
-    }, {})
+  return (
+    Reflect.get(properties, (
+      Object.keys(properties)
+        .find((key) => {
+          const schemaUri = getUri(parentUri, key)
+
+          return (uri === schemaUri)
+        })
+    ))
+  )
 }
 
 export function getArray (schema, uri, parentUri) {
@@ -27,13 +30,14 @@ export function getArray (schema, uri, parentUri) {
     items = [] // array or object
   } = schema
 
-  return []
-    .concat(items)
-    .reduce((accumulator, schema, index) => {
-      const schemaUri = getUri(parentUri, index)
-      if (uri === schemaUri) return schema
-      return accumulator
-    }, [])
+  return (
+    Array.from(items)
+      .find((schema, index) => {
+        const schemaUri = getUri(parentUri, index)
+
+        return (uri === schemaUri)
+      })
+  )
 }
 
 export function getSchema (schema = {}, uri, parentUri) {
@@ -51,22 +55,22 @@ export function getSchema (schema = {}, uri, parentUri) {
   }
 }
 
-export default function transform (document, schema = {}, values = {}, params = {}, uri = getUri(), parentUri = uri) {
+export default function transform (document, schema = {}, values = {}, params = {}, parentUri = '#', uri = getUri(parentUri)) {
   if (isObject(document)) {
     return Object.entries(document)
       .reduce((accumulator, [key, value]) => {
-        const schemaUri = getUri(uri, key)
+        const schemaUri = getUri(parentUri, key)
 
-        return transform(value, getSchema(schema, schemaUri, uri), accumulator, params, schemaUri, uri)
+        return transform(value, getSchema(schema, schemaUri, parentUri), accumulator, params, schemaUri, schemaUri)
       }, values)
   }
 
   if (isArray(document)) {
     return document
       .reduce((accumulator, value, index) => {
-        const schemaUri = getUri(uri, index)
+        const schemaUri = getUri(parentUri, index)
 
-        return transform(value, getSchema(schema, schemaUri, uri), accumulator, params, schemaUri, uri)
+        return transform(value, getSchema(schema, schemaUri, parentUri), accumulator, params, schemaUri, schemaUri)
       }, values)
   }
 
