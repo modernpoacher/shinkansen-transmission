@@ -8,7 +8,7 @@ export const isArray = (v) => Array.isArray(v)
 
 export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
-export function getObject (schema, uri, parentUri) {
+export function getObject (schema, parentUri, uri) {
   const {
     properties = {}
   } = schema
@@ -25,7 +25,7 @@ export function getObject (schema, uri, parentUri) {
   )
 }
 
-export function getArray (schema, uri, parentUri) {
+export function getArray (schema, parentUri, uri) {
   const {
     items = [] // array or object
   } = schema
@@ -40,15 +40,15 @@ export function getArray (schema, uri, parentUri) {
   )
 }
 
-export function getSchema (schema = {}, uri, parentUri) {
+export function getSchema (schema = {}, parentUri, uri) {
   const { type } = schema
 
   switch (type) {
     case 'object':
-      return getObject(schema, uri, parentUri)
+      return getObject(schema, parentUri, uri)
 
     case 'array':
-      return getArray(schema, uri, parentUri)
+      return getArray(schema, parentUri, uri)
 
     default:
       return schema
@@ -61,7 +61,7 @@ export default function transform (document, schema = {}, values = {}, params = 
       .reduce((accumulator, [key, value]) => {
         const schemaUri = getUri(parentUri, key)
 
-        return transform(value, getSchema(schema, schemaUri, parentUri), accumulator, params, schemaUri, schemaUri)
+        return transform(value, getSchema(schema, parentUri, schemaUri), accumulator, params, schemaUri, schemaUri)
       }, values)
   }
 
@@ -70,7 +70,7 @@ export default function transform (document, schema = {}, values = {}, params = 
       .reduce((accumulator, value, index) => {
         const schemaUri = getUri(parentUri, index)
 
-        return transform(value, getSchema(schema, schemaUri, parentUri), accumulator, params, schemaUri, schemaUri)
+        return transform(value, getSchema(schema, parentUri, schemaUri), accumulator, params, schemaUri, schemaUri)
       }, values)
   }
 
