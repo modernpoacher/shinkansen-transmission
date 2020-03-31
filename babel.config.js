@@ -14,6 +14,7 @@ module.exports = {
   ],
   plugins: [
     '@babel/proposal-export-default-from',
+    '@babel/proposal-export-namespace-from',
     [
       'module-resolver', {
         alias: {
