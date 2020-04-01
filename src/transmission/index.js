@@ -1,4 +1,4 @@
 export * as common from './common'
-export fromDocumentToFormData from './from-document-to-form-data'
-export fromFormDataToDocument from './from-form-data-to-document'
+export fromDocumentToHash from './from-document-to-hash'
+export fromHashToDocument from './from-hash-to-document'
 export toZashiki from './to-zashiki'

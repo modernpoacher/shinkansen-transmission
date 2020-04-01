@@ -1,4 +1,4 @@
 export * as common from './transmission/common'
-export fromDocumentToFormData from './transmission/from-document-to-form-data'
-export fromFormDataToDocument from './transmission/from-form-data-to-document'
+export fromDocumentToHash from './transmission/from-document-to-hash'
+export fromHashToDocument from './transmission/from-hash-to-document'
 export toZashiki from './transmission/to-zashiki'
