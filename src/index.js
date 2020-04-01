@@ -1,13 +1,4 @@
-import common from './transmission/common'
-import fromDocument from './transmission/from-document'
-import fromSchema from './transmission/from-schema'
-import fromValues from './transmission/from-values'
-
-export default {
-  transmission: {
-    common,
-    fromDocument,
-    fromSchema,
-    fromValues
-  }
-}
+export * as common from './transmission/common'
+export fromDocumentToHash from './transmission/from-document-to-hash'
+export fromHashToDocument from './transmission/from-hash-to-document'
+export toZashiki from './transmission/to-zashiki'

@@ -89,7 +89,7 @@ export const transformArraySchemaNull = (schema, values, { uri: parentUri, index
 export const transformArraySchemaBoolean = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformBoolean(schema, values, parentUri, uri)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
-export const transformArraySchemaObject = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformObject(schema, values, uri, uri)
+export const transformArraySchemaObject = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformObject(schema, values, uri, uri) // uri is parentUri and uri
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export const transformArraySchemaArray = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformArray(schema, values, uri, uri) // uri is parentUri and uri
@@ -158,7 +158,7 @@ export function transformBoolean (schema, values, parentUri, uri) {
   }
 }
 
-export function transformObject ({ properties = {} }, values, parentUri, uri) {
+export function transformObject ({ properties = {} /* object */ }, values, parentUri, uri) {
   return (
     Object
       .entries(properties)

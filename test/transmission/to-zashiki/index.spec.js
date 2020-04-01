@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 
-import transform from 'shinkansen-transmission/transmission/from-schema'
+import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
-describe('shinkansen-transmission/transmission/from-schema', () => {
+describe('shinkansen-transmission/transmission/to-zashiki', () => {
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')

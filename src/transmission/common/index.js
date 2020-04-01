@@ -16,7 +16,7 @@ export const getDefaultValue = (schema = {}) => {
   return {}
 }
 
-export const getValue = (values = {}, uri = getUri()) => {
+export const getValue = (values = {}, uri = '#') => {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -26,7 +26,7 @@ export const getValue = (values = {}, uri = getUri()) => {
   return {}
 }
 
-export const getSelectedIndex = (values = {}, uri = getUri()) => {
+export const getSelectedIndex = (values = {}, uri = '#') => {
   if (Reflect.has(values, uri)) {
     const index = Reflect.get(values, uri)
     const value = Number(index)
@@ -37,7 +37,7 @@ export const getSelectedIndex = (values = {}, uri = getUri()) => {
   return {}
 }
 
-export const getSelectedOneOf = (values = {}, uri = getUri()) => {
+export const getSelectedOneOf = (values = {}, uri = '#') => {
   if (Reflect.has(values, uri)) {
     const selected = Reflect.get(values, uri)
 
@@ -47,7 +47,7 @@ export const getSelectedOneOf = (values = {}, uri = getUri()) => {
   return {}
 }
 
-export const getSelectedAnyOf = (values = {}, uri = getUri()) => {
+export const getSelectedAnyOf = (values = {}, uri = '#') => {
   const selected = (
     Object
       .entries(values)
@@ -57,7 +57,7 @@ export const getSelectedAnyOf = (values = {}, uri = getUri()) => {
   return selected.length ? { selected } : {}
 }
 
-export const getMetaProps = (params = {}, uri = getUri()) => {
+export const getMetaProps = (params = {}, uri = '#') => {
   let meta
   if (Reflect.has(params, uri)) {
     ({
@@ -68,7 +68,7 @@ export const getMetaProps = (params = {}, uri = getUri()) => {
   return meta || {}
 }
 
-export const getElementsTitleProps = (params = {}, uri = getUri()) => {
+export const getElementsTitleProps = (params = {}, uri = '#') => {
   let title
   if (Reflect.has(params, uri)) {
     ({
@@ -81,7 +81,7 @@ export const getElementsTitleProps = (params = {}, uri = getUri()) => {
   return title || {}
 }
 
-export const getElementsDescriptionProps = (params = {}, uri = getUri()) => {
+export const getElementsDescriptionProps = (params = {}, uri = '#') => {
   let description
   if (Reflect.has(params, uri)) {
     ({
@@ -94,7 +94,7 @@ export const getElementsDescriptionProps = (params = {}, uri = getUri()) => {
   return description || {}
 }
 
-export const getElementsFieldProps = (params = {}, uri = getUri()) => {
+export const getElementsFieldProps = (params = {}, uri = '#') => {
   let field
   if (Reflect.has(params, uri)) {
     ({
@@ -107,7 +107,7 @@ export const getElementsFieldProps = (params = {}, uri = getUri()) => {
   return field || {}
 }
 
-export const getElementsFieldValue = (values = {}, uri = getUri(), schema) => {
+export const getElementsFieldValue = (values = {}, uri = '#', schema) => {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
