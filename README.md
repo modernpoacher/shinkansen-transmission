@@ -143,7 +143,7 @@ For applications accepting `POST` data.
 The transformer walks the `rootSchema` and maps fields in `values` to another structure, which it returns.
 
 - `rootSchema` is a JSON Schema
-- `values` is an object of form data
+- `values` is a hash of keys and values
 
 The return value is an object valid according to the Schema.
 
@@ -194,7 +194,7 @@ A hash.
   'company-publisher-firstName': 'Stan',
   'company-publisher-lastName': 'Lee',
   'company-publisher-age': '96',
-  'active': true
+  'active': 'true'
 }
 ```
 
@@ -297,6 +297,6 @@ A hash.
   'company-publisher-firstName': 'Stan',
   'company-publisher-lastName': 'Lee',
   'company-publisher-age': '96',
-  'active': true
+  'active': 'true'
 }
 ```
