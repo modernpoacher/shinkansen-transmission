@@ -1,15 +1,15 @@
-## `@modernpoacher/shinkansen-transmission`
+## `shinkansen-transmission`
 
 # Shinkansen Transmission
 
-*Shinkansen Transmission* transforms JSON Schemas into a description of a form for *Zashiki*.
+*Shinkansen Transmission* transforms JSON Schemas into a description of a form for *Zashiki Karakuri*.
 
 Your schema should have dereferenced `$ref` fields and any `allOf` fields merged _before_ it is transformed with *Shinkansen Transmission* (we recommend [json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser) and [json-schema-merge-allof](https://www.npmjs.com/package/json-schema-merge-allof)).
 
 ### Installation
 
 ```bash
-npm i -P @modernpoacher/shinkansen-transmission
+npm i -P shinkansen-transmission
 ```
 
 ### `toZashiki`
@@ -21,10 +21,12 @@ const zashiki = toZashiki(rootSchema, values, params)
 The transformer walks the `rootSchema` and maps fields in `values` and `params` to another structure, which it returns.
 
 - `rootSchema` is a JSON Schema
-- `values` is a document of values valid according to the Schema
+- `values` is a document valid according to the Schema
 - `params` are any other parameters for the transformer
 
-The return value is an object with the fields `meta` and `elements`. As you might expect, `meta` contains fields _about_ the Schema, while `elements` contains fields to be rendered as HTML. (*Transmission* doesn't express any opinion on what those elements _are_, but it does assume that a `field` will be rendered as a `<form />` element, or some component which behaves like one, for instance.)
+The return value is an object with the fields `meta` and `elements`. 
+
+As you might expect, `meta` contains fields _about_ the Schema, while `elements` contains fields to be rendered as HTML. (*Shinkansen Transmission* doesn't express any opinion on what those elements are to be, but assumes that a `field` will be rendered as an HTML `<form />` element or some component which behaves like one.)
 
 #### Transformed structure
 
@@ -63,8 +65,7 @@ The return value is an object with the fields `meta` and `elements`. As you migh
     schema: Object,
     rootSchema: Object,
     required: Boolean,
-    selectedIndex: Number,
-    value: /* Per `type` */
+    selectedIndex: Number
   },
   elements: {
     title: String,
@@ -90,15 +91,14 @@ The return value is an object with the fields `meta` and `elements`. As you migh
     schema: Object,
     rootSchema: Object,
     required: Boolean,
-    selected: Number,
-    value: /* Per `type` */,
+    selected: String,
   },
   elements: {
     title: String,
     description: String,
     oneOf: {
       required: Boolean,
-      selected: Number,
+      selected: Array /* of `String` */,
       items: Array,
       name: String
     }
@@ -118,7 +118,6 @@ The return value is an object with the fields `meta` and `elements`. As you migh
     rootSchema: Object,
     required: Boolean,
     selected: Number,
-    value: /* Per `type` */,
   },
   elements: {
     title: String,
