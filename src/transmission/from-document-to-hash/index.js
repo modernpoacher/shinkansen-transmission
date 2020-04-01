@@ -8,11 +8,7 @@ export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
 export const isArray = (v) => Array.isArray(v)
 
-export function getObject (schema, parentUri, uri) {
-  const {
-    properties = {}
-  } = schema
-
+export function getObject ({ properties = {} /* object */ }, parentUri, uri) {
   return (
     Reflect.get(properties, (
       Object.keys(properties)
@@ -25,11 +21,7 @@ export function getObject (schema, parentUri, uri) {
   )
 }
 
-export function getArray (schema, parentUri, uri) {
-  const {
-    items = [] // array or object
-  } = schema
-
+export function getArray ({ items = [] /* array or object */ }, parentUri, uri) {
   return (
     Array.from(items)
       .find((schema, index) => {

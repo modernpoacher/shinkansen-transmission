@@ -158,7 +158,7 @@ export function transformBoolean (schema, values, parentUri, uri) {
   }
 }
 
-export function transformObject ({ properties = {} }, values, parentUri, uri) {
+export function transformObject ({ properties = {} /* object */ }, values, parentUri, uri) {
   return (
     Object
       .entries(properties)
