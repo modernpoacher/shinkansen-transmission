@@ -4,7 +4,7 @@
 
 *Shinkansen Transmission* transforms JSON Schemas into a description of a form for *Zashiki Karakuri*.
 
-Your schema should have dereferenced `$ref` fields and any `allOf` fields merged _before_ it is transformed with *Shinkansen Transmission* (we recommend [json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser) and [json-schema-merge-allof](https://www.npmjs.com/package/json-schema-merge-allof)).
+Your schema should be dereferenced _before_ it is transformed with *Shinkansen Transmission* (we recommend [json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser)).
 
 ### Installation
 
@@ -24,7 +24,7 @@ The transformer walks the `rootSchema` and maps fields in `values` and `params` 
 - `values` is a document valid according to the Schema
 - `params` are any other parameters for the transformer
 
-The return value is an object with the fields `meta` and `elements`. 
+The return value is an object with the fields `meta` and `elements`.
 
 As you might expect, `meta` contains fields _about_ the Schema, while `elements` contains fields to be rendered as HTML. (*Shinkansen Transmission* doesn't express any opinion on what those elements are to be, but assumes that a `field` will be rendered as an HTML `<form />` element or some component which behaves like one.)
 
@@ -70,7 +70,7 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
   elements: {
     title: String,
     description: String,
-    oneOf: {
+    enum: {
       required: Boolean,
       selectedIndex: Number,
       items: Array,
@@ -91,14 +91,14 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     schema: Object,
     rootSchema: Object,
     required: Boolean,
-    selected: String,
+    selectedIndex: Number,
   },
   elements: {
     title: String,
     description: String,
-    oneOf: {
+    anyOf: {
       required: Boolean,
-      selected: Array /* of `String` */,
+      selectedIndex: Number,
       items: Array,
       name: String
     }
@@ -117,17 +117,59 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     schema: Object,
     rootSchema: Object,
     required: Boolean,
-    selected: Number,
+    selectedIndex: Number,
   },
   elements: {
     title: String,
     description: String,
     oneOf: {
       required: Boolean,
-      selected: Number,
+      selectedIndex: Number,
       items: Array,
       name: String
     }
+  }
+}
+```
+
+##### `allOf`
+
+- `array` or `object`
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    required: Boolean,
+  },
+  elements: {
+    title: String,
+    description: String,
+    fields: Array
+  }
+}
+```
+
+- Any other
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    required: Boolean,
+  },
+  elements: {
+    title: String,
+    description: String,
+    field: Object
   }
 }
 ```
