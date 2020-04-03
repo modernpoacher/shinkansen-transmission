@@ -37,26 +37,6 @@ export const getSelectedIndex = (values = {}, uri = '#') => {
   return {}
 }
 
-export const getSelectedOneOf = (values = {}, uri = '#') => {
-  if (Reflect.has(values, uri)) {
-    const selected = Reflect.get(values, uri)
-
-    return { selected: String(selected) }
-  }
-
-  return {}
-}
-
-export const getSelectedAnyOf = (values = {}, uri = '#') => {
-  const selected = (
-    Object
-      .entries(values)
-      .reduce((accumulator, [key, value]) => /^\d$.*/.test(key.slice(uri.length)) ? accumulator.concat(String(value)) : accumulator, [])
-  )
-
-  return selected.length ? { selected } : {}
-}
-
 export const getMetaProps = (params = {}, uri = '#') => {
   let meta
   if (Reflect.has(params, uri)) {
@@ -126,11 +106,14 @@ export const getElementsFieldValue = (values = {}, uri = '#', schema) => {
 export const hasEnum = (schema = {}) => Reflect.has(schema, 'enum')
 export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')
 
+export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
+export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
+
 export const hasOneOf = (schema = {}) => Reflect.has(schema, 'oneOf')
 export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 
-export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
-export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
+export const hasAllOf = (schema = {}) => Reflect.has(schema, 'allOf')
+export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
 export const getUri = (uri = '', resource = '') => uri.concat('/').concat(resource)
 

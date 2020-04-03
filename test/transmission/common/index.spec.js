@@ -8,6 +8,8 @@ import {
   getDefaultValue,
   hasEnum,
   getEnum,
+  hasAllOf,
+  getAllOf,
   hasOneOf,
   getOneOf,
   hasAnyOf,
@@ -337,6 +339,38 @@ describe('shinkansen-transmission/transmission/common', () => {
     describe('Schema does not have an `enum` field', () => {
       it('returns undefined', () => (
         expect(getEnum({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`hasAllOf()`', () => {
+    describe('Schema has an `allOf` field', () => {
+      it('returns true', () => (
+        expect(hasAllOf({ allOf: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `allOf` field', () => {
+      it('returns false', () => (
+        expect(hasAllOf({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getAllOf()`', () => {
+    describe('Schema has an `allOf` field', () => {
+      it('returns an array', () => {
+        expect(getAllOf({ allOf: [] }))
+          .to.eql([])
+      })
+    })
+
+    describe('Schema does not have an `allOf` field', () => {
+      it('returns undefined', () => (
+        expect(getAllOf({}))
           .to.be.undefined
       ))
     })

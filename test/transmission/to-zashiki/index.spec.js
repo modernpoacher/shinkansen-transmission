@@ -419,8 +419,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
 
             const values = {
-              '#/0': '1',
-              '#/1': '2'
+              '#/': '2'
             }
 
             const params = {
@@ -433,7 +432,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  selected: ['1', '2'],
+                  selectedIndex: 2,
                   component: 'number component'
                 },
                 elements: {
@@ -447,7 +446,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: '1',
-                          value: '1',
                           uri: '#/0'
                         },
                         elements: {
@@ -466,7 +464,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: '2',
-                          value: '2',
                           uri: '#/1'
                         },
                         elements: {
@@ -497,7 +494,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['1', '2']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -509,7 +506,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'number', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
 
             const values = {
-              '#/': '1'
+              '#/': '2'
             }
 
             const params = {
@@ -522,7 +519,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  selected: '1',
+                  selectedIndex: 2,
                   component: 'number component'
                 },
                 elements: {
@@ -584,14 +581,46 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: '1'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { default: 2 }, { maximum: 3 }] }
+
+            const values = {
+              '#/': '1'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  defaultValue: '2',
+                  value: '1',
+                  component: 'number component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '1'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -661,8 +690,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'string', anyOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/0': 'string (1)',
-              '#/1': 'string (2)'
+              '#/': '2'
             }
 
             const params = {
@@ -675,7 +703,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  selected: ['string (1)', 'string (2)'],
+                  selectedIndex: 2,
                   component: 'string component'
                 },
                 elements: {
@@ -689,7 +717,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: 'string (1)',
-                          value: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
@@ -708,7 +735,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: 'string (2)',
-                          value: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
@@ -739,7 +765,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['string (1)', 'string (2)']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -751,7 +777,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'string', oneOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/': 'string (1)'
+              '#/': '2'
             }
 
             const params = {
@@ -764,7 +790,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  selected: 'string (1)',
+                  selectedIndex: 2,
                   component: 'string component'
                 },
                 elements: {
@@ -826,14 +852,46 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: 'string (1)'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', allOf: [{ minLength: 1 }, { default: 'string (1)' }, { maxLength: 20 }] }
+
+            const values = {
+              '#/': 'string (2)'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'string component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'string (1)',
+                  value: 'string (2)',
+                  component: 'string component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'string (2)'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -4765,8 +4823,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/0': 'true',
-              '#/1': 'false'
+              '#/': '2'
             }
 
             const params = {
@@ -4779,7 +4836,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  selected: ['true', 'false'],
+                  selectedIndex: 2,
                   component: 'boolean component'
                 },
                 elements: {
@@ -4793,7 +4850,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: 'true',
-                          value: 'true',
                           uri: '#/0'
                         },
                         elements: {
@@ -4812,7 +4868,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: 'false',
-                          value: 'false',
                           uri: '#/1'
                         },
                         elements: {
@@ -4843,7 +4898,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['true', 'false']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -4855,7 +4910,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/': 'true'
+              '#/': '2'
             }
 
             const params = {
@@ -4868,7 +4923,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  selected: 'true',
+                  selectedIndex: 2,
                   component: 'boolean component'
                 },
                 elements: {
@@ -4930,14 +4985,46 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: 'true'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', allOf: [{ default: true }] }
+
+            const values = {
+              '#/': 'true'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'boolean component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'true',
+                  value: 'true',
+                  component: 'boolean component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'true'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -5007,8 +5094,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/0': 'null',
-              '#/1': 'null'
+              '#/': '2'
             }
 
             const params = {
@@ -5021,7 +5107,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  selected: ['null', 'null'],
+                  selectedIndex: 2,
                   component: 'null component'
                 },
                 elements: {
@@ -5035,7 +5121,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: 'null',
-                          value: 'null',
                           uri: '#/0'
                         },
                         elements: {
@@ -5054,7 +5139,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: 'null',
-                          value: 'null',
                           uri: '#/1'
                         },
                         elements: {
@@ -5085,7 +5169,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['null', 'null']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -5097,7 +5181,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/': 'null'
+              '#/': '2'
             }
 
             const params = {
@@ -5110,7 +5194,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  selected: 'null',
+                  selectedIndex: 2,
                   component: 'null component'
                 },
                 elements: {
@@ -5172,14 +5256,46 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: 'null'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', allOf: [{ default: null }] }
+
+            const values = {
+              '#/': 'null'
+            }
+
+            const params = {
+              '#/': { meta: { component: 'null component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'null',
+                  value: 'null',
+                  component: 'null component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'null'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
@@ -5596,8 +5712,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'number', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
 
             const values = {
-              '#/0': '1',
-              '#/1': '2'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -5606,7 +5721,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  selected: ['1', '2']
+                  selectedIndex: 2
                 },
                 elements: {
                   anyOf: {
@@ -5619,7 +5734,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: '1',
-                          value: '1',
                           uri: '#/0'
                         },
                         elements: {
@@ -5638,7 +5752,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: '2',
-                          value: '2',
                           uri: '#/1'
                         },
                         elements: {
@@ -5669,7 +5782,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['1', '2']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -5690,7 +5803,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'number',
                   schema,
                   uri: '#/',
-                  selected: '2'
+                  selectedIndex: 2
                 },
                 elements: {
                   oneOf: {
@@ -5751,14 +5864,41 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: '2'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { default: 2 }, { maximum: 3 }] }
+
+            const values = {
+              '#/': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  defaultValue: '2',
+                  value: '2'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '2'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -5818,8 +5958,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'string', anyOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/0': 'string (1)',
-              '#/1': 'string (2)'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -5828,10 +5967,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  selected: [
-                    'string (1)',
-                    'string (2)'
-                  ]
+                  selectedIndex: 2
                 },
                 elements: {
                   anyOf: {
@@ -5844,7 +5980,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: 'string (1)',
-                          value: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
@@ -5863,7 +5998,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: 'string (2)',
-                          value: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
@@ -5894,10 +6028,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: [
-                      'string (1)',
-                      'string (2)'
-                    ]
+                    selectedIndex: 2
                   }
                 }
               })
@@ -5909,7 +6040,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'string', oneOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             const values = {
-              '#/': 'string (1)'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -5918,7 +6049,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'string',
                   schema,
                   uri: '#/',
-                  selected: 'string (1)'
+                  selectedIndex: 2
                 },
                 elements: {
                   oneOf: {
@@ -5979,14 +6110,41 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: 'string (1)'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', allOf: [{ minLength: 1 }, { default: 'string' }, { maxLength: 20 }] }
+
+            const values = {
+              '#/': 'string'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'string',
+                  value: 'string'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'string'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -9583,8 +9741,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'boolean', anyOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/0': 'true',
-              '#/1': 'false'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -9593,7 +9750,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  selected: ['true', 'false']
+                  selectedIndex: 2
                 },
                 elements: {
                   anyOf: {
@@ -9606,7 +9763,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: 'true',
-                          value: 'true',
                           uri: '#/0'
                         },
                         elements: {
@@ -9625,7 +9781,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: 'false',
-                          value: 'false',
                           uri: '#/1'
                         },
                         elements: {
@@ -9656,7 +9811,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['true', 'false']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -9668,7 +9823,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'boolean', oneOf: [{ default: true }, { default: false }, { default: true }] }
 
             const values = {
-              '#/': 'true'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -9677,7 +9832,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'boolean',
                   schema,
                   uri: '#/',
-                  selected: 'true'
+                  selectedIndex: 2
                 },
                 elements: {
                   oneOf: {
@@ -9738,14 +9893,41 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: 'true'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', allOf: [{ default: true }] }
+
+            const values = {
+              '#/': 'true'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'true',
+                  value: 'true'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'true'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -9805,8 +9987,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'null', anyOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/0': 'null',
-              '#/1': 'null'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -9815,7 +9996,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  selected: ['null', 'null']
+                  selectedIndex: 2
                 },
                 elements: {
                   anyOf: {
@@ -9828,7 +10009,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 0,
                           required: false,
                           defaultValue: 'null',
-                          value: 'null',
                           uri: '#/0'
                         },
                         elements: {
@@ -9847,7 +10027,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           item: 1,
                           required: false,
                           defaultValue: 'null',
-                          value: 'null',
                           uri: '#/1'
                         },
                         elements: {
@@ -9878,7 +10057,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: ['null', 'null']
+                    selectedIndex: 2
                   }
                 }
               })
@@ -9890,7 +10069,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             const schema = { type: 'null', oneOf: [{ default: null }, { default: null }, { default: null }] }
 
             const values = {
-              '#/': 'null'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
@@ -9899,7 +10078,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   type: 'null',
                   schema,
                   uri: '#/',
-                  selected: 'null'
+                  selectedIndex: 2
                 },
                 elements: {
                   oneOf: {
@@ -9960,14 +10139,41 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ],
                     name: '#/',
-                    selected: 'null'
+                    selectedIndex: 2
                   }
                 }
               })
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', allOf: [{ default: null }] }
+
+            const values = {
+              '#/': 'null'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  defaultValue: 'null',
+                  value: 'null',
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'null'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
@@ -10542,7 +10748,36 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { default: 2 }, { maximum: 3 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  defaultValue: '2',
+                  component: 'number component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '2'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -10765,7 +11000,36 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', allOf: [{ minLength: 1 }, { default: 'string' }, { maxLength: 20 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'string component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  defaultValue: 'string',
+                  uri: '#/',
+                  component: 'string component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'string'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -14590,7 +14854,36 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', allOf: [{ default: true }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'boolean component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'true',
+                  component: 'boolean component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'true'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -14813,7 +15106,36 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', allOf: [{ default: null }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'null component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  uri: '#/',
+                  defaultValue: 'null',
+                  component: 'null component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'null'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
@@ -15343,7 +15665,29 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { default: 2 }, { maximum: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  defaultValue: '2',
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '2'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `number` type schemas', () => {
             const schema = { type: 'number' }
 
@@ -15388,7 +15732,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         describe('With `anyOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', anyOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+            const schema = { type: 'string', anyOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             return expect(transform(schema))
               .to.eql({
@@ -15404,17 +15748,17 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 1 },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: '1',
+                          defaultValue: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: '1'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -15422,17 +15766,17 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 2 },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: '2',
+                          defaultValue: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: '2'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -15440,17 +15784,17 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 3 },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: '3',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: '3'
+                            value: 'string (3)'
                           }
                         }
                       }
@@ -15464,7 +15808,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         describe('With `oneOf`', () => {
           it('transforms `string` type schemas', () => {
-            const schema = { type: 'string', oneOf: [{ default: 1 }, { default: 2 }, { default: 3 }] }
+            const schema = { type: 'string', oneOf: [{ default: 'string (1)' }, { default: 'string (2)' }, { default: 'string (3)' }] }
 
             return expect(transform(schema))
               .to.eql({
@@ -15480,17 +15824,17 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 1 },
+                          schema: { default: 'string (1)' },
                           item: 0,
                           required: false,
-                          defaultValue: '1',
+                          defaultValue: 'string (1)',
                           uri: '#/0'
                         },
                         elements: {
                           field: {
                             name: '#/0',
                             required: false,
-                            value: '1'
+                            value: 'string (1)'
                           }
                         }
                       },
@@ -15498,17 +15842,17 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 2 },
+                          schema: { default: 'string (2)' },
                           item: 1,
                           required: false,
-                          defaultValue: '2',
+                          defaultValue: 'string (2)',
                           uri: '#/1'
                         },
                         elements: {
                           field: {
                             name: '#/1',
                             required: false,
-                            value: '2'
+                            value: 'string (2)'
                           }
                         }
                       },
@@ -15516,17 +15860,17 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         meta: {
                           type: 'string',
                           rootSchema: schema,
-                          schema: { default: 3 },
+                          schema: { default: 'string (3)' },
                           item: 2,
                           required: false,
-                          defaultValue: '3',
+                          defaultValue: 'string (3)',
                           uri: '#/2'
                         },
                         elements: {
                           field: {
                             name: '#/2',
                             required: false,
-                            value: '3'
+                            value: 'string (3)'
                           }
                         }
                       }
@@ -15538,7 +15882,29 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `string` type schemas', () => {
+            const schema = { type: 'string', allOf: [{ minLength: 1 }, { default: 'string' }, { maxLength: 20 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'string',
+                  schema,
+                  defaultValue: 'string',
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'string'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `string` type schemas', () => {
             const schema = { type: 'string' }
 
@@ -18923,7 +19289,29 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `boolean` type schemas', () => {
+            const schema = { type: 'boolean', allOf: [{ default: true }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'boolean',
+                  schema,
+                  defaultValue: 'true',
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'true'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `boolean` type schemas', () => {
             const schema = { type: 'boolean' }
 
@@ -19118,7 +19506,29 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
         })
 
-        describe('Without `enum` or `anyOf` or `oneOf`', () => {
+        describe('With `allOf`', () => {
+          it('transforms `null` type schemas', () => {
+            const schema = { type: 'null', allOf: [{ default: null }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'null',
+                  schema,
+                  defaultValue: 'null',
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: 'null'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           it('transforms `null` type schemas', () => {
             const schema = { type: 'null' }
 
