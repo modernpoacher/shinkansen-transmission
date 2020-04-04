@@ -1,12 +1,27 @@
+import debug from 'debug'
+
 import {
+  toDefaultValue,
+  isObject,
+  isArray,
   hasEnum,
   getEnum,
+  hasAnyOf,
+  getAnyOf,
+  hasOneOf,
+  getOneOf,
   getUri
 } from 'shinkansen-transmission/transmission/common'
 
-export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
+const {
+  env: {
+    DEBUG = 'shinkansen-transmission:*'
+  }
+} = process
 
-export const isArray = (v) => Array.isArray(v)
+debug.enable(DEBUG)
+
+const log = debug('shinkansen-transmission:from-document-to-hash')
 
 export function getObject ({ properties = {} /* object */ }, parentUri, uri) {
   return (
@@ -47,7 +62,27 @@ export function getSchema (schema = {}, parentUri, uri) {
   }
 }
 
+export const transformValue = (schema) => isObject(schema) ? toDefaultValue(schema) : schema
+
+function transformIndexFor (value, items) {
+  if (items.some((schema) => value === transformValue(schema))) {
+    const index = items.findIndex((schema) => value === transformValue(schema))
+
+    /*
+     *  Transform a number to a string
+     */
+    return String(index)
+  }
+
+  /*
+   *  Takes the place of `String(document)` in `transform()`
+   */
+  return String(value)
+}
+
 export default function transform (document, schema = {}, values = {}, params = {}, parentUri = '#', uri = getUri(parentUri)) {
+  log('fromDocumentToHash')
+
   if (isObject(document)) {
     return Object.entries(document)
       .reduce((values, [key, value]) => {
@@ -55,23 +90,37 @@ export default function transform (document, schema = {}, values = {}, params = 
 
         return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
       }, values)
+  } else {
+    if (isArray(document)) {
+      return document
+        .reduce((values, value, index) => {
+          const schemaUri = getUri(parentUri, index)
+
+          return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
+        }, values)
+    } else {
+      if (hasEnum(schema)) {
+        const items = getEnum(schema)
+
+        return { ...values, [uri]: transformIndexFor(document, items) }
+      } else {
+        if (hasAnyOf(schema)) {
+          const items = getAnyOf(schema)
+
+          return { ...values, [uri]: transformIndexFor(document, items) }
+        } else {
+          if (hasOneOf(schema)) {
+            const items = getOneOf(schema)
+
+            return { ...values, [uri]: transformIndexFor(document, items) }
+          }
+        }
+      }
+    }
   }
 
-  if (isArray(document)) {
-    return document
-      .reduce((values, value, index) => {
-        const schemaUri = getUri(parentUri, index)
-
-        return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
-      }, values)
-  }
-
-  if (hasEnum(schema)) {
-    const items = getEnum(schema)
-    const index = items.findIndex((value) => document === value)
-
-    return { ...values, [uri]: String(index) }
-  }
-
+  /*
+   *  The hash contains only strings
+   */
   return { ...values, [uri]: String(document) }
 }

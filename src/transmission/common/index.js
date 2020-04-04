@@ -1,3 +1,9 @@
+export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
+
+export const isArray = (v) => Array.isArray(v)
+
+export const toDefaultValue = ({ default: value } = {}) => value
+
 export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
 export const getDescription = ({ description } = {}) => (description ? { description } : {})

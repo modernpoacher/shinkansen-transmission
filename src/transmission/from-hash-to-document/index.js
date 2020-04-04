@@ -1,8 +1,27 @@
+import debug from 'debug'
+
 import {
+  toDefaultValue,
+  isObject,
   hasEnum,
   getEnum,
+  hasAnyOf,
+  getAnyOf,
+  hasOneOf,
+  getOneOf,
   getUri
 } from 'shinkansen-transmission/transmission/common'
+
+const {
+  env: {
+    DEBUG = 'shinkansen-transmission:*'
+  }
+} = process
+
+debug.enable(DEBUG)
+
+const log = debug('shinkansen-transmission:from-hash-to-document:log')
+const error = debug('shinkansen-transmission:from-hash-to-document:error')
 
 export function toNull (v) {
   if (v === null || v === 'null') return null
@@ -35,6 +54,32 @@ export function toNumber (v) {
 
   throw new Error('Invalid `number`')
 }
+
+export const transformValue = (schema) => isObject(schema) ? toDefaultValue(schema) : schema
+
+function transformValueFor (value, items = []) {
+  try {
+    const i = toNumber(value)
+
+    if (Reflect.has(items, i)) {
+      const v = Reflect.get(items, i)
+
+      /*
+       *  Return the value given from the schema
+       */
+      return transformValue(v)
+    }
+  } catch ({ message = 'No error message defined' }) {
+    error(message)
+  }
+
+  /*
+   *  Return the value given
+   */
+  return value
+}
+
+const handleError = ({ message = 'No error message defined' }) => error(message)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export const transformObjectSchemaNull = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNull(schema, values, parentUri, uri)
@@ -130,31 +175,65 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
 
 export function transformNull (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
     if (hasEnum(schema)) {
       const items = getEnum(schema)
 
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
+      return transformValueFor(value, items)
+    } else {
+      if (hasAnyOf(schema)) {
+        const items = getAnyOf(schema)
 
-      return toNull(value)
+        return transformValueFor(value, items)
+      } else {
+        if (hasOneOf(schema)) {
+          const items = getOneOf(schema)
+
+          return transformValueFor(value, items)
+        }
+      }
     }
 
-    return toNull(Reflect.get(values, uri))
+    try {
+      return toNull(value)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return value
   }
 }
 
 export function transformBoolean (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
     if (hasEnum(schema)) {
       const items = getEnum(schema)
 
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
+      return transformValueFor(value, items)
+    } else {
+      if (hasAnyOf(schema)) {
+        const items = getAnyOf(schema)
 
-      return toBoolean(value)
+        return transformValueFor(value, items)
+      } else {
+        if (hasOneOf(schema)) {
+          const items = getOneOf(schema)
+
+          return transformValueFor(value, items)
+        }
+      }
     }
 
-    return toBoolean(Reflect.get(values, uri))
+    try {
+      return toBoolean(value)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return value
   }
 }
 
@@ -188,35 +267,71 @@ export function transformArray ({ items = [] /* array or object */ }, values, pa
 
 export function transformString (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
     if (hasEnum(schema)) {
       const items = getEnum(schema)
 
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
+      return transformValueFor(value, items)
+    } else {
+      if (hasAnyOf(schema)) {
+        const items = getAnyOf(schema)
 
-      return toString(value)
+        return transformValueFor(value, items)
+      } else {
+        if (hasOneOf(schema)) {
+          const items = getOneOf(schema)
+
+          return transformValueFor(value, items)
+        }
+      }
     }
 
-    return toString(Reflect.get(values, uri))
+    try {
+      return toString(value)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return value
   }
 }
 
 export function transformNumber (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
     if (hasEnum(schema)) {
       const items = getEnum(schema)
 
-      const index = toNumber(Reflect.get(values, uri))
-      const value = items[index]
+      return transformValueFor(value, items)
+    } else {
+      if (hasAnyOf(schema)) {
+        const items = getAnyOf(schema)
 
-      return toNumber(value)
+        return transformValueFor(value, items)
+      } else {
+        if (hasOneOf(schema)) {
+          const items = getOneOf(schema)
+
+          return transformValueFor(value, items)
+        }
+      }
     }
 
-    return toNumber(Reflect.get(values, uri))
+    try {
+      return toNumber(value)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return value
   }
 }
 
 export default function transform (rootSchema = {}, values = {}, parentUri = '#', uri = getUri(parentUri)) {
+  log('fromHashToDocument')
+
   const { type } = rootSchema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1

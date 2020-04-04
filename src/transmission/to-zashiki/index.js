@@ -1,3 +1,5 @@
+import debug from 'debug'
+
 import {
   getDefaultValue,
   getValue,
@@ -32,6 +34,16 @@ import {
   getElementsFieldProps,
   getElementsFieldValue
 } from 'shinkansen-transmission/transmission/common'
+
+const {
+  env: {
+    DEBUG = 'shinkansen-transmission:*'
+  }
+} = process
+
+debug.enable(DEBUG)
+
+const log = debug('shinkansen-transmission:to-zashiki')
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaNull (schema, rootSchema, values, params) {
@@ -3340,6 +3352,8 @@ export function transformNumber (rootSchema, values, params) {
 }
 
 export default function transform (rootSchema = {}, values = {}, params = {}) {
+  log('toZashiki')
+
   const { type } = rootSchema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1

@@ -55,5 +55,8 @@
     "hooks": {
       "pre-commit": "npm run pre-commit"
     }
+  },
+  "dependencies": {
+    "debug": "^4.1.1"
   }
 }
