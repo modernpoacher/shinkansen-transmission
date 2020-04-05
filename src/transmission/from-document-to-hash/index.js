@@ -1,6 +1,9 @@
 import debug from 'debug'
 
 import {
+  isConstValue,
+  toConstValue,
+  isDefaultValue,
   toDefaultValue,
   isObject,
   isArray,
@@ -62,7 +65,15 @@ export function getSchema (schema = {}, parentUri, uri) {
   }
 }
 
-export const transformValue = (schema) => isObject(schema) ? toDefaultValue(schema) : schema
+export const transformValue = (schema) => (
+  isObject(schema)
+    ? isConstValue(schema)
+      ? toConstValue(schema)
+      : isDefaultValue(schema)
+        ? toDefaultValue(schema)
+        : schema
+    : schema
+)
 
 function transformIndexFor (value, items) {
   if (items.some((schema) => value === transformValue(schema))) {

@@ -1,6 +1,10 @@
+import debug from 'debug'
+
 import { expect } from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/from-hash-to-document'
+
+debug.disable()
 
 describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
   it('is a function', () => {

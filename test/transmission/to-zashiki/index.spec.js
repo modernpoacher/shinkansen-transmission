@@ -1,6 +1,10 @@
+import debug from 'debug'
+
 import { expect } from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
+
+debug.disable()
 
 describe('shinkansen-transmission/transmission/to-zashiki', () => {
   it('is a function', () => {
@@ -1178,12 +1182,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               const schema = {
                 type: 'array',
                 items: [
-
                   {
                     type: 'boolean',
                     enum: [true, false]
                   }
-
                 ]
               }
 

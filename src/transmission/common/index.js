@@ -2,7 +2,13 @@ export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
 export const isArray = (v) => Array.isArray(v)
 
-export const toDefaultValue = ({ default: value } = {}) => value
+export const toConstValue = (schema = {}) => Reflect.get(schema, 'const')
+
+export const isConstValue = (schema = {}) => Reflect.has(schema, 'const')
+
+export const toDefaultValue = (schema = {}) => Reflect.get(schema, 'default')
+
+export const isDefaultValue = (schema = {}) => Reflect.has(schema, 'default')
 
 export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
@@ -12,7 +18,7 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export const getDefaultValue = (schema = {}) => {
+export function getDefaultValue (schema = {}) {
   if (Reflect.has(schema, 'default')) {
     const defaultValue = Reflect.get(schema, 'default')
 
@@ -22,7 +28,7 @@ export const getDefaultValue = (schema = {}) => {
   return {}
 }
 
-export const getValue = (values = {}, uri = '#') => {
+export function getValue (values = {}, uri = '#') {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -32,7 +38,7 @@ export const getValue = (values = {}, uri = '#') => {
   return {}
 }
 
-export const getSelectedIndex = (values = {}, uri = '#') => {
+export function getSelectedIndex (values = {}, uri = '#') {
   if (Reflect.has(values, uri)) {
     const index = Reflect.get(values, uri)
     const value = Number(index)
@@ -43,7 +49,7 @@ export const getSelectedIndex = (values = {}, uri = '#') => {
   return {}
 }
 
-export const getMetaProps = (params = {}, uri = '#') => {
+export function getMetaProps (params = {}, uri = '#') {
   let meta
   if (Reflect.has(params, uri)) {
     ({
@@ -54,7 +60,7 @@ export const getMetaProps = (params = {}, uri = '#') => {
   return meta || {}
 }
 
-export const getElementsTitleProps = (params = {}, uri = '#') => {
+export function getElementsTitleProps (params = {}, uri = '#') {
   let title
   if (Reflect.has(params, uri)) {
     ({
@@ -67,7 +73,7 @@ export const getElementsTitleProps = (params = {}, uri = '#') => {
   return title || {}
 }
 
-export const getElementsDescriptionProps = (params = {}, uri = '#') => {
+export function getElementsDescriptionProps (params = {}, uri = '#') {
   let description
   if (Reflect.has(params, uri)) {
     ({
@@ -80,7 +86,7 @@ export const getElementsDescriptionProps = (params = {}, uri = '#') => {
   return description || {}
 }
 
-export const getElementsFieldProps = (params = {}, uri = '#') => {
+export function getElementsFieldProps (params = {}, uri = '#') {
   let field
   if (Reflect.has(params, uri)) {
     ({
@@ -93,7 +99,7 @@ export const getElementsFieldProps = (params = {}, uri = '#') => {
   return field || {}
 }
 
-export const getElementsFieldValue = (values = {}, uri = '#', schema) => {
+export function getElementsFieldValue (values = {}, uri = '#', schema) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -112,6 +118,9 @@ export const getElementsFieldValue = (values = {}, uri = '#', schema) => {
 export const hasEnum = (schema = {}) => Reflect.has(schema, 'enum')
 export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')
 
+export const hasConst = (schema = {}) => Reflect.has(schema, 'const')
+export const getConst = (schema = {}) => Reflect.get(schema, 'const')
+
 export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
 export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')
 
@@ -123,43 +132,43 @@ export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
 export const getUri = (uri = '', resource = '') => uri.concat('/').concat(resource)
 
-export const getMin = ({ minimum } = {}) => {
+export function getMin ({ minimum } = {}) {
   const value = Number(minimum)
 
   return isNaN(value) ? {} : { min: value }
 }
 
-export const getMax = ({ maximum } = {}) => {
+export function getMax ({ maximum } = {}) {
   const value = Number(maximum)
 
   return isNaN(value) ? {} : { max: value }
 }
 
-export const getMinLength = ({ minLength } = {}) => {
+export function getMinLength ({ minLength } = {}) {
   const value = Number(minLength)
 
   return isNaN(value) ? {} : { minLength: value }
 }
 
-export const getMaxLength = ({ maxLength } = {}) => {
+export function getMaxLength ({ maxLength } = {}) {
   const value = Number(maxLength)
 
   return isNaN(value) ? {} : { maxLength: value }
 }
 
-export const getMinItems = ({ minItems } = {}) => {
+export function getMinItems ({ minItems } = {}) {
   const value = Number(minItems)
 
   return isNaN(value) ? {} : { minItems: value }
 }
 
-export const getMaxItems = ({ maxItems } = {}) => {
+export function getMaxItems ({ maxItems } = {}) {
   const value = Number(maxItems)
 
   return isNaN(value) ? {} : { maxItems: value }
 }
 
-export const getHasUniqueItems = (schema = {}) => {
+export function getHasUniqueItems (schema = {}) {
   if (Reflect.has(schema, 'uniqueItems')) {
     const value = Reflect.get(schema, 'uniqueItems')
 
@@ -169,31 +178,31 @@ export const getHasUniqueItems = (schema = {}) => {
   return {}
 }
 
-export const getMinContains = ({ minContains } = {}) => {
+export function getMinContains ({ minContains } = {}) {
   const value = Number(minContains)
 
   return isNaN(value) ? {} : { minContains: value }
 }
 
-export const getMaxContains = ({ maxContains } = {}) => {
+export function getMaxContains ({ maxContains } = {}) {
   const value = Number(maxContains)
 
   return isNaN(value) ? {} : { maxContains: value }
 }
 
-export const getMinProperties = ({ minProperties } = {}) => {
+export function getMinProperties ({ minProperties } = {}) {
   const value = Number(minProperties)
 
   return isNaN(value) ? {} : { minProperties: value }
 }
 
-export const getMaxProperties = ({ maxProperties } = {}) => {
+export function getMaxProperties ({ maxProperties } = {}) {
   const value = Number(maxProperties)
 
   return isNaN(value) ? {} : { maxProperties: value }
 }
 
-export const getIsExclusiveMin = (schema = {}) => {
+export function getIsExclusiveMin (schema = {}) {
   if (Reflect.has(schema, 'exclusiveMinimum')) {
     const value = Reflect.get(schema, 'exclusiveMinimum')
 
@@ -203,7 +212,7 @@ export const getIsExclusiveMin = (schema = {}) => {
   return {}
 }
 
-export const getIsExclusiveMax = (schema = {}) => {
+export function getIsExclusiveMax (schema = {}) {
   if (Reflect.has(schema, 'exclusiveMaximum')) {
     const value = Reflect.get(schema, 'exclusiveMaximum')
 
@@ -215,7 +224,7 @@ export const getIsExclusiveMax = (schema = {}) => {
 
 export const getPattern = ({ pattern } = {}) => (pattern ? { pattern } : {})
 
-export const getStep = ({ multipleOf } = {}) => {
+export function getStep ({ multipleOf } = {}) {
   const value = Number(multipleOf)
 
   return isNaN(value) ? {} : { step: value }

@@ -770,6 +770,217 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
   }
 }
 
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
+export function transformObjectSchemaNumber (schema, rootSchema, values, params) {
+  const {
+    required: isRequired = false,
+    uri: parentUri,
+    key: fieldKey
+  } = params
+
+  const uri = getUri(parentUri, fieldKey)
+
+  const min = getMin(schema)
+  const max = getMax(schema)
+  const step = getStep(schema)
+
+  const isExclusiveMin = getIsExclusiveMin(schema)
+  const isExclusiveMax = getIsExclusiveMax(schema)
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const items = getEnum(schema) // `enum` is a reserved word
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      name: fieldKey,
+      type: 'number',
+      schema,
+      rootSchema,
+      ...isExclusiveMin,
+      ...isExclusiveMax,
+      ...min,
+      ...max,
+      ...step,
+      required: isRequired,
+      ...selectedIndex,
+      ...metaProps
+    }
+
+    elements = {
+      ...title,
+      ...description,
+      enum: {
+        items,
+        ...min,
+        ...max,
+        ...step,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    if (hasAnyOf(schema)) {
+      const anyOf = getAnyOf(schema)
+      const items = (
+        anyOf.reduce((accumulator, schema, index) => (
+          accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        ), [])
+      )
+      const selectedIndex = getSelectedIndex(values, uri)
+
+      meta = {
+        uri,
+        name: fieldKey,
+        type: 'number',
+        schema,
+        rootSchema,
+        ...isExclusiveMin,
+        ...isExclusiveMax,
+        ...min,
+        ...max,
+        ...step,
+        required: isRequired,
+        ...selectedIndex,
+        ...metaProps
+      }
+
+      elements = {
+        ...title,
+        ...description,
+        anyOf: {
+          items,
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...selectedIndex,
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        const oneOf = getOneOf(schema)
+        const items = (
+          oneOf.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+          ), [])
+        )
+        const selectedIndex = getSelectedIndex(values, uri)
+
+        meta = {
+          uri,
+          name: fieldKey,
+          type: 'number',
+          schema,
+          rootSchema,
+          ...isExclusiveMin,
+          ...isExclusiveMax,
+          ...min,
+          ...max,
+          ...step,
+          required: isRequired,
+          ...selectedIndex,
+          ...metaProps
+        }
+
+        elements = {
+          ...title,
+          ...description,
+          oneOf: {
+            items,
+            ...min,
+            ...max,
+            ...step,
+            required: isRequired,
+            ...selectedIndex,
+            name: uri
+          }
+        }
+      } else {
+        if (hasAllOf(schema)) {
+          const allOf = getAllOf(schema)
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          meta = {
+            uri,
+            name: fieldKey,
+            type: 'number',
+            schema,
+            rootSchema,
+            ...isExclusiveMin,
+            ...isExclusiveMax,
+            ...min,
+            ...max,
+            ...step,
+            required: isRequired,
+            ...getDefaultValue(itemSchema, uri),
+            ...getValue(values, uri),
+            ...metaProps
+          }
+
+          elements = {
+            ...title,
+            ...description,
+            field: {
+              ...min,
+              ...max,
+              ...step,
+              required: isRequired,
+              ...getElementsFieldValue(values, uri, itemSchema),
+              ...getElementsFieldProps(params, uri),
+              name: uri
+            }
+          }
+        } else {
+          meta = {
+            uri,
+            name: fieldKey,
+            type: 'number',
+            schema,
+            rootSchema,
+            ...isExclusiveMin,
+            ...isExclusiveMax,
+            ...min,
+            ...max,
+            ...step,
+            required: isRequired,
+            ...getDefaultValue(schema, uri),
+            ...getValue(values, uri),
+            ...metaProps
+          }
+
+          elements = {
+            ...title,
+            ...description,
+            field: {
+              ...min,
+              ...max,
+              ...step,
+              required: isRequired,
+              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldProps(params, uri),
+              name: uri
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return {
+    meta,
+    elements
+  }
+}
+
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformObjectSchemaString (schema, rootSchema, values, params) {
   const {
@@ -952,217 +1163,6 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
               ...minLength,
               ...maxLength,
               ...pattern,
-              required: isRequired,
-              ...getElementsFieldValue(values, uri, schema),
-              ...getElementsFieldProps(params, uri),
-              name: uri
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return {
-    meta,
-    elements
-  }
-}
-
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
-export function transformObjectSchemaNumber (schema, rootSchema, values, params) {
-  const {
-    required: isRequired = false,
-    uri: parentUri,
-    key: fieldKey
-  } = params
-
-  const uri = getUri(parentUri, fieldKey)
-
-  const min = getMin(schema)
-  const max = getMax(schema)
-  const step = getStep(schema)
-
-  const isExclusiveMin = getIsExclusiveMin(schema)
-  const isExclusiveMax = getIsExclusiveMax(schema)
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(schema)
-  const description = getDescription(schema)
-
-  let meta
-  let elements
-  if (hasEnum(schema)) {
-    const items = getEnum(schema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
-
-    meta = {
-      uri,
-      name: fieldKey,
-      type: 'number',
-      schema,
-      rootSchema,
-      ...isExclusiveMin,
-      ...isExclusiveMax,
-      ...min,
-      ...max,
-      ...step,
-      required: isRequired,
-      ...selectedIndex,
-      ...metaProps
-    }
-
-    elements = {
-      ...title,
-      ...description,
-      enum: {
-        items,
-        ...min,
-        ...max,
-        ...step,
-        required: isRequired,
-        ...selectedIndex,
-        name: uri
-      }
-    }
-  } else {
-    if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
-
-      meta = {
-        uri,
-        name: fieldKey,
-        type: 'number',
-        schema,
-        rootSchema,
-        ...isExclusiveMin,
-        ...isExclusiveMax,
-        ...min,
-        ...max,
-        ...step,
-        required: isRequired,
-        ...selectedIndex,
-        ...metaProps
-      }
-
-      elements = {
-        ...title,
-        ...description,
-        anyOf: {
-          items,
-          ...min,
-          ...max,
-          ...step,
-          required: isRequired,
-          ...selectedIndex,
-          name: uri
-        }
-      }
-    } else {
-      if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
-
-        meta = {
-          uri,
-          name: fieldKey,
-          type: 'number',
-          schema,
-          rootSchema,
-          ...isExclusiveMin,
-          ...isExclusiveMax,
-          ...min,
-          ...max,
-          ...step,
-          required: isRequired,
-          ...selectedIndex,
-          ...metaProps
-        }
-
-        elements = {
-          ...title,
-          ...description,
-          oneOf: {
-            items,
-            ...min,
-            ...max,
-            ...step,
-            required: isRequired,
-            ...selectedIndex,
-            name: uri
-          }
-        }
-      } else {
-        if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
-
-          meta = {
-            uri,
-            name: fieldKey,
-            type: 'number',
-            schema,
-            rootSchema,
-            ...isExclusiveMin,
-            ...isExclusiveMax,
-            ...min,
-            ...max,
-            ...step,
-            required: isRequired,
-            ...getDefaultValue(itemSchema, uri),
-            ...getValue(values, uri),
-            ...metaProps
-          }
-
-          elements = {
-            ...title,
-            ...description,
-            field: {
-              ...min,
-              ...max,
-              ...step,
-              required: isRequired,
-              ...getElementsFieldValue(values, uri, itemSchema),
-              ...getElementsFieldProps(params, uri),
-              name: uri
-            }
-          }
-        } else {
-          meta = {
-            uri,
-            name: fieldKey,
-            type: 'number',
-            schema,
-            rootSchema,
-            ...isExclusiveMin,
-            ...isExclusiveMax,
-            ...min,
-            ...max,
-            ...step,
-            required: isRequired,
-            ...getDefaultValue(schema, uri),
-            ...getValue(values, uri),
-            ...metaProps
-          }
-
-          elements = {
-            ...title,
-            ...description,
-            field: {
-              ...min,
-              ...max,
-              ...step,
               required: isRequired,
               ...getElementsFieldValue(values, uri, schema),
               ...getElementsFieldProps(params, uri),
@@ -1934,205 +1934,6 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
   }
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformArraySchemaString (schema, rootSchema, values, params) {
-  const {
-    required: isRequired = false,
-    uri: parentUri,
-    index: arrayIndex
-  } = params
-
-  const uri = getUri(parentUri, arrayIndex)
-
-  const minLength = getMinLength(schema)
-  const maxLength = getMaxLength(schema)
-  const pattern = getPattern(schema)
-
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(schema)
-  const description = getDescription(schema)
-
-  let meta
-  let elements
-  if (hasEnum(schema)) {
-    const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
-
-    meta = {
-      uri,
-      item: arrayIndex,
-      type: 'string',
-      schema,
-      rootSchema,
-      ...minLength,
-      ...maxLength,
-      ...pattern,
-      required: isRequired,
-      ...selectedIndex,
-      ...metaProps
-    }
-
-    elements = {
-      ...title,
-      ...description,
-      enum: {
-        items,
-        ...minLength,
-        ...maxLength,
-        ...pattern,
-        required: isRequired,
-        ...selectedIndex,
-        name: uri
-      }
-    }
-  } else {
-    if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
-
-      meta = {
-        uri,
-        item: arrayIndex,
-        type: 'string',
-        schema,
-        rootSchema,
-        ...minLength,
-        ...maxLength,
-        ...pattern,
-        required: isRequired,
-        ...selectedIndex,
-        ...metaProps
-      }
-
-      elements = {
-        ...title,
-        ...description,
-        anyOf: {
-          items,
-          ...minLength,
-          ...maxLength,
-          ...pattern,
-          required: isRequired,
-          ...selectedIndex,
-          name: uri
-        }
-      }
-    } else {
-      if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
-
-        meta = {
-          uri,
-          item: arrayIndex,
-          type: 'string',
-          schema,
-          rootSchema,
-          ...minLength,
-          ...maxLength,
-          ...pattern,
-          required: isRequired,
-          ...selectedIndex,
-          ...metaProps
-        }
-
-        elements = {
-          ...title,
-          ...description,
-          oneOf: {
-            items,
-            ...minLength,
-            ...maxLength,
-            ...pattern,
-            required: isRequired,
-            ...selectedIndex,
-            name: uri
-          }
-        }
-      } else {
-        if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
-
-          meta = {
-            uri,
-            item: arrayIndex,
-            type: 'string',
-            schema,
-            rootSchema,
-            ...minLength,
-            ...maxLength,
-            ...pattern,
-            required: isRequired,
-            ...getDefaultValue(itemSchema, uri),
-            ...getValue(values, uri),
-            ...metaProps
-          }
-
-          elements = {
-            ...title,
-            ...description,
-            field: {
-              ...minLength,
-              ...maxLength,
-              ...pattern,
-              required: isRequired,
-              ...getElementsFieldValue(values, uri, itemSchema),
-              ...getElementsFieldProps(params, uri),
-              name: uri
-            }
-          }
-        } else {
-          meta = {
-            uri,
-            item: arrayIndex,
-            type: 'string',
-            schema,
-            rootSchema,
-            ...minLength,
-            ...maxLength,
-            ...pattern,
-            required: isRequired,
-            ...getDefaultValue(schema, uri),
-            ...getValue(values, uri),
-            ...metaProps
-          }
-
-          elements = {
-            ...title,
-            ...description,
-            field: {
-              ...minLength,
-              ...maxLength,
-              ...pattern,
-              required: isRequired,
-              ...getElementsFieldValue(values, uri, schema),
-              ...getElementsFieldProps(params, uri),
-              name: uri
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return {
-    meta,
-    elements
-  }
-}
-
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformArraySchemaNumber (schema, rootSchema, values, params) {
   const {
@@ -2328,6 +2129,205 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
               ...min,
               ...max,
               ...step,
+              required: isRequired,
+              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldProps(params, uri),
+              name: uri
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return {
+    meta,
+    elements
+  }
+}
+
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+export function transformArraySchemaString (schema, rootSchema, values, params) {
+  const {
+    required: isRequired = false,
+    uri: parentUri,
+    index: arrayIndex
+  } = params
+
+  const uri = getUri(parentUri, arrayIndex)
+
+  const minLength = getMinLength(schema)
+  const maxLength = getMaxLength(schema)
+  const pattern = getPattern(schema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
+  let meta
+  let elements
+  if (hasEnum(schema)) {
+    const items = getEnum(schema)
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      item: arrayIndex,
+      type: 'string',
+      schema,
+      rootSchema,
+      ...minLength,
+      ...maxLength,
+      ...pattern,
+      required: isRequired,
+      ...selectedIndex,
+      ...metaProps
+    }
+
+    elements = {
+      ...title,
+      ...description,
+      enum: {
+        items,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        required: isRequired,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    if (hasAnyOf(schema)) {
+      const anyOf = getAnyOf(schema)
+      const items = (
+        anyOf.reduce((accumulator, schema, index) => (
+          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        ), [])
+      )
+      const selectedIndex = getSelectedIndex(values, uri)
+
+      meta = {
+        uri,
+        item: arrayIndex,
+        type: 'string',
+        schema,
+        rootSchema,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        required: isRequired,
+        ...selectedIndex,
+        ...metaProps
+      }
+
+      elements = {
+        ...title,
+        ...description,
+        anyOf: {
+          items,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...selectedIndex,
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(schema)) {
+        const oneOf = getOneOf(schema)
+        const items = (
+          oneOf.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+          ), [])
+        )
+        const selectedIndex = getSelectedIndex(values, uri)
+
+        meta = {
+          uri,
+          item: arrayIndex,
+          type: 'string',
+          schema,
+          rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          required: isRequired,
+          ...selectedIndex,
+          ...metaProps
+        }
+
+        elements = {
+          ...title,
+          ...description,
+          oneOf: {
+            items,
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            required: isRequired,
+            ...selectedIndex,
+            name: uri
+          }
+        }
+      } else {
+        if (hasAllOf(schema)) {
+          const allOf = getAllOf(schema)
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          meta = {
+            uri,
+            item: arrayIndex,
+            type: 'string',
+            schema,
+            rootSchema,
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            required: isRequired,
+            ...getDefaultValue(itemSchema, uri),
+            ...getValue(values, uri),
+            ...metaProps
+          }
+
+          elements = {
+            ...title,
+            ...description,
+            field: {
+              ...minLength,
+              ...maxLength,
+              ...pattern,
+              required: isRequired,
+              ...getElementsFieldValue(values, uri, itemSchema),
+              ...getElementsFieldProps(params, uri),
+              name: uri
+            }
+          }
+        } else {
+          meta = {
+            uri,
+            item: arrayIndex,
+            type: 'string',
+            schema,
+            rootSchema,
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            required: isRequired,
+            ...getDefaultValue(schema, uri),
+            ...getValue(values, uri),
+            ...metaProps
+          }
+
+          elements = {
+            ...title,
+            ...description,
+            field: {
+              ...minLength,
+              ...maxLength,
+              ...pattern,
               required: isRequired,
               ...getElementsFieldValue(values, uri, schema),
               ...getElementsFieldProps(params, uri),
@@ -2998,176 +2998,6 @@ export function transformArray (rootSchema, values, params) {
   }
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export function transformString (rootSchema, values, params) {
-  const {
-    parentUri = '#',
-    uri = getUri(parentUri)
-  } = params
-
-  const minLength = getMinLength(rootSchema)
-  const maxLength = getMaxLength(rootSchema)
-  const pattern = getPattern(rootSchema)
-
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(rootSchema)
-  const description = getDescription(rootSchema)
-
-  let meta
-  let elements
-  if (hasEnum(rootSchema)) {
-    const items = getEnum(rootSchema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
-
-    meta = {
-      uri,
-      type: 'string',
-      schema: rootSchema,
-      ...minLength,
-      ...maxLength,
-      ...pattern,
-      ...selectedIndex,
-      ...metaProps
-    }
-
-    elements = {
-      ...title,
-      ...description,
-      enum: {
-        items,
-        ...minLength,
-        ...maxLength,
-        ...pattern,
-        ...selectedIndex,
-        name: uri
-      }
-    }
-  } else {
-    if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
-
-      meta = {
-        uri,
-        type: 'string',
-        schema: rootSchema,
-        ...minLength,
-        ...maxLength,
-        ...pattern,
-        ...selectedIndex,
-        ...metaProps
-      }
-
-      elements = {
-        ...title,
-        ...description,
-        anyOf: {
-          items,
-          ...selectedIndex,
-          name: uri
-        }
-      }
-    } else {
-      if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
-
-        meta = {
-          uri,
-          type: 'string',
-          schema: rootSchema,
-          ...minLength,
-          ...maxLength,
-          ...pattern,
-          ...selectedIndex,
-          ...metaProps
-        }
-
-        elements = {
-          ...title,
-          ...description,
-          oneOf: {
-            items,
-            ...selectedIndex,
-            name: uri
-          }
-        }
-      } else {
-        if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
-
-          meta = {
-            uri,
-            type: 'string',
-            schema: rootSchema,
-            ...minLength,
-            ...maxLength,
-            ...pattern,
-            ...getDefaultValue(schema, uri),
-            ...getValue(values, uri),
-            ...metaProps
-          }
-
-          elements = {
-            ...title,
-            ...description,
-            field: {
-              ...minLength,
-              ...maxLength,
-              ...pattern,
-              ...getElementsFieldValue(values, uri, schema),
-              ...getElementsFieldProps(params, uri),
-              name: uri
-            }
-          }
-        } else {
-          meta = {
-            uri,
-            type: 'string',
-            schema: rootSchema,
-            ...minLength,
-            ...maxLength,
-            ...pattern,
-            ...getDefaultValue(rootSchema, uri),
-            ...getValue(values, uri),
-            ...metaProps
-          }
-
-          elements = {
-            ...title,
-            ...description,
-            field: {
-              ...minLength,
-              ...maxLength,
-              ...pattern,
-              ...getElementsFieldValue(values, uri, rootSchema),
-              ...getElementsFieldProps(params, uri),
-              name: uri
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return {
-    meta,
-    elements
-  }
-}
-
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
   const {
@@ -3335,6 +3165,176 @@ export function transformNumber (rootSchema, values, params) {
               ...min,
               ...max,
               ...step,
+              ...getElementsFieldValue(values, uri, rootSchema),
+              ...getElementsFieldProps(params, uri),
+              name: uri
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return {
+    meta,
+    elements
+  }
+}
+
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+export function transformString (rootSchema, values, params) {
+  const {
+    parentUri = '#',
+    uri = getUri(parentUri)
+  } = params
+
+  const minLength = getMinLength(rootSchema)
+  const maxLength = getMaxLength(rootSchema)
+  const pattern = getPattern(rootSchema)
+
+  const metaProps = getMetaProps(params, uri)
+
+  const title = getTitle(rootSchema)
+  const description = getDescription(rootSchema)
+
+  let meta
+  let elements
+  if (hasEnum(rootSchema)) {
+    const items = getEnum(rootSchema) // `enum` is a reserved word
+    const selectedIndex = getSelectedIndex(values, uri)
+
+    meta = {
+      uri,
+      type: 'string',
+      schema: rootSchema,
+      ...minLength,
+      ...maxLength,
+      ...pattern,
+      ...selectedIndex,
+      ...metaProps
+    }
+
+    elements = {
+      ...title,
+      ...description,
+      enum: {
+        items,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        ...selectedIndex,
+        name: uri
+      }
+    }
+  } else {
+    if (hasAnyOf(rootSchema)) {
+      const anyOf = getAnyOf(rootSchema)
+      const items = (
+        anyOf.reduce((accumulator, schema, index) => (
+          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        ), [])
+      )
+      const selectedIndex = getSelectedIndex(values, uri)
+
+      meta = {
+        uri,
+        type: 'string',
+        schema: rootSchema,
+        ...minLength,
+        ...maxLength,
+        ...pattern,
+        ...selectedIndex,
+        ...metaProps
+      }
+
+      elements = {
+        ...title,
+        ...description,
+        anyOf: {
+          items,
+          ...selectedIndex,
+          name: uri
+        }
+      }
+    } else {
+      if (hasOneOf(rootSchema)) {
+        const oneOf = getOneOf(rootSchema)
+        const items = (
+          oneOf.reduce((accumulator, schema, index) => (
+            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+          ), [])
+        )
+        const selectedIndex = getSelectedIndex(values, uri)
+
+        meta = {
+          uri,
+          type: 'string',
+          schema: rootSchema,
+          ...minLength,
+          ...maxLength,
+          ...pattern,
+          ...selectedIndex,
+          ...metaProps
+        }
+
+        elements = {
+          ...title,
+          ...description,
+          oneOf: {
+            items,
+            ...selectedIndex,
+            name: uri
+          }
+        }
+      } else {
+        if (hasAllOf(rootSchema)) {
+          const allOf = getAllOf(rootSchema)
+          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          meta = {
+            uri,
+            type: 'string',
+            schema: rootSchema,
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            ...getDefaultValue(schema, uri),
+            ...getValue(values, uri),
+            ...metaProps
+          }
+
+          elements = {
+            ...title,
+            ...description,
+            field: {
+              ...minLength,
+              ...maxLength,
+              ...pattern,
+              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldProps(params, uri),
+              name: uri
+            }
+          }
+        } else {
+          meta = {
+            uri,
+            type: 'string',
+            schema: rootSchema,
+            ...minLength,
+            ...maxLength,
+            ...pattern,
+            ...getDefaultValue(rootSchema, uri),
+            ...getValue(values, uri),
+            ...metaProps
+          }
+
+          elements = {
+            ...title,
+            ...description,
+            field: {
+              ...minLength,
+              ...maxLength,
+              ...pattern,
               ...getElementsFieldValue(values, uri, rootSchema),
               ...getElementsFieldProps(params, uri),
               name: uri

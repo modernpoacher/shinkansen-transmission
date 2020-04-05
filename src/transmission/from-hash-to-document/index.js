@@ -1,6 +1,9 @@
 import debug from 'debug'
 
 import {
+  isConstValue,
+  toConstValue,
+  isDefaultValue,
   toDefaultValue,
   isObject,
   hasEnum,
@@ -55,7 +58,15 @@ export function toNumber (v) {
   throw new Error('Invalid `number`')
 }
 
-export const transformValue = (schema) => isObject(schema) ? toDefaultValue(schema) : schema
+export const transformValue = (schema) => (
+  isObject(schema)
+    ? isConstValue(schema)
+      ? toConstValue(schema)
+      : isDefaultValue(schema)
+        ? toDefaultValue(schema)
+        : schema
+    : schema
+)
 
 function transformValueFor (value, items = []) {
   try {
