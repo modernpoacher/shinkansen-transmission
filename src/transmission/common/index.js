@@ -18,26 +18,6 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export function getDefaultValue (schema = {}) {
-  if (Reflect.has(schema, 'default')) {
-    const defaultValue = Reflect.get(schema, 'default')
-
-    return { defaultValue: String(defaultValue) }
-  }
-
-  return {}
-}
-
-export function getValue (values = {}, uri = '#') {
-  if (Reflect.has(values, uri)) {
-    const value = Reflect.get(values, uri)
-
-    return { value: String(value) }
-  }
-
-  return {}
-}
-
 export function getSelectedIndex (values = {}, uri = '#') {
   if (Reflect.has(values, uri)) {
     const index = Reflect.get(values, uri)
@@ -58,6 +38,26 @@ export function getMetaProps (params = {}, uri = '#') {
   }
 
   return meta || {}
+}
+
+export function getMetaDefaultValue (schema = {}) {
+  if (Reflect.has(schema, 'default')) {
+    const defaultValue = Reflect.get(schema, 'default')
+
+    return { defaultValue: String(defaultValue) }
+  }
+
+  return {}
+}
+
+export function getMetaValue (values = {}, uri = '#') {
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    return { value: String(value) }
+  }
+
+  return {}
 }
 
 export function getElementsTitleProps (params = {}, uri = '#') {
@@ -105,10 +105,16 @@ export function getElementsFieldValue (values = {}, uri = '#', schema) {
 
     return { value: String(value) }
   } else {
-    if (Reflect.has(schema, 'default')) {
-      const defaultValue = Reflect.get(schema, 'default')
+    if (Reflect.has(schema, 'const')) {
+      const defaultValue = Reflect.get(schema, 'const')
 
       return { value: String(defaultValue) }
+    } else {
+      if (Reflect.has(schema, 'default')) {
+        const defaultValue = Reflect.get(schema, 'default')
+
+        return { value: String(defaultValue) }
+      }
     }
   }
 
@@ -120,6 +126,9 @@ export const getEnum = (schema = {}) => Reflect.get(schema, 'enum')
 
 export const hasConst = (schema = {}) => Reflect.has(schema, 'const')
 export const getConst = (schema = {}) => Reflect.get(schema, 'const')
+
+export const hasDefault = (schema = {}) => Reflect.has(schema, 'default')
+export const getDefault = (schema = {}) => Reflect.get(schema, 'default')
 
 export const hasAnyOf = (schema = {}) => Reflect.has(schema, 'anyOf')
 export const getAnyOf = (schema = {}) => Reflect.get(schema, 'anyOf')

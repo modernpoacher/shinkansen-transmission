@@ -5,7 +5,6 @@ import {
   getDescription,
   getIsReadOnly,
   getIsWriteOnly,
-  getDefaultValue,
   hasEnum,
   getEnum,
   hasAllOf,
@@ -31,6 +30,8 @@ import {
   getPattern,
   getStep,
   getMetaProps,
+  getMetaDefaultValue,
+  getMetaValue,
   getElementsTitleProps,
   getElementsDescriptionProps,
   getElementsFieldProps,
@@ -62,13 +63,6 @@ describe('shinkansen-transmission/transmission/common', () => {
   describe('`getIsWriteOnly`', () => {
     it('is a function', () => {
       expect(getIsWriteOnly)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`getDefaultValue`', () => {
-    it('is a function', () => {
-      expect(getDefaultValue)
         .to.be.a('function')
     })
   })
@@ -230,6 +224,20 @@ describe('shinkansen-transmission/transmission/common', () => {
   describe('`getMetaProps`', () => {
     it('is a function', () => {
       expect(getMetaProps)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMetaDefaultValue`', () => {
+    it('is a function', () => {
+      expect(getMetaDefaultValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMetaValue`', () => {
+    it('is a function', () => {
+      expect(getMetaValue)
         .to.be.a('function')
     })
   })
