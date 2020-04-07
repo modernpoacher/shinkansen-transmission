@@ -41,7 +41,7 @@ export function getObject ({ properties = {} /* object */ }, parentUri, uri) {
 
 export function getArray ({ items = [] /* array or object */ }, parentUri, uri) {
   return (
-    Array.from(items)
+    [].concat(items)
       .find((schema, index) => {
         const schemaUri = getUri(parentUri, index)
 
