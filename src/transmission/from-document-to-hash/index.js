@@ -26,28 +26,35 @@ debug.enable(DEBUG)
 
 const log = debug('shinkansen-transmission:from-document-to-hash')
 
+function findByKey (parentUri, uri) {
+  return function find (key) {
+    const schemaUri = getUri(parentUri, key)
+
+    return (uri === schemaUri)
+  }
+}
+
+function findByIndex (parentUri, uri) {
+  return function find (schema, index) {
+    const schemaUri = getUri(parentUri, index)
+
+    return (uri === schemaUri)
+  }
+}
+
 export function getObject ({ properties = {} /* object */ }, parentUri, uri) {
   return (
     Reflect.get(properties, (
       Object.keys(properties)
-        .find((key) => {
-          const schemaUri = getUri(parentUri, key)
-
-          return (uri === schemaUri)
-        })
+        .find(findByKey(parentUri, uri))
     ))
   )
 }
 
 export function getArray ({ items = [] /* array or object */ }, parentUri, uri) {
-  return (
-    [].concat(items)
-      .find((schema, index) => {
-        const schemaUri = getUri(parentUri, index)
-
-        return (uri === schemaUri)
-      })
-  )
+  return (isArray(items))
+    ? items.find(findByIndex(parentUri, uri))
+    : items
 }
 
 export function getSchema (schema = {}, parentUri, uri) {

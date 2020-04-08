@@ -154,6 +154,8 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(itemSchema)
+
           meta = {
             uri,
             name: fieldKey,
@@ -318,6 +320,8 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -492,6 +496,8 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -693,6 +699,8 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -909,6 +917,8 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(itemSchema)
+
           meta = {
             uri,
             name: fieldKey,
@@ -1111,6 +1121,8 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -1317,6 +1329,8 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(itemSchema)
+
           meta = {
             uri,
             item: arrayIndex,
@@ -1481,6 +1495,8 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -1655,6 +1671,8 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -1857,6 +1875,8 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         if (hasAllOf(schema)) {
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -2074,6 +2094,8 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(itemSchema)
+
           meta = {
             uri,
             item: arrayIndex,
@@ -2277,6 +2299,8 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           const allOf = getAllOf(schema)
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(itemSchema)
+
           meta = {
             uri,
             item: arrayIndex,
@@ -2467,6 +2491,8 @@ export function transformNull (rootSchema, values, params) {
           const allOf = getAllOf(rootSchema)
           const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(schema)
+
           meta = {
             uri,
             type: 'null',
@@ -2609,6 +2635,8 @@ export function transformBoolean (rootSchema, values, params) {
           const allOf = getAllOf(rootSchema)
           const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(schema)
+
           meta = {
             uri,
             type: 'boolean',
@@ -2750,6 +2778,8 @@ export function transformObject (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           const allOf = getAllOf(rootSchema)
           const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(schema)
 
           meta = {
             uri,
@@ -2927,6 +2957,8 @@ export function transformArray (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           const allOf = getAllOf(rootSchema)
           const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(schema)
 
           meta = {
             uri,
@@ -3117,6 +3149,8 @@ export function transformNumber (rootSchema, values, params) {
           const allOf = getAllOf(rootSchema)
           const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
 
+          // log(schema)
+
           meta = {
             uri,
             type: 'number',
@@ -3290,6 +3324,8 @@ export function transformString (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           const allOf = getAllOf(rootSchema)
           const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+
+          // log(schema)
 
           meta = {
             uri,

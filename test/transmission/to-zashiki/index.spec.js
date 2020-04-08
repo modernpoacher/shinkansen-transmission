@@ -4,9 +4,9 @@ import { expect } from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
-debug.disable()
+describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
+  before(() => debug.disable())
 
-describe('shinkansen-transmission/transmission/to-zashiki', () => {
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')
@@ -923,74 +923,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
       describe('Transforming `array` type schemas', () => {
         describe('With `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              ]
-            }
-
-            const values = {
-              '#/0': '2'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        selectedIndex: 2,
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false,
-                          selectedIndex: 2
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -1047,6 +979,74 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             'string (1)',
                             'string (2)',
                             'string (3)'
+                          ],
+                          name: '#/0',
+                          required: false,
+                          selectedIndex: 2
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              ]
+            }
+
+            const values = {
+              '#/0': '2'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        selectedIndex: 2,
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
                           ],
                           name: '#/0',
                           required: false,
@@ -1354,107 +1354,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number',
-                      enum: [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -1546,6 +1445,107 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number',
+                      enum: [
+                        1,
+                        2,
+                        3
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -2483,103 +2483,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -2667,6 +2570,103 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -3659,72 +3659,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'number',
-                enum: [
-                  1,
-                  2,
-                  3
-                ]
-              }
-            }
-
-            const values = {
-              '#/0': '2'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false,
-                          selectedIndex: 2
-                        }
-                      },
-                      meta: {
-                        component: 'array type index component',
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        selectedIndex: 2,
-                        type: 'number',
-                        uri: '#/0'
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -3784,6 +3718,72 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           required: false,
                           selectedIndex: 2
                         }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'number',
+                enum: [
+                  1,
+                  2,
+                  3
+                ]
+              }
+            }
+
+            const values = {
+              '#/0': '2'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
+                          ],
+                          name: '#/0',
+                          required: false,
+                          selectedIndex: 2
+                        }
+                      },
+                      meta: {
+                        component: 'array type index component',
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        selectedIndex: 2,
+                        type: 'number',
+                        uri: '#/0'
                       }
                     }
                   ]
@@ -3905,105 +3905,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                ]
-              }
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -4093,6 +3994,105 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -5012,101 +5012,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              }
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -5192,6 +5097,101 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              }
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -6166,59 +6166,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         describe('Without `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number'
-                }
-              ]
-            }
-
-            const values = {
-              '#/0': '1'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number'
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        value: '1',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false,
-                          value: '1'
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -6264,6 +6211,59 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           name: '#/0',
                           required: false,
                           value: 'string'
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number'
+                }
+              ]
+            }
+
+            const values = {
+              '#/0': '1'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number'
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        value: '1',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false,
+                          value: '1'
                         }
                       }
                     }
@@ -6509,87 +6509,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number'
-                    }
-                  ]
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -6664,6 +6583,87 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number'
+                    }
+                  ]
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -7381,83 +7381,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number'
-                  }
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -7528,6 +7451,83 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number'
+                  }
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -8278,6 +8278,57 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
+          it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'string'
+              }
+            }
+
+            const values = {
+              '#/0': 'string'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        component: 'array type index component',
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        value: 'string',
+                        type: 'string',
+                        uri: '#/0'
+                      },
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false,
+                          value: 'string'
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
           it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
             const schema = {
               type: 'array',
@@ -8322,57 +8373,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           name: '#/0',
                           required: false,
                           value: '1'
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
-          it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'string'
-              }
-            }
-
-            const values = {
-              '#/0': 'string'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        component: 'array type index component',
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'string'
-                        },
-                        value: 'string',
-                        type: 'string',
-                        uri: '#/0'
-                      },
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false,
-                          value: 'string'
                         }
                       }
                     }
@@ -8483,85 +8483,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number'
-                  }
-                ]
-              }
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -8634,6 +8555,85 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  }
+                ]
+              }
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -9347,81 +9347,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number'
-                }
-              }
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -9490,6 +9415,81 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number'
+                }
+              }
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -11366,249 +11366,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
       })
 
-      describe('Transforming `number` type schemas', () => {
-        describe('With `enum`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', enum: [1, 2, 3] }
-
-            const values = {
-              '#/': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  selectedIndex: 2
-                },
-                elements: {
-                  enum: {
-                    items: [
-                      1,
-                      2,
-                      3
-                    ],
-                    name: '#/',
-                    selectedIndex: 2
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `anyOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', anyOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
-
-            const values = {
-              '#/': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  selectedIndex: 2
-                },
-                elements: {
-                  anyOf: {
-                    items: [
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 1 },
-                          item: 0,
-                          required: false,
-                          uri: '#/0'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/0',
-                            required: false,
-                            value: '1'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 2 },
-                          item: 1,
-                          required: false,
-                          uri: '#/1'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/1',
-                            required: false,
-                            value: '2'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 3 },
-                          item: 2,
-                          required: false,
-                          uri: '#/2'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/2',
-                            required: false,
-                            value: '3'
-                          }
-                        }
-                      }
-                    ],
-                    name: '#/',
-                    selectedIndex: 2
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `oneOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', oneOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
-
-            const values = {
-              '#/': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  selectedIndex: 2
-                },
-                elements: {
-                  oneOf: {
-                    items: [
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 1 },
-                          item: 0,
-                          required: false,
-                          uri: '#/0'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/0',
-                            required: false,
-                            value: '1'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 2 },
-                          item: 1,
-                          required: false,
-                          uri: '#/1'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/1',
-                            required: false,
-                            value: '2'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 3 },
-                          item: 2,
-                          required: false,
-                          uri: '#/2'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/2',
-                            required: false,
-                            value: '3'
-                          }
-                        }
-                      }
-                    ],
-                    name: '#/',
-                    selectedIndex: 2
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `allOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', allOf: [{ minimum: 1 }, { const: 2 }, { maximum: 3 }] }
-
-            const values = {
-              '#/': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  value: '2'
-                },
-                elements: {
-                  field: {
-                    name: '#/',
-                    value: '2'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number' }
-
-            const values = {
-              '#/': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  value: '1'
-                },
-                elements: {
-                  field: {
-                    name: '#/',
-                    value: '1'
-                  }
-                }
-              })
-          })
-        })
-      })
-
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
@@ -11852,71 +11609,251 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
       })
 
-      describe('Transforming `array` type schemas', () => {
+      describe('Transforming `number` type schemas', () => {
         describe('With `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              ]
-            }
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', enum: [1, 2, 3] }
 
             const values = {
-              '#/0': '2'
+              '#/': '2'
             }
 
             return expect(transform(schema, values))
               .to.eql({
                 meta: {
-                  type: 'array',
+                  type: 'number',
                   schema,
-                  uri: '#/'
+                  uri: '#/',
+                  selectedIndex: 2
                 },
                 elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        selectedIndex: 2,
-                        item: 0
-                      },
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false,
-                          selectedIndex: 2
-                        }
-                      }
-                    }
-                  ]
+                  enum: {
+                    items: [
+                      1,
+                      2,
+                      3
+                    ],
+                    name: '#/',
+                    selectedIndex: 2
+                  }
                 }
               })
           })
+        })
 
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
+
+            const values = {
+              '#/': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  selectedIndex: 2
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 1 },
+                          item: 0,
+                          required: false,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 2 },
+                          item: 1,
+                          required: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: '2'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 3 },
+                          item: 2,
+                          required: false,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: '3'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/',
+                    selectedIndex: 2
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
+
+            const values = {
+              '#/': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  selectedIndex: 2
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 1 },
+                          item: 0,
+                          required: false,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 2 },
+                          item: 1,
+                          required: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: '2'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 3 },
+                          item: 2,
+                          required: false,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: '3'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/',
+                    selectedIndex: 2
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { const: 2 }, { maximum: 3 }] }
+
+            const values = {
+              '#/': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  value: '2'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '2'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number' }
+
+            const values = {
+              '#/': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  value: '1'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '1'
+                  }
+                }
+              })
+          })
+        })
+      })
+
+      describe('Transforming `array` type schemas', () => {
+        describe('With `enum`', () => {
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -11968,6 +11905,69 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             'string (1)',
                             'string (2)',
                             'string (3)'
+                          ],
+                          name: '#/0',
+                          required: false,
+                          selectedIndex: 2
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              ]
+            }
+
+            const values = {
+              '#/0': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        selectedIndex: 2,
+                        item: 0
+                      },
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
                           ],
                           name: '#/0',
                           required: false,
@@ -12250,100 +12250,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number',
-                      enum: [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -12428,6 +12334,100 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number',
+                      enum: [
+                        1,
+                        2,
+                        3
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -13320,96 +13320,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -13490,6 +13400,96 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -14436,67 +14436,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'number',
-                enum: [
-                  1,
-                  2,
-                  3
-                ]
-              }
-            }
-
-            const values = {
-              '#/0': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false,
-                          selectedIndex: 2
-                        }
-                      },
-                      meta: {
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        selectedIndex: 2,
-                        type: 'number',
-                        uri: '#/0'
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -14551,6 +14490,67 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           required: false,
                           selectedIndex: 2
                         }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'number',
+                enum: [
+                  1,
+                  2,
+                  3
+                ]
+              }
+            }
+
+            const values = {
+              '#/0': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
+                          ],
+                          name: '#/0',
+                          required: false,
+                          selectedIndex: 2
+                        }
+                      },
+                      meta: {
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        selectedIndex: 2,
+                        type: 'number',
+                        uri: '#/0'
                       }
                     }
                   ]
@@ -14662,98 +14662,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                ]
-              }
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -14836,6 +14744,98 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -15714,94 +15714,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              }
-            }
-
-            const values = {
-              '#/0/0': '2'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false,
-                                selectedIndex: 2
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              selectedIndex: 2,
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -15880,6 +15792,94 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 required: false,
                                 selectedIndex: 2
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              }
+            }
+
+            const values = {
+              '#/0/0': '2'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false,
+                                selectedIndex: 2
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              selectedIndex: 2,
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -16793,54 +16793,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         describe('Without `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number'
-                }
-              ]
-            }
-
-            const values = {
-              '#/0': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number'
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        value: '1',
-                        item: 0
-                      },
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false,
-                          value: '1'
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -16881,6 +16833,54 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           name: '#/0',
                           required: false,
                           value: 'string'
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number'
+                }
+              ]
+            }
+
+            const values = {
+              '#/0': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number'
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        value: '1',
+                        item: 0
+                      },
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false,
+                          value: '1'
                         }
                       }
                     }
@@ -17106,80 +17106,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number'
-                    }
-                  ]
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -17247,6 +17173,80 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number'
+                    }
+                  ]
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -17922,76 +17922,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number'
-                  }
-                }
-              ]
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -18055,6 +17985,76 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number'
+                  }
+                }
+              ]
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -18745,52 +18745,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'number'
-              }
-            }
-
-            const values = {
-              '#/0': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false,
-                          value: '1'
-                        }
-                      },
-                      meta: {
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'number'
-                        },
-                        value: '1',
-                        type: 'number',
-                        uri: '#/0'
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -18830,6 +18784,52 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           required: false,
                           value: 'string'
                         }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'number'
+              }
+            }
+
+            const values = {
+              '#/0': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false,
+                          value: '1'
+                        }
+                      },
+                      meta: {
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number'
+                        },
+                        value: '1',
+                        type: 'number',
+                        uri: '#/0'
                       }
                     }
                   ]
@@ -18929,78 +18929,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number'
-                  }
-                ]
-              }
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -19066,6 +18994,78 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  }
+                ]
+              }
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -19723,74 +19723,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number'
-                }
-              }
-            }
-
-            const values = {
-              '#/0/0': '1'
-            }
-
-            return expect(transform(schema, values))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false,
-                                value: '1'
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              value: '1',
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -19852,6 +19784,74 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number'
+                }
+              }
+            }
+
+            const values = {
+              '#/0/0': '1'
+            }
+
+            return expect(transform(schema, values))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false,
+                                value: '1'
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              value: '1',
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -21606,255 +21606,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
       })
 
-      describe('Transforming `number` type schemas', () => {
-        describe('With `enum`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', enum: [1, 2, 3] }
-
-            const values = {}
-
-            const params = {
-              '#/': { meta: { component: 'number component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  component: 'number component'
-                },
-                elements: {
-                  enum: {
-                    items: [
-                      1,
-                      2,
-                      3
-                    ],
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `anyOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', anyOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
-
-            const values = {}
-
-            const params = {
-              '#/': { meta: { component: 'number component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  component: 'number component'
-                },
-                elements: {
-                  anyOf: {
-                    items: [
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 1 },
-                          item: 0,
-                          required: false,
-                          uri: '#/0'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/0',
-                            required: false,
-                            value: '1'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 2 },
-                          item: 1,
-                          required: false,
-                          uri: '#/1'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/1',
-                            required: false,
-                            value: '2'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 3 },
-                          item: 2,
-                          required: false,
-                          uri: '#/2'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/2',
-                            required: false,
-                            value: '3'
-                          }
-                        }
-                      }
-                    ],
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `oneOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', oneOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
-
-            const values = {}
-
-            const params = {
-              '#/': { meta: { component: 'number component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  component: 'number component'
-                },
-                elements: {
-                  oneOf: {
-                    items: [
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 1 },
-                          item: 0,
-                          required: false,
-                          uri: '#/0'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/0',
-                            required: false,
-                            value: '1'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 2 },
-                          item: 1,
-                          required: false,
-                          uri: '#/1'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/1',
-                            required: false,
-                            value: '2'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 3 },
-                          item: 2,
-                          required: false,
-                          uri: '#/2'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/2',
-                            required: false,
-                            value: '3'
-                          }
-                        }
-                      }
-                    ],
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `allOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', allOf: [{ minimum: 1 }, { const: 2 }, { maximum: 3 }] }
-
-            const values = {}
-
-            const params = {
-              '#/': { meta: { component: 'number component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  component: 'number component'
-                },
-                elements: {
-                  field: {
-                    name: '#/',
-                    value: '2'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number' }
-
-            const values = {}
-
-            const params = {
-              '#/': { meta: { component: 'number component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/',
-                  component: 'number component'
-                },
-                elements: {
-                  field: {
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-      })
-
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
@@ -22104,72 +21855,257 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
       })
 
-      describe('Transforming `array` type schemas', () => {
+      describe('Transforming `number` type schemas', () => {
         describe('With `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              ]
-            }
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', enum: [1, 2, 3] }
 
             const values = {}
 
             const params = {
-              '#/0': { meta: { component: 'array type index component' } }
+              '#/': { meta: { component: 'number component' } }
             }
 
             return expect(transform(schema, values, params))
               .to.eql({
                 meta: {
-                  type: 'array',
+                  type: 'number',
                   schema,
-                  uri: '#/'
+                  uri: '#/',
+                  component: 'number component'
                 },
                 elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false
-                        }
-                      }
-                    }
-                  ]
+                  enum: {
+                    items: [
+                      1,
+                      2,
+                      3
+                    ],
+                    name: '#/'
+                  }
                 }
               })
           })
+        })
 
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  component: 'number component'
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 1 },
+                          item: 0,
+                          required: false,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 2 },
+                          item: 1,
+                          required: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: '2'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 3 },
+                          item: 2,
+                          required: false,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: '3'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  component: 'number component'
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 1 },
+                          item: 0,
+                          required: false,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 2 },
+                          item: 1,
+                          required: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: '2'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 3 },
+                          item: 2,
+                          required: false,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: '3'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { const: 2 }, { maximum: 3 }] }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  component: 'number component'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '2'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number' }
+
+            const values = {}
+
+            const params = {
+              '#/': { meta: { component: 'number component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/',
+                  component: 'number component'
+                },
+                elements: {
+                  field: {
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+      })
+
+      describe('Transforming `array` type schemas', () => {
+        describe('With `enum`', () => {
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -22223,6 +22159,70 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             'string (1)',
                             'string (2)',
                             'string (3)'
+                          ],
+                          name: '#/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              ]
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
                           ],
                           name: '#/0',
                           required: false
@@ -22508,103 +22508,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number',
-                      enum: [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -22692,6 +22595,103 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number',
+                      enum: [
+                        1,
+                        2,
+                        3
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -23594,99 +23594,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                }
-              ]
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -23770,6 +23677,99 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -24726,6 +24726,68 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
+          it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'string',
+                enum: [
+                  'array type index string type (1)',
+                  'array type index string type (2)',
+                  'array type index string type (3)'
+                ]
+              }
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        component: 'array type index component',
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          enum: [
+                            'array type index string type (1)',
+                            'array type index string type (2)',
+                            'array type index string type (3)'
+                          ],
+                          type: 'string'
+                        },
+                        type: 'string',
+                        uri: '#/0'
+                      },
+                      elements: {
+                        enum: {
+                          items: [
+                            'array type index string type (1)',
+                            'array type index string type (2)',
+                            'array type index string type (3)'
+                          ],
+                          name: '#/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
           it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
             const schema = {
               type: 'array',
@@ -24782,68 +24844,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         type: 'number',
                         uri: '#/0'
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
-          it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'string',
-                enum: [
-                  'array type index string type (1)',
-                  'array type index string type (2)',
-                  'array type index string type (3)'
-                ]
-              }
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        component: 'array type index component',
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          enum: [
-                            'array type index string type (1)',
-                            'array type index string type (2)',
-                            'array type index string type (3)'
-                          ],
-                          type: 'string'
-                        },
-                        type: 'string',
-                        uri: '#/0'
-                      },
-                      elements: {
-                        enum: {
-                          items: [
-                            'array type index string type (1)',
-                            'array type index string type (2)',
-                            'array type index string type (3)'
-                          ],
-                          name: '#/0',
-                          required: false
-                        }
                       }
                     }
                   ]
@@ -24957,101 +24957,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                ]
-              }
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -25137,6 +25042,101 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -26021,97 +26021,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              }
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -26193,6 +26102,97 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              }
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -27134,55 +27134,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         describe('Without `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number'
-                }
-              ]
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number'
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      },
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -27214,6 +27165,55 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'string',
                         schema: {
                           type: 'string'
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
+                      },
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number'
+                }
+              ]
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number'
                         },
                         rootSchema: schema,
                         uri: '#/0',
@@ -27448,83 +27448,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number'
-                    }
-                  ]
-                }
-              ]
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -27595,6 +27518,83 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number'
+                    }
+                  ]
+                }
+              ]
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -28277,79 +28277,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number'
-                  }
-                }
-              ]
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -28416,6 +28343,79 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number'
+                  }
+                }
+              ]
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -29130,53 +29130,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'number'
-              }
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false
-                        }
-                      },
-                      meta: {
-                        component: 'array type index component',
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'number'
-                        },
-                        type: 'number',
-                        uri: '#/0'
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -29217,6 +29170,53 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           name: '#/0',
                           required: false
                         }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'number'
+              }
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false
+                        }
+                      },
+                      meta: {
+                        component: 'array type index component',
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number'
+                        },
+                        type: 'number',
+                        uri: '#/0'
                       }
                     }
                   ]
@@ -29320,81 +29320,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number'
-                  }
-                ]
-              }
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -29463,6 +29388,81 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  }
+                ]
+              }
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -30127,77 +30127,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number'
-                }
-              }
-            }
-
-            const values = {}
-
-            const params = {
-              '#/0': { meta: { component: 'array type index component' } },
-              '#/0/0': { meta: { component: 'array type index array type index component' } }
-            }
-
-            return expect(transform(schema, values, params))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              component: 'array type index array type index component',
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        component: 'array type index component',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -30262,6 +30191,77 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number'
+                }
+              }
+            }
+
+            const values = {}
+
+            const params = {
+              '#/0': { meta: { component: 'array type index component' } },
+              '#/0/0': { meta: { component: 'array type index array type index component' } }
+            }
+
+            return expect(transform(schema, values, params))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              component: 'array type index array type index component',
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        component: 'array type index component',
+                        item: 0
                       }
                     }
                   ]
@@ -31997,220 +31997,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           })
       })
 
-      describe('Transforming `number` type schemas', () => {
-        describe('With `enum`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', enum: [1, 2, 3] }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  enum: {
-                    items: [
-                      1,
-                      2,
-                      3
-                    ],
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `anyOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', anyOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  anyOf: {
-                    items: [
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 1 },
-                          item: 0,
-                          required: false,
-                          uri: '#/0'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/0',
-                            required: false,
-                            value: '1'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 2 },
-                          item: 1,
-                          required: false,
-                          uri: '#/1'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/1',
-                            required: false,
-                            value: '2'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 3 },
-                          item: 2,
-                          required: false,
-                          uri: '#/2'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/2',
-                            required: false,
-                            value: '3'
-                          }
-                        }
-                      }
-                    ],
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `oneOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', oneOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  oneOf: {
-                    items: [
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 1 },
-                          item: 0,
-                          required: false,
-                          uri: '#/0'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/0',
-                            required: false,
-                            value: '1'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 2 },
-                          item: 1,
-                          required: false,
-                          uri: '#/1'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/1',
-                            required: false,
-                            value: '2'
-                          }
-                        }
-                      },
-                      {
-                        meta: {
-                          type: 'number',
-                          rootSchema: schema,
-                          schema: { const: 3 },
-                          item: 2,
-                          required: false,
-                          uri: '#/2'
-                        },
-                        elements: {
-                          field: {
-                            name: '#/2',
-                            required: false,
-                            value: '3'
-                          }
-                        }
-                      }
-                    ],
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('With `allOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number', allOf: [{ minimum: 1 }, { const: 2 }, { maximum: 3 }] }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  field: {
-                    name: '#/',
-                    value: '2'
-                  }
-                }
-              })
-          })
-        })
-
-        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          it('transforms `number` type schemas', () => {
-            const schema = { type: 'number' }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'number',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  field: {
-                    name: '#/'
-                  }
-                }
-              })
-          })
-        })
-      })
-
       describe('Transforming `string` type schemas', () => {
         describe('With `enum`', () => {
           it('transforms `string` type schemas', () => {
@@ -32425,65 +32211,222 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
       })
 
-      describe('Transforming `array` type schemas', () => {
+      describe('Transforming `number` type schemas', () => {
         describe('With `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              ]
-            }
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', enum: [1, 2, 3] }
 
             return expect(transform(schema))
               .to.eql({
                 meta: {
-                  type: 'array',
+                  type: 'number',
                   schema,
                   uri: '#/'
                 },
                 elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false
-                        }
-                      }
-                    }
-                  ]
+                  enum: {
+                    items: [
+                      1,
+                      2,
+                      3
+                    ],
+                    name: '#/'
+                  }
                 }
               })
           })
+        })
 
+        describe('With `anyOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', anyOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  anyOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 1 },
+                          item: 0,
+                          required: false,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 2 },
+                          item: 1,
+                          required: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: '2'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 3 },
+                          item: 2,
+                          required: false,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: '3'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `oneOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', oneOf: [{ const: 1 }, { const: 2 }, { const: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  oneOf: {
+                    items: [
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 1 },
+                          item: 0,
+                          required: false,
+                          uri: '#/0'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/0',
+                            required: false,
+                            value: '1'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 2 },
+                          item: 1,
+                          required: false,
+                          uri: '#/1'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/1',
+                            required: false,
+                            value: '2'
+                          }
+                        }
+                      },
+                      {
+                        meta: {
+                          type: 'number',
+                          rootSchema: schema,
+                          schema: { const: 3 },
+                          item: 2,
+                          required: false,
+                          uri: '#/2'
+                        },
+                        elements: {
+                          field: {
+                            name: '#/2',
+                            required: false,
+                            value: '3'
+                          }
+                        }
+                      }
+                    ],
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('With `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number', allOf: [{ minimum: 1 }, { const: 2 }, { maximum: 3 }] }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/',
+                    value: '2'
+                  }
+                }
+              })
+          })
+        })
+
+        describe('Without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+          it('transforms `number` type schemas', () => {
+            const schema = { type: 'number' }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'number',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  field: {
+                    name: '#/'
+                  }
+                }
+              })
+          })
+        })
+      })
+
+      describe('Transforming `array` type schemas', () => {
+        describe('With `enum`', () => {
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -32530,6 +32473,63 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             'string (1)',
                             'string (2)',
                             'string (3)'
+                          ],
+                          name: '#/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              ]
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
                           ],
                           name: '#/0',
                           required: false
@@ -32788,94 +32788,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number',
-                      enum: [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -32954,6 +32866,94 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number',
+                      enum: [
+                        1,
+                        2,
+                        3
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -33805,90 +33805,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                }
-              ]
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -33963,6 +33879,90 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                }
+              ]
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -34861,61 +34861,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'number',
-                enum: [
-                  1,
-                  2,
-                  3
-                ]
-              }
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        enum: {
-                          items: [
-                            1,
-                            2,
-                            3
-                          ],
-                          name: '#/0',
-                          required: false
-                        }
-                      },
-                      meta: {
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'number',
-                          enum: [
-                            1,
-                            2,
-                            3
-                          ]
-                        },
-                        type: 'number',
-                        uri: '#/0'
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -34964,6 +34909,61 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           name: '#/0',
                           required: false
                         }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'number',
+                enum: [
+                  1,
+                  2,
+                  3
+                ]
+              }
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        enum: {
+                          items: [
+                            1,
+                            2,
+                            3
+                          ],
+                          name: '#/0',
+                          required: false
+                        }
+                      },
+                      meta: {
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number',
+                          enum: [
+                            1,
+                            2,
+                            3
+                          ]
+                        },
+                        type: 'number',
+                        uri: '#/0'
                       }
                     }
                   ]
@@ -35063,92 +35063,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number',
-                    enum: [
-                      1,
-                      2,
-                      3
-                    ]
-                  }
-                ]
-              }
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number',
-                              enum: [
-                                1,
-                                2,
-                                3
-                              ]
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -35225,6 +35139,92 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number',
+                    enum: [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ]
+              }
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number',
+                              enum: [
+                                1,
+                                2,
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -36058,88 +36058,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number',
-                  enum: [
-                    1,
-                    2,
-                    3
-                  ]
-                }
-              }
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number',
-                            enum: [
-                              1,
-                              2,
-                              3
-                            ]
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              enum: {
-                                items: [
-                                  1,
-                                  2,
-                                  3
-                                ],
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number',
-                                enum: [
-                                  1,
-                                  2,
-                                  3
-                                ]
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -36212,6 +36130,88 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 name: '#/0/0',
                                 required: false
                               }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number',
+                  enum: [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              }
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number',
+                            enum: [
+                              1,
+                              2,
+                              3
+                            ]
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              enum: {
+                                items: [
+                                  1,
+                                  2,
+                                  3
+                                ],
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number',
+                                enum: [
+                                  1,
+                                  2,
+                                  3
+                                ]
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
                             }
                           }
                         ]
@@ -36988,48 +36988,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         describe('Without `enum`', () => {
-          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'number'
-                }
-              ]
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        required: false,
-                        type: 'number',
-                        schema: {
-                          type: 'number'
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      },
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -37055,6 +37013,48 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'string',
                         schema: {
                           type: 'string'
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
+                      },
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'number'
+                }
+              ]
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        required: false,
+                        type: 'number',
+                        schema: {
+                          type: 'number'
                         },
                         rootSchema: schema,
                         uri: '#/0',
@@ -37261,74 +37261,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: [
-                    {
-                      type: 'number'
-                    }
-                  ]
-                }
-              ]
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -37390,6 +37322,74 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: [
+                    {
+                      type: 'number'
+                    }
+                  ]
+                }
+              ]
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -38020,70 +38020,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: [
-                {
-                  type: 'array',
-                  items: {
-                    type: 'number'
-                  }
-                }
-              ]
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -38141,6 +38077,70 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: [
+                {
+                  type: 'array',
+                  items: {
+                    type: 'number'
+                  }
+                }
+              ]
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -38797,46 +38797,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'number'
-              }
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      meta: {
-                        item: 0,
-                        required: false,
-                        rootSchema: schema,
-                        schema: {
-                          type: 'number'
-                        },
-                        type: 'number',
-                        uri: '#/0'
-                      },
-                      elements: {
-                        field: {
-                          name: '#/0',
-                          required: false
-                        }
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -38863,6 +38823,46 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           type: 'string'
                         },
                         type: 'string',
+                        uri: '#/0'
+                      },
+                      elements: {
+                        field: {
+                          name: '#/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'number'
+              }
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        item: 0,
+                        required: false,
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number'
+                        },
+                        type: 'number',
                         uri: '#/0'
                       },
                       elements: {
@@ -38957,72 +38957,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: [
-                  {
-                    type: 'number'
-                  }
-                ]
-              }
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: [
-                            {
-                              type: 'number'
-                            }
-                          ]
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -39082,6 +39016,72 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: [
+                  {
+                    type: 'number'
+                  }
+                ]
+              }
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'number'
+                            }
+                          ]
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]
@@ -39694,68 +39694,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
               })
           })
 
-          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
-            const schema = {
-              type: 'array',
-              items: {
-                type: 'array',
-                items: {
-                  type: 'number'
-                }
-              }
-            }
-
-            return expect(transform(schema))
-              .to.eql({
-                meta: {
-                  type: 'array',
-                  schema,
-                  uri: '#/'
-                },
-                elements: {
-                  fields: [
-                    {
-                      elements: {
-                        fields: [
-                          {
-                            elements: {
-                              field: {
-                                name: '#/0/0',
-                                required: false
-                              }
-                            },
-                            meta: {
-                              item: 0,
-                              required: false,
-                              rootSchema: schema,
-                              schema: {
-                                type: 'number'
-                              },
-                              type: 'number',
-                              uri: '#/0/0'
-                            }
-                          }
-                        ]
-                      },
-                      meta: {
-                        required: false,
-                        type: 'array',
-                        schema: {
-                          type: 'array',
-                          items: {
-                            type: 'number'
-                          }
-                        },
-                        rootSchema: schema,
-                        uri: '#/0',
-                        item: 0
-                      }
-                    }
-                  ]
-                }
-              })
-          })
-
           it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
             const schema = {
               type: 'array',
@@ -39811,6 +39749,68 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              })
+          })
+
+          it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+            const schema = {
+              type: 'array',
+              items: {
+                type: 'array',
+                items: {
+                  type: 'number'
+                }
+              }
+            }
+
+            return expect(transform(schema))
+              .to.eql({
+                meta: {
+                  type: 'array',
+                  schema,
+                  uri: '#/'
+                },
+                elements: {
+                  fields: [
+                    {
+                      elements: {
+                        fields: [
+                          {
+                            elements: {
+                              field: {
+                                name: '#/0/0',
+                                required: false
+                              }
+                            },
+                            meta: {
+                              item: 0,
+                              required: false,
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              type: 'number',
+                              uri: '#/0/0'
+                            }
+                          }
+                        ]
+                      },
+                      meta: {
+                        required: false,
+                        type: 'array',
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'number'
+                          }
+                        },
+                        rootSchema: schema,
+                        uri: '#/0',
+                        item: 0
                       }
                     }
                   ]

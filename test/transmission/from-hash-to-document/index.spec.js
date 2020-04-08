@@ -4,9 +4,9 @@ import { expect } from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/from-hash-to-document'
 
-debug.disable()
-
 describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
+  before(() => debug.disable())
+
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')
@@ -107,17 +107,6 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         })
     })
 
-    it('transforms `number` type schemas', () => {
-      const schema = { type: 'number' }
-
-      const values = {
-        '#/': '1'
-      }
-
-      return expect(transform(schema, values))
-        .to.eql(1)
-    })
-
     it('transforms `string` type schemas', () => {
       const schema = { type: 'string' }
 
@@ -129,25 +118,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         .to.eql('mock string')
     })
 
+    it('transforms `number` type schemas', () => {
+      const schema = { type: 'number' }
+
+      const values = {
+        '#/': '1'
+      }
+
+      return expect(transform(schema, values))
+        .to.eql(1)
+    })
+
     describe('Transforming `array` type schemas', () => {
-      it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'number'
-            }
-          ]
-        }
-
-        const values = {
-          '#/0': '1'
-        }
-
-        return expect(transform(schema, values))
-          .to.eql([1])
-      })
-
       it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
         const schema = {
           type: 'array',
@@ -166,6 +148,24 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           .to.eql(['mock array type index string'])
       })
 
+      it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+        const schema = {
+          type: 'array',
+          items: [
+            {
+              type: 'number'
+            }
+          ]
+        }
+
+        const values = {
+          '#/0': '1'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([1])
+      })
+
       it('transforms `array` type schemas (`items` is an array of `array` type)', () => {
         const schema = {
           type: 'array',
@@ -182,7 +182,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           .to.eql([])
       })
 
-      it('transforms `array` type schemas (`items` is an array and `items` is an array)', () => {
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array)', () => {
         const schema = {
           type: 'array',
           items: [
@@ -209,7 +209,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           .to.eql([['mock array type index string type', 1]])
       })
 
-      it('transforms `array` type schemas (`items` is an array and `items` is an object)', () => {
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object)', () => {
         const schema = {
           type: 'array',
           items: [
@@ -257,30 +257,6 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }])
       })
 
-      it('transforms `array` type schemas (`items` is an object of `object` type)', () => {
-        const schema = {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'number' }
-            }
-          }
-        }
-
-        const values = {
-          '#/0/one': 'mock array type index object type key string (one)',
-          '#/0/two': '1'
-        }
-
-        return expect(transform(schema, values))
-          .to.eql([{
-            one: 'mock array type index object type key string (one)',
-            two: 1
-          }])
-      })
-
       it('transforms `array` type schemas (`items` is an array of `boolean` type)', () => {
         const schema = {
           type: 'array',
@@ -307,6 +283,153 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
               type: 'null'
             }
           ]
+        }
+
+        const values = {
+          '#/0': 'null'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([null])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'string'
+          }
+        }
+
+        const values = {
+          '#/0': 'mock array type index string'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql(['mock array type index string'])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'number'
+          }
+        }
+
+        const values = {
+          '#/0': '1'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([1])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `array` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'array'
+          }
+        }
+
+        const values = {}
+
+        return expect(transform(schema, values))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              },
+              {
+                type: 'number'
+              }
+            ]
+          }
+        }
+
+        const values = {
+          '#/0/0': 'mock array type index string type',
+          '#/0/1': '1'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([['mock array type index string type', 1]])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'array',
+            items: {
+              type: 'string'
+            }
+          }
+        }
+
+        const values = {
+          '#/0/0': 'mock array type index string type (0)',
+          '#/0/1': 'mock array type index string type (1)'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([['mock array type index string type (0)', 'mock array type index string type (1)']])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `object` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'number' }
+            }
+          }
+        }
+
+        const values = {
+          '#/0/one': 'mock array type index object type key string (one)',
+          '#/0/two': '1'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([{
+            one: 'mock array type index object type key string (one)',
+            two: 1
+          }])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `boolean` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'boolean'
+          }
+        }
+
+        const values = {
+          '#/0': 'true'
+        }
+
+        return expect(transform(schema, values))
+          .to.eql([true])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `null` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'null'
+          }
         }
 
         const values = {
@@ -443,13 +566,6 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         })
     })
 
-    it('transforms `number` type schemas', () => {
-      const schema = { type: 'number' }
-
-      return expect(transform(schema))
-        .to.eql(undefined)
-    })
-
     it('transforms `string` type schemas', () => {
       const schema = { type: 'string' }
 
@@ -457,13 +573,20 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         .to.eql(undefined)
     })
 
+    it('transforms `number` type schemas', () => {
+      const schema = { type: 'number' }
+
+      return expect(transform(schema))
+        .to.eql(undefined)
+    })
+
     describe('Transforming `array` type schemas', () => {
-      it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+      it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
         const schema = {
           type: 'array',
           items: [
             {
-              type: 'number'
+              type: 'string'
             }
           ]
         }
@@ -472,12 +595,12 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           .to.eql([])
       })
 
-      it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
+      it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
         const schema = {
           type: 'array',
           items: [
             {
-              type: 'string'
+              type: 'number'
             }
           ]
         }
@@ -557,22 +680,6 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           .to.eql([])
       })
 
-      it('transforms `array` type schemas (`items` is an object of `object` type)', () => {
-        const schema = {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'number' }
-            }
-          }
-        }
-
-        return expect(transform(schema))
-          .to.eql([])
-      })
-
       it('transforms `array` type schemas (`items` is an array of `boolean` type)', () => {
         const schema = {
           type: 'array',
@@ -595,6 +702,120 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
               type: 'null'
             }
           ]
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'string'
+          }
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'number'
+          }
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `array` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'array'
+          }
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object and `items` is an array)', () => {
+        const schema = {
+          type: 'array',
+          items: [
+            {
+              type: 'array',
+              items: [
+                {
+                  type: 'string'
+                },
+                {
+                  type: 'number'
+                }
+              ]
+            }
+          ]
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object and `items` is an object)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'array',
+            items: {
+              type: 'string'
+            }
+          }
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `object` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'number' }
+            }
+          }
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `boolean` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'boolean'
+          }
+        }
+
+        return expect(transform(schema))
+          .to.eql([])
+      })
+
+      it('transforms `array` type schemas (`items` is an object of `null` type)', () => {
+        const schema = {
+          type: 'array',
+          items: {
+            type: 'null'
+          }
+
         }
 
         return expect(transform(schema))

@@ -1,3 +1,5 @@
+import debug from 'debug'
+
 import { expect } from 'chai'
 
 import {
@@ -39,6 +41,8 @@ import {
 } from 'shinkansen-transmission/transmission/common'
 
 describe('shinkansen-transmission/transmission/common', () => {
+  before(() => debug.disable())
+
   describe('`getTitle`', () => {
     it('is a function', () => {
       expect(getTitle)

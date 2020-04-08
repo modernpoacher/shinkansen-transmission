@@ -104,11 +104,11 @@ export const transformObjectSchemaObject = (schema, values, { uri: parentUri, ke
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export const transformObjectSchemaArray = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformArray(schema, values, uri, uri) // uri is parentUri and uri
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export const transformObjectSchemaString = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformString(schema, values, parentUri, uri)
-
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export const transformObjectSchemaNumber = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformNumber(schema, values, parentUri, uri)
+
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+export const transformObjectSchemaString = (schema, values, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) => transformString(schema, values, parentUri, uri)
 
 export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
@@ -127,11 +127,11 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
     case 'array':
       return transformObjectSchemaArray(schema, values, params)
 
-    case 'string':
-      return transformObjectSchemaString(schema, values, params)
-
     case 'number':
       return transformObjectSchemaNumber(schema, values, params)
+
+    case 'string':
+      return transformObjectSchemaString(schema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
@@ -150,11 +150,11 @@ export const transformArraySchemaObject = (schema, values, { uri: parentUri, ind
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export const transformArraySchemaArray = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformArray(schema, values, uri, uri) // uri is parentUri and uri
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
-export const transformArraySchemaString = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformString(schema, values, parentUri, uri)
-
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export const transformArraySchemaNumber = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformNumber(schema, values, parentUri, uri)
+
+// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+export const transformArraySchemaString = (schema, values, { uri: parentUri, index: arrayIndex }, uri = getUri(parentUri, arrayIndex)) => transformString(schema, values, parentUri, uri)
 
 export function transformArraySchema (schema = {}, values = {}, params = {}) {
   const { type } = schema
@@ -173,11 +173,11 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
     case 'array':
       return transformArraySchemaArray(schema, values, params)
 
-    case 'string':
-      return transformArraySchemaString(schema, values, params)
-
     case 'number':
       return transformArraySchemaNumber(schema, values, params)
+
+    case 'string':
+      return transformArraySchemaString(schema, values, params)
 
     default:
       throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
@@ -276,38 +276,6 @@ export function transformArray ({ items = [] /* array or object */ }, values, pa
   )
 }
 
-export function transformString (schema, values, parentUri, uri) {
-  if (Reflect.has(values, uri)) {
-    const value = Reflect.get(values, uri)
-
-    if (hasEnum(schema)) {
-      const items = getEnum(schema)
-
-      return transformValueFor(value, items)
-    } else {
-      if (hasAnyOf(schema)) {
-        const items = getAnyOf(schema)
-
-        return transformValueFor(value, items)
-      } else {
-        if (hasOneOf(schema)) {
-          const items = getOneOf(schema)
-
-          return transformValueFor(value, items)
-        }
-      }
-    }
-
-    try {
-      return toString(value)
-    } catch (e) {
-      handleError(e)
-    }
-
-    return value
-  }
-}
-
 export function transformNumber (schema, values, parentUri, uri) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
@@ -332,6 +300,38 @@ export function transformNumber (schema, values, parentUri, uri) {
 
     try {
       return toNumber(value)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return value
+  }
+}
+
+export function transformString (schema, values, parentUri, uri) {
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    if (hasEnum(schema)) {
+      const items = getEnum(schema)
+
+      return transformValueFor(value, items)
+    } else {
+      if (hasAnyOf(schema)) {
+        const items = getAnyOf(schema)
+
+        return transformValueFor(value, items)
+      } else {
+        if (hasOneOf(schema)) {
+          const items = getOneOf(schema)
+
+          return transformValueFor(value, items)
+        }
+      }
+    }
+
+    try {
+      return toString(value)
     } catch (e) {
       handleError(e)
     }
