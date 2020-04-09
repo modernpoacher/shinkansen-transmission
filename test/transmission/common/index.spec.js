@@ -3,19 +3,14 @@ import debug from 'debug'
 import { expect } from 'chai'
 
 import {
-  getTitle,
-  getDescription,
-  getIsReadOnly,
-  getIsWriteOnly,
-  hasEnum,
-  getEnum,
-  hasAllOf,
-  getAllOf,
-  hasOneOf,
-  getOneOf,
-  hasAnyOf,
-  getAnyOf,
-  getUri,
+  getSelectedItems,
+  getMetaProps,
+  getMetaDefaultValue,
+  getMetaValue,
+  getElementsTitleProps,
+  getElementsDescriptionProps,
+  getElementsFieldProps,
+  getElementsFieldValue,
   getMin,
   getMax,
   getMinLength,
@@ -29,93 +24,88 @@ import {
   getMaxProperties,
   getIsExclusiveMin,
   getIsExclusiveMax,
-  getPattern,
   getStep,
-  getMetaProps,
-  getMetaDefaultValue,
-  getMetaValue,
-  getElementsTitleProps,
-  getElementsDescriptionProps,
-  getElementsFieldProps,
-  getElementsFieldValue
+  isObject,
+  isArray,
+  toConstValue,
+  isConstValue,
+  toDefaultValue,
+  isDefaultValue,
+  getTitle,
+  getDescription,
+  getIsReadOnly,
+  getIsWriteOnly,
+  hasEnum,
+  getEnum,
+  hasConst,
+  getConst,
+  hasDefault,
+  getDefault,
+  hasAnyOf,
+  getAnyOf,
+  hasOneOf,
+  getOneOf,
+  hasAllOf,
+  getAllOf,
+  getUri,
+  getPattern
 } from 'shinkansen-transmission/transmission/common'
 
 describe('shinkansen-transmission/transmission/common', () => {
   before(() => debug.disable())
 
-  describe('`getTitle`', () => {
+  describe('`getSelectedItems`', () => {
     it('is a function', () => {
-      expect(getTitle)
+      expect(getSelectedItems)
         .to.be.a('function')
     })
   })
 
-  describe('`getDescription`', () => {
+  describe('`getMetaProps`', () => {
     it('is a function', () => {
-      expect(getDescription)
+      expect(getMetaProps)
         .to.be.a('function')
     })
   })
 
-  describe('`getIsReadOnly`', () => {
+  describe('`getMetaDefaultValue`', () => {
     it('is a function', () => {
-      expect(getIsReadOnly)
+      expect(getMetaDefaultValue)
         .to.be.a('function')
     })
   })
 
-  describe('`getIsWriteOnly`', () => {
+  describe('`getMetaValue`', () => {
     it('is a function', () => {
-      expect(getIsWriteOnly)
+      expect(getMetaValue)
         .to.be.a('function')
     })
   })
 
-  describe('`hasEnum`', () => {
+  describe('`getElementsTitleProps`', () => {
     it('is a function', () => {
-      expect(hasEnum)
+      expect(getElementsTitleProps)
         .to.be.a('function')
     })
   })
 
-  describe('`getEnum`', () => {
+  describe('`getElementsDescriptionProps`', () => {
     it('is a function', () => {
-      expect(getEnum)
+      expect(getElementsDescriptionProps)
         .to.be.a('function')
     })
   })
 
-  describe('`hasOneOf`', () => {
+  describe('`getElementsFieldProps`', () => {
     it('is a function', () => {
-      expect(hasOneOf)
+      expect(getElementsFieldProps)
         .to.be.a('function')
     })
   })
 
-  describe('`getOneOf`', () => {
+  describe('`getElementsFieldValue`', () => {
     it('is a function', () => {
-      expect(getOneOf)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`hasAnyOf`', () => {
-    it('is a function', () => {
-      expect(hasAnyOf)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`getAnyOf`', () => {
-    it('is a function', () => {
-      expect(getAnyOf)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`getUri`', () => {
-    it('is a function', () => {
-      expect(getUri)
+      expect(getElementsFieldValue)
         .to.be.a('function')
     })
   })
@@ -211,13 +201,6 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`getPattern`', () => {
-    it('is a function', () => {
-      expect(getPattern)
-        .to.be.a('function')
-    })
-  })
-
   describe('`getStep`', () => {
     it('is a function', () => {
       expect(getStep)
@@ -225,255 +208,208 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`getMetaProps`', () => {
+  describe('`isObject`', () => {
     it('is a function', () => {
-      expect(getMetaProps)
+      expect(isObject)
         .to.be.a('function')
     })
   })
 
-  describe('`getMetaDefaultValue`', () => {
+  describe('`isArray`', () => {
+    it('is a function', () => {
+      expect(isArray)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`toConstValue`', () => {
+    it('is a function', () => {
+      expect(toConstValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`isConstValue`', () => {
+    it('is a function', () => {
+      expect(isConstValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`toDefaultValue`', () => {
+    it('is a function', () => {
+      expect(toDefaultValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`isDefaultValue`', () => {
+    it('is a function', () => {
+      expect(isDefaultValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getTitle`', () => {
+    it('is a function', () => {
+      expect(getTitle)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getDescription`', () => {
+    it('is a function', () => {
+      expect(getDescription)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getIsReadOnly`', () => {
+    it('is a function', () => {
+      expect(getIsReadOnly)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getIsWriteOnly`', () => {
+    it('is a function', () => {
+      expect(getIsWriteOnly)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasEnum`', () => {
+    it('is a function', () => {
+      expect(hasEnum)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getEnum`', () => {
+    it('is a function', () => {
+      expect(getEnum)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasConst`', () => {
+    it('is a function', () => {
+      expect(hasConst)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getConst`', () => {
+    it('is a function', () => {
+      expect(getConst)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasOneOf`', () => {
+    it('is a function', () => {
+      expect(hasOneOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getOneOf`', () => {
+    it('is a function', () => {
+      expect(getOneOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasAnyOf`', () => {
+    it('is a function', () => {
+      expect(hasAnyOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getAnyOf`', () => {
+    it('is a function', () => {
+      expect(getAnyOf)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getUri`', () => {
+    it('is a function', () => {
+      expect(getUri)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getPattern`', () => {
+    it('is a function', () => {
+      expect(getPattern)
+        .to.be.a('function')
+    })
+  })
+
+  xdescribe('`getSelectedItems()`', () => {
+    it('is a function', () => {
+      expect(getSelectedItems)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getMetaProps()`', () => {
+    describe('Params has a field for the uri', () => {
+      it('returns an object', () => {
+        expect(getMetaProps({ 'mock schema uri': { meta: { mockParamForUri: 'mock param for uri' } } }, 'mock schema uri'))
+          .to.eql({ mockParamForUri: 'mock param for uri' })
+      })
+    })
+
+    describe('Params does not have a field for the uri', () => {
+      it('returns an object', () => {
+        expect(getMetaProps({}, 'mock schema uri'))
+          .to.eql({})
+      })
+    })
+  })
+
+  xdescribe('`getMetaDefaultValue()`', () => {
     it('is a function', () => {
       expect(getMetaDefaultValue)
         .to.be.a('function')
     })
   })
 
-  describe('`getMetaValue`', () => {
+  xdescribe('`getMetaValue()`', () => {
     it('is a function', () => {
       expect(getMetaValue)
         .to.be.a('function')
     })
   })
 
-  describe('`getElementsTitleProps`', () => {
+  xdescribe('`getElementsTitleProps()`', () => {
     it('is a function', () => {
       expect(getElementsTitleProps)
         .to.be.a('function')
     })
   })
 
-  describe('`getElementsDescriptionProps`', () => {
+  xdescribe('`getElementsDescriptionProps()`', () => {
     it('is a function', () => {
       expect(getElementsDescriptionProps)
         .to.be.a('function')
     })
   })
 
-  describe('`getElementsFieldProps`', () => {
+  xdescribe('`getElementsFieldProps()`', () => {
     it('is a function', () => {
       expect(getElementsFieldProps)
         .to.be.a('function')
     })
   })
 
-  describe('`getElementsFieldValue`', () => {
+  xdescribe('`getElementsFieldValue()`', () => {
     it('is a function', () => {
       expect(getElementsFieldValue)
         .to.be.a('function')
-    })
-  })
-
-  describe('`getTitle()`', () => {
-    describe('Schema has a `title` field', () => {
-      describe('`title` is truthy', () => {
-        it('returns a `title` object', () => {
-          expect(getTitle({ title: 'MOCK TITLE' }))
-            .to.eql({ title: 'MOCK TITLE' })
-        })
-      })
-
-      describe('`title` is falsy', () => {
-        it('returns an object', () => {
-          expect(getTitle({ title: '' }))
-            .to.eql({})
-        })
-      })
-    })
-
-    describe('Schema does not have a `title` field', () => {
-      it('returns an object', () => {
-        expect(getTitle({}))
-          .to.eql({})
-      })
-    })
-  })
-
-  describe('`getDescription()`', () => {
-    describe('Schema has a `description` field', () => {
-      describe('`description` is truthy', () => {
-        it('returns a `description` object', () => {
-          expect(getDescription({ description: 'MOCK DESCRIPTION' }))
-            .to.eql({ description: 'MOCK DESCRIPTION' })
-        })
-      })
-
-      describe('`description` is falsy', () => {
-        it('returns an object', () => {
-          expect(getDescription({ description: '' }))
-            .to.eql({})
-        })
-      })
-    })
-
-    describe('Schema does not have a `description` field', () => {
-      it('returns an object', () => {
-        expect(getDescription({}))
-          .to.eql({})
-      })
-    })
-  })
-
-  describe('`hasEnum()`', () => {
-    describe('Schema has an `enum` field', () => {
-      it('returns true', () => (
-        expect(hasEnum({ enum: [] }))
-          .to.be.true
-      ))
-    })
-
-    describe('Schema does not have an `enum` field', () => {
-      it('returns false', () => (
-        expect(hasEnum({}))
-          .to.be.false
-      ))
-    })
-  })
-
-  describe('`getEnum()`', () => {
-    describe('Schema has an `enum` field', () => {
-      it('returns an array', () => (
-        expect(getEnum({ enum: [] }))
-          .to.eql([])
-      ))
-    })
-
-    describe('Schema does not have an `enum` field', () => {
-      it('returns undefined', () => (
-        expect(getEnum({}))
-          .to.be.undefined
-      ))
-    })
-  })
-
-  describe('`hasAllOf()`', () => {
-    describe('Schema has an `allOf` field', () => {
-      it('returns true', () => (
-        expect(hasAllOf({ allOf: [] }))
-          .to.be.true
-      ))
-    })
-
-    describe('Schema does not have an `allOf` field', () => {
-      it('returns false', () => (
-        expect(hasAllOf({}))
-          .to.be.false
-      ))
-    })
-  })
-
-  describe('`getAllOf()`', () => {
-    describe('Schema has an `allOf` field', () => {
-      it('returns an array', () => {
-        expect(getAllOf({ allOf: [] }))
-          .to.eql([])
-      })
-    })
-
-    describe('Schema does not have an `allOf` field', () => {
-      it('returns undefined', () => (
-        expect(getAllOf({}))
-          .to.be.undefined
-      ))
-    })
-  })
-
-  describe('`hasOneOf()`', () => {
-    describe('Schema has an `oneOf` field', () => {
-      it('returns true', () => (
-        expect(hasOneOf({ oneOf: [] }))
-          .to.be.true
-      ))
-    })
-
-    describe('Schema does not have an `oneOf` field', () => {
-      it('returns false', () => (
-        expect(hasOneOf({}))
-          .to.be.false
-      ))
-    })
-  })
-
-  describe('`getOneOf()`', () => {
-    describe('Schema has an `oneOf` field', () => {
-      it('returns an array', () => {
-        expect(getOneOf({ oneOf: [] }))
-          .to.eql([])
-      })
-    })
-
-    describe('Schema does not have an `oneOf` field', () => {
-      it('returns undefined', () => (
-        expect(getOneOf({}))
-          .to.be.undefined
-      ))
-    })
-  })
-
-  describe('`hasAnyOf()`', () => {
-    describe('Schema has an `anyOf` field', () => {
-      it('returns true', () => (
-        expect(hasAnyOf({ anyOf: [] }))
-          .to.be.true
-      ))
-    })
-
-    describe('Schema does not have an `anyOf` field', () => {
-      it('returns false', () => (
-        expect(hasAnyOf({}))
-          .to.be.false
-      ))
-    })
-  })
-
-  describe('`getAnyOf()`', () => {
-    describe('Schema has an `anyOf` field', () => {
-      it('returns an array', () => {
-        expect(getAnyOf({ anyOf: [] }))
-          .to.eql([])
-      })
-    })
-
-    describe('Schema does not have an `anyOf` field', () => {
-      it('returns undefined', () => (
-        expect(getAnyOf({}))
-          .to.be.undefined
-      ))
-    })
-  })
-
-  describe('`getUri()`', () => {
-    describe('A `uri` is defined', () => {
-      describe('A `resource` is defined', () => {
-        it('returns a string', () => {
-          expect(getUri('mock uri', 'mock resource'))
-            .to.equal('mock uri/mock resource')
-        })
-      })
-
-      describe('A `resource` is not defined', () => {
-        it('returns a string', () => {
-          expect(getUri('mock uri'))
-            .to.equal('mock uri/')
-        })
-      })
-    })
-
-    describe('A `uri` is not defined', () => {
-      it('returns a string', () => {
-        expect(getUri())
-          .to.equal('/')
-      })
     })
   })
 
@@ -802,22 +738,6 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`getPattern()`', () => {
-    describe('Schema has a `pattern` field', () => {
-      it('returns a `pattern` object', () => {
-        expect(getPattern({ pattern: 'MOCK PATTERN' }))
-          .to.eql({ pattern: 'MOCK PATTERN' })
-      })
-    })
-
-    describe('Schema does not have a `pattern` field', () => {
-      it('returns an object', () => {
-        expect(getPattern({}))
-          .to.eql({})
-      })
-    })
-  })
-
   describe('`getStep()`', () => {
     describe('Schema has a `multipleOf` field', () => {
       describe('`multipleOf` is a number', () => {
@@ -843,17 +763,290 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`getMetaProps()`', () => {
-    describe('Params has a field for the uri', () => {
-      it('returns an object', () => {
-        expect(getMetaProps({ 'mock schema uri': { meta: { mockParamForUri: 'mock param for uri' } } }, 'mock schema uri'))
-          .to.eql({ mockParamForUri: 'mock param for uri' })
+  xdescribe('`isObject()`', () => {
+    it('is a function', () => {
+      expect(isObject)
+        .to.be.a('function')
+    })
+  })
+
+  xdescribe('`isArray()`', () => {
+    it('is a function', () => {
+      expect(isArray)
+        .to.be.a('function')
+    })
+  })
+
+  xdescribe('`toConstValue()`', () => {
+    it('is a function', () => {
+      expect(toConstValue)
+        .to.be.a('function')
+    })
+  })
+
+  xdescribe('`isConstValue()`', () => {
+    it('is a function', () => {
+      expect(isConstValue)
+        .to.be.a('function')
+    })
+  })
+
+  xdescribe('`toDefaultValue()`', () => {
+    it('is a function', () => {
+      expect(toDefaultValue)
+        .to.be.a('function')
+    })
+  })
+
+  xdescribe('`isDefaultValue()`', () => {
+    it('is a function', () => {
+      expect(isDefaultValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getTitle()`', () => {
+    describe('Schema has a `title` field', () => {
+      describe('`title` is truthy', () => {
+        it('returns a `title` object', () => {
+          expect(getTitle({ title: 'MOCK TITLE' }))
+            .to.eql({ title: 'MOCK TITLE' })
+        })
+      })
+
+      describe('`title` is falsy', () => {
+        it('returns an object', () => {
+          expect(getTitle({ title: '' }))
+            .to.eql({})
+        })
       })
     })
 
-    describe('Params does not have a field for the uri', () => {
+    describe('Schema does not have a `title` field', () => {
       it('returns an object', () => {
-        expect(getMetaProps({}, 'mock schema uri'))
+        expect(getTitle({}))
+          .to.eql({})
+      })
+    })
+  })
+
+  describe('`getDescription()`', () => {
+    describe('Schema has a `description` field', () => {
+      describe('`description` is truthy', () => {
+        it('returns a `description` object', () => {
+          expect(getDescription({ description: 'MOCK DESCRIPTION' }))
+            .to.eql({ description: 'MOCK DESCRIPTION' })
+        })
+      })
+
+      describe('`description` is falsy', () => {
+        it('returns an object', () => {
+          expect(getDescription({ description: '' }))
+            .to.eql({})
+        })
+      })
+    })
+
+    describe('Schema does not have a `description` field', () => {
+      it('returns an object', () => {
+        expect(getDescription({}))
+          .to.eql({})
+      })
+    })
+  })
+
+  describe('`hasEnum()`', () => {
+    describe('Schema has an `enum` field', () => {
+      it('returns true', () => (
+        expect(hasEnum({ enum: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `enum` field', () => {
+      it('returns false', () => (
+        expect(hasEnum({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getEnum()`', () => {
+    describe('Schema has an `enum` field', () => {
+      it('returns an array', () => (
+        expect(getEnum({ enum: [] }))
+          .to.eql([])
+      ))
+    })
+
+    describe('Schema does not have an `enum` field', () => {
+      it('returns undefined', () => (
+        expect(getEnum({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`hasConst()`', () => {
+    it('is a function', () => {
+      expect(hasConst)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getConst()`', () => {
+    it('is a function', () => {
+      expect(getConst)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasDefault()`', () => {
+    it('is a function', () => {
+      expect(hasDefault)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`getDefault()`', () => {
+    it('is a function', () => {
+      expect(getDefault)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`hasAnyOf()`', () => {
+    describe('Schema has an `anyOf` field', () => {
+      it('returns true', () => (
+        expect(hasAnyOf({ anyOf: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `anyOf` field', () => {
+      it('returns false', () => (
+        expect(hasAnyOf({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getAnyOf()`', () => {
+    describe('Schema has an `anyOf` field', () => {
+      it('returns an array', () => {
+        expect(getAnyOf({ anyOf: [] }))
+          .to.eql([])
+      })
+    })
+
+    describe('Schema does not have an `anyOf` field', () => {
+      it('returns undefined', () => (
+        expect(getAnyOf({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`hasOneOf()`', () => {
+    describe('Schema has an `oneOf` field', () => {
+      it('returns true', () => (
+        expect(hasOneOf({ oneOf: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `oneOf` field', () => {
+      it('returns false', () => (
+        expect(hasOneOf({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getOneOf()`', () => {
+    describe('Schema has an `oneOf` field', () => {
+      it('returns an array', () => {
+        expect(getOneOf({ oneOf: [] }))
+          .to.eql([])
+      })
+    })
+
+    describe('Schema does not have an `oneOf` field', () => {
+      it('returns undefined', () => (
+        expect(getOneOf({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`hasAllOf()`', () => {
+    describe('Schema has an `allOf` field', () => {
+      it('returns true', () => (
+        expect(hasAllOf({ allOf: [] }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `allOf` field', () => {
+      it('returns false', () => (
+        expect(hasAllOf({}))
+          .to.be.false
+      ))
+    })
+  })
+
+  describe('`getAllOf()`', () => {
+    describe('Schema has an `allOf` field', () => {
+      it('returns an array', () => {
+        expect(getAllOf({ allOf: [] }))
+          .to.eql([])
+      })
+    })
+
+    describe('Schema does not have an `allOf` field', () => {
+      it('returns undefined', () => (
+        expect(getAllOf({}))
+          .to.be.undefined
+      ))
+    })
+  })
+
+  describe('`getUri()`', () => {
+    describe('A `uri` is defined', () => {
+      describe('A `resource` is defined', () => {
+        it('returns a string', () => {
+          expect(getUri('mock uri', 'mock resource'))
+            .to.equal('mock uri/mock resource')
+        })
+      })
+
+      describe('A `resource` is not defined', () => {
+        it('returns a string', () => {
+          expect(getUri('mock uri'))
+            .to.equal('mock uri/')
+        })
+      })
+    })
+
+    describe('A `uri` is not defined', () => {
+      it('returns a string', () => {
+        expect(getUri())
+          .to.equal('/')
+      })
+    })
+  })
+
+  describe('`getPattern()`', () => {
+    describe('Schema has a `pattern` field', () => {
+      it('returns a `pattern` object', () => {
+        expect(getPattern({ pattern: 'MOCK PATTERN' }))
+          .to.eql({ pattern: 'MOCK PATTERN' })
+      })
+    })
+
+    describe('Schema does not have a `pattern` field', () => {
+      it('returns an object', () => {
+        expect(getPattern({}))
           .to.eql({})
       })
     })
