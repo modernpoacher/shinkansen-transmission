@@ -497,9 +497,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => (
-                  accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
-                ), [])
+                .map(([key, schema]) => transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
             )
           }
         } else {
@@ -528,9 +526,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => (
-                  accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
-                ), [])
+                .map(([key, schema]) => transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
             )
           }
         }
@@ -690,9 +686,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
 
           const fields = []
             .concat(items)
-            .reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-            ), [])
+            .map((schema, index) => transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
 
           elements = {
             ...title,
@@ -723,9 +717,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
 
           const fields = []
             .concat(items)
-            .reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-            ), [])
+            .map((schema, index) => transformArraySchema(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
 
           elements = {
             ...title,
@@ -1624,9 +1616,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => (
-                  accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
-                ), [])
+                .map(([key, schema]) => transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
             )
           }
         } else {
@@ -1655,9 +1645,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => (
-                  accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
-                ), [])
+                .map(([key, schema]) => transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri, key }))
             )
           }
         }
@@ -1818,9 +1806,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
 
           const fields = []
             .concat(items)
-            .reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri, index }))
-            ), [])
+            .map((schema, index) => transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri, index }))
 
           elements = {
             ...title,
@@ -1851,9 +1837,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
 
           const fields = []
             .concat(items)
-            .reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri, index }))
-            ), [])
+            .map((schema, index) => transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri, index }))
 
           elements = {
             ...title,
@@ -2678,9 +2662,7 @@ export function transformObject (rootSchema, values, params) {
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => (
-                  accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri: parentUri, key }))
-                ), [])
+                .map(([key, schema]) => transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri: parentUri, key }))
             )
           }
         } else {
@@ -2704,9 +2686,7 @@ export function transformObject (rootSchema, values, params) {
             fields: (
               Object
                 .entries(properties)
-                .reduce((accumulator, [key, schema]) => (
-                  accumulator.concat(transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri: parentUri, key }))
-                ), [])
+                .map(([key, schema]) => transformObjectSchema(schema, rootSchema, values, { ...params, required: required.includes(key), parentUri, uri: parentUri, key }))
             )
           }
         }
@@ -2849,9 +2829,7 @@ export function transformArray (rootSchema, values, params) {
 
           const fields = []
             .concat(items)
-            .reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-            ), [])
+            .map((schema, index) => transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
 
           elements = {
             ...title,
@@ -2879,9 +2857,7 @@ export function transformArray (rootSchema, values, params) {
 
           const fields = []
             .concat(items)
-            .reduce((accumulator, schema, index) => (
-              accumulator.concat(transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-            ), [])
+            .map((schema, index) => transformArraySchema(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
 
           elements = {
             ...title,
@@ -3178,7 +3154,7 @@ export function transformString (rootSchema, values, params) {
           const { allOf, ...rest } = rootSchema
           const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          log(itemSchema)
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -3205,8 +3181,6 @@ export function transformString (rootSchema, values, params) {
             }
           }
         } else {
-          log(values, uri, rootSchema, getElementsFieldValue(values, uri, rootSchema))
-
           meta = {
             uri,
             type: 'string',
