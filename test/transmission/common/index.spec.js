@@ -348,10 +348,28 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  xdescribe('`getSelectedItems()`', () => {
-    it('is a function', () => {
-      expect(getSelectedItems)
-        .to.be.a('function')
+  describe('`getSelectedItems()`', () => {
+    describe('Values has a field for the uri', () => {
+      describe('The field is an array', () => {
+        it('returns the array', () => {
+          expect(getSelectedItems({ '#/': ['1'] }, '#/'))
+            .to.eql([1])
+        })
+      })
+
+      describe('The field is not an array', () => {
+        it('returns an array', () => {
+          expect(getSelectedItems({ '#/': '1' }, '#/'))
+            .to.eql([1])
+        })
+      })
+    })
+
+    describe('Values has a field for the uri', () => {
+      it('returns an array', () => {
+        expect(getSelectedItems([]))
+          .to.eql([])
+      })
     })
   })
 
@@ -371,45 +389,162 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  xdescribe('`getMetaDefaultValue()`', () => {
-    it('is a function', () => {
-      expect(getMetaDefaultValue)
-        .to.be.a('function')
+  describe('`getMetaDefaultValue()`', () => {
+    describe('Schema has a `default` field', () => {
+      describe('`default` is a string', () => {
+        it('returns a `defaultValue` object', () => {
+          expect(getMetaDefaultValue({ default: 'MOCK DEFAULT' }))
+            .to.eql({ defaultValue: 'MOCK DEFAULT' })
+        })
+      })
+
+      describe('`default` is not a string', () => {
+        it('returns a `defaultValue` object', () => {
+          expect(getMetaDefaultValue({ default: false }))
+            .to.eql({ defaultValue: 'false' })
+        })
+      })
+    })
+
+    describe('Schema does not have a `default` field', () => {
+      it('returns an object', () => {
+        expect(getMetaDefaultValue({}))
+          .to.eql({})
+      })
     })
   })
 
-  xdescribe('`getMetaValue()`', () => {
-    it('is a function', () => {
-      expect(getMetaValue)
-        .to.be.a('function')
+  describe('`getMetaValue()`', () => {
+    describe('Values has a field for the uri', () => {
+      describe('The value of the field is a string', () => {
+        it('returns a `value` object', () => {
+          expect(getMetaValue({ '#/': 'MOCK VALUE' }, '#/'))
+            .to.eql({ value: 'MOCK VALUE' })
+        })
+      })
+
+      describe('`value` is not a string', () => {
+        it('returns a `value` object', () => {
+          expect(getMetaValue({ '#/': false }, '#/'))
+            .to.eql({ value: 'false' })
+        })
+      })
+    })
+
+    describe('Values does not have a field for the uri', () => {
+      it('returns an object', () => {
+        expect(getMetaValue({}, '#/'))
+          .to.eql({})
+      })
     })
   })
 
-  xdescribe('`getElementsTitleProps()`', () => {
-    it('is a function', () => {
-      expect(getElementsTitleProps)
-        .to.be.a('function')
+  describe('`getElementsTitleProps()`', () => {
+    describe('Params has a `title` field for the uri', () => {
+      it('returns a `title` object', () => {
+        expect(getElementsTitleProps({ '#/': { elements: { title: { text: 'MOCK TITLE' } } } }, '#/'))
+          .to.eql({ text: 'MOCK TITLE' })
+      })
+    })
+
+    describe('Params does not have a `title` field for the uri', () => {
+      it('returns an object', () => {
+        expect(getElementsTitleProps({}, '#/'))
+          .to.eql({})
+      })
     })
   })
 
-  xdescribe('`getElementsDescriptionProps()`', () => {
-    it('is a function', () => {
-      expect(getElementsDescriptionProps)
-        .to.be.a('function')
+  describe('`getElementsDescriptionProps()`', () => {
+    describe('Params has a `description` field for the uri', () => {
+      it('returns a `description` object', () => {
+        expect(getElementsDescriptionProps({ '#/': { elements: { description: { text: 'MOCK DESCRIPTION' } } } }, '#/'))
+          .to.eql({ text: 'MOCK DESCRIPTION' })
+      })
+    })
+
+    describe('Params does not have a `description` field for the uri', () => {
+      it('returns an object', () => {
+        expect(getElementsDescriptionProps({}, '#/'))
+          .to.eql({})
+      })
     })
   })
 
-  xdescribe('`getElementsFieldProps()`', () => {
-    it('is a function', () => {
-      expect(getElementsFieldProps)
-        .to.be.a('function')
+  describe('`getElementsFieldProps()`', () => {
+    describe('Params has a `field` field for the uri', () => {
+      it('returns a `field` object', () => {
+        expect(getElementsFieldProps({ '#/': { elements: { field: { text: 'MOCK FIELD' } } } }, '#/'))
+          .to.eql({ text: 'MOCK FIELD' })
+      })
+    })
+
+    describe('Params does not have a `field` field for the uri', () => {
+      it('returns an object', () => {
+        expect(getElementsFieldProps({}, '#/'))
+          .to.eql({})
+      })
     })
   })
 
-  xdescribe('`getElementsFieldValue()`', () => {
-    it('is a function', () => {
-      expect(getElementsFieldValue)
-        .to.be.a('function')
+  describe('`getElementsFieldValue()`', () => {
+    describe('Values has a field for the uri', () => {
+      describe('The value of the field is a string', () => {
+        it('returns a `value` object', () => {
+          expect(getElementsFieldValue({ '#/': 'MOCK VALUE' }, '#/'))
+            .to.eql({ value: 'MOCK VALUE' })
+        })
+      })
+
+      describe('`value` is not a string', () => {
+        it('returns a `value` object', () => {
+          expect(getElementsFieldValue({ '#/': false }, '#/'))
+            .to.eql({ value: 'false' })
+        })
+      })
+    })
+
+    describe('Values does not have a field for the uri', () => {
+      describe('Schema has a `const` field', () => {
+        describe('`const` is a string', () => {
+          it('returns a `value` object', () => {
+            expect(getElementsFieldValue({}, '#/', { const: 'MOCK DEFAULT' }))
+              .to.eql({ value: 'MOCK DEFAULT' })
+          })
+        })
+
+        describe('`const` is not a string', () => {
+          it('returns a `value` object', () => {
+            expect(getElementsFieldValue({}, '#/', { const: false }))
+              .to.eql({ value: 'false' })
+          })
+        })
+      })
+
+      describe('Schema does not have a `const` field', () => {
+        describe('Schema has a `default` field', () => {
+          describe('`default` is a string', () => {
+            it('returns a `value` object', () => {
+              expect(getElementsFieldValue({}, '#/', { default: 'MOCK DEFAULT' }))
+                .to.eql({ value: 'MOCK DEFAULT' })
+            })
+          })
+
+          describe('`default` is not a string', () => {
+            it('returns a `value` object', () => {
+              expect(getElementsFieldValue({}, '#/', { default: false }))
+                .to.eql({ value: 'false' })
+            })
+          })
+        })
+
+        describe('Schema does not have a `default` field', () => {
+          it('returns an object', () => {
+            expect(getElementsFieldValue({}))
+              .to.eql({})
+          })
+        })
+      })
     })
   })
 
@@ -763,45 +898,169 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  xdescribe('`isObject()`', () => {
-    it('is a function', () => {
-      expect(isObject)
-        .to.be.a('function')
+  describe('`isObject()`', () => {
+    describe('The argument is a string', () => {
+      it('returns false', () => (
+        expect(isObject(''))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is a number', () => {
+      it('returns false', () => (
+        expect(isObject(0))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is an array', () => {
+      it('returns false', () => (
+        expect(isObject([]))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is an object', () => {
+      it('returns true', () => (
+        expect(isObject({}))
+          .to.be.true
+      ))
+    })
+
+    describe('The argument is a boolean', () => {
+      it('returns false', () => (
+        expect(isObject(false))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is null', () => {
+      it('returns false', () => (
+        expect(isObject(null))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is undefined', () => {
+      it('returns false', () => (
+        expect(isObject())
+          .to.be.false
+      ))
     })
   })
 
-  xdescribe('`isArray()`', () => {
-    it('is a function', () => {
-      expect(isArray)
-        .to.be.a('function')
+  describe('`isArray()`', () => {
+    describe('The argument is a string', () => {
+      it('returns false', () => (
+        expect(isArray(''))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is a number', () => {
+      it('returns false', () => (
+        expect(isArray(0))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is an array', () => {
+      it('returns true', () => (
+        expect(isArray([]))
+          .to.be.true
+      ))
+    })
+
+    describe('The argument is an object', () => {
+      it('returns false', () => (
+        expect(isArray({}))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is a boolean', () => {
+      it('returns false', () => (
+        expect(isArray(false))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is null', () => {
+      it('returns false', () => (
+        expect(isArray(null))
+          .to.be.false
+      ))
+    })
+
+    describe('The argument is undefined', () => {
+      it('returns false', () => (
+        expect(isArray())
+          .to.be.false
+      ))
     })
   })
 
-  xdescribe('`toConstValue()`', () => {
-    it('is a function', () => {
-      expect(toConstValue)
-        .to.be.a('function')
+  describe('`toConstValue()`', () => {
+    describe('Schema has an `const` field', () => {
+      it('returns the value of the field', () => (
+        expect(toConstValue({ const: 'MOCK CONST' }))
+          .to.eql('MOCK CONST')
+      ))
+    })
+
+    describe('Schema does not have an `const` field', () => {
+      it('returns undefined', () => (
+        expect(toConstValue({}))
+          .to.be.undefined
+      ))
     })
   })
 
-  xdescribe('`isConstValue()`', () => {
-    it('is a function', () => {
-      expect(isConstValue)
-        .to.be.a('function')
+  describe('`isConstValue()`', () => {
+    describe('Schema has an `const` field', () => {
+      it('returns the value of the field', () => (
+        expect(isConstValue({ const: 'MOCK CONST' }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `const` field', () => {
+      it('returns undefined', () => (
+        expect(isConstValue({}))
+          .to.be.false
+      ))
     })
   })
 
-  xdescribe('`toDefaultValue()`', () => {
-    it('is a function', () => {
-      expect(toDefaultValue)
-        .to.be.a('function')
+  describe('`toDefaultValue()`', () => {
+    describe('Schema has an `default` field', () => {
+      it('returns the value of the field', () => (
+        expect(toDefaultValue({ default: 'MOCK DEFAULT' }))
+          .to.eql('MOCK DEFAULT')
+      ))
+    })
+
+    describe('Schema does not have an `default` field', () => {
+      it('returns undefined', () => (
+        expect(toDefaultValue({}))
+          .to.be.undefined
+      ))
     })
   })
 
-  xdescribe('`isDefaultValue()`', () => {
-    it('is a function', () => {
-      expect(isDefaultValue)
-        .to.be.a('function')
+  describe('`isDefaultValue()`', () => {
+    describe('Schema has an `default` field', () => {
+      it('returns the value of the field', () => (
+        expect(isDefaultValue({ default: 'MOCK DEFAULT' }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have an `default` field', () => {
+      it('returns undefined', () => (
+        expect(isDefaultValue({}))
+          .to.be.false
+      ))
     })
   })
 

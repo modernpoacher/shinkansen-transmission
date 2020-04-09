@@ -98,7 +98,7 @@ export function getElementsFieldProps (params = {}, uri = '#') {
   return field || {}
 }
 
-export function getElementsFieldValue (values = {}, uri = '#', schema) {
+export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
