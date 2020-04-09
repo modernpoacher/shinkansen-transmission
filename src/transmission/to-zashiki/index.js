@@ -3,17 +3,14 @@ import debug from 'debug'
 import {
   getMetaDefaultValue,
   getMetaValue,
-  getSelectedIndex,
+  getSelectedItems,
   getTitle,
   getDescription,
   hasEnum,
   getEnum,
   hasAnyOf,
-  getAnyOf,
   hasOneOf,
-  getOneOf,
   hasAllOf,
-  getAllOf,
   getUri,
   getMin,
   getMax,
@@ -64,7 +61,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -73,7 +70,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
       schema,
       rootSchema,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -83,19 +80,15 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -104,7 +97,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
         schema,
         rootSchema,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -114,19 +107,15 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -135,7 +124,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           schema,
           rootSchema,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -145,14 +134,14 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -231,7 +220,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -240,7 +229,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
       schema,
       rootSchema,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -250,19 +239,15 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -271,7 +256,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         schema,
         rootSchema,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -281,19 +266,15 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -302,7 +283,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
           schema,
           rootSchema,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -312,14 +293,14 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -401,7 +382,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -412,7 +393,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       ...maxProperties,
       ...minProperties,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -422,19 +403,15 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -445,7 +422,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         ...maxProperties,
         ...minProperties,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -455,19 +432,15 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaObject(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -478,7 +451,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           ...maxProperties,
           ...minProperties,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -488,14 +461,14 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -596,7 +569,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -610,7 +583,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
       ...maxContains,
       ...minContains,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -619,19 +592,15 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
       ...description,
       enum: {
         items,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -645,7 +614,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         ...maxContains,
         ...minContains,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -655,19 +624,15 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -681,7 +646,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           ...maxContains,
           ...minContains,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -691,14 +656,14 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -803,7 +768,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -817,7 +782,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
       ...max,
       ...step,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -830,19 +795,15 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...max,
         ...step,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -856,7 +817,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
         ...max,
         ...step,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -869,19 +830,15 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           ...max,
           ...step,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -895,7 +852,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
           ...max,
           ...step,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -908,14 +865,14 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
             ...max,
             ...step,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -1014,7 +971,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -1026,7 +983,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
       ...maxLength,
       ...pattern,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -1039,19 +996,15 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -1063,7 +1016,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -1076,19 +1029,15 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...maxLength,
           ...pattern,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -1100,7 +1049,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
           ...maxLength,
           ...pattern,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -1113,14 +1062,14 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
             ...maxLength,
             ...pattern,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -1239,7 +1188,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -1248,7 +1197,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
       schema,
       rootSchema,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -1258,19 +1207,15 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -1279,7 +1224,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
         schema,
         rootSchema,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -1289,19 +1234,15 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaNull(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -1310,7 +1251,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           schema,
           rootSchema,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -1320,14 +1261,14 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -1406,7 +1347,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -1415,7 +1356,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
       schema,
       rootSchema,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -1425,19 +1366,15 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -1446,7 +1383,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         schema,
         rootSchema,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -1456,19 +1393,15 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaBoolean(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -1477,7 +1410,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
           schema,
           rootSchema,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -1487,14 +1420,14 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -1576,7 +1509,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -1587,7 +1520,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
       ...maxProperties,
       ...minProperties,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -1597,19 +1530,15 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -1620,7 +1549,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         ...maxProperties,
         ...minProperties,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -1630,19 +1559,15 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -1653,7 +1578,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
           ...maxProperties,
           ...minProperties,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -1663,14 +1588,14 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -1771,7 +1696,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -1785,7 +1710,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
       ...maxContains,
       ...minContains,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -1795,19 +1720,15 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
       enum: {
         items,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -1821,7 +1742,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         ...maxContains,
         ...minContains,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -1831,19 +1752,15 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
         anyOf: {
           items,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaArray(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -1857,7 +1774,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           ...maxContains,
           ...minContains,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -1867,14 +1784,14 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
           oneOf: {
             items,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -1980,7 +1897,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -1994,7 +1911,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
       ...max,
       ...step,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -2007,19 +1924,15 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
         ...max,
         ...step,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -2033,7 +1946,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
         ...max,
         ...step,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -2046,19 +1959,15 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           ...max,
           ...step,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaNumber(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -2072,7 +1981,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
           ...max,
           ...step,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -2085,14 +1994,14 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
             ...max,
             ...step,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -2191,7 +2100,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
   let elements
   if (hasEnum(schema)) {
     const items = getEnum(schema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -2203,7 +2112,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
       ...maxLength,
       ...pattern,
       required: isRequired,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -2216,19 +2125,15 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(schema)) {
-      const anyOf = getAnyOf(schema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = schema
+      const items = anyOf.map((schema, index) => transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -2240,7 +2145,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
         ...maxLength,
         ...pattern,
         required: isRequired,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -2253,19 +2158,15 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           ...maxLength,
           ...pattern,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(schema)) {
-        const oneOf = getOneOf(schema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = schema
+        const items = oneOf.map((schema, index) => transformArraySchemaString(schema, rootSchema, values, { ...params, required: isRequired, parentUri, uri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -2277,7 +2178,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
           ...maxLength,
           ...pattern,
           required: isRequired,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -2290,14 +2191,14 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
             ...maxLength,
             ...pattern,
             required: isRequired,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(schema)) {
-          const allOf = getAllOf(schema)
-          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = schema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
           // log(itemSchema)
 
@@ -2413,13 +2314,13 @@ export function transformNull (rootSchema, values, params) {
   let elements
   if (hasEnum(rootSchema)) {
     const items = getEnum(rootSchema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
       type: 'null',
       schema: rootSchema,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -2428,25 +2329,21 @@ export function transformNull (rootSchema, values, params) {
       ...description,
       enum: {
         items,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = rootSchema
+      const items = anyOf.map((schema, index) => transformArraySchemaNull(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
         type: 'null',
         schema: rootSchema,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -2455,25 +2352,21 @@ export function transformNull (rootSchema, values, params) {
         ...description,
         anyOf: {
           items,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNull(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = rootSchema
+        const items = oneOf.map((schema, index) => transformArraySchemaNull(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
           type: 'null',
           schema: rootSchema,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -2482,22 +2375,22 @@ export function transformNull (rootSchema, values, params) {
           ...description,
           oneOf: {
             items,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = rootSchema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          // log(schema)
+          // log(itemSchema)
 
           meta = {
             uri,
             type: 'null',
             schema: rootSchema,
-            ...getMetaDefaultValue(schema, uri),
+            ...getMetaDefaultValue(itemSchema, uri),
             ...getMetaValue(values, uri),
             ...metaProps
           }
@@ -2506,7 +2399,7 @@ export function transformNull (rootSchema, values, params) {
             ...title,
             ...description,
             field: {
-              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldValue(values, uri, itemSchema),
               ...getElementsFieldProps(params, uri),
               name: uri
             }
@@ -2557,13 +2450,13 @@ export function transformBoolean (rootSchema, values, params) {
   let elements
   if (hasEnum(rootSchema)) {
     const items = getEnum(rootSchema)
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
       type: 'boolean',
       schema: rootSchema,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -2572,25 +2465,21 @@ export function transformBoolean (rootSchema, values, params) {
       ...description,
       enum: {
         items,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = rootSchema
+      const items = anyOf.map((schema, index) => transformArraySchemaBoolean(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
         type: 'boolean',
         schema: rootSchema,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -2599,25 +2488,21 @@ export function transformBoolean (rootSchema, values, params) {
         ...description,
         anyOf: {
           items,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaBoolean(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = rootSchema
+        const items = oneOf.map((schema, index) => transformArraySchemaBoolean(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
           type: 'boolean',
           schema: rootSchema,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -2626,22 +2511,22 @@ export function transformBoolean (rootSchema, values, params) {
           ...description,
           oneOf: {
             items,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = rootSchema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          // log(schema)
+          // log(itemSchema)
 
           meta = {
             uri,
             type: 'boolean',
             schema: rootSchema,
-            ...getMetaDefaultValue(schema, uri),
+            ...getMetaDefaultValue(itemSchema, uri),
             ...getMetaValue(values, uri),
             ...metaProps
           }
@@ -2650,7 +2535,7 @@ export function transformBoolean (rootSchema, values, params) {
             ...title,
             ...description,
             field: {
-              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldValue(values, uri, itemSchema),
               ...getElementsFieldProps(params, uri),
               name: uri
             }
@@ -2701,13 +2586,13 @@ export function transformObject (rootSchema, values, params) {
   let elements
   if (hasEnum(rootSchema)) {
     const items = getEnum(rootSchema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
       type: 'object',
       schema: rootSchema,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -2716,25 +2601,21 @@ export function transformObject (rootSchema, values, params) {
       ...description,
       enum: {
         items,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = rootSchema
+      const items = anyOf.map((schema, index) => transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
         type: 'object',
         schema: rootSchema,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -2743,25 +2624,21 @@ export function transformObject (rootSchema, values, params) {
         ...description,
         anyOf: {
           items,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = rootSchema
+        const items = oneOf.map((schema, index) => transformArraySchemaObject(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
           type: 'object',
           schema: rootSchema,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -2770,22 +2647,22 @@ export function transformObject (rootSchema, values, params) {
           ...description,
           oneOf: {
             items,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = rootSchema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          // log(schema)
+          // log(itemSchema)
 
           meta = {
             uri,
             type: 'object',
             schema: rootSchema,
-            ...getMetaDefaultValue(schema, uri),
+            ...getMetaDefaultValue(itemSchema, uri),
             ...getMetaValue(values, uri),
             ...metaProps
           }
@@ -2793,7 +2670,7 @@ export function transformObject (rootSchema, values, params) {
           const {
             properties = {},
             required = []
-          } = schema
+          } = itemSchema
 
           elements = {
             ...title,
@@ -2865,7 +2742,7 @@ export function transformArray (rootSchema, values, params) {
   let elements
   if (hasEnum(rootSchema)) {
     const items = getEnum(rootSchema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -2876,7 +2753,7 @@ export function transformArray (rootSchema, values, params) {
       ...hasUniqueItems,
       ...maxContains,
       ...minContains,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -2885,19 +2762,15 @@ export function transformArray (rootSchema, values, params) {
       ...description,
       enum: {
         items,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = rootSchema
+      const items = anyOf.map((schema, index) => transformArraySchemaArray(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -2908,7 +2781,7 @@ export function transformArray (rootSchema, values, params) {
         ...hasUniqueItems,
         ...maxContains,
         ...minContains,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -2917,19 +2790,15 @@ export function transformArray (rootSchema, values, params) {
         ...description,
         anyOf: {
           items,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaArray(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = rootSchema
+        const items = oneOf.map((schema, index) => transformArraySchemaArray(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -2940,7 +2809,7 @@ export function transformArray (rootSchema, values, params) {
           ...hasUniqueItems,
           ...maxContains,
           ...minContains,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -2949,16 +2818,16 @@ export function transformArray (rootSchema, values, params) {
           ...description,
           oneOf: {
             items,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = rootSchema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          // log(schema)
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -2969,14 +2838,14 @@ export function transformArray (rootSchema, values, params) {
             ...hasUniqueItems,
             ...maxContains,
             ...minContains,
-            ...getMetaDefaultValue(schema, uri),
+            ...getMetaDefaultValue(itemSchema, uri),
             ...getMetaValue(values, uri),
             ...metaProps
           }
 
           const {
             items = [] // array or object
-          } = schema
+          } = itemSchema
 
           const fields = []
             .concat(items)
@@ -3053,7 +2922,7 @@ export function transformNumber (rootSchema, values, params) {
   let elements
   if (hasEnum(rootSchema)) {
     const items = getEnum(rootSchema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -3064,7 +2933,7 @@ export function transformNumber (rootSchema, values, params) {
       ...min,
       ...max,
       ...step,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -3076,19 +2945,15 @@ export function transformNumber (rootSchema, values, params) {
         ...min,
         ...max,
         ...step,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = rootSchema
+      const items = anyOf.map((schema, index) => transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -3099,7 +2964,7 @@ export function transformNumber (rootSchema, values, params) {
         ...min,
         ...max,
         ...step,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -3108,19 +2973,15 @@ export function transformNumber (rootSchema, values, params) {
         ...description,
         anyOf: {
           items,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = rootSchema
+        const items = oneOf.map((schema, index) => transformArraySchemaNumber(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -3131,7 +2992,7 @@ export function transformNumber (rootSchema, values, params) {
           ...min,
           ...max,
           ...step,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -3140,16 +3001,16 @@ export function transformNumber (rootSchema, values, params) {
           ...description,
           oneOf: {
             items,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = rootSchema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          // log(schema)
+          // log(itemSchema)
 
           meta = {
             uri,
@@ -3160,7 +3021,7 @@ export function transformNumber (rootSchema, values, params) {
             ...min,
             ...max,
             ...step,
-            ...getMetaDefaultValue(schema, uri),
+            ...getMetaDefaultValue(itemSchema, uri),
             ...getMetaValue(values, uri),
             ...metaProps
           }
@@ -3172,7 +3033,7 @@ export function transformNumber (rootSchema, values, params) {
               ...min,
               ...max,
               ...step,
-              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldValue(values, uri, itemSchema),
               ...getElementsFieldProps(params, uri),
               name: uri
             }
@@ -3235,7 +3096,7 @@ export function transformString (rootSchema, values, params) {
   let elements
   if (hasEnum(rootSchema)) {
     const items = getEnum(rootSchema) // `enum` is a reserved word
-    const selectedIndex = getSelectedIndex(values, uri)
+    const selectedItems = getSelectedItems(values, uri)
 
     meta = {
       uri,
@@ -3244,7 +3105,7 @@ export function transformString (rootSchema, values, params) {
       ...minLength,
       ...maxLength,
       ...pattern,
-      ...selectedIndex,
+      selectedItems,
       ...metaProps
     }
 
@@ -3256,19 +3117,15 @@ export function transformString (rootSchema, values, params) {
         ...minLength,
         ...maxLength,
         ...pattern,
-        ...selectedIndex,
+        selectedItems,
         name: uri
       }
     }
   } else {
     if (hasAnyOf(rootSchema)) {
-      const anyOf = getAnyOf(rootSchema)
-      const items = (
-        anyOf.reduce((accumulator, schema, index) => (
-          accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-        ), [])
-      )
-      const selectedIndex = getSelectedIndex(values, uri)
+      const { anyOf } = rootSchema
+      const items = anyOf.map((schema, index) => transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+      const selectedItems = getSelectedItems(values, uri)
 
       meta = {
         uri,
@@ -3277,7 +3134,7 @@ export function transformString (rootSchema, values, params) {
         ...minLength,
         ...maxLength,
         ...pattern,
-        ...selectedIndex,
+        selectedItems,
         ...metaProps
       }
 
@@ -3286,19 +3143,15 @@ export function transformString (rootSchema, values, params) {
         ...description,
         anyOf: {
           items,
-          ...selectedIndex,
+          selectedItems,
           name: uri
         }
       }
     } else {
       if (hasOneOf(rootSchema)) {
-        const oneOf = getOneOf(rootSchema)
-        const items = (
-          oneOf.reduce((accumulator, schema, index) => (
-            accumulator.concat(transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
-          ), [])
-        )
-        const selectedIndex = getSelectedIndex(values, uri)
+        const { oneOf } = rootSchema
+        const items = oneOf.map((schema, index) => transformArraySchemaString(schema, rootSchema, values, { ...params, parentUri, uri: parentUri, index }))
+        const selectedItems = getSelectedItems(values, uri)
 
         meta = {
           uri,
@@ -3307,7 +3160,7 @@ export function transformString (rootSchema, values, params) {
           ...minLength,
           ...maxLength,
           ...pattern,
-          ...selectedIndex,
+          selectedItems,
           ...metaProps
         }
 
@@ -3316,16 +3169,16 @@ export function transformString (rootSchema, values, params) {
           ...description,
           oneOf: {
             items,
-            ...selectedIndex,
+            selectedItems,
             name: uri
           }
         }
       } else {
         if (hasAllOf(rootSchema)) {
-          const allOf = getAllOf(rootSchema)
-          const schema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), {})
+          const { allOf, ...rest } = rootSchema
+          const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-          // log(schema)
+          log(itemSchema)
 
           meta = {
             uri,
@@ -3334,7 +3187,7 @@ export function transformString (rootSchema, values, params) {
             ...minLength,
             ...maxLength,
             ...pattern,
-            ...getMetaDefaultValue(schema, uri),
+            ...getMetaDefaultValue(itemSchema, uri),
             ...getMetaValue(values, uri),
             ...metaProps
           }
@@ -3346,12 +3199,14 @@ export function transformString (rootSchema, values, params) {
               ...minLength,
               ...maxLength,
               ...pattern,
-              ...getElementsFieldValue(values, uri, schema),
+              ...getElementsFieldValue(values, uri, itemSchema),
               ...getElementsFieldProps(params, uri),
               name: uri
             }
           }
         } else {
+          log(values, uri, rootSchema, getElementsFieldValue(values, uri, rootSchema))
+
           meta = {
             uri,
             type: 'string',

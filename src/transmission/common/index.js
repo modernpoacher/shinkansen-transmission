@@ -18,15 +18,14 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export function getSelectedIndex (values = {}, uri = '#') {
+export function getSelectedItems (values = {}, uri = '#') {
   if (Reflect.has(values, uri)) {
-    const index = Reflect.get(values, uri)
-    const value = Number(index)
+    const value = Reflect.get(values, uri)
 
-    return isNaN(value) ? {} : { selectedIndex: value }
+    return isArray(value) ? value.map((v) => Number(v)) : [Number(value)]
   }
 
-  return {}
+  return []
 }
 
 export function getMetaProps (params = {}, uri = '#') {
