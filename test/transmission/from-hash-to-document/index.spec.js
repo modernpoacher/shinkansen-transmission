@@ -130,22 +130,213 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
     })
 
     describe('Transforming `array` type schemas', () => {
-      it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
-        const schema = {
-          type: 'array',
-          items: [
-            {
-              type: 'string'
-            }
-          ]
-        }
+      describe('Transforming `array` type schemas (`items` is an array of `string` type)', () => {
+        it('transforms `array` type schemas with `enum` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string',
+                enum: [
+                  'mock array type index string (1)',
+                  'mock array type index string (2)',
+                  'mock array type index string (3)'
+                ]
+              },
+              {
+                type: 'string',
+                enum: [
+                  'mock array type index string (1)',
+                  'mock array type index string (2)',
+                  'mock array type index string (3)'
+                ]
+              },
+              {
+                type: 'string',
+                enum: [
+                  'mock array type index string (1)',
+                  'mock array type index string (2)',
+                  'mock array type index string (3)'
+                ]
+              }
+            ]
+          }
 
-        const values = {
-          '#/0': 'mock array type index string'
-        }
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
 
-        return expect(transform(schema, values))
-          .to.eql(['mock array type index string'])
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas with `anyOf` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string',
+                anyOf: [
+                  { const: 'mock array type index string (1)' },
+                  { const: 'mock array type index string (2)' },
+                  { const: 'mock array type index string (3)' }
+                ]
+              },
+              {
+                type: 'string',
+                anyOf: [
+                  { const: 'mock array type index string (1)' },
+                  { const: 'mock array type index string (2)' },
+                  { const: 'mock array type index string (3)' }
+                ]
+              },
+              {
+                type: 'string',
+                anyOf: [
+                  { const: 'mock array type index string (1)' },
+                  { const: 'mock array type index string (2)' },
+                  { const: 'mock array type index string (3)' }
+                ]
+              }
+            ]
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas with `oneOf` (`items` is an array of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string',
+                oneOf: [
+                  { const: 'mock array type index string (1)' },
+                  { const: 'mock array type index string (2)' },
+                  { const: 'mock array type index string (3)' }
+                ]
+              },
+              {
+                type: 'string',
+                oneOf: [
+                  { const: 'mock array type index string (1)' },
+                  { const: 'mock array type index string (2)' },
+                  { const: 'mock array type index string (3)' }
+                ]
+              },
+              {
+                type: 'string',
+                oneOf: [
+                  { const: 'mock array type index string (1)' },
+                  { const: 'mock array type index string (2)' },
+                  { const: 'mock array type index string (3)' }
+                ]
+              }
+            ]
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas with `allOf` (`items` is an array of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  { maxLength: 32 }
+                ]
+              },
+              {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  { maxLength: 32 }
+                ]
+              },
+              {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  { maxLength: 32 }
+                ]
+              }
+            ]
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              },
+              {
+                type: 'string'
+              },
+              {
+                type: 'string'
+              }
+            ]
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
       })
 
       it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
@@ -293,20 +484,136 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           .to.eql([null])
       })
 
-      it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
-        const schema = {
-          type: 'array',
-          items: {
-            type: 'string'
+      describe('Transforming `array` type schemas (`items` is an object of `string` type)', () => {
+        it('transforms `array` type schemas with `enum` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'string',
+              enum: [
+                'mock array type index string (1)',
+                'mock array type index string (2)',
+                'mock array type index string (3)'
+              ]
+            }
           }
-        }
 
-        const values = {
-          '#/0': 'mock array type index string'
-        }
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
 
-        return expect(transform(schema, values))
-          .to.eql(['mock array type index string'])
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas with `anyOf` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'string',
+              anyOf: [
+                { const: 'mock array type index string (1)' },
+                { const: 'mock array type index string (2)' },
+                { const: 'mock array type index string (3)' }
+              ]
+            }
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas with `oneOf` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'string',
+              oneOf: [
+                { const: 'mock array type index string (1)' },
+                { const: 'mock array type index string (2)' },
+                { const: 'mock array type index string (3)' }
+              ]
+            }
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
+
+        it('transforms `array` type schemas with `allOf` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'string',
+              allOf: [
+                { const: 'mock array type index string' },
+                { minLength: 1 },
+                { maxLength: 100 }
+              ]
+            }
+          }
+
+          const values = {
+            '#/0': 'mock array type index string',
+            '#/1': 'mock array type index string',
+            '#/2': 'mock array type index string'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string',
+              'mock array type index string',
+              'mock array type index string'
+            ])
+        })
+
+        it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `string` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'string'
+            }
+          }
+
+          const values = {
+            '#/0': 'mock array type index string (1)',
+            '#/1': 'mock array type index string (2)',
+            '#/2': 'mock array type index string (3)'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql([
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ])
+        })
       })
 
       it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
