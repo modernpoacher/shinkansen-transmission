@@ -12906,7 +12906,986 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `object` type schemas without `enum`', () => {
+        it('transforms `object` type schemas with `anyOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: true
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: true
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            }
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false,
+                      value: '0'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: '0'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false,
+                      value: '1'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: '1'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: true,
+                      value: '0'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: true,
+                        value: '0'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false,
+                      value: '1'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: '1'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           const schema = {
             type: 'object',
             properties: {
@@ -12985,7 +13964,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `object` type schemas without `enum` (with `required`)', () => {
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
           const schema = {
             type: 'object',
             properties: {
@@ -13109,10 +14088,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         it('transforms `boolean` type schemas with `anyOf`', () => {
-          const schema = { type: 'boolean', anyOf: [{ const: true }, { const: false }, { const: true }] }
+          const schema = {
+            type: 'boolean',
+            anyOf: [
+              { const: true },
+              { const: false }
+            ]
+          }
 
           const values = {
-            '#/': '2'
+            '#/': '1'
           }
 
           const params = {
@@ -13126,7 +14111,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 type: 'boolean',
                 schema,
                 uri: '#/',
-                selectedItems: [2]
+                selectedItems: [1]
               },
               elements: {
                 anyOf: {
@@ -13171,39 +14156,25 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           value: 'false'
                         }
                       }
-                    },
-                    {
-                      meta: {
-                        type: 'boolean',
-                        item: 2,
-                        rootSchema: schema,
-                        schema: {
-                          const: true
-                        },
-                        parentUri: '#/',
-                        uri: '#/2',
-                        required: false
-                      },
-                      elements: {
-                        field: {
-                          id: '#/2',
-                          required: false,
-                          value: 'true'
-                        }
-                      }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [1]
                 }
               }
             })
         })
 
         it('transforms `boolean` type schemas with `oneOf`', () => {
-          const schema = { type: 'boolean', oneOf: [{ const: true }, { const: false }] }
+          const schema = {
+            type: 'boolean',
+            oneOf: [
+              { const: true },
+              { const: false }
+            ]
+          }
 
           const values = {
-            '#/': '2'
+            '#/': '1'
           }
 
           const params = {
@@ -13217,7 +14188,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 type: 'boolean',
                 schema,
                 uri: '#/',
-                selectedItems: [2]
+                selectedItems: [1]
               },
               elements: {
                 oneOf: {
@@ -13264,14 +14235,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [1]
                 }
               }
             })
         })
 
         it('transforms `boolean` type schemas with `allOf`', () => {
-          const schema = { type: 'boolean', allOf: [{ const: true }] }
+          const schema = {
+            type: 'boolean',
+            allOf: [
+              { const: true }
+            ]
+          }
 
           const values = {
             '#/': 'true'
@@ -23318,7 +24294,940 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `object` type schemas without `enum`', () => {
+        it('transforms `object` type schemas with `anyOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: true
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [0],
+                      required: true
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [0],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [1],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [1],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  {
+                    minLength: 1
+                  },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  {
+                    minLength: 1
+                  },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            }
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false,
+                      value: '0'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: '0'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false,
+                      value: '1'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: '1'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  {
+                    minLength: 1
+                  },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  {
+                    minLength: 1
+                  },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {
+            '#/one': '0',
+            '#/two': '1'
+          }
+
+          return expect(transform(schema, values))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: true,
+                      value: '0'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: true,
+                        value: '0'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false,
+                      value: '1'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: '1'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           const schema = {
             type: 'object',
             properties: {
@@ -23388,7 +25297,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `object` type schemas without `enum` (with `required`)', () => {
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
           const schema = {
             type: 'object',
             properties: {
@@ -23498,10 +25407,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         it('transforms `boolean` type schemas with `anyOf`', () => {
-          const schema = { type: 'boolean', anyOf: [{ const: true }, { const: false }, { const: true }] }
+          const schema = {
+            type: 'boolean',
+            anyOf: [
+              { const: true },
+              { const: false }
+            ]
+          }
 
           const values = {
-            '#/': '2'
+            '#/': '1'
           }
 
           return expect(transform(schema, values))
@@ -23510,7 +25425,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 type: 'boolean',
                 schema,
                 uri: '#/',
-                selectedItems: [2]
+                selectedItems: [1]
               },
               elements: {
                 anyOf: {
@@ -23555,36 +25470,22 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           value: 'false'
                         }
                       }
-                    },
-                    {
-                      meta: {
-                        type: 'boolean',
-                        item: 2,
-                        rootSchema: schema,
-                        schema: {
-                          const: true
-                        },
-                        parentUri: '#/',
-                        uri: '#/2',
-                        required: false
-                      },
-                      elements: {
-                        field: {
-                          id: '#/2',
-                          required: false,
-                          value: 'true'
-                        }
-                      }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [1]
                 }
               }
             })
         })
 
         it('transforms `boolean` type schemas with `oneOf`', () => {
-          const schema = { type: 'boolean', oneOf: [{ const: true }, { const: false }] }
+          const schema = {
+            type: 'boolean',
+            oneOf: [
+              { const: true },
+              { const: false }
+            ]
+          }
 
           const values = {
             '#/': '1'
@@ -23650,7 +25551,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         it('transforms `boolean` type schemas with `allOf`', () => {
-          const schema = { type: 'boolean', allOf: [{ const: true }] }
+          const schema = {
+            type: 'boolean',
+            allOf: [
+              { const: true }
+            ]
+          }
 
           const values = {
             '#/': 'true'
@@ -33902,7 +35808,964 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `object` type schemas without `enum`', () => {
+        it('transforms `object` type schemas with `anyOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          const values = {}
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {}
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: true
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          const values = {}
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {}
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: true
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            }
+          }
+
+          const values = {}
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: 'object type key string (one)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: 'object type key string (two)'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const values = {}
+
+          const params = {
+            '#/': { meta: { component: 'object component' } },
+            '#/one': { meta: { component: 'object component' } },
+            '#/two': { meta: { component: 'object component' } }
+          }
+
+          return expect(transform(schema, values, params))
+            .to.eql({
+              meta: {
+                component: 'object component',
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: true
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: true,
+                        value: 'object type key string (one)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'object component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: 'object type key string (two)'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           const schema = {
             type: 'object',
             properties: {
@@ -33974,7 +36837,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `object` type schemas without `enum` (with `required`)', () => {
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
           const schema = {
             type: 'object',
             properties: {
@@ -43646,6 +46509,897 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        it('transforms `object` type schemas with `anyOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                anyOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: true
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        anyOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      anyOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              },
+              two: {
+                type: 'string',
+                oneOf: [
+                  { const: 'object type key string (1)' },
+                  { const: 'object type key string (2)' }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      selectedItems: [],
+                      required: true
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/one',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/0',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/0',
+                                required: true,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/one',
+                              uri: '#/one/1',
+                              required: true
+                            },
+                            elements: {
+                              field: {
+                                id: '#/one/1',
+                                required: true,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        oneOf: [
+                          { const: 'object type key string (1)' },
+                          { const: 'object type key string (2)' }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      selectedItems: [],
+                      required: false
+                    },
+                    elements: {
+                      oneOf: {
+                        id: '#/two',
+                        items: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (1)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/0',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/0',
+                                required: false,
+                                value: 'object type key string (1)'
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 1,
+                              rootSchema: schema,
+                              schema: {
+                                const: 'object type key string (2)'
+                              },
+                              parentUri: '#/two',
+                              uri: '#/two/1',
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/two/1',
+                                required: false,
+                                value: 'object type key string (2)'
+                              }
+                            }
+                          }
+                        ],
+                        selectedItems: [],
+                        required: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: 'object type key string (one)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: 'object type key string (two)'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (one)',
+                    maxLength: 100
+                  }
+                ]
+              },
+              two: {
+                type: 'string',
+                allOf: [
+                  { minLength: 1 },
+                  {
+                    const: 'object type key string (two)',
+                    maxLength: 100
+                  }
+                ]
+              }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'object',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (one)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: true
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: true,
+                        value: 'object type key string (one)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: schema,
+                      schema: {
+                        type: 'string',
+                        allOf: [
+                          { minLength: 1 },
+                          {
+                            const: 'object type key string (two)',
+                            maxLength: 100
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      minLength: 1,
+                      maxLength: 100,
+                      required: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        minLength: 1,
+                        maxLength: 100,
+                        required: false,
+                        value: 'object type key string (two)'
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
         it('transforms `object` type schemas without `enum`', () => {
           const schema = {
             type: 'object',
@@ -43808,8 +47562,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             type: 'boolean',
             anyOf: [
               { const: true },
-              { const: false },
-              { const: true }
+              { const: false }
             ]
           }
 
@@ -43864,26 +47617,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           value: 'false'
                         }
                       }
-                    },
-                    {
-                      meta: {
-                        type: 'boolean',
-                        item: 2,
-                        rootSchema: schema,
-                        schema: {
-                          const: true
-                        },
-                        parentUri: '#/',
-                        uri: '#/2',
-                        required: false
-                      },
-                      elements: {
-                        field: {
-                          id: '#/2',
-                          required: false,
-                          value: 'true'
-                        }
-                      }
                     }
                   ],
                   selectedItems: []
@@ -43893,7 +47626,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         it('transforms `boolean` type schemas with `oneOf`', () => {
-          const schema = { type: 'boolean', oneOf: [{ const: true }, { const: false }] }
+          const schema = {
+            type: 'boolean',
+            oneOf: [
+              { const: true },
+              { const: false }
+            ]
+          }
 
           return expect(transform(schema))
             .to.eql({
@@ -43955,7 +47694,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         it('transforms `boolean` type schemas with `allOf`', () => {
-          const schema = { type: 'boolean', allOf: [{ const: true }] }
+          const schema = {
+            type: 'boolean',
+            allOf: [
+              { const: true }
+            ]
+          }
 
           return expect(transform(schema))
             .to.eql({
