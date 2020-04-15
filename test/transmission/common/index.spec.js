@@ -432,9 +432,27 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
 
     describe('Values does not have a field for the uri', () => {
-      it('returns an object', () => {
-        expect(getMetaValue({}, '#/'))
-          .to.eql({})
+      describe('Schema has a `const` field', () => {
+        describe('`const` is a primitive', () => {
+          it('returns a `value` object', () => {
+            expect(getMetaValue({}, '#/', { const: 'MOCK CONST' }))
+              .to.eql({ value: 'MOCK CONST' })
+          })
+        })
+
+        describe('`const` is not a primitive', () => {
+          it('returns an object', () => {
+            expect(getMetaValue({}, '#/', { const: {} }))
+              .to.eql({})
+          })
+        })
+      })
+
+      describe('Schema does not have a `const` field', () => {
+        it('returns an object', () => {
+          expect(getMetaValue({}))
+            .to.eql({})
+        })
       })
     })
   })
@@ -506,17 +524,17 @@ describe('shinkansen-transmission/transmission/common', () => {
 
     describe('Values does not have a field for the uri', () => {
       describe('Schema has a `const` field', () => {
-        describe('`const` is a string', () => {
+        describe('`const` is a primitive', () => {
           it('returns a `value` object', () => {
-            expect(getElementsFieldValue({}, '#/', { const: 'MOCK DEFAULT' }))
-              .to.eql({ value: 'MOCK DEFAULT' })
+            expect(getElementsFieldValue({}, '#/', { const: 'MOCK CONST' }))
+              .to.eql({ value: 'MOCK CONST' })
           })
         })
 
-        describe('`const` is not a string', () => {
+        describe('`const` is not a primitive', () => {
           it('returns a `value` object', () => {
-            expect(getElementsFieldValue({}, '#/', { const: false }))
-              .to.eql({ value: 'false' })
+            expect(getElementsFieldValue({}, '#/', { const: {} }))
+              .to.eql({})
           })
         })
       })

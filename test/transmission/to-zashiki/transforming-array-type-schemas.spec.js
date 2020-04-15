@@ -1,0 +1,843 @@
+import debug from 'debug'
+
+import { expect } from 'chai'
+
+import transform from 'shinkansen-transmission/transmission/to-zashiki'
+
+describe('shinkansen-transmission/transmission/to-zashiki', () => {
+  before(() => debug.disable()) // enable('shinkansen-transmission:to-zashiki'))
+
+  describe('Transforming `array` type schemas', () => {
+    it('transforms `array` type schemas with `enum` (with an `array` type with `enum`)', () => {
+      const schema = {
+        type: 'array',
+        enum: [
+          {
+            type: 'array',
+            enum: [
+              {},
+              {},
+              {}
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            enum: {
+              id: '#/',
+              items: [
+                {
+                  type: 'array',
+                  enum: [
+                    {},
+                    {},
+                    {}
+                  ]
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `enum` (with an `array` type with `anyOf`)', () => {
+      const schema = {
+        type: 'array',
+        enum: [
+          {
+            type: 'array',
+            anyOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            enum: {
+              id: '#/',
+              items: [
+                {
+                  type: 'array',
+                  anyOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `enum` (with an `array` type with `oneOf`)', () => {
+      const schema = {
+        type: 'array',
+        enum: [
+          {
+            type: 'array',
+            oneOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            enum: {
+              id: '#/',
+              items: [
+                {
+                  type: 'array',
+                  oneOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `enum` (with an `array` type with `allOf`)', () => {
+      const schema = {
+        type: 'array',
+        enum: [
+          {
+            type: 'array',
+            allOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            enum: {
+              id: '#/',
+              items: [
+                {
+                  type: 'array',
+                  allOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `enum`)', () => {
+      const schema = {
+        type: 'array',
+        anyOf: [
+          {
+            type: 'array',
+            enum: [
+              {},
+              {},
+              {}
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            anyOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      enum: [
+                        {},
+                        {},
+                        {}
+                      ]
+                    },
+                    selectedItems: [],
+                    required: false
+                  },
+                  elements: {
+                    enum: {
+                      id: '#/0',
+                      items: [
+                        {},
+                        {},
+                        {}
+                      ],
+                      selectedItems: [],
+                      required: false
+                    }
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `anyOf`)', () => {
+      const schema = {
+        type: 'array',
+        anyOf: [
+          {
+            type: 'array',
+            anyOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            anyOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          type: 'array'
+                        }
+                      ]
+                    },
+                    selectedItems: [],
+                    required: false
+                  },
+                  elements: {
+                    anyOf: {
+                      id: '#/0',
+                      items: [
+                        {
+                          meta: {
+                            type: 'array',
+                            item: 0,
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            rootSchema: schema,
+                            schema: {
+                              type: 'array'
+                            },
+                            required: false
+                          },
+                          elements: {
+                            fields: []
+                          }
+                        }
+                      ],
+                      selectedItems: [],
+                      required: false
+                    }
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `oneOf`)', () => {
+      const schema = {
+        type: 'array',
+        anyOf: [
+          {
+            type: 'array',
+            oneOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            anyOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          type: 'array'
+                        }
+                      ]
+                    },
+                    selectedItems: [],
+                    required: false
+                  },
+                  elements: {
+                    oneOf: {
+                      id: '#/0',
+                      items: [
+                        {
+                          meta: {
+                            type: 'array',
+                            item: 0,
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            rootSchema: schema,
+                            schema: {
+                              type: 'array'
+                            },
+                            required: false
+                          },
+                          elements: {
+                            fields: []
+                          }
+                        }
+                      ],
+                      selectedItems: [],
+                      required: false
+                    }
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `allOf`)', () => {
+      const schema = {
+        type: 'array',
+        anyOf: [
+          {
+            type: 'array',
+            allOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            anyOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      allOf: [
+                        {
+                          type: 'array'
+                        }
+                      ]
+                    },
+                    required: false
+                  },
+                  elements: {
+                    fields: []
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `enum`)', () => {
+      const schema = {
+        type: 'array',
+        oneOf: [
+          {
+            type: 'array',
+            enum: [
+              {},
+              {},
+              {}
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            oneOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      enum: [
+                        {},
+                        {},
+                        {}
+                      ]
+                    },
+                    selectedItems: [],
+                    required: false
+                  },
+                  elements: {
+                    enum: {
+                      id: '#/0',
+                      items: [
+                        {},
+                        {},
+                        {}
+                      ],
+                      selectedItems: [],
+                      required: false
+                    }
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `anyOf`)', () => {
+      const schema = {
+        type: 'array',
+        oneOf: [
+          {
+            type: 'array',
+            anyOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            oneOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          type: 'array'
+                        }
+                      ]
+                    },
+                    selectedItems: [],
+                    required: false
+                  },
+                  elements: {
+                    anyOf: {
+                      id: '#/0',
+                      items: [
+                        {
+                          meta: {
+                            type: 'array',
+                            item: 0,
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            rootSchema: schema,
+                            schema: {
+                              type: 'array'
+                            },
+                            required: false
+                          },
+                          elements: {
+                            fields: []
+                          }
+                        }
+                      ],
+                      selectedItems: [],
+                      required: false
+                    }
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `oneOf`)', () => {
+      const schema = {
+        type: 'array',
+        oneOf: [
+          {
+            type: 'array',
+            oneOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            oneOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          type: 'array'
+                        }
+                      ]
+                    },
+                    selectedItems: [],
+                    required: false
+                  },
+                  elements: {
+                    oneOf: {
+                      id: '#/0',
+                      items: [
+                        {
+                          meta: {
+                            type: 'array',
+                            item: 0,
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            rootSchema: schema,
+                            schema: {
+                              type: 'array'
+                            },
+                            required: false
+                          },
+                          elements: {
+                            fields: []
+                          }
+                        }
+                      ],
+                      selectedItems: [],
+                      required: false
+                    }
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `allOf`)', () => {
+      const schema = {
+        type: 'array',
+        oneOf: [
+          {
+            type: 'array',
+            allOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema,
+            selectedItems: []
+          },
+          elements: {
+            oneOf: {
+              id: '#/',
+              items: [
+                {
+                  meta: {
+                    type: 'array',
+                    item: 0,
+                    parentUri: '#/',
+                    uri: '#/0',
+                    rootSchema: schema,
+                    schema: {
+                      type: 'array',
+                      allOf: [
+                        {
+                          type: 'array'
+                        }
+                      ]
+                    },
+                    required: false
+                  },
+                  elements: {
+                    fields: []
+                  }
+                }
+              ],
+              selectedItems: []
+            }
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `enum`)', () => {
+      const schema = {
+        type: 'array',
+        allOf: [
+          {
+            type: 'array',
+            enum: [
+              {},
+              {},
+              {}
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: []
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `anyOf`)', () => {
+      const schema = {
+        type: 'array',
+        allOf: [
+          {
+            type: 'array',
+            anyOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: []
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `oneOf`)', () => {
+      const schema = {
+        type: 'array',
+        allOf: [
+          {
+            type: 'array',
+            oneOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: []
+          }
+        })
+    })
+
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `allOf`)', () => {
+      const schema = {
+        type: 'array',
+        allOf: [
+          {
+            type: 'array',
+            allOf: [
+              {
+                type: 'array'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: []
+          }
+        })
+    })
+  })
+})

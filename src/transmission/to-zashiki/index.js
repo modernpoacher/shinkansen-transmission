@@ -220,7 +220,7 @@ export function transformObjectSchemaNullForAllOf (schema, rootSchema, values, p
     rootSchema,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -279,7 +279,7 @@ export function transformObjectSchemaNull (schema, rootSchema, values, params) {
             rootSchema,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -480,7 +480,7 @@ export function transformObjectSchemaBooleanForAllOf (schema, rootSchema, values
     rootSchema,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -539,7 +539,7 @@ export function transformObjectSchemaBoolean (schema, rootSchema, values, params
             rootSchema,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -766,7 +766,7 @@ export function transformObjectSchemaObjectForAllOf (schema, rootSchema, values,
     ...maxProperties,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -834,7 +834,7 @@ export function transformObjectSchemaObject (schema, rootSchema, values, params)
             ...minProperties,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -910,6 +910,7 @@ export function transformObjectSchemaArrayForEnum (schema, rootSchema, values, p
     ...description,
     enum: {
       items,
+      required: isRequired,
       selectedItems,
       id: uri
     }
@@ -1082,7 +1083,7 @@ export function transformObjectSchemaArrayForAllOf (schema, rootSchema, values, 
     ...minContains,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -1155,7 +1156,7 @@ export function transformObjectSchemaArray (schema, rootSchema, values, params) 
             ...minContains,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -1416,7 +1417,7 @@ export function transformObjectSchemaNumberForAllOf (schema, rootSchema, values,
     ...step,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -1490,7 +1491,7 @@ export function transformObjectSchemaNumber (schema, rootSchema, values, params)
             ...step,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -1715,6 +1716,8 @@ export function transformObjectSchemaStringForAllOf (schema, rootSchema, values,
 
   // log(itemSchema, schema)
 
+  log(transformObjectSchemaString(itemSchema, rootSchema, values, params))
+
   const minLength = getMinLength(itemSchema)
   const maxLength = getMaxLength(itemSchema)
   const pattern = getPattern(itemSchema)
@@ -1731,7 +1734,7 @@ export function transformObjectSchemaStringForAllOf (schema, rootSchema, values,
     ...pattern,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -1800,7 +1803,7 @@ export function transformObjectSchemaString (schema, rootSchema, values, params)
             ...pattern,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -2034,7 +2037,7 @@ export function transformArraySchemaNullForAllOf (schema, rootSchema, values, pa
     rootSchema,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -2093,7 +2096,7 @@ export function transformArraySchemaNull (schema, rootSchema, values, params) {
             rootSchema,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -2294,7 +2297,7 @@ export function transformArraySchemaBooleanForAllOf (schema, rootSchema, values,
     rootSchema,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -2353,7 +2356,7 @@ export function transformArraySchemaBoolean (schema, rootSchema, values, params)
             rootSchema,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -2580,7 +2583,7 @@ export function transformArraySchemaObjectForAllOf (schema, rootSchema, values, 
     ...minProperties,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -2648,7 +2651,7 @@ export function transformArraySchemaObject (schema, rootSchema, values, params) 
             ...minProperties,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -2856,7 +2859,7 @@ export function transformArraySchemaArrayForOneOf (schema, rootSchema, values, p
   }
 }
 
-export function transformArraySchemaArrayForAllOf (schema, rootSchema, values, params) {
+export function transformArraySchemaArrayForAllOf (schema, rootSchema, values, params) { // As-is
   log('transformArraySchemaArrayForAllOf')
 
   const {
@@ -2897,7 +2900,7 @@ export function transformArraySchemaArrayForAllOf (schema, rootSchema, values, p
     ...minContains,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -2970,7 +2973,7 @@ export function transformArraySchemaArray (schema, rootSchema, values, params) {
             ...minContains,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -3231,7 +3234,7 @@ export function transformArraySchemaNumberForAllOf (schema, rootSchema, values, 
     ...step,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -3305,7 +3308,7 @@ export function transformArraySchemaNumber (schema, rootSchema, values, params) 
             ...step,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -3546,7 +3549,7 @@ export function transformArraySchemaStringForAllOf (schema, rootSchema, values, 
     ...pattern,
     required: isRequired,
     ...getMetaDefaultValue(itemSchema, uri),
-    ...getMetaValue(values, uri),
+    ...getMetaValue(values, uri, itemSchema),
     ...metaProps
   }
 
@@ -3615,7 +3618,7 @@ export function transformArraySchemaString (schema, rootSchema, values, params) 
             ...pattern,
             required: isRequired,
             ...getMetaDefaultValue(schema, uri),
-            ...getMetaValue(values, uri),
+            ...getMetaValue(values, uri, schema),
             ...metaProps
           }
 
@@ -3798,7 +3801,7 @@ export function transformNullForAllOf (rootSchema, values, params) {
     type: 'null',
     schema: rootSchema,
     ...getMetaDefaultValue(itemSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', itemSchema),
     ...metaProps
   }
 
@@ -3844,7 +3847,7 @@ export function transformNull (rootSchema, values, params) {
             type: 'null',
             schema: rootSchema,
             ...getMetaDefaultValue(rootSchema, '#/'),
-            ...getMetaValue(values, '#/'),
+            ...getMetaValue(values, '#/', rootSchema),
             ...metaProps
           }
 
@@ -3993,7 +3996,7 @@ export function transformBooleanForAllOf (rootSchema, values, params) {
     type: 'boolean',
     schema: rootSchema,
     ...getMetaDefaultValue(itemSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', itemSchema),
     ...metaProps
   }
 
@@ -4039,7 +4042,7 @@ export function transformBoolean (rootSchema, values, params) {
             type: 'boolean',
             schema: rootSchema,
             ...getMetaDefaultValue(rootSchema, '#/'),
-            ...getMetaValue(values, '#/'),
+            ...getMetaValue(values, '#/', rootSchema),
             ...metaProps
           }
 
@@ -4084,7 +4087,7 @@ export function transformObjectForEnum (rootSchema, values, params) {
     ...minProperties,
     ...maxProperties,
     ...getMetaDefaultValue(rootSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', rootSchema),
     selectedItems,
     ...metaProps
   }
@@ -4129,7 +4132,7 @@ export function transformObjectForAnyOf (rootSchema, values, params) {
     ...minProperties,
     ...maxProperties,
     ...getMetaDefaultValue(rootSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', rootSchema),
     selectedItems,
     ...metaProps
   }
@@ -4174,7 +4177,7 @@ export function transformObjectForOneOf (rootSchema, values, params) {
     ...minProperties,
     ...maxProperties,
     ...getMetaDefaultValue(rootSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', rootSchema),
     selectedItems,
     ...metaProps
   }
@@ -4197,7 +4200,7 @@ export function transformObjectForOneOf (rootSchema, values, params) {
   }
 }
 
-export function transformObjectForAllOf (rootSchema, values, params) {
+export function transformObjectForAllOf (rootSchema, values, params) { // As-is
   log('transformObjectForAllOf')
 
   const metaProps = getMetaProps(params, '#/')
@@ -4220,7 +4223,7 @@ export function transformObjectForAllOf (rootSchema, values, params) {
     ...minProperties,
     ...maxProperties,
     ...getMetaDefaultValue(itemSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', itemSchema),
     ...metaProps
   }
 
@@ -4276,7 +4279,7 @@ export function transformObject (rootSchema, values, params) {
             ...minProperties,
             ...maxProperties,
             ...getMetaDefaultValue(rootSchema, '#/'),
-            ...getMetaValue(values, '#/'),
+            ...getMetaValue(values, '#/', rootSchema),
             ...metaProps
           }
 
@@ -4489,7 +4492,7 @@ export function transformArrayForAllOf (rootSchema, values, params) {
     ...maxContains,
     ...minContains,
     ...getMetaDefaultValue(itemSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', itemSchema),
     ...metaProps
   }
 
@@ -4550,7 +4553,7 @@ export function transformArray (rootSchema, values, params) {
             ...maxContains,
             ...minContains,
             ...getMetaDefaultValue(rootSchema, '#/'),
-            ...getMetaValue(values, '#/'),
+            ...getMetaValue(values, '#/', rootSchema),
             ...metaProps
           }
 
@@ -4760,7 +4763,7 @@ export function transformNumberForAllOf (rootSchema, values, params) {
     ...max,
     ...step,
     ...getMetaDefaultValue(itemSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', itemSchema),
     ...metaProps
   }
 
@@ -4821,7 +4824,7 @@ export function transformNumber (rootSchema, values, params) {
             ...max,
             ...step,
             ...getMetaDefaultValue(rootSchema, '#/'),
-            ...getMetaValue(values, '#/'),
+            ...getMetaValue(values, '#/', rootSchema),
             ...metaProps
           }
 
@@ -5010,7 +5013,7 @@ export function transformStringForAllOf (rootSchema, values, params) {
     ...maxLength,
     ...pattern,
     ...getMetaDefaultValue(itemSchema, '#/'),
-    ...getMetaValue(values, '#/'),
+    ...getMetaValue(values, '#/', itemSchema),
     ...metaProps
   }
 
@@ -5066,7 +5069,7 @@ export function transformString (rootSchema, values, params) {
             ...maxLength,
             ...pattern,
             ...getMetaDefaultValue(rootSchema, '#/'),
-            ...getMetaValue(values, '#/'),
+            ...getMetaValue(values, '#/', rootSchema),
             ...metaProps
           }
 

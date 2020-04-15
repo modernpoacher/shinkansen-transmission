@@ -2,6 +2,8 @@ export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
 export const isArray = (v) => Array.isArray(v)
 
+export const isPrimitive = (v) => !isObject(v) && !isArray(v)
+
 export const toConstValue = (schema = {}) => Reflect.get(schema, 'const')
 
 export const isConstValue = (schema = {}) => Reflect.has(schema, 'const')
@@ -49,11 +51,19 @@ export function getMetaDefaultValue (schema = {}) {
   return {}
 }
 
-export function getMetaValue (values = {}, uri = '#') {
+export function getMetaValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
     return { value: String(value) }
+  } else {
+    if (Reflect.has(schema, 'const')) {
+      const constValue = Reflect.get(schema, 'const')
+
+      if (isPrimitive(constValue)) {
+        return { value: String(constValue) }
+      }
+    }
   }
 
   return {}
@@ -105,14 +115,18 @@ export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
     return { value: String(value) }
   } else {
     if (Reflect.has(schema, 'const')) {
-      const defaultValue = Reflect.get(schema, 'const')
+      const constValue = Reflect.get(schema, 'const')
 
-      return { value: String(defaultValue) }
+      if (isPrimitive(constValue)) {
+        return { value: String(constValue) }
+      }
     } else {
       if (Reflect.has(schema, 'default')) {
         const defaultValue = Reflect.get(schema, 'default')
 
-        return { value: String(defaultValue) }
+        if (isPrimitive(defaultValue)) {
+          return { value: String(defaultValue) }
+        }
       }
     }
   }

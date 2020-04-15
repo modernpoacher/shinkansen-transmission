@@ -1,0 +1,12 @@
+{
+  "all": true,
+  "include": [
+    "src"
+  ],
+  "requires": [
+    "@babel/register"
+  ],
+  "exclude": [
+    "lib"
+  ]
+}

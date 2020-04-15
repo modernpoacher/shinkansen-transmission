@@ -26,7 +26,8 @@
     "babel:watch": "npm run babel -- -w",
     "lint": "eslint src test *.js",
     "lint:fix": "npm run lint -- --fix",
-    "test": "mocha test --recursive -r @babel/register -r @babel/polyfill --verbose",
+    "test": "NODE_ENV=test mocha test --recursive -r @babel/register -r @babel/polyfill --verbose",
+    "coverage": "nyc --reporter=lcov npm run test",
     "pre-commit": "npm run lint && npm test && npm run babel && git add lib"
   },
   "dependencies": {
@@ -53,6 +54,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.4",
     "mocha": "^7.1.1",
+    "nyc": "^15.0.1",
     "rimraf": "^3.0.2"
   },
   "husky": {

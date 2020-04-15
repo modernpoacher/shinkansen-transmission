@@ -4,6 +4,8 @@
 **/npm-debug.log
 
 node_modules
+coverage
+.nyc_output
 
 # User-defined NPM configuration
 .npmrc
