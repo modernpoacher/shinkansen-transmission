@@ -46,8 +46,9 @@ import {
 const log = debug('shinkansen-transmission:to-zashiki:root-schema')
 
 export function transformNullForEnum (rootSchema, values, params) {
-  log('transformNullForEnum')
-
+  /*
+   *  log('transformNullForEnum')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -81,8 +82,9 @@ export function transformNullForEnum (rootSchema, values, params) {
 }
 
 export function transformNullForAnyOf (rootSchema, values, params) {
-  log('transformNullForAnyOf')
-
+  /*
+   *  log('transformNullForAnyOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -117,8 +119,9 @@ export function transformNullForAnyOf (rootSchema, values, params) {
 }
 
 export function transformNullForOneOf (rootSchema, values, params) {
-  log('transformNullForOneOf')
-
+  /*
+   *  log('transformNullForOneOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -153,12 +156,11 @@ export function transformNullForOneOf (rootSchema, values, params) {
 }
 
 export function transformNullForAllOf (rootSchema, values, params) {
-  log('transformNullForAllOf')
-
+  /*
+   *  log('transformNullForAllOf')
+   */
   const { allOf, ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
-
-  // log(itemSchema, rootSchema)
 
   const metaProps = getMetaProps(params, '#/')
 
@@ -192,8 +194,9 @@ export function transformNullForAllOf (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (rootSchema, values, params) {
-  log('transformNull')
-
+  /*
+   *  log('transformNull (1)')
+   */
   if (hasEnum(rootSchema)) {
     return transformNullForEnum(rootSchema, values, params)
   } else {
@@ -206,6 +209,9 @@ export function transformNull (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           return transformNullForAllOf(rootSchema, values, params)
         } else {
+          /*
+           *  log('transformNull (2)')
+           */
           const metaProps = getMetaProps(params, '#/')
 
           const title = getTitle(rootSchema)
@@ -241,8 +247,9 @@ export function transformNull (rootSchema, values, params) {
 }
 
 export function transformBooleanForEnum (rootSchema, values, params) {
-  log('transformBooleanForEnum')
-
+  /*
+   *  log('transformBooleanForEnum')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -276,8 +283,9 @@ export function transformBooleanForEnum (rootSchema, values, params) {
 }
 
 export function transformBooleanForAnyOf (rootSchema, values, params) {
-  log('transformBooleanForAnyOf')
-
+  /*
+   *  log('transformBooleanForAnyOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -312,8 +320,9 @@ export function transformBooleanForAnyOf (rootSchema, values, params) {
 }
 
 export function transformBooleanForOneOf (rootSchema, values, params) {
-  log('transformBooleanForOneOf')
-
+  /*
+   *  log('transformBooleanForOneOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -348,12 +357,11 @@ export function transformBooleanForOneOf (rootSchema, values, params) {
 }
 
 export function transformBooleanForAllOf (rootSchema, values, params) {
-  log('transformBooleanForAllOf')
-
+  /*
+   *  log('transformBooleanForAllOf')
+   */
   const { allOf, ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
-
-  // log(itemSchema, rootSchema)
 
   const metaProps = getMetaProps(params, '#/')
 
@@ -387,8 +395,9 @@ export function transformBooleanForAllOf (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (rootSchema, values, params) {
-  log('transformBoolean')
-
+  /*
+   *  log('transformBoolean (1)')
+   */
   if (hasEnum(rootSchema)) {
     return transformBooleanForEnum(rootSchema, values, params)
   } else {
@@ -401,6 +410,9 @@ export function transformBoolean (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           return transformBooleanForAllOf(rootSchema, values, params)
         } else {
+          /*
+           *  log('transformBoolean (2)')
+           */
           const metaProps = getMetaProps(params, '#/')
 
           const title = getTitle(rootSchema)
@@ -436,8 +448,9 @@ export function transformBoolean (rootSchema, values, params) {
 }
 
 export function transformObjectForEnum (rootSchema, values, params) {
-  log('transformObjectForEnum')
-
+  /*
+   *  log('transformObjectForEnum')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -480,8 +493,9 @@ export function transformObjectForEnum (rootSchema, values, params) {
 }
 
 export function transformObjectForAnyOf (rootSchema, values, params) {
-  log('transformObjectForAnyOf')
-
+  /*
+   *  log('transformObjectForAnyOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -525,8 +539,9 @@ export function transformObjectForAnyOf (rootSchema, values, params) {
 }
 
 export function transformObjectForOneOf (rootSchema, values, params) {
-  log('transformObjectForOneOf')
-
+  /*
+   *  log('transformObjectForOneOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -570,12 +585,11 @@ export function transformObjectForOneOf (rootSchema, values, params) {
 }
 
 export function transformObjectForAllOf (rootSchema, values, params) { // As-is
-  log('transformObjectForAllOf')
-
+  /*
+   *  log('transformObjectForAllOf')
+   */
   const { allOf, ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
-
-  // log(itemSchema, rootSchema)
 
   const metaProps = getMetaProps(params, '#/')
 
@@ -619,8 +633,9 @@ export function transformObjectForAllOf (rootSchema, values, params) { // As-is
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (rootSchema, values, params) {
-  log('transformObject')
-
+  /*
+   *  log('transformObject (1)')
+   */
   if (hasEnum(rootSchema)) {
     return transformObjectForEnum(rootSchema, values, params)
   } else {
@@ -633,6 +648,9 @@ export function transformObject (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           return transformObjectForAllOf(rootSchema, values, params)
         } else {
+          /*
+           *  log('transformObject (2)')
+           */
           const metaProps = getMetaProps(params, '#/')
 
           const title = getTitle(rootSchema)
@@ -678,8 +696,9 @@ export function transformObject (rootSchema, values, params) {
 }
 
 export function transformArrayForEnum (rootSchema, values, params) {
-  log('transformArrayForEnum')
-
+  /*
+   *  log('transformArrayForEnum')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -729,8 +748,9 @@ export function transformArrayForEnum (rootSchema, values, params) {
 }
 
 export function transformArrayForAnyOf (rootSchema, values, params) {
-  log('transformArrayForAnyOf')
-
+  /*
+   *  log('transformArrayForAnyOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -781,8 +801,9 @@ export function transformArrayForAnyOf (rootSchema, values, params) {
 }
 
 export function transformArrayForOneOf (rootSchema, values, params) {
-  log('transformArrayForOneOf')
-
+  /*
+   *  log('transformArrayForOneOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -833,12 +854,11 @@ export function transformArrayForOneOf (rootSchema, values, params) {
 }
 
 export function transformArrayForAllOf (rootSchema, values, params) {
-  log('transformArrayForAllOf')
-
+  /*
+   *  log('transformArrayForAllOf')
+   */
   const { allOf, ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
-
-  // log(itemSchema, rootSchema)
 
   const metaProps = getMetaProps(params, '#/')
 
@@ -898,8 +918,9 @@ export function transformArrayForAllOf (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (rootSchema, values, params) {
-  log('transformArray')
-
+  /*
+   *  log('transformArray (1)')
+   */
   if (hasEnum(rootSchema)) {
     return transformArrayForEnum(rootSchema, values, params)
   } else {
@@ -912,6 +933,9 @@ export function transformArray (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           return transformArrayForAllOf(rootSchema, values, params)
         } else {
+          /*
+           *  log('transformArray (2)')
+           */
           const metaProps = getMetaProps(params, '#/')
 
           const title = getTitle(rootSchema)
@@ -973,8 +997,9 @@ export function transformArray (rootSchema, values, params) {
 }
 
 export function transformNumberForEnum (rootSchema, values, params) {
-  log('transformNumberForEnum')
-
+  /*
+   *  log('transformNumberForEnum')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -1023,8 +1048,9 @@ export function transformNumberForEnum (rootSchema, values, params) {
 }
 
 export function transformNumberForAnyOf (rootSchema, values, params) {
-  log('transformNumberForAnyOf')
-
+  /*
+   *  log('transformNumberForAnyOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -1074,8 +1100,9 @@ export function transformNumberForAnyOf (rootSchema, values, params) {
 }
 
 export function transformNumberForOneOf (rootSchema, values, params) {
-  log('transformNumberForOneOf')
-
+  /*
+   *  log('transformNumberForOneOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -1125,12 +1152,11 @@ export function transformNumberForOneOf (rootSchema, values, params) {
 }
 
 export function transformNumberForAllOf (rootSchema, values, params) {
-  log('transformNumberForAllOf')
-
+  /*
+   *  log('transformNumberForAllOf')
+   */
   const { allOf, ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
-
-  // log(itemSchema, rootSchema)
 
   const metaProps = getMetaProps(params, '#/')
 
@@ -1179,8 +1205,9 @@ export function transformNumberForAllOf (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
-  log('transformNumber')
-
+  /*
+   *  log('transformNumber (1)')
+   */
   if (hasEnum(rootSchema)) {
     return transformNumberForEnum(rootSchema, values, params)
   } else {
@@ -1193,6 +1220,9 @@ export function transformNumber (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           return transformNumberForAllOf(rootSchema, values, params)
         } else {
+          /*
+           *  log('transformNumber (2)')
+           */
           const metaProps = getMetaProps(params, '#/')
 
           const title = getTitle(rootSchema)
@@ -1243,8 +1273,9 @@ export function transformNumber (rootSchema, values, params) {
 }
 
 export function transformStringForEnum (rootSchema, values, params) {
-  log('transformStringForEnum')
-
+  /*
+   *  log('transformStringForEnum')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -1288,8 +1319,9 @@ export function transformStringForEnum (rootSchema, values, params) {
 }
 
 export function transformStringForAnyOf (rootSchema, values, params) {
-  log('transformStringForAnyOf')
-
+  /*
+   *  log('transformStringForAnyOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -1334,8 +1366,9 @@ export function transformStringForAnyOf (rootSchema, values, params) {
 }
 
 export function transformStringForOneOf (rootSchema, values, params) {
-  log('transformStringForOneOf')
-
+  /*
+   *  log('transformStringForOneOf')
+   */
   const metaProps = getMetaProps(params, '#/')
 
   const title = getTitle(rootSchema)
@@ -1380,12 +1413,11 @@ export function transformStringForOneOf (rootSchema, values, params) {
 }
 
 export function transformStringForAllOf (rootSchema, values, params) {
-  log('transformStringForAllOf')
-
+  /*
+   *  log('transformStringForAllOf')
+   */
   const { allOf, ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
-
-  // log(itemSchema, rootSchema)
 
   const metaProps = getMetaProps(params, '#/')
 
@@ -1429,8 +1461,9 @@ export function transformStringForAllOf (rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (rootSchema, values, params) {
-  log('transformString')
-
+  /*
+   *  log('transformString (1)')
+   */
   if (hasEnum(rootSchema)) {
     return transformStringForEnum(rootSchema, values, params)
   } else {
@@ -1443,6 +1476,9 @@ export function transformString (rootSchema, values, params) {
         if (hasAllOf(rootSchema)) {
           return transformStringForAllOf(rootSchema, values, params)
         } else {
+          /*
+           *  log('transformString (2)')
+           */
           const metaProps = getMetaProps(params, '#/')
 
           const title = getTitle(rootSchema)
@@ -1487,8 +1523,8 @@ export function transformString (rootSchema, values, params) {
   }
 }
 
-export default function transform (rootSchema = {}, values = {}, params = {}) {
-  log('transform')
+export default function toZashiki (rootSchema = {}, values = {}, params = {}) {
+  log('toZashiki')
 
   const { type } = rootSchema
 
