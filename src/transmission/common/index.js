@@ -20,14 +20,72 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export function getSelectedItems (values = {}, uri = '#') {
-  if (Reflect.has(values, uri)) {
-    const value = Reflect.get(values, uri)
+export function getSelectedItemsForParentUri (values = {}, uri = '#', parentUri = '#') {
+  return (
+    Object
+      .entries(values)
+      .filter(([key]) => key.startsWith(parentUri)) // parent
+      .reduce((accumulator, [key, value]) => {
+        const k = key.endsWith('/') ? uri.slice(key.length) : uri.slice(key.length + 1)
+        const i = k ? Number(k.includes('/') ? k.slice(0, k.indexOf('/')) : k) : NaN
+        const v = isArray(value) ? value[i] : value
 
-    return isArray(value) ? value.map((v) => Number(v)) : [Number(value)]
+        if (isPrimitive(v)) {
+          const n = Number(v)
+
+          if (!isNaN(n)) return accumulator.concat(n)
+        }
+
+        return accumulator
+      }, [])
+  )
+}
+
+export function getSelectedItemsForUri (value = null, uri = '#', parentUri = '#') {
+  /*
+   *  Is `value` an array?
+   */
+  if (isArray(value)) {
+    return value.reduce((accumulator, v, i) => {
+      if (isPrimitive(v)) {
+        const n = Number(v)
+
+        if (!isNaN(n)) return accumulator.concat(n)
+      }
+
+      return accumulator
+    }, [])
+  }
+
+  /*
+   *  Is `value` a primitive?
+   */
+  if (isPrimitive(value)) {
+    const n = Number(value)
+
+    if (!isNaN(n)) return [n]
   }
 
   return []
+}
+
+/*
+ *  `values` can have arrays
+ */
+export function getSelectedItems (values = {}, uri = '#', parentUri = '#') {
+  /*
+   *  Does `values` have values for `uri`?
+   */
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    return getSelectedItemsForUri(value, uri, parentUri)
+  }
+
+  /*
+   *  Does `values` have values for `parentUri`?
+   */
+  return getSelectedItemsForParentUri(values, uri, parentUri)
 }
 
 export function getMetaProps (params = {}, uri = '#') {
@@ -152,7 +210,8 @@ export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 export const hasAllOf = (schema = {}) => Reflect.has(schema, 'allOf')
 export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
-export const getUri = (uri = '', resource = '') => uri.concat('/').concat(resource)
+export const getParentUri = (parentUri = '#') => parentUri === '#' ? '#/' : parentUri
+export const getUri = (uri = '#', resource = '') => (uri.endsWith('/') ? uri : uri.concat('/')).concat(resource)
 
 export function getMin ({ minimum } = {}) {
   const value = Number(minimum)

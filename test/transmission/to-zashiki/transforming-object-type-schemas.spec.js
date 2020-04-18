@@ -5,7 +5,15 @@ import { expect } from 'chai'
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
 describe('shinkansen-transmission/transmission/to-zashiki', () => {
-  before(() => debug.disable()) // enable('shinkansen-transmission:to-zashiki'))
+  before(() => {
+    const {
+      env: {
+        DEBUG
+      }
+    } = process
+
+    if (DEBUG) debug.enable(DEBUG)
+  })
 
   describe('Transforming `object` type schemas', () => {
     it('transforms `object` type schemas with `enum` (with an `object` type with `enum`)', () => {

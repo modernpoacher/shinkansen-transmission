@@ -5,7 +5,15 @@ import { expect } from 'chai'
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
 describe('shinkansen-transmission/transmission/to-zashiki', () => {
-  before(() => debug.disable()) // enable('shinkansen-transmission:to-zashiki'))
+  before(() => {
+    const {
+      env: {
+        DEBUG
+      }
+    } = process
+
+    if (DEBUG) debug.enable(DEBUG)
+  })
 
   describe('Without values', () => {
     describe('Without params', () => {
@@ -2317,14 +2325,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -2421,14 +2429,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -6061,14 +6069,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -6161,14 +6169,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -10300,14 +10308,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
                                 value: 'null'
                               }
@@ -10374,14 +10382,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
                                 value: 'null'
                               }
@@ -12712,14 +12720,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -12814,14 +12822,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -16408,14 +16416,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -16506,14 +16514,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
                                       value: 'null'
                                     }
@@ -20599,14 +20607,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
                                 value: 'null'
                               }
@@ -20671,14 +20679,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
                                 value: 'null'
                               }

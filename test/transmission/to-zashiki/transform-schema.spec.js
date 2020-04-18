@@ -2,7 +2,9 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import transform, {
+import transform from 'shinkansen-transmission/transmission/to-zashiki'
+
+import {
   transformObjectSchemaNullForEnum,
   transformObjectSchemaNullForAnyOf,
   transformObjectSchemaNullForOneOf,
@@ -95,10 +97,18 @@ import transform, {
   transformStringForOneOf,
   transformStringForAllOf,
   transformString
-} from 'shinkansen-transmission/transmission/to-zashiki'
+} from 'shinkansen-transmission/transmission/to-zashiki/transform-schema'
 
 describe('shinkansen-transmission/transmission/to-zashiki', () => {
-  before(() => debug.disable()) // enable('shinkansen-transmission:to-zashiki'))
+  before(() => {
+    const {
+      env: {
+        DEBUG
+      }
+    } = process
+
+    if (DEBUG) debug.enable(DEBUG)
+  })
 
   it('is a function', () => {
     expect(transform)
@@ -1504,6 +1514,692 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           },
           elements: {
             fields: []
+          }
+        })
+    })
+
+    /*
+     *
+     *  Item at array index must be of type at schema item index
+     *
+     *    [ 'string', 1, true, null ]
+     *
+     */
+    it('transforms (x1)', () => {
+      const schema = {
+        type: 'array',
+        items: [
+          {
+            type: 'string'
+          },
+          {
+            type: 'number'
+          },
+          {
+            type: 'boolean'
+          },
+          {
+            type: 'null'
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: [
+              {
+                meta: {
+                  type: 'string',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'string'
+                  },
+                  required: false
+                },
+                elements: {
+                  field: {
+                    id: '#/0',
+                    required: false
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'number',
+                  item: 1,
+                  parentUri: '#/',
+                  uri: '#/1',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'number'
+                  },
+                  required: false
+                },
+                elements: {
+                  field: {
+                    id: '#/1',
+                    required: false
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'boolean',
+                  item: 2,
+                  parentUri: '#/',
+                  uri: '#/2',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'boolean'
+                  },
+                  required: false
+                },
+                elements: {
+                  field: {
+                    id: '#/2',
+                    required: false
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'null',
+                  item: 3,
+                  parentUri: '#/',
+                  uri: '#/3',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'null'
+                  },
+                  required: false
+                },
+                elements: {
+                  field: {
+                    id: '#/3',
+                    required: false
+                  }
+                }
+              }
+            ]
+          }
+        })
+    })
+
+    /*
+     *  Item at each index must be type of schema item
+     *
+     *  [ 'string' ]
+     *
+     */
+    it('transforms (x1)', () => {
+      const schema = {
+        type: 'array',
+        items: {
+          type: 'string'
+        }
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: [
+              {
+                meta: {
+                  type: 'string',
+                  item: 0,
+                  parentUri: '#/', // ?
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'string'
+                  },
+                  required: false
+                },
+                elements: {
+                  field: {
+                    id: '#/0',
+                    required: false
+                  }
+                }
+              }
+            ]
+          }
+        })
+    })
+
+    /*
+     *
+     *  Item at array index must be of type at schema item index
+     *
+     *    [
+     *      [ 'string', 1, true, null ]
+     *    ]
+     *
+     */
+    it('transforms (x2)', () => {
+      const schema = {
+        type: 'array',
+        items: [
+          {
+            type: 'array',
+            items: [
+              {
+                type: 'string'
+              },
+              {
+                type: 'number'
+              },
+              {
+                type: 'boolean'
+              },
+              {
+                type: 'null'
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: [
+              {
+                meta: {
+                  type: 'array',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'array',
+                    items: [
+                      {
+                        type: 'string'
+                      },
+                      {
+                        type: 'number'
+                      },
+                      {
+                        type: 'boolean'
+                      },
+                      {
+                        type: 'null'
+                      }
+                    ]
+                  },
+                  required: false
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        type: 'string',
+                        item: 0,
+                        parentUri: '#/0',
+                        uri: '#/0/0',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        required: false
+                      },
+                      elements: {
+                        field: {
+                          id: '#/0/0',
+                          required: false
+                        }
+                      }
+                    },
+                    {
+                      meta: {
+                        type: 'number',
+                        item: 1,
+                        parentUri: '#/0',
+                        uri: '#/0/1',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'number'
+                        },
+                        required: false
+                      },
+                      elements: {
+                        field: {
+                          id: '#/0/1',
+                          required: false
+                        }
+                      }
+                    },
+                    {
+                      meta: {
+                        type: 'boolean',
+                        item: 2,
+                        parentUri: '#/0',
+                        uri: '#/0/2',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'boolean'
+                        },
+                        required: false
+                      },
+                      elements: {
+                        field: {
+                          id: '#/0/2',
+                          required: false
+                        }
+                      }
+                    },
+                    {
+                      meta: {
+                        type: 'null',
+                        item: 3,
+                        parentUri: '#/0',
+                        uri: '#/0/3',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'null'
+                        },
+                        required: false
+                      },
+                      elements: {
+                        field: {
+                          id: '#/0/3',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        })
+    })
+
+    /*
+     *  Item at each index must be type of schema item
+     *
+     *  [
+     *    [ 'string' ]
+     *  ]
+     *
+     */
+    it('transforms (x2)', () => {
+      const schema = {
+        type: 'array',
+        items: {
+          type: 'array',
+          items: {
+            type: 'string'
+          }
+        }
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: [
+              {
+                meta: {
+                  type: 'array',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    }
+                  },
+                  required: false
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        type: 'string',
+                        item: 0,
+                        parentUri: '#/0',
+                        uri: '#/0/0',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'string'
+                        },
+                        required: false
+                      },
+                      elements: {
+                        field: {
+                          id: '#/0/0',
+                          required: false
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        })
+    })
+
+    /*
+     *
+     *  Item at array index must be of type at schema item index
+     *
+     *    [
+     *      [
+     *        [ 'string', 1, true, null ]
+     *      ]
+     *    ]
+     *
+     */
+    it('transforms (x3)', () => {
+      const schema = {
+        type: 'array',
+        items: [
+          {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'string'
+                  },
+                  {
+                    type: 'number'
+                  },
+                  {
+                    type: 'boolean'
+                  },
+                  {
+                    type: 'null'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: [
+              {
+                meta: {
+                  type: 'array',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'array',
+                    items: [
+                      {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'string'
+                          },
+                          {
+                            type: 'number'
+                          },
+                          {
+                            type: 'boolean'
+                          },
+                          {
+                            type: 'null'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  required: false
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        type: 'array',
+                        item: 0,
+                        parentUri: '#/0',
+                        uri: '#/0/0',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'array',
+                          items: [
+                            {
+                              type: 'string'
+                            },
+                            {
+                              type: 'number'
+                            },
+                            {
+                              type: 'boolean'
+                            },
+                            {
+                              type: 'null'
+                            }
+                          ]
+                        },
+                        required: false
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              parentUri: '#/0/0',
+                              uri: '#/0/0/0',
+                              rootSchema: schema,
+                              schema: {
+                                type: 'string'
+                              },
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/0/0/0',
+                                required: false
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'number',
+                              item: 1,
+                              parentUri: '#/0/0',
+                              uri: '#/0/0/1',
+                              rootSchema: schema,
+                              schema: {
+                                type: 'number'
+                              },
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/0/0/1',
+                                required: false
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'boolean',
+                              item: 2,
+                              parentUri: '#/0/0',
+                              uri: '#/0/0/2',
+                              rootSchema: schema,
+                              schema: {
+                                type: 'boolean'
+                              },
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/0/0/2',
+                                required: false
+                              }
+                            }
+                          },
+                          {
+                            meta: {
+                              type: 'null',
+                              item: 3,
+                              parentUri: '#/0/0',
+                              uri: '#/0/0/3',
+                              rootSchema: schema,
+                              schema: {
+                                type: 'null'
+                              },
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/0/0/3',
+                                required: false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        })
+    })
+
+    /*
+     *  Item at each index must be type of schema item
+     *
+     *  [
+     *    [
+     *      [ 'string' ]
+     *    ]
+     *  ]
+     *
+     */
+    it('transforms (x3)', () => {
+      const schema = {
+        type: 'array',
+        items: {
+          type: 'array',
+          items: {
+            type: 'array',
+            items: {
+              type: 'string'
+            }
+          }
+        }
+      }
+
+      expect(transform(schema))
+        .to.eql({
+          meta: {
+            type: 'array',
+            uri: '#/',
+            schema
+          },
+          elements: {
+            fields: [
+              {
+                meta: {
+                  type: 'array',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    type: 'array',
+                    items: {
+                      type: 'array',
+                      items: {
+                        type: 'string'
+                      }
+                    }
+                  },
+                  required: false
+                },
+                elements: {
+                  fields: [
+                    {
+                      meta: {
+                        type: 'array',
+                        item: 0,
+                        parentUri: '#/0',
+                        uri: '#/0/0',
+                        rootSchema: schema,
+                        schema: {
+                          type: 'array',
+                          items: {
+                            type: 'string'
+                          }
+                        },
+                        required: false
+                      },
+                      elements: {
+                        fields: [
+                          {
+                            meta: {
+                              type: 'string',
+                              item: 0,
+                              parentUri: '#/0/0',
+                              uri: '#/0/0/0',
+                              rootSchema: schema,
+                              schema: {
+                                type: 'string'
+                              },
+                              required: false
+                            },
+                            elements: {
+                              field: {
+                                id: '#/0/0/0',
+                                required: false
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         })
     })

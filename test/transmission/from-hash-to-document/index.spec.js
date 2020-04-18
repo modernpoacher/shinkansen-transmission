@@ -5,7 +5,15 @@ import { expect } from 'chai'
 import transform from 'shinkansen-transmission/transmission/from-hash-to-document'
 
 describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
-  before(() => debug.disable())
+  before(() => {
+    const {
+      env: {
+        DEBUG
+      }
+    } = process
+
+    if (DEBUG) debug.enable(DEBUG)
+  })
 
   it('is a function', () => {
     expect(transform)
@@ -163,9 +171,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': '0',
+            '#/1': '1',
+            '#/2': '2'
           }
 
           return expect(transform(schema, values))
@@ -208,9 +216,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': '0',
+            '#/1': '1',
+            '#/2': '2'
           }
 
           return expect(transform(schema, values))
@@ -253,9 +261,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': '0',
+            '#/1': '1',
+            '#/2': '2'
           }
 
           return expect(transform(schema, values))
@@ -499,9 +507,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': '0',
+            '#/1': '1',
+            '#/2': '2'
           }
 
           return expect(transform(schema, values))
@@ -526,9 +534,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': '0',
+            '#/1': '1',
+            '#/2': '2'
           }
 
           return expect(transform(schema, values))
@@ -553,9 +561,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': '0',
+            '#/1': '1',
+            '#/2': '2'
           }
 
           return expect(transform(schema, values))
@@ -580,15 +588,11 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string',
-            '#/1': 'mock array type index string',
-            '#/2': 'mock array type index string'
+            '#/0': 'mock array type index string'
           }
 
           return expect(transform(schema, values))
             .to.eql([
-              'mock array type index string',
-              'mock array type index string',
               'mock array type index string'
             ])
         })
@@ -602,16 +606,12 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
 
           const values = {
-            '#/0': 'mock array type index string (1)',
-            '#/1': 'mock array type index string (2)',
-            '#/2': 'mock array type index string (3)'
+            '#/0': 'mock array type index string'
           }
 
           return expect(transform(schema, values))
             .to.eql([
-              'mock array type index string (1)',
-              'mock array type index string (2)',
-              'mock array type index string (3)'
+              'mock array type index string'
             ])
         })
       })
@@ -640,7 +640,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
           }
         }
 
-        const values = {}
+        const values = {
+          '#/': []
+        }
 
         return expect(transform(schema, values))
           .to.eql([])

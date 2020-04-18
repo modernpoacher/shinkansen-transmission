@@ -5,7 +5,15 @@ import { expect } from 'chai'
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
 describe('shinkansen-transmission/transmission/to-zashiki', () => {
-  before(() => debug.disable()) // enable('shinkansen-transmission:to-zashiki'))
+  before(() => {
+    const {
+      env: {
+        DEBUG
+      }
+    } = process
+
+    if (DEBUG) debug.enable(DEBUG)
+  })
 
   describe('With values', () => {
     describe('With params', () => {
@@ -33,12 +41,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -47,7 +56,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -102,12 +110,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -116,7 +125,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -231,12 +239,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -245,7 +254,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -362,12 +370,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -376,7 +385,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -435,12 +443,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -449,7 +458,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -504,12 +512,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -518,7 +527,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -633,12 +641,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -647,7 +656,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -764,12 +772,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -778,7 +787,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -842,13 +850,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -882,7 +891,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -945,13 +953,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -985,7 +994,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -1108,13 +1116,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1148,7 +1157,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -1273,13 +1281,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1315,7 +1324,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -1379,13 +1387,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1419,7 +1428,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -1482,13 +1490,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1522,7 +1531,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -1645,13 +1653,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1685,7 +1694,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -1810,13 +1818,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1852,7 +1861,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -1915,13 +1923,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -1954,7 +1963,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -2014,13 +2022,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2053,7 +2062,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -2153,13 +2161,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2192,7 +2201,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -2291,13 +2299,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2329,7 +2338,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -2383,13 +2391,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2421,7 +2430,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -2478,13 +2486,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2516,7 +2525,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -2543,16 +2551,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -2593,13 +2601,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2631,7 +2640,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -2658,16 +2666,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -2708,13 +2716,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2746,7 +2755,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -2816,13 +2824,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -2869,7 +2878,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -3012,13 +3020,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -3065,7 +3074,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -3328,13 +3336,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -3381,7 +3390,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -3648,13 +3656,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -3705,7 +3714,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -3857,13 +3865,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -3913,7 +3922,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -4062,13 +4070,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -4118,7 +4127,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -4387,13 +4395,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -4443,7 +4452,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -4716,13 +4724,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -4776,7 +4785,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -4912,13 +4920,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -4950,7 +4959,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -5010,9 +5018,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             '#/0/0': '1'
           }
 
-          return expect(transform(schema, values))
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5021,6 +5035,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
+                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -5162,9 +5177,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             '#/0/0': '1'
           }
 
-          return expect(transform(schema, values))
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5173,6 +5194,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
+                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -5316,9 +5338,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             '#/0/0': 'string'
           }
 
-          return expect(transform(schema, values))
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5327,6 +5355,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
+                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -5412,13 +5441,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5450,7 +5480,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -5511,13 +5540,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5549,7 +5579,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -5670,13 +5699,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5708,7 +5738,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -5831,13 +5860,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5871,7 +5901,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -5932,13 +5961,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -5969,7 +5999,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -6027,13 +6056,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6064,7 +6094,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -6162,13 +6191,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6199,7 +6229,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -6296,13 +6325,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6332,7 +6362,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -6384,13 +6413,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6420,7 +6450,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -6475,13 +6504,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6511,7 +6541,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -6538,16 +6567,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -6586,13 +6615,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6622,7 +6652,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -6649,16 +6678,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -6697,13 +6726,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6733,7 +6763,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -6801,13 +6830,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -6852,7 +6882,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -6993,13 +7022,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -7044,7 +7074,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -7305,13 +7334,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -7356,7 +7386,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -7621,13 +7650,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -7676,7 +7706,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -7826,13 +7855,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -7880,7 +7910,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -8027,13 +8056,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -8081,7 +8111,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -8348,13 +8377,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -8402,7 +8432,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -8673,13 +8702,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -8731,7 +8761,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -8881,7 +8910,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -8889,6 +8918,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -8897,7 +8927,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -9034,7 +9063,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -9042,6 +9071,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -9050,7 +9080,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -9307,7 +9336,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -9315,6 +9344,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -9323,7 +9353,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -9584,7 +9613,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -9592,6 +9621,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -9600,7 +9630,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -9746,7 +9775,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -9754,6 +9783,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -9762,7 +9792,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -9905,7 +9934,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -9913,6 +9942,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -9921,7 +9951,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -10184,7 +10213,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -10192,6 +10221,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10200,7 +10230,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -10467,7 +10496,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -10475,6 +10504,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10483,7 +10513,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -10617,12 +10646,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10631,7 +10661,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -10683,12 +10712,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10697,7 +10727,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -10789,12 +10818,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10803,7 +10833,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -10894,12 +10923,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10908,7 +10938,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -10957,12 +10986,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -10971,7 +11001,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -11020,12 +11049,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11034,7 +11064,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -11061,16 +11090,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
-                              value: 'null'
+                              value: '0'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
-                                value: 'null'
+                                value: '0'
                               }
                             }
                           }
@@ -11103,12 +11132,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11117,7 +11147,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -11144,16 +11173,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
-                              value: 'null'
+                              value: '0'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
-                                value: 'null'
+                                value: '0'
                               }
                             }
                           }
@@ -11186,12 +11215,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11200,7 +11230,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -11249,12 +11278,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11263,7 +11293,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -11316,12 +11345,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11330,7 +11360,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -11443,12 +11472,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11457,7 +11487,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -11572,12 +11601,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11586,7 +11616,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -11643,12 +11672,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11657,7 +11687,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -11710,12 +11739,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11724,7 +11754,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -11837,12 +11866,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11851,7 +11881,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -11966,12 +11995,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -11980,7 +12010,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -12042,13 +12071,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12082,7 +12112,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -12143,13 +12172,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12183,7 +12213,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -12304,13 +12333,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12344,7 +12374,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -12467,13 +12496,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12509,7 +12539,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -12571,13 +12600,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12611,7 +12641,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -12672,13 +12701,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12712,7 +12742,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -12833,13 +12862,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -12873,7 +12903,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -12996,13 +13025,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13038,7 +13068,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -13099,13 +13128,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13138,7 +13168,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -13196,13 +13225,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13235,7 +13265,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -13333,13 +13362,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13372,7 +13402,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -13469,13 +13498,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13507,7 +13537,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -13559,13 +13588,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13597,7 +13627,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -13652,13 +13681,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13690,7 +13720,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -13717,16 +13746,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -13765,13 +13794,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13803,7 +13833,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -13830,16 +13859,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -13878,13 +13907,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13916,7 +13946,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -13984,13 +14013,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -13999,7 +14030,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -14037,7 +14067,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -14070,6 +14099,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -14101,6 +14131,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -14178,13 +14209,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -14193,7 +14226,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -14231,7 +14263,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -14264,6 +14295,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -14355,6 +14387,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -14492,13 +14525,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -14507,7 +14542,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -14545,7 +14579,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -14578,6 +14611,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -14669,6 +14703,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -14810,13 +14845,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -14825,7 +14862,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -14867,7 +14903,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -14904,6 +14939,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -14936,6 +14972,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -15017,13 +15054,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -15032,7 +15071,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -15073,7 +15111,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -15109,6 +15146,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -15140,6 +15178,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -15220,13 +15259,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -15235,7 +15276,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -15276,7 +15316,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -15312,6 +15351,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -15403,6 +15443,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -15543,13 +15584,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -15558,7 +15601,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -15599,7 +15641,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -15635,6 +15676,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -15726,6 +15768,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -15870,13 +15913,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -15885,7 +15930,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -15930,7 +15974,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -15970,6 +16013,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -16002,6 +16046,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -16064,13 +16109,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16102,7 +16148,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -16160,9 +16205,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             '#/0/0': '1'
           }
 
-          return expect(transform(schema, values))
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16171,6 +16222,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
+                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -16310,9 +16362,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             '#/0/0': '1'
           }
 
-          return expect(transform(schema, values))
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16321,6 +16379,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
+                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -16462,9 +16521,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             '#/0/0': 'string'
           }
 
-          return expect(transform(schema, values))
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16473,6 +16538,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
+                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -16556,13 +16622,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16594,7 +16661,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -16653,13 +16719,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16691,7 +16758,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -16810,13 +16876,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -16848,7 +16915,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -16969,13 +17035,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17009,7 +17076,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -17068,13 +17134,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17105,7 +17172,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -17161,13 +17227,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17198,7 +17265,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -17294,13 +17360,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17331,7 +17398,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -17426,13 +17492,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17462,7 +17529,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -17512,13 +17578,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17548,7 +17615,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -17601,13 +17667,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17637,7 +17704,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -17664,16 +17730,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -17710,13 +17776,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17746,7 +17813,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -17773,16 +17839,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
+                                    parentUri: '#/0',
+                                    uri: '#/0/0',
                                     required: false,
-                                    value: 'null'
+                                    value: '0'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0/0',
+                                      id: '#/0/0',
                                       required: false,
-                                      value: 'null'
+                                      value: '0'
                                     }
                                   }
                                 }
@@ -17819,13 +17885,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17855,7 +17922,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -17921,13 +17987,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -17936,7 +18004,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -17972,7 +18039,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -18005,6 +18071,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -18036,6 +18103,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -18111,13 +18179,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -18126,7 +18196,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -18162,7 +18231,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -18195,6 +18263,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -18286,6 +18355,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -18421,13 +18491,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -18436,7 +18508,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -18472,7 +18543,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -18505,6 +18575,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -18596,6 +18667,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -18735,13 +18807,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -18750,7 +18824,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -18790,7 +18863,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -18827,6 +18899,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -18859,6 +18932,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -18938,13 +19012,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -18953,7 +19029,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -18992,7 +19067,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -19028,6 +19102,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -19059,6 +19134,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -19137,13 +19213,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -19152,7 +19230,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -19191,7 +19268,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -19227,6 +19303,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -19318,6 +19395,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -19456,13 +19534,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -19471,7 +19551,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -19510,7 +19589,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -19546,6 +19624,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -19637,6 +19716,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -19779,13 +19859,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -19794,7 +19876,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -19837,7 +19918,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -19877,6 +19957,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -19909,6 +19990,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -19985,7 +20067,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -19993,6 +20075,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -20001,7 +20084,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -20136,7 +20218,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -20144,6 +20226,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -20152,7 +20235,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -20407,7 +20489,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -20415,6 +20497,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -20423,7 +20506,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -20682,7 +20764,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -20690,6 +20772,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -20698,7 +20781,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -20842,7 +20924,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -20850,6 +20932,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -20858,7 +20941,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -20999,7 +21081,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -21007,6 +21089,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21015,7 +21098,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -21276,7 +21358,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -21284,6 +21366,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21292,7 +21375,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -21557,7 +21639,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -21565,6 +21647,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21573,7 +21656,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -21705,12 +21787,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21719,7 +21802,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -21769,12 +21851,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21783,7 +21866,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -21873,12 +21955,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21887,7 +21970,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -21976,12 +22058,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -21990,7 +22073,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -22037,12 +22119,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22051,7 +22134,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -22098,12 +22180,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22112,7 +22195,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -22139,16 +22221,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
-                              value: 'null'
+                              value: '0'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
-                                value: 'null'
+                                value: '0'
                               }
                             }
                           }
@@ -22179,12 +22261,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22193,7 +22276,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -22220,16 +22302,16 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/0',
-                              uri: '#/0/0',
+                              parentUri: '#/',
+                              uri: '#/0',
                               required: false,
-                              value: 'null'
+                              value: '0'
                             },
                             elements: {
                               field: {
-                                id: '#/0/0',
+                                id: '#/0',
                                 required: false,
-                                value: 'null'
+                                value: '0'
                               }
                             }
                           }
@@ -22260,12 +22342,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22274,7 +22357,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -22320,12 +22402,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22334,7 +22417,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -22377,12 +22459,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22391,7 +22474,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -22439,13 +22521,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22474,7 +22557,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -22522,13 +22604,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22557,7 +22640,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -22605,13 +22687,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22640,7 +22723,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -22688,13 +22770,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22723,7 +22806,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -22780,13 +22862,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22823,7 +22906,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -22929,13 +23011,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -22975,7 +23058,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -23070,13 +23152,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23103,7 +23186,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -23149,13 +23231,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23182,7 +23265,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -23228,13 +23310,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23261,7 +23344,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -23307,13 +23389,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23340,7 +23423,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -23395,13 +23477,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23436,7 +23519,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -23540,13 +23622,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23584,7 +23667,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -23688,7 +23770,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -23696,6 +23778,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23704,7 +23787,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -23804,7 +23886,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -23812,6 +23894,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23820,7 +23903,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -23914,12 +23996,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23928,7 +24011,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -23971,12 +24053,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -23985,7 +24068,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,
@@ -24026,12 +24108,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24040,7 +24123,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'string',
                       item: 0,
                       rootSchema: schema,
@@ -24081,12 +24163,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24095,7 +24178,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'number',
                       item: 0,
                       rootSchema: schema,
@@ -24141,13 +24223,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24176,7 +24259,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -24222,13 +24304,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24257,7 +24340,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -24303,13 +24385,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24338,7 +24421,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -24384,13 +24466,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24419,7 +24502,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -24474,13 +24556,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24489,7 +24573,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -24517,7 +24600,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -24540,6 +24622,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -24561,6 +24644,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -24621,13 +24705,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24636,7 +24722,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -24667,7 +24752,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -24693,6 +24777,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -24714,6 +24799,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -24760,13 +24846,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24793,7 +24880,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'string',
                             item: 0,
                             rootSchema: schema,
@@ -24837,13 +24923,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24870,7 +24957,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'number',
                             item: 0,
                             rootSchema: schema,
@@ -24914,13 +25000,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -24947,7 +25034,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'boolean',
                             item: 0,
                             rootSchema: schema,
@@ -24991,13 +25077,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25024,7 +25111,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'null',
                             item: 0,
                             rootSchema: schema,
@@ -25077,13 +25163,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25092,7 +25180,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -25118,7 +25205,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -25141,6 +25227,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -25162,6 +25249,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -25220,13 +25308,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
-            '#/0/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } },
+            '#/0/0/one': { meta: { component: 'component' } },
+            '#/0/0/two': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25235,7 +25325,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'array',
                       item: 0,
                       rootSchema: schema,
@@ -25264,7 +25353,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       fields: [
                         {
                           meta: {
-                            component: 'component',
                             type: 'object',
                             item: 0,
                             rootSchema: schema,
@@ -25290,6 +25378,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             fields: [
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'string',
                                   name: 'one',
                                   rootSchema: schema,
@@ -25311,6 +25400,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               {
                                 meta: {
+                                  component: 'component',
                                   type: 'number',
                                   name: 'two',
                                   rootSchema: schema,
@@ -25366,7 +25456,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -25374,6 +25464,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25382,7 +25473,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -25480,7 +25570,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } },
+            '#/': { meta: { component: 'component' } },
             '#/0/one': { meta: { component: 'component' } },
             '#/0/two': { meta: { component: 'component' } }
           }
@@ -25488,6 +25578,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25496,7 +25587,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'object',
                       item: 0,
                       rootSchema: schema,
@@ -25588,12 +25678,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25602,7 +25693,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'boolean',
                       item: 0,
                       rootSchema: schema,
@@ -25643,12 +25733,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const params = {
-            '#/0': { meta: { component: 'component' } }
+            '#/': { meta: { component: 'component' } }
           }
 
           return expect(transform(schema, values, params))
             .to.eql({
               meta: {
+                component: 'component',
                 type: 'array',
                 schema,
                 uri: '#/'
@@ -25657,7 +25748,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 fields: [
                   {
                     meta: {
-                      component: 'component',
                       type: 'null',
                       item: 0,
                       rootSchema: schema,

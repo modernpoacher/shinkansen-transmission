@@ -52,7 +52,15 @@ import {
 } from 'shinkansen-transmission/transmission/common'
 
 describe('shinkansen-transmission/transmission/common', () => {
-  before(() => debug.disable())
+  before(() => {
+    const {
+      env: {
+        DEBUG
+      }
+    } = process
+
+    if (DEBUG) debug.enable(DEBUG)
+  })
 
   describe('`getSelectedItems`', () => {
     it('is a function', () => {
@@ -1308,7 +1316,7 @@ describe('shinkansen-transmission/transmission/common', () => {
     describe('A `uri` is not defined', () => {
       it('returns a string', () => {
         expect(getUri())
-          .to.equal('/')
+          .to.equal('#/')
       })
     })
   })
