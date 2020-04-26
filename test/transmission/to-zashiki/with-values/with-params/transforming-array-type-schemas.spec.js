@@ -23,11 +23,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `string` type)', () => {
           const schema = {
@@ -97,9 +95,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `string` type)', () => {
           const schema = {
@@ -229,9 +227,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `string` type)', () => {
           const schema = {
@@ -361,9 +359,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" string has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `string` type)', () => {
           const schema = {
@@ -440,11 +438,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -514,9 +510,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -646,9 +642,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -778,9 +774,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" number is not look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -857,13 +853,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -967,11 +959,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -1135,11 +1125,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -1303,11 +1291,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -1415,13 +1401,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
@@ -1524,11 +1506,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
@@ -1691,11 +1671,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
@@ -1862,7 +1840,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
@@ -1970,13 +1948,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
@@ -2173,11 +2147,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
@@ -2494,11 +2466,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
@@ -2821,7 +2791,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
@@ -3032,13 +3002,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -3244,11 +3210,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -3574,11 +3538,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -3910,7 +3872,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -4130,13 +4092,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -4235,11 +4193,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -4378,11 +4334,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -4521,11 +4475,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -4617,13 +4569,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `null` type)', () => {
           const schema = {
@@ -4718,11 +4666,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `null` type)', () => {
           const schema = {
@@ -4837,11 +4783,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `null` type)', () => {
           const schema = {
@@ -4960,7 +4904,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" null has not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
           const schema = {
@@ -5052,13 +4996,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
@@ -5157,11 +5097,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
@@ -5320,11 +5258,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
@@ -5483,11 +5419,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
@@ -5591,13 +5525,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
@@ -5696,11 +5626,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
@@ -5859,11 +5787,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
@@ -6026,7 +5952,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
@@ -6130,13 +6056,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
@@ -6329,11 +6251,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
@@ -6646,11 +6566,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
@@ -6969,7 +6887,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
@@ -7176,13 +7094,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -7384,11 +7298,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -7710,11 +7622,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -8042,7 +7952,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -8258,13 +8168,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -8359,11 +8265,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -8498,11 +8402,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -8637,11 +8539,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -8729,13 +8629,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `null` type)', () => {
           const schema = {
@@ -8826,11 +8722,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `null` type)', () => {
           const schema = {
@@ -8941,11 +8835,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `null` type)', () => {
           const schema = {
@@ -9056,11 +8948,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `null` type)', () => {
           const schema = {
@@ -9152,13 +9042,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `object` type)', () => {
           const schema = {
@@ -9313,11 +9199,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `object` type)', () => {
           const schema = {
@@ -9592,11 +9476,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `object` type)', () => {
           const schema = {
@@ -9875,7 +9757,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `object` type)', () => {
           const schema = {
@@ -10040,13 +9922,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -10207,11 +10085,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -10492,11 +10368,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -10783,7 +10657,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -10958,11 +10832,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `boolean` type)', () => {
           const schema = {
@@ -11029,9 +10901,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
@@ -11138,9 +11010,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
@@ -11247,9 +11119,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" boolean has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
@@ -11314,11 +11186,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -11382,9 +11252,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -11468,9 +11338,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -11554,9 +11424,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" null has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -11621,11 +11491,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -11693,9 +11561,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -11823,9 +11691,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -11953,9 +11821,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" string has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -12026,11 +11894,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -12098,9 +11964,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -12228,9 +12094,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -12358,9 +12224,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" number has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -12435,13 +12301,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -12542,11 +12404,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -12707,9 +12567,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -12870,11 +12730,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -12980,13 +12838,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
@@ -13087,11 +12941,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
@@ -13252,11 +13104,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
@@ -13421,7 +13271,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
@@ -13527,13 +13377,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -13730,11 +13576,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -14051,11 +13895,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -14378,7 +14220,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -14589,13 +14431,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -14801,11 +14639,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -15131,11 +14967,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -15467,7 +15301,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -15687,13 +15521,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -15790,11 +15620,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -15931,11 +15759,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -16072,11 +15898,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -16166,13 +15990,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `null` type)', () => {
           const schema = {
@@ -16265,11 +16085,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `null` type)', () => {
           const schema = {
@@ -16382,11 +16200,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `null` type)', () => {
           const schema = {
@@ -16499,11 +16315,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" null has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `null` type)', () => {
           const schema = {
@@ -16593,13 +16407,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
@@ -16696,11 +16506,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
@@ -16857,11 +16665,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
@@ -17018,11 +16824,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
@@ -17124,13 +16928,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
@@ -17227,11 +17027,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
@@ -17388,11 +17186,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
@@ -17553,7 +17349,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
@@ -17655,13 +17451,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -17754,11 +17546,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -17891,11 +17681,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -18028,11 +17816,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -18118,13 +17904,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
@@ -18213,11 +17995,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
@@ -18326,11 +18106,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
@@ -18439,11 +18217,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
@@ -18529,13 +18305,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -18728,11 +18500,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -19045,11 +18815,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -19368,7 +19136,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
@@ -19575,13 +19343,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -19783,11 +19547,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -20109,11 +19871,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -20441,7 +20201,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -20661,13 +20421,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `object` type)', () => {
           const schema = {
@@ -20820,11 +20576,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `object` type)', () => {
           const schema = {
@@ -21097,11 +20851,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `object` type)', () => {
           const schema = {
@@ -21380,7 +21132,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `object` type)', () => {
           const schema = {
@@ -21543,13 +21295,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "enum" value is look-up
-         *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -21708,11 +21456,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "anyOf" value is look-up
-         *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -21991,11 +21737,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -22280,7 +22024,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -22453,11 +22197,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `boolean` type)', () => {
           const schema = {
@@ -22522,9 +22264,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
@@ -22629,11 +22371,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Gets selected items
          *
-         *  Parent schema is array and "oneOf" value is look-up
-         *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
@@ -22738,9 +22478,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" boolean has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
@@ -22803,11 +22543,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array and "enum" value is look-up
+         *  Gets selected items
          *
-         *  "enum" gets selected items
-         *
-         *  "enum" does not get value or default value
+         *  Does not get value or default value
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `null` type)', () => {
           const schema = {
@@ -22869,9 +22607,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "anyOf" value is look-up
+         *  Gets selected items
          *
-         *  "anyOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `null` type)', () => {
           const schema = {
@@ -22953,9 +22691,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array and "oneOf" value is look-up
+         *  Gets selected items
          *
-         *  "oneOf" gets selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `null` type)', () => {
           const schema = {
@@ -23037,9 +22775,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" null has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `null` type)', () => {
           const schema = {
@@ -23102,9 +22840,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" string has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `string` type)', () => {
           const schema = {
@@ -23163,9 +22901,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" string has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -23224,11 +22962,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -23315,7 +23051,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
@@ -23402,7 +23138,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" boolean is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -23489,7 +23225,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" null is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
           const schema = {
@@ -23578,7 +23314,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
@@ -23731,7 +23467,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -23887,11 +23623,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
@@ -23974,7 +23708,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
@@ -24053,11 +23787,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -24136,11 +23868,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `null` type)', () => {
           const schema = {
@@ -24225,7 +23955,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
@@ -24374,7 +24104,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -24536,7 +24266,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `object` type)', () => {
           const schema = {
@@ -24657,7 +24387,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -24782,9 +24512,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" boolean has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
@@ -24843,9 +24573,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" null has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -24904,9 +24634,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" string has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -24963,9 +24693,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" number is not look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -25026,7 +24756,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  And parent is array but "allOf" string has no look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -25111,7 +24841,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
@@ -25196,7 +24926,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" boolean is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
           const schema = {
@@ -25281,7 +25011,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" null is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `null` type)', () => {
           const schema = {
@@ -25368,7 +25098,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
@@ -25521,7 +25251,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
@@ -25677,11 +25407,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" string has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
@@ -25762,7 +25490,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *
          *  Parent schema is array but "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
@@ -25839,11 +25567,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" boolean has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
@@ -25920,11 +25646,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
+         *  Does not get selected items
          *
-         *  Parent schema is array but "allOf" null has no look-up
-         *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
@@ -26007,7 +25731,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
@@ -26156,7 +25880,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -26318,7 +26042,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type)', () => {
           const schema = {
@@ -26437,7 +26161,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          *    - "allOf" string has no look-up
          *    - "allOf" number is not look-up
          *
-         *  "allOf" should not get selected items
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
@@ -26556,9 +26280,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is array but "allOf" boolean has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
@@ -26615,9 +26339,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Parent schema is array but "allOf" boolean has no look-up
+         *  Does not get selected items
          *
-         *  "allOf" should not get selected items
+         *  Gets value and default value
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `null` type)', () => {
           const schema = {
