@@ -799,10 +799,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `enum`', () => {
+    it('transforms with `enum`', () => {
       const schema = {
         type: 'string',
         enum: [
@@ -843,10 +840,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `anyOf`', () => {
+    it('transforms with `anyOf`', () => {
       const schema = {
         type: 'string',
         anyOf: [
@@ -932,10 +926,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `oneOf`', () => {
+    it('transforms with `oneOf`', () => {
       const schema = {
         type: 'string',
         oneOf: [
@@ -1048,10 +1039,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `allOf`', () => {
+    it('transforms with `allOf`', () => {
       const schema = {
         type: 'string',
         allOf: [
@@ -1140,10 +1128,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `enum`', () => {
+    it('transforms with `enum`', () => {
       const schema = {
         type: 'number',
         enum: [
@@ -1188,10 +1173,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `anyOf`', () => {
+    it('transforms with `anyOf`', () => {
       const schema = {
         type: 'number',
         anyOf: [
@@ -1277,10 +1259,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `oneOf`', () => {
+    it('transforms with `oneOf`', () => {
       const schema = {
         type: 'number',
         oneOf: [
@@ -1426,10 +1405,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `allOf`', () => {
+    it('transforms with `allOf`', () => {
       const schema = {
         type: 'number',
         allOf: [
@@ -1536,10 +1512,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `enum`', () => {
+    it('transforms with `enum`', () => {
       const schema = {
         type: 'array',
         enum: [
@@ -1586,10 +1559,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `anyOf`', () => {
+    it('transforms with `anyOf`', () => {
       const schema = {
         type: 'array',
         anyOf: [
@@ -1663,10 +1633,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `oneOf`', () => {
+    it('transforms with `oneOf`', () => {
       const schema = {
         type: 'array',
         oneOf: [
@@ -1791,10 +1758,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms with `allOf`', () => {
+    it('transforms with `allOf`', () => {
       const schema = {
         type: 'array',
         allOf: [
@@ -1820,7 +1784,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             maxContains: 9
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/',
+              minItems: 1,
+              maxItems: 9,
+              hasUniqueItems: true,
+              minContains: 1,
+              maxContains: 9
+            }
           }
         })
     })
@@ -1875,10 +1846,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `enum`', () => {
+    it('transforms with `enum`', () => {
       const schema = {
         type: 'object',
         enum: [
@@ -1916,10 +1884,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `anyOf`', () => {
+    it('transforms with `anyOf`', () => {
       const schema = {
         type: 'object',
         anyOf: [
@@ -1993,10 +1958,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `oneOf`', () => {
+    it('transforms with `oneOf`', () => {
       const schema = {
         type: 'object',
         oneOf: [
@@ -2094,10 +2056,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms with `allOf`', () => {
+    it('transforms with `allOf`', () => {
       const schema = {
         type: 'object',
         allOf: [
@@ -2117,7 +2076,11 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             maxProperties: 9
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/',
+              minProperties: 1,
+              maxProperties: 9
+            }
           }
         })
     })
@@ -2168,10 +2131,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `enum`', () => {
+    it('transforms with `enum`', () => {
       const schema = {
         type: 'boolean',
         enum: [
@@ -2201,10 +2161,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `anyOf`', () => {
+    it('transforms with `anyOf`', () => {
       const schema = {
         type: 'boolean',
         anyOf: [
@@ -2270,10 +2227,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `oneOf`', () => {
+    it('transforms with `oneOf`', () => {
       const schema = {
         type: 'boolean',
         oneOf: [
@@ -2339,10 +2293,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `allOf`', () => {
+    it('transforms with `allOf`', () => {
       const schema = {
         type: 'boolean',
         allOf: [
@@ -2413,10 +2364,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `enum`', () => {
+    it('transforms with `enum`', () => {
       const schema = {
         type: 'null',
         enum: [
@@ -2444,10 +2392,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `anyOf`', () => {
+    it('transforms with `anyOf`', () => {
       const schema = {
         type: 'null',
         anyOf: [
@@ -2493,10 +2438,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `oneOf`', () => {
+    it('transforms with `oneOf`', () => {
       const schema = {
         type: 'null',
         oneOf: [
@@ -2542,10 +2484,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms with `allOf`', () => {
+    it('transforms with `allOf`', () => {
       const schema = {
         type: 'null',
         allOf: [
@@ -2597,10 +2536,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
   describe('With values', () => {
     describe('With params', () => {
       describe('Transforming `string` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `enum`', () => {
+        it('transforms with `enum`', () => {
           const schema = {
             type: 'string',
             enum: [
@@ -2641,10 +2577,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `anyOf`', () => {
+        it('transforms with `anyOf`', () => {
           const schema = {
             type: 'string',
             anyOf: [
@@ -2739,10 +2672,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `oneOf`', () => {
+        it('transforms with `oneOf`', () => {
           const schema = {
             type: 'string',
             oneOf: [
@@ -2837,10 +2767,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `allOf`', () => {
+        it('transforms with `allOf`', () => {
           const schema = {
             type: 'string',
             allOf: [
@@ -2911,10 +2838,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `number` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `enum`', () => {
+        it('transforms with `enum`', () => {
           const schema = {
             type: 'number',
             enum: [
@@ -2955,10 +2879,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `anyOf`', () => {
+        it('transforms with `anyOf`', () => {
           const schema = {
             type: 'number',
             anyOf: [
@@ -3053,10 +2974,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `oneOf`', () => {
+        it('transforms with `oneOf`', () => {
           const schema = {
             type: 'number',
             oneOf: [
@@ -3151,10 +3069,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms with `allOf`', () => {
+        it('transforms with `allOf`', () => {
           const schema = {
             type: 'number',
             allOf: [
@@ -3225,10 +3140,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `boolean` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `enum`', () => {
+        it('transforms `boolean` type schemas with `enum`', () => {
           const schema = {
             type: 'boolean',
             enum: [
@@ -3267,10 +3179,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `anyOf`', () => {
+        it('transforms `boolean` type schemas with `anyOf`', () => {
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -3345,10 +3254,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `oneOf`', () => {
+        it('transforms `boolean` type schemas with `oneOf`', () => {
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -3423,10 +3329,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `allOf`', () => {
+        it('transforms `boolean` type schemas with `allOf`', () => {
           const schema = {
             type: 'boolean',
             allOf: [
@@ -3491,10 +3394,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `null` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `enum`', () => {
+        it('transforms `null` type schemas with `enum`', () => {
           const schema = {
             type: 'null',
             enum: [
@@ -3531,10 +3431,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `anyOf`', () => {
+        it('transforms `null` type schemas with `anyOf`', () => {
           const schema = {
             type: 'null',
             anyOf: [
@@ -3629,10 +3526,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `oneOf`', () => {
+        it('transforms `null` type schemas with `oneOf`', () => {
           const schema = {
             type: 'null',
             oneOf: [
@@ -3687,10 +3581,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `allOf`', () => {
+        it('transforms `null` type schemas with `allOf`', () => {
           const schema = {
             type: 'null',
             allOf: [
@@ -3760,10 +3651,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
 
     describe('Without params', () => {
       describe('Transforming `string` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `enum`', () => {
+        it('transforms `string` type schemas with `enum`', () => {
           const schema = {
             type: 'string',
             enum: [
@@ -3799,10 +3687,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `anyOf`', () => {
+        it('transforms `string` type schemas with `anyOf`', () => {
           const schema = {
             type: 'string',
             anyOf: [
@@ -3892,10 +3777,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `oneOf`', () => {
+        it('transforms `string` type schemas with `oneOf`', () => {
           const schema = {
             type: 'string',
             oneOf: [
@@ -3985,10 +3867,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `allOf`', () => {
+        it('transforms `string` type schemas with `allOf`', () => {
           const schema = {
             type: 'string',
             allOf: [
@@ -4049,10 +3928,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `number` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `enum`', () => {
+        it('transforms `number` type schemas with `enum`', () => {
           const schema = {
             type: 'number',
             enum: [
@@ -4088,10 +3964,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `anyOf`', () => {
+        it('transforms `number` type schemas with `anyOf`', () => {
           const schema = {
             type: 'number',
             anyOf: [
@@ -4181,10 +4054,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `oneOf`', () => {
+        it('transforms `number` type schemas with `oneOf`', () => {
           const schema = {
             type: 'number',
             oneOf: [
@@ -4274,10 +4144,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `allOf`', () => {
+        it('transforms `number` type schemas with `allOf`', () => {
           const schema = {
             type: 'number',
             allOf: [
@@ -4338,10 +4205,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `boolean` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `enum`', () => {
+        it('transforms `boolean` type schemas with `enum`', () => {
           const schema = {
             type: 'boolean',
             enum: [
@@ -4375,10 +4239,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `anyOf`', () => {
+        it('transforms `boolean` type schemas with `anyOf`', () => {
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -4448,10 +4309,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `oneOf`', () => {
+        it('transforms `boolean` type schemas with `oneOf`', () => {
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -4521,10 +4379,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `allOf`', () => {
+        it('transforms `boolean` type schemas with `allOf`', () => {
           const schema = {
             type: 'boolean',
             allOf: [
@@ -4579,10 +4434,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `null` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `enum`', () => {
+        it('transforms `null` type schemas with `enum`', () => {
           const schema = {
             type: 'null',
             enum: [
@@ -4614,10 +4466,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `anyOf`', () => {
+        it('transforms `null` type schemas with `anyOf`', () => {
           const schema = {
             type: 'null',
             anyOf: [
@@ -4667,10 +4516,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `oneOf`', () => {
+        it('transforms `null` type schemas with `oneOf`', () => {
           const schema = {
             type: 'null',
             oneOf: [
@@ -4720,10 +4566,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `allOf`', () => {
+        it('transforms `null` type schemas with `allOf`', () => {
           const schema = {
             type: 'null',
             allOf: [
@@ -4782,10 +4625,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
   describe('Without values', () => {
     describe('With params', () => {
       describe('Transforming `string` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `enum`', () => {
+        it('transforms `string` type schemas with `enum`', () => {
           const schema = {
             type: 'string',
             enum: [
@@ -4824,10 +4664,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `anyOf`', () => {
+        it('transforms `string` type schemas with `anyOf`', () => {
           const schema = {
             type: 'string',
             anyOf: [
@@ -4920,10 +4757,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `oneOf`', () => {
+        it('transforms `string` type schemas with `oneOf`', () => {
           const schema = {
             type: 'string',
             oneOf: [
@@ -5016,10 +4850,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `allOf`', () => {
+        it('transforms `string` type schemas with `allOf`', () => {
           const schema = {
             type: 'string',
             allOf: [
@@ -5057,10 +4888,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+        it('transforms `string` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
           const schema = { type: 'string' }
 
           const values = undefined
@@ -5087,10 +4915,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `number` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `enum`', () => {
+        it('transforms `number` type schemas with `enum`', () => {
           const schema = {
             type: 'number',
             enum: [
@@ -5129,10 +4954,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `anyOf`', () => {
+        it('transforms `number` type schemas with `anyOf`', () => {
           const schema = {
             type: 'number',
             anyOf: [
@@ -5225,10 +5047,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `oneOf`', () => {
+        it('transforms `number` type schemas with `oneOf`', () => {
           const schema = {
             type: 'number',
             oneOf: [
@@ -5321,10 +5140,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `allOf`', () => {
+        it('transforms `number` type schemas with `allOf`', () => {
           const schema = {
             type: 'number',
             allOf: [
@@ -5389,10 +5205,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `boolean` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `enum`', () => {
+        it('transforms `boolean` type schemas with `enum`', () => {
           const schema = {
             type: 'boolean',
             enum: [
@@ -5429,10 +5242,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `anyOf`', () => {
+        it('transforms `boolean` type schemas with `anyOf`', () => {
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -5505,10 +5315,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `oneOf', () => {
+        it('transforms `boolean` type schemas with `oneOf', () => {
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -5581,10 +5388,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `allOf`', () => {
+        it('transforms `boolean` type schemas with `allOf`', () => {
           const schema = {
             type: 'boolean',
             allOf: [
@@ -5643,10 +5447,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `null` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `enum`', () => {
+        it('transforms `null` type schemas with `enum`', () => {
           const schema = {
             type: 'null',
             enum: [
@@ -5681,10 +5482,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `anyOf`', () => {
+        it('transforms `null` type schemas with `anyOf`', () => {
           const schema = {
             type: 'null',
             anyOf: [
@@ -5777,10 +5575,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `oneOf`', () => {
+        it('transforms `null` type schemas with `oneOf`', () => {
           const schema = {
             type: 'null',
             oneOf: [
@@ -5833,10 +5628,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `allOf`', () => {
+        it('transforms `null` type schemas with `allOf`', () => {
           const schema = {
             type: 'null',
             allOf: [
@@ -5897,10 +5689,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
 
     describe('Without params', () => {
       describe('Transforming `string` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `enum`', () => {
+        it('transforms `string` type schemas with `enum`', () => {
           const schema = {
             type: 'string',
             enum: [
@@ -5931,10 +5720,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `anyOf`', () => {
+        it('transforms `string` type schemas with `anyOf`', () => {
           const schema = {
             type: 'string',
             anyOf: [
@@ -6020,10 +5806,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `oneOf`', () => {
+        it('transforms `string` type schemas with `oneOf`', () => {
           const schema = {
             type: 'string',
             oneOf: [
@@ -6109,10 +5892,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `string` type schemas with `allOf`', () => {
+        it('transforms `string` type schemas with `allOf`', () => {
           const schema = {
             type: 'string',
             allOf: [
@@ -6163,10 +5943,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `number` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `enum`', () => {
+        it('transforms `number` type schemas with `enum`', () => {
           const schema = {
             type: 'number',
             enum: [
@@ -6198,10 +5975,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `anyOf`', () => {
+        it('transforms `number` type schemas with `anyOf`', () => {
           const schema = {
             type: 'number',
             anyOf: [
@@ -6287,10 +6061,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `oneOf`', () => {
+        it('transforms `number` type schemas with `oneOf`', () => {
           const schema = {
             type: 'number',
             oneOf: [
@@ -6376,10 +6147,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `number` type schemas with `allOf`', () => {
+        it('transforms `number` type schemas with `allOf`', () => {
           const schema = {
             type: 'number',
             allOf: [
@@ -6430,10 +6198,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `boolean` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `enum`', () => {
+        it('transforms `boolean` type schemas with `enum`', () => {
           const schema = {
             type: 'boolean',
             enum: [
@@ -6463,10 +6228,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `anyOf`', () => {
+        it('transforms `boolean` type schemas with `anyOf`', () => {
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -6532,10 +6294,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `oneOf`', () => {
+        it('transforms `boolean` type schemas with `oneOf`', () => {
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -6601,10 +6360,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `boolean` type schemas with `allOf`', () => {
+        it('transforms `boolean` type schemas with `allOf`', () => {
           const schema = {
             type: 'boolean',
             allOf: [
@@ -6649,10 +6405,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
       })
 
       describe('Transforming `null` type schemas', () => {
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `enum`', () => {
+        it('transforms `null` type schemas with `enum`', () => {
           const schema = {
             type: 'null',
             enum: [
@@ -6680,10 +6433,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `anyOf`', () => {
+        it('transforms `null` type schemas with `anyOf`', () => {
           const schema = {
             type: 'null',
             anyOf: [
@@ -6769,10 +6519,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `oneOf`', () => {
+        it('transforms `null` type schemas with `oneOf`', () => {
           const schema = {
             type: 'null',
             oneOf: [
@@ -6818,10 +6565,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        /*
-         *  `parentUri`
-         */
-        xit('transforms `null` type schemas with `allOf`', () => {
+        it('transforms `null` type schemas with `allOf`', () => {
           const schema = {
             type: 'null',
             allOf: [

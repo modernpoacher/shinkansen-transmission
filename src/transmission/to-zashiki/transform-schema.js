@@ -7,14 +7,6 @@ import {
   isArraySchema,
   isObjectSchema,
 
-  hasMetaValue, // eslint-disable-line
-  getMetaValue,
-
-  hasValue,
-  getValue,
-
-  getMetaDefaultValue,
-
   getSelectedItemsForParentUri,
   getSelectedItemsForUri,
 
@@ -26,7 +18,11 @@ import {
   hasAnyOf,
   hasOneOf,
   hasAllOf,
-  getParentUri,
+
+  normaliseUri,
+
+  isParentUri,
+
   getUri,
   getMin,
   getMax,
@@ -43,7 +39,13 @@ import {
   getIsExclusiveMax,
   getPattern,
   getStep,
+
   getMetaProps,
+  getMetaDefaultValue,
+  getMetaValue,
+
+  getElementsProps,
+  getElementsFieldsProps,
   getElementsFieldPropsForEnum,
   getElementsFieldPropsForAnyOf,
   getElementsFieldPropsForOneOf,
@@ -66,16 +68,7 @@ export function mapTransformByIndex (rootSchema, values, { selectedItems, parent
 
       // log(getValueForEnum(index, schema))
 
-      const {
-        [uri]: {
-          meta = {},
-          elements: {
-            enum: field = {}
-          } = {}
-        } = {}
-      } = params
-
-      return transformByIndex(schema, rootSchema, values, { ...params, [uri]: { meta: { ...meta, selectedItems }, elements: { enum: { ...field, selectedItems } } }, parentUri, index })
+      return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
     } else {
       if (hasAnyOf(schema)) {
         log('mapTransformByIndex (`anyOf`)')
@@ -85,16 +78,7 @@ export function mapTransformByIndex (rootSchema, values, { selectedItems, parent
 
         // log(getValueForAnyOf(index, schema))
 
-        const {
-          [uri]: {
-            meta = {},
-            elements: {
-              anyOf: field = {}
-            } = {}
-          } = {}
-        } = params
-
-        return transformByIndex(schema, rootSchema, values, { ...params, [uri]: { meta: { ...meta, selectedItems }, elements: { anyOf: { ...field, selectedItems } } }, parentUri, index })
+        return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
       } else {
         if (hasOneOf(schema)) {
           log('mapTransformByIndex (`oneOf`)')
@@ -104,16 +88,7 @@ export function mapTransformByIndex (rootSchema, values, { selectedItems, parent
 
           // log(getValueForOneOf(index, schema))
 
-          const {
-            [uri]: {
-              meta = {},
-              elements: {
-                oneOf: field = {}
-              } = {}
-            } = {}
-          } = params
-
-          return transformByIndex(schema, rootSchema, values, { ...params, [uri]: { meta: { ...meta, selectedItems }, elements: { oneOf: { ...field, selectedItems } } }, parentUri, index })
+          return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
         }
       }
     }
@@ -281,10 +256,13 @@ export function renderNullForEnum (schema, values, params) {
   log('renderNullForEnum')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const title = getTitle(schema)
   const description = getDescription(schema)
@@ -293,6 +271,7 @@ export function renderNullForEnum (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'null',
       ...metaProps
@@ -319,10 +298,13 @@ export function renderNullForAnyOf (schema, values, params) {
   log('renderNullForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const title = getTitle(schema)
   const description = getDescription(schema)
@@ -331,6 +313,7 @@ export function renderNullForAnyOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'null',
       ...metaProps
@@ -357,10 +340,13 @@ export function renderNullForOneOf (schema, values, params) {
   log('renderNullForOneOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const title = getTitle(schema)
   const description = getDescription(schema)
@@ -369,6 +355,7 @@ export function renderNullForOneOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'null',
       ...metaProps
@@ -395,18 +382,24 @@ export function renderNullForAllOf (schema, values, params) {
   log('renderNullForAllOf')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
+  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
+  const fieldValue = getElementsFieldValue(values, uri, schema)
+  const fieldProps = getElementsFieldProps(params, uri)
+
   let selectedItems
-  if (parentUri) {
+  if (isParentUri(parentUri, uri)) {
     ({
       [parentUri]: {
         meta: {
@@ -416,23 +409,12 @@ export function renderNullForAllOf (schema, values, params) {
     } = params)
   }
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(schema)
-  const description = getDescription(schema)
-
-  const fieldValue = getElementsFieldValue(values, uri, schema)
-  const fieldProps = getElementsFieldProps(params, uri)
-
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'null',
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -441,8 +423,7 @@ export function renderNullForAllOf (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -455,18 +436,24 @@ export function renderNull (schema, values, params) {
   log('renderNull')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
+  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
+  const fieldValue = getElementsFieldValue(values, uri, schema)
+  const fieldProps = getElementsFieldProps(params, uri)
+
   let selectedItems
-  if (parentUri) {
+  if (isParentUri(parentUri, uri)) {
     ({
       [parentUri]: {
         meta: {
@@ -476,23 +463,12 @@ export function renderNull (schema, values, params) {
     } = params)
   }
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(schema)
-  const description = getDescription(schema)
-
-  const fieldValue = getElementsFieldValue(values, uri, schema)
-  const fieldProps = getElementsFieldProps(params, uri)
-
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'null',
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -501,8 +477,7 @@ export function renderNull (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -522,10 +497,13 @@ export function renderBooleanForEnum (schema, values, params) {
   log('renderBooleanForEnum')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const title = getTitle(schema)
   const description = getDescription(schema)
@@ -534,6 +512,7 @@ export function renderBooleanForEnum (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'boolean',
       ...metaProps
@@ -560,10 +539,13 @@ export function renderBooleanForAnyOf (schema, values, params) {
   log('renderBooleanForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const title = getTitle(schema)
   const description = getDescription(schema)
@@ -572,6 +554,7 @@ export function renderBooleanForAnyOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'boolean',
       ...metaProps
@@ -598,10 +581,13 @@ export function renderBooleanForOneOf (schema, values, params) {
   log('renderBooleanForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const title = getTitle(schema)
   const description = getDescription(schema)
@@ -610,6 +596,7 @@ export function renderBooleanForOneOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'boolean',
       ...metaProps
@@ -636,18 +623,24 @@ export function renderBooleanForAllOf (schema, values, params) {
   log('renderBooleanForAllOf')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
+  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
+  const fieldValue = getElementsFieldValue(values, uri, schema)
+  const fieldProps = getElementsFieldProps(params, uri)
+
   let selectedItems
-  if (parentUri) {
+  if (isParentUri(parentUri, uri)) {
     ({
       [parentUri]: {
         meta: {
@@ -657,23 +650,12 @@ export function renderBooleanForAllOf (schema, values, params) {
     } = params)
   }
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(schema)
-  const description = getDescription(schema)
-
-  const fieldValue = getElementsFieldValue(values, uri, schema)
-  const fieldProps = getElementsFieldProps(params, uri)
-
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'boolean',
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -682,8 +664,7 @@ export function renderBooleanForAllOf (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -696,18 +677,24 @@ export function renderBoolean (schema, values, params) {
   log('renderBoolean')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
+  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  const title = getTitle(schema)
+  const description = getDescription(schema)
+
+  const fieldValue = getElementsFieldValue(values, uri, schema)
+  const fieldProps = getElementsFieldProps(params, uri)
+
   let selectedItems
-  if (parentUri) {
+  if (isParentUri(parentUri, uri)) {
     ({
       [parentUri]: {
         meta: {
@@ -717,23 +704,12 @@ export function renderBoolean (schema, values, params) {
     } = params)
   }
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
-
-  const title = getTitle(schema)
-  const description = getDescription(schema)
-
-  const fieldValue = getElementsFieldValue(values, uri, schema)
-  const fieldProps = getElementsFieldProps(params, uri)
-
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'boolean',
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -742,8 +718,7 @@ export function renderBoolean (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -763,10 +738,13 @@ export function renderObjectForEnum (schema, values, params) {
   log('renderObjectForEnum')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minProperties = getMinProperties(schema)
   const maxProperties = getMaxProperties(schema)
@@ -778,6 +756,7 @@ export function renderObjectForEnum (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'object',
       ...minProperties,
@@ -808,10 +787,13 @@ export function renderObjectForAnyOf (schema, values, params) {
   log('renderObjectForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minProperties = getMinProperties(schema)
   const maxProperties = getMaxProperties(schema)
@@ -823,6 +805,7 @@ export function renderObjectForAnyOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'object',
       ...minProperties,
@@ -853,10 +836,13 @@ export function renderObjectForOneOf (schema, values, params) {
   log('renderObjectForOneOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minProperties = getMinProperties(schema)
   const maxProperties = getMaxProperties(schema)
@@ -868,6 +854,7 @@ export function renderObjectForOneOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'object',
       ...minProperties,
@@ -898,10 +885,13 @@ export function renderObjectForAllOf (schema, values, params) {
   log('renderObjectForAllOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minProperties = getMinProperties(schema)
   const maxProperties = getMaxProperties(schema)
@@ -913,6 +903,7 @@ export function renderObjectForAllOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'object',
       ...minProperties,
@@ -936,17 +927,13 @@ export function renderObject (schema, values, params) {
   log('renderObject')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      fields = []
-    } = {}
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minProperties = getMinProperties(schema)
   const maxProperties = getMaxProperties(schema)
@@ -954,10 +941,11 @@ export function renderObject (schema, values, params) {
   const title = getTitle(schema)
   const description = getDescription(schema)
 
+  const fields = getElementsFieldsProps(params, uri)
+
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'object',
       ...minProperties,
@@ -983,10 +971,13 @@ export function renderArrayForEnum (schema, values, params) {
   log('renderArrayForEnum')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minItems = getMinItems(schema)
   const maxItems = getMaxItems(schema)
@@ -1001,6 +992,7 @@ export function renderArrayForEnum (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'array',
       ...minItems,
@@ -1037,10 +1029,13 @@ export function renderArrayForAnyOf (schema, values, params) {
   log('renderArrayForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minItems = getMinItems(schema)
   const maxItems = getMaxItems(schema)
@@ -1055,6 +1050,7 @@ export function renderArrayForAnyOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'array',
       ...minItems,
@@ -1091,10 +1087,13 @@ export function renderArrayForOneOf (schema, values, params) {
   log('renderArrayForOneOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minItems = getMinItems(schema)
   const maxItems = getMaxItems(schema)
@@ -1109,6 +1108,7 @@ export function renderArrayForOneOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'array',
       ...minItems,
@@ -1145,10 +1145,13 @@ export function renderArrayForAllOf (schema, values, params) {
   log('renderArrayForAllOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minItems = getMinItems(schema)
   const maxItems = getMaxItems(schema)
@@ -1163,6 +1166,7 @@ export function renderArrayForAllOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'array',
       ...minItems,
@@ -1192,17 +1196,13 @@ export function renderArray (schema, values, params) {
   log('renderArray')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      fields = []
-    } = {}
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minItems = getMinItems(schema)
   const maxItems = getMaxItems(schema)
@@ -1213,10 +1213,11 @@ export function renderArray (schema, values, params) {
   const title = getTitle(schema)
   const description = getDescription(schema)
 
+  const fields = getElementsFieldsProps(params, uri)
+
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'array',
       ...minItems,
@@ -1245,10 +1246,13 @@ export function renderNumberForEnum (schema, values, params) {
   log('renderNumberForEnum')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
@@ -1264,6 +1268,7 @@ export function renderNumberForEnum (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'number',
       ...isExclusiveMin,
@@ -1298,10 +1303,13 @@ export function renderNumberForAnyOf (schema, values, params) {
   log('renderNumberForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
@@ -1317,6 +1325,7 @@ export function renderNumberForAnyOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'number',
       ...isExclusiveMin,
@@ -1351,10 +1360,13 @@ export function renderNumberForOneOf (schema, values, params) {
   log('renderNumberForOneOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
@@ -1370,6 +1382,7 @@ export function renderNumberForOneOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'number',
       ...isExclusiveMin,
@@ -1403,33 +1416,16 @@ export function renderNumberForOneOf (schema, values, params) {
 export function renderNumberForAllOf (schema, values, params) {
   log('renderNumberForAllOf')
 
-  log('renderNumber')
-
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
-  let selectedItems
-  if (parentUri) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
-
   const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const min = getMin(schema)
   const max = getMax(schema)
@@ -1444,10 +1440,20 @@ export function renderNumberForAllOf (schema, values, params) {
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
 
+  let selectedItems
+  if (isParentUri(parentUri, uri)) {
+    ({
+      [parentUri]: {
+        meta: {
+          selectedItems
+        } = {}
+      } = {}
+    } = params)
+  }
+
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'number',
       ...isExclusiveMin,
@@ -1455,7 +1461,7 @@ export function renderNumberForAllOf (schema, values, params) {
       ...min,
       ...max,
       ...step,
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -1464,11 +1470,10 @@ export function renderNumberForAllOf (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
         ...min,
         ...max,
         ...step,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -1481,30 +1486,15 @@ export function renderNumber (schema, values, params) {
   log('renderNumber')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
-  let selectedItems
-  if (parentUri) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
-
   const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const min = getMin(schema)
   const max = getMax(schema)
@@ -1519,10 +1509,20 @@ export function renderNumber (schema, values, params) {
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
 
+  let selectedItems
+  if (isParentUri(parentUri, uri)) {
+    ({
+      [parentUri]: {
+        meta: {
+          selectedItems
+        } = {}
+      } = {}
+    } = params)
+  }
+
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'number',
       ...isExclusiveMin,
@@ -1530,7 +1530,7 @@ export function renderNumber (schema, values, params) {
       ...min,
       ...max,
       ...step,
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -1539,11 +1539,10 @@ export function renderNumber (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
         ...min,
         ...max,
         ...step,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -1563,10 +1562,13 @@ export function renderStringForEnum (schema, values, params) {
   log('renderStringForEnum')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
@@ -1579,6 +1581,7 @@ export function renderStringForEnum (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'string',
       ...minLength,
@@ -1611,10 +1614,13 @@ export function renderStringForAnyOf (schema, values, params) {
   log('renderStringForAnyOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
@@ -1627,6 +1633,7 @@ export function renderStringForAnyOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'string',
       ...minLength,
@@ -1659,10 +1666,13 @@ export function renderStringForOneOf (schema, values, params) {
   log('renderStringForOneOf')
 
   const {
-    uri
+    uri = '#/'
   } = params
 
-  const metaProps = getMetaProps(params, uri)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
@@ -1675,6 +1685,7 @@ export function renderStringForOneOf (schema, values, params) {
 
   return {
     meta: {
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'string',
       ...minLength,
@@ -1707,30 +1718,15 @@ export function renderStringForAllOf (schema, values, params) {
   log('renderStringForAllOf')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
-  let selectedItems
-  if (parentUri) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
-
   const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
@@ -1742,16 +1738,26 @@ export function renderStringForAllOf (schema, values, params) {
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
 
+  let selectedItems
+  if (isParentUri(parentUri, uri)) {
+    ({
+      [parentUri]: {
+        meta: {
+          selectedItems
+        } = {}
+      } = {}
+    } = params)
+  }
+
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'string',
       ...minLength,
       ...maxLength,
       ...pattern,
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -1760,11 +1766,10 @@ export function renderStringForAllOf (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
         ...minLength,
         ...maxLength,
         ...pattern,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -1777,30 +1782,15 @@ export function renderString (schema, values, params) {
   log('renderString')
 
   const {
-    uri,
-    meta: {
-      parentUri,
-      ...meta
-    } = {},
-    elements: {
-      field = {}
-    } = {}
+    uri = '#/'
   } = params
 
-  let selectedItems
-  if (parentUri) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
-
   const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema) // getMetaValueForUri(values, uri, schema)
-  const metaProps = getMetaProps(params, uri)
+  const metaValue = getMetaValue(values, uri, schema)
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const minLength = getMinLength(schema)
   const maxLength = getMaxLength(schema)
@@ -1812,16 +1802,26 @@ export function renderString (schema, values, params) {
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
 
+  let selectedItems
+  if (isParentUri(parentUri, uri)) {
+    ({
+      [parentUri]: {
+        meta: {
+          selectedItems
+        } = {}
+      } = {}
+    } = params)
+  }
+
   return {
     meta: {
-      ...meta,
-      ...(parentUri ? parentUri !== '#' ? { parentUri } : {} : {}),
+      ...(isParentUri(parentUri, uri) ? { parentUri } : {}),
       uri,
       type: 'string',
       ...minLength,
       ...maxLength,
       ...pattern,
-      ...(selectedItems ? { selectedItems } : {}),
+      ...(isArray(selectedItems) ? { selectedItems } : {}),
       ...metaDefaultValue,
       ...metaValue,
       ...metaProps
@@ -1830,11 +1830,10 @@ export function renderString (schema, values, params) {
       ...title,
       ...description,
       field: {
-        ...field,
         ...minLength,
         ...maxLength,
         ...pattern,
-        ...(selectedItems ? { selectedItems } : {}),
+        ...(isArray(selectedItems) ? { selectedItems } : {}),
         ...fieldValue,
         ...fieldProps,
         id: uri
@@ -1858,29 +1857,17 @@ export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderNullForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -1898,30 +1885,18 @@ export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) 
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderNullForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -1939,30 +1914,18 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderNullForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -1980,22 +1943,13 @@ export function transformNullByKeyForAllOf (schema, rootSchema, values, params) 
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), name: fieldKey }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderNullForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), name: fieldKey }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -2013,29 +1967,17 @@ export function transformNullByIndexForEnum (schema, rootSchema, values, params)
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderNullForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2053,30 +1995,18 @@ export function transformNullByIndexForAnyOf (schema, rootSchema, values, params
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderNullForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2094,30 +2024,20 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
+  log({ uri, parentUri })
+
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderNullForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2135,22 +2055,13 @@ export function transformNullByIndexForAllOf (schema, rootSchema, values, params
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), item: arrayIndex }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderNullForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), item: arrayIndex }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -2169,25 +2080,13 @@ export function transformNullForEnum (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { field: { ...field, selectedItems, items } } } })
+  return renderNullForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { field: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2206,26 +2105,14 @@ export function transformNullForAnyOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderNullForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2244,26 +2131,14 @@ export function transformNullForOneOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderNullForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2284,16 +2159,7 @@ export function transformNullForAllOf (schema, rootSchema, values, params) {
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderNullForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderNullForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri, ...getMetaValue(values, uri, schema) }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -2311,29 +2177,17 @@ export function transformBooleanByKeyForEnum (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderBooleanForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2351,30 +2205,18 @@ export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, param
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderBooleanForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2392,30 +2234,18 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderBooleanForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2433,22 +2263,13 @@ export function transformBooleanByKeyForAllOf (schema, rootSchema, values, param
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), name: fieldKey }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderBooleanForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), name: fieldKey }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -2466,29 +2287,17 @@ export function transformBooleanByIndexForEnum (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderBooleanForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2506,30 +2315,18 @@ export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, par
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderBooleanForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2547,30 +2344,18 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderBooleanForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2588,22 +2373,13 @@ export function transformBooleanByIndexForAllOf (schema, rootSchema, values, par
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), item: arrayIndex }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderBooleanForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), item: arrayIndex }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -2622,25 +2398,13 @@ export function transformBooleanForEnum (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderBooleanForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2659,26 +2423,14 @@ export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderBooleanForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2697,26 +2449,14 @@ export function transformBooleanForOneOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderBooleanForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2737,16 +2477,7 @@ export function transformBooleanForAllOf (schema, rootSchema, values, params) {
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderBooleanForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderBooleanForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri, ...getMetaValue(values, uri, schema) }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -2764,29 +2495,17 @@ export function transformObjectByKeyForEnum (schema, rootSchema, values, params)
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderObjectForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2804,30 +2523,18 @@ export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderObjectForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2845,30 +2552,18 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderObjectForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2886,20 +2581,13 @@ export function transformObjectByKeyForAllOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements } })
+  return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
 /*
@@ -2917,29 +2605,17 @@ export function transformObjectByIndexForEnum (schema, rootSchema, values, param
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderObjectForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2957,30 +2633,18 @@ export function transformObjectByIndexForAnyOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderObjectForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -2998,30 +2662,18 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderObjectForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3039,20 +2691,13 @@ export function transformObjectByIndexForAllOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements } })
+  return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
 /*
@@ -3071,25 +2716,13 @@ export function transformObjectForEnum (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { field: { ...field, selectedItems, items } } } })
+  return renderObjectForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { field: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3108,26 +2741,14 @@ export function transformObjectForAnyOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderObjectForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3146,26 +2767,14 @@ export function transformObjectForOneOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderObjectForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderObjectForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3207,16 +2816,7 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
 
           // log(getValueForEnum(index, schema))
 
-          const {
-            [schemaUri]: {
-              meta = {},
-              elements: {
-                enum: field = {}
-              } = {}
-            } = {}
-          } = params
-
-          return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { enum: { ...field, selectedItems, isRequired } } }, parentUri, key })
+          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
         } else {
           if (hasAnyOf(schema)) {
             log('transformObjectForAllOf (`anyOf`)')
@@ -3230,16 +2830,7 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
 
             // log(getValueForAnyOf(index, schema))
 
-            const {
-              [schemaUri]: {
-                meta = {},
-                elements: {
-                  anyOf: field = {}
-                } = {}
-              } = {}
-            } = params
-
-            return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { anyOf: { ...field, selectedItems, isRequired } } }, parentUri, key })
+            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
           } else {
             if (hasOneOf(schema)) {
               log('transformObjectForAllOf (`oneOf`)')
@@ -3253,16 +2844,7 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
 
               // log(getValueForOneOf(index, schema))
 
-              const {
-                [schemaUri]: {
-                  meta = {},
-                  elements: {
-                    oneOf: field = {}
-                  } = {}
-                } = {}
-              } = params
-
-              return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { oneOf: { ...field, selectedItems, isRequired } } }, parentUri, key })
+              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
             }
           }
         }
@@ -3275,27 +2857,11 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
         const schemaUri = getUri(uri, key)
         const isRequired = required.includes(key)
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              field = {}
-            } = {}
-          } = {}
-        } = params
-
-        return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, isRequired }, elements: { field: { ...field, isRequired } } }, parentUri, key })
+        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, schemaUri), isRequired } } }, key })
       })
   )
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri }, elements: { ...elements, fields } } })
+  return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 /*
@@ -3313,29 +2879,17 @@ export function transformArrayByKeyForEnum (schema, rootSchema, values, params) 
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderArrayForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3353,30 +2907,18 @@ export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params)
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderArrayForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3394,30 +2936,18 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderArrayForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3435,20 +2965,13 @@ export function transformArrayByKeyForAllOf (schema, rootSchema, values, params)
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements } })
+  return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
 /*
@@ -3466,29 +2989,17 @@ export function transformArrayByIndexForEnum (schema, rootSchema, values, params
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, item: arrayIndex }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderArrayForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, item: arrayIndex }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3506,30 +3017,18 @@ export function transformArrayByIndexForAnyOf (schema, rootSchema, values, param
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderArrayForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3547,30 +3046,18 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderArrayForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3588,20 +3075,13 @@ export function transformArrayByIndexForAllOf (schema, rootSchema, values, param
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements } })
+  return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
 /*
@@ -3620,25 +3100,13 @@ export function transformArrayForEnum (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { field: { ...field, selectedItems, items } } } })
+  return renderArrayForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3657,26 +3125,14 @@ export function transformArrayForAnyOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderArrayForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3695,26 +3151,14 @@ export function transformArrayForOneOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderArrayForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderArrayForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3741,21 +3185,14 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
 
   if (isArray(items)) {
     log(`
-  /*
-   *  Array with "items" array
-   */
+
+  Array with "items" array
+
     `)
 
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
-    const {
-      [uri]: {
-        meta = {},
-        elements = {}
-      } = {}
-    } = params
-
-    return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri }, elements: { ...elements, fields } } })
+    return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
   }
 
   let fields
@@ -3770,17 +3207,8 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
 
     // log(getValueForEnum(0, items))
 
-    const {
-      [schemaUri]: {
-        meta = {},
-        elements: {
-          enum: field = {}
-        } = {}
-      } = {}
-    } = params
-
     fields = [
-      transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { enum: { ...field, selectedItems } } }, parentUri: uri })
+      transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
     ]
   } else {
     if (hasAnyOf(items)) {
@@ -3794,17 +3222,8 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
 
       // log(getValueForAnyOf(0, items))
 
-      const {
-        [schemaUri]: {
-          meta = {},
-          elements: {
-            anyOf: field = {}
-          } = {}
-        } = {}
-      } = params
-
       fields = [
-        transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { anyOf: { ...field, selectedItems } } }, parentUri: uri })
+        transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
       ]
     } else {
       if (hasOneOf(items)) {
@@ -3818,20 +3237,13 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
 
         // log(getValueForOneOf(0, items))
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              oneOf: field = {}
-            } = {}
-          } = {}
-        } = params
-
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { oneOf: { ...field, selectedItems } } }, parentUri: uri })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems } } } })
         ]
       } else {
         log('transformArrayForAllOf (`value` `defaultValue`)')
+
+        const schemaUri = getUri(uri, 0)
 
         /*
          *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
@@ -3850,20 +3262,13 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
          */
 
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri }) //, value })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
         ]
       }
     }
   }
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri }, elements: { ...elements, fields } } })
+  return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 /*
@@ -3881,31 +3286,17 @@ export function transformNumberByKeyForEnum (schema, rootSchema, values, params)
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
-
-  // log(selectedItems, getSelectedItemsForUri(values, parentUri, uri, schema), getSelectedItemsForParentUri(values, parentUri, uri, schema))
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderNumberForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3923,32 +3314,18 @@ export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
-
-  // log(selectedItems, getSelectedItemsForUri(values, parentUri, uri, schema))
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderNumberForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -3966,30 +3343,18 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderNumberForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4007,22 +3372,13 @@ export function transformNumberByKeyForAllOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), name: fieldKey }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderNumberForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), name: fieldKey }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -4040,29 +3396,17 @@ export function transformNumberByIndexForEnum (schema, rootSchema, values, param
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderNumberForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4080,30 +3424,18 @@ export function transformNumberByIndexForAnyOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderNumberForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4121,30 +3453,18 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderNumberForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4162,22 +3482,13 @@ export function transformNumberByIndexForAllOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), item: arrayIndex }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderNumberForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), item: arrayIndex }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -4196,25 +3507,13 @@ export function transformNumberForEnum (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderNumberForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4233,26 +3532,14 @@ export function transformNumberForAnyOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderNumberForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4271,26 +3558,14 @@ export function transformNumberForOneOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderNumberForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4311,16 +3586,7 @@ export function transformNumberForAllOf (schema, rootSchema, values, params) {
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderNumberForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderNumberForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri, ...getMetaValue(values, uri, schema) }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -4338,29 +3604,17 @@ export function transformStringByKeyForEnum (schema, rootSchema, values, params)
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderStringForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4378,30 +3632,18 @@ export function transformStringByKeyForAnyOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderStringForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4419,30 +3661,18 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderStringForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, name: fieldKey }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4460,22 +3690,13 @@ export function transformStringByKeyForAllOf (schema, rootSchema, values, params
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), name: fieldKey }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderStringForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), name: fieldKey }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -4493,29 +3714,17 @@ export function transformStringByIndexForEnum (schema, rootSchema, values, param
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderStringForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4533,30 +3742,18 @@ export function transformStringByIndexForAnyOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderStringForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4574,30 +3771,18 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderStringForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri, uri, selectedItems, item: arrayIndex }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4615,22 +3800,13 @@ export function transformStringByIndexForAllOf (schema, rootSchema, values, para
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri, uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}), item: arrayIndex }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderStringForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, ...getMetaValue(values, uri, schema), item: arrayIndex }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 /*
@@ -4649,25 +3825,13 @@ export function transformStringForEnum (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const items = getEnum(schema)
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        enum: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { enum: { ...field, selectedItems, items } } } })
+  return renderStringForEnum(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4686,26 +3850,14 @@ export function transformStringForAnyOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        anyOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...field, selectedItems, items } } } })
+  return renderStringForAnyOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4724,26 +3876,14 @@ export function transformStringForOneOf (schema, rootSchema, values, params) {
   } = params
 
   const {
-    [uri]: {
-      meta: {
-        selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema)
-      } = {}
-    } = {}
-  } = params
+    selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
+    ...metaProps
+  } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        oneOf: field = {}
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...field, selectedItems, items } } } })
+  return renderStringForOneOf(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, schema, rootSchema, parentUri: normaliseUri(parentUri), uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, items } } } })
 }
 
 /*
@@ -4764,16 +3904,7 @@ export function transformStringForAllOf (schema, rootSchema, values, params) {
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  const {
-    [uri]: {
-      meta = {},
-      elements: {
-        field
-      } = {}
-    } = {}
-  } = params
-
-  return renderStringForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...meta, schema, rootSchema, parentUri: getParentUri(parentUri), uri, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) }, elements: { field: { ...field, ...(hasValue(values, uri, schema) ? { value: getValue(values, uri, schema) } : {}) } } } })
+  return renderStringForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri, ...getMetaValue(values, uri, schema) }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), ...getElementsFieldValue(values, uri, schema) } } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
@@ -4803,21 +3934,13 @@ export function transformNullByKey (schema, rootSchema, values, params) {
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderNull(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements })
+  return renderNull(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
@@ -4847,21 +3970,13 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderNull(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements })
+  return renderNull(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
@@ -4894,21 +4009,13 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
   /*
    *  Resolve `parentUri` and `uri`
    */
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderBoolean(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements })
+  return renderBoolean(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
@@ -4941,21 +4048,13 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
   /*
    *  Resolve `parentUri` and `uri`
    */
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderBoolean(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements })
+  return renderBoolean(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -4985,7 +4084,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
     key: fieldKey
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
@@ -5009,16 +4108,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
 
           // log(getValueForEnum(index, schema))
 
-          const {
-            [schemaUri]: {
-              meta = {},
-              elements: {
-                enum: field = {}
-              } = {}
-            } = {}
-          } = params
-
-          return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { enum: { ...field, selectedItems, isRequired } } }, parentUri: uri, key })
+          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
         } else {
           if (hasAnyOf(schema)) {
             log('transformObjectByKey (`anyOf`)')
@@ -5032,16 +4122,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
 
             // log(getValueForAnyOf(index, schema))
 
-            const {
-              [schemaUri]: {
-                meta = {},
-                elements: {
-                  anyOf: field = {}
-                } = {}
-              } = {}
-            } = params
-
-            return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { anyOf: { ...field, selectedItems, isRequired } } }, parentUri: uri, key })
+            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
           } else {
             if (hasOneOf(schema)) {
               log('transformObjectByKey (`oneOf`)')
@@ -5055,16 +4136,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
 
               // log(getValueForOneOf(index, schema))
 
-              const {
-                [schemaUri]: {
-                  meta = {},
-                  elements: {
-                    oneOf: field = {}
-                  } = {}
-                } = {}
-              } = params
-
-              return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { oneOf: { ...field, selectedItems, isRequired } } }, parentUri: uri, key })
+              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
             }
           }
         }
@@ -5094,31 +4166,15 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
         const schemaUri = getUri(uri, key)
         const isRequired = required.includes(key)
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              field = {}
-            } = {}
-          } = {}
-        } = params
-
         /*
          *  Do not get the value
          */
 
-        return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, isRequired }, elements: { field: { ...field, isRequired } } }, parentUri: uri, key })
+        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldProps(params, schemaUri), isRequired } } }, key })
       })
   )
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderObject(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...elements, fields } })
+  return renderObject(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -5148,7 +4204,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
@@ -5172,16 +4228,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
 
           // log(getValueForEnum(index, schema))
 
-          const {
-            [schemaUri]: {
-              meta = {},
-              elements: {
-                enum: field = {}
-              } = {}
-            } = {}
-          } = params
-
-          return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { enum: { ...field, selectedItems, isRequired } } }, parentUri: uri, key })
+          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
         } else {
           if (hasAnyOf(schema)) {
             log('transformObjectByIndex (`anyOf`)')
@@ -5195,16 +4242,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
 
             // log(getValueForAnyOf(index, schema))
 
-            const {
-              [schemaUri]: {
-                meta = {},
-                elements: {
-                  anyOf: field = {}
-                } = {}
-              } = {}
-            } = params
-
-            return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { anyOf: { ...field, selectedItems, isRequired } } }, parentUri: uri, key })
+            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
           } else {
             if (hasOneOf(schema)) {
               log('transformObjectByIndex (`oneOf`)')
@@ -5218,16 +4256,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
 
               // log(getValueForOneOf(index, schema))
 
-              const {
-                [schemaUri]: {
-                  meta = {},
-                  elements: {
-                    oneOf: field = {}
-                  } = {}
-                } = {}
-              } = params
-
-              return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { oneOf: { ...field, selectedItems, isRequired } } }, parentUri: uri, key })
+              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
             }
           }
         }
@@ -5257,31 +4286,15 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
         const schemaUri = getUri(uri, key)
         const isRequired = required.includes(key)
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              field = {}
-            } = {}
-          } = {}
-        } = params
-
         /*
          *  Do not get the value
          */
 
-        return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, isRequired }, elements: { field: { ...field, isRequired } } }, parentUri: uri, key })
+        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldProps(params, schemaUri), isRequired } } }, key })
       })
   )
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderObject(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...elements, fields } })
+  return renderObject(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
@@ -5311,7 +4324,7 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
     key: fieldKey = ''
   } = params
 
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
   const {
@@ -5322,22 +4335,22 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
     log('transformArrayByKey (2 - 1)')
 
     log(`
-  /*
-   *  Array with "items" array
-   */
+
+  Array with "items" array
+
     `)
 
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
-    return renderArray(schema, values, { ...params, parentUri, uri, meta: { schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { fields } })
+    return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
   }
 
   log('transformArrayByKey (2 - 2)')
 
   log(`
-  /*
-   *  Array with "items" object
-   */
+
+  Array with "items" object
+
   `)
 
   let fields
@@ -5352,17 +4365,8 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
 
     // log(getValueForEnum(getIndexForEnum(values, uri, schemaUri, items), items))
 
-    const {
-      [schemaUri]: {
-        meta = {},
-        elements: {
-          enum: field = {}
-        } = {}
-      } = {}
-    } = params
-
     fields = [
-      transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { enum: { ...field, selectedItems } } }, parentUri: uri })
+      transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
     ]
   } else {
     if (hasAnyOf(items)) {
@@ -5376,17 +4380,8 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
 
       // log(getValueForAnyOf(0, items))
 
-      const {
-        [schemaUri]: {
-          meta = {},
-          elements: {
-            anyOf: field = {}
-          } = {}
-        } = {}
-      } = params
-
       fields = [
-        transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { anyOf: { ...field, selectedItems } } }, parentUri: uri })
+        transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
       ]
     } else {
       if (hasOneOf(items)) {
@@ -5400,20 +4395,13 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
 
         // log(getValueForOneOf(0, items))
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              oneOf: field = {}
-            } = {}
-          } = {}
-        } = params
-
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { oneOf: { ...field, selectedItems } } }, parentUri: uri })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems } } } })
         ]
       } else {
         log('transformArrayByKey (`value` `defaultValue`)')
+
+        const schemaUri = getUri(uri, 0)
 
         /*
          *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
@@ -5438,20 +4426,13 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
         `)
 
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
         ]
       }
     }
   }
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderArray(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...elements, fields } })
+  return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
@@ -5481,7 +4462,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
     index: arrayIndex = 0
   } = params
 
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const {
@@ -5492,29 +4473,22 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
     log('transformArrayByIndex (2 - 1)')
 
     log(`
-  /*
-   *  Array with "items" array
-   */
+
+  Array with "items" array
+
     `)
 
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
-    const {
-      [uri]: {
-        meta = {},
-        elements = {}
-      } = {}
-    } = params
-
-    return renderArray(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...elements, fields } })
+    return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
   }
 
   log('transformArrayByIndex (2 - 2)')
 
   log(`
-  /*
-   *  Array with "items" object
-   */
+
+  Array with "items" object
+
   `)
 
   let fields
@@ -5529,17 +4503,8 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
     // log(getValueForEnum(getIndexForEnum(values, uri, schemaUri, items), items))
 
-    const {
-      [schemaUri]: {
-        meta = {},
-        elements: {
-          enum: field = {}
-        } = {}
-      } = {}
-    } = params
-
     fields = [
-      transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { enum: { ...field, selectedItems } } }, parentUri: uri })
+      transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
     ]
   } else {
     if (hasAnyOf(items)) {
@@ -5553,17 +4518,8 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
       // log(getValueForAnyOf(getIndexForAnyOf(values, uri, schemaUri, items), items))
 
-      const {
-        [schemaUri]: {
-          meta = {},
-          elements: {
-            anyOf: field = {}
-          } = {}
-        } = {}
-      } = params
-
       fields = [
-        transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { anyOf: { ...field, selectedItems } } }, parentUri: uri })
+        transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
       ]
     } else {
       if (hasOneOf(items)) {
@@ -5577,17 +4533,8 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
         // log(getValueForOneOf(0, items))
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              oneOf: field = {}
-            } = {}
-          } = {}
-        } = params
-
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { oneOf: { ...field, selectedItems } } }, parentUri: uri })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems } } } })
         ]
       } else {
         log('transformArrayByIndex (`value` `defaultValue`)')
@@ -5618,7 +4565,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
           `)
 
           fields = [
-            transformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+            transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
           ]
         } else {
           if (isObjectSchema(items)) {
@@ -5629,7 +4576,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
             `)
 
             fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
             ]
           } else {
             log(`
@@ -5641,7 +4588,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
             if (Reflect.has(values, uri)) {
               const value = Reflect.get(values, uri)
 
-              if (isArray(values[uri])) {
+              if (isArray(value)) {
                 log(`
 
   value is array
@@ -5650,20 +4597,11 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
                 const v = Reflect.get(value, 0)
 
-                const {
-                  [schemaUri]: {
-                    meta = {},
-                    elements: {
-                      field = {}
-                    } = {}
-                  } = {}
-                } = params
-
                 fields = [
-                  transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...meta, value: String(v) }, elements: { field: { ...field, value: String(v) } } } })
+                  transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), value: String(v) }, elements: { field: { ...getElementsFieldProps(params, schemaUri), value: String(v) } } } })
                 ]
               } else {
-                if (isObject(values[uri])) {
+                if (isObject(value)) {
                   log(`
 
   value is object
@@ -5672,17 +4610,8 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
                   const v = Reflect.get(value, 0)
 
-                  const {
-                    [schemaUri]: {
-                      meta = {},
-                      elements: {
-                        field = {}
-                      } = {}
-                    } = {}
-                  } = params
-
                   fields = [
-                    transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...meta, value: String(v) }, elements: { field: { ...field, value: String(v) } } } })
+                    transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), value: String(v) }, elements: { field: { ...getElementsFieldProps(params, schemaUri), value: String(v) } } } })
                   ]
                 } else {
                   log(`
@@ -5691,23 +4620,14 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
                   `)
 
-                  const {
-                    [uri]: {
-                      meta = {},
-                      elements: {
-                        field = {}
-                      } = {}
-                    } = {}
-                  } = params
-
                   fields = [
-                    transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...meta, value: String(value) }, elements: { field: { ...field, value: String(value) } } } })
+                    transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), value: String(value) }, elements: { field: { ...getElementsFieldProps(params, schemaUri), value: String(value) } } } })
                   ]
                 }
               }
             } else {
               fields = [
-                transformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+                transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
               ]
             }
           }
@@ -5716,14 +4636,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderArray(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...elements, fields } })
+  return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
@@ -5756,21 +4669,13 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
   /*
    *  Resolve `parentUri` and `uri`
    */
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderNumber(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements })
+  return renderNumber(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
@@ -5803,21 +4708,13 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
   /*
    *  Resolve `parentUri` and `uri`
    */
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderNumber(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements })
+  return renderNumber(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
@@ -5850,21 +4747,13 @@ export function transformStringByKey (schema, rootSchema, values, params) {
   /*
    *  Resolve `parentUri` and `uri`
    */
-  const parentUri = getParentUri(fieldParentUri)
+  const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderString(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, name: fieldKey }, elements })
+  return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
@@ -5897,21 +4786,13 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
   /*
    *  Resolve `parentUri` and `uri`
    */
-  const parentUri = getParentUri(arrayParentUri)
+  const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
-
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
 
   /*
    *  Do not get the value
    */
-
-  return renderString(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri, uri, item: arrayIndex }, elements })
+  return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
@@ -5941,18 +4822,10 @@ export function transformNull (schema, rootSchema, values, params) {
     uri = '#/'
   } = params
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
   /*
    *  Do not get the value
    */
-
-  return renderNull(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema }, elements })
+  return renderNull(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
@@ -5982,18 +4855,10 @@ export function transformBoolean (schema, rootSchema, values, params) {
     uri = '#/'
   } = params
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
   /*
    *  Do not get the value
    */
-
-  return renderBoolean(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema }, elements })
+  return renderBoolean(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -6044,16 +4909,7 @@ export function transformObject (schema, rootSchema, values, params) {
 
           // log(getValueForEnum(index, schema))
 
-          const {
-            [schemaUri]: {
-              meta = {},
-              elements: {
-                enum: field = {}
-              } = {}
-            } = {}
-          } = params
-
-          return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { enum: { ...field, selectedItems, isRequired } } }, parentUri: uri, key }) // ??
+          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
         } else {
           if (hasAnyOf(schema)) {
             log('transformObject (`anyOf`)')
@@ -6067,16 +4923,7 @@ export function transformObject (schema, rootSchema, values, params) {
 
             // log(getValueForAnyOf(index, schema))
 
-            const {
-              [schemaUri]: {
-                meta = {},
-                elements: {
-                  anyOf: field = {}
-                } = {}
-              } = {}
-            } = params
-
-            return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { anyOf: { ...field, selectedItems, isRequired } } }, parentUri: uri, key }) // ??
+            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
           } else {
             if (hasOneOf(schema)) {
               log('transformObject (`oneOf`)')
@@ -6090,16 +4937,7 @@ export function transformObject (schema, rootSchema, values, params) {
 
               // log(getValueForOneOf(index, schema))
 
-              const {
-                [schemaUri]: {
-                  meta = {},
-                  elements: {
-                    oneOf: field = {}
-                  } = {}
-                } = {}
-              } = params
-
-              return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems, isRequired }, elements: { oneOf: { ...field, selectedItems, isRequired } } }, parentUri: uri, key }) // ??
+              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
             }
           }
         }
@@ -6121,31 +4959,14 @@ export function transformObject (schema, rootSchema, values, params) {
         const schemaUri = getUri(uri, key)
         const isRequired = required.includes(key)
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              field = {}
-            } = {}
-          } = {}
-        } = params
-
         /*
          *  Do not get the value
          */
-
-        return transformByKey(schema, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, isRequired }, elements: { field: { ...field, isRequired } } }, parentUri: uri, key })
+        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldProps(params, schemaUri), isRequired } } }, key })
       })
   )
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderObject(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri }, elements: { ...elements, fields } })
+  return renderObject(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
@@ -6190,7 +5011,7 @@ export function transformArray (schema, rootSchema, values, params) {
 
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
-    return renderArray(schema, values, { ...params, parentUri, uri, meta: { schema, rootSchema, parentUri }, elements: { fields } })
+    return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
   }
 
   log('transformArray (2 - 2)')
@@ -6213,17 +5034,8 @@ export function transformArray (schema, rootSchema, values, params) {
 
     // log(getValueForEnum(0, schema))
 
-    const {
-      [schemaUri]: {
-        meta = {},
-        elements: {
-          enum: field = {}
-        } = {}
-      } = {}
-    } = params
-
     fields = [
-      transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { enum: { ...field, selectedItems } } }, parentUri: uri })
+      transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
     ]
   } else {
     if (hasAnyOf(items)) {
@@ -6237,17 +5049,8 @@ export function transformArray (schema, rootSchema, values, params) {
 
       // log(getValueForAnyOf(0, schema))
 
-      const {
-        [schemaUri]: {
-          meta = {},
-          elements: {
-            anyOf: field = {}
-          } = {}
-        } = {}
-      } = params
-
       fields = [
-        transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { anyOf: { ...field, selectedItems } } }, parentUri: uri })
+        transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
       ]
     } else {
       if (hasOneOf(items)) {
@@ -6261,20 +5064,13 @@ export function transformArray (schema, rootSchema, values, params) {
 
         // log(getValueForOneOf(0, schema))
 
-        const {
-          [schemaUri]: {
-            meta = {},
-            elements: {
-              oneOf: field = {}
-            } = {}
-          } = {}
-        } = params
-
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, [schemaUri]: { meta: { ...meta, selectedItems }, elements: { anyOf: { ...field, selectedItems } } }, parentUri: uri })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
         ]
       } else {
         log('transformArray (`value` `defaultValue`)')
+
+        const schemaUri = getUri(uri, 0)
 
         /*
          *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
@@ -6299,20 +5095,13 @@ export function transformArray (schema, rootSchema, values, params) {
         `)
 
         fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
         ]
       }
     }
   }
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
-  return renderArray(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema, parentUri }, elements: { ...elements, fields } })
+  return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
@@ -6342,18 +5131,10 @@ export function transformNumber (schema, rootSchema, values, params) {
     uri = '#/'
   } = params
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
   /*
    *  Do not get the value
    */
-
-  return renderNumber(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema }, elements })
+  return renderNumber(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
@@ -6383,18 +5164,10 @@ export function transformString (schema, rootSchema, values, params) {
     uri = '#/'
   } = params
 
-  const {
-    [uri]: {
-      meta = {},
-      elements = {}
-    } = {}
-  } = params
-
   /*
    *  Do not get the value
    */
-
-  return renderString(schema, values, { ...params, parentUri, uri, meta: { ...meta, schema, rootSchema }, elements })
+  return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
 export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {

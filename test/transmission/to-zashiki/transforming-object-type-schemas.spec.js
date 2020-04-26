@@ -16,7 +16,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
   })
 
   describe('Transforming `object` type schemas', () => {
-    xit('transforms `object` type schemas with `enum` (with an `object` type with `enum`)', () => {
+    it('transforms `object` type schemas with `enum` (with an `object` type with `enum`)', () => {
       const schema = {
         type: 'object',
         enum: [
@@ -58,10 +58,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `enum` (with an `object` type with `anyOf`)', () => {
+    it('transforms `object` type schemas with `enum` (with an `object` type with `anyOf`)', () => {
       const schema = {
         type: 'object',
         enum: [
@@ -103,10 +100,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `enum` (with an `object` type with `oneOf`)', () => {
+    it('transforms `object` type schemas with `enum` (with an `object` type with `oneOf`)', () => {
       const schema = {
         type: 'object',
         enum: [
@@ -148,10 +142,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `enum` (with an `object` type with `allOf`)', () => {
+    it('transforms `object` type schemas with `enum` (with an `object` type with `allOf`)', () => {
       const schema = {
         type: 'object',
         enum: [
@@ -193,10 +184,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `anyOf` (with an `object` type with `enum`)', () => {
+    it('transforms `object` type schemas with `anyOf` (with an `object` type with `enum`)', () => {
       const schema = {
         type: 'object',
         anyOf: [
@@ -259,10 +247,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `anyOf` (with an `object` type with `anyOf`)', () => {
+    it('transforms `object` type schemas with `anyOf` (with an `object` type with `anyOf`)', () => {
       const schema = {
         type: 'object',
         anyOf: [
@@ -337,10 +322,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `anyOf` (with an `object` type with `oneOf`)', () => {
+    it('transforms `object` type schemas with `anyOf` (with an `object` type with `oneOf`)', () => {
       const schema = {
         type: 'object',
         anyOf: [
@@ -415,10 +397,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `object` type schemas with `anyOf` (with an `object` type with `allOf`)', () => {
+    it('transforms `object` type schemas with `anyOf` (with an `object` type with `allOf`)', () => {
       const schema = {
         type: 'object',
         anyOf: [
@@ -462,7 +441,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                     }
                   },
                   elements: {
-                    fields: []
+                    field: {
+                      id: '#/0'
+                    }
                   }
                 }
               ],
@@ -472,10 +453,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `oneOf` (with an `object` type with `enum`)', () => {
+    it('transforms `object` type schemas with `oneOf` (with an `object` type with `enum`)', () => {
       const schema = {
         type: 'object',
         oneOf: [
@@ -538,10 +516,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `oneOf` (with an `object` type with `anyOf`)', () => {
+    it('transforms `object` type schemas with `oneOf` (with an `object` type with `anyOf`)', () => {
       const schema = {
         type: 'object',
         oneOf: [
@@ -616,10 +591,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `object` type schemas with `oneOf` (with an `object` type with `oneOf`)', () => {
+    it('transforms `object` type schemas with `oneOf` (with an `object` type with `oneOf`)', () => {
       const schema = {
         type: 'object',
         oneOf: [
@@ -694,10 +666,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `object` type schemas with `oneOf` (with an `object` type with `allOf`)', () => {
+    it('transforms `object` type schemas with `oneOf` (with an `object` type with `allOf`)', () => {
       const schema = {
         type: 'object',
         oneOf: [
@@ -741,7 +710,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                     }
                   },
                   elements: {
-                    fields: []
+                    field: {
+                      id: '#/0'
+                    }
                   }
                 }
               ],
@@ -751,10 +722,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `object` type schemas with `allOf` (with an `object` type with `enum`)', () => {
+    it('transforms `object` type schemas with `allOf` (with an `object` type with `enum`)', () => {
       const schema = {
         type: 'object',
         allOf: [
@@ -777,15 +745,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `object` type schemas with `allOf` (with an `object` type with `anyOf`)', () => {
+    it('transforms `object` type schemas with `allOf` (with an `object` type with `anyOf`)', () => {
       const schema = {
         type: 'object',
         allOf: [
@@ -808,15 +775,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `object` type schemas with `allOf` (with an `object` type with `oneOf`)', () => {
+    it('transforms `object` type schemas with `allOf` (with an `object` type with `oneOf`)', () => {
       const schema = {
         type: 'object',
         allOf: [
@@ -839,15 +805,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `object` type schemas with `allOf` (with an `object` type with `allOf`)', () => {
+    it('transforms `object` type schemas with `allOf` (with an `object` type with `allOf`)', () => {
       const schema = {
         type: 'object',
         allOf: [
@@ -870,7 +835,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })

@@ -16,10 +16,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
   })
 
   describe('Transforming `array` type schemas', () => {
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `enum` (with an `array` type with `enum`)', () => {
+    it('transforms `array` type schemas with `enum` (with an `array` type with `enum`)', () => {
       const schema = {
         type: 'array',
         enum: [
@@ -61,10 +58,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `enum` (with an `array` type with `anyOf`)', () => {
+    it('transforms `array` type schemas with `enum` (with an `array` type with `anyOf`)', () => {
       const schema = {
         type: 'array',
         enum: [
@@ -106,10 +100,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `enum` (with an `array` type with `oneOf`)', () => {
+    it('transforms `array` type schemas with `enum` (with an `array` type with `oneOf`)', () => {
       const schema = {
         type: 'array',
         enum: [
@@ -151,10 +142,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `enum` (with an `array` type with `allOf`)', () => {
+    it('transforms `array` type schemas with `enum` (with an `array` type with `allOf`)', () => {
       const schema = {
         type: 'array',
         enum: [
@@ -196,10 +184,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `anyOf` (with an `array` type with `enum`)', () => {
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `enum`)', () => {
       const schema = {
         type: 'array',
         anyOf: [
@@ -262,10 +247,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `anyOf` (with an `array` type with `anyOf`)', () => {
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `anyOf`)', () => {
       const schema = {
         type: 'array',
         anyOf: [
@@ -340,10 +322,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `anyOf` (with an `array` type with `oneOf`)', () => {
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `oneOf`)', () => {
       const schema = {
         type: 'array',
         anyOf: [
@@ -418,10 +397,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `array` type schemas with `anyOf` (with an `array` type with `allOf`)', () => {
+    it('transforms `array` type schemas with `anyOf` (with an `array` type with `allOf`)', () => {
       const schema = {
         type: 'array',
         anyOf: [
@@ -465,7 +441,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                     }
                   },
                   elements: {
-                    fields: []
+                    field: {
+                      id: '#/0'
+                    }
                   }
                 }
               ],
@@ -475,10 +453,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `oneOf` (with an `array` type with `enum`)', () => {
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `enum`)', () => {
       const schema = {
         type: 'array',
         oneOf: [
@@ -541,10 +516,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `oneOf` (with an `array` type with `anyOf`)', () => {
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `anyOf`)', () => {
       const schema = {
         type: 'array',
         oneOf: [
@@ -619,10 +591,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri`
-     */
-    xit('transforms `array` type schemas with `oneOf` (with an `array` type with `oneOf`)', () => {
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `oneOf`)', () => {
       const schema = {
         type: 'array',
         oneOf: [
@@ -697,10 +666,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `array` type schemas with `oneOf` (with an `array` type with `allOf`)', () => {
+    it('transforms `array` type schemas with `oneOf` (with an `array` type with `allOf`)', () => {
       const schema = {
         type: 'array',
         oneOf: [
@@ -744,7 +710,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                     }
                   },
                   elements: {
-                    fields: []
+                    field: {
+                      id: '#/0'
+                    }
                   }
                 }
               ],
@@ -754,10 +722,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `array` type schemas with `allOf` (with an `array` type with `enum`)', () => {
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `enum`)', () => {
       const schema = {
         type: 'array',
         allOf: [
@@ -780,15 +745,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `array` type schemas with `allOf` (with an `array` type with `anyOf`)', () => {
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `anyOf`)', () => {
       const schema = {
         type: 'array',
         allOf: [
@@ -811,15 +775,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `array` type schemas with `allOf` (with an `array` type with `oneOf`)', () => {
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `oneOf`)', () => {
       const schema = {
         type: 'array',
         allOf: [
@@ -842,15 +805,14 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })
 
-    /*
-     *  `parentUri` `field`
-     */
-    xit('transforms `array` type schemas with `allOf` (with an `array` type with `allOf`)', () => {
+    it('transforms `array` type schemas with `allOf` (with an `array` type with `allOf`)', () => {
       const schema = {
         type: 'array',
         allOf: [
@@ -873,7 +835,9 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
             schema
           },
           elements: {
-            fields: []
+            field: {
+              id: '#/'
+            }
           }
         })
     })

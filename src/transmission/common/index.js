@@ -30,7 +30,7 @@ export const toDefaultValue = (schema = {}) => Reflect.get(schema, 'default')
 
 export const isDefaultValue = (schema = {}) => Reflect.has(schema, 'default')
 
-export const normaliseUri = (uri) => uri.endsWith('/') ? uri : uri.concat('/')
+export const getPatternUri = (uri) => uri.endsWith('/') ? uri : uri.concat('/')
 
 export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
@@ -84,7 +84,7 @@ export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri 
    *
    *  Get the values `#/array/n` (where `n` is a number)
    */
-  const pattern = new RegExp(`^${normaliseUri(parentUri)}\\d+$`)
+  const pattern = new RegExp(`^${getPatternUri(parentUri)}\\d+$`)
 
   /*
    *  Filter `values` for `parentUri` values
@@ -160,7 +160,7 @@ export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#')
    *
    *  Get the values `#/array/n` (where `n` is a number)
    */
-  const pattern = new RegExp(`^${normaliseUri(uri)}\\d+$`)
+  const pattern = new RegExp(`^${getPatternUri(uri)}\\d+$`)
 
   return (
     Object
@@ -191,6 +191,38 @@ export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#')
   )
 }
 
+export const isParentUri = (parentUri = '#', uri = '#') => {
+  return (
+    parentUri !== '#' &&
+    parentUri !== uri
+  )
+}
+
+export const hasParentUri = (params = {}, uri = '#') => {
+  if (Reflect.has(params, 'parentUri')) {
+    const parentUri = Reflect.get(params, 'parentUri')
+
+    return (
+      parentUri !== '#' &&
+      parentUri !== uri
+    )
+  }
+
+  return false
+}
+
+export const getParentUri = (params = {}, uri = '#') => Reflect.get(params, 'parentUri')
+
+export const transformValue = (schema) => (
+  isObject(schema)
+    ? isConstValue(schema)
+      ? toConstValue(schema)
+      : isDefaultValue(schema)
+        ? toDefaultValue(schema)
+        : schema
+    : schema
+)
+
 export function getMetaProps (params = {}, uri = '#') {
   log('getMetaProps')
 
@@ -220,29 +252,7 @@ export function hasMetaValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    if (isArraySchema(schema)) {
-      log(`
-
-is Array schema
-
-      `)
-
-      throw new Error('Uri Array schema')
-    } else {
-      if (isObjectSchema(schema)) {
-        log(`
-
-is Object schema
-
-        `)
-
-        throw new Error('Uri Object schema')
-      } else {
-        if (isArray(value)) throw new Error('Is Array')
-
-        return isPrimitive(value)
-      }
-    }
+    return isPrimitive(value)
   } else {
     if (Reflect.has(schema, 'const')) {
       const constValue = Reflect.get(schema, 'const')
@@ -260,30 +270,8 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    if (isArraySchema(schema)) {
-      log(`
-
-  is Array schema
-
-      `)
-
-      throw new Error('Uri Array schema')
-    } else {
-      if (isObjectSchema(schema)) {
-        log(`
-
-  is Object schema
-
-        `)
-
-        throw new Error('Uri Object schema')
-      } else {
-        if (isArray(value)) throw new Error('Is Array')
-
-        if (isPrimitive(value)) {
-          return { value: String(value) }
-        }
-      }
+    if (isPrimitive(value)) {
+      return { value: String(value) }
     }
   } else {
     if (Reflect.has(schema, 'const')) {
@@ -304,29 +292,7 @@ export function hasValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    if (isArraySchema(schema)) {
-      log(`
-
-  is Array schema
-
-      `)
-
-      throw new Error('Uri Array schema')
-    } else {
-      if (isObjectSchema(schema)) {
-        log(`
-
-  is Object schema
-
-        `)
-
-        throw new Error('Uri Object schema')
-      } else {
-        if (isArray(value)) throw new Error('Is Array')
-
-        return isPrimitive(value)
-      }
-    }
+    return isPrimitive(value)
   } else {
     if (Reflect.has(schema, 'const')) {
       const constValue = Reflect.get(schema, 'const')
@@ -344,30 +310,8 @@ export function getValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    if (isArraySchema(schema)) {
-      log(`
-
-  is Array schema
-
-      `)
-
-      throw new Error('Uri Array schema')
-    } else {
-      if (isObjectSchema(schema)) {
-        log(`
-
-  is Object schema
-
-        `)
-
-        throw new Error('Uri Object schema')
-      } else {
-        if (isArray(value)) throw new Error('Is Array')
-
-        if (isPrimitive(value)) {
-          return String(value)
-        }
-      }
+    if (isPrimitive(value)) {
+      return String(value)
     }
   } else {
     if (Reflect.has(schema, 'const')) {
@@ -379,16 +323,6 @@ export function getValue (values = {}, uri = '#', schema = {}) {
     }
   }
 }
-
-export const transformValue = (schema) => (
-  isObject(schema)
-    ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema
-    : schema
-)
 
 export function getValueForEnum (v, { enum: items = [] } = {}) {
   log('getValueForEnum') // , values, parentUri, uri, schema)
@@ -476,6 +410,17 @@ export function getIndexForOneOf (values = {}, parentUri = '#', uri = '#', schem
   return NaN
 }
 
+export function getElementsProps (params = {}, uri = '#') {
+  let elements
+  if (Reflect.has(params, uri)) {
+    ({
+      elements = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return elements || {}
+}
+
 export function getElementsTitleProps (params = {}, uri = '#') {
   let title
   if (Reflect.has(params, uri)) {
@@ -500,6 +445,21 @@ export function getElementsDescriptionProps (params = {}, uri = '#') {
   }
 
   return description || {}
+}
+
+export function getElementsFieldsProps (params = {}, uri = '#') {
+  log('getElementsFields')
+
+  let fields
+  if (Reflect.has(params, uri)) {
+    ({
+      elements: {
+        fields
+      } = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return fields || []
 }
 
 export function getElementsFieldPropsForEnum (params = {}, uri = '#') {
@@ -573,7 +533,9 @@ export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    return { value: String(value) }
+    if (isPrimitive(value)) {
+      return { value: String(value) }
+    }
   } else {
     if (Reflect.has(schema, 'const')) {
       const constValue = Reflect.get(schema, 'const')
@@ -613,8 +575,9 @@ export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 export const hasAllOf = (schema = {}) => Reflect.has(schema, 'allOf')
 export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
-export const getParentUri = (parentUri = '#') => parentUri === '#' ? '#/' : parentUri // parentUri.endsWith('/') ? parentUri : parentUri.concat('/')
 export const getUri = (uri = '#', resource = '') => (uri.endsWith('/') ? uri : uri.concat('/')).concat(resource)
+
+export const normaliseUri = (uri = '#') => uri === '#' ? '#/' : uri // parentUri.endsWith('/') ? parentUri : parentUri.concat('/')
 
 export function getMin ({ minimum } = {}) {
   const value = Number(minimum)
