@@ -592,8 +592,6 @@ export function transformObject (rootSchema, values, params) {
     Object
       .entries(properties)
       .map(([key, schema], index) => {
-        // log({ index })
-
         if (hasEnum(schema)) {
           log('transformObject (`enum`)')
 

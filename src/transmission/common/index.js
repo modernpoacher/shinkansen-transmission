@@ -40,34 +40,6 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export const getIsRequired = (params = {}) => Reflect.has(params, 'required') ? { required: Reflect.get(params, 'required') } : {}
-
-export const getParamsItems = (params = {}, uri = '#') => {
-  let items
-  if (Reflect.has(params, uri)) {
-    ({
-      meta: {
-        items
-      } = {}
-    } = Reflect.get(params, uri))
-  }
-
-  return items || {}
-}
-
-export const getParamsSelectedItems = (params = {}, uri = '#') => {
-  let selectedItems
-  if (Reflect.has(params, uri)) {
-    ({
-      meta: {
-        selectedItems
-      } = {}
-    } = Reflect.get(params, uri))
-  }
-
-  return selectedItems || {}
-}
-
 export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri = '#') {
   log('getSelectedItemsForParentUri', parentUri, uri)
 
@@ -197,8 +169,6 @@ export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#')
       .reduce((accumulator, [key, value]) => {
         const k = uri.endsWith('/') ? key.slice(uri.length) : key.slice(uri.length + 1) // key.endsWith('/') ? uri.slice(key.length) : uri.slice(key.length + 1)
         const i = k ? Number(k.includes('/') ? k.slice(0, k.indexOf('/')) : k) : NaN
-
-        log({ key, value, k, i })
 
         /*
          * Is `i` a number?
