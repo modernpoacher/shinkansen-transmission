@@ -86,18 +86,13 @@ export function transformValueFor (value, array) {
   return value
 }
 
-export function getArrayFor (array = [], values, parentUri, uri) {
-  const [
-    key,
-    value
-  ] = (
-    Object
-      .entries(values)
-      .find(([key]) => key === uri)
-  ) || []
-
-  if (key) {
-    const i = Number(value)
+export function getArrayFor (array = [], values, uri) {
+  /*
+   *  log('getArrayFor')
+   */
+  if (Reflect.has(values, uri)) {
+    const v = Reflect.get(values, uri)
+    const i = Number(v)
 
     if (!isNaN(i)) return array[i]
   }
@@ -424,65 +419,60 @@ export function transformBoolean (schema, values, parentUri, uri) {
 }
 
 export function transformObject (schema, values, parentUri, uri) {
-  /*
-   *  log('transformObject (1)')
-   */
+  log('transformObject (1)')
+
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
-    return getArrayFor(array, values, parentUri, uri)
+    return getArrayFor(array, values, uri)
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
 
-      return getArrayFor(array, values, parentUri, uri)
+      return getArrayFor(array, values, uri)
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
 
-        return getArrayFor(array, values, parentUri, uri)
+        return getArrayFor(array, values, uri)
       }
     }
   }
 
-  /*
-   *  log('transformObject (2)')
-   */
+  log('transformObject (2)')
+
   return transformObjectFor(schema, values, parentUri, uri)
 }
 
 export function transformArray (schema, values, parentUri, uri) {
-  /*
-   *  log('transformArray (1)')
-   */
+  log('transformArray (1)')
+
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
-    return getArrayFor(array, values, parentUri, uri)
+    return getArrayFor(array, values, uri)
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
 
-      return getArrayFor(array, values, parentUri, uri)
+      return getArrayFor(array, values, uri)
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
 
-        return getArrayFor(array, values, parentUri, uri)
+        return getArrayFor(array, values, uri)
       }
     }
   }
 
-  /*
-   *  log('transformArray (2)')
-   */
+  log('transformArray (2)')
+
   return transformArrayFor(schema, values, parentUri, uri)
 }
 
 export function transformNumber (schema, values, parentUri, uri) {
-  /*
-   *  log('transformNumber (1)')
-   */
+  log('transformNumber (1)', values)
+
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -507,9 +497,7 @@ export function transformNumber (schema, values, parentUri, uri) {
       }
     }
 
-    /*
-     *  log('transformNumber (2)')
-     */
+    log('transformNumber (2)')
     try {
       if (isArray(value)) return value.map(toNumber)
       return toNumber(value)

@@ -5,98 +5,116 @@ import { expect } from 'chai'
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
 import {
-  transformObjectSchemaNullForEnum,
-  transformObjectSchemaNullForAnyOf,
-  transformObjectSchemaNullForOneOf,
-  transformObjectSchemaNullForAllOf,
-  transformObjectSchemaNull,
-  transformObjectSchemaBooleanForEnum,
-  transformObjectSchemaBooleanForAnyOf,
-  transformObjectSchemaBooleanForOneOf,
-  transformObjectSchemaBooleanForAllOf,
-  transformObjectSchemaBoolean,
-  transformObjectSchemaObjectForEnum,
-  transformObjectSchemaObjectForAnyOf,
-  transformObjectSchemaObjectForOneOf,
-  transformObjectSchemaObjectForAllOf,
-  transformObjectSchemaObject,
-  transformObjectSchemaArrayForEnum,
-  transformObjectSchemaArrayForAnyOf,
-  transformObjectSchemaArrayForOneOf,
-  transformObjectSchemaArrayForAllOf,
-  transformObjectSchemaArray,
-  transformObjectSchemaNumberForEnum,
-  transformObjectSchemaNumberForAnyOf,
-  transformObjectSchemaNumberForOneOf,
-  transformObjectSchemaNumberForAllOf,
-  transformObjectSchemaNumber,
-  transformObjectSchemaStringForEnum,
-  transformObjectSchemaStringForAnyOf,
-  transformObjectSchemaStringForOneOf,
-  transformObjectSchemaStringForAllOf,
-  transformObjectSchemaString,
-  transformObjectSchema,
-  transformArraySchemaNullForEnum,
-  transformArraySchemaNullForAnyOf,
-  transformArraySchemaNullForOneOf,
-  transformArraySchemaNullForAllOf,
-  transformArraySchemaNull,
-  transformArraySchemaBooleanForEnum,
-  transformArraySchemaBooleanForAnyOf,
-  transformArraySchemaBooleanForOneOf,
-  transformArraySchemaBooleanForAllOf,
-  transformArraySchemaBoolean,
-  transformArraySchemaObjectForEnum,
-  transformArraySchemaObjectForAnyOf,
-  transformArraySchemaObjectForOneOf,
-  transformArraySchemaObjectForAllOf,
-  transformArraySchemaObject,
-  transformArraySchemaArrayForEnum,
-  transformArraySchemaArrayForAnyOf,
-  transformArraySchemaArrayForOneOf,
-  transformArraySchemaArrayForAllOf,
-  transformArraySchemaArray,
-  transformArraySchemaNumberForEnum,
-  transformArraySchemaNumberForAnyOf,
-  transformArraySchemaNumberForOneOf,
-  transformArraySchemaNumberForAllOf,
-  transformArraySchemaNumber,
-  transformArraySchemaStringForEnum,
-  transformArraySchemaStringForAnyOf,
-  transformArraySchemaStringForOneOf,
-  transformArraySchemaStringForAllOf,
-  transformArraySchemaString,
-  transformArraySchema,
+  transformNullByKeyForEnum,
+  transformNullByKeyForAnyOf,
+  transformNullByKeyForOneOf,
+  transformNullByKeyForAllOf,
+  transformNullByKey,
+
+  transformBooleanByKeyForEnum,
+  transformBooleanByKeyForAnyOf,
+  transformBooleanByKeyForOneOf,
+  transformBooleanByKeyForAllOf,
+  transformBooleanByKey,
+
+  transformObjectByKeyForEnum,
+  transformObjectByKeyForAnyOf,
+  transformObjectByKeyForOneOf,
+  transformObjectByKeyForAllOf,
+  transformObjectByKey,
+
+  transformArrayByKeyForEnum,
+  transformArrayByKeyForAnyOf,
+  transformArrayByKeyForOneOf,
+  transformArrayByKeyForAllOf,
+  transformArrayByKey,
+
+  transformNumberByKeyForEnum,
+  transformNumberByKeyForAnyOf,
+  transformNumberByKeyForOneOf,
+  transformNumberByKeyForAllOf,
+  transformNumberByKey,
+
+  transformStringByKeyForEnum,
+  transformStringByKeyForAnyOf,
+  transformStringByKeyForOneOf,
+  transformStringByKeyForAllOf,
+  transformStringByKey,
+
+  transformNullByIndexForEnum,
+  transformNullByIndexForAnyOf,
+  transformNullByIndexForOneOf,
+  transformNullByIndexForAllOf,
+  transformNullByIndex,
+
+  transformBooleanByIndexForEnum,
+  transformBooleanByIndexForAnyOf,
+  transformBooleanByIndexForOneOf,
+  transformBooleanByIndexForAllOf,
+  transformBooleanByIndex,
+
+  transformObjectByIndexForEnum,
+  transformObjectByIndexForAnyOf,
+  transformObjectByIndexForOneOf,
+  transformObjectByIndexForAllOf,
+  transformObjectByIndex,
+
+  transformArrayByIndexForEnum,
+  transformArrayByIndexForAnyOf,
+  transformArrayByIndexForOneOf,
+  transformArrayByIndexForAllOf,
+  transformArrayByIndex,
+
+  transformNumberByIndexForEnum,
+  transformNumberByIndexForAnyOf,
+  transformNumberByIndexForOneOf,
+  transformNumberByIndexForAllOf,
+  transformNumberByIndex,
+
+  transformStringByIndexForEnum,
+  transformStringByIndexForAnyOf,
+  transformStringByIndexForOneOf,
+  transformStringByIndexForAllOf,
+  transformStringByIndex,
+
   transformNullForEnum,
   transformNullForAnyOf,
   transformNullForOneOf,
   transformNullForAllOf,
   transformNull,
+
   transformBooleanForEnum,
   transformBooleanForAnyOf,
   transformBooleanForOneOf,
   transformBooleanForAllOf,
   transformBoolean,
+
   transformObjectForEnum,
   transformObjectForAnyOf,
   transformObjectForOneOf,
   transformObjectForAllOf,
   transformObject,
+
   transformArrayForEnum,
   transformArrayForAnyOf,
   transformArrayForOneOf,
   transformArrayForAllOf,
   transformArray,
+
   transformNumberForEnum,
   transformNumberForAnyOf,
   transformNumberForOneOf,
   transformNumberForAllOf,
   transformNumber,
+
   transformStringForEnum,
   transformStringForAnyOf,
   transformStringForOneOf,
   transformStringForAllOf,
-  transformString
+  transformString,
+
+  transformByKey,
+  transformByIndex
 } from 'shinkansen-transmission/transmission/to-zashiki/transform-schema'
 
 describe('shinkansen-transmission/transmission/to-zashiki', () => {
@@ -115,436 +133,422 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
       .to.be.a('function')
   })
 
-  describe('`transformObjectSchemaNullForEnum`', () => {
+  describe('`transformNullByKeyForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNullForEnum)
+      expect(transformNullByKeyForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNullForAnyOf`', () => {
+  describe('`transformNullByKeyForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNullForAnyOf)
+      expect(transformNullByKeyForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNullForOneOf`', () => {
+  describe('`transformNullByKeyForOneOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNullForOneOf)
+      expect(transformNullByKeyForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNullForAllOf`', () => {
+  describe('`transformNullByKeyForAllOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNullForAllOf)
+      expect(transformNullByKeyForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNull`', () => {
+  describe('`transformNullByKey`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNull)
+      expect(transformNullByKey)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaBooleanForEnum`', () => {
+  describe('`transformBooleanByKeyForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaBooleanForEnum)
+      expect(transformBooleanByKeyForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaBooleanForAnyOf`', () => {
+  describe('`transformBooleanByKeyForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaBooleanForAnyOf)
+      expect(transformBooleanByKeyForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaBooleanForOneOf`', () => {
+  describe('`transformBooleanByKeyForOneOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaBooleanForOneOf)
+      expect(transformBooleanByKeyForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaBooleanForAllOf`', () => {
+  describe('`transformBooleanByKeyForAllOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaBooleanForAllOf)
+      expect(transformBooleanByKeyForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaBoolean`', () => {
+  describe('`transformBooleanByKey`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaBoolean)
+      expect(transformBooleanByKey)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaObjectForEnum`', () => {
+  describe('`transformObjectByKeyForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaObjectForEnum)
+      expect(transformObjectByKeyForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaObjectForAnyOf`', () => {
+  describe('`transformObjectByKeyForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaObjectForAnyOf)
+      expect(transformObjectByKeyForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaObjectForOneOf`', () => {
+  describe('`transformObjectByKeyForOneOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaObjectForOneOf)
+      expect(transformObjectByKeyForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaObjectForAllOf`', () => {
+  describe('`transformObjectByKeyForAllOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaObjectForAllOf)
+      expect(transformObjectByKeyForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaObject`', () => {
+  describe('`transformObjectByKey`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaObject)
+      expect(transformObjectByKey)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaArrayForEnum`', () => {
+  describe('`transformArrayByKeyForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaArrayForEnum)
+      expect(transformArrayByKeyForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaArrayForAnyOf`', () => {
+  describe('`transformArrayByKeyForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaArrayForAnyOf)
+      expect(transformArrayByKeyForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaArrayForOneOf`', () => {
+  describe('`transformArrayByKeyForOneOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaArrayForOneOf)
+      expect(transformArrayByKeyForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaArrayForAllOf`', () => {
+  describe('`transformArrayByKeyForAllOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaArrayForAllOf)
+      expect(transformArrayByKeyForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaArray`', () => {
+  describe('`transformArrayByKey`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaArray)
+      expect(transformArrayByKey)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNumberForEnum`', () => {
+  describe('`transformNumberByKeyForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNumberForEnum)
+      expect(transformNumberByKeyForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNumberForAnyOf`', () => {
+  describe('`transformNumberByKeyForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNumberForAnyOf)
+      expect(transformNumberByKeyForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNumberForOneOf`', () => {
+  describe('`transformNumberByKeyForOneOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNumberForOneOf)
+      expect(transformNumberByKeyForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNumberForAllOf`', () => {
+  describe('`transformNumberByKeyForAllOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNumberForAllOf)
+      expect(transformNumberByKeyForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaNumber`', () => {
+  describe('`transformNumberByKey`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaNumber)
+      expect(transformNumberByKey)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaStringForEnum`', () => {
+  describe('`transformStringByKeyForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaStringForEnum)
+      expect(transformStringByKeyForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaStringForAnyOf`', () => {
+  describe('`transformStringByKeyForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaStringForAnyOf)
+      expect(transformStringByKeyForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaStringForOneOf`', () => {
+  describe('`transformStringByKeyForOneOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaStringForOneOf)
+      expect(transformStringByKeyForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaStringForAllOf`', () => {
+  describe('`transformStringByKeyForAllOf`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaStringForAllOf)
+      expect(transformStringByKeyForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchemaString`', () => {
+  describe('`transformStringByKey`', () => {
     it('is a function', () => {
-      expect(transformObjectSchemaString)
+      expect(transformStringByKey)
         .to.be.a('function')
     })
   })
 
-  describe('`transformObjectSchema`', () => {
+  describe('`transformNullByIndexForEnum`', () => {
     it('is a function', () => {
-      expect(transformObjectSchema)
+      expect(transformNullByIndexForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNullForEnum`', () => {
+  describe('`transformNullByIndexForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNullForEnum)
+      expect(transformNullByIndexForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNullForAnyOf`', () => {
+  describe('`transformNullByIndexForOneOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNullForAnyOf)
+      expect(transformNullByIndexForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNullForOneOf`', () => {
+  describe('`transformNullByIndexForAllOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNullForOneOf)
+      expect(transformNullByIndexForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNullForAllOf`', () => {
+  describe('`transformNullByIndex`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNullForAllOf)
+      expect(transformNullByIndex)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNull`', () => {
+  describe('`transformBooleanByIndexForEnum`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNull)
+      expect(transformBooleanByIndexForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaBooleanForEnum`', () => {
+  describe('`transformBooleanByIndexForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaBooleanForEnum)
+      expect(transformBooleanByIndexForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaBooleanForAnyOf`', () => {
+  describe('`transformBooleanByIndexForOneOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaBooleanForAnyOf)
+      expect(transformBooleanByIndexForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaBooleanForOneOf`', () => {
+  describe('`transformBooleanByIndexForAllOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaBooleanForOneOf)
+      expect(transformBooleanByIndexForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaBooleanForAllOf`', () => {
+  describe('`transformBooleanByIndex`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaBooleanForAllOf)
+      expect(transformBooleanByIndex)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaBoolean`', () => {
+  describe('`transformObjectByIndexForEnum`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaBoolean)
+      expect(transformObjectByIndexForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaObjectForEnum`', () => {
+  describe('`transformObjectByIndexForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaObjectForEnum)
+      expect(transformObjectByIndexForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaObjectForAnyOf`', () => {
+  describe('`transformObjectByIndexForOneOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaObjectForAnyOf)
+      expect(transformObjectByIndexForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaObjectForOneOf`', () => {
+  describe('`transformObjectByIndexForAllOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaObjectForOneOf)
+      expect(transformObjectByIndexForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaObjectForAllOf`', () => {
+  describe('`transformObjectByIndex`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaObjectForAllOf)
+      expect(transformObjectByIndex)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaObject`', () => {
+  describe('`transformArrayByIndexForEnum`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaObject)
+      expect(transformArrayByIndexForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaArrayForEnum`', () => {
+  describe('`transformArrayByIndexForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaArrayForEnum)
+      expect(transformArrayByIndexForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaArrayForAnyOf`', () => {
+  describe('`transformArrayByIndexForOneOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaArrayForAnyOf)
+      expect(transformArrayByIndexForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaArrayForOneOf`', () => {
+  describe('`transformArrayByIndexForAllOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaArrayForOneOf)
+      expect(transformArrayByIndexForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaArrayForAllOf`', () => {
+  describe('`transformArrayByIndex`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaArrayForAllOf)
+      expect(transformArrayByIndex)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaArray`', () => {
+  describe('`transformNumberByIndexForEnum`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaArray)
+      expect(transformNumberByIndexForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNumberForEnum`', () => {
+  describe('`transformNumberByIndexForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNumberForEnum)
+      expect(transformNumberByIndexForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNumberForAnyOf`', () => {
+  describe('`transformNumberByIndexForOneOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNumberForAnyOf)
+      expect(transformNumberByIndexForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNumberForOneOf`', () => {
+  describe('`transformNumberByIndexForAllOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNumberForOneOf)
+      expect(transformNumberByIndexForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNumberForAllOf`', () => {
+  describe('`transformNumberByIndex`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNumberForAllOf)
+      expect(transformNumberByIndex)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaNumber`', () => {
+  describe('`transformStringByIndexForEnum`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaNumber)
+      expect(transformStringByIndexForEnum)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaStringForEnum`', () => {
+  describe('`transformStringByIndexForAnyOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaStringForEnum)
+      expect(transformStringByIndexForAnyOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaStringForAnyOf`', () => {
+  describe('`transformStringByIndexForOneOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaStringForAnyOf)
+      expect(transformStringByIndexForOneOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaStringForOneOf`', () => {
+  describe('`transformStringByIndexForAllOf`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaStringForOneOf)
+      expect(transformStringByIndexForAllOf)
         .to.be.a('function')
     })
   })
 
-  describe('`transformArraySchemaStringForAllOf`', () => {
+  describe('`transformStringByIndex`', () => {
     it('is a function', () => {
-      expect(transformArraySchemaStringForAllOf)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`transformArraySchemaString`', () => {
-    it('is a function', () => {
-      expect(transformArraySchemaString)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`transformArraySchema`', () => {
-    it('is a function', () => {
-      expect(transformArraySchema)
+      expect(transformStringByIndex)
         .to.be.a('function')
     })
   })
@@ -759,6 +763,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
     })
   })
 
+  describe('`transformByIndex`', () => {
+    it('is a function', () => {
+      expect(transformByIndex)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`transformByKey`', () => {
+    it('is a function', () => {
+      expect(transformByKey)
+        .to.be.a('function')
+    })
+  })
+
   /*
    *  String
    */
@@ -854,13 +872,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: 'One'
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'One'
                   },
                   elements: {
                     field: {
                       id: '#/0',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'One'
                     }
                   }
@@ -875,13 +895,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: 'Two'
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'Two'
                   },
                   elements: {
                     field: {
                       id: '#/1',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'Two'
                     }
                   }
@@ -896,13 +918,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: 'Three'
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'Three'
                   },
                   elements: {
                     field: {
                       id: '#/2',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'Three'
                     }
                   }
@@ -953,7 +977,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     minLength: 1,
                     maxLength: 9,
                     pattern: /.*/,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     field: {
@@ -962,7 +987,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       minLength: 1,
                       maxLength: 9,
                       pattern: /.*/,
-                      required: false
+                      selectedItems: [],
+                      isRequired: false
                     }
                   }
                 },
@@ -983,7 +1009,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     minLength: 1,
                     maxLength: 9,
                     pattern: /.*/,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     field: {
@@ -992,7 +1019,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       minLength: 1,
                       maxLength: 9,
                       pattern: /.*/,
-                      required: false
+                      selectedItems: [],
+                      isRequired: false
                     }
                   }
                 },
@@ -1013,7 +1041,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     minLength: 1,
                     maxLength: 9,
                     pattern: /.*/,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     field: {
@@ -1022,7 +1051,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       minLength: 1,
                       maxLength: 9,
                       pattern: /.*/,
-                      required: false
+                      selectedItems: [],
+                      isRequired: false
                     }
                   }
                 }
@@ -1199,13 +1229,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: 1
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: '1'
                   },
                   elements: {
                     field: {
                       id: '#/0',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: '1'
                     }
                   }
@@ -1220,13 +1252,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: 2
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: '2'
                   },
                   elements: {
                     field: {
                       id: '#/1',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: '2'
                     }
                   }
@@ -1241,13 +1275,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: 3
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: '3'
                   },
                   elements: {
                     field: {
                       id: '#/2',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: '3'
                     }
                   }
@@ -1323,7 +1359,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     isExclusiveMin: true,
                     isExclusiveMax: true,
                     step: 1,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     field: {
@@ -1332,7 +1369,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       min: 1,
                       max: 9,
                       step: 1,
-                      required: false
+                      selectedItems: [],
+                      isRequired: false
                     }
                   }
                 },
@@ -1357,7 +1395,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     isExclusiveMin: true,
                     isExclusiveMax: true,
                     step: 1,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     field: {
@@ -1366,7 +1405,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       min: 1,
                       max: 9,
                       step: 1,
-                      required: false
+                      selectedItems: [],
+                      isRequired: false
                     }
                   }
                 },
@@ -1391,7 +1431,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     isExclusiveMin: true,
                     isExclusiveMax: true,
                     step: 1,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     field: {
@@ -1400,7 +1441,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       min: 1,
                       max: 9,
                       step: 1,
-                      required: false
+                      selectedItems: [],
+                      isRequired: false
                     }
                   }
                 }
@@ -1563,12 +1605,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   schema: {
                     type: 'string'
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   field: {
                     id: '#/0',
-                    required: false
+                    isRequired: false
                   }
                 }
               },
@@ -1582,12 +1624,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   schema: {
                     type: 'number'
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   field: {
                     id: '#/1',
-                    required: false
+                    isRequired: false
                   }
                 }
               },
@@ -1601,12 +1643,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   schema: {
                     type: 'boolean'
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   field: {
                     id: '#/2',
-                    required: false
+                    isRequired: false
                   }
                 }
               },
@@ -1620,12 +1662,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   schema: {
                     type: 'null'
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   field: {
                     id: '#/3',
-                    required: false
+                    isRequired: false
                   }
                 }
               }
@@ -1667,12 +1709,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   schema: {
                     type: 'string'
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   field: {
                     id: '#/0',
-                    required: false
+                    isRequired: false
                   }
                 }
               }
@@ -1747,7 +1789,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ]
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   fields: [
@@ -1761,12 +1803,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         schema: {
                           type: 'string'
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         field: {
                           id: '#/0/0',
-                          required: false
+                          isRequired: false
                         }
                       }
                     },
@@ -1780,12 +1822,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         schema: {
                           type: 'number'
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         field: {
                           id: '#/0/1',
-                          required: false
+                          isRequired: false
                         }
                       }
                     },
@@ -1799,12 +1841,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         schema: {
                           type: 'boolean'
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         field: {
                           id: '#/0/2',
-                          required: false
+                          isRequired: false
                         }
                       }
                     },
@@ -1818,12 +1860,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         schema: {
                           type: 'null'
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         field: {
                           id: '#/0/3',
-                          required: false
+                          isRequired: false
                         }
                       }
                     }
@@ -1876,7 +1918,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       type: 'string'
                     }
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   fields: [
@@ -1890,12 +1932,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         schema: {
                           type: 'string'
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         field: {
                           id: '#/0/0',
-                          required: false
+                          isRequired: false
                         }
                       }
                     }
@@ -1985,7 +2027,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     ]
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   fields: [
@@ -2013,7 +2055,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             }
                           ]
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         fields: [
@@ -2027,12 +2069,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 type: 'string'
                               },
-                              required: false
+                              isRequired: false
                             },
                             elements: {
                               field: {
                                 id: '#/0/0/0',
-                                required: false
+                                isRequired: false
                               }
                             }
                           },
@@ -2046,12 +2088,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 type: 'number'
                               },
-                              required: false
+                              isRequired: false
                             },
                             elements: {
                               field: {
                                 id: '#/0/0/1',
-                                required: false
+                                isRequired: false
                               }
                             }
                           },
@@ -2065,12 +2107,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 type: 'boolean'
                               },
-                              required: false
+                              isRequired: false
                             },
                             elements: {
                               field: {
                                 id: '#/0/0/2',
-                                required: false
+                                isRequired: false
                               }
                             }
                           },
@@ -2084,12 +2126,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 type: 'null'
                               },
-                              required: false
+                              isRequired: false
                             },
                             elements: {
                               field: {
                                 id: '#/0/0/3',
-                                required: false
+                                isRequired: false
                               }
                             }
                           }
@@ -2153,7 +2195,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       }
                     }
                   },
-                  required: false
+                  isRequired: false
                 },
                 elements: {
                   fields: [
@@ -2170,7 +2212,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             type: 'string'
                           }
                         },
-                        required: false
+                        isRequired: false
                       },
                       elements: {
                         fields: [
@@ -2184,12 +2226,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 type: 'string'
                               },
-                              required: false
+                              isRequired: false
                             },
                             elements: {
                               field: {
                                 id: '#/0/0/0',
-                                required: false
+                                isRequired: false
                               }
                             }
                           }
@@ -2283,7 +2325,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: []
                     },
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2299,7 +2342,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: []
                     },
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2315,7 +2359,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: []
                     },
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2391,7 +2436,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     hasUniqueItems: true,
                     minContains: 1,
                     maxContains: 9,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2417,7 +2463,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     hasUniqueItems: true,
                     minContains: 1,
                     maxContains: 9,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2443,7 +2490,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     hasUniqueItems: true,
                     minContains: 1,
                     maxContains: 9,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2607,7 +2655,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: {}
                     },
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2623,7 +2672,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: {}
                     },
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2639,7 +2689,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: {}
                     },
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2700,7 +2751,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     },
                     minProperties: 1,
                     maxProperties: 9,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2720,7 +2772,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     },
                     minProperties: 1,
                     maxProperties: 9,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2740,7 +2793,8 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     },
                     minProperties: 1,
                     maxProperties: 9,
-                    required: false
+                    selectedItems: [],
+                    isRequired: false
                   },
                   elements: {
                     fields: []
@@ -2885,13 +2939,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: true
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'true'
                   },
                   elements: {
                     field: {
                       id: '#/0',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'true'
                     }
                   }
@@ -2906,13 +2962,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: false
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'false'
                   },
                   elements: {
                     field: {
                       id: '#/1',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'false'
                     }
                   }
@@ -2955,13 +3013,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: true
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'true'
                   },
                   elements: {
                     field: {
                       id: '#/0',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'true'
                     }
                   }
@@ -2976,13 +3036,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: false
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'false'
                   },
                   elements: {
                     field: {
                       id: '#/1',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'false'
                     }
                   }
@@ -3123,13 +3185,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     schema: {
                       const: null
                     },
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'null'
                   },
                   elements: {
                     field: {
                       id: '#/0',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'null'
                     }
                   }
@@ -3171,13 +3235,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                     },
                     parentUri: '#/',
                     uri: '#/0',
-                    required: false,
+                    selectedItems: [],
+                    isRequired: false,
                     value: 'null'
                   },
                   elements: {
                     field: {
                       id: '#/0',
-                      required: false,
+                      selectedItems: [],
+                      isRequired: false,
                       value: 'null'
                     }
                   }
@@ -3323,13 +3389,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -3344,13 +3412,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -3365,13 +3435,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -3424,13 +3496,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -3445,13 +3519,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -3466,13 +3542,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -3637,13 +3715,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -3658,13 +3738,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -3679,13 +3761,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -3738,13 +3822,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -3759,13 +3845,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -3780,13 +3868,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -3948,13 +4038,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -3969,13 +4061,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -4027,13 +4121,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -4048,13 +4144,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -4209,13 +4307,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -4230,13 +4330,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -4251,13 +4353,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -4308,13 +4412,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -4465,13 +4571,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -4486,13 +4594,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -4507,13 +4617,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -4561,13 +4673,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -4582,13 +4696,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -4603,13 +4719,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -4754,13 +4872,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -4775,13 +4895,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -4796,13 +4918,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -4850,13 +4974,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -4871,13 +4997,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -4892,13 +5020,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [2],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [2],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -4965,1299 +5095,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                   id: '#/',
                   value: '1'
                 }
-              }
-            })
-        })
-      })
-
-      describe('Transforming `object` type schemas', () => {
-        it('transforms `object` type schemas with `enum`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              },
-              two: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              }
-            }
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [0],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/one',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [0],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [1],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/two',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [1],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `enum` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              },
-              two: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [0],
-                      required: true
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/one',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [0],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [1],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/two',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [1],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `anyOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            }
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [0],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [0],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [1],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [1],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [0],
-                      required: true
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: true,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: true,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: true,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: true,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [0],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [1],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [1],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `oneOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            }
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [0],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [0],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [1],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [1],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [0],
-                      required: true
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: true,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: true,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: true,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: true,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [0],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [1],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [1],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                allOf: [
-                  {
-                    minLength: 1
-                  },
-                  {
-                    const: 'string (one)',
-                    maxLength: 100
-                  }
-                ]
-              },
-              two: {
-                type: 'string',
-                allOf: [
-                  {
-                    minLength: 1
-                  },
-                  {
-                    const: 'string (two)',
-                    maxLength: 100
-                  }
-                ]
-              }
-            }
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (one)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: '0'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: '0'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (two)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: '1'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: '1'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                allOf: [
-                  {
-                    minLength: 1
-                  },
-                  {
-                    const: 'string (one)',
-                    maxLength: 100
-                  }
-                ]
-              },
-              two: {
-                type: 'string',
-                allOf: [
-                  {
-                    minLength: 1
-                  },
-                  {
-                    const: 'string (two)',
-                    maxLength: 100
-                  }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = {
-            '#/one': '0',
-            '#/two': '1'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (one)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: true,
-                      value: '0'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: true,
-                        value: '0'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (two)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: '1'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: '1'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            }
-          }
-
-          const values = {
-            '#/one': 'string',
-            '#/two': 'string'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      required: false,
-                      value: 'string'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        required: false,
-                        value: 'string'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      required: false,
-                      value: 'string'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        required: false,
-                        value: 'string'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = {
-            '#/one': 'string',
-            '#/two': 'string'
-          }
-
-          return expect(transform(schema, values))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      required: true,
-                      value: 'string'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        required: true,
-                        value: 'string'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      required: false,
-                      value: 'string'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        required: false,
-                        value: 'string'
-                      }
-                    }
-                  }
-                ]
               }
             })
         })
@@ -6333,13 +5170,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -6354,13 +5193,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -6407,13 +5248,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -6428,13 +5271,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [1],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [1],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -6537,14 +5382,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           const schema = {
             type: 'null',
             anyOf: [
-              { const: null },
-              { const: null },
               { const: null }
             ]
           }
 
           const values = {
-            '#/': '2'
+            '#/': '0'
           }
 
           return expect(transform(schema, values))
@@ -6553,7 +5396,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 type: 'null',
                 schema,
                 uri: '#/',
-                selectedItems: [2]
+                selectedItems: [0]
               },
               elements: {
                 anyOf: {
@@ -6569,61 +5412,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [0],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
-                          value: 'null'
-                        }
-                      }
-                    },
-                    {
-                      meta: {
-                        type: 'null',
-                        item: 1,
-                        rootSchema: schema,
-                        schema: {
-                          const: null
-                        },
-                        parentUri: '#/',
-                        uri: '#/1',
-                        required: false,
-                        value: 'null'
-                      },
-                      elements: {
-                        field: {
-                          id: '#/1',
-                          required: false,
-                          value: 'null'
-                        }
-                      }
-                    },
-                    {
-                      meta: {
-                        type: 'null',
-                        item: 2,
-                        rootSchema: schema,
-                        schema: {
-                          const: null
-                        },
-                        parentUri: '#/',
-                        uri: '#/2',
-                        required: false,
-                        value: 'null'
-                      },
-                      elements: {
-                        field: {
-                          id: '#/2',
-                          required: false,
+                          selectedItems: [0],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [0]
                 }
               }
             })
@@ -6638,7 +5441,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
           }
 
           const values = {
-            '#/': '2'
+            '#/': '0'
           }
 
           return expect(transform(schema, values))
@@ -6647,7 +5450,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 type: 'null',
                 schema,
                 uri: '#/',
-                selectedItems: [2]
+                selectedItems: [0]
               },
               elements: {
                 oneOf: {
@@ -6663,19 +5466,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [0],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [0],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [0]
                 }
               }
             })
@@ -6818,13 +5623,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -6839,13 +5646,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -6860,13 +5669,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -6917,13 +5728,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -6938,13 +5751,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -6959,13 +5774,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -7120,13 +5937,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -7141,13 +5960,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -7162,13 +5983,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -7219,13 +6042,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -7240,13 +6065,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -7261,13 +6088,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -7338,1343 +6167,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 field: {
                   id: '#/'
                 }
-              }
-            })
-        })
-      })
-
-      describe('Transforming `object` type schemas', () => {
-        it('transforms `object` type schemas with `enum`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              },
-              two: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              }
-            }
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/one',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/two',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `enum` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              },
-              two: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: true
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/one',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/two',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `anyOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            }
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: true
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: true,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: true,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: true,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: true,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `oneOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            }
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: true
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: true,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: true,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: true,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: true,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (one)',
-                    maxLength: 100
-                  }
-                ]
-              },
-              two: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (two)',
-                    maxLength: 100
-                  }
-                ]
-              }
-            }
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (one)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: 'string (one)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: 'string (one)'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (two)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: 'string (two)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: 'string (two)'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (one)',
-                    maxLength: 100
-                  }
-                ]
-              },
-              two: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (two)',
-                    maxLength: 100
-                  }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (one)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: true,
-                      value: 'string (one)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: true,
-                        value: 'string (one)'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (two)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: 'string (two)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: 'string (two)'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            }
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      required: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      required: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      required: true
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      required: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        required: false
-                      }
-                    }
-                  }
-                ]
               }
             })
         })
@@ -8756,13 +6248,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -8777,13 +6271,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -8833,13 +6329,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -8854,13 +6352,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -9005,13 +6505,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -9026,13 +6528,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -9047,13 +6551,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -9102,13 +6608,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -9244,13 +6752,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -9265,13 +6775,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -9286,13 +6798,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -9336,13 +6850,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (1)'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (1)'
                         }
                       }
@@ -9357,13 +6873,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (2)'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (2)'
                         }
                       }
@@ -9378,13 +6896,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'string (3)'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'string (3)'
                         }
                       }
@@ -9511,13 +7031,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -9532,13 +7054,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -9553,13 +7077,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -9603,13 +7129,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '1'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '1'
                         }
                       }
@@ -9624,13 +7152,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '2'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '2'
                         }
                       }
@@ -9645,13 +7175,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: '3'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: '3'
                         }
                       }
@@ -9708,1233 +7240,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                 field: {
                   id: '#/'
                 }
-              }
-            })
-        })
-      })
-
-      describe('Transforming `object` type schemas', () => {
-        it('transforms `object` type schemas with `enum`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              },
-              two: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              }
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/one',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/two',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `enum` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              },
-              two: {
-                type: 'string',
-                enum: [
-                  'string (1)',
-                  'string (2)'
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: true
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/one',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        enum: [
-                          'string (1)',
-                          'string (2)'
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      enum: {
-                        id: '#/two',
-                        items: [
-                          'string (1)',
-                          'string (2)'
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `anyOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                anyOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: true
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: true,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: true,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: true,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: true,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        anyOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      anyOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `oneOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              },
-              two: {
-                type: 'string',
-                oneOf: [
-                  { const: 'string (1)' },
-                  { const: 'string (2)' }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      selectedItems: [],
-                      required: true
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/one',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/0',
-                              required: true,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/0',
-                                required: true,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/one',
-                              uri: '#/one/1',
-                              required: true,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/one/1',
-                                required: true,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        oneOf: [
-                          { const: 'string (1)' },
-                          { const: 'string (2)' }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      selectedItems: [],
-                      required: false
-                    },
-                    elements: {
-                      oneOf: {
-                        id: '#/two',
-                        items: [
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 0,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (1)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/0',
-                              required: false,
-                              value: 'string (1)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/0',
-                                required: false,
-                                value: 'string (1)'
-                              }
-                            }
-                          },
-                          {
-                            meta: {
-                              type: 'string',
-                              item: 1,
-                              rootSchema: schema,
-                              schema: {
-                                const: 'string (2)'
-                              },
-                              parentUri: '#/two',
-                              uri: '#/two/1',
-                              required: false,
-                              value: 'string (2)'
-                            },
-                            elements: {
-                              field: {
-                                id: '#/two/1',
-                                required: false,
-                                value: 'string (2)'
-                              }
-                            }
-                          }
-                        ],
-                        selectedItems: [],
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (one)',
-                    maxLength: 100
-                  }
-                ]
-              },
-              two: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (two)',
-                    maxLength: 100
-                  }
-                ]
-              }
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (one)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: 'string (one)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: 'string (one)'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (two)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: 'string (two)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: 'string (two)'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas with `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (one)',
-                    maxLength: 100
-                  }
-                ]
-              },
-              two: {
-                type: 'string',
-                allOf: [
-                  { minLength: 1 },
-                  {
-                    const: 'string (two)',
-                    maxLength: 100
-                  }
-                ]
-              }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (one)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: true,
-                      value: 'string (one)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: true,
-                        value: 'string (one)'
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string',
-                        allOf: [
-                          { minLength: 1 },
-                          {
-                            const: 'string (two)',
-                            maxLength: 100
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      minLength: 1,
-                      maxLength: 100,
-                      required: false,
-                      value: 'string (two)'
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        minLength: 1,
-                        maxLength: 100,
-                        required: false,
-                        value: 'string (two)'
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      required: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        required: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      required: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        required: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'object',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      required: true
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        required: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: schema,
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      required: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        required: false
-                      }
-                    }
-                  }
-                ]
               }
             })
         })
@@ -11002,13 +7307,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -11023,13 +7330,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -11072,13 +7381,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'true'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'true'
                         }
                       }
@@ -11093,13 +7404,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'false'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'false'
                         }
                       }
@@ -11216,13 +7529,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -11237,13 +7552,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/1',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/1',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -11258,13 +7575,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/2',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/2',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }
@@ -11306,13 +7625,15 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         },
                         parentUri: '#/',
                         uri: '#/0',
-                        required: false,
+                        selectedItems: [],
+                        isRequired: false,
                         value: 'null'
                       },
                       elements: {
                         field: {
                           id: '#/0',
-                          required: false,
+                          selectedItems: [],
+                          isRequired: false,
                           value: 'null'
                         }
                       }

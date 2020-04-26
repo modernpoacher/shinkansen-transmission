@@ -308,6 +308,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             schema: {
                               type: 'object'
                             },
+                            selectedItems: [],
                             required: false
                           },
                           elements: {
@@ -386,6 +387,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             schema: {
                               type: 'object'
                             },
+                            selectedItems: [],
                             required: false
                           },
                           elements: {
@@ -584,6 +586,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             schema: {
                               type: 'object'
                             },
+                            selectedItems: [],
                             required: false
                           },
                           elements: {
@@ -662,6 +665,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             schema: {
                               type: 'object'
                             },
+                            selectedItems: [],
                             required: false
                           },
                           elements: {
