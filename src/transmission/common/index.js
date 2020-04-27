@@ -224,8 +224,6 @@ export const transformValue = (schema) => (
 )
 
 export function getMetaProps (params = {}, uri = '#') {
-  log('getMetaProps')
-
   let meta
   if (Reflect.has(params, uri)) {
     ({
@@ -247,8 +245,6 @@ export function getMetaDefaultValue (schema = {}) {
 }
 
 export function hasMetaValue (values = {}, uri = '#', schema = {}) {
-  log('hasMetaValue') // , values, uri, schema)
-
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -265,8 +261,6 @@ export function hasMetaValue (values = {}, uri = '#', schema = {}) {
 }
 
 export function getMetaValue (values = {}, uri = '#', schema = {}) {
-  log('getMetaValue') // , values, uri, schema)
-
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -287,8 +281,6 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
 }
 
 export function hasValue (values = {}, uri = '#', schema = {}) {
-  log('hasValue') // , values, uri, schema)
-
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -305,8 +297,6 @@ export function hasValue (values = {}, uri = '#', schema = {}) {
 }
 
 export function getValue (values = {}, uri = '#', schema = {}) {
-  log('getValue') // , values, uri, schema)
-
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -325,8 +315,6 @@ export function getValue (values = {}, uri = '#', schema = {}) {
 }
 
 export function getValueForEnum (v, { enum: items = [] } = {}) {
-  log('getValueForEnum') // , values, parentUri, uri, schema)
-
   if (Reflect.has(items, v)) {
     const enumValue = Reflect.get(items, v)
 
@@ -338,8 +326,6 @@ export function getValueForEnum (v, { enum: items = [] } = {}) {
  *  Use `index` `item` `arrayIndex`
  */
 export function getIndexForEnum (values = {}, parentUri = '#', uri = '#', schema = {}) {
-  log('getIndexForEnum') // , values, parentUri, uri, schema)
-
   if (/\/\d+$/.test(uri)) {
     /*
      *  Get the index
@@ -351,8 +337,6 @@ export function getIndexForEnum (values = {}, parentUri = '#', uri = '#', schema
 }
 
 export function getValueForAnyOf (v, { anyOf: items = [] } = {}) {
-  log('getValueForAnyOf') // , values, parentUri, uri, schema)
-
   if (Reflect.has(items, v)) {
     const anyOf = Reflect.get(items, v)
 
@@ -368,8 +352,6 @@ export function getValueForAnyOf (v, { anyOf: items = [] } = {}) {
  *  Use `index` `item` `arrayIndex`
  */
 export function getIndexForAnyOf (values = {}, parentUri = '#', uri = '#', schema = {}) {
-  log('getIndexForAnyOf') // , values, parentUri, uri, schema)
-
   if (/\/\d+$/.test(uri)) {
     /*
      *  Get the index
@@ -381,8 +363,6 @@ export function getIndexForAnyOf (values = {}, parentUri = '#', uri = '#', schem
 }
 
 export function getValueForOneOf (v, { oneOf: items = [] } = {}) {
-  log('getValueForOneOf') // , values, parentUri, uri, schema)
-
   if (Reflect.has(items, v)) {
     const oneOf = Reflect.get(items, v)
 
@@ -398,8 +378,6 @@ export function getValueForOneOf (v, { oneOf: items = [] } = {}) {
  *  Use `index` `item` `arrayIndex`
  */
 export function getIndexForOneOf (values = {}, parentUri = '#', uri = '#', schema = {}) {
-  log('getIndexForOneOf') // , values, parentUri, uri, schema)
-
   if (/\/\d+$/.test(uri)) {
     /*
      *  Get the index
@@ -448,8 +426,6 @@ export function getElementsDescriptionProps (params = {}, uri = '#') {
 }
 
 export function getElementsFieldsProps (params = {}, uri = '#') {
-  log('getElementsFields')
-
   let fields
   if (Reflect.has(params, uri)) {
     ({
@@ -528,8 +504,6 @@ export function getElementsFieldProps (params = {}, uri = '#') {
 }
 
 export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
-  // log('getElementsFieldValue', values, uri, schema)
-
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
