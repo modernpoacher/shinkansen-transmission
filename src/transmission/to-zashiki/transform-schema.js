@@ -106,6 +106,8 @@ export function mapTransformByKey (rootSchema, values, { required = [], ...param
   log('mapTransformByKey')
 
   return function map ([key, schema]) {
+    log(key, required)
+
     return getTransformByKey(schema, rootSchema, values, { ...params, isRequired: required.includes(key), key })
 
     /*
@@ -1977,8 +1979,6 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
 
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
-
-  log({ uri, parentUri })
 
   const {
     selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
@@ -5145,8 +5145,6 @@ export function getTransformByKey (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, key)
 
-  log({ parentUri, uri, key, isRequired })
-
   return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), isRequired } } }, key }) // { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, schemaUri), isRequired } } }, key })
 }
 
@@ -5599,7 +5597,7 @@ export function getTransformByKeyForAnyOf (schema, rootSchema, values, { parentU
 }
 
 export function getTransformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForOneOf')
+  log('getTransformByKeyForOneOf', { key, isRequired })
 
   /*
    *  Get selected items for the uri

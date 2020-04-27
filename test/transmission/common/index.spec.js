@@ -3,7 +3,7 @@ import debug from 'debug'
 import { expect } from 'chai'
 
 import {
-  getSelectedItems,
+  // getSelectedItems,
   getMetaProps,
   getMetaDefaultValue,
   getMetaValue,
@@ -62,12 +62,14 @@ describe('shinkansen-transmission/transmission/common', () => {
     if (DEBUG) debug.enable(DEBUG)
   })
 
+  /*
   describe('`getSelectedItems`', () => {
     it('is a function', () => {
       expect(getSelectedItems)
         .to.be.a('function')
     })
   })
+  */
 
   describe('`getMetaProps`', () => {
     it('is a function', () => {
@@ -356,6 +358,7 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
+  /*
   describe('`getSelectedItems()`', () => {
     describe('Values has a field for the uri', () => {
       describe('The field is an array', () => {
@@ -380,6 +383,7 @@ describe('shinkansen-transmission/transmission/common', () => {
       })
     })
   })
+  */
 
   describe('`getMetaProps()`', () => {
     describe('Params has a field for the uri', () => {

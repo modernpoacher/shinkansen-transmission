@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
-describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
+describe('shinkansen-transmission/transmission/to-zashiki', () => {
   before(() => {
     const {
       env: {
@@ -1806,10 +1806,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `number` type)', () => {
@@ -2749,12 +2745,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `object` type)', () => {
@@ -3824,12 +3814,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
@@ -4705,13 +4689,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [0],
-                                    value: 'null' // ?
+                                    value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [0],
-                                      value: 'null' // ?
+                                      value: 'null'
                                     }
                                   }
                                 }
@@ -4820,13 +4804,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [0],
-                                    value: 'null' // ?
+                                    value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [0],
-                                      value: 'null' // ?
+                                      value: 'null'
                                     }
                                   }
                                 }
@@ -4844,10 +4828,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" null has not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
@@ -5878,10 +5858,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `number` type)', () => {
@@ -6805,12 +6781,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `object` type)', () => {
@@ -7864,12 +7834,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
@@ -8828,13 +8792,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [0],
-                                    value: 'null' // ?
+                                    value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [0],
-                                      value: 'null' // ?
+                                      value: 'null'
                                     }
                                   }
                                 }
@@ -9347,8 +9311,8 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                       const: 3
                                     },
                                     parentUri: '#/0/two',
-                                    selectedItems: [1],
                                     uri: '#/0/two/2',
+                                    selectedItems: [1],
                                     value: '3'
                                   },
                                   elements: {
@@ -9649,10 +9613,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Parent schema is object and
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `object` type)', () => {
@@ -10541,12 +10501,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object and
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `object` type with `required`)', () => {
@@ -11758,6 +11712,10 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
               }
             })
         })
+
+        /*
+         *  Number
+         */
 
         /*
          *  Gets selected items
@@ -13111,10 +13069,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `number` type)', () => {
@@ -14052,12 +14006,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object and
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `object` type)', () => {
@@ -14771,8 +14719,8 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                             const: 3
                                           },
                                           parentUri: '#/0/0/two',
-                                          selectedItems: [1],
                                           uri: '#/0/0/two/2',
+                                          selectedItems: [1],
                                           value: '3'
                                         },
                                         elements: {
@@ -15005,8 +14953,8 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                             const: 'string (3)'
                                           },
                                           parentUri: '#/0/0/one',
-                                          selectedItems: [1],
                                           uri: '#/0/0/one/2',
+                                          selectedItems: [1],
                                           value: 'string (3)'
                                         },
                                         elements: {
@@ -15127,12 +15075,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object and
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
@@ -15996,13 +15938,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [0],
-                                    value: 'null' // ?
+                                    value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [0],
-                                      value: 'null' // ?
+                                      value: 'null'
                                     }
                                   }
                                 }
@@ -17147,10 +17089,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `number` type)', () => {
@@ -17872,13 +17810,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [0],
-                                    value: 'null' // ?
+                                    value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [0],
-                                      value: 'null' // ?
+                                      value: 'null'
                                     }
                                   }
                                 }
@@ -17981,13 +17919,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [0],
-                                    value: 'null' // ?
+                                    value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [0],
-                                      value: 'null' // ?
+                                      value: 'null'
                                     }
                                   }
                                 }
@@ -18093,7 +18031,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Gets selected items
          */
-        it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `object` type)', () => {
+        it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
             items: {
@@ -18286,7 +18224,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Gets selected items
          */
-        it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `object` type)', () => {
+        it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
             items: {
@@ -18475,8 +18413,8 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                             const: 'string (3)'
                                           },
                                           parentUri: '#/0/0/one',
-                                          selectedItems: [1],
                                           uri: '#/0/0/one/2',
+                                          selectedItems: [1],
                                           value: 'string (3)'
                                         },
                                         elements: {
@@ -18567,8 +18505,8 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                             const: 3
                                           },
                                           parentUri: '#/0/0/two',
-                                          selectedItems: [1],
                                           uri: '#/0/0/two/2',
+                                          selectedItems: [1],
                                           value: '3'
                                         },
                                         elements: {
@@ -18599,7 +18537,7 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Gets selected items
          */
-        it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `object` type)', () => {
+        it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
             items: {
@@ -18880,8 +18818,8 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                                             const: 3
                                           },
                                           parentUri: '#/0/0/two',
-                                          selectedItems: [1],
                                           uri: '#/0/0/two/2',
+                                          selectedItems: [1],
                                           value: '3'
                                         },
                                         elements: {
@@ -18910,12 +18848,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `object` type)', () => {
@@ -19969,12 +19901,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
@@ -20894,12 +20820,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `object` type)', () => {
@@ -21780,12 +21700,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `object` type with `required`)', () => {
@@ -22420,13 +22334,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                               parentUri: '#/0',
                               uri: '#/0/0',
                               selectedItems: [0],
-                              value: 'null' // ?
+                              value: 'null'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
                                 selectedItems: [0],
-                                value: 'null' // ?
+                                value: 'null'
                               }
                             }
                           }
@@ -22502,13 +22416,13 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
                               parentUri: '#/0',
                               uri: '#/0/0',
                               selectedItems: [0],
-                              value: 'null' // ?
+                              value: 'null'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
                                 selectedItems: [0],
-                                value: 'null' // ?
+                                value: 'null'
                               }
                             }
                           }
@@ -22787,10 +22701,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `number` type)', () => {
@@ -22874,10 +22784,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" boolean is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
@@ -22961,10 +22867,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" null is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
@@ -23048,12 +22950,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `object` type)', () => {
@@ -23201,12 +23097,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
@@ -23442,10 +23332,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `number` type)', () => {
@@ -23683,12 +23569,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `object` type)', () => {
@@ -23832,12 +23712,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
@@ -23994,12 +23868,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `object` type)', () => {
@@ -24115,12 +23983,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `object` type with `required`)', () => {
@@ -24478,10 +24340,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
-         *
-         *  And parent is array but "allOf" string has no look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `string` type)', () => {
@@ -24563,10 +24421,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `number` type)', () => {
@@ -24648,10 +24502,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" boolean is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
@@ -24733,10 +24583,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" null is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `null` type)', () => {
@@ -24818,12 +24664,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `object` type)', () => {
@@ -24971,12 +24811,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
@@ -25210,10 +25044,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is array but "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `number` type)', () => {
@@ -25445,12 +25275,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `object` type)', () => {
@@ -25594,12 +25418,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
@@ -25756,12 +25574,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
          */
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type)', () => {
@@ -25875,12 +25687,6 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
-         *  Root schema is array
-         *
-         *  Parent schema is object but
-         *    - "allOf" string has no look-up
-         *    - "allOf" number is not look-up
-         *
          *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type with `required`)', () => {
@@ -25998,6 +25804,10 @@ describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
               }
             })
         })
+
+        /*
+         *  Boolean
+         */
 
         /*
          *  Does not get selected items

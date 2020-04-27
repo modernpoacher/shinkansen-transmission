@@ -21,6 +21,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  String
          */
+
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -60,8 +64,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -71,8 +74,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           'string (2)',
                           'string (3)'
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -81,6 +83,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -120,8 +125,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -137,13 +141,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (1)'
                               }
                             }
@@ -158,13 +162,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (2)'
                               }
                             }
@@ -179,20 +183,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -201,6 +204,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -240,8 +246,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -257,13 +262,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (1)'
                               }
                             }
@@ -278,13 +283,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (2)'
                               }
                             }
@@ -299,20 +304,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -321,6 +325,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -366,7 +373,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       minLength: 1,
                       maxLength: 100,
-                      isRequired: false,
                       value: 'string'
                     },
                     elements: {
@@ -374,7 +380,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         minLength: 1,
                         maxLength: 100,
-                        isRequired: false,
                         value: 'string'
                       }
                     }
@@ -386,6 +391,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Number
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -426,8 +435,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -437,8 +445,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           2,
                           3
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -447,6 +454,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -486,8 +496,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -503,13 +512,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '1'
                               }
                             }
@@ -524,13 +533,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '2'
                               }
                             }
@@ -545,20 +554,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '3'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -567,6 +575,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -606,8 +617,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -623,13 +633,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '1'
                               }
                             }
@@ -644,13 +654,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '2'
                               }
                             }
@@ -665,20 +675,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '3'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -687,6 +696,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -732,7 +744,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       min: 1,
                       max: 3,
-                      isRequired: false,
                       value: '2'
                     },
                     elements: {
@@ -740,7 +751,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         min: 1,
                         max: 3,
-                        isRequired: false,
                         value: '2'
                       }
                     }
@@ -752,6 +762,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Array
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -801,8 +815,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -821,8 +834,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -832,8 +844,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (2)',
                                 'string (3)'
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -845,6 +856,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -893,8 +907,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -913,8 +926,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -930,13 +942,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -951,13 +963,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -972,20 +984,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -997,6 +1008,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -1045,8 +1059,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -1065,8 +1078,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -1082,13 +1094,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -1103,13 +1115,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -1124,20 +1136,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -1149,6 +1160,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -1201,8 +1215,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -1225,7 +1238,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -1233,7 +1245,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -1246,6 +1257,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -1294,8 +1308,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -1314,8 +1327,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -1325,8 +1337,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 2,
                                 3
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -1338,6 +1349,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -1386,8 +1400,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -1406,8 +1419,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -1423,13 +1435,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -1444,13 +1456,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -1465,20 +1477,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -1490,6 +1501,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -1538,8 +1552,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -1558,8 +1571,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -1575,13 +1587,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -1596,13 +1608,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -1617,20 +1629,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -1642,6 +1653,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -1694,8 +1708,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -1718,7 +1731,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -1726,7 +1738,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -1739,804 +1750,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'boolean',
-                    enum: [
-                      true,
-                      false
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            enum: [
-                              true,
-                              false
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              enum: [
-                                true,
-                                false
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            enum: {
-                              id: '#/0/0',
-                              items: [
-                                true,
-                                false
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'boolean',
-                    anyOf: [
-                      { const: true },
-                      { const: false }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            anyOf: [
-                              { const: true },
-                              { const: false }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              anyOf: [
-                                { const: true },
-                                { const: false }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            anyOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: true
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
-                                    isRequired: false,
-                                    value: 'true'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/0',
-                                      isRequired: false,
-                                      value: 'true'
-                                    }
-                                  }
-                                },
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 1,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: false
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/1',
-                                    isRequired: false,
-                                    value: 'false'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/1',
-                                      isRequired: false,
-                                      value: 'false'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'boolean',
-                    oneOf: [
-                      { const: true },
-                      { const: false }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            oneOf: [
-                              { const: true },
-                              { const: false }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              oneOf: [
-                                { const: true },
-                                { const: false }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            oneOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: true
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
-                                    isRequired: false,
-                                    value: 'true'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/0',
-                                      isRequired: false,
-                                      value: 'true'
-                                    }
-                                  }
-                                },
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 1,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: false
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/1',
-                                    isRequired: false,
-                                    value: 'false'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/1',
-                                      isRequired: false,
-                                      value: 'false'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'boolean',
-                    allOf: [
-                      { const: true }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            allOf: [
-                              { const: true }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              allOf: [
-                                { const: true }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false,
-                            value: 'true'
-                          },
-                          elements: {
-                            field: {
-                              id: '#/0/0',
-                              isRequired: false,
-                              value: 'true'
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'null',
-                    enum: [
-                      null
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            enum: [
-                              null
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              enum: [
-                                null
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            enum: {
-                              id: '#/0/0',
-                              items: [
-                                null
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'null',
-                    anyOf: [
-                      { const: null }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            anyOf: [
-                              { const: null }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              anyOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            anyOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'null',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: null
-                                    },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
-                                    value: 'null'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
-                                      value: 'null'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'null',
-                    oneOf: [
-                      { const: null }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            oneOf: [
-                              { const: null }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              oneOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            oneOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'null',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: null
-                                    },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
-                                    value: 'null'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
-                                      value: 'null'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: [
-                  {
-                    type: 'null',
-                    allOf: [
-                      { const: null }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            allOf: [
-                              { const: null }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              allOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false,
-                            value: 'null'
-                          },
-                          elements: {
-                            field: {
-                              id: '#/0/0',
-                              isRequired: false,
-                              value: 'null'
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -2611,8 +1827,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -2643,8 +1858,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -2721,6 +1935,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -2795,8 +2012,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -2827,8 +2043,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -2864,13 +2079,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -2885,13 +2100,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -2906,13 +2121,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -2955,13 +2170,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -2976,13 +2191,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -2997,13 +2212,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -3025,6 +2240,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -3099,8 +2317,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -3131,8 +2348,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -3168,13 +2384,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -3189,13 +2405,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -3210,13 +2426,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -3259,13 +2475,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -3280,13 +2496,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -3301,13 +2517,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -3329,6 +2545,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -3411,8 +2630,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -3447,8 +2665,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -3527,6 +2744,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -3607,8 +2827,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -3642,8 +2861,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -3720,6 +2938,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -3800,8 +3021,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -3835,8 +3055,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -3872,13 +3091,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -3893,13 +3112,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -3914,13 +3133,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -3963,13 +3182,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -3984,13 +3203,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -4005,13 +3224,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -4033,6 +3252,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -4113,8 +3335,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -4148,8 +3369,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -4185,13 +3405,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -4206,13 +3426,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -4227,13 +3447,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -4276,13 +3496,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -4297,13 +3517,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -4317,14 +3537,14 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                             const: 3
                                           },
                                           parentUri: '#/0/0/two',
+                                          selectedItems: [],
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -4346,6 +3566,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -4434,8 +3657,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -4473,8 +3695,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -4553,6 +3774,807 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    enum: [
+                      true,
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            enum: [
+                              true,
+                              false
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              enum: [
+                                true,
+                                false
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            enum: {
+                              id: '#/0/0',
+                              items: [
+                                true,
+                                false
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    anyOf: [
+                      { const: true },
+                      { const: false }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            anyOf: [
+                              { const: true },
+                              { const: false }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              anyOf: [
+                                { const: true },
+                                { const: false }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            anyOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: true
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'true'
+                                    }
+                                  }
+                                },
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 1,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: false
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/1',
+                                      selectedItems: [],
+                                      value: 'false'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    oneOf: [
+                      { const: true },
+                      { const: false }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            oneOf: [
+                              { const: true },
+                              { const: false }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              oneOf: [
+                                { const: true },
+                                { const: false }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            oneOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: true
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'true'
+                                    }
+                                  }
+                                },
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 1,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: false
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/1',
+                                      selectedItems: [],
+                                      value: 'false'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'boolean',
+                    allOf: [
+                      { const: true }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            allOf: [
+                              { const: true }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              allOf: [
+                                { const: true }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            value: 'true'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/0/0',
+                              value: 'true'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    enum: [
+                      null
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            enum: [
+                              null
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              enum: [
+                                null
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            enum: {
+                              id: '#/0/0',
+                              items: [
+                                null
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    anyOf: [
+                      { const: null }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            anyOf: [
+                              { const: null }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              anyOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            anyOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'null',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: null
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'null'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    oneOf: [
+                      { const: null }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            oneOf: [
+                              { const: null }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              oneOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            oneOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'null',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: null
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'null'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: [
+                  {
+                    type: 'null',
+                    allOf: [
+                      { const: null }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            allOf: [
+                              { const: null }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              allOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            value: 'null'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/0/0',
+                              value: 'null'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -4597,8 +4619,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -4617,8 +4638,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -4628,8 +4648,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (2)',
                                 'string (3)'
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -4641,6 +4660,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -4685,8 +4707,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -4705,8 +4726,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -4722,13 +4742,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -4743,13 +4763,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -4764,20 +4784,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -4789,6 +4808,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -4833,8 +4855,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -4853,8 +4874,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -4870,13 +4890,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -4891,13 +4911,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -4912,20 +4932,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -4937,6 +4956,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -4985,8 +5007,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -5009,7 +5030,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -5017,7 +5037,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -5030,6 +5049,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -5074,8 +5096,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -5094,8 +5115,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -5105,8 +5125,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 2,
                                 3
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -5118,6 +5137,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -5162,8 +5184,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -5182,8 +5203,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -5199,13 +5219,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -5220,13 +5240,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -5241,20 +5261,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -5266,6 +5285,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -5310,8 +5332,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -5330,8 +5351,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -5347,13 +5367,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -5368,13 +5388,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -5389,20 +5409,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -5414,6 +5433,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -5462,8 +5484,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -5486,7 +5507,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -5494,7 +5514,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -5507,772 +5526,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'boolean',
-                  enum: [
-                    true,
-                    false
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'boolean',
-                          enum: [
-                            true,
-                            false
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              enum: [
-                                true,
-                                false
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            enum: {
-                              id: '#/0/0',
-                              items: [
-                                true,
-                                false
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'boolean',
-                  anyOf: [
-                    { const: true },
-                    { const: false }
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'boolean',
-                          anyOf: [
-                            { const: true },
-                            { const: false }
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              anyOf: [
-                                { const: true },
-                                { const: false }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            anyOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: true
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
-                                    isRequired: false,
-                                    value: 'true'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/0',
-                                      isRequired: false,
-                                      value: 'true'
-                                    }
-                                  }
-                                },
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 1,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: false
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/1',
-                                    isRequired: false,
-                                    value: 'false'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/1',
-                                      isRequired: false,
-                                      value: 'false'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'boolean',
-                  oneOf: [
-                    { const: true },
-                    { const: false }
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'boolean',
-                          oneOf: [
-                            { const: true },
-                            { const: false }
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              oneOf: [
-                                { const: true },
-                                { const: false }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            oneOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: true
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
-                                    isRequired: false,
-                                    value: 'true'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/0',
-                                      isRequired: false,
-                                      value: 'true'
-                                    }
-                                  }
-                                },
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 1,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: false
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/1',
-                                    isRequired: false,
-                                    value: 'false'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/1',
-                                      isRequired: false,
-                                      value: 'false'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'boolean',
-                  allOf: [
-                    { const: true }
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'boolean',
-                          allOf: [
-                            { const: true }
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              allOf: [
-                                { const: true }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false,
-                            value: 'true'
-                          },
-                          elements: {
-                            field: {
-                              id: '#/0/0',
-                              isRequired: false,
-                              value: 'true'
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'null',
-                  enum: [
-                    null
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'null',
-                          enum: [
-                            null
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              enum: [
-                                null
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            enum: {
-                              id: '#/0/0',
-                              items: [
-                                null
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'null',
-                  anyOf: [
-                    { const: null }
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'null',
-                          anyOf: [
-                            { const: null }
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              anyOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            anyOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'null',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: null
-                                    },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
-                                    value: 'null'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
-                                      value: 'null'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'null',
-                  oneOf: [
-                    { const: null }
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'null',
-                          oneOf: [
-                            { const: null }
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              oneOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            oneOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'null',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: null
-                                    },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
-                                    value: 'null'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
-                                      value: 'null'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: [
-              {
-                type: 'array',
-                items: {
-                  type: 'null',
-                  allOf: [
-                    { const: null }
-                  ]
-                }
-              }
-            ]
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: {
-                          type: 'null',
-                          allOf: [
-                            { const: null }
-                          ]
-                        }
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              allOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false,
-                            value: 'null'
-                          },
-                          elements: {
-                            field: {
-                              id: '#/0/0',
-                              isRequired: false,
-                              value: 'null'
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -6343,8 +5599,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -6375,8 +5630,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -6453,6 +5707,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -6523,8 +5780,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -6555,8 +5811,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -6592,13 +5847,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -6613,13 +5868,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -6634,13 +5889,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -6683,13 +5938,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -6704,13 +5959,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -6725,13 +5980,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -6753,6 +6008,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -6823,8 +6081,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -6855,8 +6112,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -6892,13 +6148,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -6913,13 +6169,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -6934,13 +6190,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -6983,13 +6239,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -7004,13 +6260,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -7025,13 +6281,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -7053,6 +6309,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -7131,8 +6390,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -7167,8 +6425,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -7247,6 +6504,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -7323,8 +6583,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -7358,8 +6617,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -7436,6 +6694,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -7512,8 +6773,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -7547,8 +6807,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -7584,13 +6843,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -7605,13 +6864,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -7626,13 +6885,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -7675,13 +6934,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -7696,13 +6955,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -7717,13 +6976,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -7745,6 +7004,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -7821,8 +7083,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -7856,8 +7117,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -7893,13 +7153,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -7914,13 +7174,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -7935,13 +7195,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -7984,13 +7244,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -8005,13 +7265,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -8026,13 +7286,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -8054,6 +7314,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -8138,8 +7401,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -8177,8 +7439,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -8258,7 +7519,777 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         })
 
         /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'boolean',
+                  enum: [
+                    true,
+                    false
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'boolean',
+                          enum: [
+                            true,
+                            false
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              enum: [
+                                true,
+                                false
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            enum: {
+                              id: '#/0/0',
+                              items: [
+                                true,
+                                false
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'boolean',
+                  anyOf: [
+                    { const: true },
+                    { const: false }
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'boolean',
+                          anyOf: [
+                            { const: true },
+                            { const: false }
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              anyOf: [
+                                { const: true },
+                                { const: false }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            anyOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: true
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'true'
+                                    }
+                                  }
+                                },
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 1,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: false
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/1',
+                                      selectedItems: [],
+                                      value: 'false'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'boolean',
+                  oneOf: [
+                    { const: true },
+                    { const: false }
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'boolean',
+                          oneOf: [
+                            { const: true },
+                            { const: false }
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              oneOf: [
+                                { const: true },
+                                { const: false }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            oneOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: true
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'true'
+                                    }
+                                  }
+                                },
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 1,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: false
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/1',
+                                      selectedItems: [],
+                                      value: 'false'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'boolean',
+                  allOf: [
+                    { const: true }
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'boolean',
+                          allOf: [
+                            { const: true }
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              allOf: [
+                                { const: true }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            value: 'true'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/0/0',
+                              value: 'true'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `enum` (`items` is an array and `items` is an object of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'null',
+                  enum: [
+                    null
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'null',
+                          enum: [
+                            null
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              enum: [
+                                null
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            enum: {
+                              id: '#/0/0',
+                              items: [
+                                null
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `anyOf` (`items` is an array and `items` is an object of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'null',
+                  anyOf: [
+                    { const: null }
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'null',
+                          anyOf: [
+                            { const: null }
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              anyOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            anyOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'null',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: null
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'null'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `oneOf` (`items` is an array and `items` is an object of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'null',
+                  oneOf: [
+                    { const: null }
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'null',
+                          oneOf: [
+                            { const: null }
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              oneOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            oneOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'null',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: null
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'null'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas with `allOf` (`items` is an array and `items` is an object of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: [
+              {
+                type: 'array',
+                items: {
+                  type: 'null',
+                  allOf: [
+                    { const: null }
+                  ]
+                }
+              }
+            ]
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: {
+                          type: 'null',
+                          allOf: [
+                            { const: null }
+                          ]
+                        }
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              allOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            value: 'null'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/0/0',
+                              value: 'null'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
          *  Object
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `object` type)', () => {
           const schema = {
@@ -8324,8 +8355,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -8399,6 +8429,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -8463,8 +8496,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -8500,13 +8532,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -8521,13 +8553,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -8542,13 +8574,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -8591,13 +8623,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -8612,13 +8644,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -8633,13 +8665,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -8658,6 +8690,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -8722,8 +8757,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -8759,13 +8793,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -8780,13 +8814,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -8801,13 +8835,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -8850,13 +8884,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -8871,13 +8905,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -8892,13 +8926,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -8917,6 +8951,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -8989,8 +9026,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -9066,6 +9102,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -9136,8 +9175,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -9211,6 +9249,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -9281,8 +9322,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -9318,13 +9358,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -9339,13 +9379,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -9360,13 +9400,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -9409,13 +9449,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -9430,13 +9470,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -9451,13 +9491,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -9476,6 +9516,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -9546,8 +9589,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -9583,13 +9625,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -9604,13 +9646,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -9625,13 +9667,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -9674,13 +9716,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -9695,13 +9737,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -9716,13 +9758,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -9741,6 +9783,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -9819,8 +9864,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -9899,6 +9943,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Boolean
          */
+
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -9936,8 +9984,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -9946,8 +9993,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           true,
                           false
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -9956,6 +10002,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -9993,8 +10042,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -10010,13 +10058,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'true'
                               }
                             }
@@ -10031,20 +10079,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'false'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10053,6 +10100,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -10090,8 +10140,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -10107,13 +10156,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'true'
                               }
                             }
@@ -10128,20 +10177,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'false'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10150,6 +10198,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -10185,13 +10236,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      isRequired: false,
                       value: 'true'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        isRequired: false,
                         value: 'true'
                       }
                     }
@@ -10203,6 +10252,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Null
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -10239,8 +10292,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -10248,8 +10300,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         items: [
                           null
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10258,6 +10309,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an array of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -10293,8 +10347,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -10308,22 +10361,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/',
-                              uri: '#/0',
-                              isRequired: false,
+                              parentUri: '#/0',
+                              uri: '#/0/0',
+                              selectedItems: [],
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0',
-                                isRequired: false,
+                                id: '#/0/0',
+                                selectedItems: [],
                                 value: 'null'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10332,6 +10384,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an array of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -10367,8 +10422,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -10382,22 +10436,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/',
-                              uri: '#/0',
-                              isRequired: false,
+                              parentUri: '#/0',
+                              uri: '#/0/0',
+                              selectedItems: [],
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0',
-                                isRequired: false,
+                                id: '#/0/0',
+                                selectedItems: [],
                                 value: 'null'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10406,6 +10459,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an array of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -10441,13 +10497,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      isRequired: false,
                       value: 'null'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        isRequired: false,
                         value: 'null'
                       }
                     }
@@ -10459,6 +10513,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  String
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -10497,8 +10555,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -10508,8 +10565,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           'string (2)',
                           'string (3)'
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10518,6 +10574,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -10555,8 +10614,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -10572,13 +10630,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (1)'
                               }
                             }
@@ -10593,13 +10651,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (2)'
                               }
                             }
@@ -10614,20 +10672,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10636,6 +10693,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -10673,8 +10733,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -10690,13 +10749,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (1)'
                               }
                             }
@@ -10711,13 +10770,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (2)'
                               }
                             }
@@ -10732,20 +10791,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10754,6 +10812,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -10797,7 +10858,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       minLength: 1,
                       maxLength: 100,
-                      isRequired: false,
                       value: 'string'
                     },
                     elements: {
@@ -10805,7 +10865,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         minLength: 1,
                         maxLength: 100,
-                        isRequired: false,
                         value: 'string'
                       }
                     }
@@ -10817,6 +10876,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Number
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -10855,8 +10918,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -10866,8 +10928,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           2,
                           3
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10876,6 +10937,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -10913,8 +10977,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -10930,13 +10993,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '1'
                               }
                             }
@@ -10951,13 +11014,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '2'
                               }
                             }
@@ -10972,20 +11035,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '3'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -10994,6 +11056,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -11031,8 +11096,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -11048,13 +11112,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '1'
                               }
                             }
@@ -11069,13 +11133,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '2'
                               }
                             }
@@ -11090,20 +11154,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              isRequired: false,
+                              selectedItems: [],
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: '3'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -11112,6 +11175,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -11155,7 +11221,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       min: 1,
                       max: 3,
-                      isRequired: false,
                       value: '2'
                     },
                     elements: {
@@ -11163,7 +11228,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         min: 1,
                         max: 3,
-                        isRequired: false,
                         value: '2'
                       }
                     }
@@ -11175,6 +11239,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Array
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -11222,8 +11290,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11242,8 +11309,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -11253,8 +11319,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (2)',
                                 'string (3)'
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -11266,6 +11331,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -11312,8 +11380,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11332,8 +11399,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -11349,13 +11415,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -11370,13 +11436,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -11391,20 +11457,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -11416,6 +11481,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -11462,8 +11530,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11482,8 +11549,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -11499,13 +11565,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -11520,13 +11586,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -11541,20 +11607,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -11566,6 +11631,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -11616,8 +11684,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11640,7 +11707,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -11648,7 +11714,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -11661,6 +11726,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -11707,8 +11775,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11727,8 +11794,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -11738,8 +11804,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 2,
                                 3
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -11751,6 +11816,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -11797,8 +11865,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11817,8 +11884,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -11834,13 +11900,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -11855,13 +11921,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -11876,20 +11942,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -11901,6 +11966,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -11947,8 +12015,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -11967,8 +12034,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -11984,13 +12050,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -12005,13 +12071,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -12026,20 +12092,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -12051,6 +12116,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -12101,8 +12169,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -12125,7 +12192,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -12133,7 +12199,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -12146,788 +12211,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'boolean',
-                  enum: [
-                    true,
-                    false
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            enum: [
-                              true,
-                              false
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              enum: [
-                                true,
-                                false
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            enum: {
-                              id: '#/0/0',
-                              items: [
-                                true,
-                                false
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'boolean',
-                  anyOf: [
-                    { const: true },
-                    { const: false }
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            anyOf: [
-                              { const: true },
-                              { const: false }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              anyOf: [
-                                { const: true },
-                                { const: false }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            anyOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: true
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
-                                    isRequired: false,
-                                    value: 'true'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/0',
-                                      isRequired: false,
-                                      value: 'true'
-                                    }
-                                  }
-                                },
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 1,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: false
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/1',
-                                    isRequired: false,
-                                    value: 'false'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/1',
-                                      isRequired: false,
-                                      value: 'false'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'boolean',
-                  oneOf: [
-                    { const: true },
-                    { const: false }
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            oneOf: [
-                              { const: true },
-                              { const: false }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              oneOf: [
-                                { const: true },
-                                { const: false }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            oneOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: true
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/0',
-                                    isRequired: false,
-                                    value: 'true'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/0',
-                                      isRequired: false,
-                                      value: 'true'
-                                    }
-                                  }
-                                },
-                                {
-                                  meta: {
-                                    type: 'boolean',
-                                    item: 1,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: false
-                                    },
-                                    parentUri: '#/0/0',
-                                    uri: '#/0/0/1',
-                                    isRequired: false,
-                                    value: 'false'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0/1',
-                                      isRequired: false,
-                                      value: 'false'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'boolean',
-                  allOf: [
-                    { const: true }
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'boolean',
-                            allOf: [
-                              { const: true }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'boolean',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'boolean',
-                              allOf: [
-                                { const: true }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false,
-                            value: 'true'
-                          },
-                          elements: {
-                            field: {
-                              id: '#/0/0',
-                              isRequired: false,
-                              value: 'true'
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'null',
-                  enum: [
-                    null
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            enum: [
-                              null
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              enum: [
-                                null
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            enum: {
-                              id: '#/0/0',
-                              items: [
-                                null
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'null',
-                  anyOf: [
-                    { const: null }
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            anyOf: [
-                              { const: null }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              anyOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            anyOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'null',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: null
-                                    },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
-                                    value: 'null'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
-                                      value: 'null'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'null',
-                  oneOf: [
-                    { const: null }
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            oneOf: [
-                              { const: null }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              oneOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
-                          },
-                          elements: {
-                            oneOf: {
-                              id: '#/0/0',
-                              items: [
-                                {
-                                  meta: {
-                                    type: 'null',
-                                    item: 0,
-                                    rootSchema: schema,
-                                    schema: {
-                                      const: null
-                                    },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
-                                    value: 'null'
-                                  },
-                                  elements: {
-                                    field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
-                                      value: 'null'
-                                    }
-                                  }
-                                }
-                              ],
-                              selectedItems: [],
-                              isRequired: false
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `null` type)', () => {
-          const schema = {
-            type: 'array',
-            items: {
-              type: 'array',
-              items: [
-                {
-                  type: 'null',
-                  allOf: [
-                    { const: null }
-                  ]
-                }
-              ]
-            }
-          }
-
-          return expect(transform(schema))
-            .to.eql({
-              meta: {
-                type: 'array',
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      type: 'array',
-                      item: 0,
-                      rootSchema: schema,
-                      schema: {
-                        type: 'array',
-                        items: [
-                          {
-                            type: 'null',
-                            allOf: [
-                              { const: null }
-                            ]
-                          }
-                        ]
-                      },
-                      parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
-                    },
-                    elements: {
-                      fields: [
-                        {
-                          meta: {
-                            type: 'null',
-                            item: 0,
-                            rootSchema: schema,
-                            schema: {
-                              type: 'null',
-                              allOf: [
-                                { const: null }
-                              ]
-                            },
-                            parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false,
-                            value: 'null'
-                          },
-                          elements: {
-                            field: {
-                              id: '#/0/0',
-                              isRequired: false,
-                              value: 'null'
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -13000,8 +12286,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -13032,8 +12317,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -13110,6 +12394,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -13182,8 +12469,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -13214,8 +12500,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -13251,13 +12536,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -13272,13 +12557,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -13293,13 +12578,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -13342,13 +12627,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -13363,13 +12648,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -13384,13 +12669,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -13412,6 +12697,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -13484,8 +12772,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -13516,8 +12803,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -13553,13 +12839,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -13574,13 +12860,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -13595,13 +12881,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -13644,13 +12930,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -13665,13 +12951,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -13686,13 +12972,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -13714,6 +13000,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -13794,8 +13083,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -13830,8 +13118,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -13910,6 +13197,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -13988,8 +13278,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -14023,8 +13312,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -14101,6 +13389,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -14179,8 +13470,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -14214,8 +13504,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -14251,13 +13540,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -14272,13 +13561,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -14293,13 +13582,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -14342,13 +13631,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -14363,13 +13652,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -14384,13 +13673,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -14412,6 +13701,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -14490,8 +13782,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -14525,8 +13816,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -14562,13 +13852,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -14583,13 +13873,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -14604,13 +13894,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -14653,13 +13943,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -14674,13 +13964,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -14695,13 +13985,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -14723,6 +14013,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -14809,8 +14102,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -14848,8 +14140,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -14928,6 +14219,791 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'boolean',
+                  enum: [
+                    true,
+                    false
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            enum: [
+                              true,
+                              false
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              enum: [
+                                true,
+                                false
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            enum: {
+                              id: '#/0/0',
+                              items: [
+                                true,
+                                false
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'boolean',
+                  anyOf: [
+                    { const: true },
+                    { const: false }
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            anyOf: [
+                              { const: true },
+                              { const: false }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              anyOf: [
+                                { const: true },
+                                { const: false }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            anyOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: true
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'true'
+                                    }
+                                  }
+                                },
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 1,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: false
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/1',
+                                      selectedItems: [],
+                                      value: 'false'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'boolean',
+                  oneOf: [
+                    { const: true },
+                    { const: false }
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            oneOf: [
+                              { const: true },
+                              { const: false }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              oneOf: [
+                                { const: true },
+                                { const: false }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            oneOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: true
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'true'
+                                    }
+                                  }
+                                },
+                                {
+                                  meta: {
+                                    type: 'boolean',
+                                    item: 1,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: false
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/1',
+                                      selectedItems: [],
+                                      value: 'false'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'boolean',
+                  allOf: [
+                    { const: true }
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'boolean',
+                            allOf: [
+                              { const: true }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'boolean',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'boolean',
+                              allOf: [
+                                { const: true }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            value: 'true'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/0/0',
+                              value: 'true'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'null',
+                  enum: [
+                    null
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            enum: [
+                              null
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              enum: [
+                                null
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            enum: {
+                              id: '#/0/0',
+                              items: [
+                                null
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'null',
+                  anyOf: [
+                    { const: null }
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            anyOf: [
+                              { const: null }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              anyOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            anyOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'null',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: null
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'null'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
+        it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'null',
+                  oneOf: [
+                    { const: null }
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            oneOf: [
+                              { const: null }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              oneOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            selectedItems: []
+                          },
+                          elements: {
+                            oneOf: {
+                              id: '#/0/0',
+                              items: [
+                                {
+                                  meta: {
+                                    type: 'null',
+                                    item: 0,
+                                    rootSchema: schema,
+                                    schema: {
+                                      const: null
+                                    },
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  },
+                                  elements: {
+                                    field: {
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
+                                      value: 'null'
+                                    }
+                                  }
+                                }
+                              ],
+                              selectedItems: []
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an array of `null` type)', () => {
+          const schema = {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: [
+                {
+                  type: 'null',
+                  allOf: [
+                    { const: null }
+                  ]
+                }
+              ]
+            }
+          }
+
+          return expect(transform(schema))
+            .to.eql({
+              meta: {
+                type: 'array',
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      type: 'array',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        type: 'array',
+                        items: [
+                          {
+                            type: 'null',
+                            allOf: [
+                              { const: null }
+                            ]
+                          }
+                        ]
+                      },
+                      parentUri: '#/',
+                      uri: '#/0'
+                    },
+                    elements: {
+                      fields: [
+                        {
+                          meta: {
+                            type: 'null',
+                            item: 0,
+                            rootSchema: schema,
+                            schema: {
+                              type: 'null',
+                              allOf: [
+                                { const: null }
+                              ]
+                            },
+                            parentUri: '#/0',
+                            uri: '#/0/0',
+                            value: 'null'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/0/0',
+                              value: 'null'
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -14970,8 +15046,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -14990,8 +15065,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -15001,8 +15075,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (2)',
                                 'string (3)'
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15014,6 +15087,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -15056,8 +15132,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15076,8 +15151,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -15093,13 +15167,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -15114,13 +15188,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -15135,20 +15209,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15160,6 +15233,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -15202,8 +15278,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15222,8 +15297,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -15239,13 +15313,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -15260,13 +15334,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -15281,20 +15355,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15306,6 +15379,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -15352,8 +15428,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15376,7 +15451,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -15384,7 +15458,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -15397,6 +15470,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -15439,8 +15515,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15459,8 +15534,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -15470,8 +15544,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 2,
                                 3
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15483,6 +15556,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -15525,8 +15601,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15545,8 +15620,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -15562,13 +15636,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -15583,13 +15657,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -15604,20 +15678,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15629,6 +15702,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -15671,8 +15747,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15691,8 +15766,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -15708,13 +15782,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -15729,13 +15803,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -15750,20 +15824,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15775,6 +15848,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -15821,8 +15897,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15845,7 +15920,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -15853,7 +15927,6 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -15866,6 +15939,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -15906,8 +15982,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -15925,8 +16000,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -15935,8 +16009,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 true,
                                 false
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -15948,6 +16021,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -15988,8 +16064,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16007,8 +16082,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -16024,13 +16098,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'true'
                                     }
                                   }
@@ -16045,20 +16119,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -16070,6 +16143,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -16110,8 +16186,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16129,8 +16204,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -16146,13 +16220,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'true'
                                     }
                                   }
@@ -16167,20 +16241,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -16192,6 +16265,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -16230,8 +16306,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16248,13 +16323,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            isRequired: false,
                             value: 'true'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              isRequired: false,
                               value: 'true'
                             }
                           }
@@ -16267,6 +16340,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -16305,8 +16381,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16323,8 +16398,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             enum: {
@@ -16332,8 +16406,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               items: [
                                 null
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -16345,6 +16418,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -16383,8 +16459,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16401,8 +16476,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             anyOf: {
@@ -16416,22 +16490,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -16443,6 +16516,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -16481,8 +16557,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16499,8 +16574,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            selectedItems: [],
-                            isRequired: false
+                            selectedItems: []
                           },
                           elements: {
                             oneOf: {
@@ -16514,22 +16588,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     schema: {
                                       const: null
                                     },
-                                    parentUri: '#/0',
-                                    uri: '#/0/0',
-                                    isRequired: false,
+                                    parentUri: '#/0/0',
+                                    uri: '#/0/0/0',
+                                    selectedItems: [],
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
-                                      id: '#/0/0',
-                                      isRequired: false,
+                                      id: '#/0/0/0',
+                                      selectedItems: [],
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [],
-                              isRequired: false
+                              selectedItems: []
                             }
                           }
                         }
@@ -16541,6 +16614,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -16579,8 +16655,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16597,13 +16672,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            isRequired: false,
                             value: 'null'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              isRequired: false,
                               value: 'null'
                             }
                           }
@@ -16616,6 +16689,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -16684,8 +16760,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16716,8 +16791,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -16794,6 +16868,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -16862,8 +16939,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -16894,8 +16970,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -16931,13 +17006,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -16952,13 +17027,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -16973,13 +17048,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -17022,13 +17097,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -17043,13 +17118,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -17064,13 +17139,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -17092,6 +17167,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -17160,8 +17238,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -17192,8 +17269,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -17229,13 +17305,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -17250,13 +17326,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -17271,13 +17347,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -17320,13 +17396,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -17341,13 +17417,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -17362,13 +17438,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -17390,6 +17466,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -17466,8 +17545,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -17502,8 +17580,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -17582,6 +17659,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -17656,8 +17736,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -17691,8 +17770,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -17769,6 +17847,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -17843,8 +17924,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -17878,8 +17958,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -17915,13 +17994,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -17936,13 +18015,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -17957,13 +18036,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -18006,13 +18085,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -18027,13 +18106,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -18048,13 +18127,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -18076,6 +18155,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -18150,8 +18232,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -18185,8 +18266,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -18222,13 +18302,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (1)'
                                           }
                                         }
@@ -18243,13 +18323,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (2)'
                                           }
                                         }
@@ -18264,13 +18344,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          isRequired: true,
+                                          selectedItems: [],
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            isRequired: true,
+                                            selectedItems: [],
                                             value: 'string (3)'
                                           }
                                         }
@@ -18313,13 +18393,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '1'
                                           }
                                         }
@@ -18334,13 +18414,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '2'
                                           }
                                         }
@@ -18355,13 +18435,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          isRequired: false,
+                                          selectedItems: [],
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            isRequired: false,
+                                            selectedItems: [],
                                             value: '3'
                                           }
                                         }
@@ -18383,6 +18463,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -18465,8 +18548,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -18504,8 +18586,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -18587,6 +18668,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Object
          */
+
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -18649,8 +18734,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -18724,6 +18808,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -18786,8 +18873,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -18823,13 +18909,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -18844,13 +18930,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -18865,13 +18951,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -18914,13 +19000,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -18935,13 +19021,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -18956,13 +19042,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -18981,6 +19067,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -19043,8 +19132,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -19080,13 +19168,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -19101,13 +19189,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -19122,13 +19210,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -19171,13 +19259,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -19192,13 +19280,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -19213,13 +19301,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -19238,6 +19326,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -19308,8 +19399,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -19385,6 +19475,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -19453,8 +19546,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -19528,6 +19620,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -19596,8 +19691,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -19633,13 +19727,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -19654,13 +19748,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -19675,13 +19769,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -19724,13 +19818,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -19745,13 +19839,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -19766,13 +19860,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -19791,6 +19885,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -19859,8 +19956,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -19896,13 +19992,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (1)'
                                     }
                                   }
@@ -19917,13 +20013,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (2)'
                                     }
                                   }
@@ -19938,13 +20034,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    isRequired: true,
+                                    selectedItems: [],
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      isRequired: true,
+                                      selectedItems: [],
                                       value: 'string (3)'
                                     }
                                   }
@@ -19987,13 +20083,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '1'
                                     }
                                   }
@@ -20008,13 +20104,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '2'
                                     }
                                   }
@@ -20029,13 +20125,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    isRequired: false,
+                                    selectedItems: [],
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      isRequired: false,
+                                      selectedItems: [],
                                       value: '3'
                                     }
                                   }
@@ -20054,6 +20150,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -20130,8 +20229,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -20210,6 +20308,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Boolean
          */
+
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `enum` (`items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -20245,8 +20347,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -20255,8 +20356,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           true,
                           false
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -20265,6 +20365,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -20300,8 +20403,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -20317,13 +20419,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'true'
                               }
                             }
@@ -20338,20 +20440,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'false'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -20360,6 +20461,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -20395,8 +20499,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -20412,13 +20515,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'true'
                               }
                             }
@@ -20433,20 +20536,19 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              isRequired: false,
+                              selectedItems: [],
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                isRequired: false,
+                                selectedItems: [],
                                 value: 'false'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -20455,6 +20557,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -20488,13 +20593,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      isRequired: false,
                       value: 'true'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        isRequired: false,
                         value: 'true'
                       }
                     }
@@ -20506,6 +20609,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Null
+         */
+
+        /*
+         *  Gets selected items
          */
         it('transforms `array` type schemas with `enum` (`items` is an object of `null` type)', () => {
           const schema = {
@@ -20540,8 +20647,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       enum: {
@@ -20549,8 +20655,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         items: [
                           null
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -20559,6 +20664,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `anyOf` (`items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -20592,8 +20700,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       anyOf: {
@@ -20607,22 +20714,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/',
-                              uri: '#/0',
-                              isRequired: false,
+                              parentUri: '#/0',
+                              uri: '#/0/0',
+                              selectedItems: [],
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0',
-                                isRequired: false,
+                                id: '#/0/0',
+                                selectedItems: [],
                                 value: 'null'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -20631,6 +20737,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Gets selected items
+         */
         it('transforms `array` type schemas with `oneOf` (`items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -20664,8 +20773,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      selectedItems: [],
-                      isRequired: false
+                      selectedItems: []
                     },
                     elements: {
                       oneOf: {
@@ -20679,22 +20787,21 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               schema: {
                                 const: null
                               },
-                              parentUri: '#/',
-                              uri: '#/0',
-                              isRequired: false,
+                              parentUri: '#/0',
+                              uri: '#/0/0',
+                              selectedItems: [],
                               value: 'null'
                             },
                             elements: {
                               field: {
-                                id: '#/0',
-                                isRequired: false,
+                                id: '#/0/0',
+                                selectedItems: [],
                                 value: 'null'
                               }
                             }
                           }
                         ],
-                        selectedItems: [],
-                        isRequired: false
+                        selectedItems: []
                       }
                     }
                   }
@@ -20703,6 +20810,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas with `allOf` (`items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -20736,13 +20846,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      isRequired: false,
                       value: 'null'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        isRequired: false,
                         value: 'null'
                       }
                     }
@@ -20754,6 +20862,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  String
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `string` type)', () => {
           const schema = {
@@ -20783,13 +20895,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'string'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -20800,6 +20910,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Number
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `number` type)', () => {
           const schema = {
@@ -20829,13 +20943,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'number'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -20846,6 +20958,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Array
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `string` type)', () => {
           const schema = {
@@ -20885,8 +21001,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -20899,13 +21014,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'string'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -20917,6 +21030,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -20955,8 +21071,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -20969,13 +21084,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'number'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -20987,6 +21100,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -21025,8 +21141,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21039,13 +21154,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'boolean'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -21057,6 +21170,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -21095,8 +21211,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21109,13 +21224,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'null'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -21127,6 +21240,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -21181,8 +21297,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21203,8 +21318,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -21257,6 +21371,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -21317,8 +21434,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21342,8 +21458,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -21396,6 +21511,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -21430,8 +21548,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21444,13 +21561,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'string'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -21462,6 +21577,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -21496,8 +21614,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21510,13 +21627,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'number'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -21528,6 +21643,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -21562,8 +21680,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21576,13 +21693,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'boolean'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -21594,6 +21709,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -21628,8 +21746,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21642,13 +21759,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'null'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -21660,6 +21775,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -21710,8 +21828,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21732,8 +21849,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -21786,6 +21902,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -21842,8 +21961,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -21867,8 +21985,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -21924,6 +22041,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Object
          */
+
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -21968,8 +22089,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22019,6 +22139,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -22069,8 +22192,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22123,6 +22245,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Boolean
          */
+
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -22151,13 +22277,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'boolean'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -22168,6 +22292,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Null
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an array of `null` type)', () => {
           const schema = {
@@ -22197,13 +22325,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'null'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -22214,6 +22340,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  String
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `string` type)', () => {
           const schema = {
@@ -22241,13 +22371,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'string'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -22258,6 +22386,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Number
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `number` type)', () => {
           const schema = {
@@ -22285,13 +22417,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'number'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -22302,6 +22432,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Array
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `string` type)', () => {
           const schema = {
@@ -22339,8 +22473,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22353,13 +22486,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'string'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -22371,6 +22502,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -22407,8 +22541,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22421,13 +22554,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'number'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -22439,6 +22570,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -22475,8 +22609,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22489,13 +22622,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'boolean'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -22507,6 +22638,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -22543,8 +22677,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22557,13 +22690,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'null'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -22575,6 +22706,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -22627,8 +22761,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22649,8 +22782,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -22703,6 +22835,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an array of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -22761,8 +22896,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22786,8 +22920,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -22840,6 +22973,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `string` type)', () => {
           const schema = {
             type: 'array',
@@ -22872,8 +23008,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22886,13 +23021,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'string'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -22904,6 +23037,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `number` type)', () => {
           const schema = {
             type: 'array',
@@ -22936,8 +23072,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -22950,13 +23085,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'number'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -22968,6 +23101,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -23000,8 +23136,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -23014,13 +23149,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'boolean'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -23032,6 +23165,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `null` type)', () => {
           const schema = {
             type: 'array',
@@ -23064,8 +23200,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -23078,13 +23213,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               type: 'null'
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             field: {
-                              id: '#/0/0',
-                              isRequired: false
+                              id: '#/0/0'
                             }
                           }
                         }
@@ -23096,6 +23229,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -23144,8 +23280,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -23166,8 +23301,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               }
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -23220,6 +23354,9 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object and `items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
@@ -23274,8 +23411,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -23299,8 +23435,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               ]
                             },
                             parentUri: '#/0',
-                            uri: '#/0/0',
-                            isRequired: false
+                            uri: '#/0/0'
                           },
                           elements: {
                             fields: [
@@ -23356,6 +23491,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Object
          */
+
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type)', () => {
           const schema = {
             type: 'array',
@@ -23398,8 +23537,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         }
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -23449,7 +23587,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
             })
         })
 
-        it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type)', () => {
+        /*
+         *  Does not get selected items
+         */
+        it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `object` type with `required`)', () => {
           const schema = {
             type: 'array',
             items: {
@@ -23497,8 +23638,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         ]
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       fields: [
@@ -23551,6 +23691,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
         /*
          *  Boolean
          */
+
+        /*
+         *  Does not get selected items
+         */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `boolean` type)', () => {
           const schema = {
             type: 'array',
@@ -23577,13 +23721,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'boolean'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
@@ -23594,6 +23736,10 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
 
         /*
          *  Null
+         */
+
+        /*
+         *  Does not get selected items
          */
         it('transforms `array` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (`items` is an object of `null` type)', () => {
           const schema = {
@@ -23621,13 +23767,11 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         type: 'null'
                       },
                       parentUri: '#/',
-                      uri: '#/0',
-                      isRequired: false
+                      uri: '#/0'
                     },
                     elements: {
                       field: {
-                        id: '#/0',
-                        isRequired: false
+                        id: '#/0'
                       }
                     }
                   }
