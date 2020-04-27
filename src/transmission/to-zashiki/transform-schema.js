@@ -3270,7 +3270,7 @@ export function transformStringForAllOf (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNullByKey (schema, rootSchema, values, params) {
-  log('transformNullByKey (1)')
+  log('transformNullByKey')
 
   if (hasEnum(schema)) {
     return transformNullByKeyForEnum(schema, rootSchema, values, params)
@@ -3301,7 +3301,7 @@ export function transformNullByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNullByIndex (schema, rootSchema, values, params) {
-  log('transformNullByIndex (1)')
+  log('transformNullByIndex')
 
   if (hasEnum(schema)) {
     return transformNullByIndexForEnum(schema, rootSchema, values, params)
@@ -3332,7 +3332,7 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBooleanByKey (schema, rootSchema, values, params) {
-  log('transformBooleanByKey (1)')
+  log('transformBooleanByKey')
 
   if (hasEnum(schema)) {
     return transformBooleanByKeyForEnum(schema, rootSchema, values, params)
@@ -3366,7 +3366,7 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBooleanByIndex (schema, rootSchema, values, params) {
-  log('transformBooleanByIndex (1)')
+  log('transformBooleanByIndex')
 
   if (hasEnum(schema)) {
     return transformBooleanByIndexForEnum(schema, rootSchema, values, params)
@@ -3400,7 +3400,7 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObjectByKey (schema, rootSchema, values, params) {
-  log('transformObjectByKey (1)')
+  log('transformObjectByKey')
 
   if (hasEnum(schema)) {
     return transformObjectByKeyForEnum(schema, rootSchema, values, params)
@@ -3442,7 +3442,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObjectByIndex (schema, rootSchema, values, params) {
-  log('transformObjectByIndex (1)')
+  log('transformObjectByIndex')
 
   if (hasEnum(schema)) {
     return transformObjectByIndexForEnum(schema, rootSchema, values, params)
@@ -3484,7 +3484,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArrayByKey (schema, rootSchema, values, params) {
-  log('transformArrayByKey (1)')
+  log('transformArrayByKey')
 
   if (hasEnum(schema)) {
     return transformArrayByKeyForEnum(schema, rootSchema, values, params)
@@ -3531,7 +3531,7 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArrayByIndex (schema, rootSchema, values, params) {
-  log('transformArrayByIndex (1)')
+  log('transformArrayByIndex')
 
   if (hasEnum(schema)) {
     return transformArrayByIndexForEnum(schema, rootSchema, values, params)
@@ -3578,7 +3578,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformNumberByKey (schema, rootSchema, values, params) {
-  log('transformNumberByKey (1)')
+  log('transformNumberByKey')
 
   if (hasEnum(schema)) {
     return transformNumberByKeyForEnum(schema, rootSchema, values, params)
@@ -3612,7 +3612,7 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformNumberByIndex (schema, rootSchema, values, params) {
-  log('transformNumberByIndex (1)')
+  log('transformNumberByIndex')
 
   if (hasEnum(schema)) {
     return transformNumberByIndexForEnum(schema, rootSchema, values, params)
@@ -3646,7 +3646,7 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformStringByKey (schema, rootSchema, values, params) {
-  log('transformStringByKey (1)')
+  log('transformStringByKey')
 
   if (hasEnum(schema)) {
     return transformStringByKeyForEnum(schema, rootSchema, values, params)
@@ -3680,7 +3680,7 @@ export function transformStringByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformStringByIndex (schema, rootSchema, values, params) {
-  log('transformStringByIndex (1)')
+  log('transformStringByIndex')
 
   if (hasEnum(schema)) {
     return transformStringByIndexForEnum(schema, rootSchema, values, params)
@@ -3714,7 +3714,7 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (schema, rootSchema, values, params) {
-  log('transformNull (1)')
+  log('transformNull')
 
   if (hasEnum(schema)) {
     return transformNullForEnum(schema, rootSchema, values, params)
@@ -3742,7 +3742,7 @@ export function transformNull (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (schema, rootSchema, values, params) {
-  log('transformBoolean (1)')
+  log('transformBoolean')
 
   if (hasEnum(schema)) {
     return transformBooleanForEnum(schema, rootSchema, values, params)
@@ -3770,7 +3770,7 @@ export function transformBoolean (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (schema, rootSchema, values, params) {
-  log('transformObject (1)')
+  log('transformObject')
 
   if (hasEnum(schema)) {
     return transformObjectForEnum(schema, rootSchema, values, params)
@@ -3809,24 +3809,16 @@ export function transformObject (schema, rootSchema, values, params) {
 
 export function getTransformByKey (schema, rootSchema, values, params) {
   if (hasEnum(schema)) {
-    log('getTransformByKey (`enum`)')
-
     return transformByKeyForEnum(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
   } else {
     if (hasAnyOf(schema)) {
-      log('getTransformByKey (`anyOf`)')
-
       return transformByKeyForAnyOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
     } else {
       if (hasOneOf(schema)) {
-        log('getTransformByKey (`oneOf`)')
-
         return transformByKeyForOneOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
       }
     }
   }
-
-  log('getTransformByKey (`value` `defaultValue`)')
 
   const {
     parentUri,
@@ -3841,24 +3833,16 @@ export function getTransformByKey (schema, rootSchema, values, params) {
 
 export function getTransformByIndex (schema, rootSchema, values, params) {
   if (hasEnum(schema)) {
-    log('getTransformByIndex (`enum`)')
-
     return transformByIndexForEnum(schema, rootSchema, values, params)
   } else {
     if (hasAnyOf(schema)) {
-      log('getTransformByIndex (`anyOf`)')
-
       return transformByIndexForAnyOf(schema, rootSchema, values, params)
     } else {
       if (hasOneOf(schema)) {
-        log('getTransformByIndex (`oneOf`)')
-
         return transformByIndexForOneOf(schema, rootSchema, values, params)
       }
     }
   }
-
-  log('getTransformByIndex (`value` `defaultValue`)')
 
   const {
     parentUri,
@@ -3944,7 +3928,7 @@ value is neither an array nor an object
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (schema, rootSchema, values, params) {
-  log('transformArray (1)')
+  log('transformArray')
 
   if (hasEnum(schema)) {
     return transformArrayForEnum(schema, rootSchema, values, params)
@@ -3988,7 +3972,7 @@ export function transformArray (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (schema, rootSchema, values, params) {
-  log('transformNumber (1)')
+  log('transformNumber')
 
   if (hasEnum(schema)) {
     return transformNumberForEnum(schema, rootSchema, values, params)
@@ -4016,7 +4000,7 @@ export function transformNumber (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (schema, rootSchema, values, params) {
-  log('transformString (1)')
+  log('transformString')
 
   if (hasEnum(schema)) {
     return transformStringForEnum(schema, rootSchema, values, params)

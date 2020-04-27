@@ -172,7 +172,7 @@ export function transformNullForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (rootSchema, values, params) {
-  log('transformNull (1)')
+  log('transformNull')
 
   if (hasEnum(rootSchema)) {
     return transformNullForEnum(rootSchema, values, params)
@@ -288,7 +288,7 @@ export function transformBooleanForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (rootSchema, values, params) {
-  log('transformBoolean (1)')
+  log('transformBoolean')
 
   if (hasEnum(rootSchema)) {
     return transformBooleanForEnum(rootSchema, values, params)
@@ -404,7 +404,7 @@ export function transformObjectForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (rootSchema, values, params) {
-  log('transformObject (1)')
+  log('transformObject')
 
   if (hasEnum(rootSchema)) {
     return transformObjectForEnum(rootSchema, values, params)
@@ -536,7 +536,7 @@ export function transformArrayForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (rootSchema, values, params) {
-  log('transformArray (1)')
+  log('transformArray')
 
   if (hasEnum(rootSchema)) {
     return transformArrayForEnum(rootSchema, values, params)
@@ -680,7 +680,7 @@ export function transformNumberForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
-  log('transformNumber (1)')
+  log('transformNumber')
 
   if (hasEnum(rootSchema)) {
     return transformNumberForEnum(rootSchema, values, params)
@@ -796,7 +796,7 @@ export function transformStringForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (rootSchema, values, params) {
-  log('transformString (1)')
+  log('transformString')
 
   if (hasEnum(rootSchema)) {
     return transformStringForEnum(rootSchema, values, params)
