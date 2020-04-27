@@ -4,6 +4,8 @@ import {
   isArray,
   isObject,
 
+  isPrimitive,
+
   isArraySchema,
   isObjectSchema,
 
@@ -2714,7 +2716,9 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
   } = itemSchema
 
   if (isArray(items)) {
-    const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    const fields = (
+      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    )
 
     return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
@@ -3515,7 +3519,9 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
   } = schema
 
   if (isArray(items)) {
-    const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    const fields = (
+      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    )
 
     return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
@@ -3562,7 +3568,9 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
   } = schema
 
   if (isArray(items)) {
-    const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    const fields = (
+      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    )
 
     return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
@@ -3809,13 +3817,13 @@ export function transformObject (schema, rootSchema, values, params) {
 
 export function getTransformByKey (schema, rootSchema, values, params) {
   if (hasEnum(schema)) {
-    return transformByKeyForEnum(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
+    return transformByKeyForEnum(schema, rootSchema, values, params)
   } else {
     if (hasAnyOf(schema)) {
-      return transformByKeyForAnyOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
+      return transformByKeyForAnyOf(schema, rootSchema, values, params)
     } else {
       if (hasOneOf(schema)) {
-        return transformByKeyForOneOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
+        return transformByKeyForOneOf(schema, rootSchema, values, params)
       }
     }
   }
@@ -3828,7 +3836,7 @@ export function getTransformByKey (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, key)
 
-  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), isRequired } } }, key }) // { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, schemaUri), isRequired } } }, key })
+  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), isRequired } } }, key }) // { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, schemaUri), isRequired } } }, key })
 }
 
 export function getTransformByIndex (schema, rootSchema, values, params) {
@@ -3851,46 +3859,27 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, index)
 
-  log(`
-
-Get the value
-
-  `)
-
   if (isArraySchema(schema)) {
-    log(`
-
-Array. Do not get the value
-
-    `)
-
     return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri }, elements: getElementsProps(params, uri) } })
   } else {
     if (isObjectSchema(schema)) {
-      log(`
-
-Object. Do not get the value
-
-      `)
-
       return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri }, elements: getElementsProps(params, uri) } })
     } else {
-      log(`
-
-Get the value
-
-      `)
-
       if (Reflect.has(values, parentUri)) {
         const value = Reflect.get(values, parentUri)
 
+        if (isPrimitive(value)) {
+          return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, value: String(value) }, elements: { field: { ...getElementsFieldProps(params, uri), value: String(value) } } } })
+        } else {
+          if (Reflect.has(value, index)) {
+            const v = Reflect.get(value, index)
+
+            return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, value: String(v) }, elements: { field: { ...getElementsFieldProps(params, uri), value: String(v) } } } })
+          }
+        }
+
+        /*
         if (isArray(value)) {
-          log(`
-
-value is array
-
-          `)
-
           if (Reflect.has(value, index)) {
             const v = Reflect.get(value, index)
 
@@ -3898,27 +3887,16 @@ value is array
           }
         } else {
           if (isObject(value)) {
-            log(`
-
-value is object
-
-            `)
-
             if (Reflect.has(value, index)) {
               const v = Reflect.get(value, index)
 
               return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, value: String(v) }, elements: { field: { ...getElementsFieldProps(params, uri), value: String(v) } } } })
             }
           } else {
-            log(`
-
-value is neither an array nor an object
-
-            `)
-
             return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, value: String(value) }, elements: { field: { ...getElementsFieldProps(params, uri), value: String(value) } } } })
           }
         }
+        */
       }
     }
   }
@@ -3956,7 +3934,9 @@ export function transformArray (schema, rootSchema, values, params) {
   } = schema
 
   if (isArray(items)) {
-    const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    const fields = (
+      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    )
 
     return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
@@ -4026,36 +4006,6 @@ export function transformString (schema, rootSchema, values, params) {
   return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
-export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  log('transformByKey')
-
-  const { type } = schema
-
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
-  switch (type) {
-    case 'null':
-      return transformNullByKey(schema, rootSchema, values, params)
-
-    case 'boolean':
-      return transformBooleanByKey(schema, rootSchema, values, params)
-
-    case 'object':
-      return transformObjectByKey(schema, rootSchema, values, params)
-
-    case 'array':
-      return transformArrayByKey(schema, rootSchema, values, params)
-
-    case 'number':
-      return transformNumberByKey(schema, rootSchema, values, params)
-
-    case 'string':
-      return transformStringByKey(schema, rootSchema, values, params)
-
-    default:
-      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
-  }
-}
-
 export function transformByKeyForEnum (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
   log('transformByKeyForEnum')
 
@@ -4081,7 +4031,7 @@ export function transformByKeyForAnyOf (schema, rootSchema, values, { parentUri,
 }
 
 export function transformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('transformByKeyForOneOf', { key, isRequired })
+  log('transformByKeyForOneOf')
 
   const uri = getUri(parentUri, key)
   const {
@@ -4126,6 +4076,36 @@ export function transformByIndexForOneOf (schema, rootSchema, values, { parentUr
   } = getMetaProps(params, uri)
 
   return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+}
+
+export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {
+  log('transformByKey')
+
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByKey(schema, rootSchema, values, params)
+
+    case 'boolean':
+      return transformBooleanByKey(schema, rootSchema, values, params)
+
+    case 'object':
+      return transformObjectByKey(schema, rootSchema, values, params)
+
+    case 'array':
+      return transformArrayByKey(schema, rootSchema, values, params)
+
+    case 'number':
+      return transformNumberByKey(schema, rootSchema, values, params)
+
+    case 'string':
+      return transformStringByKey(schema, rootSchema, values, params)
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByIndex (schema = {}, rootSchema = schema, values = {}, params = {}) {

@@ -559,23 +559,13 @@ export function transformArray (rootSchema, values, params) {
   } = rootSchema
 
   if (isArray(items)) {
-    log(`
-
-  Array with "items" array
-
-    `)
-
-    const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: '#' }))
+    const fields = (
+      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: '#' }))
+    )
 
     return renderArray(rootSchema, values, { ...params, parentUri: '#', uri: '#/', '#/': { meta: { ...getMetaProps(params, '#/'), schema: rootSchema, parentUri: '#', uri: '#/' }, elements: { ...getElementsProps(params, '#/'), fields } } })
   } else {
     if (isObject(items)) {
-      log(`
-
-  Array with "items" object
-
-  `)
-
       const fields = [
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: '#/' })
       ]
