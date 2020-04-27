@@ -56,100 +56,6 @@ import {
 
 const log = debug('shinkansen-transmission:to-zashiki:schema')
 
-export function mapTransformByIndex (rootSchema, values, params) {
-  log('mapTransformByIndex')
-
-  return function map (schema, index) {
-    return getTransformByIndex(schema, rootSchema, values, { ...params, index })
-
-    /*
-    if (hasEnum(schema)) {
-      return getTransformByIndexForEnum(schema, rootSchema, values, { ...params, index })
-    } else {
-      if (hasAnyOf(schema)) {
-        return getTransformByIndexForAnyOf(schema, rootSchema, values, { ...params, index })
-      } else {
-        if (hasOneOf(schema)) {
-          return getTransformByIndexForOneOf(schema, rootSchema, values, { ...params, index })
-        }
-      }
-    }
-
-    log('mapTransformByIndex (`value` `defaultValue`)')
-
-    *//*
-     *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-     *//*
-
-    *//*
-     *  Schemas may be required
-     *//*
-
-    *//*
-     *  Schemas may have a value
-     *//*
-
-    *//*
-     *  Array schemas do not have a value
-     *//*
-
-    *//*
-     *  Object schemas do not have a value
-     *//*
-
-    return transformByIndex(schema, rootSchema, values, { ...params, index })
-    */
-  }
-}
-
-export function mapTransformByKey (rootSchema, values, { required = [], ...params }) {
-  log('mapTransformByKey')
-
-  return function map ([key, schema]) {
-    log(key, required)
-
-    return getTransformByKey(schema, rootSchema, values, { ...params, isRequired: required.includes(key), key })
-
-    /*
-    if (hasEnum(schema)) {
-      return getTransformByKeyForEnum(schema, rootSchema, values, { ...params, isRequired, key })
-    } else {
-      if (hasAnyOf(schema)) {
-        return getTransformByKeyForAnyOf(schema, rootSchema, values, { ...params, isRequired, key })
-      } else {
-        if (hasOneOf(schema)) {
-          return getTransformByKeyForOneOf(schema, rootSchema, values, { ...params, isRequired, key })
-        }
-      }
-    }
-
-    log('mapTransformByKey (`value` `defaultValue`)')
-
-    *//*
-     *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-     *//*
-
-    *//*
-     *  Schemas may be required
-     *//*
-
-    *//*
-     *  Schemas may have a value
-     *//*
-
-    *//*
-     *  Array schemas do not have a value
-     *//*
-
-    *//*
-     *  Object schemas do not have a value
-     *//*
-
-    return transformByKey(schema, rootSchema, values, { ...params, key })
-    */
-  }
-}
-
 export function mapTransformNullByIndex (rootSchema, values, params) {
   log('mapTransformNullByIndex')
 
@@ -198,12 +104,24 @@ export function mapTransformStringByIndex (rootSchema, values, params) {
   }
 }
 
+export function mapTransformByIndex (rootSchema, values, params) {
+  log('mapTransformByIndex')
+
+  return function map (schema, index) {
+    return getTransformByIndex(schema, rootSchema, values, { ...params, index })
+  }
+}
+
+export function mapTransformByKey (rootSchema, values, { required = [], ...params }) {
+  log('mapTransformByKey')
+
+  return function map ([key, schema]) {
+    return getTransformByKey(schema, rootSchema, values, { ...params, isRequired: required.includes(key), key })
+  }
+}
+
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function renderNullForEnum (schema, values, params) {
   log('renderNullForEnum')
@@ -241,11 +159,7 @@ export function renderNullForEnum (schema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function renderNullForAnyOf (schema, values, params) {
   log('renderNullForAnyOf')
@@ -283,11 +197,7 @@ export function renderNullForAnyOf (schema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function renderNullForOneOf (schema, values, params) {
   log('renderNullForOneOf')
@@ -325,11 +235,7 @@ export function renderNullForOneOf (schema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function renderNullForAllOf (schema, values, params) {
   log('renderNullForAllOf')
@@ -440,11 +346,7 @@ export function renderNull (schema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function renderBooleanForEnum (schema, values, params) {
   log('renderBooleanForEnum')
@@ -482,11 +384,7 @@ export function renderBooleanForEnum (schema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function renderBooleanForAnyOf (schema, values, params) {
   log('renderBooleanForAnyOf')
@@ -524,11 +422,7 @@ export function renderBooleanForAnyOf (schema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function renderBooleanForOneOf (schema, values, params) {
   log('renderBooleanForAnyOf')
@@ -566,11 +460,7 @@ export function renderBooleanForOneOf (schema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function renderBooleanForAllOf (schema, values, params) {
   log('renderBooleanForAllOf')
@@ -681,11 +571,7 @@ export function renderBoolean (schema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function renderObjectForEnum (schema, values, params) {
   log('renderObjectForEnum')
@@ -730,11 +616,7 @@ export function renderObjectForEnum (schema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function renderObjectForAnyOf (schema, values, params) {
   log('renderObjectForAnyOf')
@@ -779,11 +661,7 @@ export function renderObjectForAnyOf (schema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function renderObjectForOneOf (schema, values, params) {
   log('renderObjectForOneOf')
@@ -828,11 +706,7 @@ export function renderObjectForOneOf (schema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function renderObjectForAllOf (schema, values, params) {
   log('renderObjectForAllOf')
@@ -914,11 +788,7 @@ export function renderObject (schema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function renderArrayForEnum (schema, values, params) {
   log('renderArrayForEnum')
@@ -972,11 +842,7 @@ export function renderArrayForEnum (schema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function renderArrayForAnyOf (schema, values, params) {
   log('renderArrayForAnyOf')
@@ -1030,11 +896,7 @@ export function renderArrayForAnyOf (schema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function renderArrayForOneOf (schema, values, params) {
   log('renderArrayForOneOf')
@@ -1088,11 +950,7 @@ export function renderArrayForOneOf (schema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function renderArrayForAllOf (schema, values, params) {
   log('renderArrayForAllOf')
@@ -1189,11 +1047,7 @@ export function renderArray (schema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function renderNumberForEnum (schema, values, params) {
   log('renderNumberForEnum')
@@ -1246,11 +1100,7 @@ export function renderNumberForEnum (schema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function renderNumberForAnyOf (schema, values, params) {
   log('renderNumberForAnyOf')
@@ -1303,11 +1153,7 @@ export function renderNumberForAnyOf (schema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function renderNumberForOneOf (schema, values, params) {
   log('renderNumberForOneOf')
@@ -1360,11 +1206,7 @@ export function renderNumberForOneOf (schema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function renderNumberForAllOf (schema, values, params) {
   log('renderNumberForAllOf')
@@ -1505,11 +1347,7 @@ export function renderNumber (schema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function renderStringForEnum (schema, values, params) {
   log('renderStringForEnum')
@@ -1557,11 +1395,7 @@ export function renderStringForEnum (schema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function renderStringForAnyOf (schema, values, params) {
   log('renderStringForAnyOf')
@@ -1609,11 +1443,7 @@ export function renderStringForAnyOf (schema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function renderStringForOneOf (schema, values, params) {
   log('renderStringForOneOf')
@@ -1661,11 +1491,7 @@ export function renderStringForOneOf (schema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function renderStringForAllOf (schema, values, params) {
   log('renderStringForAllOf')
@@ -1796,11 +1622,7 @@ export function renderString (schema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
   log('transformNullByKeyForEnum')
@@ -1824,11 +1646,7 @@ export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) {
   log('transformNullByKeyForAnyOf')
@@ -1853,11 +1671,7 @@ export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) 
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformNullByKeyForOneOf (schema, rootSchema, values, params) {
   log('transformNullByKeyForOneOf')
@@ -1882,11 +1696,7 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformNullByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformNullByKeyForAllOf')
@@ -1906,11 +1716,7 @@ export function transformNullByKeyForAllOf (schema, rootSchema, values, params) 
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformNullByIndexForEnum (schema, rootSchema, values, params) {
   log('transformNullByIndexForEnum')
@@ -1934,11 +1740,7 @@ export function transformNullByIndexForEnum (schema, rootSchema, values, params)
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformNullByIndexForAnyOf (schema, rootSchema, values, params) {
   log('transformNullByIndexForAnyOf')
@@ -1963,11 +1765,7 @@ export function transformNullByIndexForAnyOf (schema, rootSchema, values, params
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformNullByIndexForOneOf (schema, rootSchema, values, params) {
   log('transformNullByIndexForOneOf')
@@ -1992,11 +1790,7 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformNullByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformNullByIndexForAllOf')
@@ -2016,11 +1810,7 @@ export function transformNullByIndexForAllOf (schema, rootSchema, values, params
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformNullForEnum (schema, rootSchema, values, params) {
   log('transformNullForEnum')
@@ -2041,11 +1831,7 @@ export function transformNullForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformNullForAnyOf (schema, rootSchema, values, params) {
   log('transformNullForAnyOf')
@@ -2067,11 +1853,7 @@ export function transformNullForAnyOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformNullForOneOf (schema, rootSchema, values, params) {
   log('transformNullForOneOf')
@@ -2093,11 +1875,7 @@ export function transformNullForOneOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformNullForAllOf (schema, rootSchema, values, params) {
   log('transformNullForAllOf')
@@ -2114,11 +1892,7 @@ export function transformNullForAllOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformBooleanByKeyForEnum (schema, rootSchema, values, params) {
   log('transformBooleanByKeyForEnum')
@@ -2142,11 +1916,7 @@ export function transformBooleanByKeyForEnum (schema, rootSchema, values, params
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, params) {
   log('transformBooleanByKeyForAnyOf')
@@ -2171,11 +1941,7 @@ export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, param
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformBooleanByKeyForOneOf (schema, rootSchema, values, params) {
   log('transformBooleanByKeyForOneOf')
@@ -2200,11 +1966,7 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformBooleanByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformBooleanByKeyForAllOf')
@@ -2224,11 +1986,7 @@ export function transformBooleanByKeyForAllOf (schema, rootSchema, values, param
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformBooleanByIndexForEnum (schema, rootSchema, values, params) {
   log('transformBooleanByIndexForEnum')
@@ -2252,11 +2010,7 @@ export function transformBooleanByIndexForEnum (schema, rootSchema, values, para
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, params) {
   log('transformBooleanByIndexForAnyOf')
@@ -2281,11 +2035,7 @@ export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, par
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformBooleanByIndexForOneOf (schema, rootSchema, values, params) {
   log('transformBooleanByIndexForOneOf')
@@ -2310,11 +2060,7 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformBooleanByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformBooleanByIndexForAllOf')
@@ -2334,11 +2080,7 @@ export function transformBooleanByIndexForAllOf (schema, rootSchema, values, par
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformBooleanForEnum (schema, rootSchema, values, params) {
   log('transformBooleanForEnum')
@@ -2359,11 +2101,7 @@ export function transformBooleanForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
   log('transformBooleanForAnyOf')
@@ -2385,11 +2123,7 @@ export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformBooleanForOneOf (schema, rootSchema, values, params) {
   log('transformBooleanForOneOf')
@@ -2411,11 +2145,7 @@ export function transformBooleanForOneOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformBooleanForAllOf (schema, rootSchema, values, params) {
   log('transformBooleanForAllOf')
@@ -2432,11 +2162,7 @@ export function transformBooleanForAllOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformObjectByKeyForEnum (schema, rootSchema, values, params) {
   log('transformObjectByKeyForEnum')
@@ -2460,11 +2186,7 @@ export function transformObjectByKeyForEnum (schema, rootSchema, values, params)
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params) {
   log('transformObjectByKeyForAnyOf')
@@ -2489,11 +2211,7 @@ export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformObjectByKeyForOneOf (schema, rootSchema, values, params) {
   log('transformObjectByKeyForOneOf')
@@ -2518,11 +2236,7 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformObjectByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformObjectByKeyForAllOf')
@@ -2542,11 +2256,7 @@ export function transformObjectByKeyForAllOf (schema, rootSchema, values, params
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformObjectByIndexForEnum (schema, rootSchema, values, params) {
   log('transformObjectByIndexForEnum')
@@ -2570,11 +2280,7 @@ export function transformObjectByIndexForEnum (schema, rootSchema, values, param
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformObjectByIndexForAnyOf (schema, rootSchema, values, params) {
   log('transformObjectByIndexForAnyOf')
@@ -2599,11 +2305,7 @@ export function transformObjectByIndexForAnyOf (schema, rootSchema, values, para
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformObjectByIndexForOneOf (schema, rootSchema, values, params) {
   log('transformObjectByIndexForOneOf')
@@ -2628,11 +2330,7 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformObjectByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformObjectByIndexForAllOf')
@@ -2652,11 +2350,7 @@ export function transformObjectByIndexForAllOf (schema, rootSchema, values, para
 }
 
 /*
- *  "enum" value is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformObjectForEnum (schema, rootSchema, values, params) {
   log('transformObjectForEnum')
@@ -2677,11 +2371,7 @@ export function transformObjectForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformObjectForAnyOf (schema, rootSchema, values, params) {
   log('transformObjectForAnyOf')
@@ -2703,11 +2393,7 @@ export function transformObjectForAnyOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformObjectForOneOf (schema, rootSchema, values, params) {
   log('transformObjectForOneOf')
@@ -2729,11 +2415,7 @@ export function transformObjectForOneOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformObjectForAllOf (schema, rootSchema, values, params) { // As-is
   log('transformObjectForAllOf')
@@ -2757,91 +2439,11 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  /*
-  const fields = (
-    Object
-      .entries(properties)
-      .map(([key, schema]) => {
-        return getTransformByKey(schema, rootSchema, values, { ...params, parentUri: uri, isRequired: required.includes(key), key })
-
-        *//*
-        if (hasEnum(schema)) {
-          log('transformObjectForAllOf (`enum`)')
-
-          return getTransformByKeyForEnum(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-          *//*
-           *  Get selected items for the uri
-           *//*
-          const schemaUri = getUri(uri, key)
-          const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-          const isRequired = required.includes(key)
-
-          // log(getValueForEnum(index, schema))
-
-          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
-          *//*
-        } else {
-          if (hasAnyOf(schema)) {
-            log('transformObjectForAllOf (`anyOf`)')
-
-            return getTransformByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-            /*
-             *  Get selected items for the uri
-             *//*
-            const schemaUri = getUri(uri, key)
-            const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-            const isRequired = required.includes(key)
-
-            // log(getValueForAnyOf(index, schema))
-
-            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
-            *//*
-          } else {
-            if (hasOneOf(schema)) {
-              log('transformObjectForAllOf (`oneOf`)')
-
-              return getTransformByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-              *//*
-               *  Get selected items for the uri
-               *//*
-              const schemaUri = getUri(uri, key)
-              const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-              const isRequired = required.includes(key)
-
-              // log(getValueForOneOf(index, schema))
-
-              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
-              *//*
-            }
-          }
-        }
-
-        log('transformObjectForAllOf (`value` `defaultValue`)')
-
-        *//*
-         *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-         *//*
-        const schemaUri = getUri(uri, key)
-        const isRequired = required.includes(key)
-
-        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, schemaUri), isRequired } } }, key })
-        *//*
-      })
-  )
-  */
-
   return renderObjectForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformArrayByKeyForEnum (schema, rootSchema, values, params) {
   log('transformArrayByKeyForEnum')
@@ -2865,11 +2467,7 @@ export function transformArrayByKeyForEnum (schema, rootSchema, values, params) 
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params) {
   log('transformArrayByKeyForAnyOf')
@@ -2894,11 +2492,7 @@ export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params)
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformArrayByKeyForOneOf (schema, rootSchema, values, params) {
   log('transformArrayByKeyForOneOf')
@@ -2923,11 +2517,7 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformArrayByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformArrayByKeyForAllOf')
@@ -2947,11 +2537,7 @@ export function transformArrayByKeyForAllOf (schema, rootSchema, values, params)
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformArrayByIndexForEnum (schema, rootSchema, values, params) {
   log('transformArrayByIndexForEnum')
@@ -2975,11 +2561,7 @@ export function transformArrayByIndexForEnum (schema, rootSchema, values, params
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformArrayByIndexForAnyOf (schema, rootSchema, values, params) {
   log('transformArrayByIndexForAnyOf')
@@ -3004,11 +2586,7 @@ export function transformArrayByIndexForAnyOf (schema, rootSchema, values, param
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformArrayByIndexForOneOf (schema, rootSchema, values, params) {
   log('transformArrayByIndexForOneOf')
@@ -3033,11 +2611,7 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformArrayByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformArrayByIndexForAllOf')
@@ -3057,11 +2631,7 @@ export function transformArrayByIndexForAllOf (schema, rootSchema, values, param
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformArrayForEnum (schema, rootSchema, values, params) {
   log('transformArrayForEnum')
@@ -3082,11 +2652,7 @@ export function transformArrayForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformArrayForAnyOf (schema, rootSchema, values, params) {
   log('transformArrayForAnyOf')
@@ -3108,11 +2674,7 @@ export function transformArrayForAnyOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformArrayForOneOf (schema, rootSchema, values, params) {
   log('transformArrayForOneOf')
@@ -3134,11 +2696,7 @@ export function transformArrayForOneOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformArrayForAllOf (schema, rootSchema, values, params) {
   log('transformArrayForAllOf')
@@ -3156,115 +2714,22 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
   } = itemSchema
 
   if (isArray(items)) {
-    log(`
-
-  Array with "items" array
-
-    `)
-
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
     return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
     if (isObject(items)) {
-      log(`
-
-  Array with "items" object
-
-      `)
-
       const fields = [
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
       return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
-
-      /*
-      let fields
-      if (hasEnum(items)) {
-        log('transformArrayForAllOf (`enum`)')
-
-        *//*
-         *  Get selected items for the parent uri
-         *//*
-        const schemaUri = getUri(uri, 0)
-        const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-        // log(getValueForEnum(0, items))
-
-        fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
-        ]
-      } else {
-        if (hasAnyOf(items)) {
-          log('transformArrayForAllOf (`anyOf`)')
-
-          *//*
-           *  Get selected items for the parent uri
-           *//*
-          const schemaUri = getUri(uri, 0)
-          const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-          // log(getValueForAnyOf(0, items))
-
-          fields = [
-            transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
-          ]
-        } else {
-          if (hasOneOf(items)) {
-            log('transformArrayForAllOf (`oneOf`)')
-
-            *//*
-             *  Get selected items for the parent uri
-             *//*
-            const schemaUri = getUri(uri, 0)
-            const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-            // log(getValueForOneOf(0, items))
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems } } } })
-            ]
-          } else {
-            log('transformArrayForAllOf (`value` `defaultValue`)')
-
-            const schemaUri = getUri(uri, 0)
-
-            *//*
-             *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-             *//*
-
-            *//*
-             *  Schemas may have a value
-             *//*
-
-            *//*
-             *  Array schemas do not have a value
-             *//*
-
-            *//*
-             *  Object schemas do not have a value
-             *//*
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
-            ]
-          }
-        }
-      }
-
-      return renderArrayForAllOf(itemSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri: normaliseUri(parentUri), uri }, elements: { ...getElementsProps(params, uri), fields } } })
-      */
     }
   }
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformNumberByKeyForEnum (schema, rootSchema, values, params) {
   log('transformNumberByKeyForEnum')
@@ -3288,11 +2753,7 @@ export function transformNumberByKeyForEnum (schema, rootSchema, values, params)
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params) {
   log('transformNumberByKeyForAnyOf')
@@ -3317,11 +2778,7 @@ export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformNumberByKeyForOneOf (schema, rootSchema, values, params) {
   log('transformNumberByKeyForOneOf')
@@ -3346,11 +2803,7 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformNumberByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformNumberByKeyForAllOf')
@@ -3370,11 +2823,7 @@ export function transformNumberByKeyForAllOf (schema, rootSchema, values, params
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformNumberByIndexForEnum (schema, rootSchema, values, params) {
   log('transformNumberByIndexForEnum')
@@ -3398,11 +2847,7 @@ export function transformNumberByIndexForEnum (schema, rootSchema, values, param
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformNumberByIndexForAnyOf (schema, rootSchema, values, params) {
   log('transformNumberByIndexForAnyOf')
@@ -3427,11 +2872,7 @@ export function transformNumberByIndexForAnyOf (schema, rootSchema, values, para
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformNumberByIndexForOneOf (schema, rootSchema, values, params) {
   log('transformNumberByIndexForOneOf')
@@ -3456,11 +2897,7 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformNumberByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformNumberByIndexForAllOf')
@@ -3480,11 +2917,7 @@ export function transformNumberByIndexForAllOf (schema, rootSchema, values, para
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformNumberForEnum (schema, rootSchema, values, params) {
   log('transformNumberForEnum')
@@ -3505,11 +2938,7 @@ export function transformNumberForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformNumberForAnyOf (schema, rootSchema, values, params) {
   log('transformNumberForAnyOf')
@@ -3531,11 +2960,7 @@ export function transformNumberForAnyOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformNumberForOneOf (schema, rootSchema, values, params) {
   log('transformNumberForOneOf')
@@ -3557,11 +2982,7 @@ export function transformNumberForOneOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformNumberForAllOf (schema, rootSchema, values, params) {
   log('transformNumberForAllOf')
@@ -3578,11 +2999,7 @@ export function transformNumberForAllOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformStringByKeyForEnum (schema, rootSchema, values, params) {
   log('transformStringByKeyForEnum')
@@ -3606,11 +3023,7 @@ export function transformStringByKeyForEnum (schema, rootSchema, values, params)
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformStringByKeyForAnyOf (schema, rootSchema, values, params) {
   log('transformStringByKeyForAnyOf')
@@ -3635,11 +3048,7 @@ export function transformStringByKeyForAnyOf (schema, rootSchema, values, params
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformStringByKeyForOneOf (schema, rootSchema, values, params) {
   log('transformStringByKeyForOneOf')
@@ -3664,11 +3073,7 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformStringByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformStringByKeyForAllOf')
@@ -3688,11 +3093,7 @@ export function transformStringByKeyForAllOf (schema, rootSchema, values, params
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformStringByIndexForEnum (schema, rootSchema, values, params) {
   log('transformStringByIndexForEnum')
@@ -3716,11 +3117,7 @@ export function transformStringByIndexForEnum (schema, rootSchema, values, param
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformStringByIndexForAnyOf (schema, rootSchema, values, params) {
   log('transformStringByIndexForAnyOf')
@@ -3745,11 +3142,7 @@ export function transformStringByIndexForAnyOf (schema, rootSchema, values, para
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformStringByIndexForOneOf (schema, rootSchema, values, params) {
   log('transformStringByIndexForOneOf')
@@ -3774,11 +3167,7 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformStringByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformStringByIndexForAllOf')
@@ -3798,11 +3187,7 @@ export function transformStringByIndexForAllOf (schema, rootSchema, values, para
 }
 
 /*
- *  "enum" is look-up
- *
- *  "enum" gets selected items
- *
- *  "enum" does not get value or default value
+ *  "enum"
  */
 export function transformStringForEnum (schema, rootSchema, values, params) {
   log('transformStringForEnum')
@@ -3823,11 +3208,7 @@ export function transformStringForEnum (schema, rootSchema, values, params) {
 }
 
 /*
- *  "anyOf" is look-up
- *
- *  "anyOf" gets selected items
- *
- *  "anyOf" does not get value or default value
+ *  "anyOf"
  */
 export function transformStringForAnyOf (schema, rootSchema, values, params) {
   log('transformStringForAnyOf')
@@ -3849,11 +3230,7 @@ export function transformStringForAnyOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "oneOf" is look-up
- *
- *  "oneOf" gets selected items
- *
- *  "oneOf" does not get value or default value
+ *  "oneOf"
  */
 export function transformStringForOneOf (schema, rootSchema, values, params) {
   log('transformStringForOneOf')
@@ -3875,11 +3252,7 @@ export function transformStringForOneOf (schema, rootSchema, values, params) {
 }
 
 /*
- *  "allOf" is not look-up
- *
- *  "allOf" does not get selected items
- *
- *  "allOf" gets value and default value
+ *  "allOf"
  */
 export function transformStringForAllOf (schema, rootSchema, values, params) {
   log('transformStringForAllOf')
@@ -3915,8 +3288,6 @@ export function transformNullByKey (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformNullByKey (2)')
-
   const {
     parentUri: fieldParentUri = '#',
     key: fieldKey = ''
@@ -3925,9 +3296,6 @@ export function transformNullByKey (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  /*
-   *  Do not get the value
-   */
   return renderNull(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
@@ -3951,8 +3319,6 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformNullByIndex (2)')
-
   const {
     parentUri: arrayParentUri = '#',
     index: arrayIndex = 0
@@ -3961,9 +3327,6 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  /*
-   *  Do not get the value
-   */
   return renderNull(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
@@ -3987,8 +3350,6 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformBooleanByKey (2)')
-
   const {
     parentUri: fieldParentUri = '#',
     key: fieldKey = ''
@@ -4000,9 +3361,6 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  /*
-   *  Do not get the value
-   */
   return renderBoolean(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4026,8 +3384,6 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformBooleanByIndex (2)')
-
   const {
     parentUri: arrayParentUri = '#',
     index: arrayIndex = 0
@@ -4039,9 +3395,6 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  /*
-   *  Do not get the value
-   */
   return renderBoolean(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4065,8 +3418,6 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformObjectByKey (2)')
-
   const {
     parentUri: fieldParentUri = '#',
     key: fieldKey
@@ -4085,103 +3436,6 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
       .entries(properties)
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
-
-  /*
-  const fields = (
-    Object
-      .entries(properties)
-      .map(([key, schema]) => {
-        return getTransformByKey(schema, rootSchema, values, { ...params, parentUri: uri, isRequired: required.includes(key), key })
-
-        *//*
-        if (hasEnum(schema)) {
-          log('transformObjectByKey (`enum`)')
-
-          return getTransformByKeyForEnum(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-          *//*
-           *  Get selected items for the uri
-           *//*
-          const schemaUri = getUri(uri, key)
-          const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-          const isRequired = required.includes(key)
-
-          // log(getValueForEnum(index, schema))
-
-          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
-          *//*
-        } else {
-          if (hasAnyOf(schema)) {
-            log('transformObjectByKey (`anyOf`)')
-
-            return getTransformByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-            *//*
-             *  Get selected items for the uri
-             *//*
-            const schemaUri = getUri(uri, key)
-            const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-            const isRequired = required.includes(key)
-
-            // log(getValueForAnyOf(index, schema))
-
-            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
-            *//*
-          } else {
-            if (hasOneOf(schema)) {
-              log('transformObjectByKey (`oneOf`)')
-
-              return getTransformByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-              /*
-               *  Get selected items for the uri
-               *//*
-              const schemaUri = getUri(uri, key)
-              const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-              const isRequired = required.includes(key)
-
-              // log(getValueForOneOf(index, schema))
-
-              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
-              *//*
-            }
-          }
-        }
-
-        log('transformObjectByKey (`value` `defaultValue`)')
-
-        *//*
-         *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-         *//*
-
-        *//*
-         *  Schemas may be required
-         *//*
-
-        *//*
-         *  Schemas may have a value
-         *//*
-
-        *//*
-         *  Array schemas do not have a value
-         *//*
-
-        *//*
-         *  Object schemas do not have a value
-         *//*
-
-        const schemaUri = getUri(uri, key)
-        const isRequired = required.includes(key)
-
-        *//*
-         *  Do not get the value
-         *//*
-
-        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldProps(params, schemaUri), isRequired } } }, key })
-        *//*
-      })
-  )
-  */
 
   return renderObject(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
 }
@@ -4206,8 +3460,6 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformObjectByIndex (2)')
-
   const {
     parentUri: arrayParentUri = '#',
     index: arrayIndex = 0
@@ -4226,103 +3478,6 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
       .entries(properties)
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
-
-  /*
-  const fields = (
-    Object
-      .entries(properties)
-      .map(([key, schema]) => {
-        return getTransformByKey(schema, rootSchema, values, { ...params, parentUri: uri, isRequired: required.includes(key), key })
-
-        *//*
-        if (hasEnum(schema)) {
-          log('transformObjectByIndex (`enum`)')
-
-          return getTransformByKeyForEnum(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-          *//*
-           *  Get selected items for the uri
-           *//*
-          const schemaUri = getUri(uri, key)
-          const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-          const isRequired = required.includes(key)
-
-          // log(getValueForEnum(index, schema))
-
-          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
-          *//*
-        } else {
-          if (hasAnyOf(schema)) {
-            log('transformObjectByIndex (`anyOf`)')
-
-            return getTransformByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-            /*
-             *  Get selected items for the uri
-             *//*
-            const schemaUri = getUri(uri, key)
-            const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-            const isRequired = required.includes(key)
-
-            // log(getValueForAnyOf(index, schema))
-
-            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
-            *//*
-          } else {
-            if (hasOneOf(schema)) {
-              log('transformObjectByIndex (`oneOf`)')
-
-              return getTransformByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-              *//*
-               *  Get selected items for the uri
-               *//*
-              const schemaUri = getUri(uri, key)
-              const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-              const isRequired = required.includes(key)
-
-              // log(getValueForOneOf(index, schema))
-
-              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
-              *//*
-            }
-          }
-        }
-
-        log('transformObjectByIndex (`value` `defaultValue`)')
-
-        *//*
-         *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-         *//*
-
-        *//*
-         *  Schemas may be required
-         *//*
-
-        *//*
-         *  Schemas may have a value
-         *//*
-
-        *//*
-         *  Array schemas do not have a value
-         *//*
-
-        *//*
-         *  Object schemas do not have a value
-         *//*
-
-        const schemaUri = getUri(uri, key)
-        const isRequired = required.includes(key)
-
-        *//*
-         *  Do not get the value
-         *//*
-
-        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldProps(params, schemaUri), isRequired } } }, key })
-        *//*
-      })
-  )
-  */
 
   return renderObject(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
 }
@@ -4347,8 +3502,6 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformArrayByKey (2)')
-
   const {
     parentUri: fieldParentUri = '#',
     key: fieldKey = ''
@@ -4362,130 +3515,16 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
   } = schema
 
   if (isArray(items)) {
-    log('transformArrayByKey (2 - 1)')
-
-    log(`
-
-Array with "items" array
-
-    `)
-
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
     return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
     if (isObject(items)) {
-      log('transformArrayByKey (2 - 2)')
-
-      log(`
-
-Array with "items" object
-
-      `)
-
       const fields = [
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
       return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
-
-      /*
-      let fields
-      if (hasEnum(items)) {
-        log('transformArrayByKey (`enum`)')
-
-        fields = [
-          getTransformByIndexForEnum(items, rootSchema, values, { ...params, parentUri: uri })
-        ]
-
-        *//*
-         *  Get selected items for the parent uri
-         *//*
-        const schemaUri = getUri(uri, 0)
-        const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-        // log(getValueForEnum(getIndexForEnum(values, uri, schemaUri, items), items))
-
-        fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
-        ]
-        *//*
-      } else {
-        if (hasAnyOf(items)) {
-          log('transformArrayByKey (`anyOf`)')
-
-          fields = [
-            getTransformByIndexForAnyOf(items, rootSchema, values, { ...params, parentUri: uri })
-          ]
-
-          *//*
-           *  Get selected items for the parent uri
-           *//*
-          const schemaUri = getUri(uri, 0)
-          const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-          // log(getValueForAnyOf(0, items))
-
-          fields = [
-            transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
-          ]
-          *//*
-        } else {
-          if (hasOneOf(items)) {
-            log('transformArrayByKey (`oneOf`)')
-
-            fields = [
-              getTransformByIndexForOneOf(items, rootSchema, values, { ...params, parentUri: uri })
-            ]
-
-            *//*
-             *  Get selected items for the parent uri
-             *//*
-            const schemaUri = getUri(uri, 0)
-            const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-            // log(getValueForOneOf(0, items))
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems } } } })
-            ]
-            *//*
-          } else {
-            log('transformArrayByKey (`value` `defaultValue`)')
-
-            const schemaUri = getUri(uri, 0)
-
-            *//*
-             *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-             *//*
-
-            *//*
-             *  Schemas may have a value
-             *//*
-
-            *//*
-             *  Array schemas do not have a value
-             *//*
-
-            *//*
-             *  Object schemas do not have a value
-             *//*
-
-            log(`
-
-Get the value
-
-            `)
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
-            ]
-          }
-        }
-      }
-
-      return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: { ...getElementsProps(params, uri), fields } } })
-      */
     }
   }
 }
@@ -4510,8 +3549,6 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformArrayByIndex (2)')
-
   const {
     parentUri: arrayParentUri = '#',
     index: arrayIndex = 0
@@ -4525,196 +3562,16 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
   } = schema
 
   if (isArray(items)) {
-    log('transformArrayByIndex (2 - 1)')
-
-    log(`
-
-  Array with "items" array
-
-    `)
-
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
     return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
     if (isObject(items)) {
-      log('transformArrayByIndex (2 - 2)')
-
-      log(`
-
-Array with "items" object
-
-      `)
-
       const fields = [
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
       return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
-
-      /*
-      let fields
-      if (hasEnum(items)) {
-        log('transformArrayByIndex (`enum`)')
-
-        fields = [
-          getTransformByIndexForEnum(items, rootSchema, values, { ...params, parentUri: uri })
-        ]
-
-        *//*
-         *  Get selected items for the parent uri
-         *//*
-        const schemaUri = getUri(uri, 0)
-        const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-        // log(getValueForEnum(getIndexForEnum(values, uri, schemaUri, items), items))
-
-        fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
-        ]
-        *//*
-      } else {
-        if (hasAnyOf(items)) {
-          log('transformArrayByIndex (`anyOf`)')
-
-          fields = [
-            getTransformByIndexForAnyOf(items, rootSchema, values, { ...params, parentUri: uri })
-          ]
-
-          /*
-           *  Get selected items for the parent uri
-           *//*
-          const schemaUri = getUri(uri, 0)
-          const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-          // log(getValueForAnyOf(getIndexForAnyOf(values, uri, schemaUri, items), items))
-
-          fields = [
-            transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
-          ]
-          *//*
-        } else {
-          if (hasOneOf(items)) {
-            log('transformArrayByIndex (`oneOf`)')
-
-            fields = [
-              getTransformByIndexForOneOf(items, rootSchema, values, { ...params, parentUri: uri })
-            ]
-
-            *//*
-             *  Get selected items for the parent uri
-             *//*
-            const schemaUri = getUri(uri, 0)
-            const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-            // log(getValueForOneOf(0, items))
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems } } } })
-            ]
-            *//*
-          } else {
-            log('transformArrayByIndex (`value` `defaultValue`)')
-
-            *//*
-             *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-             *//*
-
-            *//*
-             *  Schemas may have a value
-             *//*
-
-            *//*
-             *  Array schemas do not have a value
-             *//*
-
-            *//*
-             *  Object schemas do not have a value
-             *//*
-
-            const schemaUri = getUri(uri, 0)
-
-            if (isArraySchema(items)) {
-              log(`
-
-  Array. Do not get the value
-
-              `)
-
-              fields = [
-                transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
-              ]
-            } else {
-              if (isObjectSchema(items)) {
-                log(`
-
-  Object. Do not get the value
-
-                `)
-
-                fields = [
-                  transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
-                ]
-              } else {
-                log(`
-
-  Get the value
-
-                `)
-
-                if (Reflect.has(values, uri)) {
-                  const value = Reflect.get(values, uri)
-
-                  if (isArray(value)) {
-                    log(`
-
-  value is array
-
-                    `)
-
-                    const v = Reflect.get(value, 0)
-
-                    fields = [
-                      transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), value: String(v) }, elements: { field: { ...getElementsFieldProps(params, schemaUri), value: String(v) } } } })
-                    ]
-                  } else {
-                    if (isObject(value)) {
-                      log(`
-
-  value is object
-
-                      `)
-
-                      const v = Reflect.get(value, 0)
-
-                      fields = [
-                        transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), value: String(v) }, elements: { field: { ...getElementsFieldProps(params, schemaUri), value: String(v) } } } })
-                      ]
-                    } else {
-                      log(`
-
-  value is neither an array nor an object
-
-                      `)
-
-                      fields = [
-                        transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), value: String(value) }, elements: { field: { ...getElementsFieldProps(params, schemaUri), value: String(value) } } } })
-                      ]
-                    }
-                  }
-                } else {
-                  fields = [
-                    transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-
-      return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: { ...getElementsProps(params, uri), fields } } })
-      */
     }
   }
 }
@@ -4739,8 +3596,6 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformNumberByKey (2)')
-
   const {
     parentUri: fieldParentUri = '#',
     key: fieldKey = ''
@@ -4752,9 +3607,6 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  /*
-   *  Do not get the value
-   */
   return renderNumber(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4778,8 +3630,6 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformNumberByIndex (2)')
-
   const {
     parentUri: arrayParentUri = '#',
     index: arrayIndex = 0
@@ -4791,9 +3641,6 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  /*
-   *  Do not get the value
-   */
   return renderNumber(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4817,8 +3664,6 @@ export function transformStringByKey (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformStringByKey (2)')
-
   const {
     parentUri: fieldParentUri = '#',
     key: fieldKey = ''
@@ -4830,9 +3675,6 @@ export function transformStringByKey (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  /*
-   *  Do not get the value
-   */
   return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, name: fieldKey }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4856,8 +3698,6 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformStringByIndex (2)')
-
   const {
     parentUri: arrayParentUri = '#',
     index: arrayIndex = 0
@@ -4869,9 +3709,6 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  /*
-   *  Do not get the value
-   */
   return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri, item: arrayIndex }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4895,16 +3732,11 @@ export function transformNull (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformNull (2)')
-
   const {
     parentUri = '#',
     uri = '#/'
   } = params
 
-  /*
-   *  Do not get the value
-   */
   return renderNull(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4928,16 +3760,11 @@ export function transformBoolean (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformBoolean (2)')
-
   const {
     parentUri = '#',
     uri = '#/'
   } = params
 
-  /*
-   *  Do not get the value
-   */
   return renderBoolean(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
@@ -4961,8 +3788,6 @@ export function transformObject (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformObject (2)')
-
   const {
     parentUri = '#',
     uri = '#/'
@@ -4979,104 +3804,6 @@ export function transformObject (schema, rootSchema, values, params) {
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  /*
-  const fields = (
-    Object
-      .entries(properties)
-      .map(([key, schema], index) => {
-        return getTransformByKey(schema, rootSchema, values, { ...params, parentUri: uri, isRequired: required.includes(key), key, index })
-
-        *//*
-        if (hasEnum(schema)) {
-          log('transformObject (`enum`)')
-
-          return getTransformByKeyForEnum(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-          *//*
-           *  Get selected items for the uri
-           *//*
-          const schemaUri = getUri(uri, key)
-          const {
-            selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema),
-            ...metaProps
-          } = getMetaProps(params, schemaUri)
-
-          const isRequired = required.includes(key)
-
-          // log(getValueForEnum(index, schema))
-
-          return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...metaProps, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
-          *//*
-        } else {
-          if (hasAnyOf(schema)) {
-            log('transformObject (`anyOf`)')
-
-            return getTransformByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-            *//*
-             *  Get selected items for the uri
-             *//*
-            const schemaUri = getUri(uri, key)
-            const {
-              selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema),
-              ...metaProps
-            } = getMetaProps(params, schemaUri)
-            const isRequired = required.includes(key)
-
-            // log(getValueForAnyOf(index, schema))
-
-            return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...metaProps, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
-            *//*
-          } else {
-            if (hasOneOf(schema)) {
-              log('transformObject (`oneOf`)')
-
-              return getTransformByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-              *//*
-               *  Get selected items for the uri
-               *//*
-              const schemaUri = getUri(uri, key)
-              const {
-                selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema),
-                ...metaProps
-              } = getMetaProps(params, schemaUri)
-              const isRequired = required.includes(key)
-
-              // log(getValueForOneOf(index, schema))
-
-              return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...metaProps, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
-              *//*
-            }
-          }
-        }
-
-        log('transformObject (`value` `defaultValue`)')
-
-        *//*
-         *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-         *//*
-
-        *//*
-         *  Schemas may be required
-         *//*
-
-        *//*
-         *  Schemas may have a value
-         *//*
-
-        const schemaUri = getUri(uri, key)
-        const isRequired = required.includes(key)
-
-        *//*
-         *  Do not get the value
-         *//*
-        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldProps(params, schemaUri), isRequired } } }, key })
-        *//*
-      })
-  )
-  */
-
   return renderObject(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
 }
 
@@ -5084,53 +3811,17 @@ export function getTransformByKey (schema, rootSchema, values, params) {
   if (hasEnum(schema)) {
     log('getTransformByKey (`enum`)')
 
-    return getTransformByKeyForEnum(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-    /*
-     *  Get selected items for the uri
-     *//*
-    const schemaUri = getUri(uri, key)
-    const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-    const isRequired = required.includes(key)
-
-    // log(getValueForEnum(index, schema))
-
-    return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems, isRequired } } }, key })
-    */
+    return transformByKeyForEnum(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
   } else {
     if (hasAnyOf(schema)) {
       log('getTransformByKey (`anyOf`)')
 
-      return getTransformByKeyForAnyOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-      /*
-       *  Get selected items for the uri
-       *//*
-      const schemaUri = getUri(uri, key)
-      const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-      const isRequired = required.includes(key)
-
-      // log(getValueForAnyOf(index, schema))
-
-      return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems, isRequired } } }, key })
-      */
+      return transformByKeyForAnyOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
     } else {
       if (hasOneOf(schema)) {
         log('getTransformByKey (`oneOf`)')
 
-        return getTransformByKeyForOneOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
-
-        /*
-         *  Get selected items for the uri
-         *//*
-        const schemaUri = getUri(uri, key)
-        const selectedItems = getSelectedItemsForUri(values, uri, schemaUri, schema)
-        const isRequired = required.includes(key)
-
-        // log(getValueForOneOf(index, schema))
-
-        return transformByKey(schema, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, schemaUri), selectedItems, isRequired } } }, key })
-        */
+        return transformByKeyForOneOf(schema, rootSchema, values, params) // { ...params, parentUri: uri, key, isRequired: required.includes(key) })
       }
     }
   }
@@ -5152,56 +3843,17 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
   if (hasEnum(schema)) {
     log('getTransformByIndex (`enum`)')
 
-    return getTransformByIndexForEnum(schema, rootSchema, values, params)
-
-    /*
-     *  Get selected items for the parent uri
-     *//*
-    const uri = getUri(parentUri, index)
-    const selectedItems = getSelectedItemsForParentUri(values, parentUri, uri, schema)
-
-    // log(getValueForEnum(index, schema))
-
-    fields = [
-      transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } } })
-    ]
-    */
+    return transformByIndexForEnum(schema, rootSchema, values, params)
   } else {
     if (hasAnyOf(schema)) {
       log('getTransformByIndex (`anyOf`)')
 
-      return getTransformByIndexForAnyOf(schema, rootSchema, values, params)
-
-      /*
-       *  Get selected items for the parent uri
-       *//*
-      const uri = getUri(parentUri, index)
-      const selectedItems = getSelectedItemsForParentUri(values, parentUri, uri, schema)
-
-      // log(getValueForAnyOf(index, schema))
-
-      fields = [
-        transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } } })
-      ]
-      */
+      return transformByIndexForAnyOf(schema, rootSchema, values, params)
     } else {
       if (hasOneOf(schema)) {
         log('getTransformByIndex (`oneOf`)')
 
-        return getTransformByIndexForOneOf(schema, rootSchema, values, params)
-
-        /*
-         *  Get selected items for the parent uri
-         *//*
-        const uri = getUri(parentUri, index)
-        const selectedItems = getSelectedItemsForParentUri(values, parentUri, uri, schema)
-
-        // log(getValueForOneOf(index, schema))
-
-        fields = [
-          transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } } })
-        ]
-        */
+        return transformByIndexForOneOf(schema, rootSchema, values, params)
       }
     }
   }
@@ -5214,22 +3866,6 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
   } = params
 
   const uri = getUri(parentUri, index)
-
-  /*
-   *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-   */
-
-  /*
-   *  Schemas may have a value
-   */
-
-  /*
-   *  Array schemas do not have a value
-   */
-
-  /*
-   *  Object schemas do not have a value
-   */
 
   log(`
 
@@ -5326,8 +3962,6 @@ export function transformArray (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformArray (2)')
-
   const {
     parentUri = '#',
     uri = '#/'
@@ -5338,130 +3972,16 @@ export function transformArray (schema, rootSchema, values, params) {
   } = schema
 
   if (isArray(items)) {
-    log('transformArray (2 - 1)')
-
-    log(`
-
-  Array with "items" array
-
-    `)
-
     const fields = items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
     return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
   } else {
     if (isObject(items)) {
-      log('transformArray (2 - 2)')
-
-      log(`
-
-  Array with "items" object
-
-      `)
-
       const fields = [
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
       return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
-
-      /*
-      let fields
-      if (hasEnum(items)) {
-        log('transformArray (`enum`)')
-
-        fields = [
-          getTransformByIndexForEnum(items, rootSchema, values, { ...params, parentUri: uri })
-        ]
-
-        *//*
-         *  Get selected items for the parent uri
-         *//*
-        const schemaUri = getUri(uri, 0)
-        const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-        // log(getValueForEnum(0, schema))
-
-        fields = [
-          transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, schemaUri), selectedItems } } } })
-        ]
-        *//*
-      } else {
-        if (hasAnyOf(items)) {
-          log('transformArray (`anyOf`)')
-
-          fields = [
-            getTransformByIndexForAnyOf(items, rootSchema, values, { ...params, parentUri: uri })
-          ]
-
-          *//*
-           *  Get selected items for the parent uri
-           *//*
-          const schemaUri = getUri(uri, 0)
-          const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-          // log(getValueForAnyOf(0, schema))
-
-          fields = [
-            transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
-          ]
-          *//*
-        } else {
-          if (hasOneOf(items)) {
-            log('transformArray (`oneOf`)')
-
-            fields = [
-              getTransformByIndexForOneOf(items, rootSchema, values, { ...params, parentUri: uri })
-            ]
-
-            /*
-             *  Get selected items for the parent uri
-             *//*
-            const schemaUri = getUri(uri, 0)
-            const selectedItems = getSelectedItemsForParentUri(values, uri, schemaUri, items)
-
-            // log(getValueForOneOf(0, schema))
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, schemaUri), selectedItems } } } })
-            ]
-            *//*
-          } else {
-            log('transformArray (`value` `defaultValue`)')
-
-            const schemaUri = getUri(uri, 0)
-
-            *//*
-             *  Schemas without `enum`, `anyOf`, or `oneOf` do not have selected items
-             *//*
-
-            *//*
-             *  Schemas may have a value
-             *//*
-
-            *//*
-             *  Array schemas do not have a value
-             *//*
-
-            *//*
-             *  Object schemas do not have a value
-             *//*
-
-            log(`
-
-  Get the value
-
-            `)
-
-            fields = [
-              transformByIndex(items, rootSchema, values, { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: getMetaProps(params, schemaUri), elements: getElementsProps(params, schemaUri) } })
-            ]
-          }
-        }
-      }
-
-      return renderArray(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: { ...getElementsProps(params, uri), fields } } })
-      */
     }
   }
 }
@@ -5486,16 +4006,11 @@ export function transformNumber (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformNumber (2)')
-
   const {
     parentUri = '#',
     uri = '#/'
   } = params
 
-  /*
-   *  Do not get the value
-   */
   return renderNumber(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
@@ -5519,16 +4034,11 @@ export function transformString (schema, rootSchema, values, params) {
     }
   }
 
-  log('transformString (2)')
-
   const {
     parentUri = '#',
     uri = '#/'
   } = params
 
-  /*
-   *  Do not get the value
-   */
   return renderString(schema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), schema, rootSchema, parentUri, uri }, elements: getElementsProps(params, uri) } })
 }
 
@@ -5562,110 +4072,43 @@ export function transformByKey (schema = {}, rootSchema = schema, values = {}, p
   }
 }
 
-export function getTransformByKeyForEnum (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForEnum')
+export function transformByKeyForEnum (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
+  log('transformByKeyForEnum')
 
-  /*
-   *  Get selected items for the uri
-   */
   const uri = getUri(parentUri, key)
   const {
     selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
     ...metaProps
   } = getMetaProps(params, uri)
-
-  // log(getValueForEnum(index, schema))
 
   return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
 }
 
-export function getTransformByKeyForAnyOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForAnyOf')
+export function transformByKeyForAnyOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
+  log('transformByKeyForAnyOf')
 
-  /*
-   *  Get selected items for the uri
-   */
   const uri = getUri(parentUri, key)
   const {
     selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
     ...metaProps
   } = getMetaProps(params, uri)
-
-  // log(getValueForAnyOf(index, schema))
 
   return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
 }
 
-export function getTransformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForOneOf', { key, isRequired })
+export function transformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
+  log('transformByKeyForOneOf', { key, isRequired })
 
-  /*
-   *  Get selected items for the uri
-   */
   const uri = getUri(parentUri, key)
   const {
     selectedItems = getSelectedItemsForUri(values, parentUri, uri, schema),
     ...metaProps
   } = getMetaProps(params, uri)
 
-  // log(getValueForOneOf(index, schema))
-
   return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
 }
 
-export function getTransformByIndexForEnum (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
-  log('getTransformByIndexForEnum')
-
-  /*
-   *  Get selected items for the parent uri
-   */
-  const uri = getUri(parentUri, index)
-  const {
-    selectedItems = getSelectedItemsForParentUri(values, parentUri, uri, schema),
-    ...metaProps
-  } = getMetaProps(params, uri)
-
-  // log(getValueForEnum(index, schema))
-
-  return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
-}
-
-export function getTransformByIndexForAnyOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
-  log('getTransformByIndexForAnyOf')
-
-  /*
-   *  Get selected items for the parent uri
-   */
-  const uri = getUri(parentUri, index)
-  const {
-    selectedItems = getSelectedItemsForParentUri(values, parentUri, uri, schema),
-    ...metaProps
-  } = getMetaProps(params, uri)
-
-  // log(getValueForAnyOf(index, schema))
-
-  return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
-}
-
-export function getTransformByIndexForOneOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
-  log('getTransformByIndexForOneOf')
-
-  /*
-   *  Get selected items for the parent uri
-   */
-  const uri = getUri(parentUri, index)
-  const {
-    selectedItems = getSelectedItemsForParentUri(values, parentUri, uri, schema),
-    ...metaProps
-  } = getMetaProps(params, uri)
-
-  // log(getValueForOneOf(index, schema))
-
-  return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
-}
-
-/*
-export function transformByIndexForEnum (schema, rootSchema, values, { index = 0, parentUri, ...params }) {
+export function transformByIndexForEnum (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
   log('transformByIndexForEnum')
 
   const uri = getUri(parentUri, index)
@@ -5674,12 +4117,10 @@ export function transformByIndexForEnum (schema, rootSchema, values, { index = 0
     ...metaProps
   } = getMetaProps(params, uri)
 
-  // log(getValueForEnum(index, schema))
-
   return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
 }
 
-export function transformByIndexForAnyOf (schema, rootSchema, values, { index = 0, parentUri, ...params }) {
+export function transformByIndexForAnyOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
   log('transformByIndexForAnyOf')
 
   const uri = getUri(parentUri, index)
@@ -5688,12 +4129,10 @@ export function transformByIndexForAnyOf (schema, rootSchema, values, { index = 
     ...metaProps
   } = getMetaProps(params, uri)
 
-  // log(getValueForAnyOf(index, schema))
-
   return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
 }
 
-export function transformByIndexForOneOf (schema, rootSchema, values, { index = 0, parentUri, ...params }) {
+export function transformByIndexForOneOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
   log('transformByIndexForOneOf')
 
   const uri = getUri(parentUri, index)
@@ -5702,11 +4141,8 @@ export function transformByIndexForOneOf (schema, rootSchema, values, { index = 
     ...metaProps
   } = getMetaProps(params, uri)
 
-  // log(getValueForOneOf(index, schema))
-
   return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
 }
-*/
 
 export function transformByIndex (schema = {}, rootSchema = schema, values = {}, params = {}) {
   log('transformByIndex')

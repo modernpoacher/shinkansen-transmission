@@ -39,12 +39,12 @@ import {
   mapTransformByIndex,
   getTransformByIndex,
 
-  // getTransformByKeyForEnum,
-  // getTransformByKeyForAnyOf,
-  // getTransformByKeyForOneOf,
-  // getTransformByIndexForEnum,
-  // getTransformByIndexForAnyOf,
-  // getTransformByIndexForOneOf,
+  // transformByKeyForEnum,
+  // transformByKeyForAnyOf,
+  // transformByKeyForOneOf,
+  // transformByIndexForEnum,
+  // transformByIndexForAnyOf,
+  // transformByIndexForOneOf,
 
   mapTransformByKey,
 
@@ -489,7 +489,7 @@ export function transformObject (rootSchema, values, params) {
         if (hasEnum(schema)) {
           log('transformObject (`enum`)')
 
-          return getTransformByKeyForEnum(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
+          return transformByKeyForEnum(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
 
           *//*
            *  Get selected items for the uri
@@ -510,7 +510,7 @@ export function transformObject (rootSchema, values, params) {
           if (hasAnyOf(schema)) {
             log('transformObject (`anyOf`)')
 
-            return getTransformByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
+            return transformByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
 
             *//*
              *  Get selected items for the uri
@@ -531,7 +531,7 @@ export function transformObject (rootSchema, values, params) {
             if (hasOneOf(schema)) {
               log('transformObject (`oneOf`)')
 
-              return getTransformByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
+              return transformByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri: uri, key, isRequired: required.includes(key) })
 
               /*
                *  Get selected items for the uri
@@ -688,8 +688,8 @@ export function transformArrayForAllOf (rootSchema, values, params) {
 }
 
 /*
-function getTransformByKeyForEnum (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForEnum')
+function transformByKeyForEnum (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
+  log('transformByKeyForEnum')
 
   *//*
    *  Get selected items for the uri
@@ -708,8 +708,8 @@ function getTransformByKeyForEnum (schema, rootSchema, values, { parentUri, key 
   return transformByKey(schema, rootSchema, values, { ...params, parentUri, [uri]: { meta: { ...metaProps, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
 }
 
-function getTransformByKeyForAnyOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForAnyOf')
+function transformByKeyForAnyOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
+  log('transformByKeyForAnyOf')
 
   *//*
    *  Get selected items for the uri
@@ -725,8 +725,8 @@ function getTransformByKeyForAnyOf (schema, rootSchema, values, { parentUri, key
   return transformByKey(schema, rootSchema, values, { ...params, parentUri, [uri]: { meta: { ...metaProps, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
 }
 
-function getTransformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
-  log('getTransformByKeyForOneOf')
+function transformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
+  log('transformByKeyForOneOf')
 
   *//*
    *  Get selected items for the uri
@@ -742,8 +742,8 @@ function getTransformByKeyForOneOf (schema, rootSchema, values, { parentUri, key
   return transformByKey(schema, rootSchema, values, { ...params, parentUri: '#', [uri]: { meta: { ...metaProps, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
 }
 
-function getTransformByIndexForEnum (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
-  log('getTransformByIndexForEnum')
+function transformByIndexForEnum (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
+  log('transformByIndexForEnum')
 
   *//*
    *  Get selected items for the parent uri
@@ -757,8 +757,8 @@ function getTransformByIndexForEnum (schema, rootSchema, values, { parentUri, in
   return transformByIndex(schema, rootSchema, values, { ...params, parentUri, [uri]: { meta: { ...metaProps, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } } })
 }
 
-function getTransformByIndexForAnyOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
-  log('getTransformByIndexForAnyOf')
+function transformByIndexForAnyOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
+  log('transformByIndexForAnyOf')
 
   *//*
    *  Get selected items for the parent uri
@@ -772,8 +772,8 @@ function getTransformByIndexForAnyOf (schema, rootSchema, values, { parentUri, i
   return transformByIndex(schema, rootSchema, values, { ...params, parentUri: '#', [uri]: { meta: { ...metaProps, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } } })
 }
 
-function getTransformByIndexForOneOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
-  log('getTransformByIndexForOneOf')
+function transformByIndexForOneOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
+  log('transformByIndexForOneOf')
 
   *//*
    *  Get selected items for the parent uri
@@ -851,7 +851,7 @@ export function transformArray (rootSchema, values, params) {
         log('transformArray (`enum`)')
 
         fields = [
-          getTransformByIndexForEnum(items, rootSchema, values, { parentUri: '#/', ...params })
+          transformByIndexForEnum(items, rootSchema, values, { parentUri: '#/', ...params })
         ]
 
         *//*
@@ -872,7 +872,7 @@ export function transformArray (rootSchema, values, params) {
           log('transformArray (`anyOf`)')
 
           fields = [
-            getTransformByIndexForAnyOf(items, rootSchema, values, { parentUri: '#/', ...params })
+            transformByIndexForAnyOf(items, rootSchema, values, { parentUri: '#/', ...params })
           ]
 
           *//*
@@ -893,7 +893,7 @@ export function transformArray (rootSchema, values, params) {
             log('transformArray (`oneOf`)')
 
             fields = [
-              getTransformByIndexForOneOf(items, rootSchema, values, { parentUri: '#/', ...params })
+              transformByIndexForOneOf(items, rootSchema, values, { parentUri: '#/', ...params })
             ]
 
             *//*
