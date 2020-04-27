@@ -61,7 +61,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -72,7 +72,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           'string (3)'
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -121,7 +121,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -137,13 +137,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (1)'
                               }
                             }
@@ -158,13 +158,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (2)'
                               }
                             }
@@ -179,20 +179,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -241,7 +241,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -257,13 +257,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (1)'
                               }
                             }
@@ -278,13 +278,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (2)'
                               }
                             }
@@ -299,20 +299,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -366,7 +366,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       minLength: 1,
                       maxLength: 100,
-                      required: false,
+                      isRequired: false,
                       value: 'string'
                     },
                     elements: {
@@ -374,7 +374,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         minLength: 1,
                         maxLength: 100,
-                        required: false,
+                        isRequired: false,
                         value: 'string'
                       }
                     }
@@ -427,7 +427,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -438,7 +438,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           3
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -487,7 +487,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -503,13 +503,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: '1'
                               }
                             }
@@ -524,13 +524,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: '2'
                               }
                             }
@@ -545,20 +545,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: '3'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -607,7 +607,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -623,13 +623,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: '1'
                               }
                             }
@@ -644,13 +644,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: '2'
                               }
                             }
@@ -665,20 +665,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: '3'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -732,7 +732,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       min: 1,
                       max: 3,
-                      required: false,
+                      isRequired: false,
                       value: '2'
                     },
                     elements: {
@@ -740,7 +740,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         min: 1,
                         max: 3,
-                        required: false,
+                        isRequired: false,
                         value: '2'
                       }
                     }
@@ -802,7 +802,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -822,7 +822,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -833,7 +833,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -894,7 +894,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -914,7 +914,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -930,13 +930,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -951,13 +951,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -972,20 +972,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -1046,7 +1046,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1066,7 +1066,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -1082,13 +1082,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -1103,13 +1103,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -1124,20 +1124,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -1202,7 +1202,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1225,7 +1225,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            required: false,
+                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -1233,7 +1233,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              required: false,
+                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -1295,7 +1295,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1315,7 +1315,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -1326,7 +1326,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -1387,7 +1387,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1407,7 +1407,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -1423,13 +1423,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -1444,13 +1444,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -1465,20 +1465,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -1539,7 +1539,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1559,7 +1559,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -1575,13 +1575,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -1596,13 +1596,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -1617,20 +1617,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -1695,7 +1695,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1718,7 +1718,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -1726,7 +1726,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -1786,7 +1786,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1805,7 +1805,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -1815,7 +1815,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 false
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -1874,7 +1874,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -1893,7 +1893,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -1909,13 +1909,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -1930,20 +1930,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -2002,7 +2002,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2021,7 +2021,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -2037,13 +2037,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -2058,20 +2058,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -2128,7 +2128,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2145,13 +2145,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'true'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             }
                           }
@@ -2209,7 +2209,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2227,7 +2227,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -2236,7 +2236,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 null
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -2293,7 +2293,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2311,7 +2311,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -2327,20 +2327,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -2397,7 +2397,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2415,7 +2415,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -2431,20 +2431,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -2501,7 +2501,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2518,13 +2518,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'null'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             }
                           }
@@ -2612,7 +2612,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2644,7 +2644,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -2664,7 +2664,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -2675,7 +2675,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -2695,7 +2695,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -2706,7 +2706,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -2796,7 +2796,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -2828,7 +2828,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -2848,7 +2848,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -2864,13 +2864,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -2885,13 +2885,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -2906,20 +2906,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -2939,7 +2939,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -2955,13 +2955,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -2976,13 +2976,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -2997,20 +2997,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -3100,7 +3100,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -3132,7 +3132,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -3152,7 +3152,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -3168,13 +3168,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -3189,13 +3189,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -3210,20 +3210,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -3243,7 +3243,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -3259,13 +3259,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -3280,13 +3280,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -3301,20 +3301,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -3412,7 +3412,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -3448,7 +3448,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -3471,7 +3471,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: false,
+                                  isRequired: false,
                                   value: 'string'
                                 },
                                 elements: {
@@ -3479,7 +3479,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string'
                                   }
                                 }
@@ -3503,7 +3503,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -3511,7 +3511,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -3608,7 +3608,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -3643,7 +3643,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -3663,7 +3663,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   enum: {
@@ -3674,7 +3674,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -3694,7 +3694,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -3705,7 +3705,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -3801,7 +3801,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -3836,7 +3836,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -3856,7 +3856,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   anyOf: {
@@ -3872,13 +3872,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -3893,13 +3893,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -3914,20 +3914,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -3947,7 +3947,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -3963,13 +3963,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -3984,13 +3984,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -4005,20 +4005,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -4114,7 +4114,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -4149,7 +4149,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -4169,7 +4169,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   oneOf: {
@@ -4185,13 +4185,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -4206,13 +4206,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -4227,20 +4227,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -4260,7 +4260,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -4276,13 +4276,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -4297,13 +4297,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -4318,20 +4318,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -4435,7 +4435,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -4474,7 +4474,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -4497,7 +4497,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: true,
+                                  isRequired: true,
                                   value: 'string'
                                 },
                                 elements: {
@@ -4505,7 +4505,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string'
                                   }
                                 }
@@ -4529,7 +4529,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -4537,7 +4537,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -4598,7 +4598,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -4618,7 +4618,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -4629,7 +4629,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -4686,7 +4686,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -4706,7 +4706,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -4722,13 +4722,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -4743,13 +4743,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -4764,20 +4764,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -4834,7 +4834,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -4854,7 +4854,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -4870,13 +4870,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -4891,13 +4891,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -4912,20 +4912,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -4986,7 +4986,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5009,7 +5009,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            required: false,
+                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -5017,7 +5017,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              required: false,
+                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -5075,7 +5075,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5095,7 +5095,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -5106,7 +5106,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -5163,7 +5163,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5183,7 +5183,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -5199,13 +5199,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -5220,13 +5220,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -5241,20 +5241,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -5311,7 +5311,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5331,7 +5331,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -5347,13 +5347,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -5368,13 +5368,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -5389,20 +5389,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -5463,7 +5463,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5486,7 +5486,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -5494,7 +5494,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -5550,7 +5550,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5569,7 +5569,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -5579,7 +5579,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 false
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -5634,7 +5634,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5653,7 +5653,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -5669,13 +5669,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -5690,20 +5690,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -5758,7 +5758,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5777,7 +5777,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -5793,13 +5793,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -5814,20 +5814,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -5880,7 +5880,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5897,13 +5897,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'true'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             }
                           }
@@ -5957,7 +5957,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -5975,7 +5975,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -5984,7 +5984,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 null
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -6037,7 +6037,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -6055,7 +6055,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -6071,20 +6071,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -6137,7 +6137,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -6155,7 +6155,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -6171,20 +6171,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -6237,7 +6237,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -6254,13 +6254,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'null'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             }
                           }
@@ -6344,7 +6344,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -6376,7 +6376,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -6396,7 +6396,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -6407,7 +6407,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -6427,7 +6427,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -6438,7 +6438,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -6524,7 +6524,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -6556,7 +6556,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -6576,7 +6576,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -6592,13 +6592,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -6613,13 +6613,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -6634,20 +6634,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -6667,7 +6667,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -6683,13 +6683,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -6704,13 +6704,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -6725,20 +6725,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -6824,7 +6824,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -6856,7 +6856,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -6876,7 +6876,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -6892,13 +6892,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -6913,13 +6913,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -6934,20 +6934,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -6967,7 +6967,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -6983,13 +6983,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -7004,13 +7004,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -7025,20 +7025,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -7132,7 +7132,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -7168,7 +7168,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -7191,7 +7191,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: false,
+                                  isRequired: false,
                                   value: 'string'
                                 },
                                 elements: {
@@ -7199,7 +7199,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string'
                                   }
                                 }
@@ -7223,7 +7223,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -7231,7 +7231,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -7324,7 +7324,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -7359,7 +7359,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -7379,7 +7379,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   enum: {
@@ -7390,7 +7390,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -7410,7 +7410,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -7421,7 +7421,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -7513,7 +7513,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -7548,7 +7548,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -7568,7 +7568,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   anyOf: {
@@ -7584,13 +7584,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -7605,13 +7605,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -7626,20 +7626,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -7659,7 +7659,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -7675,13 +7675,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -7696,13 +7696,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -7717,20 +7717,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -7822,7 +7822,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -7857,7 +7857,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -7877,7 +7877,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   oneOf: {
@@ -7893,13 +7893,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -7914,13 +7914,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -7935,20 +7935,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -7968,7 +7968,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -7984,13 +7984,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -8005,13 +8005,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -8026,20 +8026,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -8139,7 +8139,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -8178,7 +8178,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -8201,7 +8201,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: true,
+                                  isRequired: true,
                                   value: 'string'
                                 },
                                 elements: {
@@ -8209,7 +8209,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string'
                                   }
                                 }
@@ -8233,7 +8233,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -8241,7 +8241,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -8325,7 +8325,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -8345,7 +8345,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -8356,7 +8356,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -8376,7 +8376,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -8387,7 +8387,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -8464,7 +8464,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -8484,7 +8484,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -8500,13 +8500,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -8521,13 +8521,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -8542,20 +8542,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -8575,7 +8575,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -8591,13 +8591,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -8612,13 +8612,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -8633,20 +8633,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -8723,7 +8723,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -8743,7 +8743,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -8759,13 +8759,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -8780,13 +8780,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -8801,20 +8801,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -8834,7 +8834,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -8850,13 +8850,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -8871,13 +8871,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -8892,20 +8892,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -8990,7 +8990,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -9013,7 +9013,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/one',
                             minLength: 1,
                             maxLength: 100,
-                            required: false,
+                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -9021,7 +9021,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/one',
                               minLength: 1,
                               maxLength: 100,
-                              required: false,
+                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -9045,7 +9045,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/two',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -9053,7 +9053,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/two',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -9137,7 +9137,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -9157,7 +9157,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             enum: {
@@ -9168,7 +9168,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -9188,7 +9188,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -9199,7 +9199,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -9282,7 +9282,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -9302,7 +9302,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             anyOf: {
@@ -9318,13 +9318,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (1)'
                                     }
                                   }
@@ -9339,13 +9339,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (2)'
                                     }
                                   }
@@ -9360,20 +9360,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -9393,7 +9393,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -9409,13 +9409,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -9430,13 +9430,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -9451,20 +9451,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -9547,7 +9547,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -9567,7 +9567,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             oneOf: {
@@ -9583,13 +9583,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (1)'
                                     }
                                   }
@@ -9604,13 +9604,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (2)'
                                     }
                                   }
@@ -9625,20 +9625,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -9658,7 +9658,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -9674,13 +9674,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -9695,13 +9695,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -9716,20 +9716,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -9820,7 +9820,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -9843,7 +9843,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/one',
                             minLength: 1,
                             maxLength: 100,
-                            required: true,
+                            isRequired: true,
                             value: 'string'
                           },
                           elements: {
@@ -9851,7 +9851,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/one',
                               minLength: 1,
                               maxLength: 100,
-                              required: true,
+                              isRequired: true,
                               value: 'string'
                             }
                           }
@@ -9875,7 +9875,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/two',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -9883,7 +9883,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/two',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -9937,7 +9937,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -9947,7 +9947,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           false
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -9994,7 +9994,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -10010,13 +10010,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'true'
                               }
                             }
@@ -10031,20 +10031,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'false'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10091,7 +10091,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -10107,13 +10107,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'true'
                               }
                             }
@@ -10128,20 +10128,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'false'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10185,13 +10185,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false,
+                      isRequired: false,
                       value: 'true'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false,
+                        isRequired: false,
                         value: 'true'
                       }
                     }
@@ -10240,7 +10240,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -10249,7 +10249,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           null
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10294,7 +10294,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -10310,20 +10310,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/',
                               uri: '#/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
                                 id: '#/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'null'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10368,7 +10368,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -10384,20 +10384,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/',
                               uri: '#/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
                                 id: '#/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'null'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10441,13 +10441,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false,
+                      isRequired: false,
                       value: 'null'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false,
+                        isRequired: false,
                         value: 'null'
                       }
                     }
@@ -10498,7 +10498,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -10509,7 +10509,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           'string (3)'
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10556,7 +10556,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -10572,13 +10572,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (1)'
                               }
                             }
@@ -10593,13 +10593,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (2)'
                               }
                             }
@@ -10614,20 +10614,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10674,7 +10674,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -10690,13 +10690,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (1)'
                               }
                             }
@@ -10711,13 +10711,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (2)'
                               }
                             }
@@ -10732,20 +10732,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: 'string (3)'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: 'string (3)'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10797,7 +10797,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       minLength: 1,
                       maxLength: 100,
-                      required: false,
+                      isRequired: false,
                       value: 'string'
                     },
                     elements: {
@@ -10805,7 +10805,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         minLength: 1,
                         maxLength: 100,
-                        required: false,
+                        isRequired: false,
                         value: 'string'
                       }
                     }
@@ -10856,7 +10856,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -10867,7 +10867,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           3
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -10914,7 +10914,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -10930,13 +10930,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: '1'
                               }
                             }
@@ -10951,13 +10951,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: '2'
                               }
                             }
@@ -10972,20 +10972,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: '3'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -11032,7 +11032,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -11048,13 +11048,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: '1'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: '1'
                               }
                             }
@@ -11069,13 +11069,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: '2'
                               }
                             }
@@ -11090,20 +11090,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/2',
-                              required: false,
+                              isRequired: false,
                               value: '3'
                             },
                             elements: {
                               field: {
                                 id: '#/0/2',
-                                required: false,
+                                isRequired: false,
                                 value: '3'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -11155,7 +11155,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       uri: '#/0',
                       min: 1,
                       max: 3,
-                      required: false,
+                      isRequired: false,
                       value: '2'
                     },
                     elements: {
@@ -11163,7 +11163,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                         id: '#/0',
                         min: 1,
                         max: 3,
-                        required: false,
+                        isRequired: false,
                         value: '2'
                       }
                     }
@@ -11223,7 +11223,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11243,7 +11243,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -11254,7 +11254,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -11313,7 +11313,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11333,7 +11333,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -11349,13 +11349,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -11370,13 +11370,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -11391,20 +11391,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -11463,7 +11463,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11483,7 +11483,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -11499,13 +11499,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -11520,13 +11520,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -11541,20 +11541,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -11617,7 +11617,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11640,7 +11640,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            required: false,
+                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -11648,7 +11648,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              required: false,
+                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -11708,7 +11708,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11728,7 +11728,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -11739,7 +11739,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -11798,7 +11798,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11818,7 +11818,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -11834,13 +11834,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -11855,13 +11855,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -11876,20 +11876,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -11948,7 +11948,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -11968,7 +11968,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -11984,13 +11984,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -12005,13 +12005,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -12026,20 +12026,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12102,7 +12102,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12125,7 +12125,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -12133,7 +12133,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -12191,7 +12191,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12210,7 +12210,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -12220,7 +12220,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 false
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12277,7 +12277,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12296,7 +12296,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -12312,13 +12312,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -12333,20 +12333,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12403,7 +12403,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12422,7 +12422,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -12438,13 +12438,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -12459,20 +12459,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12527,7 +12527,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12544,13 +12544,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'true'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             }
                           }
@@ -12606,7 +12606,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12624,7 +12624,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -12633,7 +12633,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 null
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12688,7 +12688,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12706,7 +12706,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -12722,20 +12722,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12790,7 +12790,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12808,7 +12808,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -12824,20 +12824,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -12892,7 +12892,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -12909,13 +12909,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'null'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             }
                           }
@@ -13001,7 +13001,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -13033,7 +13033,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -13053,7 +13053,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -13064,7 +13064,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -13084,7 +13084,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -13095,7 +13095,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -13183,7 +13183,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -13215,7 +13215,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -13235,7 +13235,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -13251,13 +13251,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -13272,13 +13272,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -13293,20 +13293,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -13326,7 +13326,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -13342,13 +13342,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -13363,13 +13363,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -13384,20 +13384,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -13485,7 +13485,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -13517,7 +13517,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -13537,7 +13537,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -13553,13 +13553,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -13574,13 +13574,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -13595,20 +13595,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -13628,7 +13628,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -13644,13 +13644,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -13665,13 +13665,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -13686,20 +13686,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -13795,7 +13795,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -13831,7 +13831,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -13854,7 +13854,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: false,
+                                  isRequired: false,
                                   value: 'string'
                                 },
                                 elements: {
@@ -13862,7 +13862,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string'
                                   }
                                 }
@@ -13886,7 +13886,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -13894,7 +13894,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -13989,7 +13989,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -14024,7 +14024,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -14044,7 +14044,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   enum: {
@@ -14055,7 +14055,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -14075,7 +14075,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -14086,7 +14086,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -14180,7 +14180,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -14215,7 +14215,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -14235,7 +14235,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   anyOf: {
@@ -14251,13 +14251,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -14272,13 +14272,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -14293,20 +14293,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -14326,7 +14326,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -14342,13 +14342,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -14363,13 +14363,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -14384,20 +14384,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -14491,7 +14491,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -14526,7 +14526,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -14546,7 +14546,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   oneOf: {
@@ -14562,13 +14562,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -14583,13 +14583,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -14604,20 +14604,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -14637,7 +14637,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -14653,13 +14653,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -14674,13 +14674,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -14695,20 +14695,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -14810,7 +14810,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -14849,7 +14849,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -14872,7 +14872,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: true,
+                                  isRequired: true,
                                   value: 'string'
                                 },
                                 elements: {
@@ -14880,7 +14880,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string'
                                   }
                                 }
@@ -14904,7 +14904,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -14912,7 +14912,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -14971,7 +14971,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -14991,7 +14991,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -15002,7 +15002,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15057,7 +15057,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15077,7 +15077,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -15093,13 +15093,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -15114,13 +15114,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -15135,20 +15135,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15203,7 +15203,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15223,7 +15223,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -15239,13 +15239,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -15260,13 +15260,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -15281,20 +15281,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15353,7 +15353,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15376,7 +15376,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             minLength: 1,
                             maxLength: 100,
-                            required: false,
+                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -15384,7 +15384,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               minLength: 1,
                               maxLength: 100,
-                              required: false,
+                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -15440,7 +15440,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15460,7 +15460,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -15471,7 +15471,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15526,7 +15526,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15546,7 +15546,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -15562,13 +15562,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -15583,13 +15583,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -15604,20 +15604,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15672,7 +15672,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15692,7 +15692,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -15708,13 +15708,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -15729,13 +15729,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -15750,20 +15750,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15822,7 +15822,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15845,7 +15845,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/0',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -15853,7 +15853,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/0',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -15907,7 +15907,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -15926,7 +15926,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -15936,7 +15936,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 false
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -15989,7 +15989,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16008,7 +16008,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -16024,13 +16024,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -16045,20 +16045,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -16111,7 +16111,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16130,7 +16130,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -16146,13 +16146,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'true'
                                     }
                                   }
@@ -16167,20 +16167,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -16231,7 +16231,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16248,13 +16248,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'true'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             }
                           }
@@ -16306,7 +16306,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16324,7 +16324,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -16333,7 +16333,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 null
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -16384,7 +16384,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16402,7 +16402,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -16418,20 +16418,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -16482,7 +16482,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16500,7 +16500,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/0',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -16516,20 +16516,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0',
                                     uri: '#/0/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -16580,7 +16580,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16597,13 +16597,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false,
+                            isRequired: false,
                             value: 'null'
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             }
                           }
@@ -16685,7 +16685,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16717,7 +16717,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -16737,7 +16737,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -16748,7 +16748,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -16768,7 +16768,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -16779,7 +16779,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -16863,7 +16863,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -16895,7 +16895,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -16915,7 +16915,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -16931,13 +16931,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -16952,13 +16952,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -16973,20 +16973,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -17006,7 +17006,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -17022,13 +17022,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -17043,13 +17043,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -17064,20 +17064,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -17161,7 +17161,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -17193,7 +17193,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -17213,7 +17213,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -17229,13 +17229,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (1)'
                                           }
                                         }
@@ -17250,13 +17250,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (2)'
                                           }
                                         }
@@ -17271,20 +17271,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -17304,7 +17304,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -17320,13 +17320,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -17341,13 +17341,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -17362,20 +17362,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -17467,7 +17467,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -17503,7 +17503,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -17526,7 +17526,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: false,
+                                  isRequired: false,
                                   value: 'string'
                                 },
                                 elements: {
@@ -17534,7 +17534,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string'
                                   }
                                 }
@@ -17558,7 +17558,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -17566,7 +17566,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -17657,7 +17657,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -17692,7 +17692,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -17712,7 +17712,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   enum: {
@@ -17723,7 +17723,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       'string (3)'
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -17743,7 +17743,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   enum: {
@@ -17754,7 +17754,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                       3
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -17844,7 +17844,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -17879,7 +17879,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -17899,7 +17899,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   anyOf: {
@@ -17915,13 +17915,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -17936,13 +17936,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -17957,20 +17957,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -17990,7 +17990,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   anyOf: {
@@ -18006,13 +18006,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -18027,13 +18027,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -18048,20 +18048,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -18151,7 +18151,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -18186,7 +18186,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -18206,7 +18206,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
                                   selectedItems: [],
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   oneOf: {
@@ -18222,13 +18222,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/0',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (1)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/0',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (1)'
                                           }
                                         }
@@ -18243,13 +18243,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/1',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (2)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/1',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (2)'
                                           }
                                         }
@@ -18264,20 +18264,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/one',
                                           uri: '#/0/0/one/2',
-                                          required: true,
+                                          isRequired: true,
                                           value: 'string (3)'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/one/2',
-                                            required: true,
+                                            isRequired: true,
                                             value: 'string (3)'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -18297,7 +18297,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
                                   selectedItems: [],
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   oneOf: {
@@ -18313,13 +18313,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/0',
-                                          required: false,
+                                          isRequired: false,
                                           value: '1'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/0',
-                                            required: false,
+                                            isRequired: false,
                                             value: '1'
                                           }
                                         }
@@ -18334,13 +18334,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/1',
-                                          required: false,
+                                          isRequired: false,
                                           value: '2'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/1',
-                                            required: false,
+                                            isRequired: false,
                                             value: '2'
                                           }
                                         }
@@ -18355,20 +18355,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                           },
                                           parentUri: '#/0/0/two',
                                           uri: '#/0/0/two/2',
-                                          required: false,
+                                          isRequired: false,
                                           value: '3'
                                         },
                                         elements: {
                                           field: {
                                             id: '#/0/0/two/2',
-                                            required: false,
+                                            isRequired: false,
                                             value: '3'
                                           }
                                         }
                                       }
                                     ],
                                     selectedItems: [],
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -18466,7 +18466,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -18505,7 +18505,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -18528,7 +18528,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/one',
                                   minLength: 1,
                                   maxLength: 100,
-                                  required: true,
+                                  isRequired: true,
                                   value: 'string'
                                 },
                                 elements: {
@@ -18536,7 +18536,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/one',
                                     minLength: 1,
                                     maxLength: 100,
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string'
                                   }
                                 }
@@ -18560,7 +18560,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   uri: '#/0/0/two',
                                   min: 1,
                                   max: 3,
-                                  required: false,
+                                  isRequired: false,
                                   value: '2'
                                 },
                                 elements: {
@@ -18568,7 +18568,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     id: '#/0/0/two',
                                     min: 1,
                                     max: 3,
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   }
                                 }
@@ -18650,7 +18650,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -18670,7 +18670,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -18681,7 +18681,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -18701,7 +18701,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -18712,7 +18712,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -18787,7 +18787,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -18807,7 +18807,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -18823,13 +18823,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -18844,13 +18844,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -18865,20 +18865,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -18898,7 +18898,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -18914,13 +18914,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -18935,13 +18935,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -18956,20 +18956,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -19044,7 +19044,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -19064,7 +19064,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -19080,13 +19080,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (1)'
                                     }
                                   }
@@ -19101,13 +19101,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (2)'
                                     }
                                   }
@@ -19122,20 +19122,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -19155,7 +19155,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -19171,13 +19171,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -19192,13 +19192,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -19213,20 +19213,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -19309,7 +19309,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -19332,7 +19332,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/one',
                             minLength: 1,
                             maxLength: 100,
-                            required: false,
+                            isRequired: false,
                             value: 'string'
                           },
                           elements: {
@@ -19340,7 +19340,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/one',
                               minLength: 1,
                               maxLength: 100,
-                              required: false,
+                              isRequired: false,
                               value: 'string'
                             }
                           }
@@ -19364,7 +19364,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/two',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -19372,7 +19372,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/two',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -19454,7 +19454,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -19474,7 +19474,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             enum: {
@@ -19485,7 +19485,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 'string (3)'
                               ],
                               selectedItems: [],
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -19505,7 +19505,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             enum: {
@@ -19516,7 +19516,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                 3
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -19597,7 +19597,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -19617,7 +19617,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             anyOf: {
@@ -19633,13 +19633,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (1)'
                                     }
                                   }
@@ -19654,13 +19654,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (2)'
                                     }
                                   }
@@ -19675,20 +19675,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -19708,7 +19708,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             anyOf: {
@@ -19724,13 +19724,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -19745,13 +19745,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -19766,20 +19766,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -19860,7 +19860,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -19880,7 +19880,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/one',
                             selectedItems: [],
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             oneOf: {
@@ -19896,13 +19896,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/0',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/0',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (1)'
                                     }
                                   }
@@ -19917,13 +19917,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/1',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/1',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (2)'
                                     }
                                   }
@@ -19938,20 +19938,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/one',
                                     uri: '#/0/one/2',
-                                    required: true,
+                                    isRequired: true,
                                     value: 'string (3)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/one/2',
-                                      required: true,
+                                      isRequired: true,
                                       value: 'string (3)'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -19971,7 +19971,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             parentUri: '#/0',
                             uri: '#/0/two',
                             selectedItems: [],
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             oneOf: {
@@ -19987,13 +19987,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/0',
-                                    required: false,
+                                    isRequired: false,
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/0',
-                                      required: false,
+                                      isRequired: false,
                                       value: '1'
                                     }
                                   }
@@ -20008,13 +20008,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/1',
-                                    required: false,
+                                    isRequired: false,
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/1',
-                                      required: false,
+                                      isRequired: false,
                                       value: '2'
                                     }
                                   }
@@ -20029,20 +20029,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                     },
                                     parentUri: '#/0/two',
                                     uri: '#/0/two/2',
-                                    required: false,
+                                    isRequired: false,
                                     value: '3'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/0/two/2',
-                                      required: false,
+                                      isRequired: false,
                                       value: '3'
                                     }
                                   }
                                 }
                               ],
                               selectedItems: [],
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -20131,7 +20131,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -20154,7 +20154,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/one',
                             minLength: 1,
                             maxLength: 100,
-                            required: true,
+                            isRequired: true,
                             value: 'string'
                           },
                           elements: {
@@ -20162,7 +20162,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/one',
                               minLength: 1,
                               maxLength: 100,
-                              required: true,
+                              isRequired: true,
                               value: 'string'
                             }
                           }
@@ -20186,7 +20186,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             uri: '#/0/two',
                             min: 1,
                             max: 3,
-                            required: false,
+                            isRequired: false,
                             value: '2'
                           },
                           elements: {
@@ -20194,7 +20194,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               id: '#/0/two',
                               min: 1,
                               max: 3,
-                              required: false,
+                              isRequired: false,
                               value: '2'
                             }
                           }
@@ -20246,7 +20246,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -20256,7 +20256,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           false
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20301,7 +20301,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -20317,13 +20317,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'true'
                               }
                             }
@@ -20338,20 +20338,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'false'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20396,7 +20396,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -20412,13 +20412,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/0',
-                              required: false,
+                              isRequired: false,
                               value: 'true'
                             },
                             elements: {
                               field: {
                                 id: '#/0/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'true'
                               }
                             }
@@ -20433,20 +20433,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/0',
                               uri: '#/0/1',
-                              required: false,
+                              isRequired: false,
                               value: 'false'
                             },
                             elements: {
                               field: {
                                 id: '#/0/1',
-                                required: false,
+                                isRequired: false,
                                 value: 'false'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20488,13 +20488,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false,
+                      isRequired: false,
                       value: 'true'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false,
+                        isRequired: false,
                         value: 'true'
                       }
                     }
@@ -20541,7 +20541,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       enum: {
@@ -20550,7 +20550,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                           null
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20593,7 +20593,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       anyOf: {
@@ -20609,20 +20609,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/',
                               uri: '#/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
                                 id: '#/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'null'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20665,7 +20665,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       parentUri: '#/',
                       uri: '#/0',
                       selectedItems: [],
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       oneOf: {
@@ -20681,20 +20681,20 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                               },
                               parentUri: '#/',
                               uri: '#/0',
-                              required: false,
+                              isRequired: false,
                               value: 'null'
                             },
                             elements: {
                               field: {
                                 id: '#/0',
-                                required: false,
+                                isRequired: false,
                                 value: 'null'
                               }
                             }
                           }
                         ],
                         selectedItems: [],
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20736,13 +20736,13 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false,
+                      isRequired: false,
                       value: 'null'
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false,
+                        isRequired: false,
                         value: 'null'
                       }
                     }
@@ -20784,12 +20784,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20830,12 +20830,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -20886,7 +20886,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -20900,12 +20900,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -20956,7 +20956,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -20970,12 +20970,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21026,7 +21026,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21040,12 +21040,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21096,7 +21096,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21110,12 +21110,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21182,7 +21182,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21204,7 +21204,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -21218,12 +21218,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -21237,12 +21237,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -21318,7 +21318,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21343,7 +21343,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -21357,12 +21357,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -21376,12 +21376,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -21431,7 +21431,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21445,12 +21445,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21497,7 +21497,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21511,12 +21511,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21563,7 +21563,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21577,12 +21577,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21629,7 +21629,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21643,12 +21643,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -21711,7 +21711,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21733,7 +21733,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -21747,12 +21747,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -21766,12 +21766,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -21843,7 +21843,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21868,7 +21868,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -21882,12 +21882,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -21901,12 +21901,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -21969,7 +21969,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -21983,12 +21983,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/one',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/one',
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -22002,12 +22002,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/two',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/two',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22070,7 +22070,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22084,12 +22084,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/one',
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             field: {
                               id: '#/0/one',
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -22103,12 +22103,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/two',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/two',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22152,12 +22152,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -22198,12 +22198,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -22242,12 +22242,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -22286,12 +22286,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -22340,7 +22340,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22354,12 +22354,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22408,7 +22408,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22422,12 +22422,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22476,7 +22476,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22490,12 +22490,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22544,7 +22544,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22558,12 +22558,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22628,7 +22628,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22650,7 +22650,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -22664,12 +22664,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -22683,12 +22683,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -22762,7 +22762,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22787,7 +22787,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -22801,12 +22801,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -22820,12 +22820,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -22873,7 +22873,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22887,12 +22887,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -22937,7 +22937,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -22951,12 +22951,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -23001,7 +23001,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -23015,12 +23015,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -23065,7 +23065,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -23079,12 +23079,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/0',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -23145,7 +23145,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -23167,7 +23167,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -23181,12 +23181,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               },
@@ -23200,12 +23200,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -23275,7 +23275,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -23300,7 +23300,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/0',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             fields: [
@@ -23314,12 +23314,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/one',
-                                  required: true
+                                  isRequired: true
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/one',
-                                    required: true
+                                    isRequired: true
                                   }
                                 }
                               },
@@ -23333,12 +23333,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                                   },
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/two',
-                                  required: false
+                                  isRequired: false
                                 },
                                 elements: {
                                   field: {
                                     id: '#/0/0/two',
-                                    required: false
+                                    isRequired: false
                                   }
                                 }
                               }
@@ -23399,7 +23399,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -23413,12 +23413,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/one',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/one',
-                              required: false
+                              isRequired: false
                             }
                           }
                         },
@@ -23432,12 +23432,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/two',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/two',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -23498,7 +23498,7 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       fields: [
@@ -23512,12 +23512,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/one',
-                            required: true
+                            isRequired: true
                           },
                           elements: {
                             field: {
                               id: '#/0/one',
-                              required: true
+                              isRequired: true
                             }
                           }
                         },
@@ -23531,12 +23531,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                             },
                             parentUri: '#/0',
                             uri: '#/0/two',
-                            required: false
+                            isRequired: false
                           },
                           elements: {
                             field: {
                               id: '#/0/two',
-                              required: false
+                              isRequired: false
                             }
                           }
                         }
@@ -23578,12 +23578,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }
@@ -23622,12 +23622,12 @@ describe('shinkansen-transmission/transmission/to-zashiki', () => {
                       },
                       parentUri: '#/',
                       uri: '#/0',
-                      required: false
+                      isRequired: false
                     },
                     elements: {
                       field: {
                         id: '#/0',
-                        required: false
+                        isRequired: false
                       }
                     }
                   }

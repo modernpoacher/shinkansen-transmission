@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/to-zashiki'
 
-describe('shinkansen-transmission/transmission/to-zashiki', () => {
+describe.only('shinkansen-transmission/transmission/to-zashiki', () => {
   before(() => {
     const {
       env: {
