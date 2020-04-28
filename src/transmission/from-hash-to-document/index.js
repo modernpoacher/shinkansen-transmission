@@ -2,11 +2,11 @@ import debug from 'debug'
 
 import {
   isArray,
+  isObject,
   isConstValue,
   toConstValue,
   isDefaultValue,
   toDefaultValue,
-  isObject,
   hasEnum,
   getEnum,
   hasAnyOf,
@@ -65,6 +65,7 @@ export function transformValueFor (value, array) {
   /*
    *  log('transformValueFor')
    */
+
   try {
     const i = toNumber(value)
 
@@ -90,6 +91,7 @@ export function getArrayFor (array = [], values, uri) {
   /*
    *  log('getArrayFor')
    */
+
   if (Reflect.has(values, uri)) {
     const v = Reflect.get(values, uri)
     const i = Number(v)
@@ -100,10 +102,11 @@ export function getArrayFor (array = [], values, uri) {
   return []
 }
 
-export function transformArrayFor ({ items = {} }, values, parentUri, uri) {
+export function transformArrayFor ({ items = null }, values, parentUri, uri) {
   /*
    *  log('transformArrayFor')
    */
+
   if (isArray(items)) {
     return transformItemsArrayFor(items, values, parentUri, uri)
   } else {
@@ -111,27 +114,43 @@ export function transformArrayFor ({ items = {} }, values, parentUri, uri) {
       return transformItemsObjectFor(items, values, parentUri, uri)
     }
   }
+
+  return []
 }
 
-export function transformObjectFor ({ properties = {} }, values, parentUri, uri) {
+export function transformObjectFor ({ properties = null }, values, parentUri, uri) {
   /*
    *  log('transformObjectFor')
    */
-  return (
-    Object
-      .entries(properties)
-      .reduce((accumulator, [key, schema]) => {
-        const schemaUri = getUri(parentUri, key)
 
-        return ({ ...accumulator, [key]: transform(schema, values, schemaUri, schemaUri) })
-      }, {})
-  )
+  if (isObject(properties)) {
+    return (
+      Object
+        .entries(properties)
+        .reduce((accumulator, [key, schema]) => {
+          const schemaUri = getUri(parentUri, key)
+
+          return ({ ...accumulator, [key]: transform(schema, values, schemaUri, schemaUri) })
+        }, {})
+    )
+  }
+
+  return {}
 }
 
-export function transformItemsArrayFor (array = [], values, parentUri, uri) {
+export function transformItemsArrayFor (items = [], values, parentUri, uri) {
   /*
    *  log('transformItemsArrayFor')
    */
+
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    if (isArray(value)) {
+      return transform(items, values, uri, uri)
+    }
+  }
+
   return (
     Object
       .keys(values)
@@ -143,7 +162,7 @@ export function transformItemsArrayFor (array = [], values, parentUri, uri) {
         if (!isNaN(i)) {
           const schemaUri = getUri(parentUri, i)
 
-          accumulator[i] = transform(array[i], values, schemaUri, schemaUri) // items[i]
+          accumulator[i] = transform(items[i], values, schemaUri, schemaUri) // items[i]
         }
 
         return accumulator
@@ -151,10 +170,19 @@ export function transformItemsArrayFor (array = [], values, parentUri, uri) {
   )
 }
 
-export function transformItemsObjectFor (object = {}, values, parentUri, uri) {
+export function transformItemsObjectFor (items = {}, values, parentUri, uri) {
   /*
    *  log('transformItemsObjectFor')
    */
+
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    if (isArray(value)) {
+      return transform(items, values, uri, uri)
+    }
+  }
+
   return (
     Object
       .keys(values)
@@ -166,7 +194,7 @@ export function transformItemsObjectFor (object = {}, values, parentUri, uri) {
         if (!isNaN(i)) {
           const schemaUri = getUri(parentUri, i)
 
-          accumulator[i] = transform(object, values, schemaUri, schemaUri) // items
+          accumulator[i] = transform(items, values, schemaUri, schemaUri) // items
         }
 
         return accumulator
@@ -181,6 +209,7 @@ export function transformObjectSchemaNull (schema, values, { uri: parentUri, key
   /*
    *  log('transformObjectSchemaNull')
    */
+
   return transformNull(schema, values, parentUri, uri)
 }
 
@@ -189,6 +218,7 @@ export function transformObjectSchemaBoolean (schema, values, { uri: parentUri, 
   /*
    *  log('transformObjectSchemaBoolean')
    */
+
   return transformBoolean(schema, values, parentUri, uri)
 }
 
@@ -197,6 +227,7 @@ export function transformObjectSchemaObject (schema, values, { uri: parentUri, k
   /*
    *  log('transformObjectSchemaObject')
    */
+
   return transformObject(schema, values, uri, uri) // uri is parentUri and uri
 }
 
@@ -205,6 +236,7 @@ export function transformObjectSchemaArray (schema, values, { uri: parentUri, ke
   /*
    *  log('transformObjectSchemaArray')
    */
+
   return transformArray(schema, values, uri, uri) // uri is parentUri and uri
 }
 
@@ -213,6 +245,7 @@ export function transformObjectSchemaNumber (schema, values, { uri: parentUri, k
   /*
    *  log('transformObjectSchemaNumber')
    */
+
   return transformNumber(schema, values, parentUri, uri)
 }
 
@@ -221,6 +254,7 @@ export function transformObjectSchemaString (schema, values, { uri: parentUri, k
   /*
    *  log('transformObjectSchemaString')
    */
+
   return transformString(schema, values, parentUri, uri)
 }
 
@@ -228,6 +262,7 @@ export function transformObjectSchema (schema = {}, values = {}, params = {}) {
   /*
    *  log('transformObjectSchema')
    */
+
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
@@ -260,6 +295,7 @@ export function transformArraySchemaNull (schema, values, { uri: parentUri, inde
   /*
    *  log('transformArraySchemaNull')
    */
+
   return transformNull(schema, values, parentUri, uri)
 }
 
@@ -268,6 +304,7 @@ export function transformArraySchemaBoolean (schema, values, { uri: parentUri, i
   /*
    *  log('transformArraySchemaBoolean')
    */
+
   return transformBoolean(schema, values, parentUri, uri)
 }
 
@@ -276,6 +313,7 @@ export function transformArraySchemaObject (schema, values, { uri: parentUri, in
   /*
    *  log('transformArraySchemaObject')
    */
+
   return transformObject(schema, values, uri, uri) // uri is parentUri and uri
 }
 
@@ -284,6 +322,7 @@ export function transformArraySchemaArray (schema, values, { uri: parentUri, ind
   /*
    *  log('transformArraySchemaArray')
    */
+
   return transformArray(schema, values, uri, uri) // uri is parentUri and uri
 }
 
@@ -292,6 +331,7 @@ export function transformArraySchemaNumber (schema, values, { uri: parentUri, in
   /*
    *  log('transformArraySchemaNumber')
    */
+
   return transformNumber(schema, values, parentUri, uri)
 }
 
@@ -300,6 +340,7 @@ export function transformArraySchemaString (schema, values, { uri: parentUri, in
   /*
    *  log('transformArraySchemaString')
    */
+
   return transformString(schema, values, parentUri, uri)
 }
 
@@ -307,6 +348,7 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
   /*
    *  log('transformArraySchema')
    */
+
   const { type } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
@@ -336,8 +378,9 @@ export function transformArraySchema (schema = {}, values = {}, params = {}) {
 
 export function transformNull (schema, values, parentUri, uri) {
   /*
-   *  log('transformNull (1)')
+   *  log('transformNull')
    */
+
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -362,9 +405,6 @@ export function transformNull (schema, values, parentUri, uri) {
       }
     }
 
-    /*
-     *  log('transformNull (2)')
-     */
     try {
       if (isArray(value)) return value.map(toNull)
       return toNull(value)
@@ -378,8 +418,9 @@ export function transformNull (schema, values, parentUri, uri) {
 
 export function transformBoolean (schema, values, parentUri, uri) {
   /*
-   *  log('transformBoolean (1)')
+   *  log('transformBoolean')
    */
+
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -404,9 +445,6 @@ export function transformBoolean (schema, values, parentUri, uri) {
       }
     }
 
-    /*
-     *  log('transformBoolean (2)')
-     */
     try {
       if (isArray(value)) return value.map(toBoolean)
       return toBoolean(value)
@@ -419,7 +457,9 @@ export function transformBoolean (schema, values, parentUri, uri) {
 }
 
 export function transformObject (schema, values, parentUri, uri) {
-  log('transformObject (1)')
+  /*
+   *  log('transformObject')
+   */
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
@@ -438,14 +478,14 @@ export function transformObject (schema, values, parentUri, uri) {
       }
     }
   }
-
-  log('transformObject (2)')
 
   return transformObjectFor(schema, values, parentUri, uri)
 }
 
 export function transformArray (schema, values, parentUri, uri) {
-  log('transformArray (1)')
+  /*
+   *  log('transformArray')
+   */
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
@@ -465,13 +505,13 @@ export function transformArray (schema, values, parentUri, uri) {
     }
   }
 
-  log('transformArray (2)')
-
   return transformArrayFor(schema, values, parentUri, uri)
 }
 
 export function transformNumber (schema, values, parentUri, uri) {
-  log('transformNumber (1)', values)
+  /*
+   *  log('transformNumber')
+   */
 
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
@@ -497,7 +537,6 @@ export function transformNumber (schema, values, parentUri, uri) {
       }
     }
 
-    log('transformNumber (2)')
     try {
       if (isArray(value)) return value.map(toNumber)
       return toNumber(value)
@@ -511,8 +550,9 @@ export function transformNumber (schema, values, parentUri, uri) {
 
 export function transformString (schema, values, parentUri, uri) {
   /*
-   *  log('transformString (1)')
+   *  log('transformString')
    */
+
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
@@ -537,9 +577,6 @@ export function transformString (schema, values, parentUri, uri) {
       }
     }
 
-    /*
-     *  log('transformString (2)')
-     */
     try {
       if (isArray(value)) return value.map(toString)
       return toString(value)
