@@ -20,7 +20,7 @@ export const isBooleanSchema = ({ type } = {}) => type === 'boolean'
 
 export const isNullSchema = ({ type } = {}) => type === 'null'
 
-export const isPrimitive = (v) => !isObject(v) // && !isArray(v)
+export const isPrimitive = (v) => !isObject(v) && !isArray(v)
 
 export const toConstValue = (schema = {}) => Reflect.get(schema, 'const')
 
@@ -41,43 +41,33 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
 export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri = '#') {
-  log('getSelectedItemsForParentUri', parentUri, uri)
+  log('getSelectedItemsForParentUri')
 
   if (Reflect.has(values, parentUri)) {
     const value = Reflect.get(values, parentUri)
 
-    log('getSelectedItemsForParentUri (1)')
+    // transformByIndexForEnum
+    // transformByIndexForAnyOf
+    // transformByIndexForOneOf
 
-    /*
-     *  Is `value` an array?
-     */
-    if (isArray(value)) {
-      log('getSelectedItemsForParentUri (1 - 1)')
-
-      return value.reduce((accumulator, v) => {
-        if (isPrimitive(v)) {
-          const n = Number(v)
-
-          if (!isNaN(n)) return accumulator.concat(n)
-        }
-
-        return accumulator
-      }, [])
-    }
-
-    /*
-     *  Is `value` a primitive?
-     */
     if (isPrimitive(value)) {
-      log('getSelectedItemsForParentUri (1 - 2)')
-
       const n = Number(value)
-
-      if (!isNaN(n)) return [n]
+      return isNaN(n)
+        ? [value]
+        : [n]
+    } else {
+      return value.map((v) => {
+        const n = Number(v)
+        return isNaN(n)
+          ? v
+          : n
+      })
     }
   }
 
-  log('getSelectedItemsForParentUri (2)') // , values, parentUri)
+  // transformByIndexForEnum
+  // transformByIndexForAnyOf
+  // transformByIndexForOneOf
 
   /*
    *  Given the uri `#/array`
@@ -86,74 +76,71 @@ export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri 
    */
   const pattern = new RegExp(`^${getPatternUri(parentUri)}\\d+$`)
 
-  /*
-   *  Filter `values` for `parentUri` values
-   */
   return (
     Object
       .entries(values)
       .filter(([key]) => pattern.test(key)) // parent uri
-      .reduce((accumulator, [key, value]) => {
-        const k = parentUri.endsWith('/') ? key.slice(parentUri.length) : key.slice(parentUri.length + 1)
-        const i = k ? Number(k.includes('/') ? k.slice(0, k.indexOf('/')) : k) : NaN
+      .map(([key, value]) => {
+        const i = Number(key.slice(key.lastIndexOf('/') + 1))
+        const v = isArray(value) ? value[i] : value
+        const n = Number(v)
 
-        /*
-         * Is `i` a number?
-         */
-        if (!isNaN(i)) {
-          const v = isArray(value) ? value[i] : value
+        if (!isNaN(n)) return n
+        return v
+      })
+  )
 
-          /*
-           * Yes. Transform the value
-           */
-          if (isPrimitive(v)) {
-            const n = Number(v)
+  /*
+  return (
+    Object
+      .entries(values)
+      .filter(([key]) => pattern.test(key)) // parent uri
+      .reduce((array, [key, value]) => {
+        const i = Number(key.slice(key.lastIndexOf('/') + 1))
+        const v = isArray(value) ? value[i] : value
 
-            if (!isNaN(n)) return accumulator.concat(n)
-          }
-        }
+        log({ i, v })
 
-        return accumulator
+        array[i] = (
+          Number(v)
+        )
+
+        log(array)
+
+        return array
       }, [])
   )
+  */
 }
 
 export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#') {
-  log('getSelectedItemsForUri', uri)
+  log('getSelectedItemsForUri')
 
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    /*
-     *  Is `value` an array?
-     */
-    if (isArray(value)) {
-      log('getSelectedItemsForUri (1 - 1)')
+    // transformByKeyForEnum
+    // transformByKeyForAnyOf
+    // transformByKeyForOneOf
 
-      return value.reduce((accumulator, v) => {
-        if (isPrimitive(v)) {
-          const n = Number(v)
-
-          if (!isNaN(n)) return accumulator.concat(n)
-        }
-
-        return accumulator
-      }, [])
-    }
-
-    log('getSelectedItemsForUri (1 - 2)') // , value)
-
-    /*
-     *  Is `value` a primitive?
-     */
     if (isPrimitive(value)) {
       const n = Number(value)
-
-      if (!isNaN(n)) return [n]
+      return isNaN(n)
+        ? [value]
+        : [n]
+    } else {
+      return value.map((v) => {
+        const n = Number(v)
+        return isNaN(n)
+          ? v
+          : n
+      })
     }
   }
 
-  log('getSelectedItemsForUri (2)') // , values, uri)
+  // transformByKeyForEnum
+  // transformByKeyForAnyOf
+  // transformByKeyForOneOf
 
   /*
    *  Given the uri `#/array`
@@ -165,29 +152,15 @@ export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#')
   return (
     Object
       .entries(values)
-      .filter(([key]) => pattern.test(key)) // key.startsWith(uri)) // uri
-      .reduce((accumulator, [key, value]) => {
-        const k = uri.endsWith('/') ? key.slice(uri.length) : key.slice(uri.length + 1) // key.endsWith('/') ? uri.slice(key.length) : uri.slice(key.length + 1)
-        const i = k ? Number(k.includes('/') ? k.slice(0, k.indexOf('/')) : k) : NaN
+      .filter(([key]) => pattern.test(key)) // parent uri
+      .map(([key, value]) => {
+        const i = Number(key.slice(key.lastIndexOf('/') + 1))
+        const v = isArray(value) ? value[i] : value
+        const n = Number(v)
 
-        /*
-         * Is `i` a number?
-         */
-        if (!isNaN(i)) {
-          const v = isArray(value) ? value[i] : value
-
-          /*
-           * Yes. Transform the value
-           */
-          if (isPrimitive(v)) {
-            const n = Number(v)
-
-            if (!isNaN(n)) return accumulator.concat(n)
-          }
-        }
-
-        return accumulator
-      }, [])
+        if (!isNaN(n)) return n
+        return v
+      })
   )
 }
 

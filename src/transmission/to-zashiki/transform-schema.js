@@ -3816,6 +3816,8 @@ export function transformObject (schema, rootSchema, values, params) {
 }
 
 export function getTransformByKey (schema, rootSchema, values, params) {
+  log('getTransformByKey')
+
   if (hasEnum(schema)) {
     return transformByKeyForEnum(schema, rootSchema, values, params)
   } else {
@@ -3836,10 +3838,12 @@ export function getTransformByKey (schema, rootSchema, values, params) {
 
   const uri = getUri(parentUri, key)
 
-  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), isRequired } } }, key }) // { ...params, parentUri: uri, uri: schemaUri, [schemaUri]: { meta: { ...getMetaProps(params, schemaUri), isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, schemaUri), isRequired } } }, key })
+  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, isRequired }, elements: { field: { ...getElementsFieldPropsForAllOf(params, uri), isRequired } } }, key })
 }
 
 export function getTransformByIndex (schema, rootSchema, values, params) {
+  log('getTransformByIndex')
+
   if (hasEnum(schema)) {
     return transformByIndexForEnum(schema, rootSchema, values, params)
   } else {
@@ -4015,7 +4019,31 @@ export function transformByKeyForEnum (schema, rootSchema, values, { parentUri, 
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByKeyForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'boolean':
+      return transformBooleanByKeyForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'object':
+      return transformObjectByKeyForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'array':
+      return transformArrayByKeyForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'number':
+      return transformNumberByKeyForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'string':
+      return transformStringByKeyForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems, isRequired } } }, key })
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByKeyForAnyOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
@@ -4027,7 +4055,31 @@ export function transformByKeyForAnyOf (schema, rootSchema, values, { parentUri,
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'boolean':
+      return transformBooleanByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'object':
+      return transformObjectByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'array':
+      return transformArrayByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'number':
+      return transformNumberByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'string':
+      return transformStringByKeyForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems, isRequired } } }, key })
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByKeyForOneOf (schema, rootSchema, values, { parentUri, key = '', isRequired = false, ...params }) {
@@ -4039,7 +4091,31 @@ export function transformByKeyForOneOf (schema, rootSchema, values, { parentUri,
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return transformByKey(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'boolean':
+      return transformBooleanByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'object':
+      return transformObjectByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'array':
+      return transformArrayByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'number':
+      return transformNumberByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+
+    case 'string':
+      return transformStringByKeyForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems, isRequired }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems, isRequired } } }, key })
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByIndexForEnum (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
@@ -4051,7 +4127,31 @@ export function transformByIndexForEnum (schema, rootSchema, values, { parentUri
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+
+    case 'boolean':
+      return transformBooleanByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+
+    case 'object':
+      return transformObjectByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+
+    case 'array':
+      return transformArrayByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+
+    case 'number':
+      return transformNumberByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+
+    case 'string':
+      return transformStringByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { enum: { ...getElementsFieldPropsForEnum(params, uri), selectedItems } } }, index })
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByIndexForAnyOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
@@ -4063,7 +4163,31 @@ export function transformByIndexForAnyOf (schema, rootSchema, values, { parentUr
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+
+    case 'boolean':
+      return transformBooleanByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+
+    case 'object':
+      return transformObjectByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+
+    case 'array':
+      return transformArrayByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+
+    case 'number':
+      return transformNumberByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+
+    case 'string':
+      return transformStringByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { anyOf: { ...getElementsFieldPropsForAnyOf(params, uri), selectedItems } } }, index })
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByIndexForOneOf (schema, rootSchema, values, { parentUri, index = 0, ...params }) {
@@ -4075,7 +4199,31 @@ export function transformByIndexForOneOf (schema, rootSchema, values, { parentUr
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+  const { type } = schema
+
+  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  switch (type) {
+    case 'null':
+      return transformNullByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+
+    case 'boolean':
+      return transformBooleanByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+
+    case 'object':
+      return transformObjectByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+
+    case 'array':
+      return transformArrayByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+
+    case 'number':
+      return transformNumberByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+
+    case 'string':
+      return transformStringByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...metaProps, parentUri, uri, selectedItems }, elements: { oneOf: { ...getElementsFieldPropsForOneOf(params, uri), selectedItems } } }, index })
+
+    default:
+      throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')
+  }
 }
 
 export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {

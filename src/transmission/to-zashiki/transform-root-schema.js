@@ -808,7 +808,7 @@ export function transformString (rootSchema, values, params) {
 }
 
 export default function toZashiki (rootSchema = {}, values = {}, params = {}) {
-  log('toZashiki', values)
+  log('toZashiki')
 
   const { type } = rootSchema
 
