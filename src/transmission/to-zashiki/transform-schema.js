@@ -1648,7 +1648,7 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, values, params)
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
         selectedItems,
         // items,
@@ -1690,7 +1690,7 @@ export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, params
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
         selectedItems,
         // items,
@@ -1730,7 +1730,7 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, params
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
         selectedItems,
         // items,
@@ -1770,9 +1770,8 @@ export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, params
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
-        ...getMetaValue(values, uri, schema), // ?,
         name: fieldKey
       },
       elements: getElementsProps(params, uri)
@@ -1803,15 +1802,13 @@ export function getRenderParamsByKey (schema, rootSchema, values, params) {
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
-        ...getMetaValue(values, uri, schema), // ?
         name: fieldKey
       },
       elements: {
         field: {
-          ...getElementsFieldProps(params, uri),
-          ...getElementsFieldValue(values, uri, schema)
+          ...getElementsFieldProps(params, uri)
         }
       }
     }
@@ -1843,7 +1840,7 @@ export function getRenderParamsByIndexForEnum (schema, rootSchema, values, param
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
         selectedItems,
         // items,
@@ -1864,12 +1861,17 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, para
   log('getRenderParamsByIndexForAnyOf')
 
   const {
-    parentUri = '#/',
-    uri = '#',
+    parentUri: arrayParentUri = '#',
+    index: arrayIndex = 0,
     selectedItems = [],
-    items = [],
-    item = 0
+    items = []
   } = params
+
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(arrayParentUri)
+  const uri = getUri(arrayParentUri, arrayIndex)
 
   return {
     ...params,
@@ -1880,11 +1882,11 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, para
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri: normaliseUri(parentUri),
+        parentUri,
         uri,
         selectedItems,
         // items,
-        item
+        item: arrayIndex
       },
       elements: {
         anyOf: {
@@ -1922,7 +1924,7 @@ export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, para
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri: normaliseUri(parentUri),
+        parentUri,
         uri,
         selectedItems,
         // items,
@@ -1962,15 +1964,13 @@ export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, para
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri, // : normaliseUri(parentUri),
+        parentUri,
         uri,
-        ...getMetaValue(values, uri, schema), // ?
         item: arrayIndex
       },
       elements: {
         field: {
-          ...getElementsFieldPropsForAllOf(params, uri),
-          ...getElementsFieldValue(values, uri, schema)
+          ...getElementsFieldPropsForAllOf(params, uri)
         }
       }
     }
@@ -2000,15 +2000,13 @@ export function getRenderParamsByIndex (schema, rootSchema, values, params) {
         ...getMetaProps(params, uri),
         schema,
         rootSchema,
-        parentUri: normaliseUri(parentUri),
+        parentUri,
         uri,
-        ...getMetaValue(values, uri, schema), // ?
         item: arrayIndex
       },
       elements: {
         field: {
-          ...getElementsFieldProps(params, uri),
-          ...getElementsFieldValue(values, uri, schema)
+          ...getElementsFieldProps(params, uri)
         }
       }
     }
@@ -2036,8 +2034,8 @@ export function getRenderParamsForEnum (schema, rootSchema, values, params) {
         rootSchema,
         parentUri: normaliseUri(parentUri),
         uri,
-        selectedItems,
-        items
+        selectedItems /* ,
+        items */
       },
       elements: {
         enum: {
@@ -2071,8 +2069,8 @@ export function getRenderParamsForAnyOf (schema, rootSchema, values, params) {
         rootSchema,
         parentUri: normaliseUri(parentUri),
         uri,
-        selectedItems,
-        items
+        selectedItems /* ,
+        items */
       },
       elements: {
         anyOf: {
@@ -2106,8 +2104,8 @@ export function getRenderParamsForOneOf (schema, rootSchema, values, params) {
         rootSchema,
         parentUri: normaliseUri(parentUri),
         uri,
-        selectedItems,
-        items
+        selectedItems /* ,
+        items */
       },
       elements: {
         oneOf: {
@@ -2138,13 +2136,11 @@ export function getRenderParamsForAllOf (schema, rootSchema, values, params) {
         schema,
         rootSchema,
         parentUri: normaliseUri(parentUri),
-        uri,
-        ...getMetaValue(values, uri, schema)
+        uri
       },
       elements: {
         field: {
-          ...getElementsFieldPropsForAllOf(params, uri),
-          ...getElementsFieldValue(values, uri, schema)
+          ...getElementsFieldPropsForAllOf(params, uri)
         }
       }
     }
@@ -2282,16 +2278,6 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
 export function transformNullByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformNullByKeyForAllOf')
 
-  /*
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = ''
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-  */
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
@@ -2318,7 +2304,7 @@ export function transformNullByIndexForEnum (schema, rootSchema, values, params)
 
   const items = getEnum(schema)
 
-  return renderNullForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderNullForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2342,7 +2328,7 @@ export function transformNullByIndexForAnyOf (schema, rootSchema, values, params
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNullForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderNullForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2366,7 +2352,7 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNullForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderNullForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2375,18 +2361,10 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
 export function transformNullByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformNullByIndexForAllOf')
 
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  return renderNullForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, { ...params, parentUri, uri, item: arrayIndex }))
+  return renderNullForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
 /*
@@ -2406,7 +2384,7 @@ export function transformNullForEnum (schema, rootSchema, values, params) {
 
   const items = getEnum(schema)
 
-  return renderNullForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderNullForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2427,7 +2405,7 @@ export function transformNullForAnyOf (schema, rootSchema, values, params) {
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNullForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderNullForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2448,7 +2426,7 @@ export function transformNullForOneOf (schema, rootSchema, values, params) {
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNullForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderNullForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2540,16 +2518,6 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
 export function transformBooleanByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformBooleanByKeyForAllOf')
 
-  /*
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = ''
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-  */
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
@@ -2576,7 +2544,7 @@ export function transformBooleanByIndexForEnum (schema, rootSchema, values, para
 
   const items = getEnum(schema)
 
-  return renderBooleanForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderBooleanForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2600,7 +2568,7 @@ export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, par
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderBooleanForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderBooleanForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2624,7 +2592,7 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderBooleanForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderBooleanForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2633,18 +2601,10 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
 export function transformBooleanByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformBooleanByIndexForAllOf')
 
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  return renderBooleanForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, { ...params, parentUri, uri, item: arrayIndex }))
+  return renderBooleanForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
 /*
@@ -2664,7 +2624,7 @@ export function transformBooleanForEnum (schema, rootSchema, values, params) {
 
   const items = getEnum(schema)
 
-  return renderBooleanForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderBooleanForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2685,7 +2645,7 @@ export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderBooleanForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderBooleanForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2706,7 +2666,7 @@ export function transformBooleanForOneOf (schema, rootSchema, values, params) {
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderBooleanForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderBooleanForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2798,16 +2758,6 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
 export function transformObjectByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformObjectByKeyForAllOf')
 
-  /*
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = ''
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-  */
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
@@ -2834,7 +2784,7 @@ export function transformObjectByIndexForEnum (schema, rootSchema, values, param
 
   const items = getEnum(schema)
 
-  return renderObjectForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderObjectForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2858,7 +2808,7 @@ export function transformObjectByIndexForAnyOf (schema, rootSchema, values, para
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderObjectForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderObjectForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2882,7 +2832,7 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderObjectForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderObjectForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2891,18 +2841,10 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
 export function transformObjectByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformObjectByIndexForAllOf')
 
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  return renderObjectForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, { ...params, parentUri, uri, item: arrayIndex }))
+  return renderObjectForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
 /*
@@ -2922,7 +2864,7 @@ export function transformObjectForEnum (schema, rootSchema, values, params) {
 
   const items = getEnum(schema)
 
-  return renderObjectForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderObjectForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2943,7 +2885,7 @@ export function transformObjectForAnyOf (schema, rootSchema, values, params) {
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderObjectForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderObjectForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -2964,7 +2906,7 @@ export function transformObjectForOneOf (schema, rootSchema, values, params) {
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderObjectForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderObjectForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3071,16 +3013,6 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
 export function transformArrayByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformArrayByKeyForAllOf')
 
-  /*
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = ''
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-  */
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
@@ -3107,7 +3039,7 @@ export function transformArrayByIndexForEnum (schema, rootSchema, values, params
 
   const items = getEnum(schema)
 
-  return renderArrayForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderArrayForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3131,7 +3063,7 @@ export function transformArrayByIndexForAnyOf (schema, rootSchema, values, param
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderArrayForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderArrayForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3155,7 +3087,7 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderArrayForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderArrayForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3164,18 +3096,10 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
 export function transformArrayByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformArrayByIndexForAllOf')
 
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  return renderArrayForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, { ...params, parentUri, uri, item: arrayIndex }))
+  return renderArrayForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
 /*
@@ -3195,7 +3119,7 @@ export function transformArrayForEnum (schema, rootSchema, values, params) {
 
   const items = getEnum(schema)
 
-  return renderArrayForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderArrayForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3216,7 +3140,7 @@ export function transformArrayForAnyOf (schema, rootSchema, values, params) {
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderArrayForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderArrayForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3237,7 +3161,7 @@ export function transformArrayForOneOf (schema, rootSchema, values, params) {
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderArrayForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderArrayForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3355,16 +3279,6 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
 export function transformNumberByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformNumberByKeyForAllOf')
 
-  /*
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = ''
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-  */
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
@@ -3391,7 +3305,7 @@ export function transformNumberByIndexForEnum (schema, rootSchema, values, param
 
   const items = getEnum(schema)
 
-  return renderNumberForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderNumberForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3415,7 +3329,7 @@ export function transformNumberByIndexForAnyOf (schema, rootSchema, values, para
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNumberForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderNumberForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3439,7 +3353,7 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNumberForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderNumberForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3448,18 +3362,10 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
 export function transformNumberByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformNumberByIndexForAllOf')
 
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  return renderNumberForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, { ...params, parentUri, uri, item: arrayIndex }))
+  return renderNumberForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
 /*
@@ -3479,7 +3385,7 @@ export function transformNumberForEnum (schema, rootSchema, values, params) {
 
   const items = getEnum(schema)
 
-  return renderNumberForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderNumberForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3500,7 +3406,7 @@ export function transformNumberForAnyOf (schema, rootSchema, values, params) {
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNumberForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderNumberForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3521,7 +3427,7 @@ export function transformNumberForOneOf (schema, rootSchema, values, params) {
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderNumberForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderNumberForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3613,16 +3519,6 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
 export function transformStringByKeyForAllOf (schema, rootSchema, values, params) {
   log('transformStringByKeyForAllOf')
 
-  /*
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = ''
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-  */
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
@@ -3649,7 +3545,7 @@ export function transformStringByIndexForEnum (schema, rootSchema, values, param
 
   const items = getEnum(schema)
 
-  return renderStringForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderStringForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3673,7 +3569,7 @@ export function transformStringByIndexForAnyOf (schema, rootSchema, values, para
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderStringForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderStringForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3697,7 +3593,7 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri }))
 
-  return renderStringForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items, item: arrayIndex }))
+  return renderStringForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3706,18 +3602,10 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
 export function transformStringByIndexForAllOf (schema, rootSchema, values, params) {
   log('transformStringByIndexForAllOf')
 
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
 
-  return renderStringForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, { ...params, parentUri, uri, item: arrayIndex }))
+  return renderStringForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
 /*
@@ -3737,7 +3625,7 @@ export function transformStringForEnum (schema, rootSchema, values, params) {
 
   const items = getEnum(schema)
 
-  return renderStringForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderStringForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3758,7 +3646,7 @@ export function transformStringForAnyOf (schema, rootSchema, values, params) {
   const { anyOf = [] } = schema
   const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderStringForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderStringForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
@@ -3779,7 +3667,7 @@ export function transformStringForOneOf (schema, rootSchema, values, params) {
   const { oneOf = [] } = schema
   const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
 
-  return renderStringForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, parentUri, uri, selectedItems, items }))
+  return renderStringForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, { ...params, selectedItems, items }))
 }
 
 /*
