@@ -565,13 +565,13 @@ export function transformObject (rootSchema, values, params) {
   }
 
   const {
-    uri = '#/'
-  } = params
-
-  const {
     properties = {},
     required = []
   } = rootSchema
+
+  const {
+    uri = '#/'
+  } = params
 
   const fields = (
     Object
@@ -693,14 +693,14 @@ export function transformArray (rootSchema, values, params) {
 
   if (isArray(items)) {
     const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: '#' }))
+      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: '#/' })) // uri
     )
 
     return renderArray(rootSchema, values, getRenderParamsForFields(rootSchema, values, { ...params, fields }))
   } else {
     if (isObject(items)) {
       const fields = [
-        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: '#/' })
+        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: '#/' }) // uri
       ]
 
       return renderArray(rootSchema, values, getRenderParamsForFields(rootSchema, values, { ...params, fields }))

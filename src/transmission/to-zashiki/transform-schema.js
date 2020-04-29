@@ -3907,7 +3907,6 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
     index: arrayIndex = 0
   } = params
 
-  // const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
   const fields = (
