@@ -224,7 +224,8 @@ export function getRenderParams (rootSchema, values, params) {
 
   const {
     parentUri = '#',
-    uri = '#/'
+    uri = '#/',
+    fields = []
   } = params
 
   return {
@@ -238,7 +239,10 @@ export function getRenderParams (rootSchema, values, params) {
         parentUri: normaliseUri(parentUri),
         uri
       },
-      elements: getElementsProps(params, uri)
+      elements: {
+        ...getElementsProps(params, uri),
+        fields
+      }
     }
   }
 }
@@ -579,7 +583,7 @@ export function transformObject (rootSchema, values, params) {
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  return renderObject(rootSchema, values, getRenderParamsForFields(rootSchema, values, { ...params, fields }))
+  return renderObject(rootSchema, values, getRenderParams(rootSchema, values, { ...params, fields }))
 }
 
 /*
@@ -696,14 +700,14 @@ export function transformArray (rootSchema, values, params) {
       items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: '#/' })) // uri
     )
 
-    return renderArray(rootSchema, values, getRenderParamsForFields(rootSchema, values, { ...params, fields }))
+    return renderArray(rootSchema, values, getRenderParams(rootSchema, values, { ...params, fields }))
   } else {
     if (isObject(items)) {
       const fields = [
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: '#/' }) // uri
       ]
 
-      return renderArray(rootSchema, values, getRenderParamsForFields(rootSchema, values, { ...params, fields }))
+      return renderArray(rootSchema, values, getRenderParams(rootSchema, values, { ...params, fields }))
     }
   }
 }

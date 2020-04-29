@@ -47,7 +47,6 @@ import {
   getMetaValue,
 
   getElementsProps,
-  getElementsFieldsProps,
   getElementsFieldPropsForEnum,
   getElementsFieldPropsForAnyOf,
   getElementsFieldPropsForOneOf,
@@ -756,7 +755,8 @@ export function renderObject (schema, values, params) {
   log('renderObject')
 
   const {
-    uri = '#/'
+    uri = '#/',
+    fields = []
   } = params
 
   const {
@@ -769,8 +769,6 @@ export function renderObject (schema, values, params) {
 
   const title = getTitle(schema)
   const description = getDescription(schema)
-
-  const fields = getElementsFieldsProps(params, uri)
 
   return {
     meta: {
@@ -1009,7 +1007,8 @@ export function renderArray (schema, values, params) {
   log('renderArray')
 
   const {
-    uri = '#/'
+    uri = '#/',
+    fields = []
   } = params
 
   const {
@@ -1025,8 +1024,6 @@ export function renderArray (schema, values, params) {
 
   const title = getTitle(schema)
   const description = getDescription(schema)
-
-  const fields = getElementsFieldsProps(params, uri)
 
   return {
     meta: {
@@ -2147,8 +2144,8 @@ export function getRenderParamsForAllOf (schema, rootSchema, values, params) {
   }
 }
 
-export function getRenderParamsForFields (schema, rootSchema, values, params) {
-  log('getRenderParamsForFields')
+export function getRenderParams (schema, rootSchema, values, params) {
+  log('getRenderParams')
 
   const {
     parentUri = '#',
@@ -2172,31 +2169,6 @@ export function getRenderParamsForFields (schema, rootSchema, values, params) {
         ...getElementsProps(params, uri),
         fields
       }
-    }
-  }
-}
-
-export function getRenderParams (schema, rootSchema, values, params) {
-  log('getRenderParams')
-
-  const {
-    parentUri = '#',
-    uri = '#/'
-  } = params
-
-  return {
-    ...params,
-    parentUri,
-    uri,
-    [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema,
-        rootSchema,
-        parentUri: normaliseUri(parentUri),
-        uri
-      },
-      elements: getElementsProps(params, uri)
     }
   }
 }
@@ -2933,7 +2905,7 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  return renderObjectForAllOf(itemSchema, values, getRenderParamsForFields(schema, rootSchema, values, { ...params, fields }))
+  return renderObjectForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, { ...params, fields }))
 }
 
 /*
@@ -3186,7 +3158,7 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
       items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
     )
 
-    return renderArrayForAllOf(itemSchema, values, getRenderParamsForFields(schema, rootSchema, values, { ...params, fields }))
+    return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, { ...params, fields }))
   } else {
     if (isObject(items)) {
       const {
@@ -3197,7 +3169,7 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
-      return renderArrayForAllOf(itemSchema, values, getRenderParamsForFields(schema, rootSchema, values, { ...params, fields }))
+      return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, { ...params, fields }))
     }
   }
 }
@@ -3774,68 +3746,6 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
   return renderBoolean(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
 }
 
-function getRenderParamsByKeyForFields (schema, rootSchema, values, params) {
-  const {
-    parentUri: fieldParentUri = '#',
-    key: fieldKey = '',
-    fields = []
-  } = params
-
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  return {
-    ...params,
-    parentUri,
-    uri,
-    [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema,
-        rootSchema,
-        parentUri,
-        uri,
-        name: fieldKey
-      },
-      elements: {
-        ...getElementsProps(params, uri),
-        fields
-      }
-    }
-  }
-}
-
-function getRenderParamsByIndexForFields (schema, rootSchema, values, params) {
-  const {
-    parentUri: arrayParentUri = '#',
-    index: arrayIndex = 0,
-    fields = []
-  } = params
-
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  return {
-    ...params,
-    parentUri,
-    uri,
-    [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema,
-        rootSchema,
-        parentUri,
-        uri,
-        item: arrayIndex
-      },
-      elements: {
-        ...getElementsProps(params, uri),
-        fields
-      }
-    }
-  }
-}
-
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObjectByKey (schema, rootSchema, values, params) {
   log('transformObjectByKey')
@@ -3874,7 +3784,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  return renderObject(schema, values, getRenderParamsByKeyForFields(schema, rootSchema, values, { ...params, fields }))
+  return renderObject(schema, values, getRenderParamsByKey(schema, rootSchema, values, { ...params, fields }))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
@@ -3915,7 +3825,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  return renderObject(schema, values, getRenderParamsByIndexForFields(schema, rootSchema, values, { ...params, fields }))
+  return renderObject(schema, values, getRenderParamsByIndex(schema, rootSchema, values, { ...params, fields }))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
@@ -3954,7 +3864,7 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
       items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
     )
 
-    return renderArray(schema, values, getRenderParamsByKeyForFields(schema, rootSchema, values, { ...params, fields }))
+    return renderArray(schema, values, getRenderParamsByKey(schema, rootSchema, values, { ...params, fields }))
   } else {
     if (isObject(items)) {
       const {
@@ -3968,7 +3878,7 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
-      return renderArray(schema, values, getRenderParamsByKeyForFields(schema, rootSchema, values, { ...params, fields }))
+      return renderArray(schema, values, getRenderParamsByKey(schema, rootSchema, values, { ...params, fields }))
     }
   }
 }
@@ -4009,7 +3919,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
       items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
     )
 
-    return renderArray(schema, values, getRenderParamsByIndexForFields(schema, rootSchema, values, { ...params, fields }))
+    return renderArray(schema, values, getRenderParamsByIndex(schema, rootSchema, values, { ...params, fields }))
   } else {
     if (isObject(items)) {
       const {
@@ -4023,7 +3933,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
-      return renderArray(schema, values, getRenderParamsByIndexForFields(schema, rootSchema, values, { ...params, fields }))
+      return renderArray(schema, values, getRenderParamsByIndex(schema, rootSchema, values, { ...params, fields }))
     }
   }
 }
@@ -4201,7 +4111,7 @@ export function transformObject (schema, rootSchema, values, params) {
       .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
   )
 
-  return renderObject(schema, values, getRenderParamsForFields(schema, rootSchema, values, { ...params, fields }))
+  return renderObject(schema, values, getRenderParams(schema, rootSchema, values, { ...params, fields }))
 }
 
 export function getTransformByKey (schema, rootSchema, values, params) {
@@ -4244,20 +4154,29 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
       return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
     } else {
       const {
-        parentUri = '#/',
-        index = 0
+        parentUri = '#/'
       } = params
-
-      const uri = getUri(parentUri, index)
 
       if (Reflect.has(values, parentUri)) {
         const value = Reflect.get(values, parentUri)
 
         if (isPrimitive(value)) {
+          const {
+            index = 0
+          } = params
+
+          const uri = getUri(parentUri, index)
+
           return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, value: String(value) }, elements: { field: { ...getElementsFieldProps(params, uri), value: String(value) } } } })
         } else {
+          const {
+            index = 0
+          } = params
+
           if (Reflect.has(value, index)) {
             const v = Reflect.get(value, index)
+
+            const uri = getUri(parentUri, index)
 
             return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta: { ...getMetaProps(params, uri), parentUri, uri, value: String(v) }, elements: { field: { ...getElementsFieldProps(params, uri), value: String(v) } } } })
           }
@@ -4304,7 +4223,7 @@ export function transformArray (schema, rootSchema, values, params) {
       items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
     )
 
-    return renderArray(schema, values, getRenderParamsForFields(schema, rootSchema, values, { ...params, fields }))
+    return renderArray(schema, values, getRenderParams(schema, rootSchema, values, { ...params, fields }))
   } else {
     if (isObject(items)) {
       const {
@@ -4315,7 +4234,7 @@ export function transformArray (schema, rootSchema, values, params) {
         getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
       ]
 
-      return renderArray(schema, values, getRenderParamsForFields(schema, rootSchema, values, { ...params, fields }))
+      return renderArray(schema, values, getRenderParams(schema, rootSchema, values, { ...params, fields }))
     }
   }
 }

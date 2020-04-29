@@ -38,7 +38,7 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
     schema: Object,
     rootSchema: Object,
-    required: Boolean,
+    isRequired: Boolean,
     defaultValue: /* Per `type` */,
     value: /* Per `type` */,
   },
@@ -46,7 +46,7 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     title: String,
     description: String,
     field: {
-      required: Boolean,
+      isRequired: Boolean,
       value: /* Per `type` */,
       name: String
     }
@@ -64,15 +64,15 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
     schema: Object,
     rootSchema: Object,
-    required: Boolean,
-    selectedIndex: Number
+    isRequired: Boolean,
+    selectedItems: Array
   },
   elements: {
     title: String,
     description: String,
     enum: {
-      required: Boolean,
-      selectedIndex: Number,
+      isRequired: Boolean,
+      selectedItems: Array,
       items: Array,
       name: String
     }
@@ -90,15 +90,15 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
     schema: Object,
     rootSchema: Object,
-    required: Boolean,
-    selectedIndex: Number,
+    isRequired: Boolean,
+    selectedItems: Array,
   },
   elements: {
     title: String,
     description: String,
     anyOf: {
-      required: Boolean,
-      selectedIndex: Number,
+      isRequired: Boolean,
+      selectedItems: Array,
       items: Array,
       name: String
     }
@@ -116,15 +116,15 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
     schema: Object,
     rootSchema: Object,
-    required: Boolean,
-    selectedIndex: Number,
+    isRequired: Boolean,
+    selectedItems: Array,
   },
   elements: {
     title: String,
     description: String,
     oneOf: {
       required: Boolean,
-      selectedIndex: Number,
+      selectedItems: Array,
       items: Array,
       name: String
     }

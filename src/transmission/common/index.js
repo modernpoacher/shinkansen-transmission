@@ -99,13 +99,9 @@ export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri 
         const i = Number(key.slice(key.lastIndexOf('/') + 1))
         const v = isArray(value) ? value[i] : value
 
-        log({ i, v })
-
         array[i] = (
           Number(v)
         )
-
-        log(array)
 
         return array
       }, [])
