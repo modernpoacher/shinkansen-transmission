@@ -1,6 +1,8 @@
-import debug from 'debug'
-
-const log = debug('shinkansen-transmission:common')
+/*
+ *  import debug from 'debug'
+ *
+ *  const log = debug('shinkansen-transmission:common')
+ */
 
 export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
@@ -30,8 +32,6 @@ export const toDefaultValue = (schema = {}) => Reflect.get(schema, 'default')
 
 export const isDefaultValue = (schema = {}) => Reflect.has(schema, 'default')
 
-export const getPatternUri = (uri) => uri.endsWith('/') ? uri : uri.concat('/')
-
 export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
 export const getDescription = ({ description } = {}) => (description ? { description } : {})
@@ -40,23 +40,25 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri = '#') {
-  log('getSelectedItemsForParentUri')
+const getUriForRegExp = (uri) => uri.endsWith('/') ? uri : uri.concat('/')
 
-  if (Reflect.has(values, parentUri)) {
-    const value = Reflect.get(values, parentUri)
+export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri = '#') {
+  const p = normaliseUri(parentUri)
+
+  if (Reflect.has(values, p)) {
+    const v = Reflect.get(values, p)
 
     // transformByIndexForEnum
     // transformByIndexForAnyOf
     // transformByIndexForOneOf
 
-    if (isPrimitive(value)) {
-      const n = Number(value)
+    if (isPrimitive(v)) {
+      const n = Number(v)
       return isNaN(n)
-        ? [value]
+        ? [v]
         : [n]
     } else {
-      return value.map((v) => {
+      return v.map((v) => {
         const n = Number(v)
         return isNaN(n)
           ? v
@@ -70,11 +72,11 @@ export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri 
   // transformByIndexForOneOf
 
   /*
-   *  Given the uri `#/array`
+   *  Given the uri `#/`
    *
-   *  Get the values `#/array/n` (where `n` is a number)
+   *  Get the values `#/n` (where `n` is a number)
    */
-  const pattern = new RegExp(`^${getPatternUri(parentUri)}\\d+$`)
+  const pattern = new RegExp(`^${getUriForRegExp(p)}\\d+$`)
 
   return (
     Object
@@ -89,43 +91,25 @@ export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri 
         return v
       })
   )
-
-  /*
-  return (
-    Object
-      .entries(values)
-      .filter(([key]) => pattern.test(key)) // parent uri
-      .reduce((array, [key, value]) => {
-        const i = Number(key.slice(key.lastIndexOf('/') + 1))
-        const v = isArray(value) ? value[i] : value
-
-        array[i] = (
-          Number(v)
-        )
-
-        return array
-      }, [])
-  )
-  */
 }
 
 export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#') {
-  log('getSelectedItemsForUri')
+  const u = normaliseUri(uri)
 
-  if (Reflect.has(values, uri)) {
-    const value = Reflect.get(values, uri)
+  if (Reflect.has(values, u)) {
+    const v = Reflect.get(values, u)
 
     // transformByKeyForEnum
     // transformByKeyForAnyOf
     // transformByKeyForOneOf
 
-    if (isPrimitive(value)) {
-      const n = Number(value)
+    if (isPrimitive(v)) {
+      const n = Number(v)
       return isNaN(n)
-        ? [value]
+        ? [v]
         : [n]
     } else {
-      return value.map((v) => {
+      return v.map((v) => {
         const n = Number(v)
         return isNaN(n)
           ? v
@@ -139,16 +123,16 @@ export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#')
   // transformByKeyForOneOf
 
   /*
-   *  Given the uri `#/array`
+   *  Given the uri `#/`
    *
-   *  Get the values `#/array/n` (where `n` is a number)
+   *  Get the values `#/n` (where `n` is a number)
    */
-  const pattern = new RegExp(`^${getPatternUri(uri)}\\d+$`)
+  const pattern = new RegExp(`^${getUriForRegExp(u)}\\d+$`)
 
   return (
     Object
       .entries(values)
-      .filter(([key]) => pattern.test(key)) // parent uri
+      .filter(([key]) => pattern.test(key)) // uri
       .map(([key, value]) => {
         const i = Number(key.slice(key.lastIndexOf('/') + 1))
         const v = isArray(value) ? value[i] : value
@@ -520,7 +504,7 @@ export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
 export const getUri = (uri = '#', resource = '') => (uri.endsWith('/') ? uri : uri.concat('/')).concat(resource)
 
-export const normaliseUri = (uri = '#') => uri === '#' ? '#/' : uri // parentUri.endsWith('/') ? parentUri : parentUri.concat('/')
+export const normaliseUri = (uri = '#') => uri === '#' ? '#/' : uri
 
 export function getMin ({ minimum } = {}) {
   const value = Number(minimum)

@@ -3,7 +3,8 @@ import debug from 'debug'
 import { expect } from 'chai'
 
 import {
-  // getSelectedItems,
+  getSelectedItemsForParentUri,
+  getSelectedItemsForUri,
   getMetaProps,
   getMetaDefaultValue,
   getMetaValue,
@@ -62,14 +63,19 @@ describe('shinkansen-transmission/transmission/common', () => {
     if (DEBUG) debug.enable(DEBUG)
   })
 
-  /*
-  describe('`getSelectedItems`', () => {
+  describe('`getSelectedItemsForParentUri`', () => {
     it('is a function', () => {
-      expect(getSelectedItems)
+      expect(getSelectedItemsForParentUri)
         .to.be.a('function')
     })
   })
-  */
+
+  describe('`getSelectedItemsForUri`', () => {
+    it('is a function', () => {
+      expect(getSelectedItemsForUri)
+        .to.be.a('function')
+    })
+  })
 
   describe('`getMetaProps`', () => {
     it('is a function', () => {
@@ -358,32 +364,73 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  /*
-  describe('`getSelectedItems()`', () => {
+  describe('`getSelectedItemsForParentUri()`', () => {
     describe('Values has a field for the uri', () => {
       describe('The field is an array', () => {
         it('returns the array', () => {
-          expect(getSelectedItems({ '#/': ['1'] }, '#/'))
+          expect(getSelectedItemsForParentUri({ '#/': ['1'] }, '#/'))
             .to.eql([1])
         })
       })
 
       describe('The field is not an array', () => {
         it('returns an array', () => {
-          expect(getSelectedItems({ '#/': '1' }, '#/'))
+          expect(getSelectedItemsForParentUri({ '#/': '1' }, '#/'))
             .to.eql([1])
         })
       })
     })
 
-    describe('Values has a field for the uri', () => {
-      it('returns an array', () => {
-        expect(getSelectedItems([]))
-          .to.eql([])
+    describe('Values does not have a field for the uri', () => {
+      describe('Values has fields for the uri pattern', () => {
+        it('returns an array', () => {
+          expect(getSelectedItemsForParentUri({ '#/0': '1', '#/1': '2', '#/2': '3' }, '#/'))
+            .to.eql([1, 2, 3])
+        })
+      })
+
+      describe('Values does not have fields for the uri pattern', () => {
+        it('returns an array', () => {
+          expect(getSelectedItemsForParentUri({ '#/one': '1', '#/two': '2', '#/three': '3' }, '#/'))
+            .to.eql([])
+        })
       })
     })
   })
-  */
+
+  describe('`getSelectedItemsForUri()`', () => {
+    describe('Values has a field for the uri', () => {
+      describe('The field is an array', () => {
+        it('returns the array', () => {
+          expect(getSelectedItemsForUri({ '#/': ['1'] }, '#', '#/'))
+            .to.eql([1])
+        })
+      })
+
+      describe('The field is not an array', () => {
+        it('returns an array', () => {
+          expect(getSelectedItemsForUri({ '#/': '1' }, '#', '#/'))
+            .to.eql([1])
+        })
+      })
+    })
+
+    describe('Values does not have a field for the uri', () => {
+      describe('Values has fields for the uri pattern', () => {
+        it('returns an array', () => {
+          expect(getSelectedItemsForUri({ '#/0': '1', '#/1': '2', '#/2': '3' }, '#', '#/'))
+            .to.eql([1, 2, 3])
+        })
+      })
+
+      describe('Values does not have fields for the uri pattern', () => {
+        it('returns an array', () => {
+          expect(getSelectedItemsForUri({ '#/one': '1', '#/two': '2', '#/three': '3' }, '#', '#/'))
+            .to.eql([])
+        })
+      })
+    })
+  })
 
   describe('`getMetaProps()`', () => {
     describe('Params has a field for the uri', () => {
