@@ -4,7 +4,7 @@ import {
   isArray,
   isObject,
 
-  getSelectedItemsForUri,
+  getSelectedItems,
 
   hasEnum,
   getEnum,
@@ -256,12 +256,11 @@ export function transformNullForEnum (rootSchema, values, params) {
   log('transformNullForEnum')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const items = getEnum(rootSchema)
@@ -278,12 +277,11 @@ export function transformNullForAnyOf (rootSchema, values, params) {
   log('transformNullForAnyOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
@@ -301,12 +299,11 @@ export function transformNullForOneOf (rootSchema, values, params) {
   log('transformNullForOneOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
@@ -364,12 +361,11 @@ export function transformBooleanForEnum (rootSchema, values, params) {
   log('transformBooleanForEnum')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const items = getEnum(rootSchema)
@@ -386,12 +382,11 @@ export function transformBooleanForAnyOf (rootSchema, values, params) {
   log('transformBooleanForAnyOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
@@ -409,12 +404,11 @@ export function transformBooleanForOneOf (rootSchema, values, params) {
   log('transformBooleanForOneOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
@@ -472,12 +466,11 @@ export function transformObjectForEnum (rootSchema, values, params) {
   log('renderObjectForEnum')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const items = getEnum(rootSchema)
@@ -494,12 +487,11 @@ export function transformObjectForAnyOf (rootSchema, values, params) {
   log('transformObjectForAnyOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
@@ -517,12 +509,11 @@ export function transformObjectForOneOf (rootSchema, values, params) {
   log('transformObjectForOneOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
@@ -595,12 +586,11 @@ export function transformArrayForEnum (rootSchema, values, params) {
   log('renderArrayForEnum')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const items = getEnum(rootSchema)
@@ -617,12 +607,11 @@ export function transformArrayForAnyOf (rootSchema, values, params) {
   log('transformArrayForAnyOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
@@ -640,12 +629,11 @@ export function transformArrayForOneOf (rootSchema, values, params) {
   log('transformArrayForOneOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
@@ -721,12 +709,11 @@ export function transformNumberForEnum (rootSchema, values, params) {
   log('transformNumberForEnum')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const items = getEnum(rootSchema)
@@ -743,12 +730,11 @@ export function transformNumberForAnyOf (rootSchema, values, params) {
   log('transformNumberForAnyOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
@@ -766,12 +752,11 @@ export function transformNumberForOneOf (rootSchema, values, params) {
   log('transformNumberForOneOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
@@ -829,12 +814,11 @@ export function transformStringForEnum (rootSchema, values, params) {
   log('transformStringForEnum')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const items = getEnum(rootSchema)
@@ -851,12 +835,11 @@ export function transformStringForAnyOf (rootSchema, values, params) {
   log('transformStringForAnyOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
@@ -874,12 +857,11 @@ export function transformStringForOneOf (rootSchema, values, params) {
   log('transformStringForOneOf')
 
   const {
-    parentUri = '#',
     uri = '#/'
   } = params
 
   const {
-    selectedItems = getSelectedItemsForUri(values, parentUri, uri)
+    selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema

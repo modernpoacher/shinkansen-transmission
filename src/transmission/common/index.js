@@ -42,6 +42,57 @@ export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { wri
 
 const getUriForRegExp = (uri) => uri.endsWith('/') ? uri : uri.concat('/')
 
+export function getSelectedItems (values = {}, uri = '#') {
+  const u = normaliseUri(uri)
+
+  if (Reflect.has(values, u)) {
+    const v = Reflect.get(values, u)
+
+    // transformByKeyForEnum
+    // transformByKeyForAnyOf
+    // transformByKeyForOneOf
+
+    if (isPrimitive(v)) {
+      const n = Number(v)
+      return isNaN(n)
+        ? [v]
+        : [n]
+    } else {
+      return v.map((v) => {
+        const n = Number(v)
+        return isNaN(n)
+          ? v
+          : n
+      })
+    }
+  }
+
+  // transformByKeyForEnum
+  // transformByKeyForAnyOf
+  // transformByKeyForOneOf
+
+  /*
+   *  Given the uri `#/`
+   *
+   *  Get the values `#/n` (where `n` is a number)
+   */
+  const pattern = new RegExp(`^${getUriForRegExp(u)}\\d+$`)
+
+  return (
+    Object
+      .entries(values)
+      .filter(([key]) => pattern.test(key)) // uri
+      .map(([key, value]) => {
+        const i = Number(key.slice(key.lastIndexOf('/') + 1))
+        const v = isArray(value) ? value[i] : value
+        const n = Number(v)
+
+        if (!isNaN(n)) return n
+        return v
+      })
+  )
+}
+
 export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri = '#') {
   const p = normaliseUri(parentUri)
 
