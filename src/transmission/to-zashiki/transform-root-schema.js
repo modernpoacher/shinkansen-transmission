@@ -75,7 +75,9 @@ import {
 const log = debug('shinkansen-transmission:to-zashiki:root-schema')
 
 export function getRenderParamsForEnum (rootSchema, values, params) {
-  log('getRenderParamsForEnum')
+  /*
+   *  log('getRenderParamsForEnum')
+   */
 
   const {
     parentUri = '#',
@@ -106,7 +108,9 @@ export function getRenderParamsForEnum (rootSchema, values, params) {
 }
 
 export function getRenderParamsForAnyOf (rootSchema, values, params) {
-  log('getRenderParamsForAnyOf')
+  /*
+   *  log('getRenderParamsForAnyOf')
+   */
 
   const {
     parentUri = '#',
@@ -137,7 +141,9 @@ export function getRenderParamsForAnyOf (rootSchema, values, params) {
 }
 
 export function getRenderParamsForOneOf (rootSchema, values, params) {
-  log('getRenderParamsForOneOf')
+  /*
+   *  log('getRenderParamsForOneOf')
+   */
 
   const {
     parentUri = '#',
@@ -168,7 +174,9 @@ export function getRenderParamsForOneOf (rootSchema, values, params) {
 }
 
 export function getRenderParamsForAllOf (rootSchema, values, params) {
-  log('getRenderParamsForAllOf')
+  /*
+   *  log('getRenderParamsForAllOf')
+   */
 
   const {
     parentUri = '#',
@@ -194,7 +202,9 @@ export function getRenderParamsForAllOf (rootSchema, values, params) {
 }
 
 export function getRenderParamsForFields (rootSchema, values, params) {
-  log('getRenderParamsForFields')
+  /*
+   *  log('getRenderParamsForFields')
+   */
 
   const {
     parentUri = '#',
@@ -220,7 +230,9 @@ export function getRenderParamsForFields (rootSchema, values, params) {
 }
 
 export function getRenderParams (rootSchema, values, params) {
-  log('getRenderParams')
+  /*
+   *  log('getRenderParams')
+   */
 
   const {
     parentUri = '#',
@@ -253,7 +265,9 @@ export function getRenderParams (rootSchema, values, params) {
  *  "enum"
  */
 export function transformNullForEnum (rootSchema, values, params) {
-  log('transformNullForEnum')
+  /*
+   *  log('transformNullForEnum')
+   */
 
   const {
     uri = '#/'
@@ -274,7 +288,9 @@ export function transformNullForEnum (rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformNullForAnyOf (rootSchema, values, params) {
-  log('transformNullForAnyOf')
+  /*
+   *  log('transformNullForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -296,7 +312,9 @@ export function transformNullForAnyOf (rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformNullForOneOf (rootSchema, values, params) {
-  log('transformNullForOneOf')
+  /*
+   *  log('transformNullForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -318,7 +336,9 @@ export function transformNullForOneOf (rootSchema, values, params) {
  *  "allOf"
  */
 export function transformNullForAllOf (rootSchema, values, params) {
-  log('transformNullForAllOf')
+  /*
+   *  log('transformNullForAllOf')
+   */
 
   const { allOf = [], ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -331,7 +351,9 @@ export function transformNullForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (rootSchema, values, params) {
-  log('transformNull')
+  /*
+   *  log('transformNull')
+   */
 
   if (hasEnum(rootSchema)) {
     return transformNullForEnum(rootSchema, values, params)
@@ -358,7 +380,9 @@ export function transformNull (rootSchema, values, params) {
  *  "enum"
  */
 export function transformBooleanForEnum (rootSchema, values, params) {
-  log('transformBooleanForEnum')
+  /*
+   *  log('transformBooleanForEnum')
+   */
 
   const {
     uri = '#/'
@@ -379,7 +403,9 @@ export function transformBooleanForEnum (rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformBooleanForAnyOf (rootSchema, values, params) {
-  log('transformBooleanForAnyOf')
+  /*
+   *  log('transformBooleanForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -401,7 +427,9 @@ export function transformBooleanForAnyOf (rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformBooleanForOneOf (rootSchema, values, params) {
-  log('transformBooleanForOneOf')
+  /*
+   *  log('transformBooleanForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -423,7 +451,9 @@ export function transformBooleanForOneOf (rootSchema, values, params) {
  *  "allOf"
  */
 export function transformBooleanForAllOf (rootSchema, values, params) {
-  log('transformBooleanForAllOf')
+  /*
+   *  log('transformBooleanForAllOf')
+   */
 
   const { allOf = [], ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -436,7 +466,9 @@ export function transformBooleanForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (rootSchema, values, params) {
-  log('transformBoolean')
+  /*
+   *  log('transformBoolean')
+   */
 
   if (hasEnum(rootSchema)) {
     return transformBooleanForEnum(rootSchema, values, params)
@@ -463,7 +495,9 @@ export function transformBoolean (rootSchema, values, params) {
  *  "enum"
  */
 export function transformObjectForEnum (rootSchema, values, params) {
-  log('renderObjectForEnum')
+  /*
+   *  log('renderObjectForEnum')
+   */
 
   const {
     uri = '#/'
@@ -484,7 +518,9 @@ export function transformObjectForEnum (rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformObjectForAnyOf (rootSchema, values, params) {
-  log('transformObjectForAnyOf')
+  /*
+   *  log('transformObjectForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -506,7 +542,9 @@ export function transformObjectForAnyOf (rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformObjectForOneOf (rootSchema, values, params) {
-  log('transformObjectForOneOf')
+  /*
+   *  log('transformObjectForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -528,7 +566,9 @@ export function transformObjectForOneOf (rootSchema, values, params) {
  *  "allOf"
  */
 export function transformObjectForAllOf (rootSchema, values, params) {
-  log('transformObjectForAllOf')
+  /*
+   *  log('transformObjectForAllOf')
+   */
 
   const { allOf = [], ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -541,7 +581,9 @@ export function transformObjectForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (rootSchema, values, params) {
-  log('transformObject')
+  /*
+   *  log('transformObject')
+   */
 
   if (hasEnum(rootSchema)) {
     return transformObjectForEnum(rootSchema, values, params)
@@ -583,7 +625,9 @@ export function transformObject (rootSchema, values, params) {
  *  "enum"
  */
 export function transformArrayForEnum (rootSchema, values, params) {
-  log('renderArrayForEnum')
+  /*
+   *  log('renderArrayForEnum')
+   */
 
   const {
     uri = '#/'
@@ -604,7 +648,9 @@ export function transformArrayForEnum (rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformArrayForAnyOf (rootSchema, values, params) {
-  log('transformArrayForAnyOf')
+  /*
+   *  log('transformArrayForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -626,7 +672,9 @@ export function transformArrayForAnyOf (rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformArrayForOneOf (rootSchema, values, params) {
-  log('transformArrayForOneOf')
+  /*
+   *  log('transformArrayForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -648,7 +696,9 @@ export function transformArrayForOneOf (rootSchema, values, params) {
  *  "allOf"
  */
 export function transformArrayForAllOf (rootSchema, values, params) {
-  log('transformArrayForAllOf')
+  /*
+   *  log('transformArrayForAllOf')
+   */
 
   const { allOf = [], ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -661,7 +711,9 @@ export function transformArrayForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (rootSchema, values, params) {
-  log('transformArray')
+  /*
+   *  log('transformArray')
+   */
 
   if (hasEnum(rootSchema)) {
     return transformArrayForEnum(rootSchema, values, params)
@@ -706,7 +758,9 @@ export function transformArray (rootSchema, values, params) {
  *  "enum"
  */
 export function transformNumberForEnum (rootSchema, values, params) {
-  log('transformNumberForEnum')
+  /*
+   *  log('transformNumberForEnum')
+   */
 
   const {
     uri = '#/'
@@ -727,7 +781,9 @@ export function transformNumberForEnum (rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformNumberForAnyOf (rootSchema, values, params) {
-  log('transformNumberForAnyOf')
+  /*
+   *  log('transformNumberForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -749,7 +805,9 @@ export function transformNumberForAnyOf (rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformNumberForOneOf (rootSchema, values, params) {
-  log('transformNumberForOneOf')
+  /*
+   *  log('transformNumberForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -771,7 +829,9 @@ export function transformNumberForOneOf (rootSchema, values, params) {
  *  "allOf"
  */
 export function transformNumberForAllOf (rootSchema, values, params) {
-  log('transformNumberForAllOf')
+  /*
+   *  log('transformNumberForAllOf')
+   */
 
   const { allOf = [], ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -784,7 +844,9 @@ export function transformNumberForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
-  log('transformNumber')
+  /*
+   *  log('transformNumber')
+   */
 
   if (hasEnum(rootSchema)) {
     return transformNumberForEnum(rootSchema, values, params)
@@ -811,7 +873,9 @@ export function transformNumber (rootSchema, values, params) {
  *  "enum"
  */
 export function transformStringForEnum (rootSchema, values, params) {
-  log('transformStringForEnum')
+  /*
+   *  log('transformStringForEnum')
+   */
 
   const {
     uri = '#/'
@@ -832,7 +896,9 @@ export function transformStringForEnum (rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformStringForAnyOf (rootSchema, values, params) {
-  log('transformStringForAnyOf')
+  /*
+   *  log('transformStringForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -854,7 +920,9 @@ export function transformStringForAnyOf (rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformStringForOneOf (rootSchema, values, params) {
-  log('transformStringForOneOf')
+  /*
+   *  log('transformStringForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -876,7 +944,9 @@ export function transformStringForOneOf (rootSchema, values, params) {
  *  "allOf"
  */
 export function transformStringForAllOf (rootSchema, values, params) {
-  log('transformStringForAllOf')
+  /*
+   *  log('transformStringForAllOf')
+   */
 
   const { allOf = [], ...rest } = rootSchema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -889,7 +959,9 @@ export function transformStringForAllOf (rootSchema, values, params) {
  */
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (rootSchema, values, params) {
-  log('transformString')
+  /*
+   *  log('transformString')
+   */
 
   if (hasEnum(rootSchema)) {
     return transformStringForEnum(rootSchema, values, params)

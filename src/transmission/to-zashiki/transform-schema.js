@@ -57,7 +57,9 @@ import {
 const log = debug('shinkansen-transmission:to-zashiki:schema')
 
 export function mapTransformNullByIndex (rootSchema, values, params) {
-  log('mapTransformNullByIndex')
+  /*
+   *  log('mapTransformNullByIndex')
+   */
 
   return function map (schema, index) {
     return transformNullByIndex(schema, rootSchema, values, { ...params, index })
@@ -65,7 +67,9 @@ export function mapTransformNullByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformBooleanByIndex (rootSchema, values, params) {
-  log('mapTransformBooleanByIndex')
+  /*
+   *  log('mapTransformBooleanByIndex')
+   */
 
   return function map (schema, index) {
     return transformBooleanByIndex(schema, rootSchema, values, { ...params, index })
@@ -73,7 +77,9 @@ export function mapTransformBooleanByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformObjectByIndex (rootSchema, values, params) {
-  log('mapTransformObjectByIndex')
+  /*
+   *  log('mapTransformObjectByIndex')
+   */
 
   return function map (schema, index) {
     return transformObjectByIndex(schema, rootSchema, values, { ...params, index })
@@ -81,7 +87,9 @@ export function mapTransformObjectByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformArrayByIndex (rootSchema, values, params) {
-  log('mapTransformArrayByIndex')
+  /*
+   *  log('mapTransformArrayByIndex')
+   */
 
   return function map (schema, index) {
     return transformArrayByIndex(schema, rootSchema, values, { ...params, index })
@@ -89,7 +97,9 @@ export function mapTransformArrayByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformNumberByIndex (rootSchema, values, params) {
-  log('mapTransformNumberByIndex')
+  /*
+   *  log('mapTransformNumberByIndex')
+   */
 
   return function map (schema, index) {
     return transformNumberByIndex(schema, rootSchema, values, { ...params, index })
@@ -97,7 +107,9 @@ export function mapTransformNumberByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformStringByIndex (rootSchema, values, params) {
-  log('mapTransformStringByIndex')
+  /*
+   *  log('mapTransformStringByIndex')
+   */
 
   return function map (schema, index) {
     return transformStringByIndex(schema, rootSchema, values, { ...params, index })
@@ -105,7 +117,9 @@ export function mapTransformStringByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformByIndex (rootSchema, values, params) {
-  log('mapTransformByIndex')
+  /*
+   *  log('mapTransformByIndex')
+   */
 
   return function map (schema, index) {
     return getTransformByIndex(schema, rootSchema, values, { ...params, index })
@@ -113,7 +127,9 @@ export function mapTransformByIndex (rootSchema, values, params) {
 }
 
 export function mapTransformByKey (rootSchema, values, { required = [], ...params }) {
-  log('mapTransformByKey')
+  /*
+   *  log('mapTransformByKey')
+   */
 
   return function map ([key, schema]) {
     return getTransformByKey(schema, rootSchema, values, { ...params, isRequired: required.includes(key), key })
@@ -124,7 +140,9 @@ export function mapTransformByKey (rootSchema, values, { required = [], ...param
  *  "enum"
  */
 export function renderNullForEnum (schema, values, params) {
-  log('renderNullForEnum')
+  /*
+   *  log('renderNullForEnum')
+   */
 
   const {
     uri = '#/'
@@ -162,7 +180,9 @@ export function renderNullForEnum (schema, values, params) {
  *  "anyOf"
  */
 export function renderNullForAnyOf (schema, values, params) {
-  log('renderNullForAnyOf')
+  /*
+   *  log('renderNullForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -200,7 +220,9 @@ export function renderNullForAnyOf (schema, values, params) {
  *  "oneOf"
  */
 export function renderNullForOneOf (schema, values, params) {
-  log('renderNullForOneOf')
+  /*
+   *  log('renderNullForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -238,7 +260,9 @@ export function renderNullForOneOf (schema, values, params) {
  *  "allOf"
  */
 export function renderNullForAllOf (schema, values, params) {
-  log('renderNullForAllOf')
+  /*
+   *  log('renderNullForAllOf')
+   */
 
   const {
     uri = '#/'
@@ -292,7 +316,9 @@ export function renderNullForAllOf (schema, values, params) {
 }
 
 export function renderNull (schema, values, params) {
-  log('renderNull')
+  /*
+   *  log('renderNull')
+   */
 
   const {
     uri = '#/'
@@ -349,7 +375,9 @@ export function renderNull (schema, values, params) {
  *  "enum"
  */
 export function renderBooleanForEnum (schema, values, params) {
-  log('renderBooleanForEnum')
+  /*
+   *  log('renderBooleanForEnum')
+   */
 
   const {
     uri = '#/'
@@ -387,7 +415,9 @@ export function renderBooleanForEnum (schema, values, params) {
  *  "anyOf"
  */
 export function renderBooleanForAnyOf (schema, values, params) {
-  log('renderBooleanForAnyOf')
+  /*
+   *  log('renderBooleanForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -425,7 +455,9 @@ export function renderBooleanForAnyOf (schema, values, params) {
  *  "oneOf"
  */
 export function renderBooleanForOneOf (schema, values, params) {
-  log('renderBooleanForAnyOf')
+  /*
+   *  log('renderBooleanForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -463,7 +495,9 @@ export function renderBooleanForOneOf (schema, values, params) {
  *  "allOf"
  */
 export function renderBooleanForAllOf (schema, values, params) {
-  log('renderBooleanForAllOf')
+  /*
+   *  log('renderBooleanForAllOf')
+   */
 
   const {
     uri = '#/'
@@ -517,7 +551,9 @@ export function renderBooleanForAllOf (schema, values, params) {
 }
 
 export function renderBoolean (schema, values, params) {
-  log('renderBoolean')
+  /*
+   *  log('renderBoolean')
+   */
 
   const {
     uri = '#/'
@@ -574,7 +610,9 @@ export function renderBoolean (schema, values, params) {
  *  "enum"
  */
 export function renderObjectForEnum (schema, values, params) {
-  log('renderObjectForEnum')
+  /*
+   *  log('renderObjectForEnum')
+   */
 
   const {
     uri = '#/'
@@ -619,7 +657,9 @@ export function renderObjectForEnum (schema, values, params) {
  *  "anyOf"
  */
 export function renderObjectForAnyOf (schema, values, params) {
-  log('renderObjectForAnyOf')
+  /*
+   *  log('renderObjectForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -664,7 +704,9 @@ export function renderObjectForAnyOf (schema, values, params) {
  *  "oneOf"
  */
 export function renderObjectForOneOf (schema, values, params) {
-  log('renderObjectForOneOf')
+  /*
+   *  log('renderObjectForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -709,7 +751,9 @@ export function renderObjectForOneOf (schema, values, params) {
  *  "allOf"
  */
 export function renderObjectForAllOf (schema, values, params) {
-  log('renderObjectForAllOf')
+  /*
+   *  log('renderObjectForAllOf')
+   */
 
   const {
     uri = '#/'
@@ -751,7 +795,9 @@ export function renderObjectForAllOf (schema, values, params) {
 }
 
 export function renderObject (schema, values, params) {
-  log('renderObject')
+  /*
+   *  log('renderObject')
+   */
 
   const {
     uri = '#/',
@@ -790,7 +836,9 @@ export function renderObject (schema, values, params) {
  *  "enum"
  */
 export function renderArrayForEnum (schema, values, params) {
-  log('renderArrayForEnum')
+  /*
+   *  log('renderArrayForEnum')
+   */
 
   const {
     uri = '#/'
@@ -844,7 +892,9 @@ export function renderArrayForEnum (schema, values, params) {
  *  "anyOf"
  */
 export function renderArrayForAnyOf (schema, values, params) {
-  log('renderArrayForAnyOf')
+  /*
+   *  log('renderArrayForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -898,7 +948,9 @@ export function renderArrayForAnyOf (schema, values, params) {
  *  "oneOf"
  */
 export function renderArrayForOneOf (schema, values, params) {
-  log('renderArrayForOneOf')
+  /*
+   *  log('renderArrayForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -952,7 +1004,9 @@ export function renderArrayForOneOf (schema, values, params) {
  *  "allOf"
  */
 export function renderArrayForAllOf (schema, values, params) {
-  log('renderArrayForAllOf')
+  /*
+   *  log('renderArrayForAllOf')
+   */
 
   const {
     uri = '#/'
@@ -1003,7 +1057,9 @@ export function renderArrayForAllOf (schema, values, params) {
 }
 
 export function renderArray (schema, values, params) {
-  log('renderArray')
+  /*
+   *  log('renderArray')
+   */
 
   const {
     uri = '#/',
@@ -1048,7 +1104,9 @@ export function renderArray (schema, values, params) {
  *  "enum"
  */
 export function renderNumberForEnum (schema, values, params) {
-  log('renderNumberForEnum')
+  /*
+   *  log('renderNumberForEnum')
+   */
 
   const {
     uri = '#/'
@@ -1101,7 +1159,9 @@ export function renderNumberForEnum (schema, values, params) {
  *  "anyOf"
  */
 export function renderNumberForAnyOf (schema, values, params) {
-  log('renderNumberForAnyOf')
+  /*
+   *  log('renderNumberForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -1154,7 +1214,9 @@ export function renderNumberForAnyOf (schema, values, params) {
  *  "oneOf"
  */
 export function renderNumberForOneOf (schema, values, params) {
-  log('renderNumberForOneOf')
+  /*
+   *  log('renderNumberForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -1207,7 +1269,9 @@ export function renderNumberForOneOf (schema, values, params) {
  *  "allOf"
  */
 export function renderNumberForAllOf (schema, values, params) {
-  log('renderNumberForAllOf')
+  /*
+   *  log('renderNumberForAllOf')
+   */
 
   const {
     uri = '#/'
@@ -1276,7 +1340,9 @@ export function renderNumberForAllOf (schema, values, params) {
 }
 
 export function renderNumber (schema, values, params) {
-  log('renderNumber')
+  /*
+   *  log('renderNumber')
+   */
 
   const {
     uri = '#/'
@@ -1348,7 +1414,9 @@ export function renderNumber (schema, values, params) {
  *  "enum"
  */
 export function renderStringForEnum (schema, values, params) {
-  log('renderStringForEnum')
+  /*
+   *  log('renderStringForEnum')
+   */
 
   const {
     uri = '#/'
@@ -1396,7 +1464,9 @@ export function renderStringForEnum (schema, values, params) {
  *  "anyOf"
  */
 export function renderStringForAnyOf (schema, values, params) {
-  log('renderStringForAnyOf')
+  /*
+   *  log('renderStringForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -1444,7 +1514,9 @@ export function renderStringForAnyOf (schema, values, params) {
  *  "oneOf"
  */
 export function renderStringForOneOf (schema, values, params) {
-  log('renderStringForOneOf')
+  /*
+   *  log('renderStringForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -1492,7 +1564,9 @@ export function renderStringForOneOf (schema, values, params) {
  *  "allOf"
  */
 export function renderStringForAllOf (schema, values, params) {
-  log('renderStringForAllOf')
+  /*
+   *  log('renderStringForAllOf')
+   */
 
   const {
     uri = '#/'
@@ -1556,7 +1630,9 @@ export function renderStringForAllOf (schema, values, params) {
 }
 
 export function renderString (schema, values, params) {
-  log('renderString')
+  /*
+   *  log('renderString')
+   */
 
   const {
     uri = '#/'
@@ -1620,7 +1696,9 @@ export function renderString (schema, values, params) {
 }
 
 export function getRenderParamsByKeyForEnum (schema, rootSchema, values, params) {
-  log('getRenderParamsByKeyForEnum')
+  /*
+   *  log('getRenderParamsByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -1662,7 +1740,9 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, values, params)
 }
 
 export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('getRenderParamsByKeyForAnyOf')
+  /*
+   *  log('getRenderParamsByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -1744,7 +1824,9 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, params
 }
 
 export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, params) {
-  log('getRenderParamsByKeyForAllOf')
+  /*
+   *  log('getRenderParamsByKeyForAllOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -1776,7 +1858,9 @@ export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, params
 }
 
 export function getRenderParamsByKey (schema, rootSchema, values, params) {
-  log('getRenderParamsByKey')
+  /*
+   *  log('getRenderParamsByKey')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -1812,7 +1896,9 @@ export function getRenderParamsByKey (schema, rootSchema, values, params) {
 }
 
 export function getRenderParamsByIndexForEnum (schema, rootSchema, values, params) {
-  log('getRenderParamsByIndexForEnum')
+  /*
+   *  log('getRenderParamsByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -1854,7 +1940,9 @@ export function getRenderParamsByIndexForEnum (schema, rootSchema, values, param
 }
 
 export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('getRenderParamsByIndexForAnyOf')
+  /*
+   *  log('getRenderParamsByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -1896,7 +1984,9 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, para
 }
 
 export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, params) {
-  log('getRenderParamsByIndexForOneOf')
+  /*
+   *  log('getRenderParamsByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -1938,7 +2028,9 @@ export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, para
 }
 
 export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, params) {
-  log('getRenderParamsByIndexForAllOf')
+  /*
+   *  log('getRenderParamsByIndexForAllOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -1974,7 +2066,9 @@ export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, para
 }
 
 export function getRenderParamsByIndex (schema, rootSchema, values, params) {
-  log('getRenderParamsByIndex')
+  /*
+   *  log('getRenderParamsByIndex')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2010,7 +2104,9 @@ export function getRenderParamsByIndex (schema, rootSchema, values, params) {
 }
 
 export function getRenderParamsForEnum (schema, rootSchema, values, params) {
-  log('getRenderParamsForEnum')
+  /*
+   *  log('getRenderParamsForEnum')
+   */
 
   const {
     parentUri = '#',
@@ -2045,7 +2141,9 @@ export function getRenderParamsForEnum (schema, rootSchema, values, params) {
 }
 
 export function getRenderParamsForAnyOf (schema, rootSchema, values, params) {
-  log('getRenderParamsForAnyOf')
+  /*
+   *  log('getRenderParamsForAnyOf')
+   */
 
   const {
     parentUri = '#',
@@ -2080,7 +2178,9 @@ export function getRenderParamsForAnyOf (schema, rootSchema, values, params) {
 }
 
 export function getRenderParamsForOneOf (schema, rootSchema, values, params) {
-  log('getRenderParamsForOneOf')
+  /*
+   *  log('getRenderParamsForOneOf')
+   */
 
   const {
     parentUri = '#',
@@ -2115,7 +2215,9 @@ export function getRenderParamsForOneOf (schema, rootSchema, values, params) {
 }
 
 export function getRenderParamsForAllOf (schema, rootSchema, values, params) {
-  log('getRenderParamsForAllOf')
+  /*
+   *  log('getRenderParamsForAllOf')
+   */
 
   const {
     parentUri = '#',
@@ -2144,7 +2246,9 @@ export function getRenderParamsForAllOf (schema, rootSchema, values, params) {
 }
 
 export function getRenderParams (schema, rootSchema, values, params) {
-  log('getRenderParams')
+  /*
+   *  log('getRenderParams')
+   */
 
   const {
     parentUri = '#',
@@ -2176,7 +2280,9 @@ export function getRenderParams (schema, rootSchema, values, params) {
  *  "enum"
  */
 export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformNullByKeyForEnum')
+  /*
+   *  log('transformNullByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2198,7 +2304,9 @@ export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformNullByKeyForAnyOf')
+  /*
+   *  log('transformNullByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2221,7 +2329,9 @@ export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) 
  *  "oneOf"
  */
 export function transformNullByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformNullByKeyForOneOf')
+  /*
+   *  log('transformNullByKeyForOneOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2244,7 +2354,9 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
  *  "allOf"
  */
 export function transformNullByKeyForAllOf (schema, rootSchema, values, params) {
-  log('transformNullByKeyForAllOf')
+  /*
+   *  log('transformNullByKeyForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2256,7 +2368,9 @@ export function transformNullByKeyForAllOf (schema, rootSchema, values, params) 
  *  "enum"
  */
 export function transformNullByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformNullByIndexForEnum')
+  /*
+   *  log('transformNullByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2277,7 +2391,9 @@ export function transformNullByIndexForEnum (schema, rootSchema, values, params)
  *  "anyOf"
  */
 export function transformNullByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformNullByIndexForAnyOf')
+  /*
+   *  log('transformNullByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2299,7 +2415,9 @@ export function transformNullByIndexForAnyOf (schema, rootSchema, values, params
  *  "oneOf"
  */
 export function transformNullByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformNullByIndexForOneOf')
+  /*
+   *  log('transformNullByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2321,7 +2439,9 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
  *  "allOf"
  */
 export function transformNullByIndexForAllOf (schema, rootSchema, values, params) {
-  log('transformNullByIndexForAllOf')
+  /*
+   *  log('transformNullByIndexForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2333,7 +2453,9 @@ export function transformNullByIndexForAllOf (schema, rootSchema, values, params
  *  "enum"
  */
 export function transformNullForEnum (schema, rootSchema, values, params) {
-  log('transformNullForEnum')
+  /*
+   *  log('transformNullForEnum')
+   */
 
   const {
     uri = '#/'
@@ -2352,7 +2474,9 @@ export function transformNullForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformNullForAnyOf (schema, rootSchema, values, params) {
-  log('transformNullForAnyOf')
+  /*
+   *  log('transformNullForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -2372,7 +2496,9 @@ export function transformNullForAnyOf (schema, rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformNullForOneOf (schema, rootSchema, values, params) {
-  log('transformNullForOneOf')
+  /*
+   *  log('transformNullForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -2392,7 +2518,9 @@ export function transformNullForOneOf (schema, rootSchema, values, params) {
  *  "allOf"
  */
 export function transformNullForAllOf (schema, rootSchema, values, params) {
-  log('transformNullForAllOf')
+  /*
+   *  log('transformNullForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2404,7 +2532,9 @@ export function transformNullForAllOf (schema, rootSchema, values, params) {
  *  "enum"
  */
 export function transformBooleanByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformBooleanByKeyForEnum')
+  /*
+   *  log('transformBooleanByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2426,7 +2556,9 @@ export function transformBooleanByKeyForEnum (schema, rootSchema, values, params
  *  "anyOf"
  */
 export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformBooleanByKeyForAnyOf')
+  /*
+   *  log('transformBooleanByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2449,7 +2581,9 @@ export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, param
  *  "oneOf"
  */
 export function transformBooleanByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformBooleanByKeyForOneOf')
+  /*
+   *  log('transformBooleanByKeyForOneOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2472,7 +2606,9 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
  *  "allOf"
  */
 export function transformBooleanByKeyForAllOf (schema, rootSchema, values, params) {
-  log('transformBooleanByKeyForAllOf')
+  /*
+   *  log('transformBooleanByKeyForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2484,7 +2620,9 @@ export function transformBooleanByKeyForAllOf (schema, rootSchema, values, param
  *  "enum"
  */
 export function transformBooleanByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformBooleanByIndexForEnum')
+  /*
+   *  log('transformBooleanByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2505,7 +2643,9 @@ export function transformBooleanByIndexForEnum (schema, rootSchema, values, para
  *  "anyOf"
  */
 export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformBooleanByIndexForAnyOf')
+  /*
+   *  log('transformBooleanByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2527,7 +2667,9 @@ export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, par
  *  "oneOf"
  */
 export function transformBooleanByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformBooleanByIndexForOneOf')
+  /*
+   *  log('transformBooleanByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2549,7 +2691,9 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
  *  "allOf"
  */
 export function transformBooleanByIndexForAllOf (schema, rootSchema, values, params) {
-  log('transformBooleanByIndexForAllOf')
+  /*
+   *  log('transformBooleanByIndexForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2561,7 +2705,9 @@ export function transformBooleanByIndexForAllOf (schema, rootSchema, values, par
  *  "enum"
  */
 export function transformBooleanForEnum (schema, rootSchema, values, params) {
-  log('transformBooleanForEnum')
+  /*
+   *  log('transformBooleanForEnum')
+   */
 
   const {
     uri = '#/'
@@ -2580,7 +2726,9 @@ export function transformBooleanForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
-  log('transformBooleanForAnyOf')
+  /*
+   *  log('transformBooleanForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -2600,7 +2748,9 @@ export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformBooleanForOneOf (schema, rootSchema, values, params) {
-  log('transformBooleanForOneOf')
+  /*
+   *  log('transformBooleanForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -2620,7 +2770,9 @@ export function transformBooleanForOneOf (schema, rootSchema, values, params) {
  *  "allOf"
  */
 export function transformBooleanForAllOf (schema, rootSchema, values, params) {
-  log('transformBooleanForAllOf')
+  /*
+   *  log('transformBooleanForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2632,7 +2784,9 @@ export function transformBooleanForAllOf (schema, rootSchema, values, params) {
  *  "enum"
  */
 export function transformObjectByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformObjectByKeyForEnum')
+  /*
+   *  log('transformObjectByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2654,7 +2808,9 @@ export function transformObjectByKeyForEnum (schema, rootSchema, values, params)
  *  "anyOf"
  */
 export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformObjectByKeyForAnyOf')
+  /*
+   *  log('transformObjectByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2677,7 +2833,9 @@ export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params
  *  "oneOf"
  */
 export function transformObjectByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformObjectByKeyForOneOf')
+  /*
+   *  log('transformObjectByKeyForOneOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2700,7 +2858,9 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
  *  "allOf"
  */
 export function transformObjectByKeyForAllOf (schema, rootSchema, values, params) {
-  log('transformObjectByKeyForAllOf')
+  /*
+   *  log('transformObjectByKeyForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2712,7 +2872,9 @@ export function transformObjectByKeyForAllOf (schema, rootSchema, values, params
  *  "enum"
  */
 export function transformObjectByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformObjectByIndexForEnum')
+  /*
+   *  log('transformObjectByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2733,7 +2895,9 @@ export function transformObjectByIndexForEnum (schema, rootSchema, values, param
  *  "anyOf"
  */
 export function transformObjectByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformObjectByIndexForAnyOf')
+  /*
+   *  log('transformObjectByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2755,7 +2919,9 @@ export function transformObjectByIndexForAnyOf (schema, rootSchema, values, para
  *  "oneOf"
  */
 export function transformObjectByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformObjectByIndexForOneOf')
+  /*
+   *  log('transformObjectByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2777,7 +2943,9 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
  *  "allOf"
  */
 export function transformObjectByIndexForAllOf (schema, rootSchema, values, params) {
-  log('transformObjectByIndexForAllOf')
+  /*
+   *  log('transformObjectByIndexForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2789,7 +2957,9 @@ export function transformObjectByIndexForAllOf (schema, rootSchema, values, para
  *  "enum"
  */
 export function transformObjectForEnum (schema, rootSchema, values, params) {
-  log('transformObjectForEnum')
+  /*
+   *  log('transformObjectForEnum')
+   */
 
   const {
     uri = '#/'
@@ -2808,7 +2978,9 @@ export function transformObjectForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformObjectForAnyOf (schema, rootSchema, values, params) {
-  log('transformObjectForAnyOf')
+  /*
+   *  log('transformObjectForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -2828,7 +3000,9 @@ export function transformObjectForAnyOf (schema, rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformObjectForOneOf (schema, rootSchema, values, params) {
-  log('transformObjectForOneOf')
+  /*
+   *  log('transformObjectForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -2848,7 +3022,9 @@ export function transformObjectForOneOf (schema, rootSchema, values, params) {
  *  "allOf"
  */
 export function transformObjectForAllOf (schema, rootSchema, values, params) { // As-is
-  log('transformObjectForAllOf')
+  /*
+   *  log('transformObjectForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2875,7 +3051,9 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
  *  "enum"
  */
 export function transformArrayByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformArrayByKeyForEnum')
+  /*
+   *  log('transformArrayByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2897,7 +3075,9 @@ export function transformArrayByKeyForEnum (schema, rootSchema, values, params) 
  *  "anyOf"
  */
 export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformArrayByKeyForAnyOf')
+  /*
+   *  log('transformArrayByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2920,7 +3100,9 @@ export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params)
  *  "oneOf"
  */
 export function transformArrayByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformArrayByKeyForOneOf')
+  /*
+   *  log('transformArrayByKeyForOneOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -2943,7 +3125,9 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
  *  "allOf"
  */
 export function transformArrayByKeyForAllOf (schema, rootSchema, values, params) {
-  log('transformArrayByKeyForAllOf')
+  /*
+   *  log('transformArrayByKeyForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -2955,7 +3139,9 @@ export function transformArrayByKeyForAllOf (schema, rootSchema, values, params)
  *  "enum"
  */
 export function transformArrayByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformArrayByIndexForEnum')
+  /*
+   *  log('transformArrayByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2976,7 +3162,9 @@ export function transformArrayByIndexForEnum (schema, rootSchema, values, params
  *  "anyOf"
  */
 export function transformArrayByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformArrayByIndexForAnyOf')
+  /*
+   *  log('transformArrayByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -2998,7 +3186,9 @@ export function transformArrayByIndexForAnyOf (schema, rootSchema, values, param
  *  "oneOf"
  */
 export function transformArrayByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformArrayByIndexForOneOf')
+  /*
+   *  log('transformArrayByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3020,7 +3210,9 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
  *  "allOf"
  */
 export function transformArrayByIndexForAllOf (schema, rootSchema, values, params) {
-  log('transformArrayByIndexForAllOf')
+  /*
+   *  log('transformArrayByIndexForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3032,7 +3224,9 @@ export function transformArrayByIndexForAllOf (schema, rootSchema, values, param
  *  "enum"
  */
 export function transformArrayForEnum (schema, rootSchema, values, params) {
-  log('transformArrayForEnum')
+  /*
+   *  log('transformArrayForEnum')
+   */
 
   const {
     uri = '#/'
@@ -3051,7 +3245,9 @@ export function transformArrayForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformArrayForAnyOf (schema, rootSchema, values, params) {
-  log('transformArrayForAnyOf')
+  /*
+   *  log('transformArrayForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -3071,7 +3267,9 @@ export function transformArrayForAnyOf (schema, rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformArrayForOneOf (schema, rootSchema, values, params) {
-  log('transformArrayForOneOf')
+  /*
+   *  log('transformArrayForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -3091,7 +3289,9 @@ export function transformArrayForOneOf (schema, rootSchema, values, params) {
  *  "allOf"
  */
 export function transformArrayForAllOf (schema, rootSchema, values, params) {
-  log('transformArrayForAllOf')
+  /*
+   *  log('transformArrayForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3129,7 +3329,9 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
  *  "enum"
  */
 export function transformNumberByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformNumberByKeyForEnum')
+  /*
+   *  log('transformNumberByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -3151,7 +3353,9 @@ export function transformNumberByKeyForEnum (schema, rootSchema, values, params)
  *  "anyOf"
  */
 export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformNumberByKeyForAnyOf')
+  /*
+   *  log('transformNumberByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -3174,7 +3378,9 @@ export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params
  *  "oneOf"
  */
 export function transformNumberByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformNumberByKeyForOneOf')
+  /*
+   *  log('transformNumberByKeyForOneOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -3197,7 +3403,9 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
  *  "allOf"
  */
 export function transformNumberByKeyForAllOf (schema, rootSchema, values, params) {
-  log('transformNumberByKeyForAllOf')
+  /*
+   *  log('transformNumberByKeyForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3209,7 +3417,9 @@ export function transformNumberByKeyForAllOf (schema, rootSchema, values, params
  *  "enum"
  */
 export function transformNumberByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformNumberByIndexForEnum')
+  /*
+   *  log('transformNumberByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3230,7 +3440,9 @@ export function transformNumberByIndexForEnum (schema, rootSchema, values, param
  *  "anyOf"
  */
 export function transformNumberByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformNumberByIndexForAnyOf')
+  /*
+   *  log('transformNumberByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3252,7 +3464,9 @@ export function transformNumberByIndexForAnyOf (schema, rootSchema, values, para
  *  "oneOf"
  */
 export function transformNumberByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformNumberByIndexForOneOf')
+  /*
+   *  log('transformNumberByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3274,7 +3488,9 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
  *  "allOf"
  */
 export function transformNumberByIndexForAllOf (schema, rootSchema, values, params) {
-  log('transformNumberByIndexForAllOf')
+  /*
+   *  log('transformNumberByIndexForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3286,7 +3502,9 @@ export function transformNumberByIndexForAllOf (schema, rootSchema, values, para
  *  "enum"
  */
 export function transformNumberForEnum (schema, rootSchema, values, params) {
-  log('transformNumberForEnum')
+  /*
+   *  log('transformNumberForEnum')
+   */
 
   const {
     uri = '#/'
@@ -3305,7 +3523,9 @@ export function transformNumberForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformNumberForAnyOf (schema, rootSchema, values, params) {
-  log('transformNumberForAnyOf')
+  /*
+   *  log('transformNumberForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -3325,7 +3545,9 @@ export function transformNumberForAnyOf (schema, rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformNumberForOneOf (schema, rootSchema, values, params) {
-  log('transformNumberForOneOf')
+  /*
+   *  log('transformNumberForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -3345,7 +3567,9 @@ export function transformNumberForOneOf (schema, rootSchema, values, params) {
  *  "allOf"
  */
 export function transformNumberForAllOf (schema, rootSchema, values, params) {
-  log('transformNumberForAllOf')
+  /*
+   *  log('transformNumberForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3357,7 +3581,9 @@ export function transformNumberForAllOf (schema, rootSchema, values, params) {
  *  "enum"
  */
 export function transformStringByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformStringByKeyForEnum')
+  /*
+   *  log('transformStringByKeyForEnum')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -3379,7 +3605,9 @@ export function transformStringByKeyForEnum (schema, rootSchema, values, params)
  *  "anyOf"
  */
 export function transformStringByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformStringByKeyForAnyOf')
+  /*
+   *  log('transformStringByKeyForAnyOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -3402,7 +3630,9 @@ export function transformStringByKeyForAnyOf (schema, rootSchema, values, params
  *  "oneOf"
  */
 export function transformStringByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformStringByKeyForOneOf')
+  /*
+   *  log('transformStringByKeyForOneOf')
+   */
 
   const {
     parentUri: fieldParentUri = '#',
@@ -3425,7 +3655,9 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
  *  "allOf"
  */
 export function transformStringByKeyForAllOf (schema, rootSchema, values, params) {
-  log('transformStringByKeyForAllOf')
+  /*
+   *  log('transformStringByKeyForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3437,7 +3669,9 @@ export function transformStringByKeyForAllOf (schema, rootSchema, values, params
  *  "enum"
  */
 export function transformStringByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformStringByIndexForEnum')
+  /*
+   *  log('transformStringByIndexForEnum')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3458,7 +3692,9 @@ export function transformStringByIndexForEnum (schema, rootSchema, values, param
  *  "anyOf"
  */
 export function transformStringByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformStringByIndexForAnyOf')
+  /*
+   *  log('transformStringByIndexForAnyOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3480,7 +3716,9 @@ export function transformStringByIndexForAnyOf (schema, rootSchema, values, para
  *  "oneOf"
  */
 export function transformStringByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformStringByIndexForOneOf')
+  /*
+   *  log('transformStringByIndexForOneOf')
+   */
 
   const {
     parentUri: arrayParentUri = '#',
@@ -3502,7 +3740,9 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
  *  "allOf"
  */
 export function transformStringByIndexForAllOf (schema, rootSchema, values, params) {
-  log('transformStringByIndexForAllOf')
+  /*
+   *  log('transformStringByIndexForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3514,7 +3754,9 @@ export function transformStringByIndexForAllOf (schema, rootSchema, values, para
  *  "enum"
  */
 export function transformStringForEnum (schema, rootSchema, values, params) {
-  log('transformStringForEnum')
+  /*
+   *  log('transformStringForEnum')
+   */
 
   const {
     uri = '#/'
@@ -3533,7 +3775,9 @@ export function transformStringForEnum (schema, rootSchema, values, params) {
  *  "anyOf"
  */
 export function transformStringForAnyOf (schema, rootSchema, values, params) {
-  log('transformStringForAnyOf')
+  /*
+   *  log('transformStringForAnyOf')
+   */
 
   const {
     uri = '#/'
@@ -3553,7 +3797,9 @@ export function transformStringForAnyOf (schema, rootSchema, values, params) {
  *  "oneOf"
  */
 export function transformStringForOneOf (schema, rootSchema, values, params) {
-  log('transformStringForOneOf')
+  /*
+   *  log('transformStringForOneOf')
+   */
 
   const {
     uri = '#/'
@@ -3573,7 +3819,9 @@ export function transformStringForOneOf (schema, rootSchema, values, params) {
  *  "allOf"
  */
 export function transformStringForAllOf (schema, rootSchema, values, params) {
-  log('transformStringForAllOf')
+  /*
+   *  log('transformStringForAllOf')
+   */
 
   const { allOf = [], ...rest } = schema
   const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
@@ -3583,7 +3831,9 @@ export function transformStringForAllOf (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNullByKey (schema, rootSchema, values, params) {
-  log('transformNullByKey')
+  /*
+   *  log('transformNullByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformNullByKeyForEnum(schema, rootSchema, values, params)
@@ -3606,7 +3856,9 @@ export function transformNullByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNullByIndex (schema, rootSchema, values, params) {
-  log('transformNullByIndex')
+  /*
+   *  log('transformNullByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformNullByIndexForEnum(schema, rootSchema, values, params)
@@ -3629,7 +3881,9 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBooleanByKey (schema, rootSchema, values, params) {
-  log('transformBooleanByKey')
+  /*
+   *  log('transformBooleanByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformBooleanByKeyForEnum(schema, rootSchema, values, params)
@@ -3652,7 +3906,9 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBooleanByIndex (schema, rootSchema, values, params) {
-  log('transformBooleanByIndex')
+  /*
+   *  log('transformBooleanByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformBooleanByIndexForEnum(schema, rootSchema, values, params)
@@ -3675,7 +3931,9 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObjectByKey (schema, rootSchema, values, params) {
-  log('transformObjectByKey')
+  /*
+   *  log('transformObjectByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformObjectByKeyForEnum(schema, rootSchema, values, params)
@@ -3716,7 +3974,9 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObjectByIndex (schema, rootSchema, values, params) {
-  log('transformObjectByIndex')
+  /*
+   *  log('transformObjectByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformObjectByIndexForEnum(schema, rootSchema, values, params)
@@ -3757,7 +4017,9 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArrayByKey (schema, rootSchema, values, params) {
-  log('transformArrayByKey')
+  /*
+   *  log('transformArrayByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformArrayByKeyForEnum(schema, rootSchema, values, params)
@@ -3812,7 +4074,9 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArrayByIndex (schema, rootSchema, values, params) {
-  log('transformArrayByIndex')
+  /*
+   *  log('transformArrayByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformArrayByIndexForEnum(schema, rootSchema, values, params)
@@ -3867,7 +4131,9 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformNumberByKey (schema, rootSchema, values, params) {
-  log('transformNumberByKey')
+  /*
+   *  log('transformNumberByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformNumberByKeyForEnum(schema, rootSchema, values, params)
@@ -3890,7 +4156,9 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
 export function transformNumberByIndex (schema, rootSchema, values, params) {
-  log('transformNumberByIndex')
+  /*
+   *  log('transformNumberByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformNumberByIndexForEnum(schema, rootSchema, values, params)
@@ -3913,7 +4181,9 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformStringByKey (schema, rootSchema, values, params) {
-  log('transformStringByKey')
+  /*
+   *  log('transformStringByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformStringByKeyForEnum(schema, rootSchema, values, params)
@@ -3936,7 +4206,9 @@ export function transformStringByKey (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformStringByIndex (schema, rootSchema, values, params) {
-  log('transformStringByIndex')
+  /*
+   *  log('transformStringByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformStringByIndexForEnum(schema, rootSchema, values, params)
@@ -3959,7 +4231,9 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (schema, rootSchema, values, params) {
-  log('transformNull')
+  /*
+   *  log('transformNull')
+   */
 
   if (hasEnum(schema)) {
     return transformNullForEnum(schema, rootSchema, values, params)
@@ -3982,7 +4256,9 @@ export function transformNull (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (schema, rootSchema, values, params) {
-  log('transformBoolean')
+  /*
+   *  log('transformBoolean')
+   */
 
   if (hasEnum(schema)) {
     return transformBooleanForEnum(schema, rootSchema, values, params)
@@ -4005,7 +4281,9 @@ export function transformBoolean (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (schema, rootSchema, values, params) {
-  log('transformObject')
+  /*
+   *  log('transformObject')
+   */
 
   if (hasEnum(schema)) {
     return transformObjectForEnum(schema, rootSchema, values, params)
@@ -4042,7 +4320,9 @@ export function transformObject (schema, rootSchema, values, params) {
 }
 
 export function getTransformByKey (schema, rootSchema, values, params) {
-  log('getTransformByKey')
+  /*
+   *  log('getTransformByKey')
+   */
 
   if (hasEnum(schema)) {
     return transformByKeyForEnum(schema, rootSchema, values, params)
@@ -4060,7 +4340,9 @@ export function getTransformByKey (schema, rootSchema, values, params) {
 }
 
 export function getTransformByIndex (schema, rootSchema, values, params) {
-  log('getTransformByIndex')
+  /*
+   *  log('getTransformByIndex')
+   */
 
   if (hasEnum(schema)) {
     return transformByIndexForEnum(schema, rootSchema, values, params)
@@ -4119,7 +4401,9 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (schema, rootSchema, values, params) {
-  log('transformArray')
+  /*
+   *  log('transformArray')
+   */
 
   if (hasEnum(schema)) {
     return transformArrayForEnum(schema, rootSchema, values, params)
@@ -4168,7 +4452,9 @@ export function transformArray (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (schema, rootSchema, values, params) {
-  log('transformNumber')
+  /*
+   *  log('transformNumber')
+   */
 
   if (hasEnum(schema)) {
     return transformNumberForEnum(schema, rootSchema, values, params)
@@ -4191,7 +4477,9 @@ export function transformNumber (schema, rootSchema, values, params) {
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (schema, rootSchema, values, params) {
-  log('transformString')
+  /*
+   *  log('transformString')
+   */
 
   if (hasEnum(schema)) {
     return transformStringForEnum(schema, rootSchema, values, params)
@@ -4245,7 +4533,9 @@ export function getParamsByKeyForEnum (schema, rootSchema, values, { parentUri =
 }
 
 export function getParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
-  log('getParamsByKeyForAnyOf')
+  /*
+   *  log('getParamsByKeyForAnyOf')
+   */
 
   const uri = getUri(parentUri, key)
   const {
@@ -4279,7 +4569,9 @@ export function getParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri 
 }
 
 export function getParamsByKeyForOneOf (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
-  log('getParamsByKeyForOneOf')
+  /*
+   *  log('getParamsByKeyForOneOf')
+   */
 
   const uri = getUri(parentUri, key)
   const {
@@ -4338,7 +4630,9 @@ export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', k
 }
 
 export function getParamsByIndexForEnum (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  log('getParamsByIndexForEnum')
+  /*
+   *  log('getParamsByIndexForEnum')
+   */
 
   const uri = getUri(parentUri, index)
   const {
@@ -4371,7 +4665,9 @@ export function getParamsByIndexForEnum (schema, rootSchema, values, { parentUri
 }
 
 export function getParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  log('getParamsByIndexForAnyOf')
+  /*
+   *  log('getParamsByIndexForAnyOf')
+   */
 
   const uri = getUri(parentUri, index)
   const {
@@ -4404,7 +4700,9 @@ export function getParamsByIndexForAnyOf (schema, rootSchema, values, { parentUr
 }
 
 export function getParamsByIndexForOneOf (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  log('getParamsByIndexForOneOf')
+  /*
+   *  log('getParamsByIndexForOneOf')
+   */
 
   const uri = getUri(parentUri, index)
   const {
@@ -4455,7 +4753,9 @@ export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#',
 }
 
 export function transformByKeyForEnum (schema, rootSchema, values, params) {
-  log('transformByKeyForEnum')
+  /*
+   *  log('transformByKeyForEnum')
+   */
 
   const { type } = schema
 
@@ -4485,7 +4785,9 @@ export function transformByKeyForEnum (schema, rootSchema, values, params) {
 }
 
 export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
-  log('transformByKeyForAnyOf')
+  /*
+   *  log('transformByKeyForAnyOf')
+   */
 
   const { type } = schema
 
@@ -4515,7 +4817,9 @@ export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
 }
 
 export function transformByKeyForOneOf (schema, rootSchema, values, params) {
-  log('transformByKeyForOneOf')
+  /*
+   *  log('transformByKeyForOneOf')
+   */
 
   const { type } = schema
 
@@ -4545,7 +4849,9 @@ export function transformByKeyForOneOf (schema, rootSchema, values, params) {
 }
 
 export function transformByIndexForEnum (schema, rootSchema, values, params) {
-  log('transformByIndexForEnum')
+  /*
+   *  log('transformByIndexForEnum')
+   */
 
   const { type } = schema
 
@@ -4575,7 +4881,9 @@ export function transformByIndexForEnum (schema, rootSchema, values, params) {
 }
 
 export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
-  log('transformByIndexForAnyOf')
+  /*
+   *  log('transformByIndexForAnyOf')
+   */
 
   const { type } = schema
 
@@ -4605,7 +4913,9 @@ export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
 }
 
 export function transformByIndexForOneOf (schema, rootSchema, values, params) {
-  log('transformByIndexForOneOf')
+  /*
+   *  log('transformByIndexForOneOf')
+   */
 
   const { type } = schema
 
@@ -4635,7 +4945,9 @@ export function transformByIndexForOneOf (schema, rootSchema, values, params) {
 }
 
 export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  log('transformByKey')
+  /*
+   *  log('transformByKey')
+   */
 
   const { type } = schema
 
@@ -4665,7 +4977,9 @@ export function transformByKey (schema = {}, rootSchema = schema, values = {}, p
 }
 
 export function transformByIndex (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  log('transformByIndex')
+  /*
+   *  log('transformByIndex')
+   */
 
   const { type } = schema
 
