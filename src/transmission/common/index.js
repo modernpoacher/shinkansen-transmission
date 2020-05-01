@@ -93,116 +93,14 @@ export function getSelectedItems (values = {}, uri = '#') {
   )
 }
 
-export function getSelectedItemsForParentUri (values = {}, parentUri = '#', uri = '#') {
-  const p = normaliseUri(parentUri)
-
-  if (Reflect.has(values, p)) {
-    const v = Reflect.get(values, p)
-
-    // transformByIndexForEnum
-    // transformByIndexForAnyOf
-    // transformByIndexForOneOf
-
-    if (isPrimitive(v)) {
-      const n = Number(v)
-      return isNaN(n)
-        ? [v]
-        : [n]
-    } else {
-      return v.map((v) => {
-        const n = Number(v)
-        return isNaN(n)
-          ? v
-          : n
-      })
-    }
-  }
-
-  // transformByIndexForEnum
-  // transformByIndexForAnyOf
-  // transformByIndexForOneOf
-
-  /*
-   *  Given the uri `#/`
-   *
-   *  Get the values `#/n` (where `n` is a number)
-   */
-  const pattern = new RegExp(`^${getUriForRegExp(p)}\\d+$`)
-
-  return (
-    Object
-      .entries(values)
-      .filter(([key]) => pattern.test(key)) // parent uri
-      .map(([key, value]) => {
-        const i = Number(key.slice(key.lastIndexOf('/') + 1))
-        const v = isArray(value) ? value[i] : value
-        const n = Number(v)
-
-        if (!isNaN(n)) return n
-        return v
-      })
-  )
-}
-
-export function getSelectedItemsForUri (values = {}, parentUri = '#', uri = '#') {
-  const u = normaliseUri(uri)
-
-  if (Reflect.has(values, u)) {
-    const v = Reflect.get(values, u)
-
-    // transformByKeyForEnum
-    // transformByKeyForAnyOf
-    // transformByKeyForOneOf
-
-    if (isPrimitive(v)) {
-      const n = Number(v)
-      return isNaN(n)
-        ? [v]
-        : [n]
-    } else {
-      return v.map((v) => {
-        const n = Number(v)
-        return isNaN(n)
-          ? v
-          : n
-      })
-    }
-  }
-
-  // transformByKeyForEnum
-  // transformByKeyForAnyOf
-  // transformByKeyForOneOf
-
-  /*
-   *  Given the uri `#/`
-   *
-   *  Get the values `#/n` (where `n` is a number)
-   */
-  const pattern = new RegExp(`^${getUriForRegExp(u)}\\d+$`)
-
-  return (
-    Object
-      .entries(values)
-      .filter(([key]) => pattern.test(key)) // uri
-      .map(([key, value]) => {
-        const i = Number(key.slice(key.lastIndexOf('/') + 1))
-        const v = isArray(value) ? value[i] : value
-        const n = Number(v)
-
-        if (!isNaN(n)) return n
-        return v
-      })
-  )
-}
-
-export const isParentUri = (parentUri = '#', uri = '#') => {
+export function isParentUri (parentUri = '#', uri = '#') {
   return (
     parentUri !== '#' &&
     parentUri !== uri
   )
 }
 
-export const hasParentUri = (params = {}, uri = '#') => {
+export function hasParentUri (params = {}, uri = '#') {
   if (Reflect.has(params, 'parentUri')) {
     const parentUri = Reflect.get(params, 'parentUri')
 
