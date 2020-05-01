@@ -28,7 +28,7 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "NODE_ENV=test mocha test --recursive -r @babel/register -r @babel/polyfill --verbose",
     "coverage": "nyc --reporter=lcov npm run test",
-    "pre-commit": "npm run lint && npm test && npm run babel && git add lib"
+    "pre-commit": "npm run lint && npm run coverage && npm run babel && git add lib"
   },
   "dependencies": {
     "debug": "^4.1.1",
