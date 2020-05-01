@@ -3,6 +3,7 @@
 .editorconfig
 .eslintignore
 .eslintrc
+.nycrc
 
 # NPM
 .npmignore
