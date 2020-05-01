@@ -100,31 +100,6 @@ export function isParentUri (parentUri = '#', uri = '#') {
   )
 }
 
-export function hasParentUri (params = {}, uri = '#') {
-  if (Reflect.has(params, 'parentUri')) {
-    const parentUri = Reflect.get(params, 'parentUri')
-
-    return (
-      parentUri !== '#' &&
-      parentUri !== uri
-    )
-  }
-
-  return false
-}
-
-export const getParentUri = (params = {}, uri = '#') => Reflect.get(params, 'parentUri')
-
-export const transformValue = (schema) => (
-  isObject(schema)
-    ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema
-    : schema
-)
-
 export function getMetaProps (params = {}, uri = '#') {
   let meta
   if (Reflect.has(params, uri)) {
@@ -181,6 +156,16 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
 
   return {}
 }
+
+export const transformValue = (schema) => (
+  isObject(schema)
+    ? isConstValue(schema)
+      ? toConstValue(schema)
+      : isDefaultValue(schema)
+        ? toDefaultValue(schema)
+        : schema
+    : schema
+)
 
 export function hasValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
@@ -325,19 +310,6 @@ export function getElementsDescriptionProps (params = {}, uri = '#') {
   }
 
   return description || {}
-}
-
-export function getElementsFieldsProps (params = {}, uri = '#') {
-  let fields
-  if (Reflect.has(params, uri)) {
-    ({
-      elements: {
-        fields
-      } = {}
-    } = Reflect.get(params, uri))
-  }
-
-  return fields || []
 }
 
 export function getElementsFieldPropsForEnum (params = {}, uri = '#') {
