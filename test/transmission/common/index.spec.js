@@ -373,10 +373,19 @@ describe('shinkansen-transmission/transmission/common', () => {
       })
     })
 
-    describe('Values has a field for the uri', () => {
-      it('returns an array', () => {
-        expect(getSelectedItems([]))
-          .to.eql([])
+    describe('Values does not have a field for the uri', () => {
+      describe('Values has fields for the uri pattern', () => {
+        it('returns an array', () => {
+          expect(getSelectedItems({ '#/0': '1', '#/1': '2', '#/2': '3' }, '#/'))
+            .to.eql([1, 2, 3])
+        })
+      })
+
+      describe('Values does not have fields for the uri pattern', () => {
+        it('returns an array', () => {
+          expect(getSelectedItems({ '#/one': '1', '#/two': '2', '#/three': '3' }, '#/'))
+            .to.eql([])
+        })
       })
     })
   })

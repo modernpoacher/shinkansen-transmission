@@ -1,6 +1,26 @@
+/*
+ *  import debug from 'debug'
+ *
+ *  const log = debug('shinkansen-transmission:common')
+ */
+
 export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
 export const isArray = (v) => Array.isArray(v)
+
+export const isSchema = (v = {}) => Reflect.has(v, 'type')
+
+export const isStringSchema = ({ type } = {}) => type === 'string'
+
+export const isNumberSchema = ({ type } = {}) => type === 'number'
+
+export const isArraySchema = ({ type } = {}) => type === 'array'
+
+export const isObjectSchema = ({ type } = {}) => type === 'object'
+
+export const isBooleanSchema = ({ type } = {}) => type === 'boolean'
+
+export const isNullSchema = ({ type } = {}) => type === 'null'
 
 export const isPrimitive = (v) => !isObject(v) && !isArray(v)
 
@@ -20,72 +40,64 @@ export const getIsReadOnly = ({ readOnly = false } = {}) => (readOnly ? { readOn
 
 export const getIsWriteOnly = ({ writeOnly = false } = {}) => (writeOnly ? { writeOnly } : {})
 
-export function getSelectedItemsForParentUri (values = {}, uri = '#', parentUri = '#') {
+const getUriForRegExp = (uri) => uri.endsWith('/') ? uri : uri.concat('/')
+
+export function getSelectedItems (values = {}, uri = '#') {
+  const u = normaliseUri(uri)
+
+  if (Reflect.has(values, u)) {
+    const v = Reflect.get(values, u)
+
+    // transformByKeyForEnum
+    // transformByKeyForAnyOf
+    // transformByKeyForOneOf
+
+    if (isPrimitive(v)) {
+      const n = Number(v)
+      return isNaN(n)
+        ? [v]
+        : [n]
+    } else {
+      return v.map((v) => {
+        const n = Number(v)
+        return isNaN(n)
+          ? v
+          : n
+      })
+    }
+  }
+
+  // transformByKeyForEnum
+  // transformByKeyForAnyOf
+  // transformByKeyForOneOf
+
+  /*
+   *  Given the uri `#/`
+   *
+   *  Get the values `#/n` (where `n` is a number)
+   */
+  const pattern = new RegExp(`^${getUriForRegExp(u)}\\d+$`)
+
   return (
     Object
       .entries(values)
-      .filter(([key]) => key.startsWith(parentUri)) // parent
-      .reduce((accumulator, [key, value]) => {
-        const k = key.endsWith('/') ? uri.slice(key.length) : uri.slice(key.length + 1)
-        const i = k ? Number(k.includes('/') ? k.slice(0, k.indexOf('/')) : k) : NaN
+      .filter(([key]) => pattern.test(key)) // uri
+      .map(([key, value]) => {
+        const i = Number(key.slice(key.lastIndexOf('/') + 1))
         const v = isArray(value) ? value[i] : value
+        const n = Number(v)
 
-        if (isPrimitive(v)) {
-          const n = Number(v)
-
-          if (!isNaN(n)) return accumulator.concat(n)
-        }
-
-        return accumulator
-      }, [])
+        if (!isNaN(n)) return n
+        return v
+      })
   )
 }
 
-export function getSelectedItemsForUri (value = null, uri = '#', parentUri = '#') {
-  /*
-   *  Is `value` an array?
-   */
-  if (isArray(value)) {
-    return value.reduce((accumulator, v, i) => {
-      if (isPrimitive(v)) {
-        const n = Number(v)
-
-        if (!isNaN(n)) return accumulator.concat(n)
-      }
-
-      return accumulator
-    }, [])
-  }
-
-  /*
-   *  Is `value` a primitive?
-   */
-  if (isPrimitive(value)) {
-    const n = Number(value)
-
-    if (!isNaN(n)) return [n]
-  }
-
-  return []
-}
-
-/*
- *  `values` can have arrays
- */
-export function getSelectedItems (values = {}, uri = '#', parentUri = '#') {
-  /*
-   *  Does `values` have values for `uri`?
-   */
-  if (Reflect.has(values, uri)) {
-    const value = Reflect.get(values, uri)
-
-    return getSelectedItemsForUri(value, uri, parentUri)
-  }
-
-  /*
-   *  Does `values` have values for `parentUri`?
-   */
-  return getSelectedItemsForParentUri(values, uri, parentUri)
+export function isParentUri (parentUri = '#', uri = '#') {
+  return (
+    parentUri !== '#' &&
+    parentUri !== uri
+  )
 }
 
 export function getMetaProps (params = {}, uri = '#') {
@@ -109,11 +121,29 @@ export function getMetaDefaultValue (schema = {}) {
   return {}
 }
 
+export function hasMetaValue (values = {}, uri = '#', schema = {}) {
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    return isPrimitive(value)
+  } else {
+    if (Reflect.has(schema, 'const')) {
+      const constValue = Reflect.get(schema, 'const')
+
+      return isPrimitive(constValue)
+    }
+  }
+
+  return false
+}
+
 export function getMetaValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    return { value: String(value) }
+    if (isPrimitive(value)) {
+      return { value: String(value) }
+    }
   } else {
     if (Reflect.has(schema, 'const')) {
       const constValue = Reflect.get(schema, 'const')
@@ -125,6 +155,135 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
   }
 
   return {}
+}
+
+export const transformValue = (schema) => (
+  isObject(schema)
+    ? isConstValue(schema)
+      ? toConstValue(schema)
+      : isDefaultValue(schema)
+        ? toDefaultValue(schema)
+        : schema
+    : schema
+)
+
+export function hasValue (values = {}, uri = '#', schema = {}) {
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    return isPrimitive(value)
+  } else {
+    if (Reflect.has(schema, 'const')) {
+      const constValue = Reflect.get(schema, 'const')
+
+      return isPrimitive(constValue)
+    }
+  }
+
+  return false
+}
+
+export function getValue (values = {}, uri = '#', schema = {}) {
+  if (Reflect.has(values, uri)) {
+    const value = Reflect.get(values, uri)
+
+    if (isPrimitive(value)) {
+      return String(value)
+    }
+  } else {
+    if (Reflect.has(schema, 'const')) {
+      const constValue = Reflect.get(schema, 'const')
+
+      if (isPrimitive(constValue)) {
+        return String(constValue)
+      }
+    }
+  }
+}
+
+export function getValueForEnum (v, { enum: items = [] } = {}) {
+  if (Reflect.has(items, v)) {
+    const enumValue = Reflect.get(items, v)
+
+    return String(enumValue)
+  }
+}
+
+/*
+ *  Use `index` `item` `arrayIndex`
+ */
+export function getIndexForEnum (values = {}, parentUri = '#', uri = '#', schema = {}) {
+  if (/\/\d+$/.test(uri)) {
+    /*
+     *  Get the index
+     */
+    return Number(uri.slice(uri.lastIndexOf('/') + 1))
+  }
+
+  return NaN
+}
+
+export function getValueForAnyOf (v, { anyOf: items = [] } = {}) {
+  if (Reflect.has(items, v)) {
+    const anyOf = Reflect.get(items, v)
+
+    const anyOfValue = transformValue(anyOf)
+
+    if (isPrimitive(anyOfValue)) {
+      return String(anyOfValue)
+    }
+  }
+}
+
+/*
+ *  Use `index` `item` `arrayIndex`
+ */
+export function getIndexForAnyOf (values = {}, parentUri = '#', uri = '#', schema = {}) {
+  if (/\/\d+$/.test(uri)) {
+    /*
+     *  Get the index
+     */
+    return Number(uri.slice(uri.lastIndexOf('/') + 1))
+  }
+
+  return NaN
+}
+
+export function getValueForOneOf (v, { oneOf: items = [] } = {}) {
+  if (Reflect.has(items, v)) {
+    const oneOf = Reflect.get(items, v)
+
+    const oneOfValue = transformValue(oneOf)
+
+    if (isPrimitive(oneOfValue)) {
+      return String(oneOfValue)
+    }
+  }
+}
+
+/*
+ *  Use `index` `item` `arrayIndex`
+ */
+export function getIndexForOneOf (values = {}, parentUri = '#', uri = '#', schema = {}) {
+  if (/\/\d+$/.test(uri)) {
+    /*
+     *  Get the index
+     */
+    return Number(uri.slice(uri.lastIndexOf('/') + 1))
+  }
+
+  return NaN
+}
+
+export function getElementsProps (params = {}, uri = '#') {
+  let elements
+  if (Reflect.has(params, uri)) {
+    ({
+      elements = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return elements || {}
 }
 
 export function getElementsTitleProps (params = {}, uri = '#') {
@@ -153,6 +312,58 @@ export function getElementsDescriptionProps (params = {}, uri = '#') {
   return description || {}
 }
 
+export function getElementsFieldPropsForEnum (params = {}, uri = '#') {
+  let field
+  if (Reflect.has(params, uri)) {
+    ({
+      elements: {
+        enum: field
+      } = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return field || {}
+}
+
+export function getElementsFieldPropsForOneOf (params = {}, uri = '#') {
+  let field
+  if (Reflect.has(params, uri)) {
+    ({
+      elements: {
+        oneOf: field
+      } = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return field || {}
+}
+
+export function getElementsFieldPropsForAnyOf (params = {}, uri = '#') {
+  let field
+  if (Reflect.has(params, uri)) {
+    ({
+      elements: {
+        anyOf: field
+      } = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return field || {}
+}
+
+export function getElementsFieldPropsForAllOf (params = {}, uri = '#') {
+  let field
+  if (Reflect.has(params, uri)) {
+    ({
+      elements: {
+        field
+      } = {}
+    } = Reflect.get(params, uri))
+  }
+
+  return field || {}
+}
+
 export function getElementsFieldProps (params = {}, uri = '#') {
   let field
   if (Reflect.has(params, uri)) {
@@ -170,7 +381,9 @@ export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {
     const value = Reflect.get(values, uri)
 
-    return { value: String(value) }
+    if (isPrimitive(value)) {
+      return { value: String(value) }
+    }
   } else {
     if (Reflect.has(schema, 'const')) {
       const constValue = Reflect.get(schema, 'const')
@@ -210,8 +423,9 @@ export const getOneOf = (schema = {}) => Reflect.get(schema, 'oneOf')
 export const hasAllOf = (schema = {}) => Reflect.has(schema, 'allOf')
 export const getAllOf = (schema = {}) => Reflect.get(schema, 'allOf')
 
-export const getParentUri = (parentUri = '#') => parentUri === '#' ? '#/' : parentUri
 export const getUri = (uri = '#', resource = '') => (uri.endsWith('/') ? uri : uri.concat('/')).concat(resource)
+
+export const normaliseUri = (uri = '#') => uri === '#' ? '#/' : uri
 
 export function getMin ({ minimum } = {}) {
   const value = Number(minimum)

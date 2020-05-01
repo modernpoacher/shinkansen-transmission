@@ -28,12 +28,38 @@ function findByKey (parentUri, uri) {
 
 function findByIndex (parentUri, uri) {
   return function find (schema, index) {
-    return uri === getUri(parentUri, index)
+    /*
+     *  log('findByIndex')
+     */
+
+    if (hasEnum(schema)) {
+      // const array = getEnum(schema)
+
+      // return array.find(findByIndex(parentUri, uri))
+    } else {
+      if (hasAnyOf(schema)) {
+        const array = getAnyOf(schema)
+
+        return array.find(findByIndex(parentUri, uri))
+      } else {
+        if (hasOneOf(schema)) {
+          const array = getOneOf(schema)
+
+          return array.find(findByIndex(parentUri, uri))
+        }
+      }
+    }
+
+    return getUri(parentUri, index) === uri
   }
 }
 
 function findByValue (value) {
   return function find (schema) {
+    /*
+     *  log('findByValue')
+     */
+
     return value === transformValue(schema)
   }
 }
@@ -45,6 +71,10 @@ function findByEqual (value) {
 }
 
 export function getObject ({ properties = {} /* object */ } = {}, parentUri, uri) {
+  /*
+   *  log('getObject')
+   */
+
   return (
     Reflect.get(properties, (
       Object.keys(properties)
@@ -54,12 +84,20 @@ export function getObject ({ properties = {} /* object */ } = {}, parentUri, uri
 }
 
 export function getArray ({ items = {} /* array or object */ } = {}, parentUri, uri) {
+  /*
+   *  log('getArray')
+   */
+
   return (isArray(items))
     ? items.find(findByIndex(parentUri, uri))
     : items
 }
 
 export function getSchema (schema = {}, parentUri, uri) {
+  /*
+   *  log('getSchema')
+   */
+
   const { type } = schema
 
   switch (type) {
@@ -124,6 +162,7 @@ export function transformArrayFor (document, schema, values, params, parentUri, 
   /*
    *  log('transformArrayFor')
    */
+
   return (
     document
       .reduce((values, value, index) => {
@@ -138,6 +177,7 @@ export function transformObjectFor (document, schema, values, params, parentUri,
   /*
    *  log('transformObjectFor')
    */
+
   return (
     Object.entries(document)
       .reduce((values, [key, value]) => {
@@ -152,20 +192,21 @@ export function transformArray (document, schema, values, params, parentUri, uri
   /*
    *  log('transformArray')
    */
+
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
-    return { ...values, [uri]: transformEqualIndexFor(array, document) }
+    return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
 
-      return { ...values, [uri]: transformEqualIndexFor(array, document) }
+      return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
 
-        return { ...values, [uri]: transformEqualIndexFor(array, document) }
+        return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
       } else {
         const { items = {} } = schema
 
@@ -212,6 +253,7 @@ export function transformObject (document, schema, values, params, parentUri, ur
   /*
    *  log('transformObject')
    */
+
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
