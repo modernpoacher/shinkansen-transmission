@@ -1725,7 +1725,7 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, values, params)
         parentUri,
         uri,
         selectedItems,
-        // items,
+        items,
         name: fieldKey
       },
       elements: {
@@ -1769,7 +1769,7 @@ export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, params
         parentUri,
         uri,
         selectedItems,
-        // items,
+        items,
         name: fieldKey
       },
       elements: {
@@ -1809,7 +1809,7 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, params
         parentUri,
         uri,
         selectedItems,
-        // items,
+        items,
         name: fieldKey
       },
       elements: {
@@ -1925,7 +1925,7 @@ export function getRenderParamsByIndexForEnum (schema, rootSchema, values, param
         parentUri,
         uri,
         selectedItems,
-        // items,
+        items,
         item: arrayIndex
       },
       elements: {
@@ -1969,7 +1969,7 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, para
         parentUri,
         uri,
         selectedItems,
-        // items,
+        items,
         item: arrayIndex
       },
       elements: {
@@ -2013,7 +2013,7 @@ export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, para
         parentUri,
         uri,
         selectedItems,
-        // items,
+        items,
         item: arrayIndex
       },
       elements: {
@@ -2126,8 +2126,8 @@ export function getRenderParamsForEnum (schema, rootSchema, values, params) {
         rootSchema,
         parentUri: normaliseUri(parentUri),
         uri,
-        selectedItems /* ,
-        items */
+        selectedItems,
+        items
       },
       elements: {
         enum: {
@@ -2163,8 +2163,8 @@ export function getRenderParamsForAnyOf (schema, rootSchema, values, params) {
         rootSchema,
         parentUri: normaliseUri(parentUri),
         uri,
-        selectedItems /* ,
-        items */
+        selectedItems,
+        items
       },
       elements: {
         anyOf: {
@@ -2200,8 +2200,8 @@ export function getRenderParamsForOneOf (schema, rootSchema, values, params) {
         rootSchema,
         parentUri: normaliseUri(parentUri),
         uri,
-        selectedItems /* ,
-        items */
+        selectedItems,
+        items
       },
       elements: {
         oneOf: {
@@ -2290,7 +2290,6 @@ export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2314,7 +2313,6 @@ export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) 
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2339,7 +2337,6 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2542,7 +2539,6 @@ export function transformBooleanByKeyForEnum (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2566,7 +2562,6 @@ export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, param
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2591,7 +2586,6 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2794,7 +2788,6 @@ export function transformObjectByKeyForEnum (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2818,7 +2811,6 @@ export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -2843,7 +2835,6 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3061,7 +3052,6 @@ export function transformArrayByKeyForEnum (schema, rootSchema, values, params) 
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3085,7 +3075,6 @@ export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3110,7 +3099,6 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3339,7 +3327,6 @@ export function transformNumberByKeyForEnum (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3363,7 +3350,6 @@ export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3388,7 +3374,6 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3591,7 +3576,6 @@ export function transformStringByKeyForEnum (schema, rootSchema, values, params)
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3615,7 +3599,6 @@ export function transformStringByKeyForAnyOf (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -3640,7 +3623,6 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
   } = params
 
   const uri = getUri(fieldParentUri, fieldKey)
-
   const {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
@@ -4615,7 +4597,9 @@ export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', k
     [uri]: {
       meta: {
         ...getMetaProps(params, uri),
-        parentUri,
+        schema,
+        rootSchema,
+        parentUri: normaliseUri(parentUri),
         uri,
         isRequired
       },
@@ -4744,7 +4728,9 @@ export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#',
     [uri]: {
       meta: {
         ...getMetaProps(params, uri),
-        parentUri,
+        schema,
+        rootSchema,
+        parentUri: normaliseUri(parentUri),
         uri
       },
       elements: getElementsProps(params, uri)

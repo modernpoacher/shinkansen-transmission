@@ -33,6 +33,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 type: 'boolean',
                 schema,
                 uri: '#/',
+                items: [
+                  true,
+                  false
+                ],
                 selectedItems: []
               },
               elements: {
@@ -63,6 +67,46 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 type: 'boolean',
                 schema,
                 uri: '#/',
+                items: [
+                  {
+                    meta: {
+                      type: 'boolean',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        const: true
+                      },
+                      parentUri: '#/',
+                      uri: '#/0',
+                      value: 'true'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/0',
+                        value: 'true'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'boolean',
+                      item: 1,
+                      rootSchema: schema,
+                      schema: {
+                        const: false
+                      },
+                      parentUri: '#/',
+                      uri: '#/1',
+                      value: 'false'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/1',
+                        value: 'false'
+                      }
+                    }
+                  }
+                ],
                 selectedItems: []
               },
               elements: {
@@ -129,6 +173,46 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 type: 'boolean',
                 schema,
                 uri: '#/',
+                items: [
+                  {
+                    meta: {
+                      type: 'boolean',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        const: true
+                      },
+                      parentUri: '#/',
+                      uri: '#/0',
+                      value: 'true'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/0',
+                        value: 'true'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'boolean',
+                      item: 1,
+                      rootSchema: schema,
+                      schema: {
+                        const: false
+                      },
+                      parentUri: '#/',
+                      uri: '#/1',
+                      value: 'false'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/1',
+                        value: 'false'
+                      }
+                    }
+                  }
+                ],
                 selectedItems: []
               },
               elements: {

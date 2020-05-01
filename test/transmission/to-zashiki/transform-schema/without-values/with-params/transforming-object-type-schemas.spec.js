@@ -78,6 +78,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/one',
+                      items: [
+                        'string (1)',
+                        'string (2)'
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -108,6 +112,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/two',
+                      items: [
+                        'string (1)',
+                        'string (2)'
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -185,6 +193,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/one',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -255,6 +307,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/two',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -372,6 +468,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/one',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -442,6 +582,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/two',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -681,6 +865,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/one',
+                      items: [
+                        'string (1)',
+                        'string (2)'
+                      ],
                       selectedItems: [],
                       isRequired: true
                     },
@@ -711,6 +899,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/two',
+                      items: [
+                        'string (1)',
+                        'string (2)'
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -791,6 +983,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/one',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: true
                     },
@@ -861,6 +1097,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/two',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -981,6 +1261,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/one',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/one',
+                            uri: '#/one/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/one/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: true
                     },
@@ -1051,6 +1375,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                       },
                       parentUri: '#/',
                       uri: '#/two',
+                      items: [
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 0,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (1)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/0',
+                            selectedItems: [],
+                            value: 'string (1)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/0',
+                              selectedItems: [],
+                              value: 'string (1)'
+                            }
+                          }
+                        },
+                        {
+                          meta: {
+                            type: 'string',
+                            item: 1,
+                            rootSchema: {},
+                            schema: {
+                              const: 'string (2)'
+                            },
+                            parentUri: '#/two',
+                            uri: '#/two/1',
+                            selectedItems: [],
+                            value: 'string (2)'
+                          },
+                          elements: {
+                            field: {
+                              id: '#/two/1',
+                              selectedItems: [],
+                              value: 'string (2)'
+                            }
+                          }
+                        }
+                      ],
                       selectedItems: [],
                       isRequired: false
                     },
@@ -1233,6 +1601,159 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'string' }
+            }
+          }
+
+          const rootSchema = undefined
+
+          const values = undefined
+
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/one': { meta: { component: 'component' } },
+            '#/two': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, rootSchema, values, params))
+            .to.eql({
+              meta: {
+                component: 'component',
+                type: 'object',
+                rootSchema: {},
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: {},
+                      schema: {
+                        type: 'string'
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      isRequired: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        isRequired: false
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: {},
+                      schema: {
+                        type: 'string'
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      isRequired: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        isRequired: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
+        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
+          const schema = {
+            type: 'object',
+            properties: {
+              one: { type: 'string' },
+              two: { type: 'string' }
+            },
+            required: [
+              'one'
+            ]
+          }
+
+          const rootSchema = undefined
+
+          const values = undefined
+
+          const params = {
+            '#/': { meta: { component: 'component' } },
+            '#/one': { meta: { component: 'component' } },
+            '#/two': { meta: { component: 'component' } }
+          }
+
+          return expect(transform(schema, rootSchema, values, params))
+            .to.eql({
+              meta: {
+                component: 'component',
+                type: 'object',
+                rootSchema: {},
+                schema,
+                uri: '#/'
+              },
+              elements: {
+                fields: [
+                  {
+                    meta: {
+                      component: 'component',
+                      type: 'string',
+                      name: 'one',
+                      rootSchema: {},
+                      schema: {
+                        type: 'string'
+                      },
+                      parentUri: '#/',
+                      uri: '#/one',
+                      isRequired: true
+                    },
+                    elements: {
+                      field: {
+                        id: '#/one',
+                        isRequired: true
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      component: 'component',
+                      type: 'string',
+                      name: 'two',
+                      rootSchema: {},
+                      schema: {
+                        type: 'string'
+                      },
+                      parentUri: '#/',
+                      uri: '#/two',
+                      isRequired: false
+                    },
+                    elements: {
+                      field: {
+                        id: '#/two',
+                        isRequired: false
+                      }
+                    }
+                  }
+                ]
+              }
+            })
+        })
+
         /*
          *  String
          */
@@ -1315,6 +1836,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              'string (1)',
+                              'string (2)'
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -1417,6 +1942,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (1)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'string (1)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'string (1)'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (2)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'string (2)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'string (2)'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -1559,6 +2128,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (1)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'string (1)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'string (1)'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (2)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'string (2)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'string (2)'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -1815,6 +2428,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              'string (1)',
+                              'string (2)'
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -1920,6 +2537,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (1)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'string (1)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'string (1)'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (2)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'string (2)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'string (2)'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -2065,6 +2726,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (1)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'string (1)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'string (1)'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'string',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 'string (2)'
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'string (2)'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'string (2)'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -2324,6 +3029,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              1,
+                              2
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -2426,6 +3135,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 1
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: '1'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: '1'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 2
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: '2'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: '2'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -2568,6 +3321,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 1
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: '1'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: '1'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 2
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: '2'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: '2'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -2824,6 +3621,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              1,
+                              2
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -2929,6 +3730,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 1
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: '1'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: '1'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 2
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: '2'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: '2'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -3074,6 +3919,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 1
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: '1'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: '1'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'number',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: 2
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: '2'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: '2'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -3333,6 +4222,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              [],
+                              []
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -3435,6 +4328,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -3565,6 +4490,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -3791,6 +4748,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              [],
+                              []
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -3896,6 +4857,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4029,6 +5022,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'array',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: []
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4258,6 +5283,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {},
+                              {}
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4360,6 +5389,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4490,6 +5551,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4716,6 +5809,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {},
+                              {}
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4821,6 +5918,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -4954,6 +6083,38 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'object',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: {}
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1'
+                                },
+                                elements: {
+                                  fields: []
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -5183,6 +6344,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              true,
+                              false
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -5285,6 +6450,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: true
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'true'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: false
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'false'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -5427,6 +6636,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: true
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'true'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: false
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'false'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -5667,6 +6920,10 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              true,
+                              false
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -5772,6 +7029,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: true
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'true'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: false
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'false'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -5917,6 +7218,50 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: true
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'true'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'true'
+                                  }
+                                }
+                              },
+                              {
+                                meta: {
+                                  type: 'boolean',
+                                  item: 1,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: false
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/1',
+                                  selectedItems: [],
+                                  value: 'false'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/1',
+                                    selectedItems: [],
+                                    value: 'false'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6157,6 +7502,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              null
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6255,6 +7603,29 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'null',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: null
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'null'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6373,6 +7744,29 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'null',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: null
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'null'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6589,6 +7983,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              null
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6690,6 +8087,29 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'null',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: null
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'null'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6811,6 +8231,29 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/two',
+                            items: [
+                              {
+                                meta: {
+                                  type: 'null',
+                                  item: 0,
+                                  rootSchema: {},
+                                  schema: {
+                                    const: null
+                                  },
+                                  parentUri: '#/one/two',
+                                  uri: '#/one/two/0',
+                                  selectedItems: [],
+                                  value: 'null'
+                                },
+                                elements: {
+                                  field: {
+                                    id: '#/one/two/0',
+                                    selectedItems: [],
+                                    value: 'null'
+                                  }
+                                }
+                              }
+                            ],
                             selectedItems: [],
                             isRequired: false
                           },
@@ -6944,159 +8387,6 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                           }
                         }
                       ]
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            }
-          }
-
-          const rootSchema = undefined
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, rootSchema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                rootSchema: {},
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: {},
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      isRequired: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        isRequired: false
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: {},
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      isRequired: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        isRequired: false
-                      }
-                    }
-                  }
-                ]
-              }
-            })
-        })
-
-        it('transforms `object` type schemas without `enum` or `anyOf` or `oneOf` or `allOf` (with `required`)', () => {
-          const schema = {
-            type: 'object',
-            properties: {
-              one: { type: 'string' },
-              two: { type: 'string' }
-            },
-            required: [
-              'one'
-            ]
-          }
-
-          const rootSchema = undefined
-
-          const values = undefined
-
-          const params = {
-            '#/': { meta: { component: 'component' } },
-            '#/one': { meta: { component: 'component' } },
-            '#/two': { meta: { component: 'component' } }
-          }
-
-          return expect(transform(schema, rootSchema, values, params))
-            .to.eql({
-              meta: {
-                component: 'component',
-                type: 'object',
-                rootSchema: {},
-                schema,
-                uri: '#/'
-              },
-              elements: {
-                fields: [
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'one',
-                      rootSchema: {},
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/one',
-                      isRequired: true
-                    },
-                    elements: {
-                      field: {
-                        id: '#/one',
-                        isRequired: true
-                      }
-                    }
-                  },
-                  {
-                    meta: {
-                      component: 'component',
-                      type: 'string',
-                      name: 'two',
-                      rootSchema: {},
-                      schema: {
-                        type: 'string'
-                      },
-                      parentUri: '#/',
-                      uri: '#/two',
-                      isRequired: false
-                    },
-                    elements: {
-                      field: {
-                        id: '#/two',
-                        isRequired: false
-                      }
                     }
                   }
                 ]

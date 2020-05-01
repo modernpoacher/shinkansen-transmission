@@ -94,7 +94,8 @@ export function getRenderParamsForEnum (rootSchema, values, params) {
       meta: {
         ...getMetaProps(params, uri),
         schema: rootSchema,
-        selectedItems
+        selectedItems,
+        items
       },
       elements: {
         enum: {
@@ -127,7 +128,8 @@ export function getRenderParamsForAnyOf (rootSchema, values, params) {
       meta: {
         ...getMetaProps(params, uri),
         schema: rootSchema,
-        selectedItems
+        selectedItems,
+        items
       },
       elements: {
         anyOf: {
@@ -160,7 +162,8 @@ export function getRenderParamsForOneOf (rootSchema, values, params) {
       meta: {
         ...getMetaProps(params, uri),
         schema: rootSchema,
-        selectedItems
+        selectedItems,
+        items
       },
       elements: {
         oneOf: {
@@ -196,34 +199,6 @@ export function getRenderParamsForAllOf (rootSchema, values, params) {
         field: {
           ...getElementsFieldPropsForAllOf(params, uri)
         }
-      }
-    }
-  }
-}
-
-export function getRenderParamsForFields (rootSchema, values, params) {
-  /*
-   *  log('getRenderParamsForFields')
-   */
-
-  const {
-    parentUri = '#',
-    uri = '#/',
-    fields = []
-  } = params
-
-  return {
-    ...params,
-    parentUri,
-    uri,
-    [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema: rootSchema
-      },
-      elements: {
-        ...getElementsProps(params, uri),
-        fields
       }
     }
   }

@@ -41,6 +41,11 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 type: 'string',
                 schema,
                 uri: '#/',
+                items: [
+                  'string (1)',
+                  'string (2)',
+                  'string (3)'
+                ],
                 selectedItems: []
               },
               elements: {
@@ -80,6 +85,65 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 type: 'string',
                 schema,
                 uri: '#/',
+                items: [
+                  {
+                    meta: {
+                      type: 'string',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        const: 'string (1)'
+                      },
+                      parentUri: '#/',
+                      uri: '#/0',
+                      value: 'string (1)'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/0',
+                        value: 'string (1)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      item: 1,
+                      rootSchema: schema,
+                      schema: {
+                        const: 'string (2)'
+                      },
+                      parentUri: '#/',
+                      uri: '#/1',
+                      value: 'string (2)'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/1',
+                        value: 'string (2)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      item: 2,
+                      rootSchema: schema,
+                      schema: {
+                        const: 'string (3)'
+                      },
+                      parentUri: '#/',
+                      uri: '#/2',
+                      value: 'string (3)'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/2',
+                        value: 'string (3)'
+                      }
+                    }
+                  }
+                ],
                 selectedItems: []
               },
               elements: {
@@ -173,6 +237,65 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 type: 'string',
                 schema,
                 uri: '#/',
+                items: [
+                  {
+                    meta: {
+                      type: 'string',
+                      item: 0,
+                      rootSchema: schema,
+                      schema: {
+                        const: 'string (1)'
+                      },
+                      parentUri: '#/',
+                      uri: '#/0',
+                      value: 'string (1)'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/0',
+                        value: 'string (1)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      item: 1,
+                      rootSchema: schema,
+                      schema: {
+                        const: 'string (2)'
+                      },
+                      parentUri: '#/',
+                      uri: '#/1',
+                      value: 'string (2)'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/1',
+                        value: 'string (2)'
+                      }
+                    }
+                  },
+                  {
+                    meta: {
+                      type: 'string',
+                      item: 2,
+                      rootSchema: schema,
+                      schema: {
+                        const: 'string (3)'
+                      },
+                      parentUri: '#/',
+                      uri: '#/2',
+                      value: 'string (3)'
+                    },
+                    elements: {
+                      field: {
+                        id: '#/2',
+                        value: 'string (3)'
+                      }
+                    }
+                  }
+                ],
                 selectedItems: []
               },
               elements: {

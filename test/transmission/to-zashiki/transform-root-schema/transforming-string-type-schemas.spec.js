@@ -59,19 +59,24 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             minLength: 1,
             maxLength: 9,
             pattern: /.*/,
+            items: [
+              'One',
+              'Two',
+              'Three'
+            ],
             selectedItems: []
           },
           elements: {
             enum: {
               id: '#/',
+              minLength: 1,
+              maxLength: 9,
+              pattern: /.*/,
               items: [
                 'One',
                 'Two',
                 'Three'
               ],
-              minLength: 1,
-              maxLength: 9,
-              pattern: /.*/,
               selectedItems: []
             }
           }
@@ -94,6 +99,65 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             type: 'string',
             uri: '#/',
             schema,
+            items: [
+              {
+                meta: {
+                  type: 'string',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    const: 'One'
+                  },
+                  value: 'One'
+                },
+                elements: {
+                  field: {
+                    id: '#/0',
+                    value: 'One'
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'string',
+                  item: 1,
+                  parentUri: '#/',
+                  uri: '#/1',
+                  rootSchema: schema,
+                  schema: {
+                    const: 'Two'
+                  },
+                  value: 'Two'
+                },
+                elements: {
+                  field: {
+                    id: '#/1',
+                    value: 'Two'
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'string',
+                  item: 2,
+                  parentUri: '#/',
+                  uri: '#/2',
+                  rootSchema: schema,
+                  schema: {
+                    const: 'Three'
+                  },
+                  value: 'Three'
+                },
+                elements: {
+                  field: {
+                    id: '#/2',
+                    value: 'Three'
+                  }
+                }
+              }
+            ],
             selectedItems: []
           },
           elements: {
@@ -180,6 +244,92 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             type: 'string',
             uri: '#/',
             schema,
+            items: [
+              {
+                meta: {
+                  type: 'string',
+                  item: 0,
+                  parentUri: '#/',
+                  uri: '#/0',
+                  rootSchema: schema,
+                  schema: {
+                    const: 'One',
+                    minLength: 1,
+                    maxLength: 9,
+                    pattern: /.*/
+                  },
+                  value: 'One',
+                  minLength: 1,
+                  maxLength: 9,
+                  pattern: /.*/
+                },
+                elements: {
+                  field: {
+                    id: '#/0',
+                    value: 'One',
+                    minLength: 1,
+                    maxLength: 9,
+                    pattern: /.*/
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'string',
+                  item: 1,
+                  parentUri: '#/',
+                  uri: '#/1',
+                  rootSchema: schema,
+                  schema: {
+                    const: 'Two',
+                    minLength: 1,
+                    maxLength: 9,
+                    pattern: /.*/
+                  },
+                  value: 'Two',
+                  minLength: 1,
+                  maxLength: 9,
+                  pattern: /.*/
+                },
+                elements: {
+                  field: {
+                    id: '#/1',
+                    value: 'Two',
+                    minLength: 1,
+                    maxLength: 9,
+                    pattern: /.*/
+                  }
+                }
+              },
+              {
+                meta: {
+                  type: 'string',
+                  item: 2,
+                  parentUri: '#/',
+                  uri: '#/2',
+                  rootSchema: schema,
+                  schema: {
+                    const: 'Three',
+                    minLength: 1,
+                    maxLength: 9,
+                    pattern: /.*/
+                  },
+                  value: 'Three',
+                  minLength: 1,
+                  maxLength: 9,
+                  pattern: /.*/
+                },
+                elements: {
+                  field: {
+                    id: '#/2',
+                    value: 'Three',
+                    minLength: 1,
+                    maxLength: 9,
+                    pattern: /.*/
+                  }
+                }
+              }
+            ],
             selectedItems: []
           },
           elements: {
