@@ -4339,9 +4339,17 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
   }
 
   if (isArraySchema(schema)) { // getParamsByIndex
+    /*
+     *  log('isArraySchema')
+     */
+
     return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
   } else {
     if (isObjectSchema(schema)) { // getParamsByIndex
+      /*
+       *  log('isObjectSchema')
+       */
+
       return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
     } else {
       const {
@@ -4587,6 +4595,10 @@ export function getParamsByKeyForOneOf (schema, rootSchema, values, { parentUri 
 }
 
 export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
+  /*
+   *  log('getParamsByKey')
+   */
+
   const uri = getUri(parentUri, key)
 
   return {
@@ -4719,12 +4731,17 @@ export function getParamsByIndexForOneOf (schema, rootSchema, values, { parentUr
 }
 
 export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
+  /*
+   *  log('getParamsByIndex')
+   */
+
   const uri = getUri(parentUri, index)
 
   return {
     ...params,
     parentUri,
     uri,
+    index,
     [uri]: {
       meta: {
         ...getMetaProps(params, uri),
