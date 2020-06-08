@@ -339,6 +339,6 @@ A hash.
   'company-publisher-firstName': 'Stan',
   'company-publisher-lastName': 'Lee',
   'company-publisher-age': '96',
-  'active': 'true'
+  active: 'true'
 }
 ```
