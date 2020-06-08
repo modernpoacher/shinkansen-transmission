@@ -228,7 +228,7 @@ The return value is an object valid according to the Schema.
 
 ##### `values`
 
-A hash.
+An object.
 
 ```javascript
 {
