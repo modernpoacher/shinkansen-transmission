@@ -211,7 +211,7 @@ The return value is an object valid according to the Schema.
             },
             lastName: {
               type: 'string'
-            }
+            },
             age: {
               type: 'number'
             }
