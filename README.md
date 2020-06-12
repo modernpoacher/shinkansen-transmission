@@ -177,15 +177,15 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
 ### `fromHashToDocument`
 
 ```javascript
-const document = fromHashToDocument(rootSchema, values)
+const document = fromHashToDocument(values, rootSchema)
 ```
 
 For applications accepting `POST` data.
 
 The transformer walks the `rootSchema` and maps fields in `values` to another structure, which it returns.
 
-- `rootSchema` is a JSON Schema
 - `values` is a hash of keys and values
+- `rootSchema` is a JSON Schema
 
 The return value is an object valid according to the Schema.
 
