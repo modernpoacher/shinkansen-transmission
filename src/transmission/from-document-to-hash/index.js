@@ -70,6 +70,10 @@ function findByEqual (value) {
   }
 }
 
+function toString (value) {
+  return (value !== undefined) ? String(value) : ''
+}
+
 export function getObject ({ properties = {} /* object */ } = {}, parentUri, uri) {
   /*
    *  log('getObject')
@@ -135,9 +139,9 @@ export function transformValueIndexFor (array, value) {
   }
 
   /*
-   *  Takes the place of `String(document)` in `transform()`
+   *  Takes the place of `toString(document)` in `transform()`
    */
-  return String(value)
+  return toString(value)
 }
 
 export function transformEqualIndexFor (array, value) {
@@ -153,9 +157,9 @@ export function transformEqualIndexFor (array, value) {
   }
 
   /*
-   *  Takes the place of `String(document)` in `transform()`
+   *  Takes the place of `toString(document)` in `transform()`
    */
-  return String(value)
+  return toString(value)
 }
 
 export function transformArrayFor (document, schema, values, params, parentUri, uri) {
@@ -322,5 +326,5 @@ export default function transform (document, schema = {}, values = {}, params = 
   /*
    *  The hash should contain only strings
    */
-  return { ...values, [uri]: String(document) }
+  return { ...values, [uri]: toString(document) }
 }
