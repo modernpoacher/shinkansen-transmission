@@ -26,7 +26,7 @@
     "babel:watch": "npm run babel -- -w",
     "lint": "eslint src test *.js",
     "lint:fix": "npm run lint -- --fix",
-    "test": "NODE_ENV=test mocha test --recursive -r @babel/register -r @babel/polyfill --verbose",
+    "test": "NODE_ENV=test mocha -r @babel/register -r @babel/polyfill test --recursive --verbose",
     "coverage": "nyc --reporter=lcov npm run test",
     "pre-commit": "npm run lint && npm run coverage && npm run babel && git add lib"
   },
