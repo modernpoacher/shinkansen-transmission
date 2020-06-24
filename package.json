@@ -2,7 +2,6 @@
   "name": "shinkansen-transmission",
   "version": "2.1.10",
   "description": "Shinkansen Transmission",
-  "main": "./index.js",
   "keywords": [
     "Shinkansen",
     "Transmission",
@@ -10,12 +9,13 @@
     "Zashiki",
     "Karakuri"
   ],
+  "main": "./index.js",
+  "author": "Jonathan Perry for Modern Poacher Limited <modernpoacher@modernpoacher.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com/modernpoacher/shinkansen-transmission.git"
   },
-  "author": "Jonathan Perry for Modern Poacher Limited",
-  "license": "MIT",
   "scripts": {
     "prepublishOnly": "npm run lint:fix && npm run babel",
     "prebuild": "npm run clean",
