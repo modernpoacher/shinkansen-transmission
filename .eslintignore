@@ -1,1 +1,11 @@
+.circleci
+.github
+.nyc_output
+coverage
+node_modules
+
 lib
+
+**/*.snap
+
+**/__snapshots__/**/*
