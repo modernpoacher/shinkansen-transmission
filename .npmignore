@@ -1,18 +1,20 @@
+.DS_Store
+
 .circleci
 .github
 
 .editorconfig
 .eslintignore
 .eslintrc
-.nycrc
 
-.depscrc
+.depsrc
 
 # NPM
 .npmignore
 .npmrc
 
 # NYC
+.nycrc
 .nyc_output
 
 # Mocha
