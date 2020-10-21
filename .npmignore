@@ -1,10 +1,25 @@
 .circleci
+.github
 
 .editorconfig
 .eslintignore
 .eslintrc
 .nycrc
 
+.depscrc
+
 # NPM
 .npmignore
 .npmrc
+
+# NYC
+.nyc_output
+
+# Mocha
+test
+
+# Coverage
+coverage
+
+# Storybook
+stories
