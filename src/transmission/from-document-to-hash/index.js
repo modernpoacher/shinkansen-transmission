@@ -119,10 +119,10 @@ export function getSchema (schema = {}, parentUri, uri) {
 export const transformValue = (schema) => (
   isObject(schema)
     ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema // object
+        ? toConstValue(schema)
+        : isDefaultValue(schema)
+          ? toDefaultValue(schema)
+          : schema // object
     : schema // primitive or array
 )
 

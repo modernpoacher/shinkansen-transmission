@@ -160,10 +160,10 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
 export const transformValue = (schema) => (
   isObject(schema)
     ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema
+        ? toConstValue(schema)
+        : isDefaultValue(schema)
+          ? toDefaultValue(schema)
+          : schema
     : schema
 )
 
