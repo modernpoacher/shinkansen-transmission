@@ -74,7 +74,7 @@ function toString (value) {
   return (value !== undefined) ? String(value) : ''
 }
 
-export function getObject ({ properties = {} /* object */ } = {}, parentUri, uri) {
+export function getObject ({ properties = {} /* object */ } = {}, parentUri = '', uri = '') {
   /*
    *  log('getObject')
    */
@@ -87,7 +87,7 @@ export function getObject ({ properties = {} /* object */ } = {}, parentUri, uri
   )
 }
 
-export function getArray ({ items = {} /* array or object */ } = {}, parentUri, uri) {
+export function getArray ({ items = {} /* array or object */ } = {}, parentUri = '', uri = '') {
   /*
    *  log('getArray')
    */
@@ -97,7 +97,7 @@ export function getArray ({ items = {} /* array or object */ } = {}, parentUri, 
     : items
 }
 
-export function getSchema (schema = {}, parentUri, uri) {
+export function getSchema (schema = {}, parentUri = '', uri = '') {
   /*
    *  log('getSchema')
    */

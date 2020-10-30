@@ -87,7 +87,7 @@ export function transformValueFor (value, array) {
   return value
 }
 
-export function getArrayFor (values, array = [], uri) {
+export function getArrayFor (values, array = [], uri = '') {
   /*
    *  log('getArrayFor')
    */
@@ -102,7 +102,7 @@ export function getArrayFor (values, array = [], uri) {
   return []
 }
 
-export function transformArrayFor (values, { items = null }, parentUri, uri) {
+export function transformArrayFor (values, { items = null } = {}, parentUri = '', uri = '') {
   /*
    *  log('transformArrayFor')
    */
@@ -118,7 +118,7 @@ export function transformArrayFor (values, { items = null }, parentUri, uri) {
   return []
 }
 
-export function transformObjectFor (values, { properties = null }, parentUri, uri) {
+export function transformObjectFor (values, { properties = null } = {}, parentUri = '', uri = '') {
   /*
    *  log('transformObjectFor')
    */
@@ -138,7 +138,7 @@ export function transformObjectFor (values, { properties = null }, parentUri, ur
   return {}
 }
 
-export function transformItemsArrayFor (values, items = [], parentUri, uri) {
+export function transformItemsArrayFor (values, items = [], parentUri = '', uri = '') {
   /*
    *  log('transformItemsArrayFor')
    */
@@ -170,7 +170,7 @@ export function transformItemsArrayFor (values, items = [], parentUri, uri) {
   )
 }
 
-export function transformItemsObjectFor (values, items = {}, parentUri, uri) {
+export function transformItemsObjectFor (values, items = {}, parentUri = '', uri = '') {
   /*
    *  log('transformItemsObjectFor')
    */
