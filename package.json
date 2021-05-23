@@ -29,7 +29,7 @@
     "babel:watch": "npm run babel -- -w",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "test": "NODE_ENV=test mocha -r @babel/register -r @babel/polyfill test --recursive --verbose",
+    "test": "NODE_ENV=test mocha -r @babel/register test --recursive --verbose",
     "coverage": "nyc --reporter=lcov npm run test",
     "pre-commit": "npm run lint && npm run coverage && npm run build && git add lib"
   },
@@ -43,7 +43,6 @@
     "@babel/eslint-parser": "^7.14.3",
     "@babel/plugin-proposal-export-default-from": "^7.12.13",
     "@babel/plugin-proposal-export-namespace-from": "^7.14.2",
-    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.2",
     "@babel/register": "^7.13.16",
     "babel-loader": "^8.2.2",
