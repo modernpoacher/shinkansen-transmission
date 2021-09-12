@@ -203,21 +203,15 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
 
           const uri = getUri(parentUri, index)
 
-          const meta = Object.assign(
-            getMetaProps(params, uri),
-            {
-              parentUri,
-              uri,
-              value: String(value)
-            }
-          )
+          const meta = Object.assign(getMetaProps(params, uri), {
+            parentUri,
+            uri,
+            value: String(value)
+          })
           const elements = {
-            field: Object.assign(
-              getElementsFieldProps(params, uri),
-              {
-                value: String(value)
-              }
-            )
+            field: Object.assign(getElementsFieldProps(params, uri), {
+              value: String(value)
+            })
           }
 
           return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
@@ -231,21 +225,15 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
 
             const uri = getUri(parentUri, index)
 
-            const meta = Object.assign(
-              getMetaProps(params, uri),
-              {
-                parentUri,
-                uri,
-                value: String(v)
-              }
-            )
+            const meta = Object.assign(getMetaProps(params, uri), {
+              parentUri,
+              uri,
+              value: String(v)
+            })
             const elements = {
-              field: Object.assign(
-                getElementsFieldProps(params, uri),
-                {
-                  value: String(v)
-                }
-              )
+              field: Object.assign(getElementsFieldProps(params, uri), {
+                value: String(v)
+              })
             }
 
             return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
@@ -270,39 +258,30 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, values, { paren
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      name: fieldKey
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    selectedItems,
+    items,
+    name: fieldKey
+  })
   const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
+      selectedItems,
+      items
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
@@ -315,39 +294,30 @@ export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { pare
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      name: fieldKey
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    selectedItems,
+    items,
+    name: fieldKey
+  })
   const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
+      selectedItems,
+      items
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
@@ -360,39 +330,30 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { pare
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      name: fieldKey
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    selectedItems,
+    items,
+    name: fieldKey
+  })
   const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
+      selectedItems,
+      items
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
@@ -405,28 +366,22 @@ export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { pare
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      name: fieldKey
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    name: fieldKey
+  })
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements: getElementsProps(params, uri)
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements: getElementsProps(params, uri)
     }
-  )
+  })
 }
 
 export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
@@ -439,31 +394,25 @@ export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: f
   const parentUri = normaliseUri(fieldParentUri)
   const uri = getUri(fieldParentUri, fieldKey)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      name: fieldKey
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    name: fieldKey
+  })
   const elements = {
     field: getElementsFieldProps(params, uri)
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByIndexForEnum (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
@@ -476,39 +425,30 @@ export function getRenderParamsByIndexForEnum (schema, rootSchema, values, { par
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      item: arrayIndex
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    selectedItems,
+    items,
+    item: arrayIndex
+  })
   const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
+      selectedItems,
+      items
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
@@ -521,39 +461,30 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, { pa
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      item: arrayIndex
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    selectedItems,
+    items,
+    item: arrayIndex
+  })
   const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
+      selectedItems,
+      items
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
@@ -566,39 +497,30 @@ export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, { pa
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      item: arrayIndex
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    selectedItems,
+    items,
+    item: arrayIndex
+  })
   const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
+      selectedItems,
+      items
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
@@ -611,31 +533,25 @@ export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, { pa
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      item: arrayIndex
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    item: arrayIndex
+  })
   const elements = {
     field: getElementsFieldPropsForAllOf(params, uri)
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsByIndex (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
@@ -648,31 +564,25 @@ export function getRenderParamsByIndex (schema, rootSchema, values, { parentUri:
   const parentUri = normaliseUri(arrayParentUri)
   const uri = getUri(arrayParentUri, arrayIndex)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      item: arrayIndex
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri,
+    uri,
+    item: arrayIndex
+  })
   const elements = {
     field: getElementsFieldProps(params, uri)
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsForEnum (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
@@ -680,38 +590,29 @@ export function getRenderParamsForEnum (schema, rootSchema, values, { parentUri 
    *  log('getRenderParamsForEnum')
    */
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems,
+    items
+  })
+  const elements = {
+    enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
       selectedItems,
       items
-    }
-  )
-  const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsForAnyOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
@@ -719,38 +620,29 @@ export function getRenderParamsForAnyOf (schema, rootSchema, values, { parentUri
    *  log('getRenderParamsForAnyOf')
    */
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems,
+    items
+  })
+  const elements = {
+    anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
       selectedItems,
       items
-    }
-  )
-  const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsForOneOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
@@ -758,38 +650,29 @@ export function getRenderParamsForOneOf (schema, rootSchema, values, { parentUri
    *  log('getRenderParamsForOneOf')
    */
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems,
+    items
+  })
+  const elements = {
+    oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
       selectedItems,
       items
-    }
-  )
-  const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParamsForAllOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', ...params }) {
@@ -797,30 +680,24 @@ export function getRenderParamsForAllOf (schema, rootSchema, values, { parentUri
    *  log('getRenderParamsForAllOf')
    */
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri
+  })
   const elements = {
     field: getElementsFieldPropsForAllOf(params, uri)
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getRenderParams (schema, rootSchema, values, { parentUri = '#', uri = '#/', fields = [], ...params }) {
@@ -828,36 +705,27 @@ export function getRenderParams (schema, rootSchema, values, { parentUri = '#', 
    *  log('getRenderParams')
    */
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri
-    }
-  )
-  const elements = Object.assign(
-    getElementsFieldProps(params, uri),
-    {
-      fields
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri
+  })
+  const elements = Object.assign(getElementsFieldProps(params, uri), {
+    fields
+  })
 
-  return Object.assign(
-    params,
-    {
-      fields // yep!
-    },
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    fields // yep!
+  },
+  {
+    parentUri,
+    uri,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function renderNullMetaForEnum (params, uri) {
@@ -1236,16 +1104,9 @@ export function renderBooleanMetaForEnum (params, uri) {
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return (
-    Object.assign(
-      {
-        uri,
-        type: 'boolean'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaProps
-    )
-  )
+  return Object.assign({ uri, type: 'boolean' },
+    isParentUri(parentUri, uri) ? { parentUri } : {},
+    metaProps)
 }
 
 export function renderBooleanMetaForAnyOf (params, uri) {
@@ -1258,16 +1119,9 @@ export function renderBooleanMetaForAnyOf (params, uri) {
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return (
-    Object.assign(
-      {
-        uri,
-        type: 'boolean'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaProps
-    )
-  )
+  return Object.assign({ uri, type: 'boolean' },
+    isParentUri(parentUri, uri) ? { parentUri } : {},
+    metaProps)
 }
 
 export function renderBooleanMetaForOneOf (params, uri) {
@@ -1280,16 +1134,9 @@ export function renderBooleanMetaForOneOf (params, uri) {
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return (
-    Object.assign(
-      {
-        uri,
-        type: 'boolean'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaProps
-    )
-  )
+  return Object.assign({ uri, type: 'boolean' },
+    isParentUri(parentUri, uri) ? { parentUri } : {},
+    metaProps)
 }
 
 export function renderBooleanMetaForAllOf (schema, values, params, uri) {
@@ -1315,19 +1162,12 @@ export function renderBooleanMetaForAllOf (schema, values, params, uri) {
     } = params)
   }
 
-  return (
-    Object.assign(
-      {
-        uri,
-        type: 'boolean'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaDefaultValue,
-      metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
-    )
-  )
+  return Object.assign({ uri, type: 'boolean' },
+    isParentUri(parentUri, uri) ? { parentUri } : {},
+    metaDefaultValue,
+    metaValue,
+    metaProps,
+    isArray(selectedItems) ? { selectedItems } : {})
 }
 
 export function renderBooleanMeta (schema, values, params, uri) {
@@ -1353,19 +1193,12 @@ export function renderBooleanMeta (schema, values, params, uri) {
     } = params)
   }
 
-  return (
-    Object.assign(
-      {
-        uri,
-        type: 'boolean'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaDefaultValue,
-      metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
-    )
-  )
+  return Object.assign({ uri, type: 'boolean' },
+    isParentUri(parentUri, uri) ? { parentUri } : {},
+    metaDefaultValue,
+    metaValue,
+    metaProps,
+    isArray(selectedItems) ? { selectedItems } : {})
 }
 
 export function getBooleanElementsFieldForEnum (field, params, uri) {
@@ -5927,39 +5760,30 @@ export function getParamsByKeyForEnum (schema, rootSchema, values, { parentUri =
     selectedItems = getSelectedItems(values, uri)
   } = getMetaProps(params, uri)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems,
+    isRequired
+  })
+  const elements = {
+    enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
       selectedItems,
       isRequired
-    }
-  )
-  const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        isRequired
-      }
-    )
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      key,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    key,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
@@ -5973,39 +5797,30 @@ export function getParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri 
     selectedItems = getSelectedItems(values, uri)
   } = getMetaProps(params, uri)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems,
+    isRequired
+  })
+  const elements = {
+    anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
       selectedItems,
       isRequired
-    }
-  )
-  const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        isRequired
-      }
-    )
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      key,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    key,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByKeyForOneOf (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
@@ -6019,39 +5834,30 @@ export function getParamsByKeyForOneOf (schema, rootSchema, values, { parentUri 
     selectedItems = getSelectedItems(values, uri)
   } = getMetaProps(params, uri)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems,
+    isRequired
+  })
+  const elements = {
+    oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
       selectedItems,
       isRequired
-    }
-  )
-  const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        isRequired
-      }
-    )
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      key,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    key,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
@@ -6061,37 +5867,28 @@ export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', k
 
   const uri = getUri(parentUri, key)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      isRequired
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    isRequired
+  })
   const elements = {
-    field: Object.assign(
-      getElementsFieldPropsForAllOf(params, uri),
-      {
-        isRequired
-      }
-    )
+    field: Object.assign(getElementsFieldPropsForAllOf(params, uri), {
+      isRequired
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      key,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    key,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByIndexForEnum (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
@@ -6106,37 +5903,28 @@ export function getParamsByIndexForEnum (schema, rootSchema, values, { parentUri
     ...metaProps
   } = getMetaProps(params, uri)
 
-  const meta = Object.assign(
-    metaProps,
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      selectedItems
-    }
-  )
+  const meta = Object.assign(metaProps, {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems
+  })
   const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems
-      }
-    )
+    enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
+      selectedItems
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      index,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    index,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
@@ -6151,37 +5939,28 @@ export function getParamsByIndexForAnyOf (schema, rootSchema, values, { parentUr
     ...metaProps
   } = getMetaProps(params, uri)
 
-  const meta = Object.assign(
-    metaProps,
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      selectedItems
-    }
-  )
+  const meta = Object.assign(metaProps, {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems
+  })
   const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems
-      }
-    )
+    anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
+      selectedItems
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      index,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    index,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByIndexForOneOf (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
@@ -6196,37 +5975,28 @@ export function getParamsByIndexForOneOf (schema, rootSchema, values, { parentUr
     ...metaProps
   } = getMetaProps(params, uri)
 
-  const meta = Object.assign(
-    metaProps,
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      selectedItems
-    }
-  )
+  const meta = Object.assign(metaProps, {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri,
+    selectedItems
+  })
   const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems
-      }
-    )
+    oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
+      selectedItems
+    })
   }
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      index,
-      [uri]: {
-        meta,
-        elements
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    index,
+    [uri]: {
+      meta,
+      elements
     }
-  )
+  })
 }
 
 export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
@@ -6236,28 +6006,22 @@ export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#',
 
   const uri = getUri(parentUri, index)
 
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri
-    }
-  )
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema,
+    rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri
+  })
 
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      index,
-      [uri]: {
-        meta,
-        elements: getElementsProps(params, uri)
-      }
+  return Object.assign(params, {
+    parentUri,
+    uri,
+    index,
+    [uri]: {
+      meta,
+      elements: getElementsProps(params, uri)
     }
-  )
+  })
 }
 
 export function transformByKeyForEnum (schema, rootSchema, values, params) {
