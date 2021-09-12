@@ -20,22 +20,30 @@ import {
 
 const log = debug('shinkansen-transmission:from-document-to-hash')
 
+log('`shinkansen-transmission` is awake')
+
 function findByKey (parentUri, uri) {
+  /*
+   *  log('findByKey')
+   */
   return function find (key) {
-    return uri === getUri(parentUri, key)
+    /*
+     *  log('find')
+     */
+    return getUri(parentUri, key) === uri
   }
 }
 
 function findByIndex (parentUri, uri) {
+  /*
+   *  log('findByIndex')
+   */
   return function find (schema, index) {
     /*
-     *  log('findByIndex')
+     *  log('find')
      */
-
     if (hasEnum(schema)) {
-      // const array = getEnum(schema)
-
-      // return array.find(findByIndex(parentUri, uri))
+      return getUri(parentUri, index) === uri
     } else {
       if (hasAnyOf(schema)) {
         const array = getAnyOf(schema)
@@ -55,22 +63,33 @@ function findByIndex (parentUri, uri) {
 }
 
 function findByValue (value) {
+  /*
+   *  log('findByValue')
+   */
   return function find (schema) {
     /*
-     *  log('findByValue')
+     *  log('find')
      */
-
     return value === transformValue(schema)
   }
 }
 
 function findByEqual (value) {
+  /*
+   *  log('findByEqual')
+   */
   return function find (schema) {
+    /*
+     *  log('find')
+     */
     return equal(value, transformValue(schema))
   }
 }
 
 function toString (value) {
+  /*
+   *  log('toString')
+   */
   return (value !== undefined) ? String(value) : ''
 }
 
@@ -78,7 +97,6 @@ export function getObject ({ properties = {} /* object */ } = {}, parentUri = ''
   /*
    *  log('getObject')
    */
-
   return (
     Reflect.get(properties, (
       Object.keys(properties)
@@ -91,7 +109,6 @@ export function getArray ({ items = {} /* array or object */ } = {}, parentUri =
   /*
    *  log('getArray')
    */
-
   return (isArray(items))
     ? items.find(findByIndex(parentUri, uri))
     : items
@@ -101,7 +118,6 @@ export function getSchema (schema = {}, parentUri = '', uri = '') {
   /*
    *  log('getSchema')
    */
-
   const { type } = schema
 
   switch (type) {
@@ -127,6 +143,9 @@ export const transformValue = (schema) => (
 )
 
 export function transformValueIndexFor (array, value) {
+  /*
+   *  log('transformValueIndexFor')
+   */
   const find = findByValue(value)
 
   if (array.some(find)) {
@@ -145,6 +164,9 @@ export function transformValueIndexFor (array, value) {
 }
 
 export function transformEqualIndexFor (array, value) {
+  /*
+   *  log('transformEqualIndexFor')
+   */
   const find = findByEqual(value)
 
   if (array.some(find)) {
@@ -166,7 +188,6 @@ export function transformArrayFor (document, schema, values, params, parentUri, 
   /*
    *  log('transformArrayFor')
    */
-
   return (
     document
       .reduce((values, value, index) => {
@@ -181,7 +202,6 @@ export function transformObjectFor (document, schema, values, params, parentUri,
   /*
    *  log('transformObjectFor')
    */
-
   return (
     Object.entries(document)
       .reduce((values, [key, value]) => {

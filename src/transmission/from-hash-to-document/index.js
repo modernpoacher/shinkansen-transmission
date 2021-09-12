@@ -16,8 +16,9 @@ import {
   getUri
 } from 'shinkansen-transmission/transmission/common'
 
-const log = debug('shinkansen-transmission:from-hash-to-document:log')
-const error = debug('shinkansen-transmission:from-hash-to-document:error')
+const log = debug('shinkansen-transmission:from-hash-to-document')
+
+log('`shinkansen-transmission` is awake')
 
 export function toNull (v) {
   if (v === null || v === 'null') return null
@@ -78,7 +79,7 @@ export function transformValueFor (value, array) {
       return transformValue(v)
     }
   } catch ({ message = 'No error message defined' }) {
-    error(message)
+    log(message)
   }
 
   /*
@@ -204,7 +205,7 @@ export function transformItemsObjectFor (values, items = {}, parentUri = '#', ur
   )
 }
 
-const handleError = ({ message = 'No error message defined' }) => error(message)
+const handleError = ({ message = 'No error message defined' }) => log(message)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaNull (values, schema, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) {
