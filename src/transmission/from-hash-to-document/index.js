@@ -130,7 +130,9 @@ export function transformObjectFor (values, { properties = null } = {}, parentUr
         .reduce((accumulator, [key, schema]) => {
           const schemaUri = getUri(parentUri, key)
 
-          return ({ ...accumulator, [key]: transform(values, schema, schemaUri, schemaUri) })
+          accumulator[key] = transform(values, schema, schemaUri, schemaUri)
+
+          return accumulator
         }, {})
     )
   }

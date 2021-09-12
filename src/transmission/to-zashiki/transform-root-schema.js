@@ -74,6 +74,8 @@ import {
 
 const log = debug('shinkansen-transmission:to-zashiki:root-schema')
 
+log('`shinkansen-transmission` is awake')
+
 export function getRenderParamsForEnum (rootSchema, values, params) {
   /*
    *  log('getRenderParamsForEnum')
@@ -86,26 +88,27 @@ export function getRenderParamsForEnum (rootSchema, values, params) {
     items = []
   } = params
 
-  return {
-    ...params,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema: rootSchema,
+    selectedItems,
+    items
+  })
+
+  const elements = {
+    enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
+      selectedItems,
+      items
+    })
+  }
+
+  return Object.assign(params, {
     parentUri,
     uri,
     [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema: rootSchema,
-        selectedItems,
-        items
-      },
-      elements: {
-        enum: {
-          ...getElementsFieldPropsForEnum(params, uri),
-          selectedItems,
-          items
-        }
-      }
+      meta,
+      elements
     }
-  }
+  })
 }
 
 export function getRenderParamsForAnyOf (rootSchema, values, params) {
@@ -120,26 +123,27 @@ export function getRenderParamsForAnyOf (rootSchema, values, params) {
     items = []
   } = params
 
-  return {
-    ...params,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema: rootSchema,
+    selectedItems,
+    items
+  })
+
+  const elements = {
+    anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
+      selectedItems,
+      items
+    })
+  }
+
+  return Object.assign(params, {
     parentUri,
     uri,
     [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema: rootSchema,
-        selectedItems,
-        items
-      },
-      elements: {
-        anyOf: {
-          ...getElementsFieldPropsForAnyOf(params, uri),
-          selectedItems,
-          items
-        }
-      }
+      meta,
+      elements
     }
-  }
+  })
 }
 
 export function getRenderParamsForOneOf (rootSchema, values, params) {
@@ -154,26 +158,27 @@ export function getRenderParamsForOneOf (rootSchema, values, params) {
     items = []
   } = params
 
-  return {
-    ...params,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema: rootSchema,
+    selectedItems,
+    items
+  })
+
+  const elements = {
+    oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
+      selectedItems,
+      items
+    })
+  }
+
+  return Object.assign(params, {
     parentUri,
     uri,
     [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema: rootSchema,
-        selectedItems,
-        items
-      },
-      elements: {
-        oneOf: {
-          ...getElementsFieldPropsForOneOf(params, uri),
-          selectedItems,
-          items
-        }
-      }
+      meta,
+      elements
     }
-  }
+  })
 }
 
 export function getRenderParamsForAllOf (rootSchema, values, params) {
@@ -186,22 +191,22 @@ export function getRenderParamsForAllOf (rootSchema, values, params) {
     uri = '#/'
   } = params
 
-  return {
-    ...params,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema: rootSchema
+  })
+
+  const elements = {
+    field: getElementsFieldPropsForAllOf(params, uri)
+  }
+
+  return Object.assign(params, {
     parentUri,
     uri,
     [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema: rootSchema
-      },
-      elements: {
-        field: {
-          ...getElementsFieldPropsForAllOf(params, uri)
-        }
-      }
+      meta,
+      elements
     }
-  }
+  })
 }
 
 export function getRenderParams (rootSchema, values, params) {
@@ -215,23 +220,24 @@ export function getRenderParams (rootSchema, values, params) {
     fields = []
   } = params
 
-  return {
-    ...params,
+  const meta = Object.assign(getMetaProps(params, uri), {
+    schema: rootSchema,
+    parentUri: normaliseUri(parentUri),
+    uri
+  })
+
+  const elements = Object.assign(getElementsProps(params, uri), {
+    fields
+  })
+
+  return Object.assign(params, {
     parentUri,
     uri,
     [uri]: {
-      meta: {
-        ...getMetaProps(params, uri),
-        schema: rootSchema,
-        parentUri: normaliseUri(parentUri),
-        uri
-      },
-      elements: {
-        ...getElementsProps(params, uri),
-        fields
-      }
+      meta,
+      elements
     }
-  }
+  })
 }
 
 /*
@@ -254,7 +260,7 @@ export function transformNullForEnum (rootSchema, values, params) {
 
   const items = getEnum(rootSchema)
 
-  return renderNullForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, { ...params, selectedItems, items }))
+  return renderNullForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -276,9 +282,9 @@ export function transformNullForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderNullForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderNullForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -300,9 +306,9 @@ export function transformNullForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderNullForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderNullForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -316,7 +322,7 @@ export function transformNullForAllOf (rootSchema, values, params) {
    */
 
   const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
+  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
 
   return renderNullForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
@@ -369,7 +375,7 @@ export function transformBooleanForEnum (rootSchema, values, params) {
 
   const items = getEnum(rootSchema)
 
-  return renderBooleanForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, { ...params, selectedItems, items }))
+  return renderBooleanForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -391,9 +397,9 @@ export function transformBooleanForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderBooleanForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderBooleanForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -415,9 +421,9 @@ export function transformBooleanForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderBooleanForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderBooleanForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -431,7 +437,7 @@ export function transformBooleanForAllOf (rootSchema, values, params) {
    */
 
   const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
+  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
 
   return renderBooleanForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
@@ -484,7 +490,7 @@ export function transformObjectForEnum (rootSchema, values, params) {
 
   const items = getEnum(rootSchema)
 
-  return renderObjectForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, { ...params, selectedItems, items }))
+  return renderObjectForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -506,9 +512,9 @@ export function transformObjectForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderObjectForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderObjectForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -530,9 +536,9 @@ export function transformObjectForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderObjectForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderObjectForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -546,7 +552,7 @@ export function transformObjectForAllOf (rootSchema, values, params) {
    */
 
   const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
+  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
 
   return renderObjectForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
@@ -588,10 +594,10 @@ export function transformObject (rootSchema, values, params) {
   const fields = (
     Object
       .entries(properties)
-      .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
+      .map(mapTransformByKey(rootSchema, values, Object.assign(params, { parentUri: uri, required })))
   )
 
-  return renderObject(rootSchema, values, getRenderParams(rootSchema, values, { ...params, fields }))
+  return renderObject(rootSchema, values, getRenderParams(rootSchema, values, Object.assign(params, { fields })))
 }
 
 /*
@@ -614,7 +620,7 @@ export function transformArrayForEnum (rootSchema, values, params) {
 
   const items = getEnum(rootSchema)
 
-  return renderArrayForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, { ...params, selectedItems, items }))
+  return renderArrayForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -636,9 +642,9 @@ export function transformArrayForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderArrayForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderArrayForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -660,9 +666,9 @@ export function transformArrayForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderArrayForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderArrayForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -676,7 +682,7 @@ export function transformArrayForAllOf (rootSchema, values, params) {
    */
 
   const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
+  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
 
   return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
@@ -712,17 +718,17 @@ export function transformArray (rootSchema, values, params) {
 
   if (isArray(items)) {
     const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: '#/' })) // uri
+      items.map(mapTransformByIndex(rootSchema, values, Object.assign(params, { parentUri: '#/' })))
     )
 
-    return renderArray(rootSchema, values, getRenderParams(rootSchema, values, { ...params, fields }))
+    return renderArray(rootSchema, values, getRenderParams(rootSchema, values, Object.assign(params, { fields })))
   } else {
     if (isObject(items)) {
       const fields = [
-        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: '#/' }) // uri
+        getTransformByIndex(items, rootSchema, values, Object.assign(params, { parentUri: '#/' }))
       ]
 
-      return renderArray(rootSchema, values, getRenderParams(rootSchema, values, { ...params, fields }))
+      return renderArray(rootSchema, values, getRenderParams(rootSchema, values, Object.assign(params, { fields })))
     }
   }
 }
@@ -747,7 +753,7 @@ export function transformNumberForEnum (rootSchema, values, params) {
 
   const items = getEnum(rootSchema)
 
-  return renderNumberForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, { ...params, selectedItems, items }))
+  return renderNumberForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -769,9 +775,9 @@ export function transformNumberForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderNumberForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderNumberForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -793,9 +799,9 @@ export function transformNumberForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderNumberForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderNumberForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -809,7 +815,7 @@ export function transformNumberForAllOf (rootSchema, values, params) {
    */
 
   const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
+  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
 
   return renderNumberForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
@@ -862,7 +868,7 @@ export function transformStringForEnum (rootSchema, values, params) {
 
   const items = getEnum(rootSchema)
 
-  return renderStringForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, { ...params, selectedItems, items }))
+  return renderStringForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -884,9 +890,9 @@ export function transformStringForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderStringForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderStringForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -908,9 +914,9 @@ export function transformStringForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, selectedItems, parentUri: uri }))
+  const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
 
-  return renderStringForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, { ...params, selectedItems, items }))
+  return renderStringForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
 /*
@@ -924,7 +930,7 @@ export function transformStringForAllOf (rootSchema, values, params) {
    */
 
   const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => ({ ...accumulator, ...schema }), rest) // initialise with `rest`
+  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
 
   return renderStringForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }

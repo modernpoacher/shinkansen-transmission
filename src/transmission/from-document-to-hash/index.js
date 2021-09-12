@@ -200,17 +200,23 @@ export function transformArray (document, schema, values, params, parentUri, uri
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
-    return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
+    values[uri] = document.map((value) => transformValueIndexFor(array, value))
+
+    return values
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
 
-      return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
+      values[uri] = document.map((value) => transformValueIndexFor(array, value))
+
+      return values
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
 
-        return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
+        values[uri] = document.map((value) => transformValueIndexFor(array, value))
+
+        return values
       } else {
         const { items = {} } = schema
 
@@ -227,17 +233,23 @@ export function transformArray (document, schema, values, params, parentUri, uri
             if (hasEnum(items)) {
               const array = getEnum(items)
 
-              return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
+              values[uri] = document.map((value) => transformValueIndexFor(array, value))
+
+              return values
             } else {
               if (hasAnyOf(items)) {
                 const array = getAnyOf(items)
 
-                return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
+                values[uri] = document.map((value) => transformValueIndexFor(array, value))
+
+                return values
               } else {
                 if (hasOneOf(items)) {
                   const array = getOneOf(items)
 
-                  return { ...values, [uri]: document.map((value) => transformValueIndexFor(array, value)) }
+                  values[uri] = document.map((value) => transformValueIndexFor(array, value))
+
+                  return values
                 }
               }
             }
@@ -261,17 +273,23 @@ export function transformObject (document, schema, values, params, parentUri, ur
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
-    return { ...values, [uri]: transformEqualIndexFor(array, document) }
+    values[uri] = transformEqualIndexFor(array, document)
+
+    return values
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
 
-      return { ...values, [uri]: transformEqualIndexFor(array, document) }
+      values[uri] = transformEqualIndexFor(array, document)
+
+      return values
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
 
-        return { ...values, [uri]: transformEqualIndexFor(array, document) }
+        values[uri] = transformEqualIndexFor(array, document)
+
+        return values
       }
     }
   }
@@ -306,17 +324,23 @@ export default function transform (document, schema = {}, values = {}, params = 
       if (hasEnum(schema)) {
         const items = getEnum(schema)
 
-        return { ...values, [uri]: transformValueIndexFor(items, document) }
+        values[uri] = transformValueIndexFor(items, document)
+
+        return values
       } else {
         if (hasAnyOf(schema)) {
           const items = getAnyOf(schema)
 
-          return { ...values, [uri]: transformValueIndexFor(items, document) }
+          values[uri] = transformValueIndexFor(items, document)
+
+          return values
         } else {
           if (hasOneOf(schema)) {
             const items = getOneOf(schema)
 
-            return { ...values, [uri]: transformValueIndexFor(items, document) }
+            values[uri] = transformValueIndexFor(items, document)
+
+            return values
           }
         }
       }
@@ -326,5 +350,7 @@ export default function transform (document, schema = {}, values = {}, params = 
   /*
    *  The hash should contain only strings
    */
-  return { ...values, [uri]: toString(document) }
+  values[uri] = toString(document)
+
+  return values
 }
