@@ -30,28 +30,11 @@ import {
   mapTransformNullByIndex,
   mapTransformArrayByIndex,
   mapTransformObjectByIndex,
+
   mapTransformByIndex,
   getTransformByIndex,
 
   mapTransformByKey,
-
-  renderStringForEnum,
-  renderStringForAnyOf,
-  renderStringForOneOf,
-  renderStringForAllOf,
-  renderString,
-
-  renderNumberForEnum,
-  renderNumberForAnyOf,
-  renderNumberForOneOf,
-  renderNumberForAllOf,
-  renderNumber,
-
-  renderBooleanForEnum,
-  renderBooleanForAnyOf,
-  renderBooleanForOneOf,
-  renderBooleanForAllOf,
-  renderBoolean,
 
   renderNullForEnum,
   renderNullForAnyOf,
@@ -59,17 +42,35 @@ import {
   renderNullForAllOf,
   renderNull,
 
+  renderBooleanForEnum,
+  renderBooleanForAnyOf,
+  renderBooleanForOneOf,
+  renderBooleanForAllOf,
+  renderBoolean,
+
+  renderObjectForEnum,
+  renderObjectForAnyOf,
+  renderObjectForOneOf,
+  renderObjectForAllOf,
+  renderObject,
+
   renderArrayForEnum,
   renderArrayForAnyOf,
   renderArrayForOneOf,
   renderArrayForAllOf,
   renderArray,
 
-  renderObjectForEnum,
-  renderObjectForAnyOf,
-  renderObjectForOneOf,
-  renderObjectForAllOf,
-  renderObject
+  renderNumberForEnum,
+  renderNumberForAnyOf,
+  renderNumberForOneOf,
+  renderNumberForAllOf,
+  renderNumber,
+
+  renderStringForEnum,
+  renderStringForAnyOf,
+  renderStringForOneOf,
+  renderStringForAllOf,
+  renderString
 } from './transform-schema'
 
 const log = debug('shinkansen-transmission:to-zashiki:root-schema')

@@ -9,10 +9,10 @@ import {
   isArraySchema,
   isObjectSchema,
 
-  getSelectedItems,
-
   getTitle,
   getDescription,
+
+  getSelectedItems,
 
   hasEnum,
   getEnum,
@@ -138,7 +138,729 @@ export function mapTransformByKey (rootSchema, values, { required = [], ...param
   }
 }
 
-function renderNullMetaForEnum (params, uri) {
+export function getTransformByKey (schema, rootSchema, values, params) {
+  /*
+   *  log('getTransformByKey')
+   */
+
+  if (hasEnum(schema)) {
+    return transformByKeyForEnum(schema, rootSchema, values, params)
+  } else {
+    if (hasAnyOf(schema)) {
+      return transformByKeyForAnyOf(schema, rootSchema, values, params)
+    } else {
+      if (hasOneOf(schema)) {
+        return transformByKeyForOneOf(schema, rootSchema, values, params)
+      }
+    }
+  }
+
+  return transformByKey(schema, rootSchema, values, getParamsByKey(schema, rootSchema, values, params))
+}
+
+export function getTransformByIndex (schema, rootSchema, values, params) {
+  /*
+   *  log('getTransformByIndex')
+   */
+
+  if (hasEnum(schema)) {
+    return transformByIndexForEnum(schema, rootSchema, values, params)
+  } else {
+    if (hasAnyOf(schema)) {
+      return transformByIndexForAnyOf(schema, rootSchema, values, params)
+    } else {
+      if (hasOneOf(schema)) {
+        return transformByIndexForOneOf(schema, rootSchema, values, params)
+      }
+    }
+  }
+
+  if (isArraySchema(schema)) { // getParamsByIndex
+    /*
+     *  log('isArraySchema')
+     */
+
+    return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
+  } else {
+    if (isObjectSchema(schema)) { // getParamsByIndex
+      /*
+       *  log('isObjectSchema')
+       */
+
+      return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
+    } else {
+      const {
+        parentUri = '#/'
+      } = params
+
+      if (Reflect.has(values, parentUri)) {
+        const value = Reflect.get(values, parentUri)
+
+        if (isPrimitive(value)) {
+          const {
+            index = 0
+          } = params
+
+          const uri = getUri(parentUri, index)
+
+          const meta = Object.assign(
+            getMetaProps(params, uri),
+            {
+              parentUri,
+              uri,
+              value: String(value)
+            }
+          )
+          const elements = {
+            field: Object.assign(
+              getElementsFieldProps(params, uri),
+              {
+                value: String(value)
+              }
+            )
+          }
+
+          return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
+        } else {
+          const {
+            index = 0
+          } = params
+
+          if (Reflect.has(value, index)) {
+            const v = Reflect.get(value, index)
+
+            const uri = getUri(parentUri, index)
+
+            const meta = Object.assign(
+              getMetaProps(params, uri),
+              {
+                parentUri,
+                uri,
+                value: String(v)
+              }
+            )
+            const elements = {
+              field: Object.assign(
+                getElementsFieldProps(params, uri),
+                {
+                  value: String(v)
+                }
+              )
+            }
+
+            return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
+          }
+        }
+      }
+    }
+  }
+
+  // getParamsByIndex
+
+  return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
+}
+
+export function getRenderParamsByKeyForEnum (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsByKeyForEnum')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(fieldParentUri)
+  const uri = getUri(fieldParentUri, fieldKey)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      selectedItems,
+      items,
+      name: fieldKey
+    }
+  )
+  const elements = {
+    enum: Object.assign(
+      getElementsFieldPropsForEnum(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsByKeyForAnyOf')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(fieldParentUri)
+  const uri = getUri(fieldParentUri, fieldKey)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      selectedItems,
+      items,
+      name: fieldKey
+    }
+  )
+  const elements = {
+    anyOf: Object.assign(
+      getElementsFieldPropsForAnyOf(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsByKeyForOneOf')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(fieldParentUri)
+  const uri = getUri(fieldParentUri, fieldKey)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      selectedItems,
+      items,
+      name: fieldKey
+    }
+  )
+  const elements = {
+    oneOf: Object.assign(
+      getElementsFieldPropsForOneOf(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
+  /*
+   *  log('getRenderParamsByKeyForAllOf')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(fieldParentUri)
+  const uri = getUri(fieldParentUri, fieldKey)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      name: fieldKey
+    }
+  )
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements: getElementsProps(params, uri)
+      }
+    }
+  )
+}
+
+export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
+  /*
+   *  log('getRenderParamsByKey')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(fieldParentUri)
+  const uri = getUri(fieldParentUri, fieldKey)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      name: fieldKey
+    }
+  )
+  const elements = {
+    field: getElementsFieldProps(params, uri)
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByIndexForEnum (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsByIndexForEnum')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(arrayParentUri)
+  const uri = getUri(arrayParentUri, arrayIndex)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      selectedItems,
+      items,
+      item: arrayIndex
+    }
+  )
+  const elements = {
+    enum: Object.assign(
+      getElementsFieldPropsForEnum(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsByIndexForAnyOf')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(arrayParentUri)
+  const uri = getUri(arrayParentUri, arrayIndex)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      selectedItems,
+      items,
+      item: arrayIndex
+    }
+  )
+  const elements = {
+    anyOf: Object.assign(
+      getElementsFieldPropsForAnyOf(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsByIndexForOneOf')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(arrayParentUri)
+  const uri = getUri(arrayParentUri, arrayIndex)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      selectedItems,
+      items,
+      item: arrayIndex
+    }
+  )
+  const elements = {
+    oneOf: Object.assign(
+      getElementsFieldPropsForOneOf(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
+  /*
+   *  log('getRenderParamsByIndexForAllOf')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(arrayParentUri)
+  const uri = getUri(arrayParentUri, arrayIndex)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      item: arrayIndex
+    }
+  )
+  const elements = {
+    field: getElementsFieldPropsForAllOf(params, uri)
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsByIndex (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
+  /*
+   *  log('getRenderParamsByIndex')
+   */
+  /*
+   *  Resolve `parentUri` and `uri`
+   */
+  const parentUri = normaliseUri(arrayParentUri)
+  const uri = getUri(arrayParentUri, arrayIndex)
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri,
+      uri,
+      item: arrayIndex
+    }
+  )
+  const elements = {
+    field: getElementsFieldProps(params, uri)
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsForEnum (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsForEnum')
+   */
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri: normaliseUri(parentUri),
+      uri,
+      selectedItems,
+      items
+    }
+  )
+  const elements = {
+    enum: Object.assign(
+      getElementsFieldPropsForEnum(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsForAnyOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsForAnyOf')
+   */
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri: normaliseUri(parentUri),
+      uri,
+      selectedItems,
+      items
+    }
+  )
+  const elements = {
+    anyOf: Object.assign(
+      getElementsFieldPropsForAnyOf(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsForOneOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
+  /*
+   *  log('getRenderParamsForOneOf')
+   */
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri: normaliseUri(parentUri),
+      uri,
+      selectedItems,
+      items
+    }
+  )
+  const elements = {
+    oneOf: Object.assign(
+      getElementsFieldPropsForOneOf(params, uri),
+      {
+        selectedItems,
+        items
+      }
+    )
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParamsForAllOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', ...params }) {
+  /*
+   *  log('getRenderParamsForAllOf')
+   */
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri: normaliseUri(parentUri),
+      uri
+    }
+  )
+  const elements = {
+    field: getElementsFieldPropsForAllOf(params, uri)
+  }
+
+  return Object.assign(
+    params,
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function getRenderParams (schema, rootSchema, values, { parentUri = '#', uri = '#/', fields = [], ...params }) {
+  /*
+   *  log('getRenderParams')
+   */
+
+  const meta = Object.assign(
+    getMetaProps(params, uri),
+    {
+      schema,
+      rootSchema,
+      parentUri: normaliseUri(parentUri),
+      uri
+    }
+  )
+  const elements = Object.assign(
+    getElementsFieldProps(params, uri),
+    {
+      fields
+    }
+  )
+
+  return Object.assign(
+    params,
+    {
+      fields // yep!
+    },
+    {
+      parentUri,
+      uri,
+      [uri]: {
+        meta,
+        elements
+      }
+    }
+  )
+}
+
+export function renderNullMetaForEnum (params, uri) {
   /*
    *  log('renderNullMetaForEnum')
    */
@@ -160,7 +882,7 @@ function renderNullMetaForEnum (params, uri) {
   )
 }
 
-function renderNullMetaForAnyOf (params, uri) {
+export function renderNullMetaForAnyOf (params, uri) {
   /*
    *  log('renderNullMetaForAnyOf')
    */
@@ -182,7 +904,7 @@ function renderNullMetaForAnyOf (params, uri) {
   )
 }
 
-function renderNullMetaForOneOf (params, uri) {
+export function renderNullMetaForOneOf (params, uri) {
   /*
    *  log('renderNullMetaForOneOf')
    */
@@ -204,7 +926,7 @@ function renderNullMetaForOneOf (params, uri) {
   )
 }
 
-function renderNullMetaForAllOf (schema, values, params, uri) {
+export function renderNullMetaForAllOf (schema, values, params, uri) {
   /*
    *  log('renderNullMetaForAllOf')
    */
@@ -242,7 +964,7 @@ function renderNullMetaForAllOf (schema, values, params, uri) {
   )
 }
 
-function renderNullMeta (schema, values, params, uri) {
+export function renderNullMeta (schema, values, params, uri) {
   /*
    *  log('renderNullMeta')
    */
@@ -280,7 +1002,7 @@ function renderNullMeta (schema, values, params, uri) {
   )
 }
 
-function getNullElementsFieldForEnum (field, params, uri) {
+export function getNullElementsFieldForEnum (field, params, uri) {
   /*
    *  log('getNullElementsFieldForEnum')
    */
@@ -296,7 +1018,7 @@ function getNullElementsFieldForEnum (field, params, uri) {
   )
 }
 
-function getNullElementsFieldForOneOf (field, params, uri) {
+export function getNullElementsFieldForOneOf (field, params, uri) {
   /*
    *  log('getNullElementsFieldForOneOf')
    */
@@ -312,7 +1034,7 @@ function getNullElementsFieldForOneOf (field, params, uri) {
   )
 }
 
-function getNullElementsFieldForAnyOf (field, params, uri) {
+export function getNullElementsFieldForAnyOf (field, params, uri) {
   /*
    *  log('getNullElementsFieldForAnyOf')
    */
@@ -328,7 +1050,7 @@ function getNullElementsFieldForAnyOf (field, params, uri) {
   )
 }
 
-function getNullElementsFieldForAllOf (field, schema, values, params, uri) {
+export function getNullElementsFieldForAllOf (field, schema, values, params, uri) {
   /*
    *  log('getNullElementsFieldForAllOf')
    */
@@ -364,7 +1086,7 @@ function getNullElementsFieldForAllOf (field, schema, values, params, uri) {
   )
 }
 
-function getNullElementsField (field, schema, values, params, uri) {
+export function getNullElementsField (field, schema, values, params, uri) {
   /*
    *  log('getNullElementsField')
    */
@@ -400,7 +1122,7 @@ function getNullElementsField (field, schema, values, params, uri) {
   )
 }
 
-function getNullElements (elements, schema) {
+export function getNullElements (elements, schema) {
   /*
    *  log('getNullElements')
    */
@@ -414,7 +1136,7 @@ function getNullElements (elements, schema) {
   )
 }
 
-function renderNullElementsForEnum (schema, params, uri) {
+export function renderNullElementsForEnum (schema, params, uri) {
   /*
    *  log('renderNullElementsForEnum')
    */
@@ -432,7 +1154,7 @@ function renderNullElementsForEnum (schema, params, uri) {
   )
 }
 
-function renderNullElementsForOneOf (schema, params, uri) {
+export function renderNullElementsForOneOf (schema, params, uri) {
   /*
    *  log('renderNullElementsForOneOf')
    */
@@ -450,7 +1172,7 @@ function renderNullElementsForOneOf (schema, params, uri) {
   )
 }
 
-function renderNullElementsForAnyOf (schema, params, uri) {
+export function renderNullElementsForAnyOf (schema, params, uri) {
   /*
    *  log('renderNullElementsForAnyOf')
    */
@@ -468,7 +1190,7 @@ function renderNullElementsForAnyOf (schema, params, uri) {
   )
 }
 
-function renderNullElementsForAllOf (schema, values, params, uri) {
+export function renderNullElementsForAllOf (schema, values, params, uri) {
   /*
    *  log('renderNullElementsForAllOf')
    */
@@ -486,7 +1208,7 @@ function renderNullElementsForAllOf (schema, values, params, uri) {
   )
 }
 
-function renderNullElements (schema, values, params, uri) {
+export function renderNullElements (schema, values, params, uri) {
   /*
    *  log('renderNullElements')
    */
@@ -504,7 +1226,7 @@ function renderNullElements (schema, values, params, uri) {
   )
 }
 
-function renderBooleanMetaForEnum (params, uri) {
+export function renderBooleanMetaForEnum (params, uri) {
   /*
    *  log('renderBooleanMetaForEnum')
    */
@@ -526,7 +1248,7 @@ function renderBooleanMetaForEnum (params, uri) {
   )
 }
 
-function renderBooleanMetaForAnyOf (params, uri) {
+export function renderBooleanMetaForAnyOf (params, uri) {
   /*
    *  log('renderBooleanMetaForAnyOf')
    */
@@ -548,7 +1270,7 @@ function renderBooleanMetaForAnyOf (params, uri) {
   )
 }
 
-function renderBooleanMetaForOneOf (params, uri) {
+export function renderBooleanMetaForOneOf (params, uri) {
   /*
    *  log('renderBooleanMetaForOneOf')
    */
@@ -570,7 +1292,7 @@ function renderBooleanMetaForOneOf (params, uri) {
   )
 }
 
-function renderBooleanMetaForAllOf (schema, values, params, uri) {
+export function renderBooleanMetaForAllOf (schema, values, params, uri) {
   /*
    *  log('renderBooleanMetaForAllOf')
    */
@@ -608,7 +1330,7 @@ function renderBooleanMetaForAllOf (schema, values, params, uri) {
   )
 }
 
-function renderBooleanMeta (schema, values, params, uri) {
+export function renderBooleanMeta (schema, values, params, uri) {
   /*
    *  log('renderBooleanMeta')
    */
@@ -646,7 +1368,7 @@ function renderBooleanMeta (schema, values, params, uri) {
   )
 }
 
-function getBooleanElementsFieldForEnum (field, params, uri) {
+export function getBooleanElementsFieldForEnum (field, params, uri) {
   /*
    *  log('getBooleanElementsFieldForEnum')
    */
@@ -662,7 +1384,7 @@ function getBooleanElementsFieldForEnum (field, params, uri) {
   )
 }
 
-function getBooleanElementsFieldForAnyOf (field, params, uri) {
+export function getBooleanElementsFieldForAnyOf (field, params, uri) {
   /*
    *  log('getBooleanElementsFieldForAnyOf')
    */
@@ -678,7 +1400,7 @@ function getBooleanElementsFieldForAnyOf (field, params, uri) {
   )
 }
 
-function getBooleanElementsFieldForOneOf (field, params, uri) {
+export function getBooleanElementsFieldForOneOf (field, params, uri) {
   /*
    *  log('getBooleanElementsFieldForOneOf')
    */
@@ -694,7 +1416,7 @@ function getBooleanElementsFieldForOneOf (field, params, uri) {
   )
 }
 
-function getBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
+export function getBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
   /*
    *  log('getBooleanElementsFieldForAllOf')
    */
@@ -730,7 +1452,7 @@ function getBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
   )
 }
 
-function getBooleanElementsField (field, schema, values, params, uri) {
+export function getBooleanElementsField (field, schema, values, params, uri) {
   /*
    *  log('getBooleanElementsField')
    */
@@ -766,7 +1488,7 @@ function getBooleanElementsField (field, schema, values, params, uri) {
   )
 }
 
-function getBooleanElements (elements, schema) {
+export function getBooleanElements (elements, schema) {
   /*
    *  log('getBooleanElements')
    */
@@ -780,7 +1502,7 @@ function getBooleanElements (elements, schema) {
   )
 }
 
-function renderBooleanElementsForEnum (schema, params, uri) {
+export function renderBooleanElementsForEnum (schema, params, uri) {
   /*
    *  log('renderBooleanElementsForEnum')
    */
@@ -798,7 +1520,7 @@ function renderBooleanElementsForEnum (schema, params, uri) {
   )
 }
 
-function renderBooleanElementsForAnyOf (schema, params, uri) {
+export function renderBooleanElementsForAnyOf (schema, params, uri) {
   /*
    *  log('renderBooleanElementsForAnyOf')
    */
@@ -816,7 +1538,7 @@ function renderBooleanElementsForAnyOf (schema, params, uri) {
   )
 }
 
-function renderBooleanElementsForOneOf (schema, params, uri) {
+export function renderBooleanElementsForOneOf (schema, params, uri) {
   /*
    *  log('renderBooleanElementsForOneOf')
    */
@@ -834,7 +1556,7 @@ function renderBooleanElementsForOneOf (schema, params, uri) {
   )
 }
 
-function renderBooleanElementsForAllOf (schema, values, params, uri) {
+export function renderBooleanElementsForAllOf (schema, values, params, uri) {
   /*
    *  log('renderBooleanElementsForAllOf')
    */
@@ -852,7 +1574,7 @@ function renderBooleanElementsForAllOf (schema, values, params, uri) {
   )
 }
 
-function renderBooleanElements (schema, values, params, uri) {
+export function renderBooleanElements (schema, values, params, uri) {
   /*
    *  log('renderBooleanElements')
    */
@@ -870,7 +1592,7 @@ function renderBooleanElements (schema, values, params, uri) {
   )
 }
 
-function renderObjectMetaForEnum (params, uri, minProperties, maxProperties) {
+export function renderObjectMetaForEnum (params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectMetaForEnum')
    */
@@ -894,7 +1616,7 @@ function renderObjectMetaForEnum (params, uri, minProperties, maxProperties) {
   )
 }
 
-function renderObjectMetaForAnyOf (params, uri, minProperties, maxProperties) {
+export function renderObjectMetaForAnyOf (params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectMetaForAnyOf')
    */
@@ -918,7 +1640,7 @@ function renderObjectMetaForAnyOf (params, uri, minProperties, maxProperties) {
   )
 }
 
-function renderObjectMetaForOneOf (params, uri, minProperties, maxProperties) {
+export function renderObjectMetaForOneOf (params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectMetaForOneOf')
    */
@@ -942,7 +1664,7 @@ function renderObjectMetaForOneOf (params, uri, minProperties, maxProperties) {
   )
 }
 
-function renderObjectMetaForAllOf (params, uri, minProperties, maxProperties) {
+export function renderObjectMetaForAllOf (params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectMetaForAllOf')
    */
@@ -966,7 +1688,7 @@ function renderObjectMetaForAllOf (params, uri, minProperties, maxProperties) {
   )
 }
 
-function renderObjectMeta (params, uri, minProperties, maxProperties) {
+export function renderObjectMeta (params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectMeta')
    */
@@ -990,7 +1712,7 @@ function renderObjectMeta (params, uri, minProperties, maxProperties) {
   )
 }
 
-function getObjectElementsFieldForEnum (field, params, uri, minProperties, maxProperties) {
+export function getObjectElementsFieldForEnum (field, params, uri, minProperties, maxProperties) {
   /*
    *  log('getObjectElementsFieldForEnum')
    */
@@ -1010,7 +1732,7 @@ function getObjectElementsFieldForEnum (field, params, uri, minProperties, maxPr
   )
 }
 
-function getObjectElementsFieldForAnyOf (field, params, uri, minProperties, maxProperties) {
+export function getObjectElementsFieldForAnyOf (field, params, uri, minProperties, maxProperties) {
   /*
    *  log('getObjectElementsFieldForAnyOf')
    */
@@ -1030,7 +1752,7 @@ function getObjectElementsFieldForAnyOf (field, params, uri, minProperties, maxP
   )
 }
 
-function getObjectElementsFieldForOneOf (field, params, uri, minProperties, maxProperties) {
+export function getObjectElementsFieldForOneOf (field, params, uri, minProperties, maxProperties) {
   /*
    *  log('getObjectElementsFieldForOneOf')
    */
@@ -1050,7 +1772,7 @@ function getObjectElementsFieldForOneOf (field, params, uri, minProperties, maxP
   )
 }
 
-function getObjectElementsFieldForAllOf (field, params, uri, minProperties, maxProperties) {
+export function getObjectElementsFieldForAllOf (field, params, uri, minProperties, maxProperties) {
   /*
    *  log('getObjectElementsFieldForAllOf')
    */
@@ -1070,7 +1792,7 @@ function getObjectElementsFieldForAllOf (field, params, uri, minProperties, maxP
   )
 }
 
-function getObjectElements (elements, schema) {
+export function getObjectElements (elements, schema) {
   /*
    *  log('getObjectElements')
    */
@@ -1084,7 +1806,7 @@ function getObjectElements (elements, schema) {
   )
 }
 
-function renderObjectElementsForEnum (schema, params, uri, minProperties, maxProperties) {
+export function renderObjectElementsForEnum (schema, params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectElementsForEnum')
    */
@@ -1102,7 +1824,7 @@ function renderObjectElementsForEnum (schema, params, uri, minProperties, maxPro
   )
 }
 
-function renderObjectElementsForAnyOf (schema, params, uri, minProperties, maxProperties) {
+export function renderObjectElementsForAnyOf (schema, params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectElementsForAnyOf')
    */
@@ -1120,7 +1842,7 @@ function renderObjectElementsForAnyOf (schema, params, uri, minProperties, maxPr
   )
 }
 
-function renderObjectElementsForOneOf (schema, params, uri, minProperties, maxProperties) {
+export function renderObjectElementsForOneOf (schema, params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectElementsForOneOf')
    */
@@ -1138,7 +1860,7 @@ function renderObjectElementsForOneOf (schema, params, uri, minProperties, maxPr
   )
 }
 
-function renderObjectElementsForAllOf (schema, params, uri, minProperties, maxProperties) {
+export function renderObjectElementsForAllOf (schema, params, uri, minProperties, maxProperties) {
   /*
    *  log('renderObjectElementsForAllOf')
    */
@@ -1156,7 +1878,7 @@ function renderObjectElementsForAllOf (schema, params, uri, minProperties, maxPr
   )
 }
 
-function renderObjectElements (schema, params) {
+export function renderObjectElements (schema, params) {
   /*
    *  log('renderObjectElements')
    */
@@ -1176,7 +1898,7 @@ function renderObjectElements (schema, params) {
   )
 }
 
-function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayMetaForEnum')
    */
@@ -1203,7 +1925,7 @@ function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniqueItems
   )
 }
 
-function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayMetaForAnyOf')
    */
@@ -1230,7 +1952,7 @@ function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUniqueItem
   )
 }
 
-function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayMetaForOneOf')
    */
@@ -1257,7 +1979,7 @@ function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUniqueItem
   )
 }
 
-function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayMetaForAllOf')
    */
@@ -1284,7 +2006,7 @@ function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUniqueItem
   )
 }
 
-function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayMeta')
    */
@@ -1311,7 +2033,7 @@ function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems, maxCo
   )
 }
 
-function getArrayElementsFieldForEnum (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function getArrayElementsFieldForEnum (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('getArrayElementsFieldForEnum')
    */
@@ -1334,7 +2056,7 @@ function getArrayElementsFieldForEnum (field, params, uri, minItems, maxItems, h
   )
 }
 
-function getArrayElementsFieldForAnyOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function getArrayElementsFieldForAnyOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('getArrayElementsFieldForAnyOf')
    */
@@ -1357,7 +2079,7 @@ function getArrayElementsFieldForAnyOf (field, params, uri, minItems, maxItems, 
   )
 }
 
-function getArrayElementsFieldForOneOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function getArrayElementsFieldForOneOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('getArrayElementsFieldForOneOf')
    */
@@ -1380,7 +2102,7 @@ function getArrayElementsFieldForOneOf (field, params, uri, minItems, maxItems, 
   )
 }
 
-function getArrayElementsFieldForAllOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function getArrayElementsFieldForAllOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('getArrayElementsFieldForAllOf')
    */
@@ -1403,7 +2125,7 @@ function getArrayElementsFieldForAllOf (field, params, uri, minItems, maxItems, 
   )
 }
 
-function getArrayElements (elements, schema) {
+export function getArrayElements (elements, schema) {
   /*
    *  log('getArrayElements')
    */
@@ -1417,7 +2139,7 @@ function getArrayElements (elements, schema) {
   )
 }
 
-function renderArrayElementsForEnum (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayElementsForEnum (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayElementsForEnum')
    */
@@ -1435,7 +2157,7 @@ function renderArrayElementsForEnum (schema, params, uri, minItems, maxItems, ha
   )
 }
 
-function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayElementsForAnyOf')
    */
@@ -1453,7 +2175,7 @@ function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxItems, h
   )
 }
 
-function renderArrayElementsForOneOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayElementsForOneOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayElementsForOneOf')
    */
@@ -1471,7 +2193,7 @@ function renderArrayElementsForOneOf (schema, params, uri, minItems, maxItems, h
   )
 }
 
-function renderArrayElementsForAllOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
+export function renderArrayElementsForAllOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
   /*
    *  log('renderArrayElementsForAllOf')
    */
@@ -1489,7 +2211,7 @@ function renderArrayElementsForAllOf (schema, params, uri, minItems, maxItems, h
   )
 }
 
-function renderArrayElements (schema, params) {
+export function renderArrayElements (schema, params) {
   /*
    *  log('renderArrayElements')
    */
@@ -1509,7 +2231,7 @@ function renderArrayElements (schema, params) {
   )
 }
 
-function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
+export function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
   /*
    *  log('renderNumberMetaForEnum')
    */
@@ -1539,7 +2261,7 @@ function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
   )
 }
 
-function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
+export function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
   /*
    *  log('renderNumberMetaForAnyOf')
    */
@@ -1569,7 +2291,7 @@ function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
   )
 }
 
-function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
+export function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
   /*
    *  log('renderNumberMetaForOneOf')
    */
@@ -1599,7 +2321,7 @@ function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
   )
 }
 
-function renderNumberMetaForAllOf (schema, values, params, uri, min, max, step) {
+export function renderNumberMetaForAllOf (schema, values, params, uri, min, max, step) {
   /*
    *  log('renderNumberMetaForAllOf')
    */
@@ -1646,7 +2368,7 @@ function renderNumberMetaForAllOf (schema, values, params, uri, min, max, step) 
   )
 }
 
-function renderNumberMeta (schema, values, params, uri, min, max, step) {
+export function renderNumberMeta (schema, values, params, uri, min, max, step) {
   /*
    *  log('renderNumberMeta')
    */
@@ -1693,7 +2415,7 @@ function renderNumberMeta (schema, values, params, uri, min, max, step) {
   )
 }
 
-function getNumberElementsFieldForEnum (field, params, uri, min, max, step) {
+export function getNumberElementsFieldForEnum (field, params, uri, min, max, step) {
   /*
    *  log('getNumberElementsFieldForEnum')
    */
@@ -1714,7 +2436,7 @@ function getNumberElementsFieldForEnum (field, params, uri, min, max, step) {
   )
 }
 
-function getNumberElementsFieldForAnyOf (field, params, uri, min, max, step) {
+export function getNumberElementsFieldForAnyOf (field, params, uri, min, max, step) {
   /*
    *  log('getNumberElementsFieldForAnyOf')
    */
@@ -1735,7 +2457,7 @@ function getNumberElementsFieldForAnyOf (field, params, uri, min, max, step) {
   )
 }
 
-function getNumberElementsFieldForOneOf (field, params, uri, min, max, step) {
+export function getNumberElementsFieldForOneOf (field, params, uri, min, max, step) {
   /*
    *  log('getNumberElementsFieldForOneOf')
    */
@@ -1756,7 +2478,7 @@ function getNumberElementsFieldForOneOf (field, params, uri, min, max, step) {
   )
 }
 
-function getNumberElementsFieldForAllOf (field, schema, values, params, uri, min, max, step) {
+export function getNumberElementsFieldForAllOf (field, schema, values, params, uri, min, max, step) {
   /*
    *  log('getNumberElementsFieldForAllOf')
    */
@@ -1795,7 +2517,7 @@ function getNumberElementsFieldForAllOf (field, schema, values, params, uri, min
   )
 }
 
-function getNumberElementsField (field, schema, values, params, uri, min, max, step) {
+export function getNumberElementsField (field, schema, values, params, uri, min, max, step) {
   /*
    *  log('getNumberElementsField')
    */
@@ -1834,7 +2556,7 @@ function getNumberElementsField (field, schema, values, params, uri, min, max, s
   )
 }
 
-function getNumberElements (elements, schema) {
+export function getNumberElements (elements, schema) {
   /*
    *  log('getNumberElements')
    */
@@ -1848,7 +2570,7 @@ function getNumberElements (elements, schema) {
   )
 }
 
-function renderNumberElementsForEnum (schema, params, uri, min, max, step) {
+export function renderNumberElementsForEnum (schema, params, uri, min, max, step) {
   /*
    *  log('renderNumberElementsForEnum')
    */
@@ -1866,7 +2588,7 @@ function renderNumberElementsForEnum (schema, params, uri, min, max, step) {
   )
 }
 
-function renderNumberElementsForAnyOf (schema, params, uri, min, max, step) {
+export function renderNumberElementsForAnyOf (schema, params, uri, min, max, step) {
   /*
    *  log('renderNumberElementsForAnyOf')
    */
@@ -1884,7 +2606,7 @@ function renderNumberElementsForAnyOf (schema, params, uri, min, max, step) {
   )
 }
 
-function renderNumberElementsForOneOf (schema, params, uri, min, max, step) {
+export function renderNumberElementsForOneOf (schema, params, uri, min, max, step) {
   /*
    *  log('renderNumberElementsForOneOf')
    */
@@ -1902,7 +2624,7 @@ function renderNumberElementsForOneOf (schema, params, uri, min, max, step) {
   )
 }
 
-function renderNumberElementsForAllOf (schema, values, params, uri, min, max, step) {
+export function renderNumberElementsForAllOf (schema, values, params, uri, min, max, step) {
   /*
    *  log('renderNumberElementsForAllOf')
    */
@@ -1920,7 +2642,7 @@ function renderNumberElementsForAllOf (schema, values, params, uri, min, max, st
   )
 }
 
-function renderNumberElements (schema, values, params, uri, min, max, step) {
+export function renderNumberElements (schema, values, params, uri, min, max, step) {
   /*
    *  log('renderNumberElements')
    */
@@ -1938,7 +2660,7 @@ function renderNumberElements (schema, values, params, uri, min, max, step) {
   )
 }
 
-function renderStringMetaForEnum (params, uri, minLength, maxLength, pattern) {
+export function renderStringMetaForEnum (params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringMetaForEnum')
    */
@@ -1963,7 +2685,7 @@ function renderStringMetaForEnum (params, uri, minLength, maxLength, pattern) {
   )
 }
 
-function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pattern) {
+export function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringMetaForAnyOf')
    */
@@ -1988,7 +2710,7 @@ function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pattern) {
   )
 }
 
-function renderStringMetaForOneOf (params, uri, minLength, maxLength, pattern) {
+export function renderStringMetaForOneOf (params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringMetaForOneOf')
    */
@@ -2013,7 +2735,7 @@ function renderStringMetaForOneOf (params, uri, minLength, maxLength, pattern) {
   )
 }
 
-function renderStringMetaForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
+export function renderStringMetaForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringMetaForAllOf')
    */
@@ -2054,7 +2776,7 @@ function renderStringMetaForAllOf (schema, values, params, uri, minLength, maxLe
   )
 }
 
-function renderStringMeta (schema, values, params, uri, minLength, maxLength, pattern) {
+export function renderStringMeta (schema, values, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringMeta')
    */
@@ -2095,7 +2817,7 @@ function renderStringMeta (schema, values, params, uri, minLength, maxLength, pa
   )
 }
 
-function getStringElementsFieldForEnum (field, params, uri, minLength, maxLength, pattern) {
+export function getStringElementsFieldForEnum (field, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('getStringElementsFieldForEnum')
    */
@@ -2116,7 +2838,7 @@ function getStringElementsFieldForEnum (field, params, uri, minLength, maxLength
   )
 }
 
-function getStringElementsFieldForAnyOf (field, params, uri, minLength, maxLength, pattern) {
+export function getStringElementsFieldForAnyOf (field, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('getStringElementsFieldForAnyOf')
    */
@@ -2136,7 +2858,7 @@ function getStringElementsFieldForAnyOf (field, params, uri, minLength, maxLengt
   )
 }
 
-function getStringElementsFieldForOneOf (field, params, uri, minLength, maxLength, pattern) {
+export function getStringElementsFieldForOneOf (field, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('getStringElementsFieldForOneOf')
    */
@@ -2157,7 +2879,7 @@ function getStringElementsFieldForOneOf (field, params, uri, minLength, maxLengt
   )
 }
 
-function getStringElementsFieldForAllOf (field, schema, values, params, uri, minLength, maxLength, pattern) {
+export function getStringElementsFieldForAllOf (field, schema, values, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('getStringElementsFieldForAllOf')
    */
@@ -2196,7 +2918,7 @@ function getStringElementsFieldForAllOf (field, schema, values, params, uri, min
   )
 }
 
-function getStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
+export function getStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('getStringElementsField')
    */
@@ -2235,7 +2957,7 @@ function getStringElementsField (field, schema, values, params, uri, minLength, 
   )
 }
 
-function getStringElements (elements, schema) {
+export function getStringElements (elements, schema) {
   /*
    *  log('getStringElements')
    */
@@ -2249,7 +2971,7 @@ function getStringElements (elements, schema) {
   )
 }
 
-function renderStringElementsForEnum (schema, params, uri, minLength, maxLength, pattern) {
+export function renderStringElementsForEnum (schema, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringElementsForEnum')
    */
@@ -2267,7 +2989,7 @@ function renderStringElementsForEnum (schema, params, uri, minLength, maxLength,
   )
 }
 
-function renderStringElementsForAnyOf (schema, params, uri, minLength, maxLength, pattern) {
+export function renderStringElementsForAnyOf (schema, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringElementsForAnyOf')
    */
@@ -2285,7 +3007,7 @@ function renderStringElementsForAnyOf (schema, params, uri, minLength, maxLength
   )
 }
 
-function renderStringElementsForOneOf (schema, params, uri, minLength, maxLength, pattern) {
+export function renderStringElementsForOneOf (schema, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringElementsForOneOf')
    */
@@ -2303,7 +3025,7 @@ function renderStringElementsForOneOf (schema, params, uri, minLength, maxLength
   )
 }
 
-function renderStringElementsForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
+export function renderStringElementsForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringElementsForAllOf')
    */
@@ -2321,7 +3043,7 @@ function renderStringElementsForAllOf (schema, values, params, uri, minLength, m
   )
 }
 
-function renderStringElements (schema, values, params, uri, minLength, maxLength, pattern) {
+export function renderStringElements (schema, values, params, uri, minLength, maxLength, pattern) {
   /*
    *  log('renderStringElements')
    */
@@ -3034,606 +3756,6 @@ export function renderString (schema, values, params) {
     meta,
     elements
   }
-}
-
-export function getRenderParamsByKeyForEnum (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsByKeyForEnum')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      name: fieldKey
-    }
-  )
-  const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsByKeyForAnyOf')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      name: fieldKey
-    }
-  )
-  const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsByKeyForOneOf')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      name: fieldKey
-    }
-  )
-  const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
-  /*
-   *  log('getRenderParamsByKeyForAllOf')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      name: fieldKey
-    }
-  )
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements: getElementsProps(params, uri)
-      }
-    }
-  )
-}
-
-export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
-  /*
-   *  log('getRenderParamsByKey')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(fieldParentUri)
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      name: fieldKey
-    }
-  )
-  const elements = {
-    field: getElementsFieldProps(params, uri)
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByIndexForEnum (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsByIndexForEnum')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      item: arrayIndex
-    }
-  )
-  const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsByIndexForAnyOf')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      item: arrayIndex
-    }
-  )
-  const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsByIndexForOneOf')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      selectedItems,
-      items,
-      item: arrayIndex
-    }
-  )
-  const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
-  /*
-   *  log('getRenderParamsByIndexForAllOf')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      item: arrayIndex
-    }
-  )
-  const elements = {
-    field: getElementsFieldPropsForAllOf(params, uri)
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsByIndex (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
-  /*
-   *  log('getRenderParamsByIndex')
-   */
-  /*
-   *  Resolve `parentUri` and `uri`
-   */
-  const parentUri = normaliseUri(arrayParentUri)
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri,
-      uri,
-      item: arrayIndex
-    }
-  )
-  const elements = {
-    field: getElementsFieldProps(params, uri)
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsForEnum (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsForEnum')
-   */
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      selectedItems,
-      items
-    }
-  )
-  const elements = {
-    enum: Object.assign(
-      getElementsFieldPropsForEnum(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsForAnyOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsForAnyOf')
-   */
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      selectedItems,
-      items
-    }
-  )
-  const elements = {
-    anyOf: Object.assign(
-      getElementsFieldPropsForAnyOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsForOneOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
-  /*
-   *  log('getRenderParamsForOneOf')
-   */
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri,
-      selectedItems,
-      items
-    }
-  )
-  const elements = {
-    oneOf: Object.assign(
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        selectedItems,
-        items
-      }
-    )
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParamsForAllOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', ...params }) {
-  /*
-   *  log('getRenderParamsForAllOf')
-   */
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri
-    }
-  )
-  const elements = {
-    field: getElementsFieldPropsForAllOf(params, uri)
-  }
-
-  return Object.assign(
-    params,
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
-}
-
-export function getRenderParams (schema, rootSchema, values, { parentUri = '#', uri = '#/', fields = [], ...params }) {
-  /*
-   *  log('getRenderParams')
-   */
-
-  const meta = Object.assign(
-    getMetaProps(params, uri),
-    {
-      schema,
-      rootSchema,
-      parentUri: normaliseUri(parentUri),
-      uri
-    }
-  )
-  const elements = Object.assign(
-    getElementsFieldProps(params, uri),
-    {
-      fields
-    }
-  )
-
-  return Object.assign(
-    params,
-    {
-      fields // yep!
-    },
-    {
-      parentUri,
-      uri,
-      [uri]: {
-        meta,
-        elements
-      }
-    }
-  )
 }
 
 /*
@@ -5695,128 +5817,6 @@ export function transformObject (schema, rootSchema, values, params) {
   )
 
   return renderObject(schema, values, getRenderParams(schema, rootSchema, values, Object.assign(params, { fields })))
-}
-
-export function getTransformByKey (schema, rootSchema, values, params) {
-  /*
-   *  log('getTransformByKey')
-   */
-
-  if (hasEnum(schema)) {
-    return transformByKeyForEnum(schema, rootSchema, values, params)
-  } else {
-    if (hasAnyOf(schema)) {
-      return transformByKeyForAnyOf(schema, rootSchema, values, params)
-    } else {
-      if (hasOneOf(schema)) {
-        return transformByKeyForOneOf(schema, rootSchema, values, params)
-      }
-    }
-  }
-
-  return transformByKey(schema, rootSchema, values, getParamsByKey(schema, rootSchema, values, params))
-}
-
-export function getTransformByIndex (schema, rootSchema, values, params) {
-  /*
-   *  log('getTransformByIndex')
-   */
-
-  if (hasEnum(schema)) {
-    return transformByIndexForEnum(schema, rootSchema, values, params)
-  } else {
-    if (hasAnyOf(schema)) {
-      return transformByIndexForAnyOf(schema, rootSchema, values, params)
-    } else {
-      if (hasOneOf(schema)) {
-        return transformByIndexForOneOf(schema, rootSchema, values, params)
-      }
-    }
-  }
-
-  if (isArraySchema(schema)) { // getParamsByIndex
-    /*
-     *  log('isArraySchema')
-     */
-
-    return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
-  } else {
-    if (isObjectSchema(schema)) { // getParamsByIndex
-      /*
-       *  log('isObjectSchema')
-       */
-
-      return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
-    } else {
-      const {
-        parentUri = '#/'
-      } = params
-
-      if (Reflect.has(values, parentUri)) {
-        const value = Reflect.get(values, parentUri)
-
-        if (isPrimitive(value)) {
-          const {
-            index = 0
-          } = params
-
-          const uri = getUri(parentUri, index)
-
-          const meta = Object.assign(
-            getMetaProps(params, uri),
-            {
-              parentUri,
-              uri,
-              value: String(value)
-            }
-          )
-          const elements = {
-            field: Object.assign(
-              getElementsFieldProps(params, uri),
-              {
-                value: String(value)
-              }
-            )
-          }
-
-          return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
-        } else {
-          const {
-            index = 0
-          } = params
-
-          if (Reflect.has(value, index)) {
-            const v = Reflect.get(value, index)
-
-            const uri = getUri(parentUri, index)
-
-            const meta = Object.assign(
-              getMetaProps(params, uri),
-              {
-                parentUri,
-                uri,
-                value: String(v)
-              }
-            )
-            const elements = {
-              field: Object.assign(
-                getElementsFieldProps(params, uri),
-                {
-                  value: String(v)
-                }
-              )
-            }
-
-            return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
-          }
-        }
-      }
-    }
-  }
-
-  // getParamsByIndex
-
-  return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
 }
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
