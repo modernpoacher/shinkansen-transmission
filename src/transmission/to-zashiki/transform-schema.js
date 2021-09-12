@@ -1104,9 +1104,16 @@ export function renderBooleanMetaForEnum (params, uri) {
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return Object.assign({ uri, type: 'boolean' },
-    isParentUri(parentUri, uri) ? { parentUri } : {},
-    metaProps)
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'boolean'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaProps
+    )
+  )
 }
 
 export function renderBooleanMetaForAnyOf (params, uri) {
@@ -1119,9 +1126,16 @@ export function renderBooleanMetaForAnyOf (params, uri) {
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return Object.assign({ uri, type: 'boolean' },
-    isParentUri(parentUri, uri) ? { parentUri } : {},
-    metaProps)
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'boolean'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaProps
+    )
+  )
 }
 
 export function renderBooleanMetaForOneOf (params, uri) {
@@ -1134,9 +1148,16 @@ export function renderBooleanMetaForOneOf (params, uri) {
     ...metaProps
   } = getMetaProps(params, uri)
 
-  return Object.assign({ uri, type: 'boolean' },
-    isParentUri(parentUri, uri) ? { parentUri } : {},
-    metaProps)
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'boolean'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaProps
+    )
+  )
 }
 
 export function renderBooleanMetaForAllOf (schema, values, params, uri) {
@@ -1162,12 +1183,19 @@ export function renderBooleanMetaForAllOf (schema, values, params, uri) {
     } = params)
   }
 
-  return Object.assign({ uri, type: 'boolean' },
-    isParentUri(parentUri, uri) ? { parentUri } : {},
-    metaDefaultValue,
-    metaValue,
-    metaProps,
-    isArray(selectedItems) ? { selectedItems } : {})
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'boolean'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaDefaultValue,
+      metaValue,
+      metaProps,
+      isArray(selectedItems) ? { selectedItems } : {}
+    )
+  )
 }
 
 export function renderBooleanMeta (schema, values, params, uri) {
@@ -1193,12 +1221,19 @@ export function renderBooleanMeta (schema, values, params, uri) {
     } = params)
   }
 
-  return Object.assign({ uri, type: 'boolean' },
-    isParentUri(parentUri, uri) ? { parentUri } : {},
-    metaDefaultValue,
-    metaValue,
-    metaProps,
-    isArray(selectedItems) ? { selectedItems } : {})
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'boolean'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaDefaultValue,
+      metaValue,
+      metaProps,
+      isArray(selectedItems) ? { selectedItems } : {}
+    )
+  )
 }
 
 export function getBooleanElementsFieldForEnum (field, params, uri) {
