@@ -1,14 +1,18 @@
-.DS_Store
-
-**/node_modules/**/*
-**/npm-debug.log
-
+# Node
 node_modules
-coverage
-.nyc_output
+
+# Mac
+.DS_Store
 
 # User-defined NPM configuration
 .npmrc
+.npmignore
 
 # User-defined NVM configuration
 .nvmrc
+
+# Deps
+.depsrc
+
+coverage
+.nyc_output
