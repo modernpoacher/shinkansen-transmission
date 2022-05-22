@@ -29,7 +29,7 @@
     "babel:watch": "npm run babel -- -w",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "test": "NODE_ENV=test mocha -r @babel/register test --recursive --verbose",
+    "test": "cross-env NODE_ENV=test mocha -r @babel/register test --recursive --verbose",
     "coverage": "nyc --reporter=lcov npm run test",
     "pre-commit": "npm run lint && npm run coverage && npm run build && git add lib"
   },
