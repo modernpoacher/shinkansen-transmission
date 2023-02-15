@@ -1,1 +1,1 @@
-export default from './transform-root-schema'
+export { default } from './transform-root-schema'
