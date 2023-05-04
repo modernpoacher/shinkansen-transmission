@@ -1,7 +1,6 @@
 {
   "name": "shinkansen-transmission",
   "version": "2.2.2",
-  "type": "module",
   "description": "Shinkansen Transmission",
   "keywords": [
     "Shinkansen",
@@ -11,6 +10,7 @@
     "Karakuri"
   ],
   "main": "./src/index.cjs",
+  "type": "module",
   "author": "Jonathan Perry for Modern Poacher Limited <modernpoacher@modernpoacher.com>",
   "license": "MIT",
   "engines": {
