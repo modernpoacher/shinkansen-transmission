@@ -16,11 +16,11 @@ import {
   hasOneOf,
   getOneOf,
   getUri
-} from '#transmission/common'
+} from 'shinkansen-transmission/transmission/common'
 
-const log = debug('shinkansen-transmission:from-document-to-hash')
+const log = debug('shinkansen-transmission/from-document-to-hash')
 
-log('`shinkansen-transmission` is awake')
+log('`shinkansen` is awake')
 
 function findByKey (parentUri, uri) {
   /*

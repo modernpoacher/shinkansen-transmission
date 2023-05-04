@@ -52,11 +52,11 @@ import {
   getElementsFieldPropsForAllOf,
   getElementsFieldProps,
   getElementsFieldValue
-} from '#transmission/common'
+} from 'shinkansen-transmission/transmission/common'
 
-const log = debug('shinkansen-transmission:to-zashiki:schema')
+const log = debug('shinkansen-transmission/to-zashiki/schema')
 
-log('`shinkansen-transmission` is awake')
+log('`shinkansen` is awake')
 
 export function mapTransformNullByIndex (rootSchema, values, params) {
   /*

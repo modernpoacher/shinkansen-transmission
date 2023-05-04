@@ -2,9 +2,9 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import transform from '#transmission/from-document-to-hash'
+import transform from 'shinkansen-transmission/transmission/from-document-to-hash'
 
-describe('#transmission/from-document-to-hash', () => {
+describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
   before(() => {
     const {
       env: {

@@ -56,15 +56,6 @@
     "nyc": "^15.1.0",
     "rimraf": "^5.0.0"
   },
-  "imports": {
-    "#transmission/common": "./src/transmission/common/index.mjs",
-    "#transmission/from-document-to-hash": "./src/transmission/from-document-to-hash/index.mjs",
-    "#transmission/from-hash-to-document": "./src/transmission/from-hash-to-document/index.mjs",
-    "#transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",
-    "#transmission/to-zashiki/transform-schema": "./src/transmission/to-zashiki/transform-schema.mjs",
-    "#transmission/to-zashiki": "./src/transmission/to-zashiki/index.mjs",
-    "#transmission": "./src/transmission/index.mjs"
-  },
   "exports": {
     ".": {
       "require": "./src/index.cjs",
@@ -73,6 +64,8 @@
     "./transmission/common": "./src/transmission/common/index.mjs",
     "./transmission/from-document-to-hash": "./src/transmission/from-document-to-hash/index.mjs",
     "./transmission/from-hash-to-document": "./src/transmission/from-hash-to-document/index.mjs",
+    "./transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",
+    "./transmission/to-zashiki/transform-schema": "./src/transmission/to-zashiki/transform-schema.mjs",
     "./transmission/to-zashiki": "./src/transmission/to-zashiki/index.mjs",
     "./transmission": "./src/transmission/index.mjs"
   }

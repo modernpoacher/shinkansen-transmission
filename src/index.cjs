@@ -1,6 +1,17 @@
-require('@babel/register')
+require('@babel/register')({ ignore: [/node_modules/], configFile: require.resolve('../babel.config.cjs') })
 
-module.exports.common = require('#transmission/common')
-module.exports.fromDocumentToHash = require('#transmission/from-document-to-hash')
-module.exports.fromHashToDocument = require('#transmission/from-hash-to-document')
-module.exports.toZashiki = require('#transmission/to-zashiki')
+const debug = require('debug')
+
+const log = debug('shinkansen-transmission')
+
+log('`shinkansen` is awake')
+
+const common = require('./transmission/common/index.mjs')
+const { default: fromDocumentToHash } = require('./transmission/from-document-to-hash/index.mjs')
+const { default: fromHashToDocument } = require('./transmission/from-hash-to-document/index.mjs')
+const { default: toZashiki } = require('./transmission/to-zashiki/index.mjs')
+
+module.exports.common = common
+module.exports.fromDocumentToHash = fromDocumentToHash
+module.exports.fromHashToDocument = fromHashToDocument
+module.exports.toZashiki = toZashiki

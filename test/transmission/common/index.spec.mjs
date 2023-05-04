@@ -49,9 +49,9 @@ import {
   getAllOf,
   getUri,
   getPattern
-} from '#transmission/common'
+} from 'shinkansen-transmission/transmission/common'
 
-describe('#transmission/common', () => {
+describe('shinkansen-transmission/transmission/common', () => {
   before(() => {
     const {
       env: {

@@ -1,8 +1,8 @@
-/*
- *  import debug from 'debug'
- *
- *  const log = debug('shinkansen-transmission:common')
- */
+import debug from 'debug'
+
+const log = debug('shinkansen-transmission/transmission/common')
+
+log('`shinkansen` is awake')
 
 export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 

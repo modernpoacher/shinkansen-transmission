@@ -113,9 +113,9 @@ import transform, {
 
   transformByKey,
   transformByIndex
-} from '#transmission/to-zashiki/transform-schema'
+} from 'shinkansen-transmission/transmission/to-zashiki/transform-schema'
 
-describe('#transmission/to-zashiki', () => {
+describe('shinkansen-transmission/transmission/to-zashiki', () => {
   before(() => {
     const {
       env: {

@@ -2,9 +2,9 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import transform from '#transmission/to-zashiki/transform-root-schema'
+import transform from 'shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
 
-describe('#transmission/to-zashiki/transform-root-schema', () => {
+describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema', () => {
   before(() => {
     const {
       env: {

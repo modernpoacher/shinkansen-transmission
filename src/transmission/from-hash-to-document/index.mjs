@@ -14,11 +14,11 @@ import {
   hasOneOf,
   getOneOf,
   getUri
-} from '#transmission/common'
+} from 'shinkansen-transmission/transmission/common'
 
-const log = debug('shinkansen-transmission:from-hash-to-document')
+const log = debug('shinkansen-transmission/from-hash-to-document')
 
-log('`shinkansen-transmission` is awake')
+log('`shinkansen` is awake')
 
 export function toNull (v) {
   if (v === null || v === 'null') return null

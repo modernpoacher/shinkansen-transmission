@@ -21,7 +21,7 @@ import {
   getElementsFieldPropsForAnyOf,
   getElementsFieldPropsForOneOf,
   getElementsFieldPropsForAllOf
-} from '#transmission/common'
+} from 'shinkansen-transmission/transmission/common'
 
 import {
   mapTransformStringByIndex,
@@ -73,9 +73,9 @@ import {
   renderString
 } from './transform-schema.mjs'
 
-const log = debug('shinkansen-transmission:to-zashiki:root-schema')
+const log = debug('shinkansen-transmission/to-zashiki:root-schema')
 
-log('`shinkansen-transmission` is awake')
+log('`shinkansen` is awake')
 
 export function getRenderParamsForEnum (rootSchema, values, params) {
   /*

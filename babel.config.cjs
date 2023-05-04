@@ -43,13 +43,14 @@ const plugins = [
   [
     'module-resolver', {
       alias: {
-        '#transmission/common': './src/transmission/common/index.mjs',
-        '#transmission/from-document-to-hash': './src/transmission/from-document-to-hash/index.mjs',
-        '#transmission/from-hash-to-document': './src/transmission/from-hash-to-document/index.mjs',
-        '#transmission/to-zashiki/transform-root-schema': './src/transmission/to-zashiki/transform-root-schema.mjs',
-        '#transmission/to-zashiki/transform-schema': './src/transmission/to-zashiki/transform-schema.mjs',
-        '#transmission/to-zashiki': './src/transmission/to-zashiki/index.mjs',
-        '#transmission': './src/transmission/index.mjs'
+        'shinkansen-transmission/transmission/common': './src/transmission/common/index.mjs',
+        'shinkansen-transmission/transmission/from-document-to-hash': './src/transmission/from-document-to-hash/index.mjs',
+        'shinkansen-transmission/transmission/from-hash-to-document': './src/transmission/from-hash-to-document/index.mjs',
+        'shinkansen-transmission/transmission/to-zashiki/transform-root-schema': './src/transmission/to-zashiki/transform-root-schema.mjs',
+        'shinkansen-transmission/transmission/to-zashiki/transform-schema': './src/transmission/to-zashiki/transform-schema.mjs',
+        'shinkansen-transmission/transmission/to-zashiki': './src/transmission/to-zashiki/index.mjs',
+        'shinkansen-transmission/transmission': './src/transmission/index.mjs',
+        'shinkansen-transmission': './src/index.cjs'
       }
     }
   ]
