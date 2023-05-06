@@ -27,7 +27,8 @@
     "pretest": "npm run nvm",
     "test": "cross-env NODE_ENV=test mocha test --recursive --verbose",
     "nvm": "bash nvm.sh",
-    "coverage": "nyc --reporter=lcov npm run test"
+    "coverage": "nyc --reporter=lcov npm run test",
+    "prepare": "husky install"
   },
   "dependencies": {
     "debug": "^4.3.4",
