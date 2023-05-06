@@ -27,7 +27,7 @@
     "pretest": "npm run nvm",
     "test": "cross-env NODE_ENV=test mocha test --recursive --verbose",
     "nvm": "bash nvm.sh",
-    "coverage": "nyc --reporter=lcov npm run test",
+    "coverage": "c8 --reporter html npm run test",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -44,6 +44,7 @@
     "@modernpoacher/hooks": "^1.0.395",
     "babel-loader": "^9.1.2",
     "babel-plugin-module-resolver": "^5.0.0",
+    "c8": "^7.13.0",
     "chai": "^4.3.7",
     "core-js": "^3.30.2",
     "cross-env": "^7.0.3",
@@ -55,7 +56,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "mocha": "^10.2.0",
-    "nyc": "^15.1.0",
     "rimraf": "^5.0.0"
   },
   "exports": {
