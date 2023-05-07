@@ -21,7 +21,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
        *  Number
        */
       describe('Transforming `number` type schemas', () => {
-        it('transforms `number` type with `enum`', () => {
+        it('transforms `number` type schemas with `enum`', () => {
           const schema = {
             type: 'number',
             enum: [
@@ -70,7 +70,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        it('transforms `number` type with `anyOf`', () => {
+        it('transforms `number` type schemas with `anyOf`', () => {
           const schema = {
             type: 'number',
             anyOf: [
@@ -227,7 +227,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        it('transforms `number` type with `oneOf`', () => {
+        it('transforms `number` type schemas with `oneOf`', () => {
           const schema = {
             type: 'number',
             oneOf: [
@@ -384,7 +384,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        it('transforms `number` type with `allOf`', () => {
+        it('transforms `number` type schemas with `allOf`', () => {
           const schema = {
             type: 'number',
             allOf: [
@@ -427,7 +427,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        it('transforms `number` type', () => {
+        it('transforms `number` type schemas', () => {
           const schema = { type: 'number' }
 
           const rootSchema = undefined

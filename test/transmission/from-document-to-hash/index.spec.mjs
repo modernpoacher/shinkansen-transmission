@@ -798,7 +798,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `string` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `string` type schemas with `enum`', () => {
         const document = [['a', 'b', 'c']]
 
         const schema = {
@@ -826,7 +826,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `number` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `number` type schemas with `enum`', () => {
         const document = [[1, 2, 3]]
 
         const schema = {
@@ -854,7 +854,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
         const document = [[true, false, true]]
 
         const schema = {
@@ -881,7 +881,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
         const document = [[null, null, null]]
 
         const schema = {
@@ -1281,7 +1281,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `string` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `string` type schemas with `enum`', () => {
         const document = [['a', 'b', 'c']]
 
         const schema = {
@@ -1307,7 +1307,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `number` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `number` type schemas with `enum`', () => {
         const document = [[1, 2, 3]]
 
         const schema = {
@@ -1333,7 +1333,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
         const document = [[true, false, true]]
 
         const schema = {
@@ -1358,7 +1358,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(values)
       })
 
-      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type with `enum`', () => {
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
         const document = [[null, null, null]]
 
         const schema = {
