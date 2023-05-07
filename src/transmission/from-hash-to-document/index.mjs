@@ -52,6 +52,8 @@ export function toNumber (v) {
   throw new Error('Invalid `number`')
 }
 
+const handleError = ({ message = 'No error message defined' }) => { log(message) }
+
 export const transformValue = (schema) => (
   isObject(schema)
     ? isConstValue(schema)
@@ -78,8 +80,8 @@ export function transformValueFor (value, array) {
        */
       return transformValue(v)
     }
-  } catch ({ message = 'No error message defined' }) {
-    log(message)
+  } catch (e) {
+    handleError(de)
   }
 
   /*
@@ -204,8 +206,6 @@ export function transformItemsObjectFor (values, items = {}, parentUri = '#', ur
       }, [])
   )
 }
-
-const handleError = ({ message = 'No error message defined' }) => log(message)
 
 // https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformObjectSchemaNull (values, schema, { uri: parentUri, key: fieldKey }, uri = getUri(parentUri, fieldKey)) {
