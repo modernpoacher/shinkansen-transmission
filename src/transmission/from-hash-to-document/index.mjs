@@ -3,6 +3,7 @@ import debug from 'debug'
 import {
   isArray,
   isObject,
+  isPrimitive,
   isConstValue,
   toConstValue,
   isDefaultValue,
@@ -43,9 +44,15 @@ export function toString (v) {
 
 export function toNumber (v) {
   if (typeof v === 'number') return v
+  if (typeof v === 'boolean') return Number(v)
 
-  if (v) {
-    const n = Number(v) // +v // unary operator
+  if (v) { // excludes zero-length strings
+    const n = (
+      isPrimitive(v) // excludes objects and arrays
+        ? Number(v) // +v // unary operator
+        : NaN
+    )
+
     if (!isNaN(n)) return n
   }
 
