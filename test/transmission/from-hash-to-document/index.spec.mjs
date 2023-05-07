@@ -269,6 +269,240 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
       })
 
       describe('Transforming `array` type schemas', () => {
+        it('transforms `array` type schemas with `enum` (`string` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            enum: [
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = 'mock array type index string (2)'
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `anyOf` (`string` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            anyOf: [
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = 'mock array type index string (2)'
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `oneOf` (`string` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            oneOf: [
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = 'mock array type index string (2)'
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `enum` (`number` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            enum: [
+              1,
+              2,
+              3
+            ]
+          }
+
+          const document = 2
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `anyOf` (`number` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            anyOf: [
+              1,
+              2,
+              3
+            ]
+          }
+
+          const document = 2
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `oneOf` (`number` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            oneOf: [
+              1,
+              2,
+              3
+            ]
+          }
+
+          const document = 2
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `enum` (`boolean` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            enum: [
+              true,
+              false,
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = false
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `anyOf` (`boolean` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            anyOf: [
+              true,
+              false,
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = false
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `oneOf` (`boolean` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'array',
+            oneOf: [
+              true,
+              false,
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = false
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `enum` (`null` type)', () => {
+          const values = {
+            '#/': '0'
+          }
+
+          const schema = {
+            type: 'array',
+            enum: [
+              null
+            ]
+          }
+
+          const document = null
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `anyOf` (`null` type)', () => {
+          const values = {
+            '#/': '0'
+          }
+
+          const schema = {
+            type: 'array',
+            anyOf: [
+              null
+            ]
+          }
+
+          const document = null
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `array` type schemas with `oneOf` (`null` type)', () => {
+          const values = {
+            '#/': '0'
+          }
+
+          const schema = {
+            type: 'array',
+            oneOf: [
+              null
+            ]
+          }
+
+          const document = null
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
         describe('Transforming `array` type schemas (`items` is an array of `string` type)', () => {
           it('transforms `array` type schemas (`items` is an object of `string` type with `enum`)', () => {
             const values = {
@@ -1141,6 +1375,240 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
       })
 
       describe('Transforming `object` type scheams', () => {
+        it('transforms `object` type schemas with `enum` (`string` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            enum: [
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = 'mock array type index string (2)'
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `anyOf` (`string` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            anyOf: [
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = 'mock array type index string (2)'
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `oneOf` (`string` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            oneOf: [
+              'mock array type index string (1)',
+              'mock array type index string (2)',
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = 'mock array type index string (2)'
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `enum` (`number` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            enum: [
+              1,
+              2,
+              3
+            ]
+          }
+
+          const document = 2
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `anyOf` (`number` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            anyOf: [
+              1,
+              2,
+              3
+            ]
+          }
+
+          const document = 2
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `oneOf` (`number` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            oneOf: [
+              1,
+              2,
+              3
+            ]
+          }
+
+          const document = 2
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `enum` (`boolean` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            enum: [
+              true,
+              false,
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = false
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `anyOf` (`boolean` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            anyOf: [
+              true,
+              false,
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = false
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `oneOf` (`boolean` type)', () => {
+          const values = {
+            '#/': '1'
+          }
+
+          const schema = {
+            type: 'object',
+            oneOf: [
+              true,
+              false,
+              'mock array type index string (3)'
+            ]
+          }
+
+          const document = false
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `enum` (`null` type)', () => {
+          const values = {
+            '#/': '0'
+          }
+
+          const schema = {
+            type: 'object',
+            enum: [
+              null
+            ]
+          }
+
+          const document = null
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `anyOf` (`null` type)', () => {
+          const values = {
+            '#/': '0'
+          }
+
+          const schema = {
+            type: 'object',
+            anyOf: [
+              null
+            ]
+          }
+
+          const document = null
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
+        it('transforms `object` type schemas with `oneOf` (`null` type)', () => {
+          const values = {
+            '#/': '0'
+          }
+
+          const schema = {
+            type: 'object',
+            oneOf: [
+              null
+            ]
+          }
+
+          const document = null
+
+          return expect(transform(values, schema))
+            .to.eql(document)
+        })
+
         it('transforms `object` type schemas with `enum`', () => {
           const values = {
             '#/one': '0',
