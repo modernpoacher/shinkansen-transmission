@@ -24,14 +24,6 @@ export const isNullSchema = ({ type } = {}) => type === 'null'
 
 export const isPrimitive = (v) => !isObject(v) && !isArray(v)
 
-export const toConstValue = (schema = {}) => Reflect.get(schema, 'const')
-
-export const isConstValue = (schema = {}) => Reflect.has(schema, 'const')
-
-export const toDefaultValue = (schema = {}) => Reflect.get(schema, 'default')
-
-export const isDefaultValue = (schema = {}) => Reflect.has(schema, 'default')
-
 export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
 export const getDescription = ({ description } = {}) => (description ? { description } : {})
@@ -157,15 +149,17 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
   return {}
 }
 
-export const transformValue = (schema) => (
-  isObject(schema)
-    ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema
-    : schema
-)
+export function transformValue (schema) {
+  return (
+    isObject(schema)
+      ? hasConst(schema)
+        ? getConst(schema)
+        : hasDefault(schema)
+          ? getDefault(schema)
+          : schema
+      : schema
+  )
+}
 
 export function hasValue (values = {}, uri = '#', schema = {}) {
   if (Reflect.has(values, uri)) {

@@ -4,17 +4,14 @@ import {
   isArray,
   isObject,
   isPrimitive,
-  isConstValue,
-  toConstValue,
-  isDefaultValue,
-  toDefaultValue,
   hasEnum,
   getEnum,
   hasAnyOf,
   getAnyOf,
   hasOneOf,
   getOneOf,
-  getUri
+  getUri,
+  transformValue
 } from 'shinkansen-transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-hash-to-document')
@@ -61,15 +58,9 @@ export function toNumber (v) {
 
 const handleError = ({ message = 'No error message defined' }) => { log(message) }
 
-export const transformValue = (schema) => (
-  isObject(schema)
-    ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema
-    : schema
-)
+export {
+  transformValue
+}
 
 export function transformValueFor (value, array) {
   /*

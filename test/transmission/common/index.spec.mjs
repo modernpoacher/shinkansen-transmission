@@ -7,6 +7,7 @@ import {
   getMetaProps,
   getMetaDefaultValue,
   getMetaValue,
+  transformValue,
   getElementsTitleProps,
   getElementsDescriptionProps,
   getElementsFieldProps,
@@ -27,10 +28,6 @@ import {
   getStep,
   isObject,
   isArray,
-  toConstValue,
-  isConstValue,
-  toDefaultValue,
-  isDefaultValue,
   getTitle,
   getDescription,
   getIsReadOnly,
@@ -86,6 +83,13 @@ describe('shinkansen-transmission/transmission/common', () => {
   describe('`getMetaValue`', () => {
     it('is a function', () => {
       expect(getMetaValue)
+        .to.be.a('function')
+    })
+  })
+
+  describe('`transformValue`', () => {
+    it('is a function', () => {
+      expect(transformValue)
         .to.be.a('function')
     })
   })
@@ -226,34 +230,6 @@ describe('shinkansen-transmission/transmission/common', () => {
   describe('`isArray`', () => {
     it('is a function', () => {
       expect(isArray)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`toConstValue`', () => {
-    it('is a function', () => {
-      expect(toConstValue)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`isConstValue`', () => {
-    it('is a function', () => {
-      expect(isConstValue)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`toDefaultValue`', () => {
-    it('is a function', () => {
-      expect(toDefaultValue)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`isDefaultValue`', () => {
-    it('is a function', () => {
-      expect(isDefaultValue)
         .to.be.a('function')
     })
   })
@@ -470,6 +446,48 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMetaValue({}))
             .to.eql({})
         })
+      })
+    })
+  })
+
+  describe('`transformValue()`', () => {
+    describe('Schema is an object', () => {
+      describe('Schema has a `const` field', () => {
+        it('returns the value', () => {
+          const schema = { const: 'MOCK CONST' }
+
+          expect(transformValue(schema))
+            .to.equal('MOCK CONST')
+        })
+      })
+
+      describe('Schema does not have a `const` field', () => {
+        describe('Schema has a `default` field', () => {
+          it('returns the value', () => {
+            const schema = { default: 'MOCK DEFAULT' }
+
+            expect(transformValue(schema))
+              .to.equal('MOCK DEFAULT')
+          })
+        })
+
+        describe('Schema does not have a `default` field', () => {
+          it('returns the schema', () => {
+            const schema = {}
+
+            expect(transformValue(schema))
+              .to.equal(schema)
+          })
+        })
+      })
+    })
+
+    describe('Schema is not an object', () => {
+      it('returns the schema', () => {
+        const schema = []
+
+        expect(transformValue(schema))
+          .to.equal(schema)
       })
     })
   })
@@ -1035,70 +1053,6 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`toConstValue()`', () => {
-    describe('Schema has an `const` field', () => {
-      it('returns the value of the field', () => (
-        expect(toConstValue({ const: 'MOCK CONST' }))
-          .to.eql('MOCK CONST')
-      ))
-    })
-
-    describe('Schema does not have an `const` field', () => {
-      it('returns undefined', () => (
-        expect(toConstValue({}))
-          .to.be.undefined
-      ))
-    })
-  })
-
-  describe('`isConstValue()`', () => {
-    describe('Schema has an `const` field', () => {
-      it('returns the value of the field', () => (
-        expect(isConstValue({ const: 'MOCK CONST' }))
-          .to.be.true
-      ))
-    })
-
-    describe('Schema does not have an `const` field', () => {
-      it('returns undefined', () => (
-        expect(isConstValue({}))
-          .to.be.false
-      ))
-    })
-  })
-
-  describe('`toDefaultValue()`', () => {
-    describe('Schema has an `default` field', () => {
-      it('returns the value of the field', () => (
-        expect(toDefaultValue({ default: 'MOCK DEFAULT' }))
-          .to.eql('MOCK DEFAULT')
-      ))
-    })
-
-    describe('Schema does not have an `default` field', () => {
-      it('returns undefined', () => (
-        expect(toDefaultValue({}))
-          .to.be.undefined
-      ))
-    })
-  })
-
-  describe('`isDefaultValue()`', () => {
-    describe('Schema has an `default` field', () => {
-      it('returns the value of the field', () => (
-        expect(isDefaultValue({ default: 'MOCK DEFAULT' }))
-          .to.be.true
-      ))
-    })
-
-    describe('Schema does not have an `default` field', () => {
-      it('returns undefined', () => (
-        expect(isDefaultValue({}))
-          .to.be.false
-      ))
-    })
-  })
-
   describe('`getTitle()`', () => {
     describe('Schema has a `title` field', () => {
       describe('`title` is truthy', () => {
@@ -1182,30 +1136,66 @@ describe('shinkansen-transmission/transmission/common', () => {
   })
 
   describe('`hasConst()`', () => {
-    it('is a function', () => {
-      expect(hasConst)
-        .to.be.a('function')
+    describe('Schema has a `const` field', () => {
+      it('returns true', () => (
+        expect(hasConst({ const: 'MOCK CONST' }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have a `const` field', () => {
+      it('returns false', () => (
+        expect(hasConst({}))
+          .to.be.false
+      ))
     })
   })
 
   describe('`getConst()`', () => {
-    it('is a function', () => {
-      expect(getConst)
-        .to.be.a('function')
+    describe('Schema has a `const` field', () => {
+      it('returns the value of the field', () => (
+        expect(getConst({ const: 'MOCK CONST' }))
+          .to.equal('MOCK CONST')
+      ))
+    })
+
+    describe('Schema does not have a `const` field', () => {
+      it('returns undefined', () => (
+        expect(getConst({}))
+          .to.be.undefined
+      ))
     })
   })
 
   describe('`hasDefault()`', () => {
-    it('is a function', () => {
-      expect(hasDefault)
-        .to.be.a('function')
+    describe('Schema has a `default` field', () => {
+      it('returns true', () => (
+        expect(hasDefault({ default: 'MOCK DEFAULT' }))
+          .to.be.true
+      ))
+    })
+
+    describe('Schema does not have a `default` field', () => {
+      it('returns false', () => (
+        expect(hasDefault({}))
+          .to.be.false
+      ))
     })
   })
 
   describe('`getDefault()`', () => {
-    it('is a function', () => {
-      expect(getDefault)
-        .to.be.a('function')
+    describe('Schema has a `default` field', () => {
+      it('returns the value of the field', () => (
+        expect(getDefault({ default: 'MOCK DEFAULT' }))
+          .to.equal('MOCK DEFAULT')
+      ))
+    })
+
+    describe('Schema does not have a `default` field', () => {
+      it('returns undefined', () => (
+        expect(getDefault({}))
+          .to.be.undefined
+      ))
     })
   })
 

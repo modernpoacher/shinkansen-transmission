@@ -3,10 +3,6 @@ import debug from 'debug'
 import equal from 'fast-deep-equal'
 
 import {
-  isConstValue,
-  toConstValue,
-  isDefaultValue,
-  toDefaultValue,
   isObject,
   isArray,
   hasEnum,
@@ -15,7 +11,8 @@ import {
   getAnyOf,
   hasOneOf,
   getOneOf,
-  getUri
+  getUri,
+  transformValue
 } from 'shinkansen-transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-document-to-hash')
@@ -132,15 +129,9 @@ export function getSchema (schema = {}, parentUri = '', uri = '') {
   }
 }
 
-export const transformValue = (schema) => (
-  isObject(schema)
-    ? isConstValue(schema)
-      ? toConstValue(schema)
-      : isDefaultValue(schema)
-        ? toDefaultValue(schema)
-        : schema // object
-    : schema // primitive or array
-)
+export {
+  transformValue
+}
 
 export function transformValueIndexFor (array, value) {
   /*
