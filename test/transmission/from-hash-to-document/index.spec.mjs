@@ -166,7 +166,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'string',
-            anyOf: [
+            oneOf: [
               { const: 'string (1)' },
               { const: 'string (2)' },
               { const: 'string (3)' }
@@ -241,7 +241,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'number',
-            anyOf: [
+            oneOf: [
               { const: 1 },
               { const: 2 },
               { const: 3 }
@@ -1316,7 +1316,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'boolean',
-            anyOf: [
+            oneOf: [
               { const: true },
               { const: false }
             ]
@@ -1388,7 +1388,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'null',
-            anyOf: [
+            oneOf: [
               { const: null },
               { const: null }
             ]
@@ -1542,7 +1542,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'string',
-            anyOf: [
+            oneOf: [
               { const: 'string (1)' },
               { const: 'string (2)' },
               { const: 'string (3)' }
@@ -1609,7 +1609,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'number',
-            anyOf: [
+            oneOf: [
               { const: 1 },
               { const: 2 },
               { const: 3 }
@@ -2098,7 +2098,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'boolean',
-            anyOf: [
+            oneOf: [
               { const: true },
               { const: false }
             ]
@@ -2160,7 +2160,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
 
           const schema = {
             type: 'null',
-            anyOf: [
+            oneOf: [
               { const: null }
             ]
           }
