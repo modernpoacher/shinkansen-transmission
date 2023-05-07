@@ -269,7 +269,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
       })
 
       describe('Transforming `array` type schemas', () => {
-        it('transforms `array` type schemas with `enum` (`string` type)', () => {
+        it('transforms `array` type schemas with `enum` (string)', () => {
           const values = {
             '#/': '1'
           }
@@ -289,7 +289,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `anyOf` (`string` type)', () => {
+        it('transforms `array` type schemas with `anyOf` (string)', () => {
           const values = {
             '#/': '1'
           }
@@ -309,7 +309,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `oneOf` (`string` type)', () => {
+        it('transforms `array` type schemas with `oneOf` (string)', () => {
           const values = {
             '#/': '1'
           }
@@ -329,7 +329,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `enum` (`number` type)', () => {
+        it('transforms `array` type schemas with `enum` (number)', () => {
           const values = {
             '#/': '1'
           }
@@ -349,7 +349,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `anyOf` (`number` type)', () => {
+        it('transforms `array` type schemas with `anyOf` (number)', () => {
           const values = {
             '#/': '1'
           }
@@ -369,7 +369,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `oneOf` (`number` type)', () => {
+        it('transforms `array` type schemas with `oneOf` (number)', () => {
           const values = {
             '#/': '1'
           }
@@ -389,7 +389,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `enum` (`boolean` type)', () => {
+        it('transforms `array` type schemas with `enum` (boolean)', () => {
           const values = {
             '#/': '1'
           }
@@ -409,7 +409,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `anyOf` (`boolean` type)', () => {
+        it('transforms `array` type schemas with `anyOf` (boolean)', () => {
           const values = {
             '#/': '1'
           }
@@ -429,7 +429,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `oneOf` (`boolean` type)', () => {
+        it('transforms `array` type schemas with `oneOf` (boolean)', () => {
           const values = {
             '#/': '1'
           }
@@ -449,7 +449,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `enum` (`null` type)', () => {
+        it('transforms `array` type schemas with `enum` (null)', () => {
           const values = {
             '#/': '0'
           }
@@ -467,7 +467,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `anyOf` (`null` type)', () => {
+        it('transforms `array` type schemas with `anyOf` (null)', () => {
           const values = {
             '#/': '0'
           }
@@ -485,7 +485,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `array` type schemas with `oneOf` (`null` type)', () => {
+        it('transforms `array` type schemas with `oneOf` (null)', () => {
           const values = {
             '#/': '0'
           }
@@ -1374,8 +1374,8 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         })
       })
 
-      describe('Transforming `object` type scheams', () => {
-        it('transforms `object` type schemas with `enum` (`string` type)', () => {
+      describe('Transforming `object` type schemas', () => {
+        it('transforms `object` type schemas with `enum` (string)', () => {
           const values = {
             '#/': '1'
           }
@@ -1395,7 +1395,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `anyOf` (`string` type)', () => {
+        it('transforms `object` type schemas with `anyOf` (string)', () => {
           const values = {
             '#/': '1'
           }
@@ -1415,7 +1415,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `oneOf` (`string` type)', () => {
+        it('transforms `object` type schemas with `oneOf` (string)', () => {
           const values = {
             '#/': '1'
           }
@@ -1435,7 +1435,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `enum` (`number` type)', () => {
+        it('transforms `object` type schemas with `enum` (number)', () => {
           const values = {
             '#/': '1'
           }
@@ -1455,7 +1455,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `anyOf` (`number` type)', () => {
+        it('transforms `object` type schemas with `anyOf` (number)', () => {
           const values = {
             '#/': '1'
           }
@@ -1475,7 +1475,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `oneOf` (`number` type)', () => {
+        it('transforms `object` type schemas with `oneOf` (number)', () => {
           const values = {
             '#/': '1'
           }
@@ -1495,7 +1495,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `enum` (`boolean` type)', () => {
+        it('transforms `object` type schemas with `enum` (boolean)', () => {
           const values = {
             '#/': '1'
           }
@@ -1515,7 +1515,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `anyOf` (`boolean` type)', () => {
+        it('transforms `object` type schemas with `anyOf` (boolean)', () => {
           const values = {
             '#/': '1'
           }
@@ -1535,7 +1535,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `oneOf` (`boolean` type)', () => {
+        it('transforms `object` type schemas with `oneOf` (boolean)', () => {
           const values = {
             '#/': '1'
           }
@@ -1555,7 +1555,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `enum` (`null` type)', () => {
+        it('transforms `object` type schemas with `enum` (null)', () => {
           const values = {
             '#/': '0'
           }
@@ -1573,7 +1573,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `anyOf` (`null` type)', () => {
+        it('transforms `object` type schemas with `anyOf` (null)', () => {
           const values = {
             '#/': '0'
           }
@@ -1591,7 +1591,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        it('transforms `object` type schemas with `oneOf` (`null` type)', () => {
+        it('transforms `object` type schemas with `oneOf` (null)', () => {
           const values = {
             '#/': '0'
           }
@@ -2408,7 +2408,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         })
       })
 
-      describe('Transforming `object` type scheams', () => {
+      describe('Transforming `object` type schemas', () => {
         it('transforms `object` type schemas with `enum`', () => {
           const values = {}
 

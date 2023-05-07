@@ -1150,7 +1150,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/transform-o
         })
       })
 
-      describe('Transforming `object` type scheams', () => {
+      describe('Transforming `object` type schemas', () => {
         it('transforms `object` type schemas with `enum`', () => {
           const values = {
             '#/one': '0',
@@ -1950,7 +1950,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/transform-o
         })
       })
 
-      describe('Transforming `object` type scheams', () => {
+      describe('Transforming `object` type schemas', () => {
         it('transforms `object` type schemas with `enum`', () => {
           const values = {}
 
