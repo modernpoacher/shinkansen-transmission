@@ -30,11 +30,13 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/to-boolean'
 
   describe('Argument is a string with any other value', () => it('throws', () => expect(() => toBoolean('MOCK STRING')).to.throw('Invalid `boolean`')))
 
-  describe('Argument is undefined', () => it('throws', () => expect(() => toBoolean()).to.throw('Invalid `boolean`')))
-
   describe('Argument is a number', () => it('throws', () => expect(() => toBoolean(0)).to.throw('Invalid `boolean`')))
+
+  describe('Argument is an array', () => it('throws', () => expect(() => toBoolean([])).to.throw('Invalid `boolean`')))
 
   describe('Argument is an object', () => it('throws', () => expect(() => toBoolean({})).to.throw('Invalid `boolean`')))
 
-  describe('Argument is an array', () => it('throws', () => expect(() => toBoolean([])).to.throw('Invalid `boolean`')))
+  describe('Argument is null', () => it('throws', () => expect(() => toBoolean(null)).to.throw('Invalid `boolean`')))
+
+  describe('Argument is undefined', () => it('throws', () => expect(() => toBoolean()).to.throw('Invalid `boolean`')))
 })

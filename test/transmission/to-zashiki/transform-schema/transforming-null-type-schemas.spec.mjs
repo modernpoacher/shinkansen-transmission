@@ -19,7 +19,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
    *  Null
    */
   describe('Transforming `null` type schemas', () => {
-    it('transforms', () => {
+    it('transforms `null` type', () => {
       const schema = { type: 'null' }
 
       expect(transform(schema))
@@ -38,7 +38,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `enum`', () => {
+    it('transforms `null` type with `enum`', () => {
       const schema = {
         type: 'null',
         enum: [
@@ -70,7 +70,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `anyOf`', () => {
+    it('transforms `null` type with `anyOf`', () => {
       const schema = {
         type: 'null',
         anyOf: [
@@ -138,7 +138,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `oneOf`', () => {
+    it('transforms `null` type with `oneOf`', () => {
       const schema = {
         type: 'null',
         oneOf: [
@@ -206,7 +206,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `allOf`', () => {
+    it('transforms `null` type with `allOf`', () => {
       const schema = {
         type: 'null',
         allOf: [
@@ -232,7 +232,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+    it('transforms `null` type', () => {
       const schema = {
         type: 'null',
         const: null

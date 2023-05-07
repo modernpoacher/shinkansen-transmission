@@ -19,7 +19,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
    *  Number
    */
   describe('Transforming `number` type schemas', () => {
-    it('transforms', () => {
+    it('transforms `number` type', () => {
       const schema = { type: 'number' }
 
       expect(transform(schema))
@@ -38,7 +38,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `enum`', () => {
+    it('transforms `number` type with `enum`', () => {
       const schema = {
         type: 'number',
         enum: [
@@ -89,7 +89,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `anyOf`', () => {
+    it('transforms `number` type with `anyOf`', () => {
       const schema = {
         type: 'number',
         anyOf: [
@@ -235,7 +235,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `oneOf`', () => {
+    it('transforms `number` type with `oneOf`', () => {
       const schema = {
         type: 'number',
         oneOf: [
@@ -480,7 +480,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `allOf`', () => {
+    it('transforms `number` type with `allOf`', () => {
       const schema = {
         type: 'number',
         allOf: [
@@ -531,7 +531,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+    it('transforms `number` type', () => {
       const schema = {
         type: 'number',
         minimum: 1,

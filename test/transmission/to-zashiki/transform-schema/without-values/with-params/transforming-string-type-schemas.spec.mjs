@@ -419,7 +419,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        it('transforms `string` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+        it('transforms `string` type schemas', () => {
           const schema = { type: 'string' }
 
           const rootSchema = undefined

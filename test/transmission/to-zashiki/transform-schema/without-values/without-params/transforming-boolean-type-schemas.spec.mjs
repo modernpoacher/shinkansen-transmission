@@ -296,7 +296,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        it('transforms `boolean` type schemas without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+        it('transforms `boolean` type schemas', () => {
           const schema = { type: 'boolean' }
 
           return expect(transform(schema))

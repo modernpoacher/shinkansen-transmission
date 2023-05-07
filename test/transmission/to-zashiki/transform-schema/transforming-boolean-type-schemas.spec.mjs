@@ -19,7 +19,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
    *  Boolean
    */
   describe('Transforming `boolean` type schemas', () => {
-    it('transforms', () => {
+    it('transforms `boolean` type', () => {
       const schema = { type: 'boolean' }
 
       expect(transform(schema))
@@ -38,7 +38,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `enum`', () => {
+    it('transforms `boolean` type with `enum`', () => {
       const schema = {
         type: 'boolean',
         enum: [
@@ -73,7 +73,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `anyOf`', () => {
+    it('transforms `boolean` type with `anyOf`', () => {
       const schema = {
         type: 'boolean',
         anyOf: [
@@ -180,7 +180,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `oneOf`', () => {
+    it('transforms `boolean` type with `oneOf`', () => {
       const schema = {
         type: 'boolean',
         oneOf: [
@@ -287,7 +287,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms with `allOf`', () => {
+    it('transforms `boolean` type with `allOf`', () => {
       const schema = {
         type: 'boolean',
         allOf: [
@@ -313,7 +313,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
     })
 
-    it('transforms without `enum` or `anyOf` or `oneOf` or `allOf`', () => {
+    it('transforms `boolean` type', () => {
       const schema = {
         type: 'boolean',
         const: true
