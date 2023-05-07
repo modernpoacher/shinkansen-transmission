@@ -20,7 +20,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       .to.be.a('function')
   })
 
-  describe('Argument is a schema', () => {
+  describe('Document is defined', () => {
     it('transforms', () => {
       const document = {
         stringTypeSubSchema: 'mock string',
@@ -2778,7 +2778,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
     })
   })
 
-  describe('Argument is not a schema', () => {
-    it('throws', () => expect(() => transform({}).to.throw('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')))
+  describe('Document is undefined', () => {
+    it('transforms', () => expect(transform()).to.eql({ '#/': '' }))
   })
 })

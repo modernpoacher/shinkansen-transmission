@@ -20,7 +20,7 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
       .to.be.a('function')
   })
 
-  describe('Argument is a schema', () => {
+  describe('Hash is defined and schema is defined', () => {
     describe('With values', () => {
       it('transforms', () => {
         const values = {
@@ -1523,7 +1523,20 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
     })
   })
 
-  describe('Argument is not a schema', () => {
-    it('throws', () => expect(() => transform({}).to.throw('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')))
+  describe('Hash is undefined and schema is defined', () => {
+    it('transforms `string` type schemas', () => expect(transform(undefined, { type: 'string' })).to.eql(undefined))
+    it('transforms `number` type schemas', () => expect(transform(undefined, { type: 'number' })).to.eql(undefined))
+    it('transforms `array` type schemas', () => expect(transform(undefined, { type: 'array' })).to.eql([]))
+    it('transforms `object` type schemas', () => expect(transform(undefined, { type: 'object' })).to.eql({}))
+    it('transforms `boolean` type schemas', () => expect(transform(undefined, { type: 'boolean' })).to.eql(undefined))
+    it('transforms `null` type schemas', () => expect(transform(undefined, { type: 'null' })).to.eql(undefined))
+  })
+
+  describe('Hash is defined and schema is undefined', () => {
+    it('throws', () => expect(() => transform({})).to.throw('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1'))
+  })
+
+  describe('Hash is undefined and schema is undefined', () => {
+    it('throws', () => expect(() => transform()).to.throw('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1'))
   })
 })
