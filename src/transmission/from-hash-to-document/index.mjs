@@ -81,7 +81,7 @@ export function transformValueFor (value, array) {
       return transformValue(v)
     }
   } catch (e) {
-    handleError(de)
+    handleError(e)
   }
 
   /*
