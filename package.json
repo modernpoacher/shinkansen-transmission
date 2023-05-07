@@ -66,6 +66,8 @@
     "./transmission/common": "./src/transmission/common/index.mjs",
     "./transmission/from-document-to-hash": "./src/transmission/from-document-to-hash/index.mjs",
     "./transmission/from-hash-to-document": "./src/transmission/from-hash-to-document/index.mjs",
+    "./transmission/from-hash-to-document/transform-array-schema": "./src/transmission/from-hash-to-document/transform-array-schema.mjs",
+    "./transmission/from-hash-to-document/transform-object-schema": "./src/transmission/from-hash-to-document/transform-object-schema.mjs",
     "./transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",
     "./transmission/to-zashiki/transform-schema": "./src/transmission/to-zashiki/transform-schema.mjs",
     "./transmission/to-zashiki": "./src/transmission/to-zashiki/index.mjs",
