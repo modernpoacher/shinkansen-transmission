@@ -73,7 +73,7 @@ import {
   renderString
 } from './transform-schema.mjs'
 
-const log = debug('shinkansen-transmission/to-zashiki:root-schema')
+const log = debug('shinkansen-transmission/to-zashiki/root-schema')
 
 log('`shinkansen` is awake')
 

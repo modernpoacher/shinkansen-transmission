@@ -1,5 +1,7 @@
 import debug from 'debug'
 
+import equal from 'fast-deep-equal'
+
 const log = debug('shinkansen-transmission/transmission/common')
 
 log('`shinkansen` is awake')
@@ -159,6 +161,158 @@ export function transformValue (schema) {
           : schema
       : schema
   )
+}
+
+export function findByKey (parentUri, uri) {
+  /*
+   *  log('findByKey')
+   */
+  return function find (key) {
+    /*
+     *  log('find')
+     */
+    return getUri(parentUri, key) === uri
+  }
+}
+
+export function findByIndex (parentUri, uri) {
+  /*
+   *  log('findByIndex')
+   */
+  return function find (schema, index) {
+    /*
+     *  log('find')
+     */
+    if (hasEnum(schema)) {
+      return getUri(parentUri, index) === uri
+    } else {
+      if (hasAnyOf(schema)) {
+        const array = getAnyOf(schema)
+
+        return array.find(findByIndex(parentUri, uri))
+      } else {
+        if (hasOneOf(schema)) {
+          const array = getOneOf(schema)
+
+          return array.find(findByIndex(parentUri, uri))
+        }
+      }
+    }
+
+    return getUri(parentUri, index) === uri
+  }
+}
+
+export function findByValue (value) {
+  /*
+   *  log('findByValue')
+   */
+  return function find (schema) {
+    /*
+     *  log('find')
+     */
+    return value === transformValue(schema)
+  }
+}
+
+export function findByEqual (value) {
+  /*
+   *  log('findByEqual')
+   */
+  return function find (schema) {
+    /*
+     *  log('find')
+     */
+    return equal(value, transformValue(schema))
+  }
+}
+
+export function toString (value) {
+  /*
+   *  log('toString')
+   */
+  return (value !== undefined) ? String(value) : ''
+}
+
+export function getObject ({ properties = {} /* object */ } = {}, parentUri = '', uri = '') {
+  /*
+   *  log('getObject')
+   */
+  return (
+    Reflect.get(properties, (
+      Object.keys(properties)
+        .find(findByKey(parentUri, uri))
+    ))
+  )
+}
+
+export function getArray ({ items = {} /* array or object */ } = {}, parentUri = '', uri = '') {
+  /*
+   *  log('getArray')
+   */
+  return (isArray(items))
+    ? items.find(findByIndex(parentUri, uri))
+    : items
+}
+
+export function getSchema (schema = {}, parentUri = '', uri = '') {
+  /*
+   *  log('getSchema')
+   */
+  const { type } = schema
+
+  switch (type) {
+    case 'object':
+      return getObject(schema, parentUri, uri)
+
+    case 'array':
+      return getArray(schema, parentUri, uri)
+
+    default:
+      return schema
+  }
+}
+
+export function transformValueIndexFor (array, value) {
+  /*
+   *  log('transformValueIndexFor')
+   */
+  const find = findByValue(value)
+
+  if (array.some(find)) {
+    const index = array.findIndex(find)
+
+    /*
+     *  Transform a number to a string
+     */
+    return String(index)
+  }
+
+  /*
+   *  Takes the place of `toString(document)` in `transform()`
+   */
+  return toString(value)
+}
+
+export function transformEqualIndexFor (array, value) {
+  /*
+   *  log('transformEqualIndexFor')
+   */
+  const find = findByEqual(value)
+
+  if (array.some(find)) {
+    const index = array.findIndex(find)
+
+    /*
+     *  Transform a number to a string
+     */
+    return String(index)
+  }
+
+  /*
+   *  Takes the place of `toString(document)` in `transform()`
+   */
+  return toString(value)
 }
 
 export function hasValue (values = {}, uri = '#', schema = {}) {

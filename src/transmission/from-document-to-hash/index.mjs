@@ -1,8 +1,8 @@
 import debug from 'debug'
 
-import equal from 'fast-deep-equal'
-
 import {
+  toString,
+  getSchema,
   isObject,
   isArray,
   hasEnum,
@@ -12,6 +12,8 @@ import {
   hasOneOf,
   getOneOf,
   getUri,
+  transformValueIndexFor,
+  transformEqualIndexFor,
   transformValue
 } from 'shinkansen-transmission/transmission/common'
 
@@ -19,163 +21,11 @@ const log = debug('shinkansen-transmission/from-document-to-hash')
 
 log('`shinkansen` is awake')
 
-function findByKey (parentUri, uri) {
-  /*
-   *  log('findByKey')
-   */
-  return function find (key) {
-    /*
-     *  log('find')
-     */
-    return getUri(parentUri, key) === uri
-  }
-}
-
-function findByIndex (parentUri, uri) {
-  /*
-   *  log('findByIndex')
-   */
-  return function find (schema, index) {
-    /*
-     *  log('find')
-     */
-    if (hasEnum(schema)) {
-      return getUri(parentUri, index) === uri
-    } else {
-      if (hasAnyOf(schema)) {
-        const array = getAnyOf(schema)
-
-        return array.find(findByIndex(parentUri, uri))
-      } else {
-        if (hasOneOf(schema)) {
-          const array = getOneOf(schema)
-
-          return array.find(findByIndex(parentUri, uri))
-        }
-      }
-    }
-
-    return getUri(parentUri, index) === uri
-  }
-}
-
-function findByValue (value) {
-  /*
-   *  log('findByValue')
-   */
-  return function find (schema) {
-    /*
-     *  log('find')
-     */
-    return value === transformValue(schema)
-  }
-}
-
-function findByEqual (value) {
-  /*
-   *  log('findByEqual')
-   */
-  return function find (schema) {
-    /*
-     *  log('find')
-     */
-    return equal(value, transformValue(schema))
-  }
-}
-
-function toString (value) {
-  /*
-   *  log('toString')
-   */
-  return (value !== undefined) ? String(value) : ''
-}
-
-export function getObject ({ properties = {} /* object */ } = {}, parentUri = '', uri = '') {
-  /*
-   *  log('getObject')
-   */
-  return (
-    Reflect.get(properties, (
-      Object.keys(properties)
-        .find(findByKey(parentUri, uri))
-    ))
-  )
-}
-
-export function getArray ({ items = {} /* array or object */ } = {}, parentUri = '', uri = '') {
-  /*
-   *  log('getArray')
-   */
-  return (isArray(items))
-    ? items.find(findByIndex(parentUri, uri))
-    : items
-}
-
-export function getSchema (schema = {}, parentUri = '', uri = '') {
-  /*
-   *  log('getSchema')
-   */
-  const { type } = schema
-
-  switch (type) {
-    case 'object':
-      return getObject(schema, parentUri, uri)
-
-    case 'array':
-      return getArray(schema, parentUri, uri)
-
-    default:
-      return schema
-  }
-}
-
 export {
   transformValue
 }
 
-export function transformValueIndexFor (array, value) {
-  /*
-   *  log('transformValueIndexFor')
-   */
-  const find = findByValue(value)
-
-  if (array.some(find)) {
-    const index = array.findIndex(find)
-
-    /*
-     *  Transform a number to a string
-     */
-    return String(index)
-  }
-
-  /*
-   *  Takes the place of `toString(document)` in `transform()`
-   */
-  return toString(value)
-}
-
-export function transformEqualIndexFor (array, value) {
-  /*
-   *  log('transformEqualIndexFor')
-   */
-  const find = findByEqual(value)
-
-  if (array.some(find)) {
-    const index = array.findIndex(find)
-
-    /*
-     *  Transform a number to a string
-     */
-    return String(index)
-  }
-
-  /*
-   *  Takes the place of `toString(document)` in `transform()`
-   */
-  return toString(value)
-}
-
-export function transformArrayFor (document, schema, values, params, parentUri, uri) {
+export function transformArrayFor (document, schema, values, parentUri) { // }, uri) {
   /*
    *  log('transformArrayFor')
    */
@@ -184,12 +34,12 @@ export function transformArrayFor (document, schema, values, params, parentUri, 
       .reduce((values, value, index) => {
         const schemaUri = getUri(parentUri, index)
 
-        return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
+        return transform(value, getSchema(schema, parentUri, schemaUri), values, schemaUri, schemaUri)
       }, values)
   )
 }
 
-export function transformObjectFor (document, schema, values, params, parentUri, uri) {
+export function transformObjectFor (document, schema, values, parentUri) { // }, uri) {
   /*
    *  log('transformObjectFor')
    */
@@ -198,12 +48,12 @@ export function transformObjectFor (document, schema, values, params, parentUri,
       .reduce((values, [key, value]) => {
         const schemaUri = getUri(parentUri, key)
 
-        return transform(value, getSchema(schema, parentUri, schemaUri), values, params, schemaUri, schemaUri)
+        return transform(value, getSchema(schema, parentUri, schemaUri), values, schemaUri, schemaUri)
       }, values)
   )
 }
 
-export function transformArray (document, schema, values, params, parentUri, uri) {
+export function transformArray (document, schema, values, parentUri, uri) {
   /*
    *  log('transformArray')
    */
@@ -235,7 +85,7 @@ export function transformArray (document, schema, values, params, parentUri, uri
           /*
            *  Items is an array of schemas
            */
-          return transformArrayFor(document, schema, values, params, parentUri, uri)
+          return transformArrayFor(document, schema, values, parentUri, uri)
         } else {
           if (isObject(items)) {
             /*
@@ -273,10 +123,10 @@ export function transformArray (document, schema, values, params, parentUri, uri
   /*
    *  Transform schema
    */
-  return transformArrayFor(document, schema, values, params, parentUri, uri) // schema not items
+  return transformArrayFor(document, schema, values, parentUri, uri) // schema not items
 }
 
-export function transformObject (document, schema, values, params, parentUri, uri) {
+export function transformObject (document, schema, values, parentUri, uri) {
   /*
    *  log('transformObject')
    */
@@ -308,10 +158,10 @@ export function transformObject (document, schema, values, params, parentUri, ur
   /*
    *  Transform schema
    */
-  return transformObjectFor(document, schema, values, params, parentUri, uri)
+  return transformObjectFor(document, schema, values, parentUri) // , uri)
 }
 
-export default function transform (document, schema = {}, values = {}, params = {}, parentUri = '#', uri = getUri(parentUri)) {
+export default function transform (document, schema = {}, values = {}, parentUri = '#', uri = getUri(parentUri)) {
   log('fromDocumentToHash')
 
   /*
@@ -321,7 +171,7 @@ export default function transform (document, schema = {}, values = {}, params = 
     /*
      *  Yes, `document` is an array
      */
-    return transformArray(document, schema, values, params, parentUri, uri)
+    return transformArray(document, schema, values, parentUri, uri)
   } else {
     /*
      *  Is `document` an object?
@@ -330,7 +180,7 @@ export default function transform (document, schema = {}, values = {}, params = 
       /*
        *  Yes, `document` is an object
        */
-      return transformObject(document, schema, values, params, parentUri, uri)
+      return transformObject(document, schema, values, parentUri, uri)
     } else {
       if (hasEnum(schema)) {
         const items = getEnum(schema)
