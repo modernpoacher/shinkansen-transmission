@@ -1,178 +1,20 @@
 ## `shinkansen-transmission`
 
-# Shinkansen Transmission
+Shinkansen generates JSON Schema valid documents from user submissions with `<html />` forms.
 
-*Shinkansen Transmission* transforms JSON Schemas into a description of a form for *Zashiki Karakuri*.
+# Transmission
 
-Your schema should be dereferenced _before_ it is transformed with *Shinkansen Transmission* (we recommend [json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser)).
+_Transmission_ transforms HTTP `POST` data into JSON Schema valid `JSON` documents (and back again).
 
-### Installation
+It can also translate JSON Schema into Zashiki description format describing `<html />` forms.
+
+## Installation
 
 ```bash
 npm i -P shinkansen-transmission
 ```
 
-### `toZashiki`
-
-```javascript
-const zashiki = toZashiki(rootSchema, values, params)
-```
-
-The transformer walks the `rootSchema` and maps fields in `values` and `params` to another structure, which it returns.
-
-- `rootSchema` is a JSON Schema
-- `values` is a document valid according to the Schema
-- `params` are any other parameters for the transformer
-
-The return value is an object with the fields `meta` and `elements`.
-
-As you might expect, `meta` contains fields _about_ the Schema, while `elements` contains fields to be rendered as HTML. (*Shinkansen Transmission* doesn't express any opinion on what those elements are to be, but assumes that a `field` will be rendered as an HTML `<form />` element or some component which behaves like one.)
-
-#### Transformed structure
-
-```javascript
-{
-  meta: {
-    uri: String,
-    name: String,
-    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
-    schema: Object,
-    rootSchema: Object,
-    isRequired: Boolean,
-    defaultValue: /* Per `type` */,
-    value: /* Per `type` */,
-  },
-  elements: {
-    title: String,
-    description: String,
-    field: {
-      isRequired: Boolean,
-      value: /* Per `type` */,
-      name: String
-    }
-  }
-}
-```
-
-##### `enum`
-
-```javascript
-{
-  meta: {
-    uri: String,
-    name: String,
-    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
-    schema: Object,
-    rootSchema: Object,
-    isRequired: Boolean,
-    selectedItems: Array
-  },
-  elements: {
-    title: String,
-    description: String,
-    enum: {
-      isRequired: Boolean,
-      selectedItems: Array,
-      items: Array,
-      name: String
-    }
-  }
-}
-```
-
-##### `anyOf`
-
-```javascript
-{
-  meta: {
-    uri: String,
-    name: String,
-    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
-    schema: Object,
-    rootSchema: Object,
-    isRequired: Boolean,
-    selectedItems: Array,
-  },
-  elements: {
-    title: String,
-    description: String,
-    anyOf: {
-      isRequired: Boolean,
-      selectedItems: Array,
-      items: Array,
-      name: String
-    }
-  }
-}
-```
-
-##### `oneOf`
-
-```javascript
-{
-  meta: {
-    uri: String,
-    name: String,
-    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
-    schema: Object,
-    rootSchema: Object,
-    isRequired: Boolean,
-    selectedItems: Array,
-  },
-  elements: {
-    title: String,
-    description: String,
-    oneOf: {
-      required: Boolean,
-      selectedItems: Array,
-      items: Array,
-      name: String
-    }
-  }
-}
-```
-
-##### `allOf`
-
-- `array` or `object`
-
-```javascript
-{
-  meta: {
-    uri: String,
-    name: String,
-    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
-    schema: Object,
-    rootSchema: Object,
-    required: Boolean,
-  },
-  elements: {
-    title: String,
-    description: String,
-    fields: Array
-  }
-}
-```
-
-- Any other
-
-```javascript
-{
-  meta: {
-    uri: String,
-    name: String,
-    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
-    schema: Object,
-    rootSchema: Object,
-    required: Boolean,
-  },
-  elements: {
-    title: String,
-    description: String,
-    field: Object
-  }
-}
-```
+Your schema should be dereferenced _before_ it is transformed with _Transmission_ (we recommend [json-schema-ref-parser](https://www.npmjs.com/package/json-schema-ref-parser)).
 
 ### `fromHashToDocument`
 
@@ -340,5 +182,167 @@ A hash.
   'company-publisher-lastName': 'Lee',
   'company-publisher-age': '96',
   active: 'true'
+}
+```
+
+### `toZashiki`
+
+```javascript
+const zashiki = toZashiki(rootSchema, values, params)
+```
+
+The transformer walks the `rootSchema` and maps fields in `values` and `params` to Zashiki description format, which it returns.
+
+- `rootSchema` is a JSON Schema
+- `values` is a document valid according to the Schema
+- `params` are any other parameters for the transformer
+
+The return value is an object with the fields `meta` and `elements`.
+
+As you might expect, `meta` contains fields _about_ the Schema, while `elements` contains fields to be rendered as HTML. (_Transmission_ doesn't express any opinion on what those elements are to be, but assumes that a `field` will be rendered as an HTML `<form />` element or some component which behaves like one.)
+
+#### Transformed structure
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    isRequired: Boolean,
+    defaultValue: /* Per `type` */,
+    value: /* Per `type` */,
+  },
+  elements: {
+    title: String,
+    description: String,
+    field: {
+      isRequired: Boolean,
+      value: /* Per `type` */,
+      name: String
+    }
+  }
+}
+```
+
+##### `enum`
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    isRequired: Boolean,
+    selectedItems: Array
+  },
+  elements: {
+    title: String,
+    description: String,
+    enum: {
+      isRequired: Boolean,
+      selectedItems: Array,
+      items: Array,
+      name: String
+    }
+  }
+}
+```
+
+##### `anyOf`
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    isRequired: Boolean,
+    selectedItems: Array,
+  },
+  elements: {
+    title: String,
+    description: String,
+    anyOf: {
+      isRequired: Boolean,
+      selectedItems: Array,
+      items: Array,
+      name: String
+    }
+  }
+}
+```
+
+##### `oneOf`
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    isRequired: Boolean,
+    selectedItems: Array,
+  },
+  elements: {
+    title: String,
+    description: String,
+    oneOf: {
+      required: Boolean,
+      selectedItems: Array,
+      items: Array,
+      name: String
+    }
+  }
+}
+```
+
+##### `allOf`
+
+- `array` or `object`
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    required: Boolean,
+  },
+  elements: {
+    title: String,
+    description: String,
+    fields: Array
+  }
+}
+```
+
+- Any other
+
+```javascript
+{
+  meta: {
+    uri: String,
+    name: String,
+    type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
+    schema: Object,
+    rootSchema: Object,
+    required: Boolean,
+  },
+  elements: {
+    title: String,
+    description: String,
+    field: Object
+  }
 }
 ```
