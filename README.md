@@ -346,3 +346,11 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
   }
 }
 ```
+
+## See also
+
+- [Cogs](https://github.com/modernpoacher/shinkansen-cogs)
+- [Sprockets](https://github.com/modernpoacher/shinkansen-sprockets)
+- [Gears](https://github.com/modernpoacher/shinkansen-gears)
+- [Pinion](https://github.com/modernpoacher/shinkansen-pinion)
+- [Engine](https://github.com/modernpoacher/shinkansen-engine)
