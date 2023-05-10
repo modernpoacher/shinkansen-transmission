@@ -22,3 +22,6 @@ test
 
 # Coverage
 coverage
+
+# Shell
+nvm.sh
