@@ -2,20 +2,21 @@
 
 .circleci
 .github
+.husky
 
 .editorconfig
 .eslintignore
 .eslintrc
 
+.gitattributes
+
 .depsrc
 
-# NPM
-.npmignore
+# User-defined NPM configuration
 .npmrc
 
-# NYC
-.nycrc
-.nyc_output
+# User-defined NVM configuration
+.nvmrc
 
 # Mocha
 test
