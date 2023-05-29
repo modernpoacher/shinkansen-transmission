@@ -2,7 +2,7 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import trasnformArraySchema from 'shinkansen-transmission/transmission/from-document-to-hash/array'
+import transformArraySchema from 'shinkansen-transmission/transmission/from-document-to-hash/array'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/array', () => {
   before(() => {
@@ -16,7 +16,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
   })
 
   it('is a function', () => {
-    expect(trasnformArraySchema)
+    expect(transformArraySchema)
       .to.be.a('function')
   })
 
@@ -38,7 +38,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': []
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -58,7 +58,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': []
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -78,7 +78,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': []
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -97,7 +97,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -116,7 +116,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -135,7 +135,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -151,7 +151,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['2']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -167,7 +167,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['2']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -183,7 +183,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['2']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -199,7 +199,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -215,7 +215,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -231,7 +231,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -247,7 +247,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['0']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -263,7 +263,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['0']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -279,7 +279,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['0']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -300,7 +300,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/2': 'mock array type index string (3)'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -324,7 +324,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -345,7 +345,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '2'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -374,7 +374,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -403,7 +403,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -432,7 +432,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -460,7 +460,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '0'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -487,7 +487,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -514,7 +514,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -541,7 +541,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -567,7 +567,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0'] // #/0/0': '0'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -595,7 +595,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '1', '2']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -623,7 +623,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '1', '2']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -650,7 +650,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '1', '0']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -676,7 +676,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '0', '0']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -718,7 +718,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/two': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -742,7 +742,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -765,7 +765,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '0'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -799,7 +799,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/1': '2'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -821,7 +821,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -844,7 +844,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['2']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -871,7 +871,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -898,7 +898,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -925,7 +925,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -951,7 +951,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '0'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -976,7 +976,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['1'] // #/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1001,7 +1001,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['1'] // #/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1026,7 +1026,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['1'] // #/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1050,7 +1050,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0'] // #/0/0': '0'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1076,7 +1076,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '1', '2']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1102,7 +1102,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '1', '2']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1127,7 +1127,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '1', '0']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1151,7 +1151,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': ['0', '0', '0']
         }
 
-        expect(trasnformArraySchema(document, schema))
+        expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1191,7 +1191,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/two': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1213,7 +1213,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['1']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1234,7 +1234,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['0']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1281,7 +1281,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/2': '2'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1328,7 +1328,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/2': '2'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1372,7 +1372,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/2': 'mock array type index string (3)'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1399,7 +1399,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['0', '1', '2']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1426,7 +1426,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/': ['0', '1', '2']
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1449,7 +1449,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '3'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1469,7 +1469,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': 'mock array type index string'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1489,7 +1489,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1514,7 +1514,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'string'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1539,7 +1539,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1564,7 +1564,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'false'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1589,7 +1589,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'null'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1612,7 +1612,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'string'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1635,7 +1635,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1658,7 +1658,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'false'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1681,7 +1681,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'null'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1715,7 +1715,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/two': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1735,7 +1735,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': 'true'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1755,7 +1755,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': 'null'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1779,7 +1779,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/1': '2'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1797,7 +1797,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': 'mock array type index string'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1815,7 +1815,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1838,7 +1838,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'string'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1861,7 +1861,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1884,7 +1884,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'false'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1907,7 +1907,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'null'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1928,7 +1928,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'string'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1949,7 +1949,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1970,7 +1970,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'false'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -1991,7 +1991,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/0': 'null'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -2023,7 +2023,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0/two': '1'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -2041,7 +2041,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': 'true'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
 
@@ -2059,13 +2059,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           '#/0': 'null'
         }
 
-        return expect(trasnformArraySchema(document, schema))
+        return expect(transformArraySchema(document, schema))
           .to.eql(values)
       })
     })
   })
 
   describe('Document is undefined', () => {
-    it('transforms', () => expect(trasnformArraySchema()).to.eql({ '#/': '' }))
+    it('transforms', () => expect(transformArraySchema()).to.eql({ '#/': '' }))
   })
 })

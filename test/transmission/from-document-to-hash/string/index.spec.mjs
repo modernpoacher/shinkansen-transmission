@@ -2,7 +2,7 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import trasnformStringSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
+import transformStringSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/string', () => {
   before(() => {
@@ -16,7 +16,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/string', ()
   })
 
   it('is a function', () => {
-    expect(trasnformStringSchema)
+    expect(transformStringSchema)
       .to.be.a('function')
   })
 
@@ -37,7 +37,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/string', ()
           '#/': '1'
         }
 
-        return expect(trasnformStringSchema(document, schema))
+        return expect(transformStringSchema(document, schema))
           .to.eql(values)
       })
 
@@ -57,7 +57,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/string', ()
           '#/': '1'
         }
 
-        return expect(trasnformStringSchema(document, schema))
+        return expect(transformStringSchema(document, schema))
           .to.eql(values)
       })
 
@@ -77,7 +77,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/string', ()
           '#/': '1'
         }
 
-        return expect(trasnformStringSchema(document, schema))
+        return expect(transformStringSchema(document, schema))
           .to.eql(values)
       })
 
@@ -90,13 +90,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/string', ()
           '#/': 'mock string'
         }
 
-        return expect(trasnformStringSchema(document, schema))
+        return expect(transformStringSchema(document, schema))
           .to.eql(values)
       })
     })
   })
 
   describe('Document is undefined', () => {
-    it('transforms', () => expect(trasnformStringSchema()).to.eql({ '#/': '' }))
+    it('transforms', () => expect(transformStringSchema()).to.eql({ '#/': '' }))
   })
 })

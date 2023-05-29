@@ -2,7 +2,7 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import trasnformNullSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
+import transformNullSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/null', () => {
   before(() => {
@@ -16,7 +16,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
   })
 
   it('is a function', () => {
-    expect(trasnformNullSchema)
+    expect(transformNullSchema)
       .to.be.a('function')
   })
 
@@ -31,7 +31,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
           '#/': '0'
         }
 
-        return expect(trasnformNullSchema(document, schema))
+        return expect(transformNullSchema(document, schema))
           .to.eql(values)
       })
 
@@ -44,7 +44,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
           '#/': '0'
         }
 
-        return expect(trasnformNullSchema(document, schema))
+        return expect(transformNullSchema(document, schema))
           .to.eql(values)
       })
 
@@ -57,7 +57,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
           '#/': '0'
         }
 
-        return expect(trasnformNullSchema(document, schema))
+        return expect(transformNullSchema(document, schema))
           .to.eql(values)
       })
 
@@ -70,13 +70,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
           '#/': 'null'
         }
 
-        return expect(trasnformNullSchema(document, schema))
+        return expect(transformNullSchema(document, schema))
           .to.eql(values)
       })
     })
   })
 
   describe('Document is undefined', () => {
-    it('transforms', () => expect(trasnformNullSchema()).to.eql({ '#/': '' }))
+    it('transforms', () => expect(transformNullSchema()).to.eql({ '#/': '' }))
   })
 })

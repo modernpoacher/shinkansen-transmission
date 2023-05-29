@@ -2,7 +2,7 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import trasnformNumberSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
+import transformNumberSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/number', () => {
   before(() => {
@@ -16,7 +16,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
   })
 
   it('is a function', () => {
-    expect(trasnformNumberSchema)
+    expect(transformNumberSchema)
       .to.be.a('function')
   })
 
@@ -38,7 +38,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           '#/': '2'
         }
 
-        return expect(trasnformNumberSchema(document, schema))
+        return expect(transformNumberSchema(document, schema))
           .to.eql(values)
       })
 
@@ -58,7 +58,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           '#/': '2'
         }
 
-        return expect(trasnformNumberSchema(document, schema))
+        return expect(transformNumberSchema(document, schema))
           .to.eql(values)
       })
 
@@ -78,7 +78,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           '#/': '2'
         }
 
-        return expect(trasnformNumberSchema(document, schema))
+        return expect(transformNumberSchema(document, schema))
           .to.eql(values)
       })
 
@@ -91,13 +91,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           '#/': '1'
         }
 
-        return expect(trasnformNumberSchema(document, schema))
+        return expect(transformNumberSchema(document, schema))
           .to.eql(values)
       })
     })
   })
 
   describe('Document is undefined', () => {
-    it('transforms', () => expect(trasnformNumberSchema()).to.eql({ '#/': '' }))
+    it('transforms', () => expect(transformNumberSchema()).to.eql({ '#/': '' }))
   })
 })

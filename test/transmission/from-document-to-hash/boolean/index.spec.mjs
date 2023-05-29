@@ -2,7 +2,7 @@ import debug from 'debug'
 
 import { expect } from 'chai'
 
-import trasnformBooleanSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
+import transformBooleanSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', () => {
   before(() => {
@@ -16,7 +16,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
   })
 
   it('is a function', () => {
-    expect(trasnformBooleanSchema)
+    expect(transformBooleanSchema)
       .to.be.a('function')
   })
 
@@ -31,7 +31,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
           '#/': '1'
         }
 
-        return expect(trasnformBooleanSchema(document, schema))
+        return expect(transformBooleanSchema(document, schema))
           .to.eql(values)
       })
 
@@ -44,7 +44,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
           '#/': '1'
         }
 
-        return expect(trasnformBooleanSchema(document, schema))
+        return expect(transformBooleanSchema(document, schema))
           .to.eql(values)
       })
 
@@ -57,7 +57,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
           '#/': '1'
         }
 
-        return expect(trasnformBooleanSchema(document, schema))
+        return expect(transformBooleanSchema(document, schema))
           .to.eql(values)
       })
 
@@ -70,13 +70,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
           '#/': 'true'
         }
 
-        return expect(trasnformBooleanSchema(document, schema))
+        return expect(transformBooleanSchema(document, schema))
           .to.eql(values)
       })
     })
   })
 
   describe('Document is undefined', () => {
-    it('transforms', () => expect(trasnformBooleanSchema()).to.eql({ '#/': '' }))
+    it('transforms', () => expect(transformBooleanSchema()).to.eql({ '#/': '' }))
   })
 })
