@@ -20,7 +20,8 @@ function env () {
 
 const presets = [
   [
-    '@babel/env', {
+    '@babel/env',
+    {
       targets: {
         node: 'current',
         browsers: [
@@ -38,8 +39,6 @@ const presets = [
 ]
 
 const plugins = [
-  '@babel/proposal-export-default-from',
-  '@babel/proposal-export-namespace-from',
   [
     'module-resolver', {
       alias: {
