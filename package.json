@@ -32,7 +32,7 @@
     "test": "cross-env NODE_ENV=test mocha test --recursive --verbose",
     "nvm": "bash nvm.sh",
     "coverage": "c8 --reporter html npm run test",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "debug": "^4.3.4",
