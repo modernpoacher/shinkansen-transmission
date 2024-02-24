@@ -10,6 +10,8 @@ export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
 export const isArray = (v) => Array.isArray(v)
 
+export const isPrimitive = (v) => !isObject(v) && !isArray(v)
+
 export const isSchema = (v = {}) => Reflect.has(v, 'type')
 
 export const isStringSchema = ({ type } = {}) => type === 'string'
@@ -23,8 +25,6 @@ export const isObjectSchema = ({ type } = {}) => type === 'object'
 export const isBooleanSchema = ({ type } = {}) => type === 'boolean'
 
 export const isNullSchema = ({ type } = {}) => type === 'null'
-
-export const isPrimitive = (v) => !isObject(v) && !isArray(v)
 
 export const getTitle = ({ title } = {}) => (title ? { title } : {})
 
