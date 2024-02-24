@@ -33,7 +33,7 @@ declare namespace Zashiki {
   }
 
   export type DocumentType = string | number | boolean | null | ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType | ObjectLiteralType | undefined
-  export type HashType = Record<PropertyKey, string>
+  export type HashType = Record<PropertyKey, string> | Record<PropertyKey, never>
 
   export interface ZashikiType {
     meta: ObjectType | ObjectLiteralType
