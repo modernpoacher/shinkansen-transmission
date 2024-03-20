@@ -40,11 +40,11 @@
     "fast-deep-equal": "^3.1.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/eslint-parser": "^7.23.10",
-    "@babel/preset-env": "^7.24.0",
+    "@babel/core": "^7.24.1",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/preset-env": "^7.24.1",
     "@babel/register": "^7.23.7",
-    "@modernpoacher/hooks": "^1.0.468",
+    "@modernpoacher/hooks": "^1.0.469",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "babel-loader": "^9.1.3",
