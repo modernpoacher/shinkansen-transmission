@@ -26,14 +26,14 @@
     "url": "git@github.com/modernpoacher/shinkansen-transmission.git"
   },
   "scripts": {
-    "prelint": "npm run nvm",
+    "coverage": "c8 --reporter html npm run test",
     "lint": "eslint . --ext .mjs,.cjs,.mts,.cts",
     "lint:fix": "npm run lint -- --fix",
-    "pretest": "npm run nvm",
-    "test": "cross-env NODE_ENV=test mocha test --recursive --verbose",
     "nvm": "bash nvm.sh",
-    "coverage": "c8 --reporter html npm run test",
-    "prepare": "husky"
+    "prelint": "npm run nvm",
+    "prepare": "husky",
+    "pretest": "npm run nvm",
+    "test": "cross-env NODE_ENV=test mocha test --recursive --verbose"
   },
   "dependencies": {
     "debug": "^4.3.5",
@@ -66,24 +66,24 @@
       "require": "./src/index.cjs",
       "import": "./src/index.mjs"
     },
+    "./transmission": "./src/transmission/index.mjs",
     "./transmission/common": "./src/transmission/common/index.mjs",
-    "./transmission/from-document-to-hash/string": "./src/transmission/from-document-to-hash/string/index.mjs",
-    "./transmission/from-document-to-hash/number": "./src/transmission/from-document-to-hash/number/index.mjs",
+    "./transmission/from-document-to-hash": "./src/transmission/from-document-to-hash/index.mjs",
     "./transmission/from-document-to-hash/array": "./src/transmission/from-document-to-hash/array/index.mjs",
-    "./transmission/from-document-to-hash/object": "./src/transmission/from-document-to-hash/object/index.mjs",
     "./transmission/from-document-to-hash/boolean": "./src/transmission/from-document-to-hash/boolean/index.mjs",
     "./transmission/from-document-to-hash/null": "./src/transmission/from-hash-to-document/null/index.mjs",
-    "./transmission/from-document-to-hash": "./src/transmission/from-document-to-hash/index.mjs",
-    "./transmission/from-hash-to-document/string": "./src/transmission/from-hash-to-document/string/index.mjs",
-    "./transmission/from-hash-to-document/number": "./src/transmission/from-hash-to-document/number/index.mjs",
+    "./transmission/from-document-to-hash/number": "./src/transmission/from-document-to-hash/number/index.mjs",
+    "./transmission/from-document-to-hash/object": "./src/transmission/from-document-to-hash/object/index.mjs",
+    "./transmission/from-document-to-hash/string": "./src/transmission/from-document-to-hash/string/index.mjs",
+    "./transmission/from-hash-to-document": "./src/transmission/from-hash-to-document/index.mjs",
     "./transmission/from-hash-to-document/array": "./src/transmission/from-hash-to-document/array/index.mjs",
-    "./transmission/from-hash-to-document/object": "./src/transmission/from-hash-to-document/object/index.mjs",
     "./transmission/from-hash-to-document/boolean": "./src/transmission/from-hash-to-document/boolean/index.mjs",
     "./transmission/from-hash-to-document/null": "./src/transmission/from-hash-to-document/null/index.mjs",
-    "./transmission/from-hash-to-document": "./src/transmission/from-hash-to-document/index.mjs",
-    "./transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",
-    "./transmission/to-zashiki/transform-schema": "./src/transmission/to-zashiki/transform-schema.mjs",
+    "./transmission/from-hash-to-document/number": "./src/transmission/from-hash-to-document/number/index.mjs",
+    "./transmission/from-hash-to-document/object": "./src/transmission/from-hash-to-document/object/index.mjs",
+    "./transmission/from-hash-to-document/string": "./src/transmission/from-hash-to-document/string/index.mjs",
     "./transmission/to-zashiki": "./src/transmission/to-zashiki/index.mjs",
-    "./transmission": "./src/transmission/index.mjs"
+    "./transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",
+    "./transmission/to-zashiki/transform-schema": "./src/transmission/to-zashiki/transform-schema.mjs"
   }
 }
