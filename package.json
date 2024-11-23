@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com/modernpoacher/shinkansen-transmission.git"
+    "url": "git+ssh://git@github.com/modernpoacher/shinkansen-transmission.git"
   },
   "scripts": {
     "coverage": "c8 --reporter html npm run test",
