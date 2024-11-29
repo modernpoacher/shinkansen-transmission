@@ -2,11 +2,11 @@ import debug from 'debug'
 
 import {
   getUri
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 import {
   transformNull
-} from 'shinkansen-transmission/transmission/from-hash-to-document'
+} from '#transmission/transmission/from-hash-to-document'
 
 const log = debug('shinkansen-transmission/from-hash-to-document/null')
 

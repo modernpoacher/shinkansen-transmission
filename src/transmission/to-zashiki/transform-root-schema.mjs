@@ -21,7 +21,7 @@ import {
   getElementsFieldPropsForAnyOf,
   getElementsFieldPropsForOneOf,
   getElementsFieldPropsForAllOf
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 import {
   mapTransformStringByIndex,

@@ -41,9 +41,13 @@ declare namespace Zashiki {
   }
 }
 
-declare module 'shinkansen-transmission/transmission' {
-  export * as common from 'shinkansen-transmission/transmission/common'
-  export { default as fromDocumentToHash } from 'shinkansen-transmission/transmission/from-document-to-hash'
-  export { default as fromHashToDocument } from 'shinkansen-transmission/transmission/from-hash-to-document'
-  export { default as toZashiki } from 'shinkansen-transmission/transmission/to-zashiki'
+declare module '#transmission' {
+  export * as common from '#transmission/transmission/common'
+  export { default as fromDocumentToHash } from '#transmission/transmission/from-document-to-hash'
+  export { default as fromHashToDocument } from '#transmission/transmission/from-hash-to-document'
+  export { default as toZashiki } from '#transmission/transmission/to-zashiki'
+}
+
+declare module 'shinkansen-transmission' {
+  export * from '#transmission'
 }

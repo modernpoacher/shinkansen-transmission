@@ -4,11 +4,11 @@ import {
   toString,
   isObject,
   getUri
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 import {
   transformObject
-} from 'shinkansen-transmission/transmission/from-document-to-hash'
+} from '#transmission/transmission/from-document-to-hash'
 
 const log = debug('shinkansen-transmission/from-document-to-hash/object')
 

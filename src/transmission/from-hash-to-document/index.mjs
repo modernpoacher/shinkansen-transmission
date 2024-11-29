@@ -12,7 +12,7 @@ import {
   getOneOf,
   getUri,
   transformValue
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-hash-to-document')
 

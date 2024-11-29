@@ -52,7 +52,7 @@ import {
   getElementsFieldPropsForAllOf,
   getElementsFieldProps,
   getElementsFieldValue
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/to-zashiki/schema')
 

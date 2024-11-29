@@ -10,7 +10,7 @@ import {
   getOneOf,
   getUri,
   transformValueIndexFor
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-document-to-hash/string')
 

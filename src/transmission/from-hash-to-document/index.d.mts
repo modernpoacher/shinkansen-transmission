@@ -1,4 +1,4 @@
-declare module 'shinkansen-transmission/transmission/from-hash-to-document' {
+declare module '#transmission/transmission/from-hash-to-document' {
   type ObjectLiteralType = Zashiki.ObjectLiteralType
   type ObjectType = Zashiki.ObjectType
   type ArrayLiteralType = Zashiki.ArrayLiteralType
@@ -27,4 +27,9 @@ declare module 'shinkansen-transmission/transmission/from-hash-to-document' {
   export function transformString (hash: HashType, schema: SchemaType, parentUri: string, uri: string): string | undefined
 
   export default function transform (hash: HashType | undefined, rootSchema: SchemaType | undefined, parentUri: string | undefined, uri: string | undefined): DocumentType | undefined
+}
+
+declare module 'shinkansen-transmission/transmission/from-hash-to-document' {
+  export { default } from '#transmission/transmission/from-hash-to-document'
+  export * from '#transmission/transmission/from-hash-to-document'
 }

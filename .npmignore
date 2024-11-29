@@ -8,6 +8,7 @@
 .eslintignore
 .eslintrc
 
+.gitignore
 .gitattributes
 
 .depsrc
@@ -26,3 +27,7 @@ coverage
 
 # Shell
 nvm.sh
+
+# TypeScript
+tsconfig.json
+jsconfig.json

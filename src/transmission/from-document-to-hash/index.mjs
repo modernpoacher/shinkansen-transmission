@@ -15,7 +15,7 @@ import {
   transformValueIndexFor,
   transformEqualIndexFor,
   transformValue
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-document-to-hash')
 

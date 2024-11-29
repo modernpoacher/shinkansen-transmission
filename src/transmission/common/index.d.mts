@@ -1,4 +1,4 @@
-declare module 'shinkansen-transmission/transmission/common' {
+declare module '#transmission/transmission/common' {
   type ObjectLiteralType = Zashiki.ObjectLiteralType
   type ObjectType = Zashiki.ObjectType
   type ArrayLiteralType = Zashiki.ArrayLiteralType
@@ -116,4 +116,8 @@ declare module 'shinkansen-transmission/transmission/common' {
   export function getPattern (schema: SchemaType | undefined): { pattern: string } | ObjectLiteralType
 
   export function getStep (schema: SchemaType | undefined): { step: number } | ObjectLiteralType
+}
+
+declare module 'shinkansen-transmission/transmission/common' {
+  export * from '#transmission/transmission/common'
 }
