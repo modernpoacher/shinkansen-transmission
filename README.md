@@ -264,7 +264,7 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     schema: Object,
     rootSchema: Object,
     isRequired: Boolean,
-    selectedItems: Array,
+    selectedItems: Array
   },
   elements: {
     title: String,
@@ -290,13 +290,13 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     schema: Object,
     rootSchema: Object,
     isRequired: Boolean,
-    selectedItems: Array,
+    selectedItems: Array
   },
   elements: {
     title: String,
     description: String,
     oneOf: {
-      required: Boolean,
+      isRequired: Boolean,
       selectedItems: Array,
       items: Array,
       name: String
@@ -317,7 +317,7 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
     schema: Object,
     rootSchema: Object,
-    required: Boolean,
+    isRequired: Boolean
   },
   elements: {
     title: String,
@@ -337,7 +337,7 @@ As you might expect, `meta` contains fields _about_ the Schema, while `elements`
     type: String /* One of "object" "array" "string" "number" "boolean" "null" */,
     schema: Object,
     rootSchema: Object,
-    required: Boolean,
+    isRequired: Boolean
   },
   elements: {
     title: String,
