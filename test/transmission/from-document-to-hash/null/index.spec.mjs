@@ -1,6 +1,8 @@
 import debug from 'debug'
 
-import { expect } from 'chai'
+import {
+  expect
+} from 'chai'
 
 import transformNullSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
 

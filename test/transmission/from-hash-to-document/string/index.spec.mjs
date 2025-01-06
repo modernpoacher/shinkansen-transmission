@@ -1,6 +1,8 @@
 import debug from 'debug'
 
-import { expect } from 'chai'
+import {
+  expect
+} from 'chai'
 
 import transformStringSchema from 'shinkansen-transmission/transmission/from-hash-to-document/string'
 

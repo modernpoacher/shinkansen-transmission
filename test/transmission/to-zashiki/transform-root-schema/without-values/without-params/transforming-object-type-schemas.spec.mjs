@@ -1,6 +1,8 @@
 import debug from 'debug'
 
-import { expect } from 'chai'
+import {
+  expect
+} from 'chai'
 
 import transform from 'shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
 
