@@ -51,14 +51,14 @@ export function getSelectedItems (values = {}, uri = '#') {
       return isNaN(n)
         ? [v]
         : [n]
-    } else {
-      return v.map((v) => {
-        const n = Number(v)
-        return isNaN(n)
-          ? v
-          : n
-      })
     }
+
+    return v.map((v) => {
+      const n = Number(v)
+      return isNaN(n)
+        ? v
+        : n
+    })
   }
 
   // transformByKeyForEnum
@@ -120,12 +120,12 @@ export function hasMetaValue (values = {}, uri = '#', schema = {}) {
     const value = Reflect.get(values, uri)
 
     return isPrimitive(value)
-  } else {
-    if (Reflect.has(schema, 'const')) {
-      const constValue = Reflect.get(schema, 'const')
+  }
 
-      return isPrimitive(constValue)
-    }
+  if (Reflect.has(schema, 'const')) {
+    const constValue = Reflect.get(schema, 'const')
+
+    return isPrimitive(constValue)
   }
 
   return false
@@ -138,13 +138,13 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
     if (isPrimitive(value)) {
       return { value: String(value) }
     }
-  } else {
-    if (Reflect.has(schema, 'const')) {
-      const constValue = Reflect.get(schema, 'const')
+  }
 
-      if (isPrimitive(constValue)) {
-        return { value: String(constValue) }
-      }
+  if (Reflect.has(schema, 'const')) {
+    const constValue = Reflect.get(schema, 'const')
+
+    if (isPrimitive(constValue)) {
+      return { value: String(constValue) }
     }
   }
 
@@ -185,18 +185,18 @@ export function findByIndex (parentUri, uri) {
      */
     if (hasEnum(schema)) {
       return getUri(parentUri, index) === uri
-    } else {
-      if (hasAnyOf(schema)) {
-        const array = getAnyOf(schema)
+    }
 
-        return array.find(findByIndex(parentUri, uri))
-      } else {
-        if (hasOneOf(schema)) {
-          const array = getOneOf(schema)
+    if (hasAnyOf(schema)) {
+      const array = getAnyOf(schema)
 
-          return array.find(findByIndex(parentUri, uri))
-        }
-      }
+      return array.find(findByIndex(parentUri, uri))
+    }
+
+    if (hasOneOf(schema)) {
+      const array = getOneOf(schema)
+
+      return array.find(findByIndex(parentUri, uri))
     }
 
     return getUri(parentUri, index) === uri
@@ -320,12 +320,12 @@ export function hasValue (values = {}, uri = '#', schema = {}) {
     const value = Reflect.get(values, uri)
 
     return isPrimitive(value)
-  } else {
-    if (Reflect.has(schema, 'const')) {
-      const constValue = Reflect.get(schema, 'const')
+  }
 
-      return isPrimitive(constValue)
-    }
+  if (Reflect.has(schema, 'const')) {
+    const constValue = Reflect.get(schema, 'const')
+
+    return isPrimitive(constValue)
   }
 
   return false
@@ -338,13 +338,13 @@ export function getValue (values = {}, uri = '#', schema = {}) {
     if (isPrimitive(value)) {
       return String(value)
     }
-  } else {
-    if (Reflect.has(schema, 'const')) {
-      const constValue = Reflect.get(schema, 'const')
+  }
 
-      if (isPrimitive(constValue)) {
-        return String(constValue)
-      }
+  if (Reflect.has(schema, 'const')) {
+    const constValue = Reflect.get(schema, 'const')
+
+    if (isPrimitive(constValue)) {
+      return String(constValue)
     }
   }
 }
@@ -532,21 +532,21 @@ export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
     if (isPrimitive(value)) {
       return { value: String(value) }
     }
-  } else {
-    if (Reflect.has(schema, 'const')) {
-      const constValue = Reflect.get(schema, 'const')
+  }
 
-      if (isPrimitive(constValue)) {
-        return { value: String(constValue) }
-      }
-    } else {
-      if (Reflect.has(schema, 'default')) {
-        const defaultValue = Reflect.get(schema, 'default')
+  if (Reflect.has(schema, 'const')) {
+    const constValue = Reflect.get(schema, 'const')
 
-        if (isPrimitive(defaultValue)) {
-          return { value: String(defaultValue) }
-        }
-      }
+    if (isPrimitive(constValue)) {
+      return { value: String(constValue) }
+    }
+  }
+
+  if (Reflect.has(schema, 'default')) {
+    const defaultValue = Reflect.get(schema, 'default')
+
+    if (isPrimitive(defaultValue)) {
+      return { value: String(defaultValue) }
     }
   }
 

@@ -31,7 +31,7 @@ declare module '#transmission/transmission/common' {
   export function hasMetaValue (values: ObjectType | ObjectLiteralType, uri: string | undefined, schema: SchemaType | undefined): boolean
   export function getMetaValue (values: ObjectType | ObjectLiteralType, uri: string | undefined, schema: SchemaType | undefined): { value: string } | ObjectLiteralType
 
-  export function transformValue (schema: SchemaType): SchemaType | unknown
+  export function transformValue (schema: SchemaType): SchemaType | ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType | undefined
 
   export function findByKey (parentUri: string | undefined, uri: string | undefined): (key: string) => boolean
   export function findByIndex (parentUri: string | undefined, uri: string | undefined): (schema: SchemaType, index: number) => boolean
