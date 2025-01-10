@@ -3,6 +3,11 @@ import standard from '@sequencemedia/eslint-config-standard/configs/recommended/
 import typescript from '@sequencemedia/eslint-config-typescript/configs/recommended/merge'
 
 export default [
+  {
+    ignores: [
+      'coverage'
+    ]
+  },
   /**
    *  Standard config
    */
@@ -65,7 +70,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
-        Zashiki: 'readonly'
+        ZashikiTypes: 'readonly'
       }
     },
     rules: {

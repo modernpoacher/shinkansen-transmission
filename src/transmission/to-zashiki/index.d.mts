@@ -1,10 +1,10 @@
 declare module '#transmission/transmission/to-zashiki' {
-  type SchemaType = Zashiki.SchemaType
+  type SchemaType = ZashikiTypes.SchemaType
 
-  type ObjectLiteralType = Zashiki.ObjectLiteralType
-  type ObjectType = Zashiki.ObjectType
+  type ObjectLiteralType = ZashikiTypes.ObjectLiteralType
+  type ObjectType = ZashikiTypes.ObjectType
 
-  type ZashikiType = Zashiki.ZashikiType
+  type ZashikiType = ZashikiTypes.ZashikiType
 
   export default function toZashiki (rootSchema: SchemaType | undefined, values: ObjectType | ObjectLiteralType | undefined, params: ObjectType | ObjectLiteralType | undefined): ZashikiType | undefined
 }

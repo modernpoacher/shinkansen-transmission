@@ -1,11 +1,11 @@
 declare module '#transmission/transmission/from-document-to-hash' {
-  type ObjectLiteralType = Zashiki.ObjectLiteralType
-  type ObjectType = Zashiki.ObjectType
+  type ObjectLiteralType = ZashikiTypes.ObjectLiteralType
+  type ObjectType = ZashikiTypes.ObjectType
 
-  type SchemaType = Zashiki.SchemaType
+  type SchemaType = ZashikiTypes.SchemaType
 
-  type DocumentType = Zashiki.DocumentType
-  type HashType = Zashiki.HashType
+  type DocumentType = ZashikiTypes.DocumentType
+  type HashType = ZashikiTypes.HashType
 
   export function transformArrayFor (document: DocumentType | undefined, schema: SchemaType | undefined, values: ObjectType | ObjectLiteralType | undefined, parentUri: string | undefined, uri: string | undefined): HashType | undefined
   export function transformObjectFor (document: DocumentType | undefined, schema: SchemaType | undefined, values: ObjectType | ObjectLiteralType | undefined, parentUri: string | undefined, uri: string | undefined): HashType | undefined

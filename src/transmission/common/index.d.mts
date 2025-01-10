@@ -1,10 +1,10 @@
 declare module '#transmission/transmission/common' {
-  type ObjectLiteralType = Zashiki.ObjectLiteralType
-  type ObjectType = Zashiki.ObjectType
-  type ArrayLiteralType = Zashiki.ArrayLiteralType
-  type ArrayType = Zashiki.ArrayType
+  type ObjectLiteralType = ZashikiTypes.ObjectLiteralType
+  type ObjectType = ZashikiTypes.ObjectType
+  type ArrayLiteralType = ZashikiTypes.ArrayLiteralType
+  type ArrayType = ZashikiTypes.ArrayType
 
-  type SchemaType = Zashiki.SchemaType
+  type SchemaType = ZashikiTypes.SchemaType
 
   export function isObject (v: unknown): boolean
   export function isArray (v: unknown): boolean
@@ -31,7 +31,7 @@ declare module '#transmission/transmission/common' {
   export function hasMetaValue (values: ObjectType | ObjectLiteralType, uri: string | undefined, schema: SchemaType | undefined): boolean
   export function getMetaValue (values: ObjectType | ObjectLiteralType, uri: string | undefined, schema: SchemaType | undefined): { value: string } | ObjectLiteralType
 
-  export function transformValue (schema: SchemaType): SchemaType | ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType | undefined
+  export function transformValue (schema: SchemaType | undefined): SchemaType | ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType | undefined
 
   export function findByKey (parentUri: string | undefined, uri: string | undefined): (key: string) => boolean
   export function findByIndex (parentUri: string | undefined, uri: string | undefined): (schema: SchemaType, index: number) => boolean
@@ -41,7 +41,7 @@ declare module '#transmission/transmission/common' {
   export function toString (value: unknown): string
 
   export function getObject (value: { properties: ObjectType /* object */ }, parentUri: string | undefined, uri: string | undefined): ObjectType
-  export function getArray (value: { items: ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType /* array or object */ }, parentUri: string | undefined, uri: string | undefined): ArrayType
+  export function getArray (value: { items: ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType /* object or array */ }, parentUri: string | undefined, uri: string | undefined): ArrayType
   export function getSchema (schema: SchemaType | ObjectType, parentUri: string | undefined, uri: string | undefined): ObjectType | ObjectLiteralType | ArrayType | ArrayLiteralType | SchemaType
 
   export function transformValueIndexFor (array: ArrayType, value: unknown): string

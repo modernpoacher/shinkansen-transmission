@@ -1,5 +1,5 @@
 declare global {
-  namespace Zashiki {
+  namespace ZashikiTypes {
     export type ObjectLiteralType = Record<PropertyKey, never>
     export type ObjectType = Record<PropertyKey, unknown>
     export type ArrayLiteralType = never[]
