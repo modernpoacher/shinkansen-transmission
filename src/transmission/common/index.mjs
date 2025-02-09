@@ -48,6 +48,7 @@ export function getSelectedItems (values = {}, uri = '#') {
 
     if (isPrimitive(v)) {
       const n = Number(v)
+
       return isNaN(n)
         ? [v]
         : [n]
@@ -55,6 +56,7 @@ export function getSelectedItems (values = {}, uri = '#') {
 
     return v.map((v) => {
       const n = Number(v)
+
       return isNaN(n)
         ? v
         : n
