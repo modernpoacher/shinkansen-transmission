@@ -1,15 +1,6 @@
-declare module '#transmission/transmission/to-zashiki' {
-  type SchemaType = ZashikiTypes.SchemaType
+export type SchemaType = TransmissionTypes.SchemaType
+export type ValuesType = TransmissionTypes.ValuesType
+export type ParamsType = TransmissionTypes.ParamsType
+export type ZashikiType = TransmissionTypes.ZashikiType
 
-  type ObjectLiteralType = ZashikiTypes.ObjectLiteralType
-  type ObjectType = ZashikiTypes.ObjectType
-
-  type ZashikiType = ZashikiTypes.ZashikiType
-
-  export default function toZashiki (rootSchema: SchemaType | undefined, values: ObjectType | ObjectLiteralType | undefined, params: ObjectType | ObjectLiteralType | undefined): ZashikiType | undefined
-}
-
-declare module 'shinkansen-transmission/transmission/to-zashiki' {
-  export { default } from '#transmission/transmission/to-zashiki'
-  export * from '#transmission/transmission/to-zashiki'
-}
+export default function toZashiki (rootSchema?: SchemaType, values?: ValuesType, params?: ParamsType): ZashikiType | undefined
