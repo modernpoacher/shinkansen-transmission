@@ -1,3 +1,10 @@
+/**
+ *  @typedef {TransmissionTypes.HashType} HashType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.ParamsType} ParamsType
+ *  @typedef {TransmissionTypes.DocumentType} DocumentType
+ */
+
 import debug from 'debug'
 
 import {
@@ -12,18 +19,28 @@ const log = debug('shinkansen-transmission/from-hash-to-document/null')
 
 log('`shinkansen` is awake')
 
-export default function transformNullSchema (values = {}, schema = {}, params = {}) {
+/**
+ * Hash can be `undefined`
+ *
+ *  @param {HashType} [hash]
+ *  @param {SchemaType} [schema]
+ *  @param {ParamsType} [params]
+ *  @returns {DocumentType | undefined}
+ */
+export default function transformNullSchema (hash = {}, schema = {}, params = {}) {
   log('transformNullSchema')
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   if (type === 'null') {
     const {
-      uri: parentUri
+      uri: parentUri = '#'
     } = params
 
-    return transformNull(values, schema, parentUri, getUri(parentUri))
+    return transformNull(hash, schema, parentUri, getUri(parentUri))
   }
 
   throw new Error('Schema does not conform to Instance Data Model, https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1')

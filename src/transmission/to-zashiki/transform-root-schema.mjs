@@ -1,3 +1,11 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.ValuesType} ValuesType
+ *  @typedef {TransmissionTypes.ParamsType} ParamsType
+ *
+ *  @typedef {TransmissionTypes.Zashiki.ZashikiType} ZashikiType
+ */
+
 import debug from 'debug'
 
 import {
@@ -7,7 +15,6 @@ import {
   getSelectedItems,
 
   hasEnum,
-  getEnum,
   hasAnyOf,
   hasOneOf,
   hasAllOf,
@@ -77,6 +84,21 @@ const log = debug('shinkansen-transmission/to-zashiki/root-schema')
 
 log('`shinkansen` is awake')
 
+/**
+ *  @param {SchemaType} schemaProps
+ *  @param {SchemaType} item
+ *  @returns {SchemaType}
+ */
+function toSchema (schemaProps, item) {
+  return Object.assign(schemaProps, item)
+}
+
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
 export function getRenderParamsForEnum (rootSchema, values, params) {
   /*
    *  log('getRenderParamsForEnum')
@@ -112,6 +134,12 @@ export function getRenderParamsForEnum (rootSchema, values, params) {
   })
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
 export function getRenderParamsForAnyOf (rootSchema, values, params) {
   /*
    *  log('getRenderParamsForAnyOf')
@@ -147,6 +175,12 @@ export function getRenderParamsForAnyOf (rootSchema, values, params) {
   })
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
 export function getRenderParamsForOneOf (rootSchema, values, params) {
   /*
    *  log('getRenderParamsForOneOf')
@@ -182,6 +216,12 @@ export function getRenderParamsForOneOf (rootSchema, values, params) {
   })
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
 export function getRenderParamsForAllOf (rootSchema, values, params) {
   /*
    *  log('getRenderParamsForAllOf')
@@ -210,6 +250,12 @@ export function getRenderParamsForAllOf (rootSchema, values, params) {
   })
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
 export function getRenderParams (rootSchema, values, params) {
   /*
    *  log('getRenderParams')
@@ -241,10 +287,15 @@ export function getRenderParams (rootSchema, values, params) {
   })
 }
 
-/*
+/**
  *  Root schema
  *
  *  "enum"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForEnum (rootSchema, values, params) {
   /*
@@ -259,15 +310,20 @@ export function transformNullForEnum (rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(rootSchema)
+  const { enum: items = [] } = rootSchema // const items = getEnum(rootSchema)
 
   return renderNullForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "anyOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForAnyOf (rootSchema, values, params) {
   /*
@@ -283,15 +339,20 @@ export function transformNullForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = anyOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderNullForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "oneOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForOneOf (rootSchema, values, params) {
   /*
@@ -307,31 +368,49 @@ export function transformNullForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = oneOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderNullForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "allOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForAllOf (rootSchema, values, params) {
   /*
    *  log('transformNullForAllOf')
    */
 
-  const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = rootSchema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNullForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
+ *
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformNull (rootSchema, values, params) {
   /*
    *  log('transformNull')
@@ -356,10 +435,15 @@ export function transformNull (rootSchema, values, params) {
   return renderNull(rootSchema, values, getRenderParams(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "enum"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForEnum (rootSchema, values, params) {
   /*
@@ -374,15 +458,20 @@ export function transformBooleanForEnum (rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(rootSchema)
+  const { enum: items = [] } = rootSchema // const items = getEnum(rootSchema)
 
   return renderBooleanForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "anyOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForAnyOf (rootSchema, values, params) {
   /*
@@ -398,15 +487,20 @@ export function transformBooleanForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = anyOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderBooleanForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "oneOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForOneOf (rootSchema, values, params) {
   /*
@@ -422,31 +516,49 @@ export function transformBooleanForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = oneOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderBooleanForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "allOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForAllOf (rootSchema, values, params) {
   /*
    *  log('transformBooleanForAllOf')
    */
 
-  const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = rootSchema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderBooleanForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
+ *
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
 export function transformBoolean (rootSchema, values, params) {
   /*
    *  log('transformBoolean')
@@ -471,10 +583,15 @@ export function transformBoolean (rootSchema, values, params) {
   return renderBoolean(rootSchema, values, getRenderParams(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "enum"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForEnum (rootSchema, values, params) {
   /*
@@ -489,15 +606,20 @@ export function transformObjectForEnum (rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(rootSchema)
+  const { enum: items = [] } = rootSchema // const items = getEnum(rootSchema)
 
   return renderObjectForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "anyOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForAnyOf (rootSchema, values, params) {
   /*
@@ -513,15 +635,20 @@ export function transformObjectForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = anyOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderObjectForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "oneOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForOneOf (rootSchema, values, params) {
   /*
@@ -537,31 +664,49 @@ export function transformObjectForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = oneOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderObjectForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "allOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForAllOf (rootSchema, values, params) {
   /*
    *  log('transformObjectForAllOf')
    */
 
-  const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = rootSchema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderObjectForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
+ *
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
 export function transformObject (rootSchema, values, params) {
   /*
    *  log('transformObject')
@@ -595,16 +740,21 @@ export function transformObject (rootSchema, values, params) {
   const fields = (
     Object
       .entries(properties)
-      .map(mapTransformByKey(rootSchema, values, Object.assign(params, { parentUri: uri, required })))
+      .map(mapTransformByKey(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, required })))
   )
 
   return renderObject(rootSchema, values, getRenderParams(rootSchema, values, Object.assign(params, { fields })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "enum"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForEnum (rootSchema, values, params) {
   /*
@@ -619,15 +769,20 @@ export function transformArrayForEnum (rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(rootSchema)
+  const { enum: items = [] } = rootSchema // const items = getEnum(rootSchema)
 
   return renderArrayForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "anyOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForAnyOf (rootSchema, values, params) {
   /*
@@ -643,15 +798,20 @@ export function transformArrayForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = anyOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderArrayForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "oneOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForOneOf (rootSchema, values, params) {
   /*
@@ -667,31 +827,49 @@ export function transformArrayForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = oneOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderArrayForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "allOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForAllOf (rootSchema, values, params) {
   /*
    *  log('transformArrayForAllOf')
    */
 
-  const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = rootSchema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
+ *
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
 export function transformArray (rootSchema, values, params) {
   /*
    *  log('transformArray')
@@ -719,25 +897,32 @@ export function transformArray (rootSchema, values, params) {
 
   if (isArray(items)) {
     const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, Object.assign(params, { parentUri: '#/' })))
+      items.map(mapTransformByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: '#/' })))
     )
 
     return renderArray(rootSchema, values, getRenderParams(rootSchema, values, Object.assign(params, { fields })))
   } else {
     if (isObject(items)) {
       const fields = [
-        getTransformByIndex(items, rootSchema, values, Object.assign(params, { parentUri: '#/' }))
+        getTransformByIndex(items, rootSchema, values, Object.assign(structuredClone(params), { parentUri: '#/' }))
       ]
 
       return renderArray(rootSchema, values, getRenderParams(rootSchema, values, Object.assign(params, { fields })))
     }
   }
+
+  throw new Error('Invalid `array`')
 }
 
-/*
+/**
  *  Root schema
  *
  *  "enum"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForEnum (rootSchema, values, params) {
   /*
@@ -752,15 +937,20 @@ export function transformNumberForEnum (rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(rootSchema)
+  const { enum: items = [] } = rootSchema // const items = getEnum(rootSchema)
 
   return renderNumberForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "anyOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForAnyOf (rootSchema, values, params) {
   /*
@@ -776,15 +966,20 @@ export function transformNumberForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = anyOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderNumberForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "oneOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForOneOf (rootSchema, values, params) {
   /*
@@ -800,31 +995,49 @@ export function transformNumberForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = oneOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderNumberForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "allOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForAllOf (rootSchema, values, params) {
   /*
    *  log('transformNumberForAllOf')
    */
 
-  const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = rootSchema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNumberForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
+ *
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
 export function transformNumber (rootSchema, values, params) {
   /*
    *  log('transformNumber')
@@ -849,10 +1062,15 @@ export function transformNumber (rootSchema, values, params) {
   return renderNumber(rootSchema, values, getRenderParams(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "enum"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForEnum (rootSchema, values, params) {
   /*
@@ -867,15 +1085,20 @@ export function transformStringForEnum (rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(rootSchema)
+  const { enum: items = [] } = rootSchema // const items = getEnum(rootSchema)
 
   return renderStringForEnum(rootSchema, values, getRenderParamsForEnum(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "anyOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForAnyOf (rootSchema, values, params) {
   /*
@@ -891,15 +1114,20 @@ export function transformStringForAnyOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = rootSchema
-  const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = anyOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderStringForAnyOf(rootSchema, values, getRenderParamsForAnyOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "oneOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForOneOf (rootSchema, values, params) {
   /*
@@ -915,31 +1143,49 @@ export function transformStringForOneOf (rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = rootSchema
-  const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, Object.assign(params, { selectedItems, parentUri: uri })))
+  const items = oneOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { selectedItems, parentUri: uri })))
 
   return renderStringForOneOf(rootSchema, values, getRenderParamsForOneOf(rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  Root schema
  *
  *  "allOf"
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForAllOf (rootSchema, values, params) {
   /*
    *  log('transformStringForAllOf')
    */
 
-  const { allOf = [], ...rest } = rootSchema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = rootSchema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderStringForAllOf(itemSchema, values, getRenderParamsForAllOf(rootSchema, values, params))
 }
 
-/*
+/**
  *  Root schema
+ *
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+ *
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
 export function transformString (rootSchema, values, params) {
   /*
    *  log('transformString')
@@ -964,6 +1210,12 @@ export function transformString (rootSchema, values, params) {
   return renderString(rootSchema, values, getRenderParams(rootSchema, values, params))
 }
 
+/**
+ *  @param {SchemaType} [rootSchema]
+ *  @param {ValuesType} [values]
+ *  @param {ParamsType} [params]
+ *  @returns {ZashikiType}
+ */
 export default function toZashiki (rootSchema = {}, values = {}, params = {}) {
   log('toZashiki')
 

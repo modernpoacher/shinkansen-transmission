@@ -1,3 +1,9 @@
+/**
+ *  @typedef {TransmissionTypes.DocumentType} DocumentType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -14,7 +20,17 @@ const log = debug('shinkansen-transmission/from-document-to-hash/object')
 
 log('`shinkansen` is awake')
 
-export default function transformObjectSchema (document, schema = {}, values = {}, parentUri = '#', uri = getUri(parentUri)) {
+/**
+ * Document can be `undefined`
+ *
+ *  @param {DocumentType} [document]
+ *  @param {SchemaType} [schema]
+ *  @param {HashType} [hash]
+ *  @param {string} [parentUri]
+ *  @param {string} [uri]
+ *  @returns {HashType}
+ */
+export default function transformObjectSchema (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
   log('transformObjectSchema')
 
   /*
@@ -22,15 +38,15 @@ export default function transformObjectSchema (document, schema = {}, values = {
    */
   if (isObject(document)) {
     /*
-      *  Yes, `document` is an object
-      */
-    return transformObject(document, schema, values, parentUri, uri)
+     *  Yes, `document` is an object
+     */
+    return transformObject(document, schema, hash, parentUri, uri)
   }
 
   /*
    *  The hash should contain only strings
    */
-  values[uri] = toString(document)
+  hash[uri] = toString(document)
 
-  return values
+  return hash
 }

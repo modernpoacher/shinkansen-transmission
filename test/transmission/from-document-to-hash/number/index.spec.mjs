@@ -1,10 +1,17 @@
+/**
+ *  @typedef {TransmissionTypes.ArrayLiteralType} ArrayLiteralType
+ *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
   expect
 } from 'chai'
 
-import transformNumberSchema from 'shinkansen-transmission/transmission/from-document-to-hash'
+import transformNumberSchema from 'shinkansen-transmission/transmission/from-document-to-hash/number'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/number', () => {
   before(() => {
@@ -27,6 +34,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
       it('transforms `number` type schemas with `enum`', () => {
         const document = 3
 
+        /**
+         *  @type {SchemaType}
+         */
         const schema = {
           type: 'number',
           enum: [
@@ -36,17 +46,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           ]
         }
 
-        const values = {
+        const hash = {
           '#/': '2'
         }
 
         return expect(transformNumberSchema(document, schema))
-          .to.eql(values)
+          .to.eql(hash)
       })
 
       it('transforms `number` type schemas with `anyOf`', () => {
         const document = 3
 
+        /**
+         *  @type {SchemaType}
+         */
         const schema = {
           type: 'number',
           anyOf: [
@@ -56,17 +69,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           ]
         }
 
-        const values = {
+        const hash = {
           '#/': '2'
         }
 
         return expect(transformNumberSchema(document, schema))
-          .to.eql(values)
+          .to.eql(hash)
       })
 
       it('transforms `number` type schemas with `oneOf`', () => {
         const document = 3
 
+        /**
+         *  @type {SchemaType}
+         */
         const schema = {
           type: 'number',
           oneOf: [
@@ -76,30 +92,33 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/number', ()
           ]
         }
 
-        const values = {
+        const hash = {
           '#/': '2'
         }
 
         return expect(transformNumberSchema(document, schema))
-          .to.eql(values)
+          .to.eql(hash)
       })
 
       it('transforms `number` type schemas', () => {
         const document = 1
 
+        /**
+         *  @type {SchemaType}
+         */
         const schema = { type: 'number' }
 
-        const values = {
+        const hash = {
           '#/': '1'
         }
 
         return expect(transformNumberSchema(document, schema))
-          .to.eql(values)
+          .to.eql(hash)
       })
     })
   })
 
   describe('Document is undefined', () => {
-    it('transforms', () => expect(transformNumberSchema()).to.eql({ '#/': '' }))
+    it('transforms', () => expect(transformNumberSchema(undefined, { type: 'number' })).to.eql({ '#/': '' }))
   })
 })

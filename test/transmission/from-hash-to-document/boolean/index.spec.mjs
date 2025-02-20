@@ -1,3 +1,10 @@
+/**
+ *  @typedef {TransmissionTypes.ArrayLiteralType} ArrayLiteralType
+ *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -23,13 +30,16 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
   })
 
   describe('Hash is defined and schema is defined', () => {
-    describe('With values', () => {
+    describe('Hash has values', () => {
       describe('Transforming `boolean` type schemas', () => {
         it('transforms `boolean` type schemas with `enum`', () => {
-          const values = {
+          const hash = {
             '#/': '1'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             enum: [
@@ -40,15 +50,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
 
           const document = false
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `boolean` type schemas with `anyOf`', () => {
-          const values = {
+          const hash = {
             '#/': '1'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -59,15 +72,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
 
           const document = false
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `boolean` type schemas with `oneOf`', () => {
-          const values = {
+          const hash = {
             '#/': '1'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -78,30 +94,39 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
 
           const document = false
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `boolean` type schemas', () => {
-          const values = {
+          const hash = {
             '#/': 'true'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'boolean' }
 
           const document = true
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.eql(document)
         })
       })
     })
 
-    describe('Without values', () => {
+    describe('Hash does not have values', () => {
       describe('Transforming `boolean` type schemas', () => {
         it('transforms `boolean` type schemas with `enum`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             enum: [
@@ -112,13 +137,19 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
 
           const document = undefined
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `boolean` type schemas with `anyOf`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -129,13 +160,19 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
 
           const document = undefined
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `boolean` type schemas with `oneOf`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -146,18 +183,24 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', (
 
           const document = undefined
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `boolean` type schemas', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'boolean' }
 
           const document = undefined
 
-          return expect(transformBooleanSchema(values, schema))
+          return expect(transformBooleanSchema(hash, schema))
             .to.eql(document)
         })
       })

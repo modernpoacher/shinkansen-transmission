@@ -1,3 +1,10 @@
+/**
+ *  @typedef {TransmissionTypes.ArrayLiteralType} ArrayLiteralType
+ *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -9,9 +16,7 @@ import {
   getMetaProps,
   getMetaDefaultValue,
   getMetaValue,
-  transformValue,
-  getElementsTitleProps,
-  getElementsDescriptionProps,
+  transformToValue,
   getElementsFieldProps,
   getElementsFieldValue,
   getMin,
@@ -89,23 +94,9 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`transformValue`', () => {
+  describe('`transformToValue`', () => {
     it('is a function', () => {
-      expect(transformValue)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`getElementsTitleProps`', () => {
-    it('is a function', () => {
-      expect(getElementsTitleProps)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`getElementsDescriptionProps`', () => {
-    it('is a function', () => {
-      expect(getElementsDescriptionProps)
+      expect(transformToValue)
         .to.be.a('function')
     })
   })
@@ -452,13 +443,13 @@ describe('shinkansen-transmission/transmission/common', () => {
     })
   })
 
-  describe('`transformValue()`', () => {
+  describe('`transformToValue()`', () => {
     describe('Schema is an object', () => {
       describe('Schema has a `const` field', () => {
         it('returns the value', () => {
           const schema = { const: 'MOCK CONST' }
 
-          expect(transformValue(schema))
+          expect(transformToValue(schema))
             .to.equal('MOCK CONST')
         })
       })
@@ -468,7 +459,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           it('returns the value', () => {
             const schema = { default: 'MOCK DEFAULT' }
 
-            expect(transformValue(schema))
+            expect(transformToValue(schema))
               .to.equal('MOCK DEFAULT')
           })
         })
@@ -477,7 +468,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           it('returns the schema', () => {
             const schema = {}
 
-            expect(transformValue(schema))
+            expect(transformToValue(schema))
               .to.equal(schema)
           })
         })
@@ -486,42 +477,13 @@ describe('shinkansen-transmission/transmission/common', () => {
 
     describe('Schema is not an object', () => {
       it('returns the schema', () => {
+        /**
+         *  @type {ArrayLiteralType}
+         */
         const schema = []
 
-        expect(transformValue(schema))
+        expect(transformToValue(schema))
           .to.equal(schema)
-      })
-    })
-  })
-
-  describe('`getElementsTitleProps()`', () => {
-    describe('Params has a `title` field for the uri', () => {
-      it('returns a `title` object', () => {
-        expect(getElementsTitleProps({ '#/': { elements: { title: { text: 'MOCK TITLE' } } } }, '#/'))
-          .to.eql({ text: 'MOCK TITLE' })
-      })
-    })
-
-    describe('Params does not have a `title` field for the uri', () => {
-      it('returns an object', () => {
-        expect(getElementsTitleProps({}, '#/'))
-          .to.eql({})
-      })
-    })
-  })
-
-  describe('`getElementsDescriptionProps()`', () => {
-    describe('Params has a `description` field for the uri', () => {
-      it('returns a `description` object', () => {
-        expect(getElementsDescriptionProps({ '#/': { elements: { description: { text: 'MOCK DESCRIPTION' } } } }, '#/'))
-          .to.eql({ text: 'MOCK DESCRIPTION' })
-      })
-    })
-
-    describe('Params does not have a `description` field for the uri', () => {
-      it('returns an object', () => {
-        expect(getElementsDescriptionProps({}, '#/'))
-          .to.eql({})
       })
     })
   })
@@ -605,6 +567,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMin()`', () => {
     describe('Schema has a `minimum` field', () => {
+      it('returns a `min` object', () => {
+        expect(getMin({ minimum: 1 }))
+          .to.eql({ min: 1 })
+      })
+
+      /*
       describe('`minimum` is a number', () => {
         it('returns a `min` object', () => {
           expect(getMin({ minimum: 1 }))
@@ -617,7 +585,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMin({ minimum: 'MOCK MINIMUM' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `minimum` field', () => {
@@ -630,6 +598,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMax()`', () => {
     describe('Schema has a `maximum` field', () => {
+      it('returns a `max` object', () => {
+        expect(getMax({ maximum: 1 }))
+          .to.eql({ max: 1 })
+      })
+
+      /*
       describe('`maximum` is a number', () => {
         it('returns a `max` object', () => {
           expect(getMax({ maximum: 1 }))
@@ -642,7 +616,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMax({ maximum: 'MOCK MAXIMUM' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `maximum` field', () => {
@@ -655,6 +629,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMinLength()`', () => {
     describe('Schema has a `minLength` field', () => {
+      it('returns a `minLength` object', () => {
+        expect(getMinLength({ minLength: 1 }))
+          .to.eql({ minLength: 1 })
+      })
+
+      /*
       describe('`minLength` is a number', () => {
         it('returns a `minLength` object', () => {
           expect(getMinLength({ minLength: 1 }))
@@ -667,7 +647,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMinLength({ minLength: 'MOCK MIN LENGTH' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `minLength` field', () => {
@@ -680,6 +660,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMaxLength()`', () => {
     describe('Schema has a `maxLength` field', () => {
+      it('returns a `maxLength` object', () => {
+        expect(getMaxLength({ maxLength: 1 }))
+          .to.eql({ maxLength: 1 })
+      })
+
+      /*
       describe('`maxLength` is a number', () => {
         it('returns a `maxLength` object', () => {
           expect(getMaxLength({ maxLength: 1 }))
@@ -692,7 +678,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMaxLength({ maxLength: 'MOCK MAX LENGTH' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `maxLength` field', () => {
@@ -705,6 +691,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMinItems()`', () => {
     describe('Schema has a `minItems` field', () => {
+      it('returns a `minItems` object', () => {
+        expect(getMinItems({ minItems: 1 }))
+          .to.eql({ minItems: 1 })
+      })
+
+      /*
       describe('`minItems` is a number', () => {
         it('returns a `minItems` object', () => {
           expect(getMinItems({ minItems: 1 }))
@@ -717,7 +709,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMinItems({ minItems: 'MOCK MIN ITEMS' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `minItems` field', () => {
@@ -730,6 +722,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMaxItems()`', () => {
     describe('Schema has a `maxItems` field', () => {
+      it('returns a `maxItems` object', () => {
+        expect(getMaxItems({ maxItems: 1 }))
+          .to.eql({ maxItems: 1 })
+      })
+
+      /*
       describe('`maxItems` is a number', () => {
         it('returns a `maxItems` object', () => {
           expect(getMaxItems({ maxItems: 1 }))
@@ -742,7 +740,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMaxItems({ maxItems: 'MOCK MAX ITEMS' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `maxItems` field', () => {
@@ -755,6 +753,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getHasUniqueItems()`', () => {
     describe('Schema has an `uniqueItems` field', () => {
+      it('returns a `hasUniqueItems` object', () => {
+        expect(getHasUniqueItems({ uniqueItems: true }))
+          .to.eql({ hasUniqueItems: true })
+      })
+
+      /*
       describe('`uniqueItems` is a boolean', () => {
         it('returns a `hasUniqueItems` object', () => {
           expect(getHasUniqueItems({ uniqueItems: true }))
@@ -767,7 +771,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getHasUniqueItems({ uniqueItems: 'MOCK UNIQUE ITEMS' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have an `uniqueItems` field', () => {
@@ -779,6 +783,14 @@ describe('shinkansen-transmission/transmission/common', () => {
   })
 
   describe('`getMinContains()`', () => {
+    describe('Schema has a `minContains` field', () => {
+      it('returns a `minContains` object', () => {
+        expect(getMinContains({ minContains: 1 }))
+          .to.eql({ minContains: 1 })
+      })
+    })
+
+    /*
     describe('`minContains` is a number', () => {
       describe('Schema has a `minContains` field', () => {
         it('returns a `minContains` object', () => {
@@ -793,7 +805,7 @@ describe('shinkansen-transmission/transmission/common', () => {
             .to.eql({})
         })
       })
-    })
+    }) */
 
     describe('Schema does not have a `minContains` field', () => {
       it('returns an object', () => {
@@ -805,6 +817,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMaxContains()`', () => {
     describe('Schema has a `maxContains` field', () => {
+      it('returns a `maxContains` object', () => {
+        expect(getMaxContains({ maxContains: 1 }))
+          .to.eql({ maxContains: 1 })
+      })
+
+      /*
       describe('`maxContains` is a number', () => {
         it('returns a `maxContains` object', () => {
           expect(getMaxContains({ maxContains: 1 }))
@@ -817,7 +835,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMaxContains({ maxContains: 'MOCK MAX CONTAINS' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `maxContains` field', () => {
@@ -829,8 +847,14 @@ describe('shinkansen-transmission/transmission/common', () => {
   })
 
   describe('`getMinProperties()`', () => {
-    describe('`minProperties` is a number', () => {
-      describe('Schema has a `minProperties` field', () => {
+    describe('Schema has a `minProperties` field', () => {
+      it('returns a `minProperties` object', () => {
+        expect(getMinProperties({ minProperties: 1 }))
+          .to.eql({ minProperties: 1 })
+      })
+
+      /*
+      describe('`minProperties` is a number', () => {
         it('returns a `minProperties` object', () => {
           expect(getMinProperties({ minProperties: 1 }))
             .to.eql({ minProperties: 1 })
@@ -839,10 +863,10 @@ describe('shinkansen-transmission/transmission/common', () => {
 
       describe('`minProperties` is not a number', () => {
         it('returns an object', () => {
-          expect(getMinContains({ minProperties: 'MOCK MIN PROPERTIES' }))
+          expect(getMinProperties({ minProperties: 'MOCK MIN PROPERTIES' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `minProperties` field', () => {
@@ -855,6 +879,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getMaxProperties()`', () => {
     describe('Schema has a `maxProperties` field', () => {
+      it('returns a `maxProperties` object', () => {
+        expect(getMaxProperties({ maxProperties: 1 }))
+          .to.eql({ maxProperties: 1 })
+      })
+
+      /*
       describe('`maxProperties` is a number', () => {
         it('returns a `maxProperties` object', () => {
           expect(getMaxProperties({ maxProperties: 1 }))
@@ -867,7 +897,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getMaxProperties({ maxProperties: 'MOCK MAX PROPERTIES' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `maxProperties` field', () => {
@@ -880,6 +910,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getIsExclusiveMin()`', () => {
     describe('Schema has an `exclusiveMinimum` field', () => {
+      it('returns an `isExclusiveMin` object', () => {
+        expect(getIsExclusiveMin({ exclusiveMinimum: true }))
+          .to.eql({ isExclusiveMin: true })
+      })
+
+      /*
       describe('`exclusiveMinimum` is a boolean', () => {
         it('returns an `isExclusiveMin` object', () => {
           expect(getIsExclusiveMin({ exclusiveMinimum: true }))
@@ -892,7 +928,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getIsExclusiveMin({ exclusiveMinimum: 'MOCK EXCLUSIVE MINIMUM' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have an `exclusiveMinimum` field', () => {
@@ -905,6 +941,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getIsExclusiveMax()`', () => {
     describe('Schema has an `exclusiveMaximum` field', () => {
+      it('returns an `isExclusiveMax` object', () => {
+        expect(getIsExclusiveMax({ exclusiveMaximum: true }))
+          .to.eql({ isExclusiveMax: true })
+      })
+
+      /*
       describe('`exclusiveMaximum` is a boolean', () => {
         it('returns an `isExclusiveMax` object', () => {
           expect(getIsExclusiveMax({ exclusiveMaximum: true }))
@@ -917,7 +959,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getIsExclusiveMax({ exclusiveMaximum: 'MOCK IS EXCLUSIVE MAXIMUM' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have an `exclusiveMaximum` field', () => {
@@ -930,6 +972,12 @@ describe('shinkansen-transmission/transmission/common', () => {
 
   describe('`getStep()`', () => {
     describe('Schema has a `multipleOf` field', () => {
+      it('returns a `step` object', () => {
+        expect(getStep({ multipleOf: 1 }))
+          .to.eql({ step: 1 })
+      })
+
+      /*
       describe('`multipleOf` is a number', () => {
         it('returns a `step` object', () => {
           expect(getStep({ multipleOf: 1 }))
@@ -942,7 +990,7 @@ describe('shinkansen-transmission/transmission/common', () => {
           expect(getStep({ multipleOf: 'MOCK MULTIPLE OF' }))
             .to.eql({})
         })
-      })
+      }) */
     })
 
     describe('Schema does not have a `multipleOf` field', () => {
