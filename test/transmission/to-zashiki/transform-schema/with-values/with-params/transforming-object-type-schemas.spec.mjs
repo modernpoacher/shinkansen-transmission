@@ -1,3 +1,8 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.ValuesType} ValuesType
+ */
+
 import debug from 'debug'
 
 import {
@@ -19,11 +24,14 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
   describe('With values', () => {
     describe('With params', () => {
-      /*
+      /**
        *  Object
        */
       describe('Transforming `object` type schemas', () => {
         it('transforms `object` type schemas with `enum`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -46,6 +54,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -142,6 +153,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `anyOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -164,6 +178,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -420,6 +437,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `oneOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -442,6 +462,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -698,6 +721,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `allOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -726,6 +752,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -820,6 +849,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `enum` (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -845,6 +877,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -941,6 +976,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `anyOf` (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -966,6 +1004,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -1222,6 +1263,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `oneOf` (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -1247,6 +1291,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -1503,6 +1550,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas with `allOf` (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -1534,6 +1584,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': '0',
             '#/two': '1'
@@ -1628,6 +1681,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -1638,6 +1694,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': 'string',
             '#/two': 'string'
@@ -1710,6 +1769,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -1723,6 +1785,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one': 'string',
             '#/two': 'string'
@@ -1794,10 +1859,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        /*
+        /**
          *  String
          */
         it('transforms `object` type schemas (`properties` is an object of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -1818,6 +1886,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -1906,6 +1977,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -1926,6 +2000,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -2094,6 +2171,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -2114,6 +2194,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -2282,6 +2365,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -2305,6 +2391,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': 'string'
           }
@@ -2395,6 +2484,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -2418,6 +2510,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -2506,6 +2601,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -2529,6 +2627,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -2697,6 +2798,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -2720,6 +2824,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -2888,6 +2995,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `string` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -2914,6 +3024,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -3003,10 +3116,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        /*
+        /**
          *  Number
          */
         it('transforms `object` type schemas (`properties` is an object of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3027,6 +3143,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -3115,6 +3234,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3135,6 +3257,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -3303,6 +3428,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3323,6 +3451,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -3491,6 +3622,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3514,6 +3648,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '2'
           }
@@ -3604,6 +3741,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3627,6 +3767,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -3715,6 +3858,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3738,6 +3884,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -3906,6 +4055,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -3929,6 +4081,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -4097,6 +4252,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `number` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4123,6 +4281,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '2'
           }
@@ -4212,10 +4373,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        /*
+        /**
          *  Array
          */
         it('transforms `object` type schemas (`properties` is an object of `array` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4236,6 +4400,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -4324,6 +4491,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4344,6 +4514,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -4488,6 +4661,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4508,6 +4684,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -4652,6 +4831,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4671,6 +4853,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {}
 
           const params = {
@@ -4745,6 +4930,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4768,6 +4956,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -4856,6 +5047,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -4879,6 +5073,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -5023,6 +5220,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5046,6 +5246,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -5190,6 +5393,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `array` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5212,6 +5418,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {}
 
           const params = {
@@ -5285,10 +5494,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        /*
+        /**
          *  Object
          */
         it('transforms `object` type schemas (`properties` is an object of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5309,6 +5521,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -5397,6 +5612,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5417,6 +5635,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -5561,6 +5782,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5581,6 +5805,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -5725,6 +5952,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5744,6 +5974,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {}
 
           const params = {
@@ -5818,6 +6051,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5841,6 +6077,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -5929,6 +6168,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -5952,6 +6194,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -6096,6 +6341,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6119,6 +6367,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -6263,6 +6514,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6285,6 +6539,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {}
 
           const params = {
@@ -6358,10 +6615,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        /*
+        /**
          *  Boolean
          */
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6382,6 +6642,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -6470,6 +6733,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6490,6 +6756,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -6658,6 +6927,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6678,6 +6950,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -6846,6 +7121,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6865,6 +7143,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': 'true'
           }
@@ -6943,6 +7224,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -6966,6 +7250,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -7054,6 +7341,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7077,6 +7367,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -7245,6 +7538,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7268,6 +7564,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -7436,6 +7735,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `boolean` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7458,6 +7760,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': 'true'
           }
@@ -7535,10 +7840,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
             })
         })
 
-        /*
+        /**
          *  Null
          */
         it('transforms `object` type schemas (`properties` is an object of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7558,6 +7866,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -7642,6 +7953,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7661,6 +7975,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -7785,6 +8102,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7804,6 +8124,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -7928,6 +8251,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -7947,6 +8273,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': 'null'
           }
@@ -8025,6 +8354,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -8047,6 +8379,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -8131,6 +8466,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -8153,6 +8491,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -8277,6 +8618,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -8299,6 +8643,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': '0'
           }
@@ -8423,6 +8770,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `object` type schemas (`properties` is an object of `null` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'object',
             properties: {
@@ -8445,6 +8795,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
           const rootSchema = undefined
 
+          /**
+           *  @type {ValuesType}
+           */
           const values = {
             '#/one/two': 'null'
           }

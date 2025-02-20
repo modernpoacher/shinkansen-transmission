@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "NodeNext",
     "target": "ESNext",
     "allowJs": true,
-    "checkJs": false,
+    "checkJs": true,
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "strict": true,
@@ -12,6 +12,9 @@
     "paths": {
       "#transmission": [
         "src/index.mjs"
+      ],
+      "#transmission/common": [
+        "src/common/index.mjs"
       ],
       "#transmission/transmission": [
         "src/transmission/index.mjs"

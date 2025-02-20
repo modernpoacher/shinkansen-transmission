@@ -1,5 +1,7 @@
 import globals from 'globals'
+// @ts-ignore
 import standard from '@sequencemedia/eslint-config-standard/configs/recommended/merge'
+// @ts-ignore
 import typescript from '@sequencemedia/eslint-config-typescript/configs/recommended/merge'
 
 export default [
@@ -15,24 +17,22 @@ export default [
     files: [
       '**/*.{mjs,cjs,mts,cts}'
     ],
-    ignores: [
-      'src',
-      'test'
-    ],
     languageOptions: {
       globals: {
         ...globals.node
       }
-    }
-  }),
-  standard({
-    files: [
-      'src/**/*.{mjs,cjs,mts,cts}'
-    ],
-    languageOptions: {
-      globals: {
-        ...globals.browser
-      }
+    },
+    rules: {
+      '@stylistic/object-curly-newline': [
+        'error',
+        {
+          ImportDeclaration: 'always',
+          ExportDeclaration: {
+            multiline: true,
+            minProperties: 2
+          }
+        }
+      ]
     }
   }),
   standard({
@@ -52,29 +52,27 @@ export default [
     files: [
       '**/*.{mts,cts}'
     ],
-    ignores: [
-      'src',
-      'test'
-    ],
     languageOptions: {
       globals: {
-        ...globals.node
-      }
-    }
-  }),
-  typescript({
-    files: [
-      'src/**/*.{mts,cts}',
-      'test/**/*.{mts,cts}'
-    ],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ZashikiTypes: 'readonly'
+        ...globals.node,
+        TransmissionTypes: 'readonly'
       }
     },
     rules: {
-      '@typescript-eslint/max-params': ['error', { max: 5 }]
+      '@typescript-eslint/max-params': [
+        'error',
+        {
+          max: 5
+        }
+      ]
     }
-  })
+  }),
+  {
+    files: [
+      'src/**/*.d.{mts,cts}'
+    ],
+    rules: {
+      'no-redeclare': 'off'
+    }
+  }
 ]

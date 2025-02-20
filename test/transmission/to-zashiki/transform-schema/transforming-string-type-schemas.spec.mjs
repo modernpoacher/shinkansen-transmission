@@ -1,3 +1,7 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ */
+
 import debug from 'debug'
 
 import {
@@ -17,11 +21,14 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     if (DEBUG) debug.enable(DEBUG)
   })
 
-  /*
+  /**
    *  String
    */
   describe('Transforming `string` type schemas', () => {
     it('transforms `string` type schemas', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = { type: 'string' }
 
       expect(transform(schema))
@@ -41,6 +48,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `string` type schemas with `enum`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'string',
         enum: [
@@ -88,6 +98,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `string` type schemas with `anyOf`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'string',
         anyOf: [
@@ -234,6 +247,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `string` type schemas with `oneOf`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'string',
         oneOf: [
@@ -434,6 +450,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `string` type schemas with `allOf`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'string',
         allOf: [
@@ -469,6 +488,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `string` type schemas', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'string',
         minLength: 1,

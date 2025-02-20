@@ -1,3 +1,7 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ */
+
 import debug from 'debug'
 
 import {
@@ -19,11 +23,14 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
   describe('Without values', () => {
     describe('With params', () => {
-      /*
+      /**
        *  Number
        */
       describe('Transforming `number` type schemas', () => {
         it('transforms `number` type schemas with `enum`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'number',
             enum: [
@@ -71,6 +78,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `number` type schemas with `anyOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'number',
             anyOf: [
@@ -226,6 +236,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `number` type schemas with `oneOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'number',
             oneOf: [
@@ -381,6 +394,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `number` type schemas with `allOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'number',
             allOf: [
@@ -422,6 +438,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `number` type schemas', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'number' }
 
           const rootSchema = undefined

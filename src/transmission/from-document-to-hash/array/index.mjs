@@ -1,3 +1,9 @@
+/**
+ *  @typedef {TransmissionTypes.DocumentType} DocumentType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -14,7 +20,17 @@ const log = debug('shinkansen-transmission/from-document-to-hash/array')
 
 log('`shinkansen` is awake')
 
-export default function transformArraySchema (document, schema = {}, values = {}, parentUri = '#', uri = getUri(parentUri)) {
+/**
+ * Document can be `undefined`
+ *
+ *  @param {DocumentType} [document]
+ *  @param {SchemaType} [schema]
+ *  @param {HashType} [hash]
+ *  @param {string} [parentUri]
+ *  @param {string} [uri]
+ *  @returns {HashType}
+ */
+export default function transformArraySchema (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
   log('transformArraySchema')
 
   /*
@@ -24,13 +40,13 @@ export default function transformArraySchema (document, schema = {}, values = {}
     /*
      *  Yes, `document` is an array
      */
-    return transformArray(document, schema, values, parentUri, uri)
+    return transformArray(document, schema, hash, parentUri, uri)
   }
 
   /*
    *  The hash should contain only strings
    */
-  values[uri] = toString(document)
+  hash[uri] = toString(document)
 
-  return values
+  return hash
 }

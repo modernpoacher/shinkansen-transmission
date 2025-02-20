@@ -1,3 +1,10 @@
+/**
+ *  @typedef {TransmissionTypes.ArrayLiteralType} ArrayLiteralType
+ *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -23,13 +30,16 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
   })
 
   describe('Hash is defined and schema is defined', () => {
-    describe('With values', () => {
+    describe('Hash has values', () => {
       describe('Transforming `string` type schemas', () => {
         it('transforms `string` type schemas with `enum`', () => {
-          const values = {
+          const hash = {
             '#/': '1'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'string',
             enum: [
@@ -41,15 +51,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
 
           const document = 'string (2)'
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `string` type schemas with `anyOf`', () => {
-          const values = {
+          const hash = {
             '#/': '1'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'string',
             anyOf: [
@@ -61,15 +74,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
 
           const document = 'string (2)'
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `string` type schemas with `oneOf`', () => {
-          const values = {
+          const hash = {
             '#/': '1'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'string',
             oneOf: [
@@ -81,30 +97,39 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
 
           const document = 'string (2)'
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `string` type schemas', () => {
-          const values = {
+          const hash = {
             '#/': 'mock string'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'string' }
 
           const document = 'mock string'
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.eql(document)
         })
       })
     })
 
-    describe('Without values', () => {
+    describe('Hash does not have values', () => {
       describe('Transforming `string` type schemas', () => {
         it('transforms `string` type schemas with `enum`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'string',
             enum: [
@@ -116,13 +141,19 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
 
           const document = undefined
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `string` type schemas with `anyOf`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'string',
             anyOf: [
@@ -134,13 +165,19 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
 
           const document = undefined
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `string` type schemas with `oneOf`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'string',
             oneOf: [
@@ -152,18 +189,24 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/string', ()
 
           const document = undefined
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `string` type schemas', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'string' }
 
           const document = undefined
 
-          return expect(transformStringSchema(values, schema))
+          return expect(transformStringSchema(hash, schema))
             .to.eql(document)
         })
       })

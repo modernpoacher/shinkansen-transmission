@@ -1,3 +1,7 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ */
+
 import debug from 'debug'
 
 import {
@@ -19,11 +23,14 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
   describe('Without values', () => {
     describe('Without params', () => {
-      /*
+      /**
        *  Null
        */
       describe('Transforming `null` type schemas', () => {
         it('transforms `null` type schemas with `enum`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             enum: [
@@ -56,6 +63,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `null` type schemas with `anyOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             anyOf: [
@@ -202,6 +212,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `null` type schemas with `oneOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             oneOf: [
@@ -270,6 +283,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `null` type schemas with `allOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             allOf: [
@@ -296,6 +312,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `null` type schemas', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'null' }
 
           return expect(transform(schema))

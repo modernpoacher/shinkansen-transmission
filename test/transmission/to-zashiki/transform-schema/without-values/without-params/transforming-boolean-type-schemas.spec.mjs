@@ -1,3 +1,7 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ */
+
 import debug from 'debug'
 
 import {
@@ -19,11 +23,14 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
 
   describe('Without values', () => {
     describe('Without params', () => {
-      /*
+      /**
        *  Boolean
        */
       describe('Transforming `boolean` type schemas', () => {
         it('transforms `boolean` type schemas with `enum`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             enum: [
@@ -59,6 +66,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `boolean` type schemas with `anyOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             anyOf: [
@@ -166,6 +176,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `boolean` type schemas with `oneOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             oneOf: [
@@ -273,6 +286,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `boolean` type schemas with `allOf`', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'boolean',
             allOf: [
@@ -299,6 +315,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
         })
 
         it('transforms `boolean` type schemas', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'boolean' }
 
           return expect(transform(schema))

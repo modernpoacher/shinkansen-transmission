@@ -1,3 +1,7 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ */
+
 import debug from 'debug'
 
 import {
@@ -19,18 +23,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
 
   describe('Without values', () => {
     describe('Without params', () => {
-      /*
+      /**
        *  Array
        */
       describe('Transforming `array` type schemas', () => {
-        /*
+        /**
          *  String
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -93,10 +100,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -279,10 +289,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -465,10 +478,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -529,14 +545,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Number
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -599,10 +618,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -785,10 +807,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -971,10 +996,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1035,14 +1063,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Array
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1136,10 +1167,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1353,10 +1387,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1570,10 +1607,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1667,10 +1707,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1764,10 +1807,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -1981,10 +2027,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -2198,10 +2247,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -2295,10 +2347,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -2490,10 +2545,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -2925,10 +2983,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -3360,10 +3421,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -3559,10 +3623,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -3763,10 +3830,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -4207,10 +4277,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -4651,10 +4724,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -4859,10 +4935,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -4951,10 +5030,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5123,10 +5205,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5295,10 +5380,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5376,10 +5464,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5463,10 +5554,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5590,10 +5684,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5717,10 +5814,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5798,10 +5898,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -5891,10 +5994,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -6104,10 +6210,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -6317,10 +6426,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -6410,10 +6522,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -6503,10 +6618,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -6716,10 +6834,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -6929,10 +7050,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -7022,10 +7146,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -7213,10 +7340,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -7644,10 +7774,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -8075,10 +8208,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -8270,10 +8406,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -8470,10 +8609,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -8910,10 +9052,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -9350,10 +9495,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -9554,10 +9702,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -9642,10 +9793,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -9810,10 +9964,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -9978,10 +10135,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -10055,10 +10215,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -10138,10 +10301,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -10261,10 +10427,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -10384,10 +10553,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -10461,14 +10633,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Object
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -10616,10 +10791,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -11007,10 +11185,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -11398,10 +11579,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -11549,10 +11733,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -11706,10 +11893,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -12103,10 +12293,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -12500,10 +12693,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -12657,14 +12853,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Boolean
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -12723,10 +12922,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -12865,10 +13067,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -13007,10 +13212,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -13059,14 +13267,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Null
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -13121,10 +13332,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -13219,10 +13433,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an array of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -13317,10 +13534,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -13369,14 +13589,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  String
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -13437,10 +13660,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -13621,10 +13847,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -13805,10 +14034,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -13867,14 +14099,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Number
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -13935,10 +14170,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14119,10 +14357,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14303,10 +14544,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14365,14 +14609,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Array
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14464,10 +14711,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14679,10 +14929,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14894,10 +15147,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -14989,10 +15245,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -15084,10 +15343,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -15299,10 +15561,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -15514,10 +15779,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -15609,10 +15877,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -15802,10 +16073,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -16235,10 +16509,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -16668,10 +16945,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -16865,10 +17145,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -17067,10 +17350,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -17509,10 +17795,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -17951,10 +18240,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18157,10 +18449,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18247,10 +18542,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18417,10 +18715,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18587,10 +18888,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18666,10 +18970,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18751,10 +19058,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -18876,10 +19186,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19001,10 +19314,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19080,10 +19396,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19171,10 +19490,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19382,10 +19704,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19593,10 +19918,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19684,10 +20012,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19775,10 +20106,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -19986,10 +20320,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20197,10 +20534,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20288,10 +20628,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20374,10 +20717,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20540,10 +20886,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20706,10 +21055,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20781,10 +21133,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20862,10 +21217,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -20983,10 +21341,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -21104,10 +21465,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -21179,10 +21543,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -21368,10 +21735,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -21797,10 +22167,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -22226,10 +22599,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -22419,10 +22795,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -22617,10 +22996,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -23055,10 +23437,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -23493,10 +23878,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -23695,14 +24083,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Object
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -23848,10 +24239,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -24237,10 +24631,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -24626,10 +25023,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -24775,10 +25175,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `enum`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -24930,10 +25333,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `anyOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -25325,10 +25731,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `oneOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -25720,10 +26129,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type with `allOf`) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -25875,14 +26287,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Boolean
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `boolean` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -25939,10 +26354,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `boolean` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26079,10 +26497,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `boolean` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26219,10 +26640,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `boolean` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26269,14 +26693,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Null
          */
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `null` type with `enum`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26329,10 +26756,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `null` type with `anyOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26425,10 +26855,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Gets selected items
          */
         it('transforms `array` type schemas (`items` is an object of `null` type with `oneOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26521,10 +26954,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `null` type with `allOf`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -26571,14 +27007,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  String
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -26619,14 +27058,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Number
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -26667,14 +27109,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Array
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `string` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -26741,10 +27186,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `number` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -26811,10 +27259,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `boolean` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -26881,10 +27332,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `null` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -26951,10 +27405,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27082,10 +27539,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an array of `object` type) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27222,10 +27682,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `string` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27288,10 +27751,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `number` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27354,10 +27820,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `boolean` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27420,10 +27889,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `null` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27486,10 +27958,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27613,10 +28088,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array and `items` is an object of `object` type) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27749,14 +28227,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Object
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27850,10 +28331,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `object` type) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -27953,14 +28437,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Boolean
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `boolean` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -28001,14 +28488,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Null
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an array of `null` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: [
@@ -28049,14 +28539,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  String
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28095,14 +28588,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Number
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28141,14 +28637,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Array
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `string` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28213,10 +28712,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `number` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28281,10 +28783,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `boolean` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28349,10 +28854,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `null` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28417,10 +28925,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28546,10 +29057,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an array of `object` type) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28684,10 +29198,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `string` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28748,10 +29265,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `number` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28812,10 +29332,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `boolean` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28876,10 +29399,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `null` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -28940,10 +29466,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -29065,10 +29594,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object and `items` is an object of `object` type) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -29199,14 +29731,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Object
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -29298,10 +29833,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `object` type) (with `required`)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -29399,14 +29937,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Boolean
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `boolean` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {
@@ -29445,14 +29986,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             })
         })
 
-        /*
+        /**
          *  Null
          */
 
-        /*
+        /**
          *  Does not get selected items
          */
         it('transforms `array` type schemas (`items` is an object of `null` type)', () => {
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'array',
             items: {

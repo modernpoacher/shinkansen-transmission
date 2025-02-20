@@ -1,3 +1,9 @@
+/**
+ *  @typedef {TransmissionTypes.DocumentType} DocumentType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -16,29 +22,39 @@ const log = debug('shinkansen-transmission/from-document-to-hash/null')
 
 log('`shinkansen` is awake')
 
-export default function transformNullSchema (document, schema = {}, values = {}, parentUri = '#', uri = getUri(parentUri)) {
+/**
+ * Document can be `undefined`
+ *
+ *  @param {DocumentType} [document]
+ *  @param {SchemaType} [schema]
+ *  @param {HashType} [hash]
+ *  @param {string} [parentUri]
+ *  @param {string} [uri]
+ *  @returns {HashType}
+ */
+export default function transformNullSchema (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
   log('transformNullSchema')
 
   if (hasEnum(schema)) {
     const items = getEnum(schema)
 
-    values[uri] = transformValueIndexFor(items, document)
+    hash[uri] = transformValueIndexFor(items, document)
 
-    return values
+    return hash
   } else {
     if (hasAnyOf(schema)) {
       const items = getAnyOf(schema)
 
-      values[uri] = transformValueIndexFor(items, document)
+      hash[uri] = transformValueIndexFor(items, document)
 
-      return values
+      return hash
     } else {
       if (hasOneOf(schema)) {
         const items = getOneOf(schema)
 
-        values[uri] = transformValueIndexFor(items, document)
+        hash[uri] = transformValueIndexFor(items, document)
 
-        return values
+        return hash
       }
     }
   }
@@ -46,7 +62,7 @@ export default function transformNullSchema (document, schema = {}, values = {},
   /*
    *  The hash should contain only strings
    */
-  values[uri] = toString(document)
+  hash[uri] = toString(document)
 
-  return values
+  return hash
 }

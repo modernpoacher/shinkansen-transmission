@@ -1,3 +1,7 @@
+/**
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ */
+
 import debug from 'debug'
 
 import {
@@ -17,11 +21,14 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     if (DEBUG) debug.enable(DEBUG)
   })
 
-  /*
+  /**
    *  Object
    */
   describe('Transforming `object` type schemas', () => {
     it('transforms `object` type schemas', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = { type: 'object' }
 
       expect(transform(schema))
@@ -39,6 +46,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `enum`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         enum: [
@@ -83,6 +93,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `anyOf`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         anyOf: [
@@ -205,6 +218,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `oneOf`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         oneOf: [
@@ -363,6 +379,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `allOf`', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         allOf: [
@@ -393,6 +412,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         const: {},
@@ -417,6 +439,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `enum` (with an `object` type with `enum`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         enum: [
@@ -470,6 +495,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `enum` (with an `object` type with `anyOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         enum: [
@@ -523,6 +551,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `enum` (with an `object` type with `oneOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         enum: [
@@ -576,6 +607,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `enum` (with an `object` type with `allOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         enum: [
@@ -629,6 +663,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `anyOf` (with an `object` type with `enum`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         anyOf: [
@@ -734,6 +771,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `anyOf` (with an `object` type with `anyOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         anyOf: [
@@ -887,6 +927,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `anyOf` (with an `object` type with `oneOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         anyOf: [
@@ -1040,6 +1083,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `anyOf` (with an `object` type with `allOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         anyOf: [
@@ -1121,6 +1167,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `oneOf` (with an `object` type with `enum`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         oneOf: [
@@ -1226,6 +1275,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `oneOf` (with an `object` type with `anyOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         oneOf: [
@@ -1379,6 +1431,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `oneOf` (with an `object` type with `oneOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         oneOf: [
@@ -1532,6 +1587,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `oneOf` (with an `object` type with `allOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         oneOf: [
@@ -1613,6 +1671,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `allOf` (with an `object` type with `enum`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         allOf: [
@@ -1644,6 +1705,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `allOf` (with an `object` type with `anyOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         allOf: [
@@ -1675,6 +1739,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `allOf` (with an `object` type with `oneOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         allOf: [
@@ -1706,6 +1773,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
     })
 
     it('transforms `object` type schemas with `allOf` (with an `object` type with `allOf`)', () => {
+      /**
+       *  @type {SchemaType}
+       */
       const schema = {
         type: 'object',
         allOf: [
