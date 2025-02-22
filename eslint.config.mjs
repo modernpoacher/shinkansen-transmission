@@ -1,5 +1,7 @@
 import globals from 'globals'
+// @ts-ignore
 import standard from '@sequencemedia/eslint-config-standard/configs/recommended/merge'
+// @ts-ignore
 import typescript from '@sequencemedia/eslint-config-typescript/configs/recommended/merge'
 
 export default [
@@ -70,11 +72,19 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
-        ZashikiTypes: 'readonly'
+        TransmissionTypes: 'readonly'
       }
     },
     rules: {
       '@typescript-eslint/max-params': ['error', { max: 5 }]
     }
-  })
+  }),
+  {
+    files: [
+      'src/**/*.d.{mts,cts}'
+    ],
+    rules: {
+      'no-redeclare': 'off'
+    }
+  }
 ]

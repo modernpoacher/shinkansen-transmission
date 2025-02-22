@@ -1,3 +1,46 @@
+/**
+ *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
+ *  @typedef {TransmissionTypes.ObjectType} ObjectType
+ *
+ *  @typedef {TransmissionTypes.EnumType} EnumType
+ *  @typedef {TransmissionTypes.AnyOfType} AnyOfType
+ *  @typedef {TransmissionTypes.OneOfType} OneOfType
+ *  @typedef {TransmissionTypes.FieldType} FieldType
+ *
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *
+ *  @typedef {TransmissionTypes.StringSchemaType} StringSchemaType
+ *  @typedef {TransmissionTypes.NumberSchemaType} NumberSchemaType
+ *  @typedef {TransmissionTypes.ArraySchemaType} ArraySchemaType
+ *  @typedef {TransmissionTypes.ObjectSchemaType} ObjectSchemaType
+ *  @typedef {TransmissionTypes.BooleanSchemaType} BooleanSchemaType
+ *  @typedef {TransmissionTypes.NullSchemaType} NullSchemaType
+ *
+ *  @typedef {TransmissionTypes.ValuesType} ValuesType
+ *  @typedef {TransmissionTypes.ParamsType} ParamsType
+ *  @typedef {TransmissionTypes.ZashikiType} ZashikiType
+ *
+
+/**
+ *  @typedef {TransmissionTypes.ZashikiMetaType} ZashikiMetaType
+ *  @typedef {TransmissionTypes.ZashikiStringMetaType} ZashikiStringMetaType
+ *  @typedef {TransmissionTypes.ZashikiNumberMetaType} ZashikiNumberMetaType
+ *  @typedef {TransmissionTypes.ZashikiArrayMetaType} ZashikiArrayMetaType
+ *  @typedef {TransmissionTypes.ZashikiObjectMetaType} ZashikiObjectMetaType
+ *  @typedef {TransmissionTypes.ZashikiBooleanMetaType} ZashikiBooleanMetaType
+ *  @typedef {TransmissionTypes.ZashikiNullMetaType} ZashikiNullMetaType
+ */
+
+/**
+ *  @typedef {TransmissionTypes.ZashikiElementsType} ZashikiElementsType
+ *  @typedef {TransmissionTypes.ZashikiStringElementsType} ZashikiStringElementsType
+ *  @typedef {TransmissionTypes.ZashikiNumberElementsType} ZashikiNumberElementsType
+ *  @typedef {TransmissionTypes.ZashikiArrayElementsType} ZashikiArrayElementsType
+ *  @typedef {TransmissionTypes.ZashikiObjectElementsType} ZashikiObjectElementsType
+ *  @typedef {TransmissionTypes.ZashikiBooleanElementsType} ZashikiBooleanElementsType
+ *  @typedef {TransmissionTypes.ZashikiNullElementsType} ZashikiNullElementsType
+ */
+
 import debug from 'debug'
 
 import {
@@ -15,7 +58,6 @@ import {
   getSelectedItems,
 
   hasEnum,
-  getEnum,
   hasAnyOf,
   hasOneOf,
   hasAllOf,
@@ -58,88 +100,208 @@ const log = debug('shinkansen-transmission/to-zashiki/schema')
 
 log('`shinkansen` is awake')
 
+/**
+ *  @param {SchemaType} schemaProps
+ *  @param {SchemaType} item
+ *  @returns {SchemaType}
+ */
+function toSchema (schemaProps, item) {
+  return Object.assign(schemaProps, item)
+}
+
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformNullByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformNullByIndex')
    */
 
   return function map (schema, index) {
-    return transformNullByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map)
+     */
+    params.index = index
+
+    return (
+      transformNullByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformBooleanByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformBooleanByIndex')
    */
 
   return function map (schema, index) {
-    return transformBooleanByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map')
+     */
+    params.index = index
+
+    return (
+      transformBooleanByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformObjectByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformObjectByIndex')
    */
 
   return function map (schema, index) {
-    return transformObjectByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map')
+     */
+    params.index = index
+
+    return (
+      transformObjectByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformArrayByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformArrayByIndex')
    */
 
   return function map (schema, index) {
-    return transformArrayByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map')
+     */
+    params.index = index
+
+    return (
+      transformArrayByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformNumberByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformNumberByIndex')
    */
 
   return function map (schema, index) {
-    return transformNumberByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map')
+     */
+    params.index = index
+
+    return (
+      transformNumberByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformStringByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformStringByIndex')
    */
 
   return function map (schema, index) {
-    return transformStringByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map')
+     */
+    params.index = index
+
+    return (
+      transformStringByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(schema: SchemaType, index: number) => ZashikiType}
+ */
 export function mapTransformByIndex (rootSchema, values, params) {
-  /*
+  /**
    *  log('mapTransformByIndex')
    */
 
   return function map (schema, index) {
-    return getTransformByIndex(schema, rootSchema, values, Object.assign(params, { index }))
+    /**
+     *  log('map')
+     */
+    params.index = index
+
+    return (
+      getTransformByIndex(schema, rootSchema, values, params)
+    )
   }
 }
 
-export function mapTransformByKey (rootSchema, values, { required = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {(entries: [key: string, schema: SchemaType]) => ZashikiType}
+ */
+export function mapTransformByKey (rootSchema, values, params) {
+  /**
    *  log('mapTransformByKey')
    */
 
   return function map ([key, schema]) {
-    return getTransformByKey(schema, rootSchema, values, Object.assign(params, { isRequired: required.includes(key), key }))
+    /**
+     *  log('map')
+     */
+    params.key = key
+
+    return (
+      getTransformByKey(schema, rootSchema, values, params)
+    )
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function getTransformByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('getTransformByKey')
    */
 
@@ -158,8 +320,15 @@ export function getTransformByKey (schema, rootSchema, values, params) {
   return transformByKey(schema, rootSchema, values, getParamsByKey(schema, rootSchema, values, params))
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function getTransformByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('getTransformByIndex')
    */
 
@@ -203,40 +372,44 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
 
           const uri = getUri(parentUri, index)
 
+          const s = String(value)
+
           const meta = Object.assign(getMetaProps(params, uri), {
             parentUri,
             uri,
-            value: String(value)
+            value: s
           })
           const elements = {
             field: Object.assign(getElementsFieldProps(params, uri), {
-              value: String(value)
+              value: s
             })
           }
 
-          return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
+          return transformByIndex(schema, rootSchema, values, Object.assign(structuredClone(params), { parentUri, uri, [uri]: { meta, elements } }))
         } else {
           const {
             index = 0
           } = params
 
-          if (Reflect.has(value, index)) {
-            const v = Reflect.get(value, index)
+          if (index in value) { // Reflect.has(value, index)) {
+            const v = value[index] // Reflect.get(value, index)
 
             const uri = getUri(parentUri, index)
+
+            const s = String(v)
 
             const meta = Object.assign(getMetaProps(params, uri), {
               parentUri,
               uri,
-              value: String(v)
+              value: s
             })
             const elements = {
               field: Object.assign(getElementsFieldProps(params, uri), {
-                value: String(v)
+                value: s
               })
             }
 
-            return transformByIndex(schema, rootSchema, values, { ...params, parentUri, uri, [uri]: { meta, elements } })
+            return transformByIndex(schema, rootSchema, values, Object.assign(structuredClone(params), { parentUri, uri, [uri]: { meta, elements } }))
           }
         }
       }
@@ -248,10 +421,26 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
   return transformByIndex(schema, rootSchema, values, getParamsByIndex(schema, rootSchema, values, params))
 }
 
-export function getRenderParamsByKeyForEnum (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByKeyForEnum (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByKeyForEnum')
    */
+
+  const {
+    parentUri: fieldParentUri = '#',
+    key: fieldKey = '',
+    required = [],
+    selectedItems = [],
+    items = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -265,7 +454,8 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, values, { paren
     uri,
     selectedItems,
     items,
-    name: fieldKey
+    name: fieldKey,
+    isRequired: required.includes(fieldKey)
   })
   const elements = {
     enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
@@ -284,10 +474,26 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, values, { paren
   })
 }
 
-export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByKeyForAnyOf')
    */
+
+  const {
+    parentUri: fieldParentUri = '#',
+    key: fieldKey = '',
+    required = [],
+    selectedItems = [],
+    items = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -301,7 +507,8 @@ export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { pare
     uri,
     selectedItems,
     items,
-    name: fieldKey
+    name: fieldKey,
+    isRequired: required.includes(fieldKey)
   })
   const elements = {
     anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
@@ -320,10 +527,26 @@ export function getRenderParamsByKeyForAnyOf (schema, rootSchema, values, { pare
   })
 }
 
-export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByKeyForOneOf')
    */
+
+  const {
+    parentUri: fieldParentUri = '#',
+    key: fieldKey = '',
+    required = [],
+    selectedItems = [],
+    items = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -337,7 +560,8 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { pare
     uri,
     selectedItems,
     items,
-    name: fieldKey
+    name: fieldKey,
+    isRequired: required.includes(fieldKey)
   })
   const elements = {
     oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
@@ -356,10 +580,24 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, values, { pare
   })
 }
 
-export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByKeyForAllOf')
    */
+
+  const {
+    parentUri: fieldParentUri = '#',
+    key: fieldKey = '',
+    required = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -371,7 +609,8 @@ export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { pare
     rootSchema,
     parentUri,
     uri,
-    name: fieldKey
+    name: fieldKey,
+    isRequired: required.includes(fieldKey)
   })
 
   return Object.assign(params, {
@@ -384,10 +623,24 @@ export function getRenderParamsByKeyForAllOf (schema, rootSchema, values, { pare
   })
 }
 
-export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: fieldParentUri = '#', key: fieldKey = '', ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByKey (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByKey')
    */
+
+  const {
+    parentUri: fieldParentUri = '#',
+    key: fieldKey = '',
+    required = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -399,7 +652,8 @@ export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: f
     rootSchema,
     parentUri,
     uri,
-    name: fieldKey
+    name: fieldKey,
+    isRequired: required.includes(fieldKey)
   })
   const elements = {
     field: getElementsFieldProps(params, uri)
@@ -415,10 +669,25 @@ export function getRenderParamsByKey (schema, rootSchema, values, { parentUri: f
   })
 }
 
-export function getRenderParamsByIndexForEnum (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByIndexForEnum (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByIndexForEnum')
    */
+
+  const {
+    parentUri: arrayParentUri = '#',
+    index: arrayIndex = 0,
+    selectedItems = [],
+    items = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -451,10 +720,25 @@ export function getRenderParamsByIndexForEnum (schema, rootSchema, values, { par
   })
 }
 
-export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByIndexForAnyOf')
    */
+
+  const {
+    parentUri: arrayParentUri = '#',
+    index: arrayIndex = 0,
+    selectedItems = [],
+    items = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -487,10 +771,25 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, values, { pa
   })
 }
 
-export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByIndexForOneOf')
    */
+
+  const {
+    parentUri: arrayParentUri = '#',
+    index: arrayIndex = 0,
+    selectedItems = [],
+    items = []
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -523,10 +822,23 @@ export function getRenderParamsByIndexForOneOf (schema, rootSchema, values, { pa
   })
 }
 
-export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByIndexForAllOf')
    */
+
+  const {
+    parentUri: arrayParentUri = '#',
+    index: arrayIndex = 0
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -554,10 +866,23 @@ export function getRenderParamsByIndexForAllOf (schema, rootSchema, values, { pa
   })
 }
 
-export function getRenderParamsByIndex (schema, rootSchema, values, { parentUri: arrayParentUri = '#', index: arrayIndex = 0, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsByIndex (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsByIndex')
    */
+
+  const {
+    parentUri: arrayParentUri = '#',
+    index: arrayIndex = 0
+  } = params
+
   /*
    *  Resolve `parentUri` and `uri`
    */
@@ -585,10 +910,24 @@ export function getRenderParamsByIndex (schema, rootSchema, values, { parentUri:
   })
 }
 
-export function getRenderParamsForEnum (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsForEnum (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsForEnum')
    */
+
+  const {
+    parentUri = '#',
+    uri = '#/',
+    selectedItems = [],
+    items = []
+  } = params
 
   const meta = Object.assign(getMetaProps(params, uri), {
     schema,
@@ -615,10 +954,24 @@ export function getRenderParamsForEnum (schema, rootSchema, values, { parentUri 
   })
 }
 
-export function getRenderParamsForAnyOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsForAnyOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsForAnyOf')
    */
+
+  const {
+    parentUri = '#',
+    uri = '#/',
+    selectedItems = [],
+    items = []
+  } = params
 
   const meta = Object.assign(getMetaProps(params, uri), {
     schema,
@@ -645,10 +998,24 @@ export function getRenderParamsForAnyOf (schema, rootSchema, values, { parentUri
   })
 }
 
-export function getRenderParamsForOneOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', selectedItems = [], items = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsForOneOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsForOneOf')
    */
+
+  const {
+    parentUri = '#',
+    uri = '#/',
+    selectedItems = [],
+    items = []
+  } = params
 
   const meta = Object.assign(getMetaProps(params, uri), {
     schema,
@@ -675,10 +1042,22 @@ export function getRenderParamsForOneOf (schema, rootSchema, values, { parentUri
   })
 }
 
-export function getRenderParamsForAllOf (schema, rootSchema, values, { parentUri = '#', uri = '#/', ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParamsForAllOf (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParamsForAllOf')
    */
+
+  const {
+    parentUri = '#',
+    uri = '#/'
+  } = params
 
   const meta = Object.assign(getMetaProps(params, uri), {
     schema,
@@ -700,10 +1079,23 @@ export function getRenderParamsForAllOf (schema, rootSchema, values, { parentUri
   })
 }
 
-export function getRenderParams (schema, rootSchema, values, { parentUri = '#', uri = '#/', fields = [], ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getRenderParams (schema, rootSchema, values, params) {
+  /**
    *  log('getRenderParams')
    */
+
+  const {
+    parentUri = '#',
+    uri = '#/',
+    fields = []
+  } = params
 
   const meta = Object.assign(getMetaProps(params, uri), {
     schema,
@@ -728,11 +1120,19 @@ export function getRenderParams (schema, rootSchema, values, { parentUri = '#', 
   })
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
 export function renderNullMetaForEnum (params, uri) {
-  /*
+  /**
    *  log('renderNullMetaForEnum')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -750,11 +1150,19 @@ export function renderNullMetaForEnum (params, uri) {
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
 export function renderNullMetaForAnyOf (params, uri) {
-  /*
+  /**
    *  log('renderNullMetaForAnyOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -772,11 +1180,19 @@ export function renderNullMetaForAnyOf (params, uri) {
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
 export function renderNullMetaForOneOf (params, uri) {
-  /*
+  /**
    *  log('renderNullMetaForOneOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -794,28 +1210,103 @@ export function renderNullMetaForOneOf (params, uri) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
+export function getNullMetaForAllOf (schema, values, params, uri) {
+  /**
+   *  log('getNullMetaForAllOf')
+   */
+
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
+  const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'null'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaDefaultValue,
+      metaValue,
+      metaProps
+    )
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
 export function renderNullMetaForAllOf (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderNullMetaForAllOf')
    */
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#'
+  } = getMetaProps(params, uri)
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNullMetaForAllOf(schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
+  }
+
+  return (
+    getNullMetaForAllOf(schema, values, params, uri)
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
+export function getNullMeta (schema, values, params, uri) {
+  /**
+   *  log('getNullMeta')
+   */
+
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
   const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
   } = getMetaProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -826,53 +1317,58 @@ export function renderNullMetaForAllOf (schema, values, params, uri) {
       isParentUri(parentUri, uri) ? { parentUri } : {},
       metaDefaultValue,
       metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
+      metaProps
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullMetaType}
+ */
 export function renderNullMeta (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderNullMeta')
    */
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema)
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
-    parentUri = '#',
-    ...metaProps
+    parentUri = '#'
   } = getMetaProps(params, uri)
 
-  let selectedItems
   if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNullMeta(schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
   }
 
   return (
-    Object.assign(
-      {
-        uri,
-        type: 'null'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaDefaultValue,
-      metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
-    )
+    getNullMeta(schema, values, params, uri)
   )
 }
 
-export function getNullElementsFieldForEnum (field, params, uri) {
-  /*
-   *  log('getNullElementsFieldForEnum')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {EnumType}
+ */
+export function renderNullElementsFieldForEnum (field, params, uri) {
+  /**
+   *  log('renderNullElementsFieldForEnum')
    */
 
   return (
@@ -886,25 +1382,15 @@ export function getNullElementsFieldForEnum (field, params, uri) {
   )
 }
 
-export function getNullElementsFieldForOneOf (field, params, uri) {
-  /*
-   *  log('getNullElementsFieldForOneOf')
-   */
-
-  return (
-    Object.assign(
-      field,
-      getElementsFieldPropsForOneOf(params, uri),
-      {
-        id: uri
-      }
-    )
-  )
-}
-
-export function getNullElementsFieldForAnyOf (field, params, uri) {
-  /*
-   *  log('getNullElementsFieldForAnyOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {AnyOfType}
+ */
+export function renderNullElementsFieldForAnyOf (field, params, uri) {
+  /**
+   *  log('renderNullElementsFieldForAnyOf')
    */
 
   return (
@@ -918,71 +1404,89 @@ export function getNullElementsFieldForAnyOf (field, params, uri) {
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {OneOfType}
+ */
+export function renderNullElementsFieldForOneOf (field, params, uri) {
+  /**
+   *  log('renderNullElementsFieldForOneOf')
+   */
+
+  return (
+    Object.assign(
+      field,
+      getElementsFieldPropsForOneOf(params, uri),
+      {
+        id: uri
+      }
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {string} uri
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getNullElementsFieldForAllOf (field, schema, values, params, uri) {
-  /*
+  /**
    *  log('getNullElementsFieldForAllOf')
    */
 
-  const {
-    parentUri = '#'
-  } = params
-
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
       field,
       fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
-      {
-        id: uri
-      }
+      fieldProps
     )
   )
 }
 
-export function getNullElementsField (field, schema, values, params, uri) {
-  /*
-   *  log('getNullElementsField')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {string} uri
+ *  @returns {FieldType}
+ */
+export function renderNullElementsFieldForAllOf (field, schema, values, params, uri) {
+  /**
+   *  log('renderNullElementsFieldForAllOf')
    */
 
   const {
     parentUri = '#'
   } = params
 
-  const fieldValue = getElementsFieldValue(values, uri, schema)
-  const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
   if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNullElementsFieldForAllOf(field, schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
   }
 
   return (
     Object.assign(
-      field,
-      fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
+      getNullElementsFieldForAllOf(field, schema, values, params, uri),
       {
         id: uri
       }
@@ -990,8 +1494,81 @@ export function getNullElementsField (field, schema, values, params, uri) {
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {string} uri
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
+export function getNullElementsField (field, schema, values, params, uri) {
+  /**
+   *  log('getNullElementsField')
+   */
+
+  const fieldValue = getElementsFieldValue(values, uri, schema)
+  const fieldProps = getElementsFieldProps(params, uri)
+
+  return (
+    Object.assign(
+      field,
+      fieldValue,
+      fieldProps
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {string} uri
+ *  @returns {FieldType}
+ */
+export function renderNullElementsField (field, schema, values, params, uri) {
+  /**
+   *  log('renderNullElementsField')
+   */
+
+  const {
+    parentUri = '#'
+  } = params
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNullElementsField(field, schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
+  }
+
+  return (
+    Object.assign(
+      getNullElementsField(field, schema, values, params, uri),
+      {
+        id: uri
+      }
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} elements
+ *  @param {SchemaType} schema
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getNullElements (elements, schema) {
-  /*
+  /**
    *  log('getNullElements')
    */
 
@@ -1004,101 +1581,176 @@ export function getNullElements (elements, schema) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullElementsType}
+ */
 export function renderNullElementsForEnum (schema, params, uri) {
-  /*
+  /**
    *  log('renderNullElementsForEnum')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNullElements(elements, schema),
       {
-        enum: getNullElementsFieldForEnum(field, params, uri)
+        enum: renderNullElementsFieldForEnum(field, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullElementsType}
+ */
 export function renderNullElementsForOneOf (schema, params, uri) {
-  /*
+  /**
    *  log('renderNullElementsForOneOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNullElements(elements, schema),
       {
-        oneOf: getNullElementsFieldForOneOf(field, params, uri)
+        oneOf: renderNullElementsFieldForOneOf(field, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullElementsType}
+ */
 export function renderNullElementsForAnyOf (schema, params, uri) {
-  /*
+  /**
    *  log('renderNullElementsForAnyOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNullElements(elements, schema),
       {
-        anyOf: getNullElementsFieldForAnyOf(field, params, uri)
+        anyOf: renderNullElementsFieldForAnyOf(field, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullElementsType}
+ */
 export function renderNullElementsForAllOf (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderNullElementsForAllOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNullElements(elements, schema),
       {
-        field: getNullElementsFieldForAllOf(field, schema, values, params, uri)
+        field: renderNullElementsFieldForAllOf(field, schema, values, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiNullElementsType}
+ */
 export function renderNullElements (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderNullElements')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNullElements(elements, schema),
       {
-        field: getNullElementsField(field, schema, values, params, uri)
+        field: renderNullElementsField(field, schema, values, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
 export function renderBooleanMetaForEnum (params, uri) {
-  /*
+  /**
    *  log('renderBooleanMetaForEnum')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1116,11 +1768,19 @@ export function renderBooleanMetaForEnum (params, uri) {
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
 export function renderBooleanMetaForAnyOf (params, uri) {
-  /*
+  /**
    *  log('renderBooleanMetaForAnyOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1138,11 +1798,19 @@ export function renderBooleanMetaForAnyOf (params, uri) {
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
 export function renderBooleanMetaForOneOf (params, uri) {
-  /*
+  /**
    *  log('renderBooleanMetaForOneOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1160,28 +1828,28 @@ export function renderBooleanMetaForOneOf (params, uri) {
   )
 }
 
-export function renderBooleanMetaForAllOf (schema, values, params, uri) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
+export function getBooleanMetaForAllOf (schema, values, params, uri) {
+  /**
    *  log('renderBooleanMetaForAllOf')
    */
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
   const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
   } = getMetaProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -1192,53 +1860,131 @@ export function renderBooleanMetaForAllOf (schema, values, params, uri) {
       isParentUri(parentUri, uri) ? { parentUri } : {},
       metaDefaultValue,
       metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
+      metaProps
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
+export function renderBooleanMetaForAllOf (schema, values, params, uri) {
+  /**
+   *  log('renderBooleanMetaForAllOf')
+   */
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#'
+  } = getMetaProps(params, uri)
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getBooleanMetaForAllOf(schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
+  }
+
+  return (
+    getBooleanMetaForAllOf(schema, values, params, uri)
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
+export function getBooleanMeta (schema, values, params, uri) {
+  /**
+   *  log('getBooleanMeta')
+   */
+
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
+  const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'boolean'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      metaDefaultValue,
+      metaValue,
+      metaProps
+    )
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanMetaType}
+ */
 export function renderBooleanMeta (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderBooleanMeta')
    */
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema)
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
-    parentUri = '#',
-    ...metaProps
+    parentUri = '#'
   } = getMetaProps(params, uri)
 
-  let selectedItems
   if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getBooleanMeta(schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
   }
 
   return (
-    Object.assign(
-      {
-        uri,
-        type: 'boolean'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      metaDefaultValue,
-      metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
-    )
+    getBooleanMeta(schema, values, params, uri)
   )
 }
 
-export function getBooleanElementsFieldForEnum (field, params, uri) {
-  /*
-   *  log('getBooleanElementsFieldForEnum')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {EnumType}
+ */
+export function renderBooleanElementsFieldForEnum (field, params, uri) {
+  /**
+   *  log('renderBooleanElementsFieldForEnum')
    */
 
   return (
@@ -1252,9 +1998,15 @@ export function getBooleanElementsFieldForEnum (field, params, uri) {
   )
 }
 
-export function getBooleanElementsFieldForAnyOf (field, params, uri) {
-  /*
-   *  log('getBooleanElementsFieldForAnyOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {AnyOfType}
+ */
+export function renderBooleanElementsFieldForAnyOf (field, params, uri) {
+  /**
+   *  log('renderBooleanElementsFieldForAnyOf')
    */
 
   return (
@@ -1268,9 +2020,15 @@ export function getBooleanElementsFieldForAnyOf (field, params, uri) {
   )
 }
 
-export function getBooleanElementsFieldForOneOf (field, params, uri) {
-  /*
-   *  log('getBooleanElementsFieldForOneOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {OneOfType}
+ */
+export function renderBooleanElementsFieldForOneOf (field, params, uri) {
+  /**
+   *  log('renderBooleanElementsFieldForOneOf')
    */
 
   return (
@@ -1284,71 +2042,67 @@ export function getBooleanElementsFieldForOneOf (field, params, uri) {
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
-  /*
+  /**
    *  log('getBooleanElementsFieldForAllOf')
    */
 
-  const {
-    parentUri = '#'
-  } = params
-
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
       field,
       fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
-      {
-        id: uri
-      }
+      fieldProps
     )
   )
 }
 
-export function getBooleanElementsField (field, schema, values, params, uri) {
-  /*
-   *  log('getBooleanElementsField')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {FieldType}
+ */
+export function renderBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
+  /**
+   *  log('renderBooleanElementsFieldForAllOf')
    */
 
   const {
     parentUri = '#'
   } = params
 
-  const fieldValue = getElementsFieldValue(values, uri, schema)
-  const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
   if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getBooleanElementsFieldForAllOf(field, schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
   }
 
   return (
     Object.assign(
-      field,
-      fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
+      getBooleanElementsFieldForAllOf(field, schema, values, params, uri),
       {
         id: uri
       }
@@ -1356,8 +2110,81 @@ export function getBooleanElementsField (field, schema, values, params, uri) {
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
+export function getBooleanElementsField (field, schema, values, params, uri) {
+  /**
+   *  log('getBooleanElementsField')
+   */
+
+  const fieldValue = getElementsFieldValue(values, uri, schema)
+  const fieldProps = getElementsFieldProps(params, uri)
+
+  return (
+    Object.assign(
+      field,
+      fieldValue,
+      fieldProps
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {FieldType}
+ */
+export function renderBooleanElementsField (field, schema, values, params, uri) {
+  /**
+   *  log('renderBooleanElementsField')
+   */
+
+  const {
+    parentUri = '#'
+  } = params
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getBooleanElementsField(field, schema, values, params, uri),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
+  }
+
+  return (
+    Object.assign(
+      getBooleanElementsField(field, schema, values, params, uri),
+      {
+        id: uri
+      }
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} elements
+ *  @param {SchemaType} schema
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getBooleanElements (elements, schema) {
-  /*
+  /**
    *  log('getBooleanElements')
    */
 
@@ -1370,101 +2197,178 @@ export function getBooleanElements (elements, schema) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanElementsType}
+ */
 export function renderBooleanElementsForEnum (schema, params, uri) {
-  /*
+  /**
    *  log('renderBooleanElementsForEnum')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getBooleanElements(elements, schema),
       {
-        enum: getBooleanElementsFieldForEnum(field, params, uri)
+        enum: renderBooleanElementsFieldForEnum(field, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanElementsType}
+ */
 export function renderBooleanElementsForAnyOf (schema, params, uri) {
-  /*
+  /**
    *  log('renderBooleanElementsForAnyOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getBooleanElements(elements, schema),
       {
-        anyOf: getBooleanElementsFieldForAnyOf(field, params, uri)
+        anyOf: renderBooleanElementsFieldForAnyOf(field, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanElementsType}
+ */
 export function renderBooleanElementsForOneOf (schema, params, uri) {
-  /*
+  /**
    *  log('renderBooleanElementsForOneOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getBooleanElements(elements, schema),
       {
-        oneOf: getBooleanElementsFieldForOneOf(field, params, uri)
+        oneOf: renderBooleanElementsFieldForOneOf(field, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanElementsType}
+ */
 export function renderBooleanElementsForAllOf (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderBooleanElementsForAllOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getBooleanElements(elements, schema),
       {
-        field: getBooleanElementsFieldForAllOf(field, schema, values, params, uri)
+        field: renderBooleanElementsFieldForAllOf(field, schema, values, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @returns {ZashikiBooleanElementsType}
+ */
 export function renderBooleanElements (schema, values, params, uri) {
-  /*
+  /**
    *  log('renderBooleanElements')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getBooleanElements(elements, schema),
       {
-        field: getBooleanElementsField(field, schema, values, params, uri)
+        field: renderBooleanElementsField(field, schema, values, params, uri)
       }
     )
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectMetaType}
+ */
 export function renderObjectMetaForEnum (params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectMetaForEnum')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1484,11 +2388,21 @@ export function renderObjectMetaForEnum (params, uri, minProperties, maxProperti
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectMetaType}
+ */
 export function renderObjectMetaForAnyOf (params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectMetaForAnyOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1508,11 +2422,21 @@ export function renderObjectMetaForAnyOf (params, uri, minProperties, maxPropert
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectMetaType}
+ */
 export function renderObjectMetaForOneOf (params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectMetaForOneOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1532,11 +2456,21 @@ export function renderObjectMetaForOneOf (params, uri, minProperties, maxPropert
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectMetaType}
+ */
 export function renderObjectMetaForAllOf (params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectMetaForAllOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1556,11 +2490,21 @@ export function renderObjectMetaForAllOf (params, uri, minProperties, maxPropert
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectMetaType}
+ */
 export function renderObjectMeta (params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectMeta')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1580,9 +2524,17 @@ export function renderObjectMeta (params, uri, minProperties, maxProperties) {
   )
 }
 
-export function getObjectElementsFieldForEnum (field, params, uri, minProperties, maxProperties) {
-  /*
-   *  log('getObjectElementsFieldForEnum')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {EnumType}
+ */
+export function renderObjectElementsFieldForEnum (field, params, uri, minProperties, maxProperties) {
+  /**
+   *  log('renderObjectElementsFieldForEnum')
    */
 
   const fieldProps = getElementsFieldPropsForEnum(params, uri)
@@ -1600,9 +2552,17 @@ export function getObjectElementsFieldForEnum (field, params, uri, minProperties
   )
 }
 
-export function getObjectElementsFieldForAnyOf (field, params, uri, minProperties, maxProperties) {
-  /*
-   *  log('getObjectElementsFieldForAnyOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {AnyOfType}
+ */
+export function renderObjectElementsFieldForAnyOf (field, params, uri, minProperties, maxProperties) {
+  /**
+   *  log('renderObjectElementsFieldForAnyOf')
    */
 
   const fieldProps = getElementsFieldPropsForAnyOf(params, uri)
@@ -1620,9 +2580,17 @@ export function getObjectElementsFieldForAnyOf (field, params, uri, minPropertie
   )
 }
 
-export function getObjectElementsFieldForOneOf (field, params, uri, minProperties, maxProperties) {
-  /*
-   *  log('getObjectElementsFieldForOneOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {OneOfType}
+ */
+export function renderObjectElementsFieldForOneOf (field, params, uri, minProperties, maxProperties) {
+  /**
+   *  log('renderObjectElementsFieldForOneOf')
    */
 
   const fieldProps = getElementsFieldPropsForOneOf(params, uri)
@@ -1640,9 +2608,17 @@ export function getObjectElementsFieldForOneOf (field, params, uri, minPropertie
   )
 }
 
-export function getObjectElementsFieldForAllOf (field, params, uri, minProperties, maxProperties) {
-  /*
-   *  log('getObjectElementsFieldForAllOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {FieldType}
+ */
+export function renderObjectElementsFieldForAllOf (field, params, uri, minProperties, maxProperties) {
+  /**
+   *  log('renderObjectElementsFieldForAllOf')
    */
 
   const fieldProps = getElementsFieldPropsForAllOf(params, uri)
@@ -1660,8 +2636,13 @@ export function getObjectElementsFieldForAllOf (field, params, uri, minPropertie
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} elements
+ *  @param {SchemaType} schema
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getObjectElements (elements, schema) {
-  /*
+  /**
    *  log('getObjectElements')
    */
 
@@ -1674,84 +2655,153 @@ export function getObjectElements (elements, schema) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectElementsType}
+ */
 export function renderObjectElementsForEnum (schema, params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectElementsForEnum')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getObjectElements(elements, schema),
       {
-        enum: getObjectElementsFieldForEnum(field, params, uri, minProperties, maxProperties)
+        enum: renderObjectElementsFieldForEnum(field, params, uri, minProperties, maxProperties)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectElementsType}
+ */
 export function renderObjectElementsForAnyOf (schema, params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectElementsForAnyOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getObjectElements(elements, schema),
       {
-        anyOf: getObjectElementsFieldForAnyOf(field, params, uri, minProperties, maxProperties)
+        anyOf: renderObjectElementsFieldForAnyOf(field, params, uri, minProperties, maxProperties)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectElementsType}
+ */
 export function renderObjectElementsForOneOf (schema, params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectElementsForOneOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getObjectElements(elements, schema),
       {
-        oneOf: getObjectElementsFieldForOneOf(field, params, uri, minProperties, maxProperties)
+        oneOf: renderObjectElementsFieldForOneOf(field, params, uri, minProperties, maxProperties)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minProperties?: number }} minProperties
+ *  @param {{ maxProperties?: number }} maxProperties
+ *  @returns {ZashikiObjectElementsType}
+ */
 export function renderObjectElementsForAllOf (schema, params, uri, minProperties, maxProperties) {
-  /*
+  /**
    *  log('renderObjectElementsForAllOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getObjectElements(elements, schema),
       {
-        field: getObjectElementsFieldForAllOf(field, params, uri, minProperties, maxProperties)
+        field: renderObjectElementsFieldForAllOf(field, params, uri, minProperties, maxProperties)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @returns {ZashikiObjectElementsType}
+ */
 export function renderObjectElements (schema, params) {
-  /*
+  /**
    *  log('renderObjectElements')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
   const {
     fields = []
   } = params
@@ -1766,11 +2816,24 @@ export function renderObjectElements (schema, params) {
   )
 }
 
-export function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayMetaType}
+ */
+export function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayMetaForEnum')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1786,18 +2849,31 @@ export function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniq
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       metaProps
     )
   )
 }
 
-export function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayMetaType}
+ */
+export function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayMetaForAnyOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1813,18 +2889,31 @@ export function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUni
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       metaProps
     )
   )
 }
 
-export function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayMetaType}
+ */
+export function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayMetaForOneOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1840,18 +2929,31 @@ export function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUni
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       metaProps
     )
   )
 }
 
-export function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayMetaType}
+ */
+export function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayMetaForAllOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1867,18 +2969,31 @@ export function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUni
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       metaProps
     )
   )
 }
 
-export function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayMetaType}
+ */
+export function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayMeta')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -1894,16 +3009,27 @@ export function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       metaProps
     )
   )
 }
 
-export function getArrayElementsFieldForEnum (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
-   *  log('getArrayElementsFieldForEnum')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {EnumType}
+ */
+export function renderArrayElementsFieldForEnum (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
+   *  log('renderArrayElementsFieldForEnum')
    */
 
   const fieldProps = getElementsFieldPropsForEnum(params, uri)
@@ -1914,8 +3040,8 @@ export function getArrayElementsFieldForEnum (field, params, uri, minItems, maxI
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       fieldProps,
       {
         id: uri
@@ -1924,9 +3050,20 @@ export function getArrayElementsFieldForEnum (field, params, uri, minItems, maxI
   )
 }
 
-export function getArrayElementsFieldForAnyOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
-   *  log('getArrayElementsFieldForAnyOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {AnyOfType}
+ */
+export function renderArrayElementsFieldForAnyOf (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
+   *  log('renderArrayElementsFieldForAnyOf')
    */
 
   const fieldProps = getElementsFieldPropsForAnyOf(params, uri)
@@ -1937,8 +3074,8 @@ export function getArrayElementsFieldForAnyOf (field, params, uri, minItems, max
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       fieldProps,
       {
         id: uri
@@ -1947,9 +3084,20 @@ export function getArrayElementsFieldForAnyOf (field, params, uri, minItems, max
   )
 }
 
-export function getArrayElementsFieldForOneOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
-   *  log('getArrayElementsFieldForOneOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {OneOfType}
+ */
+export function renderArrayElementsFieldForOneOf (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
+   *  log('renderArrayElementsFieldForOneOf')
    */
 
   const fieldProps = getElementsFieldPropsForOneOf(params, uri)
@@ -1960,8 +3108,8 @@ export function getArrayElementsFieldForOneOf (field, params, uri, minItems, max
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       fieldProps,
       {
         id: uri
@@ -1970,9 +3118,20 @@ export function getArrayElementsFieldForOneOf (field, params, uri, minItems, max
   )
 }
 
-export function getArrayElementsFieldForAllOf (field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
-   *  log('getArrayElementsFieldForAllOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {FieldType}
+ */
+export function renderArrayElementsFieldForAllOf (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
+   *  log('renderArrayElementsFieldForAllOf')
    */
 
   const fieldProps = getElementsFieldPropsForAllOf(params, uri)
@@ -1983,8 +3142,8 @@ export function getArrayElementsFieldForAllOf (field, params, uri, minItems, max
       minItems,
       maxItems,
       hasUniqueItems,
-      maxContains,
       minContains,
+      maxContains,
       fieldProps,
       {
         id: uri
@@ -1993,8 +3152,13 @@ export function getArrayElementsFieldForAllOf (field, params, uri, minItems, max
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} elements
+ *  @param {SchemaType} schema
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getArrayElements (elements, schema) {
-  /*
+  /**
    *  log('getArrayElements')
    */
 
@@ -2007,84 +3171,165 @@ export function getArrayElements (elements, schema) {
   )
 }
 
-export function renderArrayElementsForEnum (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayElementsType}
+ */
+export function renderArrayElementsForEnum (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayElementsForEnum')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getArrayElements(elements, schema),
       {
-        enum: getArrayElementsFieldForEnum(field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+        enum: renderArrayElementsFieldForEnum(field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
       }
     )
   )
 }
 
-export function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayElementsType}
+ */
+export function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayElementsForAnyOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getArrayElements(elements, schema),
       {
-        anyOf: getArrayElementsFieldForAnyOf(field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+        anyOf: renderArrayElementsFieldForAnyOf(field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
       }
     )
   )
 }
 
-export function renderArrayElementsForOneOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayElementsType}
+ */
+export function renderArrayElementsForOneOf (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayElementsForOneOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getArrayElements(elements, schema),
       {
-        oneOf: getArrayElementsFieldForOneOf(field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+        oneOf: renderArrayElementsFieldForOneOf(field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
       }
     )
   )
 }
 
-export function renderArrayElementsForAllOf (schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minItems?: number }} minItems
+ *  @param {{ maxItems?: number }} maxItems
+ *  @param {{ hasUniqueItems?: boolean }} hasUniqueItems
+ *  @param {{ minContains?: number }} minContains
+ *  @param {{ maxContains?: number }} maxContains
+ *  @returns {ZashikiArrayElementsType}
+ */
+export function renderArrayElementsForAllOf (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
+  /**
    *  log('renderArrayElementsForAllOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getArrayElements(elements, schema),
       {
-        field: getArrayElementsFieldForAllOf(field, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+        field: renderArrayElementsFieldForAllOf(field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @returns {ZashikiArrayElementsType}
+ */
 export function renderArrayElements (schema, params) {
-  /*
+  /**
    *  log('renderArrayElements')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
   const {
     fields = []
   } = params
@@ -2099,14 +3344,26 @@ export function renderArrayElements (schema, params) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
 export function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberMetaForEnum')
    */
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -2129,14 +3386,26 @@ export function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
 export function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberMetaForAnyOf')
    */
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -2159,14 +3428,26 @@ export function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
 export function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberMetaForOneOf')
    */
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -2189,79 +3470,122 @@ export function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
+export function getNumberMetaForAllOf (schema, values, params, uri, min, max, step) {
+  /**
+   *  log('getNumberMetaForAllOf')
+   */
+
+  const isExclusiveMin = getIsExclusiveMin(schema)
+  const isExclusiveMax = getIsExclusiveMax(schema)
+
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
+  const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'number'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      min,
+      max,
+      step,
+      isExclusiveMin,
+      isExclusiveMax,
+      metaDefaultValue,
+      metaValue,
+      metaProps
+    )
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
 export function renderNumberMetaForAllOf (schema, values, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberMetaForAllOf')
    */
 
-  const isExclusiveMin = getIsExclusiveMin(schema)
-  const isExclusiveMax = getIsExclusiveMax(schema)
-
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema)
-
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
-    parentUri = '#',
-    ...metaProps
+    parentUri = '#'
   } = getMetaProps(params, uri)
 
-  let selectedItems
   if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNumberMetaForAllOf(schema, values, params, uri, min, max, step),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
   }
 
   return (
-    Object.assign(
-      {
-        uri,
-        type: 'number'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      min,
-      max,
-      step,
-      isExclusiveMin,
-      isExclusiveMax,
-      metaDefaultValue,
-      metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
-    )
+    getNumberMetaForAllOf(schema, values, params, uri, min, max, step)
   )
 }
 
-export function renderNumberMeta (schema, values, params, uri, min, max, step) {
-  /*
-   *  log('renderNumberMeta')
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
+export function getNumberMeta (schema, values, params, uri, min, max, step) {
+  /**
+   *  log('getNumberMeta')
    */
 
   const isExclusiveMin = getIsExclusiveMin(schema)
   const isExclusiveMax = getIsExclusiveMax(schema)
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
   const metaValue = getMetaValue(values, uri, schema)
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
   } = getMetaProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -2277,15 +3601,63 @@ export function renderNumberMeta (schema, values, params, uri, min, max, step) {
       isExclusiveMax,
       metaDefaultValue,
       metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
+      metaProps
     )
   )
 }
 
-export function getNumberElementsFieldForEnum (field, params, uri, min, max, step) {
-  /*
-   *  log('getNumberElementsFieldForEnum')
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberMetaType}
+ */
+export function renderNumberMeta (schema, values, params, uri, min, max, step) {
+  /**
+   *  log('renderNumberMeta')
+   */
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#'
+  } = getMetaProps(params, uri)
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNumberMeta(schema, values, params, uri, min, max, step),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
+  }
+
+  return (
+    getNumberMeta(schema, values, params, uri, min, max, step)
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {EnumType}
+ */
+export function renderNumberElementsFieldForEnum (field, params, uri, min, max, step) {
+  /**
+   *  log('renderNumberElementsFieldForEnum')
    */
 
   const fieldProps = getElementsFieldPropsForEnum(params, uri)
@@ -2304,9 +3676,18 @@ export function getNumberElementsFieldForEnum (field, params, uri, min, max, ste
   )
 }
 
-export function getNumberElementsFieldForAnyOf (field, params, uri, min, max, step) {
-  /*
-   *  log('getNumberElementsFieldForAnyOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {AnyOfType}
+ */
+export function renderNumberElementsFieldForAnyOf (field, params, uri, min, max, step) {
+  /**
+   *  log('renderNumberElementsFieldForAnyOf')
    */
 
   const fieldProps = getElementsFieldPropsForAnyOf(params, uri)
@@ -2325,9 +3706,18 @@ export function getNumberElementsFieldForAnyOf (field, params, uri, min, max, st
   )
 }
 
-export function getNumberElementsFieldForOneOf (field, params, uri, min, max, step) {
-  /*
-   *  log('getNumberElementsFieldForOneOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {OneOfType}
+ */
+export function renderNumberElementsFieldForOneOf (field, params, uri, min, max, step) {
+  /**
+   *  log('renderNumberElementsFieldForOneOf')
    */
 
   const fieldProps = getElementsFieldPropsForOneOf(params, uri)
@@ -2346,28 +3736,24 @@ export function getNumberElementsFieldForOneOf (field, params, uri, min, max, st
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getNumberElementsFieldForAllOf (field, schema, values, params, uri, min, max, step) {
-  /*
+  /**
    *  log('getNumberElementsFieldForAllOf')
    */
 
-  const {
-    parentUri = '#'
-  } = params
-
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -2376,37 +3762,75 @@ export function getNumberElementsFieldForAllOf (field, schema, values, params, u
       max,
       step,
       fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
-      {
-        id: uri
-      }
+      fieldProps
     )
   )
 }
 
-export function getNumberElementsField (field, schema, values, params, uri, min, max, step) {
-  /*
-   *  log('getNumberElementsField')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {FieldType}
+ */
+export function renderNumberElementsFieldForAllOf (field, schema, values, params, uri, min, max, step) {
+  /**
+   *  log('renderNumberElementsFieldForAllOf')
    */
 
   const {
     parentUri = '#'
   } = params
 
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNumberElementsFieldForAllOf(field, schema, values, params, uri, min, max, step),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
+  }
+
+  return (
+    Object.assign(
+      getNumberElementsFieldForAllOf(field, schema, values, params, uri, min, max, step),
+      {
+        id: uri
+      }
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
+export function getNumberElementsField (field, schema, values, params, uri, min, max, step) {
+  /**
+   *  log('getNumberElementsField')
+   */
+
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -2415,8 +3839,50 @@ export function getNumberElementsField (field, schema, values, params, uri, min,
       max,
       step,
       fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
+      fieldProps
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {FieldType}
+ */
+export function renderNumberElementsField (field, schema, values, params, uri, min, max, step) {
+  /**
+   *  log('renderNumberElementsField')
+   */
+
+  const {
+    parentUri = '#'
+  } = params
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getNumberElementsField(field, schema, values, params, uri, min, max, step),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
+  }
+
+  return (
+    Object.assign(
+      getNumberElementsField(field, schema, values, params, uri, min, max, step),
       {
         id: uri
       }
@@ -2424,8 +3890,13 @@ export function getNumberElementsField (field, schema, values, params, uri, min,
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} elements
+ *  @param {SchemaType} schema
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getNumberElements (elements, schema) {
-  /*
+  /**
    *  log('getNumberElements')
    */
 
@@ -2438,101 +3909,194 @@ export function getNumberElements (elements, schema) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberElementsType}
+ */
 export function renderNumberElementsForEnum (schema, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberElementsForEnum')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNumberElements(elements, schema),
       {
-        enum: getNumberElementsFieldForEnum(field, params, uri, min, max, step)
+        enum: renderNumberElementsFieldForEnum(field, params, uri, min, max, step)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberElementsType}
+ */
 export function renderNumberElementsForAnyOf (schema, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberElementsForAnyOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNumberElements(elements, schema),
       {
-        anyOf: getNumberElementsFieldForAnyOf(field, params, uri, min, max, step)
+        anyOf: renderNumberElementsFieldForAnyOf(field, params, uri, min, max, step)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberElementsType}
+ */
 export function renderNumberElementsForOneOf (schema, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberElementsForOneOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNumberElements(elements, schema),
       {
-        oneOf: getNumberElementsFieldForOneOf(field, params, uri, min, max, step)
+        oneOf: renderNumberElementsFieldForOneOf(field, params, uri, min, max, step)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberElementsType}
+ */
 export function renderNumberElementsForAllOf (schema, values, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberElementsForAllOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNumberElements(elements, schema),
       {
-        field: getNumberElementsFieldForAllOf(field, schema, values, params, uri, min, max, step)
+        field: renderNumberElementsFieldForAllOf(field, schema, values, params, uri, min, max, step)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ min?: number }} min
+ *  @param {{ max?: number }} max
+ *  @param {{ step?: number }} step
+ *  @returns {ZashikiNumberElementsType}
+ */
 export function renderNumberElements (schema, values, params, uri, min, max, step) {
-  /*
+  /**
    *  log('renderNumberElements')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getNumberElements(elements, schema),
       {
-        field: getNumberElementsField(field, schema, values, params, uri, min, max, step)
+        field: renderNumberElementsField(field, schema, values, params, uri, min, max, step)
       }
     )
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
 export function renderStringMetaForEnum (params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringMetaForEnum')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -2553,11 +4117,22 @@ export function renderStringMetaForEnum (params, uri, minLength, maxLength, patt
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
 export function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringMetaForAnyOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -2578,11 +4153,22 @@ export function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pat
   )
 }
 
+/**
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
 export function renderStringMetaForOneOf (params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringMetaForOneOf')
    */
 
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
@@ -2603,28 +4189,114 @@ export function renderStringMetaForOneOf (params, uri, minLength, maxLength, pat
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
+export function getStringMetaForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('getStringMetaForAllOf)
+   */
+
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
+  const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#',
+    ...metaProps
+  } = getMetaProps(params, uri)
+
+  return (
+    Object.assign(
+      {
+        uri,
+        type: 'string'
+      },
+      isParentUri(parentUri, uri) ? { parentUri } : {},
+      minLength,
+      maxLength,
+      pattern,
+      metaDefaultValue,
+      metaValue,
+      metaProps
+    )
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
 export function renderStringMetaForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringMetaForAllOf')
    */
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
+  /**
+   *  @type {{ parentUri?: string }}
+   */
+  const {
+    parentUri = '#'
+  } = getMetaProps(params, uri)
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getStringMetaForAllOf(schema, values, params, uri, minLength, maxLength, pattern),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
+  }
+
+  return (
+    getStringMetaForAllOf(schema, values, params, uri, minLength, maxLength, pattern)
+  )
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
+export function getStringMeta (schema, values, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('getStringMeta')
+   */
+
+  const metaDefaultValue = getMetaDefaultValue(schema) // , uri)
   const metaValue = getMetaValue(values, uri, schema)
+
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
     parentUri = '#',
     ...metaProps
   } = getMetaProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -2638,56 +4310,63 @@ export function renderStringMetaForAllOf (schema, values, params, uri, minLength
       pattern,
       metaDefaultValue,
       metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
+      metaProps
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringMetaType}
+ */
 export function renderStringMeta (schema, values, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringMeta')
    */
 
-  const metaDefaultValue = getMetaDefaultValue(schema, uri)
-  const metaValue = getMetaValue(values, uri, schema)
+  /**
+   *  @type {{ parentUri?: string }}
+   */
   const {
-    parentUri = '#',
-    ...metaProps
+    parentUri = '#'
   } = getMetaProps(params, uri)
 
-  let selectedItems
   if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getStringMeta(schema, values, params, uri, minLength, maxLength, pattern),
+        isArray(selectedItems) ? { selectedItems } : {}
+      )
+    )
   }
 
   return (
-    Object.assign(
-      {
-        uri,
-        type: 'string'
-      },
-      isParentUri(parentUri, uri) ? { parentUri } : {},
-      minLength,
-      maxLength,
-      pattern,
-      metaDefaultValue,
-      metaValue,
-      metaProps,
-      isArray(selectedItems) ? { selectedItems } : {}
-    )
+    getStringMeta(schema, values, params, uri, minLength, maxLength, pattern)
   )
 }
 
-export function getStringElementsFieldForEnum (field, params, uri, minLength, maxLength, pattern) {
-  /*
-   *  log('getStringElementsFieldForEnum')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {EnumType}
+ */
+export function renderStringElementsFieldForEnum (field, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('renderStringElementsFieldForEnum')
    */
 
   const fieldProps = getElementsFieldPropsForEnum(params, uri)
@@ -2706,10 +4385,20 @@ export function getStringElementsFieldForEnum (field, params, uri, minLength, ma
   )
 }
 
-export function getStringElementsFieldForAnyOf (field, params, uri, minLength, maxLength, pattern) {
-  /*
-   *  log('getStringElementsFieldForAnyOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {AnyOfType}
+ */
+export function renderStringElementsFieldForAnyOf (field, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('renderStringElementsFieldForAnyOf')
    */
+
   const fieldProps = getElementsFieldPropsForAnyOf(params, uri)
 
   return (
@@ -2726,9 +4415,18 @@ export function getStringElementsFieldForAnyOf (field, params, uri, minLength, m
   )
 }
 
-export function getStringElementsFieldForOneOf (field, params, uri, minLength, maxLength, pattern) {
-  /*
-   *  log('getStringElementsFieldForOneOf')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {OneOfType}
+ */
+export function renderStringElementsFieldForOneOf (field, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('renderStringElementsFieldForOneOf')
    */
 
   const fieldProps = getElementsFieldPropsForOneOf(params, uri)
@@ -2747,28 +4445,24 @@ export function getStringElementsFieldForOneOf (field, params, uri, minLength, m
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getStringElementsFieldForAllOf (field, schema, values, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('getStringElementsFieldForAllOf')
    */
 
-  const {
-    parentUri = '#'
-  } = params
-
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -2777,37 +4471,75 @@ export function getStringElementsFieldForAllOf (field, schema, values, params, u
       maxLength,
       pattern,
       fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
-      {
-        id: uri
-      }
+      fieldProps
     )
   )
 }
 
-export function getStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
-  /*
-   *  log('getStringElementsField')
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {FieldType}
+ */
+export function renderStringElementsFieldForAllOf (field, schema, values, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('renderStringElementsFieldForAllOf')
    */
 
   const {
     parentUri = '#'
   } = params
 
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getStringElementsFieldForAllOf(field, schema, values, params, uri, minLength, maxLength, pattern),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
+  }
+
+  return (
+    Object.assign(
+      getStringElementsFieldForAllOf(field, schema, values, params, uri, minLength, maxLength, pattern),
+      {
+        id: uri
+      }
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
+export function getStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('getStringElementsField')
+   */
+
   const fieldValue = getElementsFieldValue(values, uri, schema)
   const fieldProps = getElementsFieldProps(params, uri)
-
-  let selectedItems
-  if (isParentUri(parentUri, uri)) {
-    ({
-      [parentUri]: {
-        meta: {
-          selectedItems
-        } = {}
-      } = {}
-    } = params)
-  }
 
   return (
     Object.assign(
@@ -2816,8 +4548,50 @@ export function getStringElementsField (field, schema, values, params, uri, minL
       maxLength,
       pattern,
       fieldValue,
-      fieldProps,
-      isArray(selectedItems) ? { selectedItems } : {},
+      fieldProps
+    )
+  )
+}
+
+/**
+ *  @param {ObjectLiteralType | ObjectType} field
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {FieldType}
+ */
+export function renderStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
+  /**
+   *  log('renderStringElementsField')
+   */
+
+  const {
+    parentUri = '#'
+  } = params
+
+  if (isParentUri(parentUri, uri)) {
+    const {
+      selectedItems
+    } = getMetaProps(params, parentUri)
+
+    return (
+      Object.assign(
+        getStringElementsField(field, schema, values, params, uri, minLength, maxLength, pattern),
+        isArray(selectedItems) ? { selectedItems } : {},
+        {
+          id: uri
+        }
+      )
+    )
+  }
+
+  return (
+    Object.assign(
+      getStringElementsField(field, schema, values, params, uri, minLength, maxLength, pattern),
       {
         id: uri
       }
@@ -2825,8 +4599,13 @@ export function getStringElementsField (field, schema, values, params, uri, minL
   )
 }
 
+/**
+ *  @param {ObjectLiteralType | ObjectType} elements
+ *  @param {SchemaType} schema
+ *  @returns {ObjectLiteralType | ObjectType}
+ */
 export function getStringElements (elements, schema) {
-  /*
+  /**
    *  log('getStringElements')
    */
 
@@ -2839,101 +4618,188 @@ export function getStringElements (elements, schema) {
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringElementsType}
+ */
 export function renderStringElementsForEnum (schema, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringElementsForEnum')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getStringElements(elements, schema),
       {
-        enum: getStringElementsFieldForEnum(field, params, uri, minLength, maxLength, pattern)
+        enum: renderStringElementsFieldForEnum(field, params, uri, minLength, maxLength, pattern)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringElementsType}
+ */
 export function renderStringElementsForAnyOf (schema, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringElementsForAnyOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getStringElements(elements, schema),
       {
-        anyOf: getStringElementsFieldForAnyOf(field, params, uri, minLength, maxLength, pattern)
+        anyOf: renderStringElementsFieldForAnyOf(field, params, uri, minLength, maxLength, pattern)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringElementsType}
+ */
 export function renderStringElementsForOneOf (schema, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringElementsForOneOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getStringElements(elements, schema),
       {
-        oneOf: getStringElementsFieldForOneOf(field, params, uri, minLength, maxLength, pattern)
+        oneOf: renderStringElementsFieldForOneOf(field, params, uri, minLength, maxLength, pattern)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringElementsType}
+ */
 export function renderStringElementsForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringElementsForAllOf')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getStringElements(elements, schema),
       {
-        field: getStringElementsFieldForAllOf(field, schema, values, params, uri, minLength, maxLength, pattern)
+        field: renderStringElementsFieldForAllOf(field, schema, values, params, uri, minLength, maxLength, pattern)
       }
     )
   )
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @param {string} uri
+ *  @param {{ minLength?: number }} minLength
+ *  @param {{ maxLength?: number }} maxLength
+ *  @param {{ pattern?: RegExp }} pattern
+ *  @returns {ZashikiStringElementsType}
+ */
 export function renderStringElements (schema, values, params, uri, minLength, maxLength, pattern) {
-  /*
+  /**
    *  log('renderStringElements')
    */
 
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const elements = {}
+
+  /**
+   *  @type {ObjectLiteralType}
+   */
   const field = {}
 
   return (
     Object.assign(
       getStringElements(elements, schema),
       {
-        field: getStringElementsField(field, schema, values, params, uri, minLength, maxLength, pattern)
+        field: renderStringElementsField(field, schema, values, params, uri, minLength, maxLength, pattern)
       }
     )
   )
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNullForEnum (schema, values, params) {
-  /*
+  /**
    *  log('renderNullForEnum')
    */
 
@@ -2950,11 +4816,16 @@ export function renderNullForEnum (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNullForAnyOf (schema, values, params) {
-  /*
+  /**
    *  log('renderNullForAnyOf')
    */
 
@@ -2971,11 +4842,16 @@ export function renderNullForAnyOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNullForOneOf (schema, values, params) {
-  /*
+  /**
    *  log('renderNullForOneOf')
    */
 
@@ -2992,11 +4868,16 @@ export function renderNullForOneOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNullForAllOf (schema, values, params) {
-  /*
+  /**
    *  log('renderNullForAllOf')
    */
 
@@ -3013,8 +4894,14 @@ export function renderNullForAllOf (schema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function renderNull (schema, values, params) {
-  /*
+  /**
    *  log('renderNull')
    */
 
@@ -3031,11 +4918,16 @@ export function renderNull (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderBooleanForEnum (schema, values, params) {
-  /*
+  /**
    *  log('renderBooleanForEnum')
    */
 
@@ -3052,11 +4944,16 @@ export function renderBooleanForEnum (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderBooleanForAnyOf (schema, values, params) {
-  /*
+  /**
    *  log('renderBooleanForAnyOf')
    */
 
@@ -3073,11 +4970,16 @@ export function renderBooleanForAnyOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderBooleanForOneOf (schema, values, params) {
-  /*
+  /**
    *  log('renderBooleanForAnyOf')
    */
 
@@ -3094,11 +4996,16 @@ export function renderBooleanForOneOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderBooleanForAllOf (schema, values, params) {
-  /*
+  /**
    *  log('renderBooleanForAllOf')
    */
 
@@ -3115,8 +5022,14 @@ export function renderBooleanForAllOf (schema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function renderBoolean (schema, values, params) {
-  /*
+  /**
    *  log('renderBoolean')
    */
 
@@ -3133,11 +5046,16 @@ export function renderBoolean (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderObjectForEnum (schema, values, params) {
-  /*
+  /**
    *  log('renderObjectForEnum')
    */
 
@@ -3157,11 +5075,16 @@ export function renderObjectForEnum (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderObjectForAnyOf (schema, values, params) {
-  /*
+  /**
    *  log('renderObjectForAnyOf')
    */
 
@@ -3181,11 +5104,16 @@ export function renderObjectForAnyOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderObjectForOneOf (schema, values, params) {
-  /*
+  /**
    *  log('renderObjectForOneOf')
    */
 
@@ -3205,11 +5133,16 @@ export function renderObjectForOneOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderObjectForAllOf (schema, values, params) {
-  /*
+  /**
    *  log('renderObjectForAllOf')
    */
 
@@ -3229,8 +5162,14 @@ export function renderObjectForAllOf (schema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function renderObject (schema, values, params) {
-  /*
+  /**
    *  log('renderObject')
    */
 
@@ -3250,11 +5189,16 @@ export function renderObject (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderArrayForEnum (schema, values, params) {
-  /*
+  /**
    *  log('renderArrayForEnum')
    */
 
@@ -3268,8 +5212,8 @@ export function renderArrayForEnum (schema, values, params) {
   const maxContains = getMaxContains(schema)
   const minContains = getMinContains(schema)
 
-  const meta = renderArrayMetaForEnum(params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
-  const elements = renderArrayElementsForEnum(schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+  const meta = renderArrayMetaForEnum(params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
+  const elements = renderArrayElementsForEnum(schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
 
   return {
     meta,
@@ -3277,11 +5221,16 @@ export function renderArrayForEnum (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderArrayForAnyOf (schema, values, params) {
-  /*
+  /**
    *  log('renderArrayForAnyOf')
    */
 
@@ -3295,8 +5244,8 @@ export function renderArrayForAnyOf (schema, values, params) {
   const maxContains = getMaxContains(schema)
   const minContains = getMinContains(schema)
 
-  const meta = renderArrayMetaForAnyOf(params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
-  const elements = renderArrayElementsForAnyOf(schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+  const meta = renderArrayMetaForAnyOf(params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
+  const elements = renderArrayElementsForAnyOf(schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
 
   return {
     meta,
@@ -3304,11 +5253,16 @@ export function renderArrayForAnyOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderArrayForOneOf (schema, values, params) {
-  /*
+  /**
    *  log('renderArrayForOneOf')
    */
 
@@ -3322,8 +5276,8 @@ export function renderArrayForOneOf (schema, values, params) {
   const maxContains = getMaxContains(schema)
   const minContains = getMinContains(schema)
 
-  const meta = renderArrayMetaForOneOf(params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
-  const elements = renderArrayElementsForOneOf(schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+  const meta = renderArrayMetaForOneOf(params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
+  const elements = renderArrayElementsForOneOf(schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
 
   return {
     meta,
@@ -3331,11 +5285,16 @@ export function renderArrayForOneOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderArrayForAllOf (schema, values, params) {
-  /*
+  /**
    *  log('renderArrayForAllOf')
    */
 
@@ -3349,8 +5308,8 @@ export function renderArrayForAllOf (schema, values, params) {
   const maxContains = getMaxContains(schema)
   const minContains = getMinContains(schema)
 
-  const meta = renderArrayMetaForAllOf(params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
-  const elements = renderArrayElementsForAllOf(schema, params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+  const meta = renderArrayMetaForAllOf(params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
+  const elements = renderArrayElementsForAllOf(schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
 
   return {
     meta,
@@ -3358,8 +5317,14 @@ export function renderArrayForAllOf (schema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function renderArray (schema, values, params) {
-  /*
+  /**
    *  log('renderArray')
    */
 
@@ -3373,7 +5338,7 @@ export function renderArray (schema, values, params) {
   const maxContains = getMaxContains(schema)
   const minContains = getMinContains(schema)
 
-  const meta = renderArrayMeta(params, uri, minItems, maxItems, hasUniqueItems, maxContains, minContains)
+  const meta = renderArrayMeta(params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains)
   const elements = renderArrayElements(schema, params)
 
   return {
@@ -3382,11 +5347,16 @@ export function renderArray (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNumberForEnum (schema, values, params) {
-  /*
+  /**
    *  log('renderNumberForEnum')
    */
 
@@ -3407,11 +5377,16 @@ export function renderNumberForEnum (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNumberForAnyOf (schema, values, params) {
-  /*
+  /**
    *  log('renderNumberForAnyOf')
    */
 
@@ -3432,11 +5407,16 @@ export function renderNumberForAnyOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNumberForOneOf (schema, values, params) {
-  /*
+  /**
    *  log('renderNumberForOneOf')
    */
 
@@ -3457,11 +5437,16 @@ export function renderNumberForOneOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderNumberForAllOf (schema, values, params) {
-  /*
+  /**
    *  log('renderNumberForAllOf')
    */
 
@@ -3482,8 +5467,14 @@ export function renderNumberForAllOf (schema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function renderNumber (schema, values, params) {
-  /*
+  /**
    *  log('renderNumber')
    */
 
@@ -3504,11 +5495,16 @@ export function renderNumber (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderStringForEnum (schema, values, params) {
-  /*
+  /**
    *  log('renderStringForEnum')
    */
 
@@ -3529,11 +5525,16 @@ export function renderStringForEnum (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderStringForAnyOf (schema, values, params) {
-  /*
+  /**
    *  log('renderStringForAnyOf')
    */
 
@@ -3554,11 +5555,16 @@ export function renderStringForAnyOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderStringForOneOf (schema, values, params) {
-  /*
+  /**
    *  log('renderStringForOneOf')
    */
 
@@ -3579,11 +5585,16 @@ export function renderStringForOneOf (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function renderStringForAllOf (schema, values, params) {
-  /*
+  /**
    *  log('renderStringForAllOf')
    */
 
@@ -3604,8 +5615,14 @@ export function renderStringForAllOf (schema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function renderString (schema, values, params) {
-  /*
+  /**
    *  log('renderString')
    */
 
@@ -3626,11 +5643,17 @@ export function renderString (schema, values, params) {
   }
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByKeyForEnum')
    */
 
@@ -3645,16 +5668,22 @@ export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderNullForEnum(schema, values, getRenderParamsByKeyForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByKeyForAnyOf')
    */
 
@@ -3670,16 +5699,22 @@ export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) 
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNullForAnyOf(schema, values, getRenderParamsByKeyForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByKeyForOneOf')
    */
 
@@ -3695,30 +5730,49 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNullForOneOf(schema, values, getRenderParamsByKeyForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByKeyForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByKeyForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNullForAllOf(itemSchema, values, getRenderParamsByKeyForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByIndexForEnum')
    */
 
@@ -3733,16 +5787,22 @@ export function transformNullByIndexForEnum (schema, rootSchema, values, params)
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderNullForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByIndexForAnyOf')
    */
 
@@ -3758,16 +5818,22 @@ export function transformNullByIndexForAnyOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNullForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByIndexForOneOf')
    */
 
@@ -3783,30 +5849,49 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNullForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullByIndexForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByIndexForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNullForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullForEnum')
    */
 
@@ -3818,16 +5903,22 @@ export function transformNullForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderNullForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullForAnyOf')
    */
 
@@ -3840,16 +5931,22 @@ export function transformNullForAnyOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNullForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullForOneOf')
    */
 
@@ -3862,30 +5959,49 @@ export function transformNullForOneOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformNullByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformNullByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNullForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNullForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNullForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByKeyForEnum')
    */
 
@@ -3900,16 +6016,22 @@ export function transformBooleanByKeyForEnum (schema, rootSchema, values, params
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderBooleanForEnum(schema, values, getRenderParamsByKeyForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByKeyForAnyOf')
    */
 
@@ -3925,16 +6047,22 @@ export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, param
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderBooleanForAnyOf(schema, values, getRenderParamsByKeyForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByKeyForOneOf')
    */
 
@@ -3950,30 +6078,49 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderBooleanForOneOf(schema, values, getRenderParamsByKeyForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByKeyForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderBooleanForAllOf(itemSchema, values, getRenderParamsByKeyForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByIndexForEnum')
    */
 
@@ -3988,16 +6135,22 @@ export function transformBooleanByIndexForEnum (schema, rootSchema, values, para
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderBooleanForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByIndexForAnyOf')
    */
 
@@ -4013,16 +6166,22 @@ export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, par
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderBooleanForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByIndexForOneOf')
    */
 
@@ -4038,30 +6197,49 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderBooleanForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByIndexForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderBooleanForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanForEnum')
    */
 
@@ -4073,16 +6251,22 @@ export function transformBooleanForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderBooleanForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanForAnyOf')
    */
 
@@ -4095,16 +6279,22 @@ export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderBooleanForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanForOneOf')
    */
 
@@ -4117,30 +6307,49 @@ export function transformBooleanForOneOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformBooleanByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformBooleanByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderBooleanForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformBooleanForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderBooleanForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByKeyForEnum')
    */
 
@@ -4155,16 +6364,22 @@ export function transformObjectByKeyForEnum (schema, rootSchema, values, params)
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderObjectForEnum(schema, values, getRenderParamsByKeyForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByKeyForAnyOf')
    */
 
@@ -4180,16 +6395,22 @@ export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderObjectForAnyOf(schema, values, getRenderParamsByKeyForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByKeyForOneOf')
    */
 
@@ -4205,30 +6426,49 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderObjectForOneOf(schema, values, getRenderParamsByKeyForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByKeyForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderObjectForAllOf(itemSchema, values, getRenderParamsByKeyForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByIndexForEnum')
    */
 
@@ -4243,16 +6483,22 @@ export function transformObjectByIndexForEnum (schema, rootSchema, values, param
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderObjectForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByIndexForAnyOf')
    */
 
@@ -4268,16 +6514,22 @@ export function transformObjectByIndexForAnyOf (schema, rootSchema, values, para
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderObjectForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByIndexForOneOf')
    */
 
@@ -4293,30 +6545,49 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderObjectForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByIndexForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderObjectForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectForEnum')
    */
 
@@ -4328,16 +6599,22 @@ export function transformObjectForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderObjectForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectForAnyOf')
    */
 
@@ -4350,16 +6627,22 @@ export function transformObjectForAnyOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderObjectForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectForOneOf')
    */
 
@@ -4372,21 +6655,34 @@ export function transformObjectForOneOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformObjectByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformObjectByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderObjectForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformObjectForAllOf (schema, rootSchema, values, params) { // As-is
-  /*
+  /**
    *  log('transformObjectForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   const {
     properties = {},
@@ -4397,20 +6693,26 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
     uri = '#/'
   } = params
 
-  const fields = (
+  params.fields = (
     Object
       .entries(properties)
-      .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
+      .map(mapTransformByKey(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, required })))
   )
 
-  return renderObjectForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, { ...params, fields }))
+  return renderObjectForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByKeyForEnum')
    */
 
@@ -4425,16 +6727,22 @@ export function transformArrayByKeyForEnum (schema, rootSchema, values, params) 
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderArrayForEnum(schema, values, getRenderParamsByKeyForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByKeyForAnyOf')
    */
 
@@ -4450,16 +6758,22 @@ export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params)
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderArrayForAnyOf(schema, values, getRenderParamsByKeyForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByKeyForOneOf')
    */
 
@@ -4475,30 +6789,49 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderArrayForOneOf(schema, values, getRenderParamsByKeyForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByKeyForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderArrayForAllOf(itemSchema, values, getRenderParamsByKeyForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByIndexForEnum')
    */
 
@@ -4513,16 +6846,22 @@ export function transformArrayByIndexForEnum (schema, rootSchema, values, params
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderArrayForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByIndexForAnyOf')
    */
 
@@ -4538,16 +6877,22 @@ export function transformArrayByIndexForAnyOf (schema, rootSchema, values, param
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderArrayForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByIndexForOneOf')
    */
 
@@ -4563,30 +6908,49 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderArrayForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByIndexForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderArrayForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayForEnum')
    */
 
@@ -4598,16 +6962,22 @@ export function transformArrayForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderArrayForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayForAnyOf')
    */
 
@@ -4620,16 +6990,22 @@ export function transformArrayForAnyOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderArrayForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayForOneOf')
    */
 
@@ -4642,21 +7018,34 @@ export function transformArrayForOneOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformArrayByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformArrayByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderArrayForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformArrayForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   const {
     items = [] // array or object
@@ -4667,31 +7056,39 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
       uri = '#/'
     } = params
 
-    const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    params.fields = (
+      items.map(mapTransformByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri })))
     )
 
-    return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, { ...params, fields }))
+    return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
   } else {
     if (isObject(items)) {
       const {
         uri = '#/'
       } = params
 
-      const fields = [
-        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+      params.fields = [
+        getTransformByIndex(items, rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri }))
       ]
 
-      return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, { ...params, fields }))
+      return renderArrayForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
     }
   }
+
+  throw new Error('Invalid `array`')
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByKeyForEnum')
    */
 
@@ -4706,16 +7103,22 @@ export function transformNumberByKeyForEnum (schema, rootSchema, values, params)
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderNumberForEnum(schema, values, getRenderParamsByKeyForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByKeyForAnyOf')
    */
 
@@ -4731,16 +7134,22 @@ export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNumberForAnyOf(schema, values, getRenderParamsByKeyForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByKeyForOneOf')
    */
 
@@ -4756,30 +7165,49 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNumberForOneOf(schema, values, getRenderParamsByKeyForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByKeyForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNumberForAllOf(itemSchema, values, getRenderParamsByKeyForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByIndexForEnum')
    */
 
@@ -4794,16 +7222,22 @@ export function transformNumberByIndexForEnum (schema, rootSchema, values, param
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderNumberForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByIndexForAnyOf')
    */
 
@@ -4819,16 +7253,22 @@ export function transformNumberByIndexForAnyOf (schema, rootSchema, values, para
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNumberForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByIndexForOneOf')
    */
 
@@ -4844,30 +7284,49 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNumberForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByIndexForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNumberForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberForEnum')
    */
 
@@ -4879,16 +7338,22 @@ export function transformNumberForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderNumberForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberForAnyOf')
    */
 
@@ -4901,16 +7366,22 @@ export function transformNumberForAnyOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNumberForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberForOneOf')
    */
 
@@ -4923,30 +7394,49 @@ export function transformNumberForOneOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformNumberByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformNumberByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderNumberForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformNumberForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderNumberForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByKeyForEnum')
    */
 
@@ -4961,16 +7451,22 @@ export function transformStringByKeyForEnum (schema, rootSchema, values, params)
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderStringForEnum(schema, values, getRenderParamsByKeyForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByKeyForAnyOf')
    */
 
@@ -4986,16 +7482,26 @@ export function transformStringByKeyForAnyOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+
+  /**
+   *  @type {ZashikiType[]}
+   */
+  const items = anyOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderStringForAnyOf(schema, values, getRenderParamsByKeyForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByKeyForOneOf')
    */
 
@@ -5011,30 +7517,49 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderStringForOneOf(schema, values, getRenderParamsByKeyForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByKeyForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByKeyForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderStringForAllOf(itemSchema, values, getRenderParamsByKeyForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByIndexForEnum')
    */
 
@@ -5049,16 +7574,22 @@ export function transformStringByIndexForEnum (schema, rootSchema, values, param
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderStringForEnum(schema, values, getRenderParamsByIndexForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByIndexForAnyOf')
    */
 
@@ -5074,16 +7605,22 @@ export function transformStringByIndexForAnyOf (schema, rootSchema, values, para
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderStringForAnyOf(schema, values, getRenderParamsByIndexForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByIndexForOneOf')
    */
 
@@ -5099,30 +7636,49 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri }))
+  const items = oneOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri })))
 
   return renderStringForOneOf(schema, values, getRenderParamsByIndexForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringByIndexForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByIndexForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderStringForAllOf(itemSchema, values, getRenderParamsByIndexForAllOf(schema, rootSchema, values, params))
 }
 
-/*
+/**
  *  "enum"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringForEnum')
    */
 
@@ -5134,16 +7690,22 @@ export function transformStringForEnum (schema, rootSchema, values, params) {
     selectedItems = getSelectedItems(values, uri) // uri
   } = getMetaProps(params, uri)
 
-  const items = getEnum(schema)
+  const { enum: items = [] } = schema // const items = getEnum(schema)
 
   return renderStringForEnum(schema, values, getRenderParamsForEnum(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "anyOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringForAnyOf')
    */
 
@@ -5156,16 +7718,22 @@ export function transformStringForAnyOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { anyOf = [] } = schema
-  const items = anyOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = anyOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderStringForAnyOf(schema, values, getRenderParamsForAnyOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "oneOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringForOneOf')
    */
 
@@ -5178,28 +7746,49 @@ export function transformStringForOneOf (schema, rootSchema, values, params) {
   } = getMetaProps(params, uri)
 
   const { oneOf = [] } = schema
-  const items = oneOf.map(mapTransformStringByIndex(rootSchema, values, { ...params, parentUri: uri, selectedItems }))
+  const items = oneOf.filter(isObject).map(mapTransformStringByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, selectedItems })))
 
   return renderStringForOneOf(schema, values, getRenderParamsForOneOf(schema, rootSchema, values, Object.assign(params, { selectedItems, items })))
 }
 
-/*
+/**
  *  "allOf"
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
  */
 export function transformStringForAllOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringForAllOf')
    */
 
-  const { allOf = [], ...rest } = schema
-  const itemSchema = allOf.reduce((accumulator, schema) => Object.assign(accumulator, schema), rest) // initialise with `rest`
+  const {
+    allOf = [],
+    ...schemaProps
+  } = schema
+
+  /**
+   *  @type {SchemaType}
+   */
+  const itemSchema = allOf.filter(isObject).reduce(toSchema, structuredClone(schemaProps)) // initialise with `rest`
 
   return renderStringForAllOf(itemSchema, values, getRenderParamsForAllOf(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformNullByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByKey')
    */
 
@@ -5222,9 +7811,17 @@ export function transformNullByKey (schema, rootSchema, values, params) {
   return renderNull(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformNullByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNullByIndex')
    */
 
@@ -5247,9 +7844,17 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
   return renderNull(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformBooleanByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByKey')
    */
 
@@ -5272,9 +7877,17 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
   return renderBoolean(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformBooleanByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBooleanByIndex')
    */
 
@@ -5297,9 +7910,17 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
   return renderBoolean(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformObjectByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByKey')
    */
 
@@ -5329,20 +7950,26 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
     key: fieldKey
   } = params
 
-  const uri = getUri(fieldParentUri, fieldKey)
-
-  const fields = (
+  params.fields = (
     Object
       .entries(properties)
-      .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
+      .map(mapTransformByKey(rootSchema, values, Object.assign(structuredClone(params), { parentUri: getUri(fieldParentUri, fieldKey), required })))
   )
 
-  return renderObject(schema, values, getRenderParamsByKey(schema, rootSchema, values, Object.assign(params, { fields })))
+  return renderObject(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformObjectByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObjectByIndex')
    */
 
@@ -5372,20 +7999,26 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
     index: arrayIndex = 0
   } = params
 
-  const uri = getUri(arrayParentUri, arrayIndex)
-
-  const fields = (
+  params.fields = (
     Object
       .entries(properties)
-      .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
+      .map(mapTransformByKey(rootSchema, values, Object.assign(structuredClone(params), { parentUri: getUri(arrayParentUri, arrayIndex), required })))
   )
 
-  return renderObject(schema, values, getRenderParamsByIndex(schema, rootSchema, values, Object.assign(params, { fields })))
+  return renderObject(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformArrayByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByKey')
    */
 
@@ -5415,13 +8048,11 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
       key: fieldKey = ''
     } = params
 
-    const uri = getUri(fieldParentUri, fieldKey)
-
-    const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    params.fields = (
+      items.map(mapTransformByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: getUri(fieldParentUri, fieldKey) })))
     )
 
-    return renderArray(schema, values, getRenderParamsByKey(schema, rootSchema, values, Object.assign(params, { fields })))
+    return renderArray(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
   } else {
     if (isObject(items)) {
       const {
@@ -5429,20 +8060,28 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
         key: fieldKey = ''
       } = params
 
-      const uri = getUri(fieldParentUri, fieldKey)
-
-      const fields = [
-        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+      params.fields = [
+        getTransformByIndex(items, rootSchema, values, Object.assign(structuredClone(params), { parentUri: getUri(fieldParentUri, fieldKey) }))
       ]
 
-      return renderArray(schema, values, getRenderParamsByKey(schema, rootSchema, values, Object.assign(params, { fields })))
+      return renderArray(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
     }
   }
+
+  throw new Error('Invalid `array`')
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformArrayByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArrayByIndex')
    */
 
@@ -5472,13 +8111,11 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
       index: arrayIndex = 0
     } = params
 
-    const uri = getUri(arrayParentUri, arrayIndex)
-
-    const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    params.fields = (
+      items.map(mapTransformByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: getUri(arrayParentUri, arrayIndex) })))
     )
 
-    return renderArray(schema, values, getRenderParamsByIndex(schema, rootSchema, values, Object.assign(params, { fields })))
+    return renderArray(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
   } else {
     if (isObject(items)) {
       const {
@@ -5486,20 +8123,28 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
         index: arrayIndex = 0
       } = params
 
-      const uri = getUri(arrayParentUri, arrayIndex)
-
-      const fields = [
-        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+      params.fields = [
+        getTransformByIndex(items, rootSchema, values, Object.assign(structuredClone(params), { parentUri: getUri(arrayParentUri, arrayIndex) }))
       ]
 
-      return renderArray(schema, values, getRenderParamsByIndex(schema, rootSchema, values, Object.assign(params, { fields })))
+      return renderArray(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
     }
   }
+
+  throw new Error('Invalid `array`')
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformNumberByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByKey')
    */
 
@@ -5522,9 +8167,17 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
   return renderNumber(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.2
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformNumberByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumberByIndex')
    */
 
@@ -5547,9 +8200,17 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
   return renderNumber(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformStringByKey (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByKey')
    */
 
@@ -5572,9 +8233,17 @@ export function transformStringByKey (schema, rootSchema, values, params) {
   return renderString(schema, values, getRenderParamsByKey(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformStringByIndex (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformStringByIndex')
    */
 
@@ -5597,9 +8266,17 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
   return renderString(schema, values, getRenderParamsByIndex(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformNull (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNull')
    */
 
@@ -5622,9 +8299,17 @@ export function transformNull (schema, rootSchema, values, params) {
   return renderNull(schema, values, getRenderParams(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformBoolean (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformBoolean')
    */
 
@@ -5647,9 +8332,17 @@ export function transformBoolean (schema, rootSchema, values, params) {
   return renderBoolean(schema, values, getRenderParams(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformObject (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformObject')
    */
 
@@ -5678,18 +8371,26 @@ export function transformObject (schema, rootSchema, values, params) {
     uri = '#/'
   } = params
 
-  const fields = (
+  params.fields = (
     Object
       .entries(properties)
-      .map(mapTransformByKey(rootSchema, values, { ...params, parentUri: uri, required }))
+      .map(mapTransformByKey(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri, required })))
   )
 
-  return renderObject(schema, values, getRenderParams(schema, rootSchema, values, Object.assign(params, { fields })))
+  return renderObject(schema, values, getRenderParams(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformArray (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformArray')
    */
 
@@ -5718,29 +8419,39 @@ export function transformArray (schema, rootSchema, values, params) {
       uri = '#/'
     } = params
 
-    const fields = (
-      items.map(mapTransformByIndex(rootSchema, values, { ...params, parentUri: uri }))
+    params.fields = (
+      items.map(mapTransformByIndex(rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri })))
     )
 
-    return renderArray(schema, values, getRenderParams(schema, rootSchema, values, Object.assign(params, { fields })))
+    return renderArray(schema, values, getRenderParams(schema, rootSchema, values, params))
   } else {
     if (isObject(items)) {
       const {
         uri = '#/'
       } = params
 
-      const fields = [
-        getTransformByIndex(items, rootSchema, values, { ...params, parentUri: uri })
+      params.fields = [
+        getTransformByIndex(items, rootSchema, values, Object.assign(structuredClone(params), { parentUri: uri }))
       ]
 
-      return renderArray(schema, values, getRenderParams(schema, rootSchema, values, Object.assign(params, { fields })))
+      return renderArray(schema, values, getRenderParams(schema, rootSchema, values, params))
     }
   }
+
+  throw new Error('Invalid `array`')
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.1
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformNumber (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformNumber')
    */
 
@@ -5763,9 +8474,17 @@ export function transformNumber (schema, rootSchema, values, params) {
   return renderNumber(schema, values, getRenderParams(schema, rootSchema, values, params))
 }
 
-// https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+/**
+ *  @link https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.3
+ *
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformString (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformString')
    */
 
@@ -5788,7 +8507,26 @@ export function transformString (schema, rootSchema, values, params) {
   return renderString(schema, values, getRenderParams(schema, rootSchema, values, params))
 }
 
-export function getParamsByKeyForEnum (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByKeyForEnum (schema, rootSchema, values, params) {
+  /**
+   *  log('getParamsByKeyForAnyOf')
+   */
+
+  const {
+    parentUri = '#',
+    key = '',
+    required = []
+  } = params
+
+  const isRequired = key ? required.includes(key) : false
+
   const uri = getUri(parentUri, key)
 
   const {
@@ -5821,10 +8559,25 @@ export function getParamsByKeyForEnum (schema, rootSchema, values, { parentUri =
   })
 }
 
-export function getParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByKeyForAnyOf (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByKeyForAnyOf')
    */
+
+  const {
+    parentUri = '#',
+    key = '',
+    required = []
+  } = params
+
+  const isRequired = key ? required.includes(key) : false
 
   const uri = getUri(parentUri, key)
 
@@ -5858,10 +8611,25 @@ export function getParamsByKeyForAnyOf (schema, rootSchema, values, { parentUri 
   })
 }
 
-export function getParamsByKeyForOneOf (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByKeyForOneOf (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByKeyForOneOf')
    */
+
+  const {
+    parentUri = '#',
+    key = '',
+    required = []
+  } = params
+
+  const isRequired = key ? required.includes(key) : false
 
   const uri = getUri(parentUri, key)
 
@@ -5895,10 +8663,25 @@ export function getParamsByKeyForOneOf (schema, rootSchema, values, { parentUri 
   })
 }
 
-export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', key = '', isRequired = false, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByKey (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByKey')
    */
+
+  const {
+    parentUri = '#',
+    key = '',
+    required = []
+  } = params
+
+  const isRequired = key ? required.includes(key) : false
 
   const uri = getUri(parentUri, key)
 
@@ -5926,10 +8709,22 @@ export function getParamsByKey (schema, rootSchema, values, { parentUri = '#', k
   })
 }
 
-export function getParamsByIndexForEnum (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByIndexForEnum (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByIndexForEnum')
    */
+
+  const {
+    parentUri = '#',
+    index = 0
+  } = params
 
   const uri = getUri(parentUri, index)
 
@@ -5962,10 +8757,22 @@ export function getParamsByIndexForEnum (schema, rootSchema, values, { parentUri
   })
 }
 
-export function getParamsByIndexForAnyOf (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByIndexForAnyOf (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByIndexForAnyOf')
    */
+
+  const {
+    parentUri = '#',
+    index = 0
+  } = params
 
   const uri = getUri(parentUri, index)
 
@@ -5998,10 +8805,22 @@ export function getParamsByIndexForAnyOf (schema, rootSchema, values, { parentUr
   })
 }
 
-export function getParamsByIndexForOneOf (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByIndexForOneOf (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByIndexForOneOf')
    */
+
+  const {
+    parentUri = '#',
+    index = 0
+  } = params
 
   const uri = getUri(parentUri, index)
 
@@ -6034,10 +8853,22 @@ export function getParamsByIndexForOneOf (schema, rootSchema, values, { parentUr
   })
 }
 
-export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#', index = 0, ...params }) {
-  /*
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ParamsType}
+ */
+export function getParamsByIndex (schema, rootSchema, values, params) {
+  /**
    *  log('getParamsByIndex')
    */
+
+  const {
+    parentUri = '#',
+    index = 0
+  } = params
 
   const uri = getUri(parentUri, index)
 
@@ -6059,12 +8890,21 @@ export function getParamsByIndex (schema, rootSchema, values, { parentUri = '#',
   })
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformByKeyForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformByKeyForEnum')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6091,12 +8931,21 @@ export function transformByKeyForEnum (schema, rootSchema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformByKeyForAnyOf')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6123,12 +8972,21 @@ export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformByKeyForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformByKeyForOneOf')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6155,12 +9013,21 @@ export function transformByKeyForOneOf (schema, rootSchema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformByIndexForEnum (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformByIndexForEnum')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6187,12 +9054,21 @@ export function transformByIndexForEnum (schema, rootSchema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformByIndexForAnyOf')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6219,12 +9095,21 @@ export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} schema
+ *  @param {SchemaType} rootSchema
+ *  @param {ValuesType} values
+ *  @param {ParamsType} params
+ *  @returns {ZashikiType}
+ */
 export function transformByIndexForOneOf (schema, rootSchema, values, params) {
-  /*
+  /**
    *  log('transformByIndexForOneOf')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6251,12 +9136,21 @@ export function transformByIndexForOneOf (schema, rootSchema, values, params) {
   }
 }
 
+/**
+ *  @param {SchemaType} [schema]
+ *  @param {SchemaType} [rootSchema]
+ *  @param {ValuesType} [values]
+ *  @param {ParamsType} [params]
+ *  @returns {ZashikiType}
+ */
 export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  /*
+  /**
    *  log('transformByKey')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6283,12 +9177,21 @@ export function transformByKey (schema = {}, rootSchema = schema, values = {}, p
   }
 }
 
+/**
+ *  @param {SchemaType} [schema]
+ *  @param {SchemaType} [rootSchema]
+ *  @param {ValuesType} [values]
+ *  @param {ParamsType} [params]
+ *  @returns {ZashikiType}
+ */
 export function transformByIndex (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  /*
+  /**
    *  log('transformByIndex')
    */
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {
@@ -6315,10 +9218,19 @@ export function transformByIndex (schema = {}, rootSchema = schema, values = {},
   }
 }
 
+/**
+ *  @param {SchemaType} [schema]
+ *  @param {SchemaType} [rootSchema]
+ *  @param {ValuesType} [values]
+ *  @param {ParamsType} [params]
+ *  @returns {ZashikiType}
+ */
 export default function toZashiki (schema = {}, rootSchema = {}, values = {}, params = {}) {
   log('toZashiki')
 
-  const { type } = schema
+  const {
+    type
+  } = schema
 
   // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
   switch (type) {

@@ -1,3 +1,10 @@
+/**
+ *  @typedef {TransmissionTypes.ArrayLiteralType} ArrayLiteralType
+ *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
+ *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.HashType} HashType
+ */
+
 import debug from 'debug'
 
 import {
@@ -23,13 +30,16 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
   })
 
   describe('Hash is defined and schema is defined', () => {
-    describe('With values', () => {
+    describe('Hash has values', () => {
       describe('Transforming `null` type schemas', () => {
         it('transforms `null` type schemas with `enum`', () => {
-          const values = {
+          const hash = {
             '#/': '0'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             enum: [
@@ -40,15 +50,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
 
           const document = null
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `null` type schemas with `anyOf`', () => {
-          const values = {
+          const hash = {
             '#/': '0'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             anyOf: [
@@ -59,15 +72,18 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
 
           const document = null
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `null` type schemas with `oneOf`', () => {
-          const values = {
+          const hash = {
             '#/': '0'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             oneOf: [
@@ -78,30 +94,39 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
 
           const document = null
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `null` type schemas', () => {
-          const values = {
+          const hash = {
             '#/': 'null'
           }
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'null' }
 
           const document = null
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.eql(document)
         })
       })
     })
 
-    describe('Without values', () => {
+    describe('Hash does not have values', () => {
       describe('Transforming `null` type schemas', () => {
         it('transforms `null` type schemas with `enum`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             enum: [
@@ -111,13 +136,19 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
 
           const document = undefined
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `null` type schemas with `anyOf`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             anyOf: [
@@ -127,13 +158,19 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
 
           const document = undefined
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `null` type schemas with `oneOf`', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = {
             type: 'null',
             oneOf: [
@@ -143,18 +180,24 @@ describe('shinkansen-transmission/transmission/from-hash-to-document/null', () =
 
           const document = undefined
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.equal(document)
         })
 
         it('transforms `null` type schemas', () => {
-          const values = {}
+          /**
+           *  @type {ObjectLiteralType}
+           */
+          const hash = {}
 
+          /**
+           *  @type {SchemaType}
+           */
           const schema = { type: 'null' }
 
           const document = undefined
 
-          return expect(transformNullSchema(values, schema))
+          return expect(transformNullSchema(hash, schema))
             .to.eql(document)
         })
       })
