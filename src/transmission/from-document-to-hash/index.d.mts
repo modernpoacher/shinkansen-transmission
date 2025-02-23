@@ -1,6 +1,6 @@
-type DocumentType = TransmissionTypes.DocumentType
-type SchemaType = TransmissionTypes.SchemaType
-type HashType = TransmissionTypes.HashType
+export type DocumentType = TransmissionTypes.DocumentType
+export type SchemaType = TransmissionTypes.SchemaType
+export type HashType = TransmissionTypes.HashType
 
 export function transformArrayFor (document: DocumentType[], schema: { type: string }, hash: HashType, parentUri: string): HashType
 export function transformObjectFor (document: Record<string, DocumentType>, schema: { type: string }, hash: HashType, parentUri: string): HashType

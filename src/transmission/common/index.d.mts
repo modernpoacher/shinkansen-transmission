@@ -1,38 +1,38 @@
-type ObjectLiteralType = TransmissionTypes.ObjectLiteralType
-type ObjectType = TransmissionTypes.ObjectType
+export type ObjectLiteralType = TransmissionTypes.ObjectLiteralType
+export type ObjectType = TransmissionTypes.ObjectType
 
-type ItemsType = TransmissionTypes.ItemsType
+export type ItemsType = TransmissionTypes.ItemsType
 
-type TransmissionStringMetaType = TransmissionTypes.Transmission.StringMetaType
-type TransmissionNumberMetaType = TransmissionTypes.Transmission.NumberMetaType
-type TransmissionArrayMetaType = TransmissionTypes.Transmission.ArrayMetaType
-type TransmissionObjectMetaType = TransmissionTypes.Transmission.ObjectMetaType
-type TransmissionBooleanMetaType = TransmissionTypes.Transmission.BooleanMetaType
-type TransmissionNullMetaType = TransmissionTypes.Transmission.NullMetaType
+export type StringMetaType = TransmissionTypes.Transmission.StringMetaType
+export type NumberMetaType = TransmissionTypes.Transmission.NumberMetaType
+export type ArrayMetaType = TransmissionTypes.Transmission.ArrayMetaType
+export type ObjectMetaType = TransmissionTypes.Transmission.ObjectMetaType
+export type BooleanMetaType = TransmissionTypes.Transmission.BooleanMetaType
+export type NullMetaType = TransmissionTypes.Transmission.NullMetaType
 
-type TransmissionStringElementsType = TransmissionTypes.Transmission.StringElementsType
-type TransmissionNumberElementsType = TransmissionTypes.Transmission.NumberElementsType
-type TransmissionArrayElementsType = TransmissionTypes.Transmission.ArrayElementsType
-type TransmissionObjectElementsType = TransmissionTypes.Transmission.ObjectElementsType
-type TransmissionBooleanElementsType = TransmissionTypes.Transmission.BooleanElementsType
-type TransmissionNullElementsType = TransmissionTypes.Transmission.NullElementsType
+export type StringElementsType = TransmissionTypes.Transmission.StringElementsType
+export type NumberElementsType = TransmissionTypes.Transmission.NumberElementsType
+export type ArrayElementsType = TransmissionTypes.Transmission.ArrayElementsType
+export type ObjectElementsType = TransmissionTypes.Transmission.ObjectElementsType
+export type BooleanElementsType = TransmissionTypes.Transmission.BooleanElementsType
+export type NullElementsType = TransmissionTypes.Transmission.NullElementsType
 
-type EnumType = TransmissionTypes.EnumType
-type OneOfType = TransmissionTypes.OneOfType
-type AnyOfType = TransmissionTypes.AnyOfType
-type FieldType = TransmissionTypes.FieldType
+export type EnumType = TransmissionTypes.EnumType
+export type OneOfType = TransmissionTypes.OneOfType
+export type AnyOfType = TransmissionTypes.AnyOfType
+export type FieldType = TransmissionTypes.FieldType
 
-type SchemaType = TransmissionTypes.SchemaType
+export type SchemaType = TransmissionTypes.SchemaType
 
-type StringSchemaType = TransmissionTypes.StringSchemaType
-type NumberSchemaType = TransmissionTypes.NumberSchemaType
-type ArraySchemaType = TransmissionTypes.ArraySchemaType
-type ObjectSchemaType = TransmissionTypes.ObjectSchemaType
-type BooleanSchemaType = TransmissionTypes.BooleanSchemaType
-type NullSchemaType = TransmissionTypes.NullSchemaType
+export type StringSchemaType = TransmissionTypes.StringSchemaType
+export type NumberSchemaType = TransmissionTypes.NumberSchemaType
+export type ArraySchemaType = TransmissionTypes.ArraySchemaType
+export type ObjectSchemaType = TransmissionTypes.ObjectSchemaType
+export type BooleanSchemaType = TransmissionTypes.BooleanSchemaType
+export type NullSchemaType = TransmissionTypes.NullSchemaType
 
-type ValuesType = TransmissionTypes.ValuesType
-type ParamsType = TransmissionTypes.ParamsType
+export type ValuesType = TransmissionTypes.ValuesType
+export type ParamsType = TransmissionTypes.ParamsType
 
 export function isObject (v?: unknown): v is (Record<PropertyKey, string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]> | Record<PropertyKey, never>)
 export function isArray (v?: unknown): v is (string[] | number[] | object[] | boolean[] | null[])
@@ -55,7 +55,7 @@ export function getSelectedItems (values?: ValuesType, uri?: string): Array<stri
 
 export function isParentUri (parentUri?: string, uri?: string): boolean
 
-export function getMetaProps (params?: ParamsType, uri?: string): TransmissionStringMetaType | TransmissionNumberMetaType | TransmissionArrayMetaType | TransmissionObjectMetaType | TransmissionBooleanMetaType | TransmissionNullMetaType | Record<string, never>
+export function getMetaProps (params?: ParamsType, uri?: string): StringMetaType | NumberMetaType | ArrayMetaType | ObjectMetaType | BooleanMetaType | NullMetaType | Record<string, never>
 export function hasMetaDefaultValue (schema?: SchemaType): boolean
 export function getMetaDefaultValue (schema?: SchemaType): { defaultValue: string } | ObjectLiteralType
 export function hasMetaValue (values?: ValuesType, uri?: string, schema?: SchemaType): boolean
@@ -109,7 +109,7 @@ export function getIndexForAnyOf (values?: ValuesType, parentUri?: string, uri?:
 export function getValueForOneOf (v: string | number, schema?: { oneOf?: ItemsType }): string
 export function getIndexForOneOf (values: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
 
-export function getElementsProps (params?: ParamsType, uri?: string): TransmissionStringElementsType | TransmissionNumberElementsType | TransmissionArrayElementsType | TransmissionObjectElementsType | TransmissionBooleanElementsType | TransmissionNullElementsType | Record<string, never>
+export function getElementsProps (params?: ParamsType, uri?: string): StringElementsType | NumberElementsType | ArrayElementsType | ObjectElementsType | BooleanElementsType | NullElementsType | Record<string, never>
 
 export function getElementsFieldPropsForEnum (params?: ParamsType, uri?: string): EnumType | ObjectLiteralType
 export function getElementsFieldPropsForOneOf (params?: ParamsType, uri?: string): OneOfType | ObjectLiteralType
