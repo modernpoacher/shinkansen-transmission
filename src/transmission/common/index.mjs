@@ -328,9 +328,9 @@ export function transformToValue (item) {
  *  @param {string} uri
  *  @returns {(key: string | number) => boolean}
  */
-export function findByUri (parentUri, uri) {
+export function findByKey (parentUri, uri) {
   /*
-   *  log('findByUri')
+   *  log('findByKey')
    */
   return function find (key) {
     /*
@@ -339,6 +339,60 @@ export function findByUri (parentUri, uri) {
 
     return (
       getUri(parentUri, key) === uri
+    )
+  }
+}
+
+/**
+ *  @param {string} parentUri
+ *  @param {string} uri
+ *  @returns {(item: SchemaType, index: number) => boolean}
+ */
+export function findByIndex (parentUri, uri) {
+  /*
+   *  log('findByIndex')
+   */
+  return function find (item, index) {
+    /*
+     *  log('find')
+     */
+
+    /**
+     *  It's a schema not a value
+     */
+
+    if (hasEnum(item)) {
+      /**
+       *  Do the `parentUri` and `uri` match?
+       */
+
+      return (
+        getUri(parentUri, index) === uri
+      )
+    } else {
+      if (hasAnyOf(item)) {
+        const array = getAnyOf(item)
+
+        return (
+          array.filter(isObject).some(findByIndex(parentUri, uri))
+        )
+      } else {
+        if (hasOneOf(item)) {
+          const array = getOneOf(item)
+
+          return (
+            array.filter(isObject).some(findByIndex(parentUri, uri))
+          )
+        }
+      }
+    }
+
+    /**
+     *  It's any other kind of schema/sub-schema
+     */
+
+    return (
+      getUri(parentUri, index) === uri
     )
   }
 }
@@ -395,14 +449,17 @@ export function toString (value) {
  *  @param {string} uri
  *  @returns {SchemaType | undefined}
  */
-function getArray ({ items /* array or object */ } = {}, parentUri = '', uri = '') {
-  if (isArray(items)) {
-    const keys = Object.keys(items).map(Number)
-    const find = findByUri(parentUri, uri)
+export function getArray ({ items /* array or object */ } = {}, parentUri = '', uri = '') {
+  /*
+   *  log('getArray')
+   */
 
-    const key = keys.find(find)
-    if (typeof key === 'number') return items[key]
-    return undefined
+  if (isArray(items)) {
+    const find = findByIndex(parentUri, uri)
+
+    return (
+      items.find(find)
+    )
   }
 
   if (isObject(items)) return items
@@ -422,11 +479,14 @@ export function getObject ({ properties /* object */ } = {}, parentUri = '', uri
    */
 
   if (isObject(properties)) {
-    const keys = Object.keys(properties).map(String)
-    const find = findByUri(parentUri, uri)
+    const find = findByKey(parentUri, uri)
+    const key = Object.keys(properties).find(find)
 
-    const key = keys.find(find)
-    if (typeof key === 'string') return properties[key]
+    if (key) {
+      return (
+        properties[key]
+      )
+    }
   }
 
   return undefined
@@ -456,6 +516,7 @@ export function getSchema (schema = {}, parentUri = '', uri = '') {
   /*
    *  log('getSchema')
    */
+
   const {
     type
   } = schema

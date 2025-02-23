@@ -63,7 +63,8 @@ export function getMetaValue (values?: ValuesType, uri?: string, schema?: Schema
 
 export function transformToValue (schema?: string | number | object | boolean | null): string | number | object | boolean | null | undefined
 
-export function findByUri (parentUri: string, uri: string): (key: string | number) => boolean
+export function findByKey (parentUri: string, uri: string): (key: string | number) => boolean
+export function findByIndex (parentUri: string, uri: string): (item: SchemaType, index: number) => boolean
 export function findByValue (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
 export function findByEqual (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
 
