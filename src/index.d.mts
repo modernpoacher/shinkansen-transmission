@@ -1,5 +1,4 @@
 export type SchemaType = TransmissionTypes.SchemaType
-
 export type DocumentType = TransmissionTypes.DocumentType
 export type HashType = TransmissionTypes.HashType
 
