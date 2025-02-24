@@ -73,17 +73,29 @@ declare global {
       pattern?: RegExp
     }
 
-    export interface StringSchemaType extends SchemaType {}
+    export interface StringSchemaType extends SchemaType {
+      type?: 'string'
+    }
 
-    export interface NumberSchemaType extends SchemaType {}
+    export interface NumberSchemaType extends SchemaType {
+      type?: 'number'
+    }
 
-    export interface ArraySchemaType extends SchemaType {}
+    export interface ArraySchemaType extends SchemaType {
+      type?: 'array'
+    }
 
-    export interface ObjectSchemaType extends SchemaType {}
+    export interface ObjectSchemaType extends SchemaType {
+      type?: 'object'
+    }
 
-    export interface BooleanSchemaType extends SchemaType {}
+    export interface BooleanSchemaType extends SchemaType {
+      type?: 'boolean'
+    }
 
-    export interface NullSchemaType extends SchemaType {}
+    export interface NullSchemaType extends SchemaType {
+      type?: 'null'
+    }
 
     /**
      *  String keys with string or string array values
