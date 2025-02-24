@@ -1,31 +1,7 @@
 /**
- *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
- *  @typedef {TransmissionTypes.ObjectType} ObjectType
- *
- *  @typedef {TransmissionTypes.EnumType} EnumType
- *  @typedef {TransmissionTypes.AnyOfType} AnyOfType
- *  @typedef {TransmissionTypes.OneOfType} OneOfType
- *  @typedef {TransmissionTypes.FieldType} FieldType
- *
  *  @typedef {TransmissionTypes.SchemaType} SchemaType
  *  @typedef {TransmissionTypes.ValuesType} ValuesType
  *  @typedef {TransmissionTypes.ParamsType} ParamsType
- *
- *  @typedef {TransmissionTypes.Zashiki.ZashikiType} ZashikiType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringMetaType} ZashikiStringMetaType
- *  @typedef {TransmissionTypes.Zashiki.NumberMetaType} ZashikiNumberMetaType
- *  @typedef {TransmissionTypes.Zashiki.ArrayMetaType} ZashikiArrayMetaType
- *  @typedef {TransmissionTypes.Zashiki.ObjectMetaType} ZashikiObjectMetaType
- *  @typedef {TransmissionTypes.Zashiki.BooleanMetaType} ZashikiBooleanMetaType
- *  @typedef {TransmissionTypes.Zashiki.NullMetaType} ZashikiNullMetaType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringElementsType} ZashikiStringElementsType
- *  @typedef {TransmissionTypes.Zashiki.NumberElementsType} ZashikiNumberElementsType
- *  @typedef {TransmissionTypes.Zashiki.ArrayElementsType} ZashikiArrayElementsType
- *  @typedef {TransmissionTypes.Zashiki.ObjectElementsType} ZashikiObjectElementsType
- *  @typedef {TransmissionTypes.Zashiki.BooleanElementsType} ZashikiBooleanElementsType
- *  @typedef {TransmissionTypes.Zashiki.NullElementsType} ZashikiNullElementsType
  */
 
 import debug from 'debug'

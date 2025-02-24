@@ -11,21 +11,9 @@
  *  @typedef {TransmissionTypes.ValuesType} ValuesType
  *  @typedef {TransmissionTypes.ParamsType} ParamsType
  *
- *  @typedef {TransmissionTypes.Zashiki.ZashikiType} ZashikiType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringMetaType} ZashikiStringMetaType
- *  @typedef {TransmissionTypes.Zashiki.NumberMetaType} ZashikiNumberMetaType
- *  @typedef {TransmissionTypes.Zashiki.ArrayMetaType} ZashikiArrayMetaType
- *  @typedef {TransmissionTypes.Zashiki.ObjectMetaType} ZashikiObjectMetaType
  *  @typedef {TransmissionTypes.Zashiki.BooleanMetaType} ZashikiBooleanMetaType
- *  @typedef {TransmissionTypes.Zashiki.NullMetaType} ZashikiNullMetaType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringElementsType} ZashikiStringElementsType
- *  @typedef {TransmissionTypes.Zashiki.NumberElementsType} ZashikiNumberElementsType
- *  @typedef {TransmissionTypes.Zashiki.ArrayElementsType} ZashikiArrayElementsType
- *  @typedef {TransmissionTypes.Zashiki.ObjectElementsType} ZashikiObjectElementsType
  *  @typedef {TransmissionTypes.Zashiki.BooleanElementsType} ZashikiBooleanElementsType
- *  @typedef {TransmissionTypes.Zashiki.NullElementsType} ZashikiNullElementsType
+ *  @typedef {TransmissionTypes.Zashiki.BooleanType} ZashikiBooleanType
  */
 
 import debug from 'debug'
@@ -671,7 +659,7 @@ export function renderBooleanElements (schema, values, params, uri) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForEnum (schema, values, params) {
   /**
@@ -697,7 +685,7 @@ export function renderBooleanForEnum (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForAnyOf (schema, values, params) {
   /**
@@ -723,7 +711,7 @@ export function renderBooleanForAnyOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForOneOf (schema, values, params) {
   /**
@@ -749,7 +737,7 @@ export function renderBooleanForOneOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForAllOf (schema, values, params) {
   /**
@@ -773,7 +761,7 @@ export function renderBooleanForAllOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiBooleanType}
  */
 export function renderBoolean (schema, values, params) {
   /**

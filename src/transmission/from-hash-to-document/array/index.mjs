@@ -25,7 +25,7 @@ log('`shinkansen` is awake')
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
- *  @returns {DocumentType | undefined}
+ *  @returns {DocumentType}
  */
 export default function transformArraySchema (hash = {}, schema = {}, params = {}) {
   log('transformArraySchema')

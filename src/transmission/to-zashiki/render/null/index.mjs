@@ -11,21 +11,9 @@
  *  @typedef {TransmissionTypes.ValuesType} ValuesType
  *  @typedef {TransmissionTypes.ParamsType} ParamsType
  *
- *  @typedef {TransmissionTypes.Zashiki.ZashikiType} ZashikiType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringMetaType} ZashikiStringMetaType
- *  @typedef {TransmissionTypes.Zashiki.NumberMetaType} ZashikiNumberMetaType
- *  @typedef {TransmissionTypes.Zashiki.ArrayMetaType} ZashikiArrayMetaType
- *  @typedef {TransmissionTypes.Zashiki.ObjectMetaType} ZashikiObjectMetaType
- *  @typedef {TransmissionTypes.Zashiki.BooleanMetaType} ZashikiBooleanMetaType
  *  @typedef {TransmissionTypes.Zashiki.NullMetaType} ZashikiNullMetaType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringElementsType} ZashikiStringElementsType
- *  @typedef {TransmissionTypes.Zashiki.NumberElementsType} ZashikiNumberElementsType
- *  @typedef {TransmissionTypes.Zashiki.ArrayElementsType} ZashikiArrayElementsType
- *  @typedef {TransmissionTypes.Zashiki.ObjectElementsType} ZashikiObjectElementsType
- *  @typedef {TransmissionTypes.Zashiki.BooleanElementsType} ZashikiBooleanElementsType
  *  @typedef {TransmissionTypes.Zashiki.NullElementsType} ZashikiNullElementsType
+ *  @typedef {TransmissionTypes.Zashiki.NullType} ZashikiNullType
  */
 
 import debug from 'debug'
@@ -673,7 +661,7 @@ export function renderNullElements (schema, values, params, uri) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNullType}
  */
 export function renderNullForEnum (schema, values, params) {
   /**
@@ -699,7 +687,7 @@ export function renderNullForEnum (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNullType}
  */
 export function renderNullForAnyOf (schema, values, params) {
   /**
@@ -725,7 +713,7 @@ export function renderNullForAnyOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNullType}
  */
 export function renderNullForOneOf (schema, values, params) {
   /**
@@ -751,7 +739,7 @@ export function renderNullForOneOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNullType}
  */
 export function renderNullForAllOf (schema, values, params) {
   /**
@@ -775,7 +763,7 @@ export function renderNullForAllOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNullType}
  */
 export function renderNull (schema, values, params) {
   /**

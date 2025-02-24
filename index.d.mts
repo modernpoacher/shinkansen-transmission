@@ -105,9 +105,16 @@ declare global {
     interface MetaType extends ObjectType {
       parentUri?: string
       uri?: string
+      schema?: SchemaType
+      rootSchema?: SchemaType
+      value?: string
+      defaultValue?: string
+      item?: number
+      name?: string
       selectedItems?: SelectedItemsType
       items?: ItemsType
-      item?: number
+      isRequired?: boolean
+      component?: string
     }
 
     interface ElementsType extends ObjectType {
@@ -116,14 +123,26 @@ declare global {
     }
 
     export namespace Transmission {
-      export interface StringMetaType extends MetaType {
+      interface TransmissionMetaType extends MetaType {}
+
+      interface TransmissionElementsType extends ElementsType {
+        field?: FieldType
+        enum?: EnumType
+        anyOf?: AnyOfType
+        oneOf?: OneOfType
+        fields?: Array<{
+          meta?: TransmissionMetaType
+          elements?: TransmissionElementsType
+        }>
+      }
+
+      export interface StringMetaType extends TransmissionMetaType {
         minLength?: number
         maxLength?: number
         pattern?: RegExp
-        defaultValue?: string
       }
 
-      export interface NumberMetaType extends MetaType {
+      export interface NumberMetaType extends TransmissionMetaType {
         min?: number
         max?: number
         step?: number
@@ -131,59 +150,34 @@ declare global {
         isExclusiveMax?: boolean
       }
 
-      export interface ArrayMetaType extends MetaType {}
-
-      export interface ObjectMetaType extends MetaType {}
-
-      export interface BooleanMetaType extends MetaType {}
-
-      export interface NullMetaType extends MetaType {}
-
-      export interface StringElementsType extends ElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
+      export interface ArrayMetaType extends TransmissionMetaType {
+        minItems?: number
+        maxItems?: number
+        hasUniqueItems?: boolean
+        minContains?: number
+        maxContains?: number
       }
 
-      export interface NumberElementsType extends ElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
+      export interface ObjectMetaType extends TransmissionMetaType {
+        minProperties?: number
+        maxProperties?: number
       }
 
-      export interface ArrayElementsType extends ElementsType {
-        field?: FieldType
-        fields?: Array<{
-          meta?: MetaType
-          elements?: ElementsType
-        }>
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface BooleanMetaType extends TransmissionMetaType {}
 
-      export interface ObjectElementsType extends ElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface NullMetaType extends TransmissionMetaType {}
 
-      export interface BooleanElementsType extends ElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface StringElementsType extends TransmissionElementsType {}
 
-      export interface NullElementsType extends ElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface NumberElementsType extends TransmissionElementsType {}
+
+      export interface ArrayElementsType extends TransmissionElementsType {}
+
+      export interface ObjectElementsType extends TransmissionElementsType {}
+
+      export interface BooleanElementsType extends TransmissionElementsType {}
+
+      export interface NullElementsType extends TransmissionElementsType {}
 
       interface TransmissionType {
         meta?: StringMetaType
@@ -224,21 +218,20 @@ declare global {
     export namespace Zashiki {
       interface ZashikiMetaType extends MetaType {
         type?: string
-        schema?: SchemaType
-        value?: string
-        component?: string
       }
 
       interface ZashikiElementsType extends ElementsType {
-        title?: string
-        description?: string
+        field?: FieldType
+        fields?: Array<{
+          meta?: ZashikiMetaType
+          elements?: ZashikiElementsType
+        }>
       }
 
       export interface StringMetaType extends ZashikiMetaType {
         minLength?: number
         maxLength?: number
         pattern?: RegExp
-        defaultValue?: string
       }
 
       export interface NumberMetaType extends ZashikiMetaType {
@@ -249,59 +242,34 @@ declare global {
         isExclusiveMax?: boolean
       }
 
-      export interface ArrayMetaType extends ZashikiMetaType {}
+      export interface ArrayMetaType extends ZashikiMetaType {
+        minItems?: number
+        maxItems?: number
+        hasUniqueItems?: boolean
+        minContains?: number
+        maxContains?: number
+      }
 
-      export interface ObjectMetaType extends ZashikiMetaType {}
+      export interface ObjectMetaType extends ZashikiMetaType {
+        minProperties?: number
+        maxProperties?: number
+      }
 
       export interface BooleanMetaType extends ZashikiMetaType {}
 
       export interface NullMetaType extends ZashikiMetaType {}
 
-      export interface StringElementsType extends ZashikiElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface StringElementsType extends ZashikiElementsType {}
 
-      export interface NumberElementsType extends ZashikiElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface NumberElementsType extends ZashikiElementsType {}
 
-      export interface ArrayElementsType extends ZashikiElementsType {
-        field?: FieldType
-        fields?: Array<{
-          meta?: ZashikiMetaType
-          elements?: ZashikiElementsType
-        }>
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface ArrayElementsType extends ZashikiElementsType {}
 
-      export interface ObjectElementsType extends ZashikiElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface ObjectElementsType extends ZashikiElementsType {}
 
-      export interface BooleanElementsType extends ZashikiElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface BooleanElementsType extends ZashikiElementsType {}
 
-      export interface NullElementsType extends ZashikiElementsType {
-        field?: FieldType
-        enum?: EnumType
-        anyOf?: AnyOfType
-        oneOf?: OneOfType
-      }
+      export interface NullElementsType extends ZashikiElementsType {}
 
       interface ZashikiType {
         meta?: ZashikiMetaType

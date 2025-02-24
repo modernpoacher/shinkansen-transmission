@@ -2,8 +2,6 @@
  *  @typedef {TransmissionTypes.SchemaType} SchemaType
  *  @typedef {TransmissionTypes.ValuesType} ValuesType
  *  @typedef {TransmissionTypes.ParamsType} ParamsType
- *
- *  @typedef {TransmissionTypes.Zashiki.ZashikiType} ZashikiType
  */
 
 import debug from 'debug'

@@ -11,21 +11,9 @@
  *  @typedef {TransmissionTypes.ValuesType} ValuesType
  *  @typedef {TransmissionTypes.ParamsType} ParamsType
  *
- *  @typedef {TransmissionTypes.Zashiki.ZashikiType} ZashikiType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringMetaType} ZashikiStringMetaType
  *  @typedef {TransmissionTypes.Zashiki.NumberMetaType} ZashikiNumberMetaType
- *  @typedef {TransmissionTypes.Zashiki.ArrayMetaType} ZashikiArrayMetaType
- *  @typedef {TransmissionTypes.Zashiki.ObjectMetaType} ZashikiObjectMetaType
- *  @typedef {TransmissionTypes.Zashiki.BooleanMetaType} ZashikiBooleanMetaType
- *  @typedef {TransmissionTypes.Zashiki.NullMetaType} ZashikiNullMetaType
- *
- *  @typedef {TransmissionTypes.Zashiki.StringElementsType} ZashikiStringElementsType
  *  @typedef {TransmissionTypes.Zashiki.NumberElementsType} ZashikiNumberElementsType
- *  @typedef {TransmissionTypes.Zashiki.ArrayElementsType} ZashikiArrayElementsType
- *  @typedef {TransmissionTypes.Zashiki.ObjectElementsType} ZashikiObjectElementsType
- *  @typedef {TransmissionTypes.Zashiki.BooleanElementsType} ZashikiBooleanElementsType
- *  @typedef {TransmissionTypes.Zashiki.NullElementsType} ZashikiNullElementsType
+ *  @typedef {TransmissionTypes.Zashiki.NumberType} ZashikiNumberType
  */
 
 import debug from 'debug'
@@ -797,7 +785,7 @@ export function renderNumberElements (schema, values, params, uri, min, max, ste
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNumberType}
  */
 export function renderNumberForEnum (schema, values, params) {
   /**
@@ -827,7 +815,7 @@ export function renderNumberForEnum (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNumberType}
  */
 export function renderNumberForAnyOf (schema, values, params) {
   /**
@@ -857,7 +845,7 @@ export function renderNumberForAnyOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNumberType}
  */
 export function renderNumberForOneOf (schema, values, params) {
   /**
@@ -887,7 +875,7 @@ export function renderNumberForOneOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNumberType}
  */
 export function renderNumberForAllOf (schema, values, params) {
   /**
@@ -915,7 +903,7 @@ export function renderNumberForAllOf (schema, values, params) {
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
  *  @param {ParamsType} params
- *  @returns {ZashikiType}
+ *  @returns {ZashikiNumberType}
  */
 export function renderNumber (schema, values, params) {
   /**
