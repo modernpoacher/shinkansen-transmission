@@ -8,30 +8,13 @@
     "noEmit": true,
     "strict": true,
     "isolatedModules": true,
-    "baseUrl": ".",
-    "paths": {
-      "#transmission": [
-        "src/index.mjs"
-      ],
-      "#transmission/common": [
-        "src/common/index.mjs"
-      ],
-      "#transmission/transmission": [
-        "src/transmission/index.mjs"
-      ],
-      "#transmission/transmission/*": [
-        "src/transmission/*/index.mjs"
-      ],
-      "#transmission/transmission/to-zashiki/transform-root-schema": [
-        "src/transmission/to-zashiki/transform-root-schema.mjs"
-      ],
-      "#transmission/transmission/to-zashiki/transform-schema": [
-        "src/transmission/to-zashiki/transform-schema.mjs"
-      ]
-    }
+    "baseUrl": "."
   },
   "include": [
     ".",
     "src/**/*"
+  ],
+  "exclude": [
+    "test/**/*"
   ]
 }
