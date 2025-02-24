@@ -1,7 +1,5 @@
 import globals from 'globals'
-// @ts-ignore
 import standard from '@sequencemedia/eslint-config-standard/configs/recommended/merge'
-// @ts-ignore
 import typescript from '@sequencemedia/eslint-config-typescript/configs/recommended/merge'
 
 export default [
