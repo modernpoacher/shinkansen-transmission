@@ -308,7 +308,11 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
  *  @returns {string | number | object | boolean | null | undefined}
  */
 export function transformToValue (item) {
+  if (item === undefined) return item
+
   if (isPrimitive(item)) return item
+
+  if (isArray(item)) return item // .map(transformToValue)
 
   if (isObject(item)) {
     if (hasConst(item)) {
@@ -318,9 +322,9 @@ export function transformToValue (item) {
         return getDefault(item)
       }
     }
-  }
 
-  return item
+    return item
+  }
 }
 
 /**
