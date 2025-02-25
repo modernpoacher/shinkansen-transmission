@@ -33,7 +33,8 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
             enum: [
               'string (1)',
               'string (2)',
-              'string (3)']
+              'string (3)'
+            ]
           }
 
           return expect(transform(schema))

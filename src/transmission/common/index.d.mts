@@ -63,10 +63,10 @@ export function getMetaValue (values?: ValuesType, uri?: string, schema?: Schema
 
 export function transformToValue (schema?: string | number | object | boolean | null): string | number | object | boolean | null | undefined
 
-export function findByKey (parentUri: string, uri: string): (key: string | number) => boolean
-export function findByIndex (parentUri: string, uri: string): (item: SchemaType, index: number) => boolean
-export function findByValue (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
-export function findByEqual (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
+export function getFindByKey (parentUri: string, uri: string): (key: string | number) => boolean
+export function getFindByIndex (parentUri: string, uri: string): (item: SchemaType, index: number) => boolean
+export function getFindByValue (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
+export function getFindByEqual (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
 
 export function toString (value?: string | number | object | boolean | null): string
 
@@ -96,6 +96,9 @@ export { getSchema }
 
 export function transformValueIndexFor (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): string
 export function transformEqualIndexFor (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): string
+
+export function getIndexByValue (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): number
+export function getIndexByEqual (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): number
 
 export function hasValue (values?: ValuesType, uri?: string, schema?: SchemaType): boolean
 export function getValue (values?: ValuesType, uri?: string, schema?: SchemaType): string

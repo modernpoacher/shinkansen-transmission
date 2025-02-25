@@ -36,6 +36,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           meta: {
             type: 'array',
             uri: '#/',
+            // rootSchema: [],
             schema
           },
           elements: {
@@ -55,11 +56,11 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           [],
           []
         ],
-        minItems: 1,
-        maxItems: 9,
+        minItems: 0,
+        maxItems: 3,
         uniqueItems: true,
-        minContains: 1,
-        maxContains: 9
+        minContains: 0,
+        maxContains: 3
       }
 
       expect(transform(schema))
@@ -67,12 +68,13 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           meta: {
             type: 'array',
             uri: '#/',
+            // rootSchema: [],
             schema,
-            minItems: 1,
-            maxItems: 9,
+            minItems: 0,
+            maxItems: 3,
             hasUniqueItems: true,
-            minContains: 1,
-            maxContains: 9,
+            minContains: 0,
+            maxContains: 3,
             items: [
               [],
               [],
@@ -83,11 +85,11 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           elements: {
             enum: {
               id: '#/',
-              minItems: 1,
-              maxItems: 9,
+              minItems: 0,
+              maxItems: 3,
               hasUniqueItems: true,
-              minContains: 1,
-              maxContains: 9,
+              minContains: 0,
+              maxContains: 3,
               items: [
                 [],
                 [],
@@ -106,29 +108,146 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       const schema = {
         type: 'array',
         anyOf: [
-          { const: [] },
-          { const: [] },
-          { const: [] }
+          {
+            const: [
+              1
+            ],
+            minItems: 1,
+            maxItems: 3,
+            uniqueItems: true,
+            minContains: 1,
+            maxContains: 3
+          },
+          {
+            const: [
+              1,
+              2
+            ],
+            minItems: 2,
+            maxItems: 3,
+            uniqueItems: true,
+            minContains: 2,
+            maxContains: 3
+          },
+          {
+            const: [
+              1,
+              2,
+              3
+            ],
+            minItems: 3,
+            maxItems: 3,
+            uniqueItems: true,
+            minContains: 3,
+            maxContains: 3
+          }
         ]
       }
 
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              anyOf: [
+                {
+                  const: [
+                    1
+                  ],
+                  minItems: 1,
+                  maxItems: 3,
+                  uniqueItems: true,
+                  minContains: 1,
+                  maxContains: 3
+                },
+                {
+                  const: [
+                    1,
+                    2
+                  ],
+                  minItems: 2,
+                  maxItems: 3,
+                  uniqueItems: true,
+                  minContains: 2,
+                  maxContains: 3
+                },
+                {
+                  const: [
+                    1,
+                    2,
+                    3
+                  ],
+                  minItems: 3,
+                  maxItems: 3,
+                  uniqueItems: true,
+                  minContains: 3,
+                  maxContains: 3
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
+                  minItems: 1,
+                  maxItems: 3,
+                  hasUniqueItems: true,
+                  minContains: 1,
+                  maxContains: 3,
                   schema: {
-                    const: []
-                  }
+                    const: [
+                      1
+                    ],
+                    minItems: 1,
+                    maxItems: 3,
+                    uniqueItems: true,
+                    minContains: 1,
+                    maxContains: 3
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        const: [
+                          1
+                        ],
+                        minItems: 1,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 1,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2
+                        ],
+                        minItems: 2,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 2,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2,
+                          3
+                        ],
+                        minItems: 3,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 3,
+                        maxContains: 3
+                      }
+                    ]
+                  },
+                  item: 0
                 },
                 elements: {
                   fields: []
@@ -136,14 +255,64 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
               },
               {
                 meta: {
-                  type: 'array',
-                  item: 1,
-                  parentUri: '#/',
                   uri: '#/1',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
+                  minItems: 2,
+                  maxItems: 3,
+                  hasUniqueItems: true,
+                  minContains: 2,
+                  maxContains: 3,
                   schema: {
-                    const: []
-                  }
+                    const: [
+                      1,
+                      2
+                    ],
+                    minItems: 2,
+                    maxItems: 3,
+                    uniqueItems: true,
+                    minContains: 2,
+                    maxContains: 3
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        const: [
+                          1
+                        ],
+                        minItems: 1,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 1,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2
+                        ],
+                        minItems: 2,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 2,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2,
+                          3
+                        ],
+                        minItems: 3,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 3,
+                        maxContains: 3
+                      }
+                    ]
+                  },
+                  item: 1
                 },
                 elements: {
                   fields: []
@@ -151,36 +320,135 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
               },
               {
                 meta: {
-                  type: 'array',
-                  item: 2,
-                  parentUri: '#/',
                   uri: '#/2',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
+                  minItems: 3,
+                  maxItems: 3,
+                  hasUniqueItems: true,
+                  minContains: 3,
+                  maxContains: 3,
                   schema: {
-                    const: []
-                  }
+                    const: [
+                      1,
+                      2,
+                      3
+                    ],
+                    minItems: 3,
+                    maxItems: 3,
+                    uniqueItems: true,
+                    minContains: 3,
+                    maxContains: 3
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        const: [
+                          1
+                        ],
+                        minItems: 1,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 1,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2
+                        ],
+                        minItems: 2,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 2,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2,
+                          3
+                        ],
+                        minItems: 3,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 3,
+                        maxContains: 3
+                      }
+                    ]
+                  },
+                  item: 2
                 },
                 elements: {
                   fields: []
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             anyOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
+                    minItems: 1,
+                    maxItems: 3,
+                    hasUniqueItems: true,
+                    minContains: 1,
+                    maxContains: 3,
                     schema: {
-                      const: []
-                    }
+                      const: [
+                        1
+                      ],
+                      minItems: 1,
+                      maxItems: 3,
+                      uniqueItems: true,
+                      minContains: 1,
+                      maxContains: 3
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          const: [
+                            1
+                          ],
+                          minItems: 1,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 1,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2
+                          ],
+                          minItems: 2,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 2,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2,
+                            3
+                          ],
+                          minItems: 3,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 3,
+                          maxContains: 3
+                        }
+                      ]
+                    },
+                    item: 0
                   },
                   elements: {
                     fields: []
@@ -188,14 +456,64 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 },
                 {
                   meta: {
-                    type: 'array',
-                    item: 1,
-                    parentUri: '#/',
                     uri: '#/1',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
+                    minItems: 2,
+                    maxItems: 3,
+                    hasUniqueItems: true,
+                    minContains: 2,
+                    maxContains: 3,
                     schema: {
-                      const: []
-                    }
+                      const: [
+                        1,
+                        2
+                      ],
+                      minItems: 2,
+                      maxItems: 3,
+                      uniqueItems: true,
+                      minContains: 2,
+                      maxContains: 3
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          const: [
+                            1
+                          ],
+                          minItems: 1,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 1,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2
+                          ],
+                          minItems: 2,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 2,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2,
+                            3
+                          ],
+                          minItems: 3,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 3,
+                          maxContains: 3
+                        }
+                      ]
+                    },
+                    item: 1
                   },
                   elements: {
                     fields: []
@@ -203,21 +521,72 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 },
                 {
                   meta: {
-                    type: 'array',
-                    item: 2,
-                    parentUri: '#/',
                     uri: '#/2',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
+                    minItems: 3,
+                    maxItems: 3,
+                    hasUniqueItems: true,
+                    minContains: 3,
+                    maxContains: 3,
                     schema: {
-                      const: []
-                    }
+                      const: [
+                        1,
+                        2,
+                        3
+                      ],
+                      minItems: 3,
+                      maxItems: 3,
+                      uniqueItems: true,
+                      minContains: 3,
+                      maxContains: 3
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          const: [
+                            1
+                          ],
+                          minItems: 1,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 1,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2
+                          ],
+                          minItems: 2,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 2,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2,
+                            3
+                          ],
+                          minItems: 3,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 3,
+                          maxContains: 3
+                        }
+                      ]
+                    },
+                    item: 2
                   },
                   elements: {
                     fields: []
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -231,28 +600,37 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
         type: 'array',
         oneOf: [
           {
-            const: [],
+            const: [
+              1
+            ],
             minItems: 1,
-            maxItems: 9,
+            maxItems: 3,
             uniqueItems: true,
             minContains: 1,
-            maxContains: 9
+            maxContains: 3
           },
           {
-            const: [],
-            minItems: 1,
-            maxItems: 9,
+            const: [
+              1,
+              2
+            ],
+            minItems: 2,
+            maxItems: 3,
             uniqueItems: true,
-            minContains: 1,
-            maxContains: 9
+            minContains: 2,
+            maxContains: 3
           },
           {
-            const: [],
-            minItems: 1,
-            maxItems: 9,
+            const: [
+              1,
+              2,
+              3
+            ],
+            minItems: 3,
+            maxItems: 3,
             uniqueItems: true,
-            minContains: 1,
-            maxContains: 9
+            minContains: 3,
+            maxContains: 3
           }
         ]
       }
@@ -260,30 +638,107 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              oneOf: [
+                {
+                  const: [
+                    1
+                  ],
+                  minItems: 1,
+                  maxItems: 3,
+                  uniqueItems: true,
+                  minContains: 1,
+                  maxContains: 3
+                },
+                {
+                  const: [
+                    1,
+                    2
+                  ],
+                  minItems: 2,
+                  maxItems: 3,
+                  uniqueItems: true,
+                  minContains: 2,
+                  maxContains: 3
+                },
+                {
+                  const: [
+                    1,
+                    2,
+                    3
+                  ],
+                  minItems: 3,
+                  maxItems: 3,
+                  uniqueItems: true,
+                  minContains: 3,
+                  maxContains: 3
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
-                  schema: {
-                    const: [],
-                    minItems: 1,
-                    maxItems: 9,
-                    uniqueItems: true,
-                    minContains: 1,
-                    maxContains: 9
-                  },
+                  type: 'array',
+                  parentUri: '#/',
                   minItems: 1,
-                  maxItems: 9,
+                  maxItems: 3,
                   hasUniqueItems: true,
                   minContains: 1,
-                  maxContains: 9
+                  maxContains: 3,
+                  schema: {
+                    const: [
+                      1
+                    ],
+                    minItems: 1,
+                    maxItems: 3,
+                    uniqueItems: true,
+                    minContains: 1,
+                    maxContains: 3
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        const: [
+                          1
+                        ],
+                        minItems: 1,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 1,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2
+                        ],
+                        minItems: 2,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 2,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2,
+                          3
+                        ],
+                        minItems: 3,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 3,
+                        maxContains: 3
+                      }
+                    ]
+                  },
+                  item: 0
                 },
                 elements: {
                   fields: []
@@ -291,24 +746,64 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
               },
               {
                 meta: {
-                  type: 'array',
-                  item: 1,
-                  parentUri: '#/',
                   uri: '#/1',
-                  rootSchema: schema,
-                  schema: {
-                    const: [],
-                    minItems: 1,
-                    maxItems: 9,
-                    uniqueItems: true,
-                    minContains: 1,
-                    maxContains: 9
-                  },
-                  minItems: 1,
-                  maxItems: 9,
+                  type: 'array',
+                  parentUri: '#/',
+                  minItems: 2,
+                  maxItems: 3,
                   hasUniqueItems: true,
-                  minContains: 1,
-                  maxContains: 9
+                  minContains: 2,
+                  maxContains: 3,
+                  schema: {
+                    const: [
+                      1,
+                      2
+                    ],
+                    minItems: 2,
+                    maxItems: 3,
+                    uniqueItems: true,
+                    minContains: 2,
+                    maxContains: 3
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        const: [
+                          1
+                        ],
+                        minItems: 1,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 1,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2
+                        ],
+                        minItems: 2,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 2,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2,
+                          3
+                        ],
+                        minItems: 3,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 3,
+                        maxContains: 3
+                      }
+                    ]
+                  },
+                  item: 1
                 },
                 elements: {
                   fields: []
@@ -316,56 +811,135 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
               },
               {
                 meta: {
-                  type: 'array',
-                  item: 2,
-                  parentUri: '#/',
                   uri: '#/2',
-                  rootSchema: schema,
-                  schema: {
-                    const: [],
-                    minItems: 1,
-                    maxItems: 9,
-                    uniqueItems: true,
-                    minContains: 1,
-                    maxContains: 9
-                  },
-                  minItems: 1,
-                  maxItems: 9,
+                  type: 'array',
+                  parentUri: '#/',
+                  minItems: 3,
+                  maxItems: 3,
                   hasUniqueItems: true,
-                  minContains: 1,
-                  maxContains: 9
+                  minContains: 3,
+                  maxContains: 3,
+                  schema: {
+                    const: [
+                      1,
+                      2,
+                      3
+                    ],
+                    minItems: 3,
+                    maxItems: 3,
+                    uniqueItems: true,
+                    minContains: 3,
+                    maxContains: 3
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        const: [
+                          1
+                        ],
+                        minItems: 1,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 1,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2
+                        ],
+                        minItems: 2,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 2,
+                        maxContains: 3
+                      },
+                      {
+                        const: [
+                          1,
+                          2,
+                          3
+                        ],
+                        minItems: 3,
+                        maxItems: 3,
+                        uniqueItems: true,
+                        minContains: 3,
+                        maxContains: 3
+                      }
+                    ]
+                  },
+                  item: 2
                 },
                 elements: {
                   fields: []
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             oneOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
-                    schema: {
-                      const: [],
-                      minItems: 1,
-                      maxItems: 9,
-                      uniqueItems: true,
-                      minContains: 1,
-                      maxContains: 9
-                    },
+                    type: 'array',
+                    parentUri: '#/',
                     minItems: 1,
-                    maxItems: 9,
+                    maxItems: 3,
                     hasUniqueItems: true,
                     minContains: 1,
-                    maxContains: 9
+                    maxContains: 3,
+                    schema: {
+                      const: [
+                        1
+                      ],
+                      minItems: 1,
+                      maxItems: 3,
+                      uniqueItems: true,
+                      minContains: 1,
+                      maxContains: 3
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          const: [
+                            1
+                          ],
+                          minItems: 1,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 1,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2
+                          ],
+                          minItems: 2,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 2,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2,
+                            3
+                          ],
+                          minItems: 3,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 3,
+                          maxContains: 3
+                        }
+                      ]
+                    },
+                    item: 0
                   },
                   elements: {
                     fields: []
@@ -373,24 +947,64 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 },
                 {
                   meta: {
-                    type: 'array',
-                    item: 1,
-                    parentUri: '#/',
                     uri: '#/1',
-                    rootSchema: schema,
-                    schema: {
-                      const: [],
-                      minItems: 1,
-                      maxItems: 9,
-                      uniqueItems: true,
-                      minContains: 1,
-                      maxContains: 9
-                    },
-                    minItems: 1,
-                    maxItems: 9,
+                    type: 'array',
+                    parentUri: '#/',
+                    minItems: 2,
+                    maxItems: 3,
                     hasUniqueItems: true,
-                    minContains: 1,
-                    maxContains: 9
+                    minContains: 2,
+                    maxContains: 3,
+                    schema: {
+                      const: [
+                        1,
+                        2
+                      ],
+                      minItems: 2,
+                      maxItems: 3,
+                      uniqueItems: true,
+                      minContains: 2,
+                      maxContains: 3
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          const: [
+                            1
+                          ],
+                          minItems: 1,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 1,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2
+                          ],
+                          minItems: 2,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 2,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2,
+                            3
+                          ],
+                          minItems: 3,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 3,
+                          maxContains: 3
+                        }
+                      ]
+                    },
+                    item: 1
                   },
                   elements: {
                     fields: []
@@ -398,31 +1012,72 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                 },
                 {
                   meta: {
-                    type: 'array',
-                    item: 2,
-                    parentUri: '#/',
                     uri: '#/2',
-                    rootSchema: schema,
-                    schema: {
-                      const: [],
-                      minItems: 1,
-                      maxItems: 9,
-                      uniqueItems: true,
-                      minContains: 1,
-                      maxContains: 9
-                    },
-                    minItems: 1,
-                    maxItems: 9,
+                    type: 'array',
+                    parentUri: '#/',
+                    minItems: 3,
+                    maxItems: 3,
                     hasUniqueItems: true,
-                    minContains: 1,
-                    maxContains: 9
+                    minContains: 3,
+                    maxContains: 3,
+                    schema: {
+                      const: [
+                        1,
+                        2,
+                        3
+                      ],
+                      minItems: 3,
+                      maxItems: 3,
+                      uniqueItems: true,
+                      minContains: 3,
+                      maxContains: 3
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          const: [
+                            1
+                          ],
+                          minItems: 1,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 1,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2
+                          ],
+                          minItems: 2,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 2,
+                          maxContains: 3
+                        },
+                        {
+                          const: [
+                            1,
+                            2,
+                            3
+                          ],
+                          minItems: 3,
+                          maxItems: 3,
+                          uniqueItems: true,
+                          minContains: 3,
+                          maxContains: 3
+                        }
+                      ]
+                    },
+                    item: 2
                   },
                   elements: {
                     fields: []
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -435,35 +1090,67 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       const schema = {
         type: 'array',
         allOf: [
-          { const: [] },
-          { minItems: 1 },
-          { maxItems: 9 },
+          {
+            const: [
+              1,
+              2,
+              3
+            ]
+          },
+          { minItems: 0 },
+          { maxItems: 3 },
           { uniqueItems: true },
-          { minContains: 1 },
-          { maxContains: 9 }
+          { minContains: 0 },
+          { maxContains: 3 }
         ]
       }
 
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
-            minItems: 1,
-            maxItems: 9,
+            type: 'array',
+            minItems: 0,
+            maxItems: 3,
             hasUniqueItems: true,
-            minContains: 1,
-            maxContains: 9
+            minContains: 0,
+            maxContains: 3,
+            schema: {
+              type: 'array',
+              allOf: [
+                {
+                  const: [
+                    1,
+                    2,
+                    3
+                  ]
+                },
+                {
+                  minItems: 0
+                },
+                {
+                  maxItems: 3
+                },
+                {
+                  uniqueItems: true
+                },
+                {
+                  minContains: 0
+                },
+                {
+                  maxContains: 3
+                }
+              ]
+            }
           },
           elements: {
             field: {
-              id: '#/',
-              minItems: 1,
-              maxItems: 9,
+              minItems: 0,
+              maxItems: 3,
               hasUniqueItems: true,
-              minContains: 1,
-              maxContains: 9
+              minContains: 0,
+              maxContains: 3,
+              id: '#/'
             }
           }
         })
@@ -476,24 +1163,32 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       const schema = {
         type: 'array',
         const: [],
-        minItems: 1,
-        maxItems: 9,
+        minItems: 0,
+        maxItems: 3,
         uniqueItems: true,
-        minContains: 1,
-        maxContains: 9
+        minContains: 0,
+        maxContains: 3
       }
 
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
-            minItems: 1,
-            maxItems: 9,
+            type: 'array',
+            minItems: 0,
+            maxItems: 3,
             hasUniqueItems: true,
-            minContains: 1,
-            maxContains: 9
+            minContains: 0,
+            maxContains: 3,
+            schema: {
+              type: 'array',
+              const: [],
+              minItems: 0,
+              maxItems: 3,
+              uniqueItems: true,
+              minContains: 0,
+              maxContains: 3
+            }
           },
           elements: {
             fields: []
@@ -511,9 +1206,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           {
             type: 'array',
             enum: [
-              {},
-              {},
-              {}
+              [],
+              [],
+              []
             ]
           }
         ]
@@ -522,35 +1217,47 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              enum: [
+                {
+                  type: 'array',
+                  enum: [
+                    [],
+                    [],
+                    []
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 type: 'array',
                 enum: [
-                  {},
-                  {},
-                  {}
+                  [],
+                  [],
+                  []
                 ]
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             enum: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   type: 'array',
                   enum: [
-                    {},
-                    {},
-                    {}
+                    [],
+                    [],
+                    []
                   ]
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -577,9 +1284,22 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              enum: [
+                {
+                  type: 'array',
+                  anyOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 type: 'array',
@@ -589,12 +1309,11 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 ]
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             enum: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   type: 'array',
@@ -605,7 +1324,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   ]
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -632,9 +1351,22 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              enum: [
+                {
+                  type: 'array',
+                  oneOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 type: 'array',
@@ -644,12 +1376,11 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 ]
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             enum: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   type: 'array',
@@ -660,7 +1391,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   ]
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -687,9 +1418,22 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              enum: [
+                {
+                  type: 'array',
+                  allOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 type: 'array',
@@ -699,12 +1443,11 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 ]
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             enum: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   type: 'array',
@@ -715,7 +1458,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   ]
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -731,9 +1474,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           {
             type: 'array',
             enum: [
-              {},
-              {},
-              {}
+              [],
+              [],
+              []
             ]
           }
         ]
@@ -742,87 +1485,123 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              anyOf: [
+                {
+                  type: 'array',
+                  enum: [
+                    [],
+                    [],
+                    []
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     enum: [
-                      {},
-                      {},
-                      {}
+                      [],
+                      [],
+                      []
                     ]
                   },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        type: 'array',
+                        enum: [
+                          [],
+                          [],
+                          []
+                        ]
+                      }
+                    ]
+                  },
+                  selectedItems: [],
                   items: [
-                    {},
-                    {},
-                    {}
+                    [],
+                    [],
+                    []
                   ],
-                  selectedItems: []
+                  item: 0
                 },
                 elements: {
                   enum: {
-                    id: '#/0',
+                    selectedItems: [],
                     items: [
-                      {},
-                      {},
-                      {}
+                      [],
+                      [],
+                      []
                     ],
-                    selectedItems: []
+                    id: '#/0'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             anyOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       enum: [
-                        {},
-                        {},
-                        {}
+                        [],
+                        [],
+                        []
                       ]
                     },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          type: 'array',
+                          enum: [
+                            [],
+                            [],
+                            []
+                          ]
+                        }
+                      ]
+                    },
+                    selectedItems: [],
                     items: [
-                      {},
-                      {},
-                      {}
+                      [],
+                      [],
+                      []
                     ],
-                    selectedItems: []
+                    item: 0
                   },
                   elements: {
                     enum: {
-                      id: '#/0',
+                      selectedItems: [],
                       items: [
-                        {},
-                        {},
-                        {}
+                        [],
+                        [],
+                        []
                       ],
-                      selectedItems: []
+                      id: '#/0'
                     }
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -849,17 +1628,28 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              anyOf: [
+                {
+                  type: 'array',
+                  anyOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     anyOf: [
@@ -868,63 +1658,98 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                       }
                     ]
                   },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        type: 'array',
+                        anyOf: [
+                          {
+                            type: 'array'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  selectedItems: [],
                   items: [
                     {
                       meta: {
-                        type: 'array',
-                        item: 0,
-                        parentUri: '#/0',
                         uri: '#/0/0',
-                        rootSchema: schema,
+                        type: 'array',
+                        parentUri: '#/0',
                         schema: {
                           type: 'array'
-                        }
+                        },
+                        rootSchema: {
+                          type: 'array',
+                          anyOf: [
+                            {
+                              type: 'array',
+                              anyOf: [
+                                {
+                                  type: 'array'
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        item: 0
                       },
                       elements: {
                         fields: []
                       }
                     }
                   ],
-                  selectedItems: []
+                  item: 0
                 },
                 elements: {
                   anyOf: {
-                    id: '#/0',
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            anyOf: [
+                              {
+                                type: 'array',
+                                anyOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    id: '#/0'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             anyOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       anyOf: [
@@ -933,51 +1758,89 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                         }
                       ]
                     },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          type: 'array',
+                          anyOf: [
+                            {
+                              type: 'array'
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            anyOf: [
+                              {
+                                type: 'array',
+                                anyOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    item: 0
                   },
                   elements: {
                     anyOf: {
-                      id: '#/0',
+                      selectedItems: [],
                       items: [
                         {
                           meta: {
-                            type: 'array',
-                            item: 0,
-                            parentUri: '#/0',
                             uri: '#/0/0',
-                            rootSchema: schema,
+                            type: 'array',
+                            parentUri: '#/0',
                             schema: {
                               type: 'array'
-                            }
+                            },
+                            rootSchema: {
+                              type: 'array',
+                              anyOf: [
+                                {
+                                  type: 'array',
+                                  anyOf: [
+                                    {
+                                      type: 'array'
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            item: 0
                           },
                           elements: {
                             fields: []
                           }
                         }
                       ],
-                      selectedItems: []
+                      id: '#/0'
                     }
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1004,17 +1867,28 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              anyOf: [
+                {
+                  type: 'array',
+                  oneOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     oneOf: [
@@ -1023,63 +1897,98 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                       }
                     ]
                   },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        type: 'array',
+                        oneOf: [
+                          {
+                            type: 'array'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  selectedItems: [],
                   items: [
                     {
                       meta: {
-                        type: 'array',
-                        item: 0,
-                        parentUri: '#/0',
                         uri: '#/0/0',
-                        rootSchema: schema,
+                        type: 'array',
+                        parentUri: '#/0',
                         schema: {
                           type: 'array'
-                        }
+                        },
+                        rootSchema: {
+                          type: 'array',
+                          anyOf: [
+                            {
+                              type: 'array',
+                              oneOf: [
+                                {
+                                  type: 'array'
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        item: 0
                       },
                       elements: {
                         fields: []
                       }
                     }
                   ],
-                  selectedItems: []
+                  item: 0
                 },
                 elements: {
                   oneOf: {
-                    id: '#/0',
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            anyOf: [
+                              {
+                                type: 'array',
+                                oneOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    id: '#/0'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             anyOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       oneOf: [
@@ -1088,51 +1997,89 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                         }
                       ]
                     },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          type: 'array',
+                          oneOf: [
+                            {
+                              type: 'array'
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            anyOf: [
+                              {
+                                type: 'array',
+                                oneOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    item: 0
                   },
                   elements: {
                     oneOf: {
-                      id: '#/0',
+                      selectedItems: [],
                       items: [
                         {
                           meta: {
-                            type: 'array',
-                            item: 0,
-                            parentUri: '#/0',
                             uri: '#/0/0',
-                            rootSchema: schema,
+                            type: 'array',
+                            parentUri: '#/0',
                             schema: {
                               type: 'array'
-                            }
+                            },
+                            rootSchema: {
+                              type: 'array',
+                              anyOf: [
+                                {
+                                  type: 'array',
+                                  oneOf: [
+                                    {
+                                      type: 'array'
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            item: 0
                           },
                           elements: {
                             fields: []
                           }
                         }
                       ],
-                      selectedItems: []
+                      id: '#/0'
                     }
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1159,17 +2106,28 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              anyOf: [
+                {
+                  type: 'array',
+                  allOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     allOf: [
@@ -1177,7 +2135,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                         type: 'array'
                       }
                     ]
-                  }
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    anyOf: [
+                      {
+                        type: 'array',
+                        allOf: [
+                          {
+                            type: 'array'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  item: 0
                 },
                 elements: {
                   field: {
@@ -1185,20 +2157,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             anyOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       allOf: [
@@ -1206,7 +2175,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                           type: 'array'
                         }
                       ]
-                    }
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      anyOf: [
+                        {
+                          type: 'array',
+                          allOf: [
+                            {
+                              type: 'array'
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    item: 0
                   },
                   elements: {
                     field: {
@@ -1215,7 +2198,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1231,9 +2214,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           {
             type: 'array',
             enum: [
-              {},
-              {},
-              {}
+              [],
+              [],
+              []
             ]
           }
         ]
@@ -1242,87 +2225,123 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              oneOf: [
+                {
+                  type: 'array',
+                  enum: [
+                    [],
+                    [],
+                    []
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     enum: [
-                      {},
-                      {},
-                      {}
+                      [],
+                      [],
+                      []
                     ]
                   },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        type: 'array',
+                        enum: [
+                          [],
+                          [],
+                          []
+                        ]
+                      }
+                    ]
+                  },
+                  selectedItems: [],
                   items: [
-                    {},
-                    {},
-                    {}
+                    [],
+                    [],
+                    []
                   ],
-                  selectedItems: []
+                  item: 0
                 },
                 elements: {
                   enum: {
-                    id: '#/0',
+                    selectedItems: [],
                     items: [
-                      {},
-                      {},
-                      {}
+                      [],
+                      [],
+                      []
                     ],
-                    selectedItems: []
+                    id: '#/0'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             oneOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       enum: [
-                        {},
-                        {},
-                        {}
+                        [],
+                        [],
+                        []
                       ]
                     },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          type: 'array',
+                          enum: [
+                            [],
+                            [],
+                            []
+                          ]
+                        }
+                      ]
+                    },
+                    selectedItems: [],
                     items: [
-                      {},
-                      {},
-                      {}
+                      [],
+                      [],
+                      []
                     ],
-                    selectedItems: []
+                    item: 0
                   },
                   elements: {
                     enum: {
-                      id: '#/0',
+                      selectedItems: [],
                       items: [
-                        {},
-                        {},
-                        {}
+                        [],
+                        [],
+                        []
                       ],
-                      selectedItems: []
+                      id: '#/0'
                     }
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1349,17 +2368,28 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              oneOf: [
+                {
+                  type: 'array',
+                  anyOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     anyOf: [
@@ -1368,63 +2398,98 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                       }
                     ]
                   },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        type: 'array',
+                        anyOf: [
+                          {
+                            type: 'array'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  selectedItems: [],
                   items: [
                     {
                       meta: {
-                        type: 'array',
-                        item: 0,
-                        parentUri: '#/0',
                         uri: '#/0/0',
-                        rootSchema: schema,
+                        type: 'array',
+                        parentUri: '#/0',
                         schema: {
                           type: 'array'
-                        }
+                        },
+                        rootSchema: {
+                          type: 'array',
+                          oneOf: [
+                            {
+                              type: 'array',
+                              anyOf: [
+                                {
+                                  type: 'array'
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        item: 0
                       },
                       elements: {
                         fields: []
                       }
                     }
                   ],
-                  selectedItems: []
+                  item: 0
                 },
                 elements: {
                   anyOf: {
-                    id: '#/0',
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            oneOf: [
+                              {
+                                type: 'array',
+                                anyOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    id: '#/0'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             oneOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       anyOf: [
@@ -1433,51 +2498,89 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                         }
                       ]
                     },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          type: 'array',
+                          anyOf: [
+                            {
+                              type: 'array'
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            oneOf: [
+                              {
+                                type: 'array',
+                                anyOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    item: 0
                   },
                   elements: {
                     anyOf: {
-                      id: '#/0',
+                      selectedItems: [],
                       items: [
                         {
                           meta: {
-                            type: 'array',
-                            item: 0,
-                            parentUri: '#/0',
                             uri: '#/0/0',
-                            rootSchema: schema,
+                            type: 'array',
+                            parentUri: '#/0',
                             schema: {
                               type: 'array'
-                            }
+                            },
+                            rootSchema: {
+                              type: 'array',
+                              oneOf: [
+                                {
+                                  type: 'array',
+                                  anyOf: [
+                                    {
+                                      type: 'array'
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            item: 0
                           },
                           elements: {
                             fields: []
                           }
                         }
                       ],
-                      selectedItems: []
+                      id: '#/0'
                     }
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1504,17 +2607,28 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              oneOf: [
+                {
+                  type: 'array',
+                  oneOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     oneOf: [
@@ -1523,63 +2637,98 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                       }
                     ]
                   },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        type: 'array',
+                        oneOf: [
+                          {
+                            type: 'array'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  selectedItems: [],
                   items: [
                     {
                       meta: {
-                        type: 'array',
-                        item: 0,
-                        parentUri: '#/0',
                         uri: '#/0/0',
-                        rootSchema: schema,
+                        type: 'array',
+                        parentUri: '#/0',
                         schema: {
                           type: 'array'
-                        }
+                        },
+                        rootSchema: {
+                          type: 'array',
+                          oneOf: [
+                            {
+                              type: 'array',
+                              oneOf: [
+                                {
+                                  type: 'array'
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        item: 0
                       },
                       elements: {
                         fields: []
                       }
                     }
                   ],
-                  selectedItems: []
+                  item: 0
                 },
                 elements: {
                   oneOf: {
-                    id: '#/0',
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            oneOf: [
+                              {
+                                type: 'array',
+                                oneOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    id: '#/0'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             oneOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       oneOf: [
@@ -1588,51 +2737,89 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                         }
                       ]
                     },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          type: 'array',
+                          oneOf: [
+                            {
+                              type: 'array'
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    selectedItems: [],
                     items: [
                       {
                         meta: {
-                          type: 'array',
-                          item: 0,
-                          parentUri: '#/0',
                           uri: '#/0/0',
-                          rootSchema: schema,
+                          type: 'array',
+                          parentUri: '#/0',
                           schema: {
                             type: 'array'
-                          }
+                          },
+                          rootSchema: {
+                            type: 'array',
+                            oneOf: [
+                              {
+                                type: 'array',
+                                oneOf: [
+                                  {
+                                    type: 'array'
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          item: 0
                         },
                         elements: {
                           fields: []
                         }
                       }
                     ],
-                    selectedItems: []
+                    item: 0
                   },
                   elements: {
                     oneOf: {
-                      id: '#/0',
+                      selectedItems: [],
                       items: [
                         {
                           meta: {
-                            type: 'array',
-                            item: 0,
-                            parentUri: '#/0',
                             uri: '#/0/0',
-                            rootSchema: schema,
+                            type: 'array',
+                            parentUri: '#/0',
                             schema: {
                               type: 'array'
-                            }
+                            },
+                            rootSchema: {
+                              type: 'array',
+                              oneOf: [
+                                {
+                                  type: 'array',
+                                  oneOf: [
+                                    {
+                                      type: 'array'
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            item: 0
                           },
                           elements: {
                             fields: []
                           }
                         }
                       ],
-                      selectedItems: []
+                      id: '#/0'
                     }
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1659,17 +2846,28 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema,
+            type: 'array',
+            schema: {
+              type: 'array',
+              oneOf: [
+                {
+                  type: 'array',
+                  allOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            },
+            selectedItems: [],
             items: [
               {
                 meta: {
-                  type: 'array',
-                  item: 0,
-                  parentUri: '#/',
                   uri: '#/0',
-                  rootSchema: schema,
+                  type: 'array',
+                  parentUri: '#/',
                   schema: {
                     type: 'array',
                     allOf: [
@@ -1677,7 +2875,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                         type: 'array'
                       }
                     ]
-                  }
+                  },
+                  rootSchema: {
+                    type: 'array',
+                    oneOf: [
+                      {
+                        type: 'array',
+                        allOf: [
+                          {
+                            type: 'array'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  item: 0
                 },
                 elements: {
                   field: {
@@ -1685,20 +2897,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 }
               }
-            ],
-            selectedItems: []
+            ]
           },
           elements: {
             oneOf: {
-              id: '#/',
+              selectedItems: [],
               items: [
                 {
                   meta: {
-                    type: 'array',
-                    item: 0,
-                    parentUri: '#/',
                     uri: '#/0',
-                    rootSchema: schema,
+                    type: 'array',
+                    parentUri: '#/',
                     schema: {
                       type: 'array',
                       allOf: [
@@ -1706,7 +2915,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                           type: 'array'
                         }
                       ]
-                    }
+                    },
+                    rootSchema: {
+                      type: 'array',
+                      oneOf: [
+                        {
+                          type: 'array',
+                          allOf: [
+                            {
+                              type: 'array'
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    item: 0
                   },
                   elements: {
                     field: {
@@ -1715,7 +2938,7 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   }
                 }
               ],
-              selectedItems: []
+              id: '#/'
             }
           }
         })
@@ -1731,9 +2954,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
           {
             type: 'array',
             enum: [
-              {},
-              {},
-              {}
+              [],
+              [],
+              []
             ]
           }
         ]
@@ -1742,9 +2965,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema
+            type: 'array',
+            schema: {
+              type: 'array',
+              allOf: [
+                {
+                  type: 'array',
+                  enum: [
+                    [],
+                    [],
+                    []
+                  ]
+                }
+              ]
+            }
           },
           elements: {
             field: {
@@ -1775,16 +3010,29 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema
+            type: 'array',
+            schema: {
+              type: 'array',
+              allOf: [
+                {
+                  type: 'array',
+                  anyOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            }
           },
           elements: {
             field: {
               id: '#/'
             }
           }
-        })
+        }
+        )
     })
 
     it('transforms `array` type schemas with `allOf` (with an `array` type with `oneOf`)', () => {
@@ -1808,9 +3056,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema
+            type: 'array',
+            schema: {
+              type: 'array',
+              allOf: [
+                {
+                  type: 'array',
+                  oneOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            }
           },
           elements: {
             field: {
@@ -1841,9 +3101,21 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
       expect(transform(schema))
         .to.eql({
           meta: {
-            type: 'array',
             uri: '#/',
-            schema
+            type: 'array',
+            schema: {
+              type: 'array',
+              allOf: [
+                {
+                  type: 'array',
+                  allOf: [
+                    {
+                      type: 'array'
+                    }
+                  ]
+                }
+              ]
+            }
           },
           elements: {
             field: {

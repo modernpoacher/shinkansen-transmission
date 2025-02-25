@@ -98,7 +98,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                         'string (1)',
                         'string (2)'
                       ],
-                      selectedItems: [0],
+                      selectedItems: [
+                        0
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -108,7 +110,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                           'string (1)',
                           'string (2)'
                         ],
-                        selectedItems: [0],
+                        selectedItems: [
+                          0
+                        ],
                         isRequired: false
                       }
                     }
@@ -132,7 +136,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                         'string (1)',
                         'string (2)'
                       ],
-                      selectedItems: [1],
+                      selectedItems: [
+                        1
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -142,7 +148,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                           'string (1)',
                           'string (2)'
                         ],
-                        selectedItems: [1],
+                        selectedItems: [
+                          1
+                        ],
                         isRequired: false
                       }
                     }
@@ -229,13 +237,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/0',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -250,19 +262,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/1',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [0],
+                      selectedItems: [
+                        0
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -279,13 +297,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/0',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -300,19 +322,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/1',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [0],
+                        selectedItems: [
+                          0
+                        ],
                         isRequired: false
                       }
                     }
@@ -343,13 +371,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/0',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -364,19 +396,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/1',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [1],
+                      selectedItems: [
+                        1
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -393,13 +431,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/0',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -414,19 +456,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/1',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [1],
+                        selectedItems: [
+                          1
+                        ],
                         isRequired: false
                       }
                     }
@@ -513,13 +561,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/0',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -534,19 +586,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/1',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [0],
+                      selectedItems: [
+                        0
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -563,13 +621,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/0',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -584,19 +646,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/1',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [0],
+                        selectedItems: [
+                          0
+                        ],
                         isRequired: false
                       }
                     }
@@ -627,13 +695,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/0',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -648,19 +720,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/1',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [1],
+                      selectedItems: [
+                        1
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -677,13 +755,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/0',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -698,19 +780,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/1',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [1],
+                        selectedItems: [
+                          1
+                        ],
                         isRequired: false
                       }
                     }
@@ -921,7 +1009,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                         'string (1)',
                         'string (2)'
                       ],
-                      selectedItems: [0],
+                      selectedItems: [
+                        0
+                      ],
                       isRequired: true
                     },
                     elements: {
@@ -931,7 +1021,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                           'string (1)',
                           'string (2)'
                         ],
-                        selectedItems: [0],
+                        selectedItems: [
+                          0
+                        ],
                         isRequired: true
                       }
                     }
@@ -955,7 +1047,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                         'string (1)',
                         'string (2)'
                       ],
-                      selectedItems: [1],
+                      selectedItems: [
+                        1
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -965,7 +1059,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                           'string (1)',
                           'string (2)'
                         ],
-                        selectedItems: [1],
+                        selectedItems: [
+                          1
+                        ],
                         isRequired: false
                       }
                     }
@@ -1055,13 +1151,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/0',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -1076,19 +1176,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/1',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [0],
+                      selectedItems: [
+                        0
+                      ],
                       isRequired: true
                     },
                     elements: {
@@ -1105,13 +1211,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/0',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -1126,19 +1236,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/1',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [0],
+                        selectedItems: [
+                          0
+                        ],
                         isRequired: true
                       }
                     }
@@ -1169,13 +1285,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/0',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -1190,19 +1310,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/1',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [1],
+                      selectedItems: [
+                        1
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -1219,13 +1345,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/0',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -1240,19 +1370,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/1',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [1],
+                        selectedItems: [
+                          1
+                        ],
                         isRequired: false
                       }
                     }
@@ -1342,13 +1478,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/0',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -1363,19 +1503,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/one',
                             uri: '#/one/1',
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [0],
+                      selectedItems: [
+                        0
+                      ],
                       isRequired: true
                     },
                     elements: {
@@ -1392,13 +1538,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/0',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/0',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -1413,19 +1563,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/one',
                               uri: '#/one/1',
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/one/1',
-                                selectedItems: [0],
+                                selectedItems: [
+                                  0
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [0],
+                        selectedItems: [
+                          0
+                        ],
                         isRequired: true
                       }
                     }
@@ -1456,13 +1612,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/0',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (1)'
                           },
                           elements: {
                             field: {
                               id: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             }
                           }
@@ -1477,19 +1637,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             },
                             parentUri: '#/two',
                             uri: '#/two/1',
-                            selectedItems: [1],
+                            selectedItems: [
+                              1
+                            ],
                             value: 'string (2)'
                           },
                           elements: {
                             field: {
                               id: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             }
                           }
                         }
                       ],
-                      selectedItems: [1],
+                      selectedItems: [
+                        1
+                      ],
                       isRequired: false
                     },
                     elements: {
@@ -1506,13 +1672,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/0',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (1)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/0',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (1)'
                               }
                             }
@@ -1527,19 +1697,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               },
                               parentUri: '#/two',
                               uri: '#/two/1',
-                              selectedItems: [1],
+                              selectedItems: [
+                                1
+                              ],
                               value: 'string (2)'
                             },
                             elements: {
                               field: {
                                 id: '#/two/1',
-                                selectedItems: [1],
+                                selectedItems: [
+                                  1
+                                ],
                                 value: 'string (2)'
                               }
                             }
                           }
                         ],
-                        selectedItems: [1],
+                        selectedItems: [
+                          1
+                        ],
                         isRequired: false
                       }
                     }
@@ -1953,7 +2129,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               'string (1)',
                               'string (2)'
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -1963,7 +2141,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 'string (1)',
                                 'string (2)'
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -2074,13 +2254,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (1)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   }
                                 }
@@ -2095,19 +2279,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (2)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -2124,13 +2314,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (1)'
                                     }
                                   }
@@ -2145,19 +2339,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (2)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -2268,13 +2468,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (1)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   }
                                 }
@@ -2289,19 +2493,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (2)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -2318,13 +2528,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (1)'
                                     }
                                   }
@@ -2339,19 +2553,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (2)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -2577,7 +2797,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               'string (1)',
                               'string (2)'
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -2587,7 +2809,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 'string (1)',
                                 'string (2)'
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -2701,13 +2925,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (1)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   }
                                 }
@@ -2722,19 +2950,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (2)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -2751,13 +2985,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (1)'
                                     }
                                   }
@@ -2772,19 +3010,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (2)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -2898,13 +3142,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (1)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   }
                                 }
@@ -2919,19 +3167,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'string (2)'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -2948,13 +3202,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (1)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (1)'
                                     }
                                   }
@@ -2969,19 +3227,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'string (2)'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'string (2)'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -3210,7 +3474,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               1,
                               2
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -3220,7 +3486,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 1,
                                 2
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -3331,13 +3599,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '1'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   }
                                 }
@@ -3352,19 +3624,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '2'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -3381,13 +3659,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '1'
                                     }
                                   }
@@ -3402,19 +3684,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '2'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -3525,13 +3813,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '1'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   }
                                 }
@@ -3546,19 +3838,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '2'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -3575,13 +3873,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '1'
                                     }
                                   }
@@ -3596,19 +3898,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '2'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -3834,7 +4142,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               1,
                               2
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -3844,7 +4154,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 1,
                                 2
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -3958,13 +4270,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '1'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   }
                                 }
@@ -3979,19 +4295,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '2'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -4008,13 +4330,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '1'
                                     }
                                   }
@@ -4029,19 +4355,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '2'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -4155,13 +4487,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '1'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   }
                                 }
@@ -4176,19 +4512,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: '2'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -4205,13 +4547,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '1'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '1'
                                     }
                                   }
@@ -4226,19 +4572,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: '2'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: '2'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -4467,7 +4819,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               [],
                               []
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -4477,7 +4831,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 [],
                                 []
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -4609,7 +4965,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -4647,7 +5005,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -4779,7 +5139,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -4817,7 +5179,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -5023,7 +5387,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               [],
                               []
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -5033,7 +5399,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 [],
                                 []
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -5168,7 +5536,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -5206,7 +5576,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -5341,7 +5713,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -5379,7 +5753,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -5588,7 +5964,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               {},
                               {}
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -5598,7 +5976,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 {},
                                 {}
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -5730,7 +6110,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -5768,7 +6150,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -5900,7 +6284,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -5938,7 +6324,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -6144,7 +6532,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               {},
                               {}
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -6154,7 +6544,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 {},
                                 {}
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -6289,7 +6681,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -6327,7 +6721,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -6462,7 +6858,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -6500,7 +6898,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -6709,7 +7109,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               true,
                               false
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -6719,7 +7121,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 true,
                                 false
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -6830,13 +7234,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'true'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   }
                                 }
@@ -6851,19 +7259,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'false'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -6880,13 +7294,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'true'
                                     }
                                   }
@@ -6901,19 +7319,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -7024,13 +7448,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'true'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   }
                                 }
@@ -7045,19 +7473,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'false'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -7074,13 +7508,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'true'
                                     }
                                   }
@@ -7095,19 +7533,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -7317,7 +7761,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               true,
                               false
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -7327,7 +7773,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                 true,
                                 false
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -7441,13 +7889,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'true'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   }
                                 }
@@ -7462,19 +7914,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'false'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -7491,13 +7949,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'true'
                                     }
                                   }
@@ -7512,19 +7974,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -7638,13 +8106,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'true'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   }
                                 }
@@ -7659,19 +8131,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/1',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'false'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -7688,13 +8166,17 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'true'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'true'
                                     }
                                   }
@@ -7709,19 +8191,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/1',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'false'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/1',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'false'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -7930,7 +8418,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             items: [
                               null
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -7939,7 +8429,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               items: [
                                 null
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -8047,19 +8539,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'null'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -8076,19 +8574,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -8196,19 +8700,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'null'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -8225,19 +8735,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -8443,7 +8959,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                             items: [
                               null
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -8452,7 +8970,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                               items: [
                                 null
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -8563,19 +9083,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'null'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -8592,19 +9118,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }
@@ -8715,19 +9247,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                   },
                                   parentUri: '#/one/two',
                                   uri: '#/one/two/0',
-                                  selectedItems: [0],
+                                  selectedItems: [
+                                    0
+                                  ],
                                   value: 'null'
                                 },
                                 elements: {
                                   field: {
                                     id: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   }
                                 }
                               }
                             ],
-                            selectedItems: [0],
+                            selectedItems: [
+                              0
+                            ],
                             isRequired: false
                           },
                           elements: {
@@ -8744,19 +9282,25 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-schema', () 
                                     },
                                     parentUri: '#/one/two',
                                     uri: '#/one/two/0',
-                                    selectedItems: [0],
+                                    selectedItems: [
+                                      0
+                                    ],
                                     value: 'null'
                                   },
                                   elements: {
                                     field: {
                                       id: '#/one/two/0',
-                                      selectedItems: [0],
+                                      selectedItems: [
+                                        0
+                                      ],
                                       value: 'null'
                                     }
                                   }
                                 }
                               ],
-                              selectedItems: [0],
+                              selectedItems: [
+                                0
+                              ],
                               isRequired: false
                             }
                           }

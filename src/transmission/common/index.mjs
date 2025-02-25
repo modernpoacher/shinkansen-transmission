@@ -332,15 +332,14 @@ export function transformToValue (item) {
  *  @param {string} uri
  *  @returns {(key: string | number) => boolean}
  */
-export function findByKey (parentUri, uri) {
+export function getFindByKey (parentUri, uri) {
   /*
-   *  log('findByKey')
+   *  log('getFindByKey')
    */
   return function find (key) {
     /*
      *  log('find')
      */
-
     return (
       getUri(parentUri, key) === uri
     )
@@ -350,51 +349,16 @@ export function findByKey (parentUri, uri) {
 /**
  *  @param {string} parentUri
  *  @param {string} uri
- *  @returns {(item: SchemaType, index: number) => boolean}
+ *  @returns {(schema: SchemaType, index: number) => boolean}
  */
-export function findByIndex (parentUri, uri) {
+export function getFindByIndex (parentUri, uri) {
   /*
-   *  log('findByIndex')
+   *  log('getFindByIndex')
    */
-  return function find (item, index) {
+  return function find (schema, index) {
     /*
      *  log('find')
      */
-
-    /**
-     *  It's a schema not a value
-     */
-
-    if (hasEnum(item)) {
-      /**
-       *  Do the `parentUri` and `uri` match?
-       */
-
-      return (
-        getUri(parentUri, index) === uri
-      )
-    } else {
-      if (hasAnyOf(item)) {
-        const array = getAnyOf(item)
-
-        return (
-          array.filter(isObject).some(findByIndex(parentUri, uri))
-        )
-      } else {
-        if (hasOneOf(item)) {
-          const array = getOneOf(item)
-
-          return (
-            array.filter(isObject).some(findByIndex(parentUri, uri))
-          )
-        }
-      }
-    }
-
-    /**
-     *  It's any other kind of schema/sub-schema
-     */
-
     return (
       getUri(parentUri, index) === uri
     )
@@ -405,15 +369,14 @@ export function findByIndex (parentUri, uri) {
  *  @param {string | number | object | boolean | null} [value]
  *  @returns {(item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean}
  */
-export function findByValue (value) {
+export function getFindByValue (value) {
   /*
-   *  log('findByValue')
+   *  log('getFindByValue')
    */
   return function find (item) {
     /*
      *  log('find')
      */
-
     return (
       value === transformToValue(item)
     )
@@ -424,9 +387,9 @@ export function findByValue (value) {
  *  @param {string | number | object | boolean | null} [value]
  *  @returns {(item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean}
  */
-export function findByEqual (value) {
+export function getFindByEqual (value) {
   /*
-   *  log('findByEqual')
+   *  log('getFindByEqual')
    */
   return function find (item) {
     /*
@@ -459,14 +422,16 @@ export function getArray ({ items /* array or object */ } = {}, parentUri = '', 
    */
 
   if (isArray(items)) {
-    const find = findByIndex(parentUri, uri)
-
     return (
-      items.find(find)
+      items.find(getFindByIndex(parentUri, uri))
     )
+  } else {
+    if (isObject(items)) {
+      return (
+        items
+      )
+    }
   }
-
-  if (isObject(items)) return items
 
   return undefined
 }
@@ -483,8 +448,7 @@ export function getObject ({ properties /* object */ } = {}, parentUri = '', uri
    */
 
   if (isObject(properties)) {
-    const find = findByKey(parentUri, uri)
-    const key = Object.keys(properties).find(find)
+    const key = Object.keys(properties).find(getFindByKey(parentUri, uri))
 
     if (key) {
       return (
@@ -547,34 +511,7 @@ export function transformValueIndexFor (array, value) {
    *  log('transformEqualIndexFor')
    */
 
-  const find = findByValue(value)
-
-  if (array.some(find)) {
-    const index = array.findIndex(find)
-
-    /*
-      *  Transform a number to a string
-      */
-    return String(index)
-  }
-
-  /*
-   *  Takes the place of `toString(document)` in `transform()`
-   */
-  return toString(value)
-}
-
-/**
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @param {string | number | object | boolean | null} [value]
- *  @returns {string}
- */
-export function transformEqualIndexFor (array, value) {
-  /*
-   *  log('transformEqualIndexFor')
-   */
-
-  const find = findByEqual(value)
+  const find = getFindByValue(value)
 
   if (array.some(find)) {
     const index = array.findIndex(find)
@@ -589,6 +526,63 @@ export function transformEqualIndexFor (array, value) {
    *  Takes the place of `toString(document)` in `transform()`
    */
   return toString(value)
+}
+
+/**
+ *  @param {string[] | number[] | object[] | boolean[] | null[]} array
+ *  @param {string | number | object | boolean | null} [value]
+ *  @returns {number}
+ */
+export function getIndexByValue (array, value) {
+  /*
+   *  log('transformEqualIndexFor')
+   */
+
+  return (
+    array.findIndex(getFindByValue(value))
+  )
+}
+
+/**
+ *  @param {string[] | number[] | object[] | boolean[] | null[]} array
+ *  @param {string | number | object | boolean | null} [value]
+ *  @returns {string}
+ */
+export function transformEqualIndexFor (array, value) {
+  /*
+   *  log('transformEqualIndexFor')
+   */
+
+  const find = getFindByEqual(value)
+
+  if (array.some(find)) {
+    const index = array.findIndex(find)
+
+    /*
+     *  Transform a number to a string
+     */
+    return String(index)
+  }
+
+  /*
+   *  Takes the place of `toString(document)` in `transform()`
+   */
+  return toString(value)
+}
+
+/**
+ *  @param {string[] | number[] | object[] | boolean[] | null[]} array
+ *  @param {string | number | object | boolean | null} [value]
+ *  @returns {string}
+ */
+export function getIndexByEqual (array, value) {
+  /*
+   *  log('transformEqualIndexFor')
+   */
+
+  return (
+    array.findIndex(getFindByEqual(value))
+  )
 }
 
 /**

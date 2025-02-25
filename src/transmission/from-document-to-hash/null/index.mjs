@@ -15,7 +15,7 @@ import {
   hasOneOf,
   getOneOf,
   getUri,
-  transformValueIndexFor
+  getIndexByValue
 } from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-document-to-hash/null')
@@ -23,7 +23,7 @@ const log = debug('shinkansen-transmission/from-document-to-hash/null')
 log('`shinkansen` is awake')
 
 /**
- * Document can be `undefined`
+ *  Document can be `undefined`
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -36,23 +36,26 @@ export default function transformNullSchema (document, schema = {}, hash = {}, p
   log('transformNullSchema')
 
   if (hasEnum(schema)) {
-    const items = getEnum(schema)
+    const array = getEnum(schema)
+    const index = getIndexByValue(array, document)
 
-    hash[uri] = transformValueIndexFor(items, document)
+    hash[uri] = String(index)
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
-      const items = getAnyOf(schema)
+      const array = getAnyOf(schema)
+      const index = getIndexByValue(array, document)
 
-      hash[uri] = transformValueIndexFor(items, document)
+      hash[uri] = String(index)
 
       return hash
     } else {
       if (hasOneOf(schema)) {
-        const items = getOneOf(schema)
+        const array = getOneOf(schema)
+        const index = getIndexByValue(array, document)
 
-        hash[uri] = transformValueIndexFor(items, document)
+        hash[uri] = String(index)
 
         return hash
       }

@@ -21,7 +21,7 @@ const log = debug('shinkansen-transmission/from-document-to-hash/array')
 log('`shinkansen` is awake')
 
 /**
- * Document can be `undefined`
+ *  Document can be `undefined`
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]

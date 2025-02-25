@@ -37,7 +37,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null', enum: [null] }
+        const schema = {
+          type: 'null',
+          enum: [
+            null
+          ]
+        }
 
         const hash = {
           '#/': '0'
@@ -53,7 +58,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null', anyOf: [null] }
+        const schema = {
+          type: 'null',
+          anyOf: [
+            null
+          ]
+        }
 
         const hash = {
           '#/': '0'
@@ -69,7 +79,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/null', () =
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null', oneOf: [null] }
+        const schema = {
+          type: 'null',
+          oneOf: [
+            null
+          ]
+        }
 
         const hash = {
           '#/': '0'

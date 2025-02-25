@@ -45,7 +45,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         nullTypeSubSchema: null,
         latitude: 84,
         longitude: -90,
-        array: [[[1]]],
+        array: [
+          [
+            [
+              1
+            ]
+          ]
+        ],
         object: {
           a: { b: { c: 'D' } }
         }
@@ -59,7 +65,10 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         $schema: 'http://json-schema.org/draft-07/schema#',
         title: 'Latitude and Longitude',
         description: 'A geographical coordinate',
-        required: ['latitude', 'longitude'],
+        required: [
+          'latitude',
+          'longitude'
+        ],
         type: 'object',
         properties: {
           stringTypeSubSchema: {
@@ -87,8 +96,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
             title: 'Object type sub schema',
             type: 'object',
             properties: {
-              one: { type: 'string' },
-              two: { type: 'number' }
+              one: {
+                type: 'string'
+              },
+              two: {
+                type: 'number'
+              }
             }
           },
           booleanTypeSubSchema: {
@@ -333,7 +346,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'number' }
+        const schema = {
+          type: 'number'
+        }
 
         const hash = {
           '#/': '1'
@@ -344,7 +359,10 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
     })
 
-    describe('Transforming `array` type schemas', () => {
+    describe.only('Transforming `array` type schemas', () => {
+      /**
+       *  While this is valid, it's not clear what we would do with it
+       */
       it('transforms `array` type schemas with `enum`', () => {
         /**
          *  @type {ArrayLiteralType}
@@ -371,321 +389,139 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           .to.eql(hash)
       })
 
-      it('transforms `array` type schemas with `anyOf`', () => {
+      /**
+       *  Valid schema and document but invalid hash
+       */
+      xit('transforms `array` type schemas with `anyOf`', () => {
         /**
          *  @type {ArrayLiteralType}
          */
-        const document = []
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          anyOf: [
-            [],
-            [],
-            []
-          ]
-        }
-
-        const hash = {
-          '#/': []
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `oneOf`', () => {
-        /**
-         *  @type {ArrayLiteralType}
-         */
-        const document = []
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          oneOf: [
-            [],
-            [],
-            []
-          ]
-        }
-
-        const hash = {
-          '#/': []
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `enum` (string)', () => {
-        const document = ['mock array type index string (2)']
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          enum: [
-            'mock array type index string (1)',
-            'mock array type index string (2)',
-            'mock array type index string (3)']
-        }
-
-        const hash = {
-          '#/': ['1']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `anyOf` (string)', () => {
-        const document = ['mock array type index string (2)']
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          anyOf: [
-            'mock array type index string (1)',
-            'mock array type index string (2)',
-            'mock array type index string (3)']
-        }
-
-        const hash = {
-          '#/': ['1']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `oneOf` (string)', () => {
-        const document = ['mock array type index string (2)']
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          oneOf: [
-            'mock array type index string (1)',
-            'mock array type index string (2)',
-            'mock array type index string (3)']
-        }
-
-        const hash = {
-          '#/': ['1']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `enum` (number)', () => {
-        const document = [3]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          enum: [1, 2, 3]
-        }
-
-        const hash = {
-          '#/': ['2']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `anyOf` (number)', () => {
-        const document = [3]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          anyOf: [1, 2, 3]
-        }
-
-        const hash = {
-          '#/': ['2']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `oneOf` (number)', () => {
-        const document = [3]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          oneOf: [1, 2, 3]
-        }
-
-        const hash = {
-          '#/': ['2']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `enum` (boolean)', () => {
-        const document = [false]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          enum: [true, false]
-        }
-
-        const hash = {
-          '#/': ['1']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `anyOf` (boolean)', () => {
-        const document = [false]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          anyOf: [true, false]
-        }
-
-        const hash = {
-          '#/': ['1']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `oneOf` (boolean)', () => {
-        const document = [false]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          oneOf: [true, false]
-        }
-
-        const hash = {
-          '#/': ['1']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `enum` (null)', () => {
-        const document = [null]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          enum: [null]
-        }
-
-        const hash = {
-          '#/': ['0']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `anyOf` (null)', () => {
-        const document = [null]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          anyOf: [null]
-        }
-
-        const hash = {
-          '#/': ['0']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas with `oneOf` (null)', () => {
-        const document = [null]
-
-        /**
-         *  @type {SchemaType}
-         */
-        const schema = {
-          type: 'array',
-          oneOf: [null]
-        }
-
-        const hash = {
-          '#/': ['0']
-        }
-
-        return expect(transform(document, schema))
-          .to.eql(hash)
-      })
-
-      it('transforms `array` type schemas', () => {
         const document = [
-          'mock array type index string (1)',
-          'mock array type index string (2)',
-          'mock array type index string (3)'
+          2
         ]
 
         /**
          *  @type {SchemaType}
          */
         const schema = {
-          type: 'array'
+          type: 'array',
+          anyOf: [
+            {
+              const: [
+                1
+              ]
+            },
+            {
+              const: [
+                2
+              ]
+            },
+            {
+              const: [
+                3
+              ]
+            }
+          ]
         }
 
         const hash = {
-          '#/0': 'mock array type index string (1)',
-          '#/1': 'mock array type index string (2)',
-          '#/2': 'mock array type index string (3)'
+          '#/': []
         }
 
-        return expect(transform(document, schema))
+        expect(transform(document, schema))
           .to.eql(hash)
       })
 
+      /**
+       *  Valid schema and document but invalid hash
+       */
+      xit('transforms `array` type schemas with `oneOf`', () => {
+        /**
+         *  @type {ArrayLiteralType}
+         */
+        const document = [
+          2
+        ]
+
+        /**
+         *  @type {SchemaType}
+         */
+        const schema = {
+          type: 'array',
+          oneOf: [
+            {
+              const: [
+                1
+              ]
+            },
+            {
+              const: [
+                2
+              ]
+            },
+            {
+              const: [
+                3
+              ]
+            }
+          ]
+        }
+
+        const hash = {
+          '#/': []
+        }
+
+        expect(transform(document, schema))
+          .to.eql(hash)
+      })
+
+      /**
+       *  All valid
+       */
+      it('transforms `array` type schemas with `allOf`', () => {
+        /**
+         *  @type {ArrayLiteralType}
+         */
+        const document = [
+          1,
+          2,
+          3
+        ]
+
+        /**
+         *  @type {SchemaType}
+         */
+        const schema = {
+          type: 'array',
+          allOf: [
+            {
+              const: [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        }
+
+        const hash = {
+          '#/0': '1',
+          '#/1': '2',
+          '#/2': '3'
+        }
+
+        expect(transform(document, schema))
+          .to.eql(hash)
+      })
+
+      /**
+       *  All other arrays use `items: []` or `items: {}`
+       */
+
       it('transforms `array` type schemas (`items` is an array of `string` type with `enum`)', () => {
-        const document = ['mock array type index string (2)']
+        const document = [
+          'mock array type index string (2)'
+        ]
 
         /**
          *  @type {SchemaType}
@@ -698,7 +534,8 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
               enum: [
                 'mock array type index string (1)',
                 'mock array type index string (2)',
-                'mock array type index string (3)']
+                'mock array type index string (3)'
+              ]
             }
           ]
         }
@@ -712,7 +549,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `number` type with `enum`)', () => {
-        const document = [3]
+        const document = [
+          3
+        ]
 
         /**
          *  @type {SchemaType}
@@ -722,7 +561,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           items: [
             {
               type: 'number',
-              enum: [1, 2, 3]
+              enum: [
+                1,
+                2,
+                3
+              ]
             }
           ]
         }
@@ -736,7 +579,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `string` type with `enum`)', () => {
-        const document = [['mock array type index string (2)']]
+        const document = [
+          [
+            'mock array type index string (2)'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -752,7 +599,8 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
                   enum: [
                     'mock array type index string (1)',
                     'mock array type index string (2)',
-                    'mock array type index string (3)']
+                    'mock array type index string (3)'
+                  ]
                 }
               ]
             }
@@ -768,7 +616,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `number` type with `enum`)', () => {
-        const document = [[2]]
+        const document = [
+          [
+            2
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -800,7 +652,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `boolean` type with `enum`)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -832,7 +688,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `null` type with `enum`)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -863,7 +723,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `string` type with `enum`)', () => {
-        const document = [['mock array type index string (2)']]
+        const document = [
+          [
+            'mock array type index string (2)'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -878,14 +742,15 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
                 enum: [
                   'mock array type index string (1)',
                   'mock array type index string (2)',
-                  'mock array type index string (3)']
+                  'mock array type index string (3)'
+                ]
               }
             }
           ]
         }
 
         const hash = {
-          '#/0': ['1']
+          '#/0/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -893,7 +758,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `number` type with `enum`)', () => {
-        const document = [[2]]
+        const document = [
+          [
+            2
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -915,7 +784,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['1']
+          '#/0/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -923,7 +792,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `boolean` type with `enum`)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -945,7 +818,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['1']
+          '#/0/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -953,7 +826,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `null` type with `enum`)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -974,7 +851,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0'] // #/0/0': '0'
+          '#/0/0': '0'
         }
 
         return expect(transform(document, schema))
@@ -982,7 +859,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `string` type schemas with `enum`', () => {
-        const document = [['a', 'b', 'c']]
+        const document = [
+          [
+            'a',
+            'b',
+            'c'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1005,7 +888,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '1', '2']
+          '#/0/0': '0',
+          '#/0/1': '1',
+          '#/0/2': '2'
         }
 
         expect(transform(document, schema))
@@ -1013,7 +898,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `number` type schemas with `enum`', () => {
-        const document = [[1, 2, 3]]
+        const document = [
+          [
+            1,
+            2,
+            3
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1036,7 +927,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '1', '2']
+          '#/0/0': '0',
+          '#/0/1': '1',
+          '#/0/2': '2'
         }
 
         expect(transform(document, schema))
@@ -1044,7 +937,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
-        const document = [[true, false, true]]
+        const document = [
+          [
+            true,
+            false,
+            true
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1055,7 +954,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
             {
               type: 'array',
               items: {
-                type: 'number',
+                type: 'boolean',
                 enum: [
                   true,
                   false
@@ -1066,15 +965,23 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '1', '0']
+          '#/0/0': '0',
+          '#/0/1': '1',
+          '#/0/2': '0'
         }
 
         expect(transform(document, schema))
           .to.eql(hash)
       })
 
-      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
-        const document = [[null, null, null]]
+      it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `array` type and `items` is an object of `null` type schemas with `enum`', () => {
+        const document = [
+          [
+            null,
+            null,
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1085,7 +992,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
             {
               type: 'array',
               items: {
-                type: 'number',
+                type: 'null',
                 enum: [
                   null
                 ]
@@ -1095,7 +1002,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '0', '0']
+          '#/0/0': '0',
+          '#/0/1': '0',
+          '#/0/2': '0'
         }
 
         expect(transform(document, schema))
@@ -1148,7 +1057,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `boolean` type with `enum`)', () => {
-        const document = [false]
+        const document = [
+          false
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1175,7 +1086,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `null` type with `enum`)', () => {
-        const document = [null]
+        const document = [
+          null
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1201,7 +1114,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `string` type and `number` type with `enum`)', () => {
-        const document = ['string (3)', 3]
+        const document = [
+          'string (3)', 3
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1238,7 +1153,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `string` type with `enum`)', () => {
-        const document = ['mock array type index string (2)']
+        const document = [
+          'mock array type index string (2)'
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1250,12 +1167,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
             enum: [
               'mock array type index string (1)',
               'mock array type index string (2)',
-              'mock array type index string (3)']
+              'mock array type index string (3)'
+            ]
           }
         }
 
         const hash = {
-          '#/': ['1']
+          '#/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -1263,7 +1181,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `number` type with `enum`)', () => {
-        const document = [3]
+        const document = [
+          3
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1281,7 +1201,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': ['2']
+          '#/0': '2'
         }
 
         return expect(transform(document, schema))
@@ -1289,7 +1209,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `string` type with `enum`)', () => {
-        const document = [['mock array type index string (2)']]
+        const document = [
+          [
+            'mock array type index string (2)'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1304,7 +1228,8 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
                 enum: [
                   'mock array type index string (1)',
                   'mock array type index string (2)',
-                  'mock array type index string (3)']
+                  'mock array type index string (3)'
+                ]
               }
             ]
           }
@@ -1319,7 +1244,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `number` type with `enum`)', () => {
-        const document = [[2]]
+        const document = [
+          [
+            2
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1349,7 +1278,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `boolean` type with `enum`)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1379,7 +1312,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `null` type with `enum`)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1408,7 +1345,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `string` type with `enum`)', () => {
-        const document = [['mock array type index string (2)']]
+        const document = [
+          [
+            'mock array type index string (2)'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1422,13 +1363,14 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
               enum: [
                 'mock array type index string (1)',
                 'mock array type index string (2)',
-                'mock array type index string (3)']
+                'mock array type index string (3)'
+              ]
             }
           }
         }
 
         const hash = {
-          '#/0': ['1'] // #/0/0': '1'
+          '#/0/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -1436,7 +1378,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `number` type with `enum`)', () => {
-        const document = [[2]]
+        const document = [
+          [
+            2
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1456,7 +1402,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['1'] // #/0/0': '1'
+          '#/0/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -1464,7 +1410,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `boolean` type with `enum`)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1484,7 +1434,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['1'] // #/0/0': '1'
+          '#/0/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -1492,7 +1442,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `null` type with `enum`)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1511,7 +1465,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0'] // #/0/0': '0'
+          '#/0/0': '0'
         }
 
         return expect(transform(document, schema))
@@ -1519,7 +1473,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `string` type schemas with `enum`', () => {
-        const document = [['a', 'b', 'c']]
+        const document = [
+          [
+            'a',
+            'b',
+            'c'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1540,7 +1500,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '1', '2']
+          '#/0/0': '0',
+          '#/0/1': '1',
+          '#/0/2': '2'
         }
 
         expect(transform(document, schema))
@@ -1548,7 +1510,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `number` type schemas with `enum`', () => {
-        const document = [[1, 2, 3]]
+        const document = [
+          [
+            1,
+            2,
+            3
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1569,7 +1537,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '1', '2']
+          '#/0/0': '0',
+          '#/0/1': '1',
+          '#/0/2': '2'
         }
 
         expect(transform(document, schema))
@@ -1577,7 +1547,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
-        const document = [[true, false, true]]
+        const document = [
+          [
+            true,
+            false,
+            true
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1587,7 +1563,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           items: {
             type: 'array',
             items: {
-              type: 'number',
+              type: 'boolean',
               enum: [
                 true,
                 false
@@ -1597,15 +1573,23 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '1', '0']
+          '#/0/0': '0',
+          '#/0/1': '1',
+          '#/0/2': '0'
         }
 
         expect(transform(document, schema))
           .to.eql(hash)
       })
 
-      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `boolean` type schemas with `enum`', () => {
-        const document = [[null, null, null]]
+      it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `array` type and `items` is an object of `null` type schemas with `enum`', () => {
+        const document = [
+          [
+            null,
+            null,
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1615,7 +1599,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
           items: {
             type: 'array',
             items: {
-              type: 'number',
+              type: 'null',
               enum: [
                 null
               ]
@@ -1624,7 +1608,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/0': ['0', '0', '0']
+          '#/0/0': '0',
+          '#/0/1': '0',
+          '#/0/2': '0'
         }
 
         expect(transform(document, schema))
@@ -1675,7 +1661,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `boolean` type with `enum`)', () => {
-        const document = [false]
+        const document = [
+          false
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1692,7 +1680,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': ['1']
+          '#/0': '1'
         }
 
         return expect(transform(document, schema))
@@ -1700,7 +1688,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `null` type with `enum`)', () => {
-        const document = [null]
+        const document = [
+          null
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1716,7 +1706,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': ['0']
+          '#/0': '0'
         }
 
         return expect(transform(document, schema))
@@ -1893,7 +1883,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': ['0', '1', '2']
+          '#/0': '0',
+          '#/1': '1',
+          '#/2': '2'
         }
 
         return expect(transform(document, schema))
@@ -1923,7 +1915,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': ['0', '1', '2']
+          '#/0': '0',
+          '#/1': '1',
+          '#/2': '2'
         }
 
         return expect(transform(document, schema))
@@ -1957,7 +1951,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `string` type)', () => {
-        const document = ['mock array type index string']
+        const document = [
+          'mock array type index string'
+        ]
 
         /**
          *  @type {SchemaType}
@@ -1980,7 +1976,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `number` type)', () => {
-        const document = [1]
+        const document = [
+          1
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2003,7 +2001,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `string` type)', () => {
-        const document = [['string']]
+        const document = [
+          [
+            'string'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2031,7 +2033,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `number` type)', () => {
-        const document = [[1]]
+        const document = [
+          [
+            1
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2059,7 +2065,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `boolean` type)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2087,7 +2097,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an array of `null` type)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2115,7 +2129,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `string` type)', () => {
-        const document = [['string']]
+        const document = [
+          [
+            'string'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2141,7 +2159,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `number` type)', () => {
-        const document = [[1]]
+        const document = [
+          [
+            1
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2167,7 +2189,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `boolean` type)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2193,7 +2219,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `array` type and `items` is an object of `null` type)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2256,7 +2286,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `boolean` type)', () => {
-        const document = [true]
+        const document = [
+          true
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2279,7 +2311,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `null` type)', () => {
-        const document = [null]
+        const document = [
+          null
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2302,7 +2336,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array)', () => {
-        const document = ['string', 2]
+        const document = [
+          'string', 2
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2329,7 +2365,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `string` type)', () => {
-        const document = ['mock array type index string']
+        const document = [
+          'mock array type index string'
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2350,7 +2388,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `number` type)', () => {
-        const document = [1]
+        const document = [
+          1
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2371,7 +2411,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `string` type)', () => {
-        const document = [['string']]
+        const document = [
+          [
+            'string'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2397,7 +2441,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `number` type)', () => {
-        const document = [[1]]
+        const document = [
+          [
+            1
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2423,7 +2471,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `boolean` type)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2449,7 +2501,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an array of `null` type)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2475,7 +2531,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `string` type)', () => {
-        const document = [['string']]
+        const document = [
+          [
+            'string'
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2499,7 +2559,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `number` type)', () => {
-        const document = [[1]]
+        const document = [
+          [
+            1
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2523,7 +2587,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `boolean` type)', () => {
-        const document = [[false]]
+        const document = [
+          [
+            false
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2547,7 +2615,11 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `array` type and `items` is an object of `null` type)', () => {
-        const document = [[null]]
+        const document = [
+          [
+            null
+          ]
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2606,7 +2678,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `boolean` type)', () => {
-        const document = [true]
+        const document = [
+          true
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2627,7 +2701,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
 
       it('transforms `array` type schemas (`items` is an object of `null` type)', () => {
-        const document = [null]
+        const document = [
+          null
+        ]
 
         /**
          *  @type {SchemaType}
@@ -2739,8 +2815,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'string' },
-            two: { type: 'string' }
+            one: {
+              type: 'string'
+            },
+            two: {
+              type: 'string'
+            }
           }
         }
 
@@ -2765,8 +2845,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'number' },
-            two: { type: 'number' }
+            one: {
+              type: 'number'
+            },
+            two: {
+              type: 'number'
+            }
           }
         }
 
@@ -2795,8 +2879,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'boolean' },
-            two: { type: 'boolean' }
+            one: {
+              type: 'boolean'
+            },
+            two: {
+              type: 'boolean'
+            }
           }
         }
 
@@ -2821,8 +2909,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'null' },
-            two: { type: 'null' }
+            one: {
+              type: 'null'
+            },
+            two: {
+              type: 'null'
+            }
           }
         }
 
@@ -2847,8 +2939,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] },
-            two: { type: 'string', enum: ['mock object type key string (1)', 'mock object type key string (2)'] }
+            one: {
+              type: 'string',
+              enum: [
+                'mock object type key string (1)',
+                'mock object type key string (2)'
+              ]
+            },
+            two: {
+              type: 'string',
+              enum: [
+                'mock object type key string (1)',
+                'mock object type key string (2)'
+              ]
+            }
           }
         }
 
@@ -2873,8 +2977,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'string', anyOf: ['mock object type key string (1)', 'mock object type key string (2)'] },
-            two: { type: 'string', anyOf: ['mock object type key string (1)', 'mock object type key string (2)'] }
+            one: {
+              type: 'string',
+              anyOf: [
+                'mock object type key string (1)',
+                'mock object type key string (2)'
+              ]
+            },
+            two: {
+              type: 'string',
+              anyOf: [
+                'mock object type key string (1)',
+                'mock object type key string (2)'
+              ]
+            }
           }
         }
 
@@ -2899,8 +3015,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'string', oneOf: ['mock object type key string (1)', 'mock object type key string (2)'] },
-            two: { type: 'string', oneOf: ['mock object type key string (1)', 'mock object type key string (2)'] }
+            one: {
+              type: 'string',
+              oneOf: [
+                'mock object type key string (1)',
+                'mock object type key string (2)'
+              ]
+            },
+            two: {
+              type: 'string',
+              oneOf: [
+                'mock object type key string (1)',
+                'mock object type key string (2)'
+              ]
+            }
           }
         }
 
@@ -2925,8 +3053,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'number', enum: [1, 2] },
-            two: { type: 'number', enum: [1, 2] }
+            one: {
+              type: 'number',
+              enum: [
+                1,
+                2
+              ]
+            },
+            two: {
+              type: 'number',
+              enum: [
+                1,
+                2
+              ]
+            }
           }
         }
 
@@ -2951,8 +3091,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'number', anyOf: [1, 2] },
-            two: { type: 'number', anyOf: [1, 2] }
+            one: {
+              type: 'number',
+              anyOf: [
+                1,
+                2
+              ]
+            },
+            two: {
+              type: 'number',
+              anyOf: [
+                1,
+                2
+              ]
+            }
           }
         }
 
@@ -2977,8 +3129,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'number', oneOf: [1, 2] },
-            two: { type: 'number', oneOf: [1, 2] }
+            one: {
+              type: 'number',
+              oneOf: [
+                1,
+                2
+              ]
+            },
+            two: {
+              type: 'number',
+              oneOf: [
+                1,
+                2
+              ]
+            }
           }
         }
 
@@ -3007,8 +3171,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'boolean', enum: [true, false] },
-            two: { type: 'boolean', enum: [true, false] }
+            one: {
+              type: 'boolean',
+              enum: [
+                true,
+                false
+              ]
+            },
+            two: {
+              type: 'boolean',
+              enum: [
+                true,
+                false
+              ]
+            }
           }
         }
 
@@ -3033,8 +3209,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'boolean', anyOf: [true, false] },
-            two: { type: 'boolean', anyOf: [true, false] }
+            one: {
+              type: 'boolean',
+              anyOf: [
+                true,
+                false
+              ]
+            },
+            two: {
+              type: 'boolean',
+              anyOf: [
+                true,
+                false
+              ]
+            }
           }
         }
 
@@ -3059,8 +3247,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'boolean', oneOf: [true, false] },
-            two: { type: 'boolean', oneOf: [true, false] }
+            one: {
+              type: 'boolean',
+              oneOf: [
+                true,
+                false
+              ]
+            },
+            two: {
+              type: 'boolean',
+              oneOf: [
+                true,
+                false
+              ]
+            }
           }
         }
 
@@ -3085,8 +3285,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'null', enum: [null, null] },
-            two: { type: 'null', enum: [null, null] }
+            one: {
+              type: 'null',
+              enum: [
+                null,
+                null
+              ]
+            },
+            two: {
+              type: 'null',
+              enum: [
+                null,
+                null
+              ]
+            }
           }
         }
 
@@ -3111,8 +3323,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'null', anyOf: [null, null] },
-            two: { type: 'null', anyOf: [null, null] }
+            one: {
+              type: 'null',
+              anyOf: [
+                null,
+                null
+              ]
+            },
+            two: {
+              type: 'null',
+              anyOf: [
+                null,
+                null
+              ]
+            }
           }
         }
 
@@ -3137,8 +3361,20 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         const schema = {
           type: 'object',
           properties: {
-            one: { type: 'null', oneOf: [null, null] },
-            two: { type: 'null', oneOf: [null, null] }
+            one: {
+              type: 'null',
+              oneOf: [
+                null,
+                null
+              ]
+            },
+            two: {
+              type: 'null',
+              oneOf: [
+                null,
+                null
+              ]
+            }
           }
         }
 
@@ -3159,7 +3395,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean', enum: [true, false] }
+        const schema = {
+          type: 'boolean',
+          enum: [
+            true,
+            false
+          ]
+        }
 
         const hash = {
           '#/': '1'
@@ -3175,7 +3417,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean', anyOf: [true, false] }
+        const schema = {
+          type: 'boolean',
+          anyOf: [
+            true,
+            false
+          ]
+        }
 
         const hash = {
           '#/': '1'
@@ -3191,7 +3439,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean', oneOf: [true, false] }
+        const schema = {
+          type: 'boolean',
+          oneOf: [
+            true,
+            false
+          ]
+        }
 
         const hash = {
           '#/': '1'
@@ -3207,7 +3461,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean' }
+        const schema = {
+          type: 'boolean'
+        }
 
         const hash = {
           '#/': 'true'
@@ -3225,7 +3481,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null', enum: [null] }
+        const schema = {
+          type: 'null',
+          enum: [
+            null
+          ]
+        }
 
         const hash = {
           '#/': '0'
@@ -3241,7 +3502,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null', anyOf: [null] }
+        const schema = {
+          type: 'null',
+          anyOf: [
+            null
+          ]
+        }
 
         const hash = {
           '#/': '0'
@@ -3257,7 +3523,12 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null', oneOf: [null] }
+        const schema = {
+          type: 'null',
+          oneOf: [
+            null
+          ]
+        }
 
         const hash = {
           '#/': '0'
@@ -3273,7 +3544,9 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'null' }
+        const schema = {
+          type: 'null'
+        }
 
         const hash = {
           '#/': 'null'

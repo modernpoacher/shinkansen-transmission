@@ -85,6 +85,8 @@ export function toNumber (v) {
   throw new Error('Invalid `number`')
 }
 
+function handleError ({ message = 'No error message defined' }) { log(message) }
+
 export { transformToValue }
 
 /**
@@ -173,8 +175,6 @@ export function transformToValueFor (document, array = []) {
   }
 
   throw new Error('Invalid `document`')
-
-  // return document
 }
 
 /**
@@ -335,8 +335,14 @@ export function transformNull (hash, schema, parentUri, uri) {
       }
     }
 
-    if (isArray(document)) return document.map(toNull)
-    return toNull(document)
+    try {
+      if (isArray(document)) return document.map(toNull)
+      return toNull(document)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return document
   }
 }
 
@@ -376,8 +382,14 @@ export function transformBoolean (hash, schema, parentUri, uri) {
       }
     }
 
-    if (isArray(document)) return document.map(toBoolean)
-    return toBoolean(document)
+    try {
+      if (isArray(document)) return document.map(toBoolean)
+      return toBoolean(document)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return document
   }
 }
 
@@ -483,8 +495,14 @@ export function transformNumber (hash, schema, parentUri, uri) {
       }
     }
 
-    if (isArray(document)) return document.map(toNumber)
-    return toNumber(document)
+    try {
+      if (isArray(document)) return document.map(toNumber)
+      return toNumber(document)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return document
   }
 }
 
@@ -524,8 +542,14 @@ export function transformString (hash, schema, parentUri, uri) {
       }
     }
 
-    if (isArray(document)) return document.map(toString)
-    return toString(document)
+    try {
+      if (isArray(document)) return document.map(toString)
+      return toString(document)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return document
   }
 }
 

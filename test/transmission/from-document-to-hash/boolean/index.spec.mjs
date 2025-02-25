@@ -37,7 +37,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean', enum: [true, false] }
+        const schema = {
+          type: 'boolean',
+          enum: [
+            true,
+            false
+          ]
+        }
 
         const hash = {
           '#/': '1'
@@ -53,7 +59,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean', anyOf: [true, false] }
+        const schema = {
+          type: 'boolean',
+          anyOf: [
+            true,
+            false
+          ]
+        }
 
         const hash = {
           '#/': '1'
@@ -69,7 +81,13 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', (
         /**
          *  @type {SchemaType}
          */
-        const schema = { type: 'boolean', oneOf: [true, false] }
+        const schema = {
+          type: 'boolean',
+          oneOf: [
+            true,
+            false
+          ]
+        }
 
         const hash = {
           '#/': '1'

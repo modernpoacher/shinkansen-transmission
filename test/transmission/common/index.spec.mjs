@@ -329,15 +329,23 @@ describe('shinkansen-transmission/transmission/common', () => {
     describe('Values has a field for the uri', () => {
       describe('The field is an array', () => {
         it('returns the array', () => {
-          expect(getSelectedItems({ '#/': ['1'] }, '#/'))
-            .to.eql([1])
+          expect(getSelectedItems({
+            '#/': [
+              '1'
+            ]
+          }, '#/'))
+            .to.eql([
+              1
+            ])
         })
       })
 
       describe('The field is not an array', () => {
         it('returns an array', () => {
           expect(getSelectedItems({ '#/': '1' }, '#/'))
-            .to.eql([1])
+            .to.eql([
+              1
+            ])
         })
       })
     })
@@ -345,14 +353,26 @@ describe('shinkansen-transmission/transmission/common', () => {
     describe('Values does not have a field for the uri', () => {
       describe('Values has fields for the uri pattern', () => {
         it('returns an array', () => {
-          expect(getSelectedItems({ '#/0': '1', '#/1': '2', '#/2': '3' }, '#/'))
-            .to.eql([1, 2, 3])
+          expect(getSelectedItems({
+            '#/0': '1',
+            '#/1': '2',
+            '#/2': '3'
+          }, '#/'))
+            .to.eql([
+              1,
+              2,
+              3
+            ])
         })
       })
 
       describe('Values does not have fields for the uri pattern', () => {
         it('returns an array', () => {
-          expect(getSelectedItems({ '#/one': '1', '#/two': '2', '#/three': '3' }, '#/'))
+          expect(getSelectedItems({
+            '#/one': '1',
+            '#/two': '2',
+            '#/three': '3'
+          }, '#/'))
             .to.eql([])
         })
       })
@@ -1137,7 +1157,8 @@ describe('shinkansen-transmission/transmission/common', () => {
     describe('A `uri` is defined', () => {
       describe('A `resource` is defined', () => {
         it('returns a string', () => {
-          expect(getUri('mock uri', 'mock resource'))
+          expect(getUri('mock uri',
+            'mock resource'))
             .to.equal('mock uri/mock resource')
         })
       })

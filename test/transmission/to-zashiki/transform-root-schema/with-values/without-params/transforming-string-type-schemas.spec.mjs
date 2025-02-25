@@ -52,7 +52,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                   'string (2)',
                   'string (3)'
                 ],
-                selectedItems: [2]
+                selectedItems: [
+                  2
+                ]
               },
               elements: {
                 enum: {
@@ -62,7 +64,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                     'string (2)',
                     'string (3)'
                   ],
-                  selectedItems: [2]
+                  selectedItems: [
+                    2
+                  ]
                 }
               }
             })
@@ -150,7 +154,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                     }
                   }
                 ],
-                selectedItems: [2]
+                selectedItems: [
+                  2
+                ]
               },
               elements: {
                 anyOf: {
@@ -214,7 +220,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                       }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [
+                    2
+                  ]
                 }
               }
             })
@@ -302,7 +310,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                     }
                   }
                 ],
-                selectedItems: [2]
+                selectedItems: [
+                  2
+                ]
               },
               elements: {
                 oneOf: {
@@ -366,7 +376,9 @@ describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
                       }
                     }
                   ],
-                  selectedItems: [2]
+                  selectedItems: [
+                    2
+                  ]
                 }
               }
             })

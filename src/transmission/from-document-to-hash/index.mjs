@@ -18,8 +18,8 @@ import {
   hasOneOf,
   getOneOf,
   getUri,
-  transformValueIndexFor,
-  transformEqualIndexFor,
+  getIndexByValue,
+  getIndexByEqual,
   transformToValue
 } from '#transmission/transmission/common'
 
@@ -118,61 +118,23 @@ export function transformArray (document, schema, hash, parentUri, uri) {
   if (hasEnum(schema)) {
     const array = getEnum(schema)
 
-    hash[uri] = document.map((value) => transformValueIndexFor(array, value))
+    hash[uri] = document.map((value) => String(getIndexByValue(array, value)))
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
 
-      hash[uri] = document.map((value) => transformValueIndexFor(array, value))
+      hash[uri] = document.map((value) => String(getIndexByValue(array, value)))
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
 
-        hash[uri] = document.map((value) => transformValueIndexFor(array, value))
+        hash[uri] = document.map((value) => String(getIndexByValue(array, value)))
 
         return hash
-      } else {
-        const { items = {} } = schema
-
-        if (isArray(items)) {
-          /*
-           *  Items is an array of schemas
-           */
-          return transformArrayFor(document, schema, hash, parentUri) // , uri)
-        } else {
-          if (isObject(items)) {
-            /*
-             *  Items is a schema
-             */
-            if (hasEnum(items)) {
-              const array = getEnum(items)
-
-              hash[uri] = document.map((value) => transformValueIndexFor(array, value))
-
-              return hash
-            } else {
-              if (hasAnyOf(items)) {
-                const array = getAnyOf(items)
-
-                hash[uri] = document.map((value) => transformValueIndexFor(array, value))
-
-                return hash
-              } else {
-                if (hasOneOf(items)) {
-                  const array = getOneOf(items)
-
-                  hash[uri] = document.map((value) => transformValueIndexFor(array, value))
-
-                  return hash
-                }
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -198,26 +160,33 @@ export function transformObject (document, schema, hash, parentUri, uri) {
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
+    const index = String(getIndexByEqual(array, document))
 
-    hash[uri] = transformEqualIndexFor(array, document)
+    hash[uri] = String(index)
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
+      const index = String(getIndexByEqual(array, document))
 
-      hash[uri] = transformEqualIndexFor(array, document)
+      hash[uri] = String(index)
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
+        const index = String(getIndexByEqual(array, document))
 
-        hash[uri] = transformEqualIndexFor(array, document)
+        hash[uri] = String(index)
 
         return hash
       }
     }
+
+    /**
+     *  We don't look at `properties` here like we look at `items` in `transformArray`
+     */
   }
 
   /*
@@ -227,7 +196,7 @@ export function transformObject (document, schema, hash, parentUri, uri) {
 }
 
 /**
- * Document can be `undefined`
+ *  Document can be `undefined`
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -263,9 +232,10 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
        *  Is the schema an `enum`?
        */
       if (hasEnum(schema)) {
-        const items = getEnum(schema)
+        const array = getEnum(schema)
+        const index = getIndexByValue(array, document)
 
-        hash[uri] = transformValueIndexFor(items, document)
+        hash[uri] = String(index)
 
         return hash
       } else {
@@ -273,9 +243,10 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
          *  Is the schema an `anyOf`?
          */
         if (hasAnyOf(schema)) {
-          const items = getAnyOf(schema)
+          const array = getAnyOf(schema)
+          const index = getIndexByValue(array, document)
 
-          hash[uri] = transformValueIndexFor(items, document)
+          hash[uri] = String(index)
 
           return hash
         } else {
@@ -283,9 +254,10 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
            *  Is the schema an `oneOf`?
            */
           if (hasOneOf(schema)) {
-            const items = getOneOf(schema)
+            const array = getOneOf(schema)
+            const index = getIndexByValue(array, document)
 
-            hash[uri] = transformValueIndexFor(items, document)
+            hash[uri] = String(index)
 
             return hash
           }
