@@ -23,7 +23,7 @@ const log = debug('shinkansen-transmission/from-document-to-hash/boolean')
 log('`shinkansen` is awake')
 
 /**
- *  Document can be `undefined`
+ *  Document can be undefined
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -36,6 +36,9 @@ export default function transformBooleanSchema (document, schema = {}, hash = {}
   log('transformBooleanSchema')
 
   if (hasEnum(schema)) {
+    /**
+     *  @link https://json-schema.org/draft/2019-09/json-schema-validation#rfc.section.6.1.2
+     */
     const array = getEnum(schema)
     const value = transformIndexToValueByFindValue(array, document)
 

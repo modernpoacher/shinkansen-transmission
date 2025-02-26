@@ -30,7 +30,7 @@ log('`shinkansen` is awake')
  *  @returns {ParamsType}
  */
 export function getParamsByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByKeyForAnyOf')
    */
 
@@ -82,7 +82,7 @@ export function getParamsByKeyForEnum (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByKeyForAnyOf')
    */
 
@@ -134,7 +134,7 @@ export function getParamsByKeyForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByKeyForOneOf')
    */
 
@@ -186,7 +186,7 @@ export function getParamsByKeyForOneOf (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByKey')
    */
 
@@ -232,7 +232,7 @@ export function getParamsByKey (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByIndexForEnum')
    */
 
@@ -280,7 +280,7 @@ export function getParamsByIndexForEnum (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByIndexForAnyOf')
    */
 
@@ -328,7 +328,7 @@ export function getParamsByIndexForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByIndexForOneOf')
    */
 
@@ -376,7 +376,7 @@ export function getParamsByIndexForOneOf (schema, rootSchema, values, params) {
  *  @returns {ParamsType}
  */
 export function getParamsByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getParamsByIndex')
    */
 

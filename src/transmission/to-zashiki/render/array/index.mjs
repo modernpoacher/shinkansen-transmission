@@ -49,7 +49,7 @@ log('`shinkansen` is awake')
  *  @returns {ZashikiArrayMetaType}
  */
 export function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayMetaForEnum')
    */
 
@@ -89,7 +89,7 @@ export function renderArrayMetaForEnum (params, uri, minItems, maxItems, hasUniq
  *  @returns {ZashikiArrayMetaType}
  */
 export function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayMetaForAnyOf')
    */
 
@@ -129,7 +129,7 @@ export function renderArrayMetaForAnyOf (params, uri, minItems, maxItems, hasUni
  *  @returns {ZashikiArrayMetaType}
  */
 export function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayMetaForOneOf')
    */
 
@@ -169,7 +169,7 @@ export function renderArrayMetaForOneOf (params, uri, minItems, maxItems, hasUni
  *  @returns {ZashikiArrayMetaType}
  */
 export function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayMetaForAllOf')
    */
 
@@ -209,7 +209,7 @@ export function renderArrayMetaForAllOf (params, uri, minItems, maxItems, hasUni
  *  @returns {ZashikiArrayMetaType}
  */
 export function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayMeta')
    */
 
@@ -250,7 +250,7 @@ export function renderArrayMeta (params, uri, minItems, maxItems, hasUniqueItems
  *  @returns {EnumType}
  */
 export function renderArrayElementsFieldForEnum (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsFieldForEnum')
    */
 
@@ -284,7 +284,7 @@ export function renderArrayElementsFieldForEnum (field, params, uri, minItems, m
  *  @returns {AnyOfType}
  */
 export function renderArrayElementsFieldForAnyOf (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsFieldForAnyOf')
    */
 
@@ -318,7 +318,7 @@ export function renderArrayElementsFieldForAnyOf (field, params, uri, minItems, 
  *  @returns {OneOfType}
  */
 export function renderArrayElementsFieldForOneOf (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsFieldForOneOf')
    */
 
@@ -352,7 +352,7 @@ export function renderArrayElementsFieldForOneOf (field, params, uri, minItems, 
  *  @returns {FieldType}
  */
 export function renderArrayElementsFieldForAllOf (field, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsFieldForAllOf')
    */
 
@@ -380,7 +380,7 @@ export function renderArrayElementsFieldForAllOf (field, params, uri, minItems, 
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getArrayElements (elements, schema) {
-  /**
+  /*
    *  log('getArrayElements')
    */
 
@@ -405,7 +405,7 @@ export function getArrayElements (elements, schema) {
  *  @returns {ZashikiArrayElementsType}
  */
 export function renderArrayElementsForEnum (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsForEnum')
    */
 
@@ -441,7 +441,7 @@ export function renderArrayElementsForEnum (schema, params, uri, minItems, maxIt
  *  @returns {ZashikiArrayElementsType}
  */
 export function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsForAnyOf')
    */
 
@@ -477,7 +477,7 @@ export function renderArrayElementsForAnyOf (schema, params, uri, minItems, maxI
  *  @returns {ZashikiArrayElementsType}
  */
 export function renderArrayElementsForOneOf (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsForOneOf')
    */
 
@@ -513,7 +513,7 @@ export function renderArrayElementsForOneOf (schema, params, uri, minItems, maxI
  *  @returns {ZashikiArrayElementsType}
  */
 export function renderArrayElementsForAllOf (schema, params, uri, minItems, maxItems, hasUniqueItems, minContains, maxContains) {
-  /**
+  /*
    *  log('renderArrayElementsForAllOf')
    */
 
@@ -543,7 +543,7 @@ export function renderArrayElementsForAllOf (schema, params, uri, minItems, maxI
  *  @returns {ZashikiArrayElementsType}
  */
 export function renderArrayElements (schema, params) {
-  /**
+  /*
    *  log('renderArrayElements')
    */
 
@@ -575,7 +575,7 @@ export function renderArrayElements (schema, params) {
  *  @returns {ZashikiArrayType}
  */
 export function renderArrayForEnum (schema, values, params) {
-  /**
+  /*
    *  log('renderArrayForEnum')
    */
 
@@ -607,7 +607,7 @@ export function renderArrayForEnum (schema, values, params) {
  *  @returns {ZashikiArrayType}
  */
 export function renderArrayForAnyOf (schema, values, params) {
-  /**
+  /*
    *  log('renderArrayForAnyOf')
    */
 
@@ -639,7 +639,7 @@ export function renderArrayForAnyOf (schema, values, params) {
  *  @returns {ZashikiArrayType}
  */
 export function renderArrayForOneOf (schema, values, params) {
-  /**
+  /*
    *  log('renderArrayForOneOf')
    */
 
@@ -671,7 +671,7 @@ export function renderArrayForOneOf (schema, values, params) {
  *  @returns {ZashikiArrayType}
  */
 export function renderArrayForAllOf (schema, values, params) {
-  /**
+  /*
    *  log('renderArrayForAllOf')
    */
 
@@ -701,7 +701,7 @@ export function renderArrayForAllOf (schema, values, params) {
  *  @returns {ZashikiArrayType}
  */
 export function renderArray (schema, values, params) {
-  /**
+  /*
    *  log('renderArray')
    */
 

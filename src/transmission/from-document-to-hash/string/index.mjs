@@ -23,7 +23,7 @@ const log = debug('shinkansen-transmission/from-document-to-hash/string')
 log('`shinkansen` is awake')
 
 /**
- *  Document can be `undefined`
+ *  Document can be undefined
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -37,14 +37,11 @@ export default function transformStringSchema (document, schema = {}, hash = {},
 
   if (hasEnum(schema)) {
     /**
-     *  https://json-schema.org/draft/2019-09/json-schema-validation#rfc.section.6.1.2
+     *  @link https://json-schema.org/draft/2019-09/json-schema-validation#rfc.section.6.1.2
      */
     const array = getEnum(schema)
     const value = transformIndexToValueByFindValue(array, document)
 
-    /**
-     *  `document` is the string representation of an value to an item in the `enum`
-     */
     hash[uri] = value
 
     return hash

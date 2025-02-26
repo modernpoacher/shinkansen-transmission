@@ -1032,9 +1032,13 @@ export function transformNull (rootSchema, values, params) {
 export default function toZashiki (rootSchema = {}, values = {}, params = {}) {
   log('toZashiki')
 
-  const { type } = rootSchema
+  const {
+    type
+  } = rootSchema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformString(rootSchema, values, params)

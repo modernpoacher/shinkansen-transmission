@@ -52,7 +52,7 @@ log('`shinkansen` is awake')
  *  @returns {ZashikiNumberMetaType}
  */
 export function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberMetaForEnum')
    */
 
@@ -94,7 +94,7 @@ export function renderNumberMetaForEnum (schema, params, uri, min, max, step) {
  *  @returns {ZashikiNumberMetaType}
  */
 export function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberMetaForAnyOf')
    */
 
@@ -136,7 +136,7 @@ export function renderNumberMetaForAnyOf (schema, params, uri, min, max, step) {
  *  @returns {ZashikiNumberMetaType}
  */
 export function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberMetaForOneOf')
    */
 
@@ -179,7 +179,7 @@ export function renderNumberMetaForOneOf (schema, params, uri, min, max, step) {
  *  @returns {ZashikiNumberMetaType}
  */
 export function getNumberMetaForAllOf (schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('getNumberMetaForAllOf')
    */
 
@@ -227,7 +227,7 @@ export function getNumberMetaForAllOf (schema, values, params, uri, min, max, st
  *  @returns {ZashikiNumberMetaType}
  */
 export function renderNumberMetaForAllOf (schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberMetaForAllOf')
    */
 
@@ -267,7 +267,7 @@ export function renderNumberMetaForAllOf (schema, values, params, uri, min, max,
  *  @returns {ZashikiNumberMetaType}
  */
 export function getNumberMeta (schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('getNumberMeta')
    */
 
@@ -315,7 +315,7 @@ export function getNumberMeta (schema, values, params, uri, min, max, step) {
  *  @returns {ZashikiNumberMetaType}
  */
 export function renderNumberMeta (schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberMeta')
    */
 
@@ -354,7 +354,7 @@ export function renderNumberMeta (schema, values, params, uri, min, max, step) {
  *  @returns {EnumType}
  */
 export function renderNumberElementsFieldForEnum (field, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsFieldForEnum')
    */
 
@@ -384,7 +384,7 @@ export function renderNumberElementsFieldForEnum (field, params, uri, min, max, 
  *  @returns {AnyOfType}
  */
 export function renderNumberElementsFieldForAnyOf (field, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsFieldForAnyOf')
    */
 
@@ -414,7 +414,7 @@ export function renderNumberElementsFieldForAnyOf (field, params, uri, min, max,
  *  @returns {OneOfType}
  */
 export function renderNumberElementsFieldForOneOf (field, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsFieldForOneOf')
    */
 
@@ -446,7 +446,7 @@ export function renderNumberElementsFieldForOneOf (field, params, uri, min, max,
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getNumberElementsFieldForAllOf (field, schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('getNumberElementsFieldForAllOf')
    */
 
@@ -477,7 +477,7 @@ export function getNumberElementsFieldForAllOf (field, schema, values, params, u
  *  @returns {FieldType}
  */
 export function renderNumberElementsFieldForAllOf (field, schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsFieldForAllOf')
    */
 
@@ -523,7 +523,7 @@ export function renderNumberElementsFieldForAllOf (field, schema, values, params
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getNumberElementsField (field, schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('getNumberElementsField')
    */
 
@@ -554,7 +554,7 @@ export function getNumberElementsField (field, schema, values, params, uri, min,
  *  @returns {FieldType}
  */
 export function renderNumberElementsField (field, schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsField')
    */
 
@@ -594,7 +594,7 @@ export function renderNumberElementsField (field, schema, values, params, uri, m
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getNumberElements (elements, schema) {
-  /**
+  /*
    *  log('getNumberElements')
    */
 
@@ -617,7 +617,7 @@ export function getNumberElements (elements, schema) {
  *  @returns {ZashikiNumberElementsType}
  */
 export function renderNumberElementsForEnum (schema, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsForEnum')
    */
 
@@ -651,7 +651,7 @@ export function renderNumberElementsForEnum (schema, params, uri, min, max, step
  *  @returns {ZashikiNumberElementsType}
  */
 export function renderNumberElementsForAnyOf (schema, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsForAnyOf')
    */
 
@@ -685,7 +685,7 @@ export function renderNumberElementsForAnyOf (schema, params, uri, min, max, ste
  *  @returns {ZashikiNumberElementsType}
  */
 export function renderNumberElementsForOneOf (schema, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsForOneOf')
    */
 
@@ -720,7 +720,7 @@ export function renderNumberElementsForOneOf (schema, params, uri, min, max, ste
  *  @returns {ZashikiNumberElementsType}
  */
 export function renderNumberElementsForAllOf (schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElementsForAllOf')
    */
 
@@ -755,7 +755,7 @@ export function renderNumberElementsForAllOf (schema, values, params, uri, min, 
  *  @returns {ZashikiNumberElementsType}
  */
 export function renderNumberElements (schema, values, params, uri, min, max, step) {
-  /**
+  /*
    *  log('renderNumberElements')
    */
 
@@ -788,7 +788,7 @@ export function renderNumberElements (schema, values, params, uri, min, max, ste
  *  @returns {ZashikiNumberType}
  */
 export function renderNumberForEnum (schema, values, params) {
-  /**
+  /*
    *  log('renderNumberForEnum')
    */
 
@@ -818,7 +818,7 @@ export function renderNumberForEnum (schema, values, params) {
  *  @returns {ZashikiNumberType}
  */
 export function renderNumberForAnyOf (schema, values, params) {
-  /**
+  /*
    *  log('renderNumberForAnyOf')
    */
 
@@ -848,7 +848,7 @@ export function renderNumberForAnyOf (schema, values, params) {
  *  @returns {ZashikiNumberType}
  */
 export function renderNumberForOneOf (schema, values, params) {
-  /**
+  /*
    *  log('renderNumberForOneOf')
    */
 
@@ -878,7 +878,7 @@ export function renderNumberForOneOf (schema, values, params) {
  *  @returns {ZashikiNumberType}
  */
 export function renderNumberForAllOf (schema, values, params) {
-  /**
+  /*
    *  log('renderNumberForAllOf')
    */
 
@@ -906,7 +906,7 @@ export function renderNumberForAllOf (schema, values, params) {
  *  @returns {ZashikiNumberType}
  */
 export function renderNumber (schema, values, params) {
-  /**
+  /*
    *  log('renderNumber')
    */
 

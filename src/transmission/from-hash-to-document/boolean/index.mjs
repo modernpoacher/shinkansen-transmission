@@ -51,8 +51,8 @@ export function transformBoolean (hash, schema, parentUri, uri) {
    *  log('transformBoolean')
    */
 
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
+  if (uri in hash) {
+    const document = hash[uri]
 
     if (hasEnum(schema)) {
       const array = getEnum(schema)
@@ -101,8 +101,6 @@ export function transformBoolean (hash, schema, parentUri, uri) {
 }
 
 /**
- *  Hash can be `undefined`
- *
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
@@ -115,7 +113,9 @@ export default function transformBooleanSchema (hash = {}, schema = {}, params =
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   if (type === 'boolean') {
     const {
       uri: parentUri = '#'

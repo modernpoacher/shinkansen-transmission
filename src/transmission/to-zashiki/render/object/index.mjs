@@ -43,7 +43,7 @@ log('`shinkansen` is awake')
  *  @returns {ZashikiObjectMetaType}
  */
 export function renderObjectMetaForEnum (params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectMetaForEnum')
    */
 
@@ -77,7 +77,7 @@ export function renderObjectMetaForEnum (params, uri, minProperties, maxProperti
  *  @returns {ZashikiObjectMetaType}
  */
 export function renderObjectMetaForAnyOf (params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectMetaForAnyOf')
    */
 
@@ -111,7 +111,7 @@ export function renderObjectMetaForAnyOf (params, uri, minProperties, maxPropert
  *  @returns {ZashikiObjectMetaType}
  */
 export function renderObjectMetaForOneOf (params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectMetaForOneOf')
    */
 
@@ -145,7 +145,7 @@ export function renderObjectMetaForOneOf (params, uri, minProperties, maxPropert
  *  @returns {ZashikiObjectMetaType}
  */
 export function renderObjectMetaForAllOf (params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectMetaForAllOf')
    */
 
@@ -179,7 +179,7 @@ export function renderObjectMetaForAllOf (params, uri, minProperties, maxPropert
  *  @returns {ZashikiObjectMetaType}
  */
 export function renderObjectMeta (params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectMeta')
    */
 
@@ -214,7 +214,7 @@ export function renderObjectMeta (params, uri, minProperties, maxProperties) {
  *  @returns {EnumType}
  */
 export function renderObjectElementsFieldForEnum (field, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsFieldForEnum')
    */
 
@@ -242,7 +242,7 @@ export function renderObjectElementsFieldForEnum (field, params, uri, minPropert
  *  @returns {AnyOfType}
  */
 export function renderObjectElementsFieldForAnyOf (field, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsFieldForAnyOf')
    */
 
@@ -270,7 +270,7 @@ export function renderObjectElementsFieldForAnyOf (field, params, uri, minProper
  *  @returns {OneOfType}
  */
 export function renderObjectElementsFieldForOneOf (field, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsFieldForOneOf')
    */
 
@@ -298,7 +298,7 @@ export function renderObjectElementsFieldForOneOf (field, params, uri, minProper
  *  @returns {FieldType}
  */
 export function renderObjectElementsFieldForAllOf (field, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsFieldForAllOf')
    */
 
@@ -323,7 +323,7 @@ export function renderObjectElementsFieldForAllOf (field, params, uri, minProper
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getObjectElements (elements, schema) {
-  /**
+  /*
    *  log('getObjectElements')
    */
 
@@ -345,7 +345,7 @@ export function getObjectElements (elements, schema) {
  *  @returns {ZashikiObjectElementsType}
  */
 export function renderObjectElementsForEnum (schema, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsForEnum')
    */
 
@@ -378,7 +378,7 @@ export function renderObjectElementsForEnum (schema, params, uri, minProperties,
  *  @returns {ZashikiObjectElementsType}
  */
 export function renderObjectElementsForAnyOf (schema, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsForAnyOf')
    */
 
@@ -411,7 +411,7 @@ export function renderObjectElementsForAnyOf (schema, params, uri, minProperties
  *  @returns {ZashikiObjectElementsType}
  */
 export function renderObjectElementsForOneOf (schema, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsForOneOf')
    */
 
@@ -444,7 +444,7 @@ export function renderObjectElementsForOneOf (schema, params, uri, minProperties
  *  @returns {ZashikiObjectElementsType}
  */
 export function renderObjectElementsForAllOf (schema, params, uri, minProperties, maxProperties) {
-  /**
+  /*
    *  log('renderObjectElementsForAllOf')
    */
 
@@ -474,7 +474,7 @@ export function renderObjectElementsForAllOf (schema, params, uri, minProperties
  *  @returns {ZashikiObjectElementsType}
  */
 export function renderObjectElements (schema, params) {
-  /**
+  /*
    *  log('renderObjectElements')
    */
 
@@ -506,7 +506,7 @@ export function renderObjectElements (schema, params) {
  *  @returns {ZashikiObjectType}
  */
 export function renderObjectForEnum (schema, values, params) {
-  /**
+  /*
    *  log('renderObjectForEnum')
    */
 
@@ -535,7 +535,7 @@ export function renderObjectForEnum (schema, values, params) {
  *  @returns {ZashikiObjectType}
  */
 export function renderObjectForAnyOf (schema, values, params) {
-  /**
+  /*
    *  log('renderObjectForAnyOf')
    */
 
@@ -564,7 +564,7 @@ export function renderObjectForAnyOf (schema, values, params) {
  *  @returns {ZashikiObjectType}
  */
 export function renderObjectForOneOf (schema, values, params) {
-  /**
+  /*
    *  log('renderObjectForOneOf')
    */
 
@@ -593,7 +593,7 @@ export function renderObjectForOneOf (schema, values, params) {
  *  @returns {ZashikiObjectType}
  */
 export function renderObjectForAllOf (schema, values, params) {
-  /**
+  /*
    *  log('renderObjectForAllOf')
    */
 
@@ -620,7 +620,7 @@ export function renderObjectForAllOf (schema, values, params) {
  *  @returns {ZashikiObjectType}
  */
 export function renderObject (schema, values, params) {
-  /**
+  /*
    *  log('renderObject')
    */
 

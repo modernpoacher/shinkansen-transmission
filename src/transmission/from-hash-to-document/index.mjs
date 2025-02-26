@@ -130,8 +130,8 @@ function transformItemsArrayFor (hash, itemSchemas = [], parentUri = '#', uri = 
    *  log('transformItemsArrayFor')
    */
 
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
+  if (uri in hash) {
+    const document = hash[uri]
 
     if (isArray(document)) {
       return itemSchemas.map((itemSchema, i) => fromHashToDocument(hash, itemSchema, uri, getUri(uri, i)))
@@ -158,8 +158,8 @@ function transformItemsObjectFor (hash, itemSchema = {}, parentUri = '#', uri = 
    *  log('transformItemsObjectFor')
    */
 
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
+  if (uri in hash) {
+    const document = hash[uri]
 
     if (isArray(document)) {
       return fromHashToDocument(hash, itemSchema, uri, uri)
@@ -243,8 +243,6 @@ export function transformArray (hash, schema, parentUri, uri) {
 }
 
 /**
- *  Hash can be `undefined`
- *
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
@@ -257,7 +255,9 @@ export function transformArraySchema (hash = {}, schema = {}, params = {}) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   if (type === 'array') {
     const {
       uri: parentUri = '#',
@@ -358,8 +358,6 @@ export function transformObject (hash, schema, parentUri, uri) {
 }
 
 /**
- *  Hash can be `undefined`
- *
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
@@ -372,7 +370,9 @@ export function transformObjectSchema (hash = {}, schema = {}, params = {}) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   if (type === 'object') {
     const {
       uri: parentUri = '#',
@@ -386,8 +386,6 @@ export function transformObjectSchema (hash = {}, schema = {}, params = {}) {
 }
 
 /**
- *  Hash can be `undefined`
- *
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {string} [parentUri]
@@ -401,7 +399,9 @@ export default function fromHashToDocument (hash = {}, schema = {}, parentUri = 
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformString(hash, schema, parentUri, uri)

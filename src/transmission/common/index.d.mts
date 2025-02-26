@@ -71,8 +71,8 @@ export function getFindByEqual (value?: MemberType): (item?: MemberType | Member
 
 export function toString (value?: MemberType): string
 
-export function getArray (schema?: { items?: SchemaType | SchemaType[] }, parentUri?: string, uri?: string): SchemaType | undefined
-export function getObject (schema?: { properties?: Record<string, SchemaType> }, parentUri?: string, uri?: string): SchemaType | undefined
+export function getSchemaFromItems (schema?: { items?: SchemaType | SchemaType[] }, parentUri?: string, uri?: string): SchemaType | undefined
+export function getSchemaFromProperties (schema?: { properties?: Record<string, SchemaType> }, parentUri?: string, uri?: string): SchemaType | undefined
 
 declare function getSchema (
   schema: (

@@ -8,7 +8,8 @@ import debug from 'debug'
 
 import {
   toString,
-  getSchema,
+  getSchemaFromItems,
+  getSchemaFromProperties,
   isObject,
   isArray,
   hasEnum,
@@ -44,7 +45,7 @@ function getReduceArrayFor (schema, parentUri) {
   return function reduce (hash, document, index) {
     const schemaUri = getUri(parentUri, index)
 
-    return fromDocumentToHash(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+    return fromDocumentToHash(document, getSchemaFromItems(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
   }
 }
 
@@ -80,6 +81,9 @@ export function transformArray (document, schema, hash, parentUri, uri) {
    */
 
   if (hasEnum(schema)) {
+    /**
+     *  @link https://json-schema.org/draft/2019-09/json-schema-validation#rfc.section.6.1.2
+     */
     const array = getEnum(schema)
     const value = transformIndexToValueByFindEqual(array, document)
 
@@ -113,7 +117,7 @@ export function transformArray (document, schema, hash, parentUri, uri) {
 }
 
 /**
- *  Document can be `undefined`
+ *  Document can be undefined
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -157,7 +161,7 @@ function getReduceObjectFor (schema, parentUri) {
   return function reduce (hash, [key, document]) {
     const schemaUri = getUri(parentUri, key)
 
-    return fromDocumentToHash(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+    return fromDocumentToHash(document, getSchemaFromProperties(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
   }
 }
 
@@ -193,6 +197,9 @@ export function transformObject (document, schema, hash, parentUri, uri) {
    */
 
   if (hasEnum(schema)) {
+    /**
+     *  @link https://json-schema.org/draft/2019-09/json-schema-validation#rfc.section.6.1.2
+     */
     const array = getEnum(schema)
     const value = transformIndexToValueByFindEqual(array, document)
 
@@ -226,7 +233,7 @@ export function transformObject (document, schema, hash, parentUri, uri) {
 }
 
 /**
- *  Document can be `undefined`
+ *  Document can be undefined
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -257,7 +264,7 @@ export function transformObjectSchema (document, schema = {}, hash = {}, parentU
 }
 
 /**
- *  Document can be `undefined`
+ *  Document can be undefined
  *
  *  @param {DocumentType} [document]
  *  @param {SchemaType} [schema]
@@ -300,7 +307,7 @@ export default function fromDocumentToHash (document, schema = {}, hash = {}, pa
 
         return hash
       } else {
-        /**
+        /*
          *  Is the schema an `anyOf`?
          */
         if (hasAnyOf(schema)) {
@@ -311,7 +318,7 @@ export default function fromDocumentToHash (document, schema = {}, hash = {}, pa
 
           return hash
         } else {
-          /**
+          /*
            *  Is the schema a `oneOf`?
            */
           if (hasOneOf(schema)) {
