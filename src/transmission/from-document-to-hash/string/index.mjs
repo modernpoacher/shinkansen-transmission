@@ -15,7 +15,7 @@ import {
   hasOneOf,
   getOneOf,
   getUri,
-  getIndexByValue
+  transformIndexToValueByFindValue
 } from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-document-to-hash/string')
@@ -40,28 +40,28 @@ export default function transformStringSchema (document, schema = {}, hash = {},
      *  https://json-schema.org/draft/2019-09/json-schema-validation#rfc.section.6.1.2
      */
     const array = getEnum(schema)
-    const index = getIndexByValue(array, document)
+    const value = transformIndexToValueByFindValue(array, document)
 
     /**
-     *  `document` is the string representation of an index to an item in the `enum`
+     *  `document` is the string representation of an value to an item in the `enum`
      */
-    hash[uri] = String(index)
+    hash[uri] = value
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
-      const index = getIndexByValue(array, document)
+      const value = transformIndexToValueByFindValue(array, document)
 
-      hash[uri] = String(index)
+      hash[uri] = value
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
-        const index = getIndexByValue(array, document)
+        const value = transformIndexToValueByFindValue(array, document)
 
-        hash[uri] = String(index)
+        hash[uri] = value
 
         return hash
       }

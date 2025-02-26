@@ -18,8 +18,8 @@ import {
   hasOneOf,
   getOneOf,
   getUri,
-  getIndexByValue,
-  getIndexByEqual,
+  transformIndexToValueByFindValue,
+  transformIndexToValueByFindEqual,
   transformToValue
 } from '#transmission/transmission/common'
 
@@ -81,25 +81,25 @@ export function transformArray (document, schema, hash, parentUri, uri) {
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
-    const index = String(getIndexByEqual(array, document))
+    const value = transformIndexToValueByFindEqual(array, document)
 
-    hash[uri] = String(index)
+    hash[uri] = value
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
-      const index = String(getIndexByEqual(array, document))
+      const value = transformIndexToValueByFindEqual(array, document)
 
-      hash[uri] = String(index)
+      hash[uri] = value
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
-        const index = String(getIndexByEqual(array, document))
+        const value = transformIndexToValueByFindEqual(array, document)
 
-        hash[uri] = String(index)
+        hash[uri] = value
 
         return hash
       }
@@ -194,33 +194,29 @@ export function transformObject (document, schema, hash, parentUri, uri) {
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
-    const index = String(getIndexByEqual(array, document))
+    const value = transformIndexToValueByFindEqual(array, document)
 
-    hash[uri] = String(index)
+    hash[uri] = value
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
-      const index = String(getIndexByEqual(array, document))
+      const value = transformIndexToValueByFindEqual(array, document)
 
-      hash[uri] = String(index)
+      hash[uri] = value
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
-        const index = String(getIndexByEqual(array, document))
+        const value = transformIndexToValueByFindEqual(array, document)
 
-        hash[uri] = String(index)
+        hash[uri] = value
 
         return hash
       }
     }
-
-    /**
-     *  We don't look at `properties` here like we look at `items` in `transformArray`
-     */
   }
 
   /*
@@ -298,9 +294,9 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
        */
       if (hasEnum(schema)) {
         const array = getEnum(schema)
-        const index = getIndexByValue(array, document)
+        const value = transformIndexToValueByFindValue(array, document)
 
-        hash[uri] = String(index)
+        hash[uri] = value
 
         return hash
       } else {
@@ -309,9 +305,9 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
          */
         if (hasAnyOf(schema)) {
           const array = getAnyOf(schema)
-          const index = getIndexByValue(array, document)
+          const value = transformIndexToValueByFindValue(array, document)
 
-          hash[uri] = String(index)
+          hash[uri] = value
 
           return hash
         } else {
@@ -320,9 +316,9 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
            */
           if (hasOneOf(schema)) {
             const array = getOneOf(schema)
-            const index = getIndexByValue(array, document)
+            const value = transformIndexToValueByFindValue(array, document)
 
-            hash[uri] = String(index)
+            hash[uri] = value
 
             return hash
           }

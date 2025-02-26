@@ -15,7 +15,7 @@ import {
   hasOneOf,
   getOneOf,
   getUri,
-  getIndexByValue
+  transformIndexToValueByFindValue
 } from '#transmission/transmission/common'
 
 const log = debug('shinkansen-transmission/from-document-to-hash/null')
@@ -37,25 +37,25 @@ export default function transformNullSchema (document, schema = {}, hash = {}, p
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
-    const index = getIndexByValue(array, document)
+    const value = transformIndexToValueByFindValue(array, document)
 
-    hash[uri] = String(index)
+    hash[uri] = value
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
-      const index = getIndexByValue(array, document)
+      const value = transformIndexToValueByFindValue(array, document)
 
-      hash[uri] = String(index)
+      hash[uri] = value
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
-        const index = getIndexByValue(array, document)
+        const value = transformIndexToValueByFindValue(array, document)
 
-        hash[uri] = String(index)
+        hash[uri] = value
 
         return hash
       }

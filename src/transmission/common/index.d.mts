@@ -95,23 +95,14 @@ declare function getSchema (
 
 export { getSchema }
 
-export function transformValueIndexFor (array: MemberArrayType, value?: MemberType): string
-export function transformEqualIndexFor (array: MemberArrayType, value?: MemberType): string
+export function transformIndexToValueByFindValue (array: MemberArrayType, value?: MemberType): string
+export function transformIndexToValueByFindEqual (array: MemberArrayType, value?: MemberType): string
 
-export function getIndexByValue (array: MemberArrayType, value?: MemberType): number
-export function getIndexByEqual (array: MemberArrayType, value?: MemberType): number
+export function findIndexByValue (array: MemberArrayType, value?: MemberType): number
+export function findIndexByEqual (array: MemberArrayType, value?: MemberType): number
 
 export function hasValue (values?: ValuesType, uri?: string, schema?: SchemaType): boolean
 export function getValue (values?: ValuesType, uri?: string, schema?: SchemaType): string
-
-export function getValueForEnum (v: string | number, schema?: { enum?: MemberArrayType }): string
-export function getIndexForEnum (values?: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
-
-export function getValueForAnyOf (v: string | number, schema?: { anyOf?: MemberArrayType }): string
-export function getIndexForAnyOf (values?: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
-
-export function getValueForOneOf (v: string | number, schema?: { oneOf?: MemberArrayType }): string
-export function getIndexForOneOf (values: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
 
 export function getElementsProps (params?: ParamsType, uri?: string): StringElementsType | NumberElementsType | ArrayElementsType | ObjectElementsType | BooleanElementsType | NullElementsType | Record<string, never>
 

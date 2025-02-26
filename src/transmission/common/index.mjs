@@ -507,26 +507,17 @@ export function getSchema (schema = {}, parentUri = '', uri = '') {
  *  @param {MemberType} [value]
  *  @returns {string}
  */
-export function transformValueIndexFor (array, value) {
+export function transformIndexToValueByFindValue (array, value) {
   /*
-   *  log('transformEqualIndexFor')
+   *  log('transformIndexToValueByFindValue')
    */
 
-  const find = getFindByValue(value)
-
-  if (array.some(find)) {
-    const index = array.findIndex(find)
-
-    /*
-     *  Transform a number to a string
-     */
-    return String(index)
-  }
+  const index = findIndexByValue(array, value)
 
   /*
-   *  Takes the place of `toString(document)` in `transform()`
+   *  Transform a number to a string
    */
-  return toString(value)
+  return String(index)
 }
 
 /**
@@ -534,13 +525,15 @@ export function transformValueIndexFor (array, value) {
  *  @param {MemberType} [value]
  *  @returns {number}
  */
-export function getIndexByValue (array, value) {
+export function findIndexByValue (array, value) {
   /*
-   *  log('transformEqualIndexFor')
+   *  log('findIndexByValue')
    */
 
+  const find = getFindByValue(value)
+
   return (
-    array.findIndex(getFindByValue(value))
+    array.findIndex(find)
   )
 }
 
@@ -549,26 +542,17 @@ export function getIndexByValue (array, value) {
  *  @param {MemberType} [value]
  *  @returns {string}
  */
-export function transformEqualIndexFor (array, value) {
+export function transformIndexToValueByFindEqual (array, value) {
   /*
-   *  log('transformEqualIndexFor')
+   *  log('transformIndexToValueByFindEqual')
    */
 
-  const find = getFindByEqual(value)
-
-  if (array.some(find)) {
-    const index = array.findIndex(find)
-
-    /*
-     *  Transform a number to a string
-     */
-    return String(index)
-  }
+  const index = findIndexByEqual(array, value)
 
   /*
-   *  Takes the place of `toString(document)` in `transform()`
-   */
-  return toString(value)
+    *  Transform a number to a string
+    */
+  return String(index)
 }
 
 /**
@@ -576,13 +560,15 @@ export function transformEqualIndexFor (array, value) {
  *  @param {MemberType} [value]
  *  @returns {string}
  */
-export function getIndexByEqual (array, value) {
+export function findIndexByEqual (array, value) {
   /*
-   *  log('transformEqualIndexFor')
+   *  log('findIndexByEqual')
    */
 
+  const find = getFindByEqual(value)
+
   return (
-    array.findIndex(getFindByEqual(value))
+    array.findIndex(find)
   )
 }
 
@@ -632,113 +618,6 @@ export function getValue (values = {}, uri = '#', schema = {}) {
   }
 
   return ''
-}
-
-/**
- *  @deprecated
- *
- *  @param {string | number} v
- *  @param {{ enum?: MemberArrayType }} [schema]
- *  @returns {string}
- */
-export function getValueForEnum (v, { enum: items = [] } = {}) {
-  if (v in items) { // @ts-ignore // if (Reflect.has(items, v)) {
-    const enumValue = items[v] // Reflect.get(items, v)
-
-    return String(enumValue)
-  }
-
-  return ''
-}
-
-/**
- *  Use `index` `item` `arrayIndex`
- *
- *  @deprecated
- */
-export function getIndexForEnum (values = {}, parentUri = '#', uri = '#', schema = {}) {
-  if (/\/\d+$/.test(uri)) {
-    /*
-     *  Get the index
-     */
-    return Number(uri.slice(uri.lastIndexOf('/') + 1))
-  }
-
-  return NaN
-}
-
-/**
- *  @deprecated
- *
- *  @param {string | number} v
- *  @param {{ anyOf?: MemberArrayType }} [schema]
- *  @returns {string}
- */
-export function getValueForAnyOf (v, { anyOf: items = [] } = {}) {
-  if (v in items) { // @ts-ignore // if (Reflect.has(items, v)) {
-    const anyOf = items[v] // Reflect.get(items, v)
-
-    const anyOfValue = transformToValue(anyOf)
-
-    if (isPrimitive(anyOfValue)) {
-      return String(anyOfValue)
-    }
-  }
-
-  return ''
-}
-
-/**
- *  Use `index` `item` `arrayIndex`
- *
- *  @deprecated
- */
-export function getIndexForAnyOf (values = {}, parentUri = '#', uri = '#', schema = {}) {
-  if (/\/\d+$/.test(uri)) {
-    /*
-     *  Get the index
-     */
-    return Number(uri.slice(uri.lastIndexOf('/') + 1))
-  }
-
-  return NaN
-}
-
-/**
- *  @deprecated
- *
- *  @param {string | number} v
- *  @param {{ oneOf?: MemberArrayType }} [schema]
- *  @returns {string}
- */
-export function getValueForOneOf (v, { oneOf: items = [] } = {}) {
-  if (v in items) { // @ts-ignore // if (Reflect.has(items, v)) {
-    const oneOf = items[v] // Reflect.get(items, v)
-
-    const oneOfValue = transformToValue(oneOf)
-
-    if (isPrimitive(oneOfValue)) {
-      return String(oneOfValue)
-    }
-  }
-
-  return ''
-}
-
-/**
- *  Use `index` `item` `arrayIndex`
- *
- *  @deprecated
- */
-export function getIndexForOneOf (values = {}, parentUri = '#', uri = '#', schema = {}) {
-  if (/\/\d+$/.test(uri)) {
-    /*
-     *  Get the index
-     */
-    return Number(uri.slice(uri.lastIndexOf('/') + 1))
-  }
-
-  return NaN
 }
 
 /**
