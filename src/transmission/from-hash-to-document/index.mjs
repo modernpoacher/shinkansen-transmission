@@ -46,6 +46,18 @@ import {
   transformNull
 } from './null/index.mjs'
 
+export { default as transformStringSchema } from './string/index.mjs'
+export { default as transformNumberSchema } from './number/index.mjs'
+export { default as transformBooleanSchema } from './boolean/index.mjs'
+export { default as transformNullSchema } from './null/index.mjs'
+
+export {
+  transformString,
+  transformNumber,
+  transformBoolean,
+  transformNull
+}
+
 const log = debug('shinkansen-transmission/from-hash-to-document')
 
 log('`shinkansen` is awake')
@@ -113,7 +125,7 @@ function getReduceItemsObjectFor (hash, itemSchema, parentUri, uri) {
  *  @param {string} uri
  *  @returns {DocumentType}
  */
-export function transformItemsArrayFor (hash, itemSchemas = [], parentUri = '#', uri = getUri(parentUri)) {
+function transformItemsArrayFor (hash, itemSchemas = [], parentUri = '#', uri = getUri(parentUri)) {
   /*
    *  log('transformItemsArrayFor')
    */
@@ -141,7 +153,7 @@ export function transformItemsArrayFor (hash, itemSchemas = [], parentUri = '#',
  *  @param {string} uri
  *  @returns {DocumentType | undefined}
  */
-export function transformItemsObjectFor (hash, itemSchema = {}, parentUri = '#', uri = getUri(parentUri)) {
+function transformItemsObjectFor (hash, itemSchema = {}, parentUri = '#', uri = getUri(parentUri)) {
   /*
    *  log('transformItemsObjectFor')
    */

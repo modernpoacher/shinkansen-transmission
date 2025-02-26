@@ -8,29 +8,32 @@ export type ParamsType = TransmissionTypes.ParamsType
 export type DocumentType = TransmissionTypes.DocumentType
 export type HashType = TransmissionTypes.HashType
 
-export function toNull (v: unknown): null
-export function toBoolean (v: unknown): boolean
-export function toString (v: unknown): string
-export function toNumber (v: unknown): number
-
-export function transformValueFor (document: DocumentType, array?: ArrayLiteralType | ArrayType): DocumentType
-
-export function getArrayFor (hash: HashType, array?: ArrayLiteralType | ArrayType, uri?: string): ArrayLiteralType | ArrayType
-
 export function transformArrayFor (hash: HashType, schema: SchemaType, parentUri?: string, uri?: string): ArrayLiteralType | ArrayType
+export function transformArray (hash: HashType, schema: SchemaType, parentUri: string, uri: string): DocumentType | undefined
+export function transformArraySchema (hash?: HashType, schema?: SchemaType, params?: ParamsType): DocumentType | undefined
+
 export function transformObjectFor (hash: HashType, schema: SchemaType, parentUri?: string, uri?: string): ObjectLiteralType | ObjectType
+export function transformObject (hash: HashType, schema: SchemaType, parentUri: string, uri: string): DocumentType | undefined
+export function transformObjectSchema (hash?: HashType, schema?: SchemaType, params?: ParamsType): DocumentType | undefined
 
-export function transformItemsArrayFor (hash: HashType, items?: ArrayLiteralType | ArrayType, parentUri?: string, uri?: string): ArrayLiteralType | ArrayType | undefined
-export function transformItemsObjectFor (hash: HashType, items?: ObjectLiteralType | ObjectType, parentUri?: string, uri?: string): ArrayLiteralType | ArrayType | undefined
+export {
+  transformString,
+  default as transformStringSchema
+} from './string/index.mjs'
 
-export function transformNull (hash: HashType, schema: SchemaType, parentUri: string, uri: string): null | undefined
-export function transformBoolean (hash: HashType, schema: SchemaType, parentUri: string, uri: string): boolean | undefined
-export function transformObject (hash: HashType, schema: SchemaType, parentUri: string, uri: string): ObjectLiteralType | ObjectType
-export function transformArray (hash: HashType, schema: SchemaType, parentUri: string, uri: string): ArrayLiteralType | ArrayType
-export function transformNumber (hash: HashType, schema: SchemaType, parentUri: string, uri: string): number | undefined
-export function transformString (hash: HashType, schema: SchemaType, parentUri: string, uri: string): string | undefined
+export {
+  transformNumber,
+  default as transformNumberSchema
+} from './number/index.mjs'
 
-export function transformArraySchema (v?: HashType, schema?: SchemaType, params?: ParamsType): DocumentType | undefined
-export function transformObjectSchema (v?: HashType, schema?: SchemaType, params?: ParamsType): DocumentType | undefined
+export {
+  transformBoolean,
+  default as transformBooleanSchema
+} from './boolean/index.mjs'
 
-export default function transform (hash?: HashType, rootSchema?: SchemaType, parentUri?: string, uri?: string): DocumentType | undefined
+export {
+  transformNull,
+  default as transformNullSchema
+} from './null/index.mjs'
+
+export default function fromHashToDocument (hash?: HashType, rootSchema?: SchemaType, parentUri?: string, uri?: string): DocumentType | undefined

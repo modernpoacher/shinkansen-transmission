@@ -4,4 +4,7 @@ const log = debug('shinkansen-transmission/from-hash-to-document/object')
 
 log('`shinkansen` is awake')
 
-export { transformObjectSchema as default } from '#transmission/transmission/from-hash-to-document'
+export {
+  transformObject,
+  transformObjectSchema as default
+} from '#transmission/transmission/from-hash-to-document'
