@@ -49,7 +49,7 @@ log('`shinkansen` is awake')
  *  @returns {ZashikiStringMetaType}
  */
 export function renderStringMetaForEnum (params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringMetaForEnum')
    */
 
@@ -85,7 +85,7 @@ export function renderStringMetaForEnum (params, uri, minLength, maxLength, patt
  *  @returns {ZashikiStringMetaType}
  */
 export function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringMetaForAnyOf')
    */
 
@@ -121,7 +121,7 @@ export function renderStringMetaForAnyOf (params, uri, minLength, maxLength, pat
  *  @returns {ZashikiStringMetaType}
  */
 export function renderStringMetaForOneOf (params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringMetaForOneOf')
    */
 
@@ -159,7 +159,7 @@ export function renderStringMetaForOneOf (params, uri, minLength, maxLength, pat
  *  @returns {ZashikiStringMetaType}
  */
 export function getStringMetaForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('getStringMetaForAllOf)
    */
 
@@ -202,7 +202,7 @@ export function getStringMetaForAllOf (schema, values, params, uri, minLength, m
  *  @returns {ZashikiStringMetaType}
  */
 export function renderStringMetaForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringMetaForAllOf')
    */
 
@@ -242,7 +242,7 @@ export function renderStringMetaForAllOf (schema, values, params, uri, minLength
  *  @returns {ZashikiStringMetaType}
  */
 export function getStringMeta (schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('getStringMeta')
    */
 
@@ -285,7 +285,7 @@ export function getStringMeta (schema, values, params, uri, minLength, maxLength
  *  @returns {ZashikiStringMetaType}
  */
 export function renderStringMeta (schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringMeta')
    */
 
@@ -324,7 +324,7 @@ export function renderStringMeta (schema, values, params, uri, minLength, maxLen
  *  @returns {EnumType}
  */
 export function renderStringElementsFieldForEnum (field, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsFieldForEnum')
    */
 
@@ -354,7 +354,7 @@ export function renderStringElementsFieldForEnum (field, params, uri, minLength,
  *  @returns {AnyOfType}
  */
 export function renderStringElementsFieldForAnyOf (field, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsFieldForAnyOf')
    */
 
@@ -384,7 +384,7 @@ export function renderStringElementsFieldForAnyOf (field, params, uri, minLength
  *  @returns {OneOfType}
  */
 export function renderStringElementsFieldForOneOf (field, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsFieldForOneOf')
    */
 
@@ -416,7 +416,7 @@ export function renderStringElementsFieldForOneOf (field, params, uri, minLength
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getStringElementsFieldForAllOf (field, schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('getStringElementsFieldForAllOf')
    */
 
@@ -447,7 +447,7 @@ export function getStringElementsFieldForAllOf (field, schema, values, params, u
  *  @returns {FieldType}
  */
 export function renderStringElementsFieldForAllOf (field, schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsFieldForAllOf')
    */
 
@@ -493,7 +493,7 @@ export function renderStringElementsFieldForAllOf (field, schema, values, params
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('getStringElementsField')
    */
 
@@ -524,7 +524,7 @@ export function getStringElementsField (field, schema, values, params, uri, minL
  *  @returns {FieldType}
  */
 export function renderStringElementsField (field, schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsField')
    */
 
@@ -564,7 +564,7 @@ export function renderStringElementsField (field, schema, values, params, uri, m
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getStringElements (elements, schema) {
-  /**
+  /*
    *  log('getStringElements')
    */
 
@@ -587,7 +587,7 @@ export function getStringElements (elements, schema) {
  *  @returns {ZashikiStringElementsType}
  */
 export function renderStringElementsForEnum (schema, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsForEnum')
    */
 
@@ -621,7 +621,7 @@ export function renderStringElementsForEnum (schema, params, uri, minLength, max
  *  @returns {ZashikiStringElementsType}
  */
 export function renderStringElementsForAnyOf (schema, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsForAnyOf')
    */
 
@@ -655,7 +655,7 @@ export function renderStringElementsForAnyOf (schema, params, uri, minLength, ma
  *  @returns {ZashikiStringElementsType}
  */
 export function renderStringElementsForOneOf (schema, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsForOneOf')
    */
 
@@ -690,7 +690,7 @@ export function renderStringElementsForOneOf (schema, params, uri, minLength, ma
  *  @returns {ZashikiStringElementsType}
  */
 export function renderStringElementsForAllOf (schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElementsForAllOf')
    */
 
@@ -725,7 +725,7 @@ export function renderStringElementsForAllOf (schema, values, params, uri, minLe
  *  @returns {ZashikiStringElementsType}
  */
 export function renderStringElements (schema, values, params, uri, minLength, maxLength, pattern) {
-  /**
+  /*
    *  log('renderStringElements')
    */
 
@@ -758,7 +758,7 @@ export function renderStringElements (schema, values, params, uri, minLength, ma
  *  @returns {ZashikiStringType}
  */
 export function renderStringForEnum (schema, values, params) {
-  /**
+  /*
    *  log('renderStringForEnum')
    */
 
@@ -788,7 +788,7 @@ export function renderStringForEnum (schema, values, params) {
  *  @returns {ZashikiStringType}
  */
 export function renderStringForAnyOf (schema, values, params) {
-  /**
+  /*
    *  log('renderStringForAnyOf')
    */
 
@@ -818,7 +818,7 @@ export function renderStringForAnyOf (schema, values, params) {
  *  @returns {ZashikiStringType}
  */
 export function renderStringForOneOf (schema, values, params) {
-  /**
+  /*
    *  log('renderStringForOneOf')
    */
 
@@ -848,7 +848,7 @@ export function renderStringForOneOf (schema, values, params) {
  *  @returns {ZashikiStringType}
  */
 export function renderStringForAllOf (schema, values, params) {
-  /**
+  /*
    *  log('renderStringForAllOf')
    */
 
@@ -876,7 +876,7 @@ export function renderStringForAllOf (schema, values, params) {
  *  @returns {ZashikiStringType}
  */
 export function renderString (schema, values, params) {
-  /**
+  /*
    *  log('renderString')
    */
 

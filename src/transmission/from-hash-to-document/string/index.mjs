@@ -106,8 +106,6 @@ export function transformString (hash, schema, parentUri, uri) {
 }
 
 /**
- *  Hash can be `undefined`
- *
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
@@ -120,7 +118,9 @@ export default function transformStringSchema (hash = {}, schema = {}, params = 
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   if (type === 'string') {
     const {
       uri: parentUri = '#'

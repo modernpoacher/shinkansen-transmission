@@ -129,12 +129,12 @@ function toSchema (schemaProps, item) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformNullByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformNullByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map)
      */
     params.index = index
@@ -152,12 +152,12 @@ export function mapTransformNullByIndex (rootSchema, values, params) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformBooleanByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformBooleanByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map')
      */
     params.index = index
@@ -175,12 +175,12 @@ export function mapTransformBooleanByIndex (rootSchema, values, params) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformObjectByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformObjectByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map')
      */
     params.index = index
@@ -198,12 +198,12 @@ export function mapTransformObjectByIndex (rootSchema, values, params) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformArrayByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformArrayByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map')
      */
     params.index = index
@@ -221,12 +221,12 @@ export function mapTransformArrayByIndex (rootSchema, values, params) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformNumberByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformNumberByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map')
      */
     params.index = index
@@ -244,12 +244,12 @@ export function mapTransformNumberByIndex (rootSchema, values, params) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformStringByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformStringByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map')
      */
     params.index = index
@@ -267,12 +267,12 @@ export function mapTransformStringByIndex (rootSchema, values, params) {
  *  @returns {(schema: SchemaType, index: number) => ZashikiType}
  */
 export function mapTransformByIndex (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformByIndex')
    */
 
   return function map (schema, index) {
-    /**
+    /*
      *  log('map')
      */
     params.index = index
@@ -290,12 +290,12 @@ export function mapTransformByIndex (rootSchema, values, params) {
  *  @returns {(entries: [key: string, schema: SchemaType]) => ZashikiType}
  */
 export function mapTransformByKey (rootSchema, values, params) {
-  /**
+  /*
    *  log('mapTransformByKey')
    */
 
   return function map ([key, schema]) {
-    /**
+    /*
      *  log('map')
      */
     params.key = key
@@ -314,7 +314,7 @@ export function mapTransformByKey (rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function getTransformByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getTransformByKey')
    */
 
@@ -341,7 +341,7 @@ export function getTransformByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function getTransformByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('getTransformByIndex')
    */
 
@@ -444,7 +444,7 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformStringByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByKeyForEnum')
    */
 
@@ -474,7 +474,7 @@ export function transformStringByKeyForEnum (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformStringByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByKeyForAnyOf')
    */
 
@@ -509,7 +509,7 @@ export function transformStringByKeyForAnyOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformStringByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByKeyForOneOf')
    */
 
@@ -540,7 +540,7 @@ export function transformStringByKeyForOneOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformStringByKeyForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByKeyForAllOf')
    */
 
@@ -567,7 +567,7 @@ export function transformStringByKeyForAllOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformStringByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByIndexForEnum')
    */
 
@@ -597,7 +597,7 @@ export function transformStringByIndexForEnum (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformStringByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByIndexForAnyOf')
    */
 
@@ -628,7 +628,7 @@ export function transformStringByIndexForAnyOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformStringByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByIndexForOneOf')
    */
 
@@ -659,7 +659,7 @@ export function transformStringByIndexForOneOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformStringByIndexForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByIndexForAllOf')
    */
 
@@ -686,7 +686,7 @@ export function transformStringByIndexForAllOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformStringForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringForEnum')
    */
 
@@ -713,7 +713,7 @@ export function transformStringForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformStringForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringForAnyOf')
    */
 
@@ -741,7 +741,7 @@ export function transformStringForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformStringForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringForOneOf')
    */
 
@@ -769,7 +769,7 @@ export function transformStringForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformStringForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringForAllOf')
    */
 
@@ -796,7 +796,7 @@ export function transformStringForAllOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByKeyForEnum')
    */
 
@@ -826,7 +826,7 @@ export function transformNumberByKeyForEnum (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByKeyForAnyOf')
    */
 
@@ -857,7 +857,7 @@ export function transformNumberByKeyForAnyOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByKeyForOneOf')
    */
 
@@ -888,7 +888,7 @@ export function transformNumberByKeyForOneOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformNumberByKeyForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByKeyForAllOf')
    */
 
@@ -915,7 +915,7 @@ export function transformNumberByKeyForAllOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByIndexForEnum')
    */
 
@@ -945,7 +945,7 @@ export function transformNumberByIndexForEnum (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByIndexForAnyOf')
    */
 
@@ -976,7 +976,7 @@ export function transformNumberByIndexForAnyOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByIndexForOneOf')
    */
 
@@ -1007,7 +1007,7 @@ export function transformNumberByIndexForOneOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformNumberByIndexForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByIndexForAllOf')
    */
 
@@ -1034,7 +1034,7 @@ export function transformNumberByIndexForAllOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformNumberForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberForEnum')
    */
 
@@ -1061,7 +1061,7 @@ export function transformNumberForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumberForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberForAnyOf')
    */
 
@@ -1089,7 +1089,7 @@ export function transformNumberForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumberForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberForOneOf')
    */
 
@@ -1117,7 +1117,7 @@ export function transformNumberForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumberForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberForAllOf')
    */
 
@@ -1144,7 +1144,7 @@ export function transformNumberForAllOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByKeyForEnum')
    */
 
@@ -1174,7 +1174,7 @@ export function transformArrayByKeyForEnum (schema, rootSchema, values, params) 
  *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByKeyForAnyOf')
    */
 
@@ -1205,7 +1205,7 @@ export function transformArrayByKeyForAnyOf (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByKeyForOneOf')
    */
 
@@ -1236,7 +1236,7 @@ export function transformArrayByKeyForOneOf (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformArrayByKeyForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByKeyForAllOf')
    */
 
@@ -1263,7 +1263,7 @@ export function transformArrayByKeyForAllOf (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByIndexForEnum')
    */
 
@@ -1293,7 +1293,7 @@ export function transformArrayByIndexForEnum (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByIndexForAnyOf')
    */
 
@@ -1324,7 +1324,7 @@ export function transformArrayByIndexForAnyOf (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByIndexForOneOf')
    */
 
@@ -1355,7 +1355,7 @@ export function transformArrayByIndexForOneOf (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformArrayByIndexForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByIndexForAllOf')
    */
 
@@ -1382,7 +1382,7 @@ export function transformArrayByIndexForAllOf (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformArrayForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayForEnum')
    */
 
@@ -1409,7 +1409,7 @@ export function transformArrayForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArrayForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayForAnyOf')
    */
 
@@ -1437,7 +1437,7 @@ export function transformArrayForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArrayForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayForOneOf')
    */
 
@@ -1465,7 +1465,7 @@ export function transformArrayForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArrayForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayForAllOf')
    */
 
@@ -1520,7 +1520,7 @@ export function transformArrayForAllOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByKeyForEnum')
    */
 
@@ -1550,7 +1550,7 @@ export function transformObjectByKeyForEnum (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByKeyForAnyOf')
    */
 
@@ -1581,7 +1581,7 @@ export function transformObjectByKeyForAnyOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByKeyForOneOf')
    */
 
@@ -1612,7 +1612,7 @@ export function transformObjectByKeyForOneOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformObjectByKeyForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByKeyForAllOf')
    */
 
@@ -1639,7 +1639,7 @@ export function transformObjectByKeyForAllOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByIndexForEnum')
    */
 
@@ -1669,7 +1669,7 @@ export function transformObjectByIndexForEnum (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByIndexForAnyOf')
    */
 
@@ -1700,7 +1700,7 @@ export function transformObjectByIndexForAnyOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByIndexForOneOf')
    */
 
@@ -1731,7 +1731,7 @@ export function transformObjectByIndexForOneOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformObjectByIndexForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByIndexForAllOf')
    */
 
@@ -1758,7 +1758,7 @@ export function transformObjectByIndexForAllOf (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformObjectForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectForEnum')
    */
 
@@ -1785,7 +1785,7 @@ export function transformObjectForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObjectForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectForAnyOf')
    */
 
@@ -1813,7 +1813,7 @@ export function transformObjectForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObjectForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectForOneOf')
    */
 
@@ -1841,7 +1841,7 @@ export function transformObjectForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObjectForAllOf (schema, rootSchema, values, params) { // As-is
-  /**
+  /*
    *  log('transformObjectForAllOf')
    */
 
@@ -1883,7 +1883,7 @@ export function transformObjectForAllOf (schema, rootSchema, values, params) { /
  *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByKeyForEnum')
    */
 
@@ -1913,7 +1913,7 @@ export function transformBooleanByKeyForEnum (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByKeyForAnyOf')
    */
 
@@ -1944,7 +1944,7 @@ export function transformBooleanByKeyForAnyOf (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByKeyForOneOf')
    */
 
@@ -1975,7 +1975,7 @@ export function transformBooleanByKeyForOneOf (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformBooleanByKeyForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByKeyForAllOf')
    */
 
@@ -2002,7 +2002,7 @@ export function transformBooleanByKeyForAllOf (schema, rootSchema, values, param
  *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByIndexForEnum')
    */
 
@@ -2032,7 +2032,7 @@ export function transformBooleanByIndexForEnum (schema, rootSchema, values, para
  *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByIndexForAnyOf')
    */
 
@@ -2063,7 +2063,7 @@ export function transformBooleanByIndexForAnyOf (schema, rootSchema, values, par
  *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByIndexForOneOf')
    */
 
@@ -2094,7 +2094,7 @@ export function transformBooleanByIndexForOneOf (schema, rootSchema, values, par
  *  @returns {ZashikiType}
  */
 export function transformBooleanByIndexForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByIndexForAllOf')
    */
 
@@ -2121,7 +2121,7 @@ export function transformBooleanByIndexForAllOf (schema, rootSchema, values, par
  *  @returns {ZashikiType}
  */
 export function transformBooleanForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanForEnum')
    */
 
@@ -2148,7 +2148,7 @@ export function transformBooleanForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanForAnyOf')
    */
 
@@ -2176,7 +2176,7 @@ export function transformBooleanForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformBooleanForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanForOneOf')
    */
 
@@ -2204,7 +2204,7 @@ export function transformBooleanForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformBooleanForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanForAllOf')
    */
 
@@ -2231,7 +2231,7 @@ export function transformBooleanForAllOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByKeyForEnum')
    */
 
@@ -2261,7 +2261,7 @@ export function transformNullByKeyForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByKeyForAnyOf')
    */
 
@@ -2292,7 +2292,7 @@ export function transformNullByKeyForAnyOf (schema, rootSchema, values, params) 
  *  @returns {ZashikiType}
  */
 export function transformNullByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByKeyForOneOf')
    */
 
@@ -2323,7 +2323,7 @@ export function transformNullByKeyForOneOf (schema, rootSchema, values, params) 
  *  @returns {ZashikiType}
  */
 export function transformNullByKeyForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByKeyForAllOf')
    */
 
@@ -2350,7 +2350,7 @@ export function transformNullByKeyForAllOf (schema, rootSchema, values, params) 
  *  @returns {ZashikiType}
  */
 export function transformNullByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByIndexForEnum')
    */
 
@@ -2380,7 +2380,7 @@ export function transformNullByIndexForEnum (schema, rootSchema, values, params)
  *  @returns {ZashikiType}
  */
 export function transformNullByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByIndexForAnyOf')
    */
 
@@ -2411,7 +2411,7 @@ export function transformNullByIndexForAnyOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformNullByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByIndexForOneOf')
    */
 
@@ -2442,7 +2442,7 @@ export function transformNullByIndexForOneOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformNullByIndexForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByIndexForAllOf')
    */
 
@@ -2469,7 +2469,7 @@ export function transformNullByIndexForAllOf (schema, rootSchema, values, params
  *  @returns {ZashikiType}
  */
 export function transformNullForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullForEnum')
    */
 
@@ -2496,7 +2496,7 @@ export function transformNullForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullForAnyOf')
    */
 
@@ -2524,7 +2524,7 @@ export function transformNullForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullForOneOf')
    */
 
@@ -2552,7 +2552,7 @@ export function transformNullForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullForAllOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullForAllOf')
    */
 
@@ -2579,7 +2579,7 @@ export function transformNullForAllOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformStringByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByKey')
    */
 
@@ -2612,7 +2612,7 @@ export function transformStringByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformStringByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformStringByIndex')
    */
 
@@ -2645,7 +2645,7 @@ export function transformStringByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumberByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByKey')
    */
 
@@ -2678,7 +2678,7 @@ export function transformNumberByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumberByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumberByIndex')
    */
 
@@ -2711,7 +2711,7 @@ export function transformNumberByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArrayByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByKey')
    */
 
@@ -2774,7 +2774,7 @@ export function transformArrayByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArrayByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArrayByIndex')
    */
 
@@ -2837,7 +2837,7 @@ export function transformArrayByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObjectByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByKey')
    */
 
@@ -2886,7 +2886,7 @@ export function transformObjectByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObjectByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObjectByIndex')
    */
 
@@ -2935,7 +2935,7 @@ export function transformObjectByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformBooleanByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByKey')
    */
 
@@ -2968,7 +2968,7 @@ export function transformBooleanByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformBooleanByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBooleanByIndex')
    */
 
@@ -3001,7 +3001,7 @@ export function transformBooleanByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullByKey (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByKey')
    */
 
@@ -3034,7 +3034,7 @@ export function transformNullByKey (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNullByIndex (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNullByIndex')
    */
 
@@ -3067,7 +3067,7 @@ export function transformNullByIndex (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformString (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformString')
    */
 
@@ -3100,7 +3100,7 @@ export function transformString (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNumber (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNumber')
    */
 
@@ -3133,7 +3133,7 @@ export function transformNumber (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformArray (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformArray')
    */
 
@@ -3194,7 +3194,7 @@ export function transformArray (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformObject (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformObject')
    */
 
@@ -3242,7 +3242,7 @@ export function transformObject (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformBoolean (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformBoolean')
    */
 
@@ -3275,7 +3275,7 @@ export function transformBoolean (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformNull (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformNull')
    */
 
@@ -3306,7 +3306,7 @@ export function transformNull (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByKeyForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformByKeyForEnum')
    */
 
@@ -3314,7 +3314,9 @@ export function transformByKeyForEnum (schema, rootSchema, values, params) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByKeyForEnum(schema, rootSchema, values, getParamsByKeyForEnum(schema, rootSchema, values, params))
@@ -3346,7 +3348,7 @@ export function transformByKeyForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformByKeyForAnyOf')
    */
 
@@ -3354,7 +3356,9 @@ export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByKeyForAnyOf(schema, rootSchema, values, getParamsByKeyForAnyOf(schema, rootSchema, values, params))
@@ -3386,7 +3390,7 @@ export function transformByKeyForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByKeyForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformByKeyForOneOf')
    */
 
@@ -3394,7 +3398,9 @@ export function transformByKeyForOneOf (schema, rootSchema, values, params) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByKeyForOneOf(schema, rootSchema, values, getParamsByKeyForOneOf(schema, rootSchema, values, params))
@@ -3426,7 +3432,7 @@ export function transformByKeyForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByIndexForEnum (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformByIndexForEnum')
    */
 
@@ -3434,7 +3440,9 @@ export function transformByIndexForEnum (schema, rootSchema, values, params) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByIndexForEnum(schema, rootSchema, values, getParamsByIndexForEnum(schema, rootSchema, values, params))
@@ -3466,7 +3474,7 @@ export function transformByIndexForEnum (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformByIndexForAnyOf')
    */
 
@@ -3474,7 +3482,9 @@ export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByIndexForAnyOf(schema, rootSchema, values, getParamsByIndexForAnyOf(schema, rootSchema, values, params))
@@ -3506,7 +3516,7 @@ export function transformByIndexForAnyOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByIndexForOneOf (schema, rootSchema, values, params) {
-  /**
+  /*
    *  log('transformByIndexForOneOf')
    */
 
@@ -3514,7 +3524,9 @@ export function transformByIndexForOneOf (schema, rootSchema, values, params) {
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByIndexForOneOf(schema, rootSchema, values, getParamsByIndexForOneOf(schema, rootSchema, values, params))
@@ -3546,7 +3558,7 @@ export function transformByIndexForOneOf (schema, rootSchema, values, params) {
  *  @returns {ZashikiType}
  */
 export function transformByKey (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  /**
+  /*
    *  log('transformByKey')
    */
 
@@ -3554,7 +3566,9 @@ export function transformByKey (schema = {}, rootSchema = schema, values = {}, p
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByKey(schema, rootSchema, values, params)
@@ -3586,7 +3600,7 @@ export function transformByKey (schema = {}, rootSchema = schema, values = {}, p
  *  @returns {ZashikiType}
  */
 export function transformByIndex (schema = {}, rootSchema = schema, values = {}, params = {}) {
-  /**
+  /*
    *  log('transformByIndex')
    */
 
@@ -3594,7 +3608,9 @@ export function transformByIndex (schema = {}, rootSchema = schema, values = {},
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformStringByIndex(schema, rootSchema, values, params)
@@ -3632,7 +3648,9 @@ export default function toZashiki (schema = {}, rootSchema = {}, values = {}, pa
     type
   } = schema
 
-  // https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+  /**
+   *  @link https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.4.2.1
+   */
   switch (type) {
     case 'string':
       return transformString(schema, rootSchema, values, params)

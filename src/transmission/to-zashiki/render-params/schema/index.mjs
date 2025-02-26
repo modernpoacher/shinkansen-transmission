@@ -29,7 +29,7 @@ log('`shinkansen` is awake')
  *  @returns {ParamsType}
  */
 export function getRenderParamsByKeyForEnum (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByKeyForEnum')
    */
 
@@ -81,7 +81,7 @@ export function getRenderParamsByKeyForEnum (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByKeyForAnyOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByKeyForAnyOf')
    */
 
@@ -133,7 +133,7 @@ export function getRenderParamsByKeyForAnyOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByKeyForOneOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByKeyForOneOf')
    */
 
@@ -185,7 +185,7 @@ export function getRenderParamsByKeyForOneOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByKeyForAllOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByKeyForAllOf')
    */
 
@@ -227,7 +227,7 @@ export function getRenderParamsByKeyForAllOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByKey (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByKey')
    */
 
@@ -272,7 +272,7 @@ export function getRenderParamsByKey (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByIndexForEnum (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByIndexForEnum')
    */
 
@@ -322,7 +322,7 @@ export function getRenderParamsByIndexForEnum (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByIndexForAnyOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByIndexForAnyOf')
    */
 
@@ -372,7 +372,7 @@ export function getRenderParamsByIndexForAnyOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByIndexForOneOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByIndexForOneOf')
    */
 
@@ -422,7 +422,7 @@ export function getRenderParamsByIndexForOneOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByIndexForAllOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByIndexForAllOf')
    */
 
@@ -465,7 +465,7 @@ export function getRenderParamsByIndexForAllOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsByIndex (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsByIndex')
    */
 
@@ -508,7 +508,7 @@ export function getRenderParamsByIndex (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsForEnum (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsForEnum')
    */
 
@@ -551,7 +551,7 @@ export function getRenderParamsForEnum (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsForAnyOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsForAnyOf')
    */
 
@@ -594,7 +594,7 @@ export function getRenderParamsForAnyOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsForOneOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsForOneOf')
    */
 
@@ -637,7 +637,7 @@ export function getRenderParamsForOneOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParamsForAllOf (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParamsForAllOf')
    */
 
@@ -673,7 +673,7 @@ export function getRenderParamsForAllOf (schema, rootSchema, params) {
  *  @returns {ParamsType}
  */
 export function getRenderParams (schema, rootSchema, params) {
-  /**
+  /*
    *  log('getRenderParams')
    */
 

@@ -43,7 +43,7 @@ log('`shinkansen` is awake')
  *  @returns {ZashikiBooleanMetaType}
  */
 export function renderBooleanMetaForEnum (params, uri) {
-  /**
+  /*
    *  log('renderBooleanMetaForEnum')
    */
 
@@ -73,7 +73,7 @@ export function renderBooleanMetaForEnum (params, uri) {
  *  @returns {ZashikiBooleanMetaType}
  */
 export function renderBooleanMetaForAnyOf (params, uri) {
-  /**
+  /*
    *  log('renderBooleanMetaForAnyOf')
    */
 
@@ -103,7 +103,7 @@ export function renderBooleanMetaForAnyOf (params, uri) {
  *  @returns {ZashikiBooleanMetaType}
  */
 export function renderBooleanMetaForOneOf (params, uri) {
-  /**
+  /*
    *  log('renderBooleanMetaForOneOf')
    */
 
@@ -135,7 +135,7 @@ export function renderBooleanMetaForOneOf (params, uri) {
  *  @returns {ZashikiBooleanMetaType}
  */
 export function getBooleanMetaForAllOf (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanMetaForAllOf')
    */
 
@@ -172,7 +172,7 @@ export function getBooleanMetaForAllOf (schema, values, params, uri) {
  *  @returns {ZashikiBooleanMetaType}
  */
 export function renderBooleanMetaForAllOf (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanMetaForAllOf')
    */
 
@@ -209,7 +209,7 @@ export function renderBooleanMetaForAllOf (schema, values, params, uri) {
  *  @returns {ZashikiBooleanMetaType}
  */
 export function getBooleanMeta (schema, values, params, uri) {
-  /**
+  /*
    *  log('getBooleanMeta')
    */
 
@@ -246,7 +246,7 @@ export function getBooleanMeta (schema, values, params, uri) {
  *  @returns {ZashikiBooleanMetaType}
  */
 export function renderBooleanMeta (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanMeta')
    */
 
@@ -282,7 +282,7 @@ export function renderBooleanMeta (schema, values, params, uri) {
  *  @returns {EnumType}
  */
 export function renderBooleanElementsFieldForEnum (field, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsFieldForEnum')
    */
 
@@ -304,7 +304,7 @@ export function renderBooleanElementsFieldForEnum (field, params, uri) {
  *  @returns {AnyOfType}
  */
 export function renderBooleanElementsFieldForAnyOf (field, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsFieldForAnyOf')
    */
 
@@ -326,7 +326,7 @@ export function renderBooleanElementsFieldForAnyOf (field, params, uri) {
  *  @returns {OneOfType}
  */
 export function renderBooleanElementsFieldForOneOf (field, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsFieldForOneOf')
    */
 
@@ -350,7 +350,7 @@ export function renderBooleanElementsFieldForOneOf (field, params, uri) {
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('getBooleanElementsFieldForAllOf')
    */
 
@@ -375,7 +375,7 @@ export function getBooleanElementsFieldForAllOf (field, schema, values, params, 
  *  @returns {FieldType}
  */
 export function renderBooleanElementsFieldForAllOf (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsFieldForAllOf')
    */
 
@@ -418,7 +418,7 @@ export function renderBooleanElementsFieldForAllOf (field, schema, values, param
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getBooleanElementsField (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('getBooleanElementsField')
    */
 
@@ -443,7 +443,7 @@ export function getBooleanElementsField (field, schema, values, params, uri) {
  *  @returns {FieldType}
  */
 export function renderBooleanElementsField (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsField')
    */
 
@@ -483,7 +483,7 @@ export function renderBooleanElementsField (field, schema, values, params, uri) 
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getBooleanElements (elements, schema) {
-  /**
+  /*
    *  log('getBooleanElements')
    */
 
@@ -503,7 +503,7 @@ export function getBooleanElements (elements, schema) {
  *  @returns {ZashikiBooleanElementsType}
  */
 export function renderBooleanElementsForEnum (schema, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsForEnum')
    */
 
@@ -534,7 +534,7 @@ export function renderBooleanElementsForEnum (schema, params, uri) {
  *  @returns {ZashikiBooleanElementsType}
  */
 export function renderBooleanElementsForAnyOf (schema, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsForAnyOf')
    */
 
@@ -565,7 +565,7 @@ export function renderBooleanElementsForAnyOf (schema, params, uri) {
  *  @returns {ZashikiBooleanElementsType}
  */
 export function renderBooleanElementsForOneOf (schema, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsForOneOf')
    */
 
@@ -597,7 +597,7 @@ export function renderBooleanElementsForOneOf (schema, params, uri) {
  *  @returns {ZashikiBooleanElementsType}
  */
 export function renderBooleanElementsForAllOf (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElementsForAllOf')
    */
 
@@ -629,7 +629,7 @@ export function renderBooleanElementsForAllOf (schema, values, params, uri) {
  *  @returns {ZashikiBooleanElementsType}
  */
 export function renderBooleanElements (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderBooleanElements')
    */
 
@@ -662,7 +662,7 @@ export function renderBooleanElements (schema, values, params, uri) {
  *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForEnum (schema, values, params) {
-  /**
+  /*
    *  log('renderBooleanForEnum')
    */
 
@@ -688,7 +688,7 @@ export function renderBooleanForEnum (schema, values, params) {
  *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForAnyOf (schema, values, params) {
-  /**
+  /*
    *  log('renderBooleanForAnyOf')
    */
 
@@ -714,7 +714,7 @@ export function renderBooleanForAnyOf (schema, values, params) {
  *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForOneOf (schema, values, params) {
-  /**
+  /*
    *  log('renderBooleanForAnyOf')
    */
 
@@ -740,7 +740,7 @@ export function renderBooleanForOneOf (schema, values, params) {
  *  @returns {ZashikiBooleanType}
  */
 export function renderBooleanForAllOf (schema, values, params) {
-  /**
+  /*
    *  log('renderBooleanForAllOf')
    */
 
@@ -764,7 +764,7 @@ export function renderBooleanForAllOf (schema, values, params) {
  *  @returns {ZashikiBooleanType}
  */
 export function renderBoolean (schema, values, params) {
-  /**
+  /*
    *  log('renderBoolean')
    */
 

@@ -43,7 +43,7 @@ log('`shinkansen` is awake')
  *  @returns {ZashikiNullMetaType}
  */
 export function renderNullMetaForEnum (params, uri) {
-  /**
+  /*
    *  log('renderNullMetaForEnum')
    */
 
@@ -73,7 +73,7 @@ export function renderNullMetaForEnum (params, uri) {
  *  @returns {ZashikiNullMetaType}
  */
 export function renderNullMetaForAnyOf (params, uri) {
-  /**
+  /*
    *  log('renderNullMetaForAnyOf')
    */
 
@@ -103,7 +103,7 @@ export function renderNullMetaForAnyOf (params, uri) {
  *  @returns {ZashikiNullMetaType}
  */
 export function renderNullMetaForOneOf (params, uri) {
-  /**
+  /*
    *  log('renderNullMetaForOneOf')
    */
 
@@ -135,7 +135,7 @@ export function renderNullMetaForOneOf (params, uri) {
  *  @returns {ZashikiNullMetaType}
  */
 export function getNullMetaForAllOf (schema, values, params, uri) {
-  /**
+  /*
    *  log('getNullMetaForAllOf')
    */
 
@@ -172,7 +172,7 @@ export function getNullMetaForAllOf (schema, values, params, uri) {
  *  @returns {ZashikiNullMetaType}
  */
 export function renderNullMetaForAllOf (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderNullMetaForAllOf')
    */
 
@@ -210,7 +210,7 @@ export function renderNullMetaForAllOf (schema, values, params, uri) {
  *  @returns {ZashikiNullMetaType}
  */
 export function getNullMeta (schema, values, params, uri) {
-  /**
+  /*
    *  log('getNullMeta')
    */
 
@@ -248,7 +248,7 @@ export function getNullMeta (schema, values, params, uri) {
  *  @returns {ZashikiNullMetaType}
  */
 export function renderNullMeta (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderNullMeta')
    */
 
@@ -284,7 +284,7 @@ export function renderNullMeta (schema, values, params, uri) {
  *  @returns {EnumType}
  */
 export function renderNullElementsFieldForEnum (field, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsFieldForEnum')
    */
 
@@ -306,7 +306,7 @@ export function renderNullElementsFieldForEnum (field, params, uri) {
  *  @returns {AnyOfType}
  */
 export function renderNullElementsFieldForAnyOf (field, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsFieldForAnyOf')
    */
 
@@ -328,7 +328,7 @@ export function renderNullElementsFieldForAnyOf (field, params, uri) {
  *  @returns {OneOfType}
  */
 export function renderNullElementsFieldForOneOf (field, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsFieldForOneOf')
    */
 
@@ -352,7 +352,7 @@ export function renderNullElementsFieldForOneOf (field, params, uri) {
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getNullElementsFieldForAllOf (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('getNullElementsFieldForAllOf')
    */
 
@@ -377,7 +377,7 @@ export function getNullElementsFieldForAllOf (field, schema, values, params, uri
  *  @returns {FieldType}
  */
 export function renderNullElementsFieldForAllOf (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsFieldForAllOf')
    */
 
@@ -420,7 +420,7 @@ export function renderNullElementsFieldForAllOf (field, schema, values, params, 
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getNullElementsField (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('getNullElementsField')
    */
 
@@ -445,7 +445,7 @@ export function getNullElementsField (field, schema, values, params, uri) {
  *  @returns {FieldType}
  */
 export function renderNullElementsField (field, schema, values, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsField')
    */
 
@@ -485,7 +485,7 @@ export function renderNullElementsField (field, schema, values, params, uri) {
  *  @returns {ObjectLiteralType | ObjectType}
  */
 export function getNullElements (elements, schema) {
-  /**
+  /*
    *  log('getNullElements')
    */
 
@@ -505,7 +505,7 @@ export function getNullElements (elements, schema) {
  *  @returns {ZashikiNullElementsType}
  */
 export function renderNullElementsForEnum (schema, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsForEnum')
    */
 
@@ -536,7 +536,7 @@ export function renderNullElementsForEnum (schema, params, uri) {
  *  @returns {ZashikiNullElementsType}
  */
 export function renderNullElementsForOneOf (schema, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsForOneOf')
    */
 
@@ -567,7 +567,7 @@ export function renderNullElementsForOneOf (schema, params, uri) {
  *  @returns {ZashikiNullElementsType}
  */
 export function renderNullElementsForAnyOf (schema, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsForAnyOf')
    */
 
@@ -599,7 +599,7 @@ export function renderNullElementsForAnyOf (schema, params, uri) {
  *  @returns {ZashikiNullElementsType}
  */
 export function renderNullElementsForAllOf (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderNullElementsForAllOf')
    */
 
@@ -631,7 +631,7 @@ export function renderNullElementsForAllOf (schema, values, params, uri) {
  *  @returns {ZashikiNullElementsType}
  */
 export function renderNullElements (schema, values, params, uri) {
-  /**
+  /*
    *  log('renderNullElements')
    */
 
@@ -664,7 +664,7 @@ export function renderNullElements (schema, values, params, uri) {
  *  @returns {ZashikiNullType}
  */
 export function renderNullForEnum (schema, values, params) {
-  /**
+  /*
    *  log('renderNullForEnum')
    */
 
@@ -690,7 +690,7 @@ export function renderNullForEnum (schema, values, params) {
  *  @returns {ZashikiNullType}
  */
 export function renderNullForAnyOf (schema, values, params) {
-  /**
+  /*
    *  log('renderNullForAnyOf')
    */
 
@@ -716,7 +716,7 @@ export function renderNullForAnyOf (schema, values, params) {
  *  @returns {ZashikiNullType}
  */
 export function renderNullForOneOf (schema, values, params) {
-  /**
+  /*
    *  log('renderNullForOneOf')
    */
 
@@ -742,7 +742,7 @@ export function renderNullForOneOf (schema, values, params) {
  *  @returns {ZashikiNullType}
  */
 export function renderNullForAllOf (schema, values, params) {
-  /**
+  /*
    *  log('renderNullForAllOf')
    */
 
@@ -766,7 +766,7 @@ export function renderNullForAllOf (schema, values, params) {
  *  @returns {ZashikiNullType}
  */
 export function renderNull (schema, values, params) {
-  /**
+  /*
    *  log('renderNull')
    */
 
