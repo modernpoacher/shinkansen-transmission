@@ -1,4 +1,7 @@
 /**
+ *  @typedef {TransmissionTypes.MemberArrayType} MemberArrayType
+ *  @typedef {TransmissionTypes.MemberType} MemberType
+ *
  *  @typedef {TransmissionTypes.HashType} HashType
  *  @typedef {TransmissionTypes.SchemaType} SchemaType
  *  @typedef {TransmissionTypes.ParamsType} ParamsType
@@ -65,13 +68,13 @@ export function toNull (v) {
 }
 
 /**
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @returns {(document: DocumentType | undefined) => string | number | object | boolean | null | undefined}
+ *  @param {MemberArrayType} array
+ *  @returns {(document: DocumentType | undefined) => MemberType | undefined}
  */
 export function mapToValue (array) {
   /**
    *  @param {DocumentType | undefined} document
-   *  @returns {string | number | object | boolean | null | undefined}
+   *  @returns {MemberType | undefined}
    */
   return function toValue (document) {
     return (
@@ -84,8 +87,8 @@ export function mapToValue (array) {
 
 /**
  *  @param {DocumentType | undefined} document
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @returns {string | number | object | boolean | null}
+ *  @param {MemberArrayType} array
+ *  @returns {MemberType}
  */
 export function fromDocumentToArray (document, array) {
   /*
@@ -105,8 +108,8 @@ export function fromDocumentToArray (document, array) {
 /**
  *  @param {HashType} hash
  *  @param {string} uri
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @returns {string | number | object | boolean | null}
+ *  @param {MemberArrayType} array
+ *  @returns {MemberType}
  */
 export function fromHashToArray (hash, uri, array) {
   /*

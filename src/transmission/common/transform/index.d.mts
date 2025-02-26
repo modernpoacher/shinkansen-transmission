@@ -1,3 +1,6 @@
+type MemberArrayType = TransmissionTypes.MemberArrayType
+type MemberType = TransmissionTypes.MemberType
+
 type HashType = TransmissionTypes.HashType
 type SchemaType = TransmissionTypes.SchemaType
 type ParamsType = TransmissionTypes.ParamsType
@@ -11,8 +14,8 @@ export function toBoolean (v: unknown) : boolean
 
 export function toNull (v: unknown): null
 
-export function mapToValue (array: string[] | number[] | object[] | boolean[] | null[]): (document: DocumentType | undefined) => string | number | object | boolean | null | undefined
+export function mapToValue (array: MemberArrayType): (document: DocumentType | undefined) => MemberType | undefined
 
-export function fromDocumentToArray (document: DocumentType | undefined, array: string[] | number[] | object[] | boolean[] | null[]) : string | number | object | boolean | null
+export function fromDocumentToArray (document: DocumentType | undefined, array: MemberArrayType) : MemberType
 
-export function fromHashToArray (hash: HashType, uri: string, array: string[] | number[] | object[] | boolean[] | null[]): string | number | object | boolean | null
+export function fromHashToArray (hash: HashType, uri: string, array: MemberArrayType): MemberType

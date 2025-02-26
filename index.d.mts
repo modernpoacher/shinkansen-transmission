@@ -5,38 +5,38 @@ declare global {
     export type ArrayLiteralType = never[]
     export type ArrayType = unknown[]
 
-    export type ItemsType = string[] | number[] | object[] | boolean[] | null[]
-
-    export type SelectedItemsType = Array<string | number | boolean | null>
+    export type MemberArrayType = string[] | number[] | object[] | boolean[] | null[]
+    export type MemberType = string | number | object | boolean | null
+    export type SelectedMemberArrayType = MemberType[]
 
     export interface EnumType {
       id: string
       name?: string
-      items?: ItemsType
-      selectedItems?: SelectedItemsType
+      items?: MemberArrayType
+      selectedItems?: SelectedMemberArrayType
     }
 
     export interface AnyOfType {
       id: string
       name?: string
-      items?: ItemsType
-      selectedItems?: SelectedItemsType
+      items?: MemberArrayType
+      selectedItems?: SelectedMemberArrayType
     }
 
     export interface OneOfType {
       id: string
       name?: string
-      items?: ItemsType
-      selectedItems?: SelectedItemsType
+      items?: MemberArrayType
+      selectedItems?: SelectedMemberArrayType
     }
 
     export interface FieldType {
       id: string
       name?: string
-      items?: ItemsType
-      selectedItems?: SelectedItemsType
-      value?: string | number | boolean | null | object | ItemsType
-      defaultValue?: string | number | boolean | null | object | ItemsType
+      items?: MemberArrayType
+      selectedItems?: SelectedMemberArrayType
+      value?: MemberType | MemberArrayType
+      defaultValue?: MemberType | MemberArrayType
     }
 
     export interface SchemaType {
@@ -48,12 +48,12 @@ declare global {
       required?: string[]
       readOnly?: boolean
       writeOnly?: boolean
-      const?: string | number | object | boolean | null
-      default?: string | number | object | boolean | null
-      enum?: ItemsType
-      anyOf?: ItemsType
-      oneOf?: ItemsType
-      allOf?: ItemsType
+      const?: MemberType
+      default?: MemberType
+      enum?: MemberArrayType
+      anyOf?: MemberArrayType
+      oneOf?: MemberArrayType
+      allOf?: MemberArrayType
       minimum?: number
       maximum?: number
       minLength?: number
@@ -111,8 +111,8 @@ declare global {
       defaultValue?: string
       item?: number
       name?: string
-      selectedItems?: SelectedItemsType
-      items?: ItemsType
+      selectedItems?: SelectedMemberArrayType
+      items?: MemberArrayType
       isRequired?: boolean
       component?: string
     }
@@ -319,7 +319,7 @@ declare global {
     /**
      *  A JSON Schema document
      */
-    export type DocumentType = string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]
+    export type DocumentType = MemberType | MemberArrayType
 
     /**
      *  String keys with string or string array values

@@ -4,7 +4,7 @@
  *  @typedef {TransmissionTypes.ArrayLiteralType} ArrayLiteralType
  *  @typedef {TransmissionTypes.ArrayType} ArrayType
  *
- *  @typedef {TransmissionTypes.ItemsType} ItemsType
+ *  @typedef {TransmissionTypes.MemberArrayType} MemberArrayType
  *
  *  @typedef {TransmissionTypes.DocumentType} DocumentType
  *  @typedef {TransmissionTypes.SchemaType} SchemaType

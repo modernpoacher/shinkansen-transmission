@@ -2,7 +2,7 @@
  *  @typedef {TransmissionTypes.ObjectType} ObjectType
  *  @typedef {TransmissionTypes.ArrayType} ArrayType
  *
- *  @typedef {TransmissionTypes.ItemsType} ItemsType
+ *  @typedef {TransmissionTypes.MemberArrayType} MemberArrayType
  *
  *  @typedef {TransmissionTypes.HashType} HashType
  *  @typedef {TransmissionTypes.SchemaType} SchemaType

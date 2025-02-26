@@ -1,7 +1,8 @@
 export type ObjectLiteralType = TransmissionTypes.ObjectLiteralType
 export type ObjectType = TransmissionTypes.ObjectType
 
-export type ItemsType = TransmissionTypes.ItemsType
+export type MemberArrayType = TransmissionTypes.MemberArrayType
+export type MemberType = TransmissionTypes.MemberType
 
 export type StringMetaType = TransmissionTypes.Transmission.StringMetaType
 export type NumberMetaType = TransmissionTypes.Transmission.NumberMetaType
@@ -34,8 +35,8 @@ export type NullSchemaType = TransmissionTypes.NullSchemaType
 export type ValuesType = TransmissionTypes.ValuesType
 export type ParamsType = TransmissionTypes.ParamsType
 
-export function isObject (v?: unknown): v is (Record<PropertyKey, string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]> | Record<PropertyKey, never>)
-export function isArray (v?: unknown): v is (string[] | number[] | object[] | boolean[] | null[])
+export function isObject (v?: unknown): v is (Record<PropertyKey, MemberType | MemberArrayType> | Record<PropertyKey, never>)
+export function isArray (v?: unknown): v is (MemberArrayType)
 export function isPrimitive (v?: unknown): v is string | number | boolean | null
 
 export function isSchema (v?: SchemaType | object): v is SchemaType
@@ -61,14 +62,14 @@ export function getMetaDefaultValue (schema?: SchemaType): { defaultValue: strin
 export function hasMetaValue (values?: ValuesType, uri?: string, schema?: SchemaType): boolean
 export function getMetaValue (values?: ValuesType, uri?: string, schema?: SchemaType): { value: string } | ObjectLiteralType
 
-export function transformToValue (schema?: string | number | object | boolean | null): string | number | object | boolean | null | undefined
+export function transformToValue (schema?: MemberType): MemberType | undefined
 
 export function getFindByKey (parentUri: string, uri: string): (key: string | number) => boolean
 export function getFindByIndex (parentUri: string, uri: string): (item: SchemaType, index: number) => boolean
-export function getFindByValue (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
-export function getFindByEqual (value?: string | number | object | boolean | null): (item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean
+export function getFindByValue (value?: MemberType): (item?: MemberType | MemberArrayType) => boolean
+export function getFindByEqual (value?: MemberType): (item?: MemberType | MemberArrayType) => boolean
 
-export function toString (value?: string | number | object | boolean | null): string
+export function toString (value?: MemberType): string
 
 export function getArray (schema?: { items?: SchemaType | SchemaType[] }, parentUri?: string, uri?: string): SchemaType | undefined
 export function getObject (schema?: { properties?: Record<string, SchemaType> }, parentUri?: string, uri?: string): SchemaType | undefined
@@ -94,22 +95,22 @@ declare function getSchema (
 
 export { getSchema }
 
-export function transformValueIndexFor (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): string
-export function transformEqualIndexFor (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): string
+export function transformValueIndexFor (array: MemberArrayType, value?: MemberType): string
+export function transformEqualIndexFor (array: MemberArrayType, value?: MemberType): string
 
-export function getIndexByValue (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): number
-export function getIndexByEqual (array: string[] | number[] | object[] | boolean[] | null[], value?: string | number | object | boolean | null): number
+export function getIndexByValue (array: MemberArrayType, value?: MemberType): number
+export function getIndexByEqual (array: MemberArrayType, value?: MemberType): number
 
 export function hasValue (values?: ValuesType, uri?: string, schema?: SchemaType): boolean
 export function getValue (values?: ValuesType, uri?: string, schema?: SchemaType): string
 
-export function getValueForEnum (v: string | number, schema?: { enum?: ItemsType }): string
+export function getValueForEnum (v: string | number, schema?: { enum?: MemberArrayType }): string
 export function getIndexForEnum (values?: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
 
-export function getValueForAnyOf (v: string | number, schema?: { anyOf?: ItemsType }): string
+export function getValueForAnyOf (v: string | number, schema?: { anyOf?: MemberArrayType }): string
 export function getIndexForAnyOf (values?: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
 
-export function getValueForOneOf (v: string | number, schema?: { oneOf?: ItemsType }): string
+export function getValueForOneOf (v: string | number, schema?: { oneOf?: MemberArrayType }): string
 export function getIndexForOneOf (values: ValuesType, parentUri?: string, uri?: string, schema?: SchemaType): number
 
 export function getElementsProps (params?: ParamsType, uri?: string): StringElementsType | NumberElementsType | ArrayElementsType | ObjectElementsType | BooleanElementsType | NullElementsType | Record<string, never>
@@ -121,45 +122,45 @@ export function getElementsFieldPropsForAllOf (params?: ParamsType, uri?: string
 export function getElementsFieldProps (params?: ParamsType, uri?: string): FieldType | ObjectLiteralType
 export function getElementsFieldValue (values?: ValuesType, uri?: string, schema?: SchemaType): { value: string } | ObjectLiteralType
 
-export function hasEnum (schema?: { enum?: ItemsType }): schema is { enum: ItemsType }
+export function hasEnum (schema?: { enum?: MemberArrayType }): schema is { enum: MemberArrayType }
 
-declare function getEnum (schema: { enum: ItemsType }): ItemsType
-declare function getEnum (schema?: { enum?: ItemsType }): ItemsType | undefined
+declare function getEnum (schema: { enum: MemberArrayType }): MemberArrayType
+declare function getEnum (schema?: { enum?: MemberArrayType }): MemberArrayType | undefined
 
 export { getEnum }
 
-export function hasConst (schema?: { const?: string | number | object | boolean | null }): schema is { const: string | number | object | boolean | null }
+export function hasConst (schema?: { const?: MemberType }): schema is { const: MemberType }
 
-declare function getConst (schema: { const: string | number | object | boolean | null }): string | number | object | boolean | null
-declare function getConst (schema?: { const?: string | number | object | boolean | null }): string | number | object | boolean | null | undefined
+declare function getConst (schema: { const: MemberType }): MemberType
+declare function getConst (schema?: { const?: MemberType }): MemberType | undefined
 
 export { getConst }
 
-export function hasDefault (schema?: { default?: string | number | object | boolean | null }): schema is { default: string | number | object | boolean | null }
+export function hasDefault (schema?: { default?: MemberType }): schema is { default: MemberType }
 
-declare function getDefault (schema: { default: string | number | object | boolean | null }): string | number | object | boolean | null
-declare function getDefault (schema?: { default?: string | number | object | boolean | null }): string | number | object | boolean | null | undefined
+declare function getDefault (schema: { default: MemberType }): MemberType
+declare function getDefault (schema?: { default?: MemberType }): MemberType | undefined
 
 export { getDefault }
 
-export function hasAnyOf (schema?: { anyOf?: ItemsType }): schema is { anyOf: ItemsType }
+export function hasAnyOf (schema?: { anyOf?: MemberArrayType }): schema is { anyOf: MemberArrayType }
 
-declare function getAnyOf (schema: { anyOf: ItemsType }): ItemsType
-declare function getAnyOf (schema?: { anyOf?: ItemsType }): ItemsType | undefined
+declare function getAnyOf (schema: { anyOf: MemberArrayType }): MemberArrayType
+declare function getAnyOf (schema?: { anyOf?: MemberArrayType }): MemberArrayType | undefined
 
 export { getAnyOf }
 
-export function hasOneOf (schema?: { oneOf?: ItemsType }): schema is { oneOf: ItemsType }
+export function hasOneOf (schema?: { oneOf?: MemberArrayType }): schema is { oneOf: MemberArrayType }
 
-declare function getOneOf (schema: { oneOf: ItemsType }): ItemsType
-declare function getOneOf (schema?: { oneOf?: ItemsType }): ItemsType | undefined
+declare function getOneOf (schema: { oneOf: MemberArrayType }): MemberArrayType
+declare function getOneOf (schema?: { oneOf?: MemberArrayType }): MemberArrayType | undefined
 
 export { getOneOf }
 
-export function hasAllOf (schema?: { allOf?: ItemsType }): schema is { allOf: ItemsType }
+export function hasAllOf (schema?: { allOf?: MemberArrayType }): schema is { allOf: MemberArrayType }
 
-declare function getAllOf (schema: { allOf: ItemsType }): ItemsType
-declare function getAllOf (schema?: { allOf?: ItemsType }): ItemsType | undefined
+declare function getAllOf (schema: { allOf: MemberArrayType }): MemberArrayType
+declare function getAllOf (schema?: { allOf?: MemberArrayType }): MemberArrayType | undefined
 
 export { getAllOf }
 

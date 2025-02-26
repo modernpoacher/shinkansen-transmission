@@ -2,7 +2,8 @@
  *  @typedef {TransmissionTypes.ObjectLiteralType} ObjectLiteralType
  *  @typedef {TransmissionTypes.ObjectType} ObjectType
  *
- *  @typedef {TransmissionTypes.ItemsType} ItemsType
+ *  @typedef {TransmissionTypes.MemberArrayType} MemberArrayType
+ *  @typedef {TransmissionTypes.MemberType} MemberType
  *
  *  @typedef {TransmissionTypes.Transmission.StringMetaType} TransmissionStringMetaType
  *  @typedef {TransmissionTypes.Transmission.NumberMetaType} TransmissionNumberMetaType
@@ -46,13 +47,13 @@ log('`shinkansen` is awake')
 
 /**
  *  @param {unknown} [v]
- *  @returns {v is (Record<PropertyKey, string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]> | Record<PropertyKey, never>)}
+ *  @returns {v is (Record<PropertyKey, MemberType | MemberArrayType> | Record<PropertyKey, never>)}
  */
 export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
 
 /**
  *  @param {unknown} [v]
- *  @returns {v is (string[] | number[] | object[] | boolean[] | null[])} //  | SchemaType)[]}
+ *  @returns {v is (MemberArrayType)} //  | SchemaType)[]}
  */
 export const isArray = (v) => Array.isArray(v)
 
@@ -304,8 +305,8 @@ export function getMetaValue (values = {}, uri = '#', schema = {}) {
 }
 
 /**
- *  @param {string | number | object | boolean | null} [item]
- *  @returns {string | number | object | boolean | null | undefined}
+ *  @param {MemberType} [item]
+ *  @returns {MemberType | undefined}
  */
 export function transformToValue (item) {
   if (item === undefined) return item
@@ -366,8 +367,8 @@ export function getFindByIndex (parentUri, uri) {
 }
 
 /**
- *  @param {string | number | object | boolean | null} [value]
- *  @returns {(item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean}
+ *  @param {MemberType} [value]
+ *  @returns {(item?: MemberType | MemberArrayType) => boolean}
  */
 export function getFindByValue (value) {
   /*
@@ -384,8 +385,8 @@ export function getFindByValue (value) {
 }
 
 /**
- *  @param {string | number | object | boolean | null} [value]
- *  @returns {(item?: string | number | object | boolean | null | string[] | number[] | object[] | boolean[] | null[]) => boolean}
+ *  @param {MemberType} [value]
+ *  @returns {(item?: MemberType | MemberArrayType) => boolean}
  */
 export function getFindByEqual (value) {
   /*
@@ -400,7 +401,7 @@ export function getFindByEqual (value) {
 }
 
 /**
- *  @param {string | number | object | boolean | null} [value]
+ *  @param {MemberType} [value]
  *  @returns {string}
  */
 export function toString (value) {
@@ -502,8 +503,8 @@ export function getSchema (schema = {}, parentUri = '', uri = '') {
 }
 
 /**
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @param {string | number | object | boolean | null} [value]
+ *  @param {MemberArrayType} array
+ *  @param {MemberType} [value]
  *  @returns {string}
  */
 export function transformValueIndexFor (array, value) {
@@ -529,8 +530,8 @@ export function transformValueIndexFor (array, value) {
 }
 
 /**
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @param {string | number | object | boolean | null} [value]
+ *  @param {MemberArrayType} array
+ *  @param {MemberType} [value]
  *  @returns {number}
  */
 export function getIndexByValue (array, value) {
@@ -544,8 +545,8 @@ export function getIndexByValue (array, value) {
 }
 
 /**
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @param {string | number | object | boolean | null} [value]
+ *  @param {MemberArrayType} array
+ *  @param {MemberType} [value]
  *  @returns {string}
  */
 export function transformEqualIndexFor (array, value) {
@@ -571,8 +572,8 @@ export function transformEqualIndexFor (array, value) {
 }
 
 /**
- *  @param {string[] | number[] | object[] | boolean[] | null[]} array
- *  @param {string | number | object | boolean | null} [value]
+ *  @param {MemberArrayType} array
+ *  @param {MemberType} [value]
  *  @returns {string}
  */
 export function getIndexByEqual (array, value) {
@@ -637,7 +638,7 @@ export function getValue (values = {}, uri = '#', schema = {}) {
  *  @deprecated
  *
  *  @param {string | number} v
- *  @param {{ enum?: ItemsType }} [schema]
+ *  @param {{ enum?: MemberArrayType }} [schema]
  *  @returns {string}
  */
 export function getValueForEnum (v, { enum: items = [] } = {}) {
@@ -670,7 +671,7 @@ export function getIndexForEnum (values = {}, parentUri = '#', uri = '#', schema
  *  @deprecated
  *
  *  @param {string | number} v
- *  @param {{ anyOf?: ItemsType }} [schema]
+ *  @param {{ anyOf?: MemberArrayType }} [schema]
  *  @returns {string}
  */
 export function getValueForAnyOf (v, { anyOf: items = [] } = {}) {
@@ -707,7 +708,7 @@ export function getIndexForAnyOf (values = {}, parentUri = '#', uri = '#', schem
  *  @deprecated
  *
  *  @param {string | number} v
- *  @param {{ oneOf?: ItemsType }} [schema]
+ *  @param {{ oneOf?: MemberArrayType }} [schema]
  *  @returns {string}
  */
 export function getValueForOneOf (v, { oneOf: items = [] } = {}) {
@@ -902,98 +903,98 @@ export function getElementsFieldValue (values = {}, uri = '#', schema = {}) {
 }
 
 /**
- *  @param {{ 'enum'?: ItemsType }} [schema]
- *  @returns {schema is { 'enum': ItemsType }}
+ *  @param {{ 'enum'?: MemberArrayType }} [schema]
+ *  @returns {schema is { 'enum': MemberArrayType }}
  */
 export const hasEnum = (schema = {}) => 'enum' in schema // Reflect.has(schema, 'enum')
 
 /**
  *  @overload
- *  @param {{ 'enum': ItemsType }} schema
- *  @returns {ItemsType}
+ *  @param {{ 'enum': MemberArrayType }} schema
+ *  @returns {MemberArrayType}
  *
- *  @param {{ 'enum'?: ItemsType }} [schema]
- *  @returns {ItemsType | undefined}
+ *  @param {{ 'enum'?: MemberArrayType }} [schema]
+ *  @returns {MemberArrayType | undefined}
  */
 export const getEnum = (schema = {}) => schema.enum // Reflect.get(schema, 'enum')
 
 /**
- *  @param {{ 'const'?: string | number | object | boolean | null }} [schema]
- *  @returns {schema is { 'const': string | number | object | boolean | null }}
+ *  @param {{ 'const'?: MemberType }} [schema]
+ *  @returns {schema is { 'const': MemberType }}
  */
 export const hasConst = (schema = {}) => 'const' in schema // Reflect.has(schema, 'const')
 
 /**
  *  @overload
- *  @param {{ 'const': string | number | object | boolean | null }} schema
- *  @returns {string | number | object | boolean | null}
+ *  @param {{ 'const': MemberType }} schema
+ *  @returns {MemberType}
  *
- *  @param {{ 'const'?: string | number | object | boolean | null }} [schema]
- *  @returns {string | number | object | boolean | null | undefined}
+ *  @param {{ 'const'?: MemberType }} [schema]
+ *  @returns {MemberType | undefined}
  */
 export const getConst = (schema = {}) => schema.const // Reflect.get(schema, 'const')
 
 /**
- *  @param {{ 'default'?: string | number | object | boolean | null }} [schema]
- *  @returns {schema is { 'default': string | number | object | boolean | null }}
+ *  @param {{ 'default'?: MemberType }} [schema]
+ *  @returns {schema is { 'default': MemberType }}
  */
 export const hasDefault = (schema = {}) => 'default' in schema // Reflect.has(schema, 'default')
 
 /**
  *  @overload
- *  @param {{ 'default': string | number | object | boolean | null }} schema
- *  @returns {string | number | object | boolean | null}
+ *  @param {{ 'default': MemberType }} schema
+ *  @returns {MemberType}
  *
- *  @param {{ 'default'?: string | number | object | boolean | null }} [schema]
- *  @returns {string | number | object | boolean | null | undefined}
+ *  @param {{ 'default'?: MemberType }} [schema]
+ *  @returns {MemberType | undefined}
  */
 export const getDefault = (schema = {}) => schema.default // Reflect.get(schema, 'default')
 
 /**
- *  @param {{ 'anyOf'?: ItemsType }} [schema]
- *  @returns {schema is { 'anyOf': ItemsType }}
+ *  @param {{ 'anyOf'?: MemberArrayType }} [schema]
+ *  @returns {schema is { 'anyOf': MemberArrayType }}
  */
 export const hasAnyOf = (schema = {}) => 'anyOf' in schema // Reflect.has(schema, 'anyOf')
 
 /**
  *  @overload
- *  @param {{ 'anyOf': ItemsType }} schema
- *  @returns {ItemsType}
+ *  @param {{ 'anyOf': MemberArrayType }} schema
+ *  @returns {MemberArrayType}
  *
- *  @param {{ 'anyOf'?: ItemsType }} [schema]
- *  @returns {ItemsType | undefined}
+ *  @param {{ 'anyOf'?: MemberArrayType }} [schema]
+ *  @returns {MemberArrayType | undefined}
  */
 export const getAnyOf = (schema = {}) => schema.anyOf // Reflect.get(schema, 'anyOf')
 
 /**
- *  @param {{ 'oneOf'?: ItemsType }} [schema]
- *  @returns {schema is { 'oneOf': ItemsType }}
+ *  @param {{ 'oneOf'?: MemberArrayType }} [schema]
+ *  @returns {schema is { 'oneOf': MemberArrayType }}
  */
 export const hasOneOf = (schema = {}) => 'oneOf' in schema // Reflect.has(schema, 'oneOf')
 
 /**
  *  @overload
- *  @param {{ 'oneOf': ItemsType }} schema
- *  @returns {ItemsType}
+ *  @param {{ 'oneOf': MemberArrayType }} schema
+ *  @returns {MemberArrayType}
  *
- *  @param {{ 'oneOf'?: ItemsType }} schema
- *  @returns {ItemsType | undefined}
+ *  @param {{ 'oneOf'?: MemberArrayType }} schema
+ *  @returns {MemberArrayType | undefined}
  */
 export const getOneOf = (schema = {}) => schema.oneOf // Reflect.get(schema, 'oneOf')
 
 /**
- *  @param {{ 'allOf'?: ItemsType }} [schema]
- *  @returns {schema is { 'allOf': ItemsType }}
+ *  @param {{ 'allOf'?: MemberArrayType }} [schema]
+ *  @returns {schema is { 'allOf': MemberArrayType }}
  */
 export const hasAllOf = (schema = {}) => 'allOf' in schema // Reflect.has(schema, 'allOf')
 
 /**
  *  @overload
- *  @param {{ 'allOf': ItemsType }} schema
- *  @returns {ItemsType}
+ *  @param {{ 'allOf': MemberArrayType }} schema
+ *  @returns {MemberArrayType}
  *
- *  @param {{ 'allOf'?: ItemsType }} [schema]
- *  @returns {ItemsType | undefined}
+ *  @param {{ 'allOf'?: MemberArrayType }} [schema]
+ *  @returns {MemberArrayType | undefined}
  */
 export const getAllOf = (schema = {}) => schema.allOf // Reflect.get(schema, 'allOf')
 
