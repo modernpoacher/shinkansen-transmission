@@ -117,22 +117,25 @@ export function transformArray (document, schema, hash, parentUri, uri) {
 
   if (hasEnum(schema)) {
     const array = getEnum(schema)
+    const index = String(getIndexByEqual(array, document))
 
-    hash[uri] = document.map((value) => String(getIndexByValue(array, value)))
+    hash[uri] = String(index)
 
     return hash
   } else {
     if (hasAnyOf(schema)) {
       const array = getAnyOf(schema)
+      const index = String(getIndexByEqual(array, document))
 
-      hash[uri] = document.map((value) => String(getIndexByValue(array, value)))
+      hash[uri] = String(index)
 
       return hash
     } else {
       if (hasOneOf(schema)) {
         const array = getOneOf(schema)
+        const index = String(getIndexByEqual(array, document))
 
-        hash[uri] = document.map((value) => String(getIndexByValue(array, value)))
+        hash[uri] = String(index)
 
         return hash
       }
@@ -251,7 +254,7 @@ export default function transform (document, schema = {}, hash = {}, parentUri =
           return hash
         } else {
           /**
-           *  Is the schema an `oneOf`?
+           *  Is the schema a `oneOf`?
            */
           if (hasOneOf(schema)) {
             const array = getOneOf(schema)

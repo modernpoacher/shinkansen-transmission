@@ -90,6 +90,57 @@ function handleError ({ message = 'No error message defined' }) { log(message) }
 export { transformToValue }
 
 /**
+ *  @param {DocumentType} document
+ *  @param {ItemsType} array
+ *  @returns {DocumentType | undefined}
+ */
+export function fromDocumentToValue (document, array) {
+  /*
+   *  log('fromDocumentToValue')
+   */
+
+  const i = Number(document)
+  if (!isNaN(i)) {
+    if (i in array) { // @ts-ignore
+      const v = array[i]
+
+      /*
+       *  Return the document according to the schema `v` or, if `v` is a primitive, return that
+       */
+      return transformToValue(v)
+    }
+  }
+
+  throw new Error('Invalid `document`')
+}
+
+/**
+ *  @param {HashType} hash
+ *  @param {string} uri
+ *  @param {ItemsType} array
+ *  @returns {string | number | object | boolean | null}
+ */
+export function fromHashToArray (hash, uri, array) {
+  /*
+   *  log('fromHashToArray')
+   */
+
+  if (uri in hash) {
+    const v = hash[uri]
+    const i = Number(v)
+
+    if (!isNaN(i)) {
+      /*
+       *  Return the the schema at `i`
+       */
+      return array[i]
+    }
+  }
+
+  throw new Error('Invalid `hash`')
+}
+
+/**
  *  @param {HashType} hash
  *  @param {string} parentUri
  *  @returns {(document: ObjectLiteralType | ObjectType, entry: [key: string, schema: SchemaType]) => ObjectLiteralType | ObjectType}
@@ -154,96 +205,6 @@ function getReduceItemsObjectFor (hash, items, parentUri, uri) {
 }
 
 /**
- *  @param {DocumentType} document
- *  @param {ItemsType} [array]
- *  @returns {DocumentType | undefined}
- */
-export function transformToValueFor (document, array = []) {
-  /*
-   *  log('transformToValueFor')
-   */
-
-  const i = toNumber(document)
-
-  if (i in array) { // @ts-ignore
-    const v = array[i]
-
-    /*
-     *  Return the document according to the schema `v` or, if `v` is a primitive, return that
-     */
-    return transformToValue(v)
-  }
-
-  throw new Error('Invalid `document`')
-}
-
-/**
- *  @param {HashType} hash
- *  @param {ItemsType} [array]
- *  @param {string} [uri]
- *  @returns {string | number | object | boolean | null | []}
- */
-export function getArrayFor (hash, array = [], uri = '#') {
-  /*
-   *  log('getArrayFor')
-   */
-
-  if (uri in hash) {
-    const v = hash[uri]
-    const i = Number(v)
-
-    if (!isNaN(i)) return array[i]
-  }
-
-  return []
-}
-
-/**
- *  @param {HashType} hash
- *  @param {SchemaType} [schema]
- *  @param {string} parentUri
- *  @param {string} uri
- *  @returns {DocumentType | undefined}
- */
-export function transformArrayFor (hash, { items } = {}, parentUri = '#', uri = getUri(parentUri)) {
-  /*
-   *  log('transformArrayFor')
-   */
-
-  if (isArray(items)) {
-    return transformItemsArrayFor(hash, items, parentUri, uri)
-  } else {
-    if (isObject(items)) {
-      return transformItemsObjectFor(hash, items, parentUri, uri)
-    }
-  }
-
-  return []
-}
-
-/**
- *  @param {HashType} hash
- *  @param {SchemaType} [schema]
- *  @param {string} [parentUri]
- *  @returns {DocumentType}
- */
-export function transformObjectFor (hash, { properties } = {}, parentUri = '#') { // }, uri = getUri(parentUri)) {
-  /*
-   *  log('transformObjectFor')
-   */
-
-  if (isObject(properties)) {
-    return (
-      Object
-        .entries(properties)
-        .reduce(getReducePropertiesEntriesFor(hash, parentUri), {})
-    )
-  }
-
-  return {}
-}
-
-/**
  *  @param {HashType} hash
  *  @param {SchemaType[]} [items]
  *  @param {string} parentUri
@@ -301,14 +262,59 @@ export function transformItemsObjectFor (hash, items = {}, parentUri = '#', uri 
 
 /**
  *  @param {HashType} hash
+ *  @param {SchemaType} [schema]
+ *  @param {string} parentUri
+ *  @param {string} uri
+ *  @returns {DocumentType | undefined}
+ */
+export function transformArrayFor (hash, { items } = {}, parentUri = '#', uri = getUri(parentUri)) {
+  /*
+   *  log('transformArrayFor')
+   */
+
+  if (isArray(items)) {
+    return transformItemsArrayFor(hash, items, parentUri, uri)
+  } else {
+    if (isObject(items)) {
+      return transformItemsObjectFor(hash, items, parentUri, uri)
+    }
+  }
+
+  return []
+}
+
+/**
+ *  @param {HashType} hash
+ *  @param {SchemaType} [schema]
+ *  @param {string} [parentUri]
+ *  @returns {DocumentType}
+ */
+export function transformObjectFor (hash, { properties } = {}, parentUri = '#') { // }, uri = getUri(parentUri)) {
+  /*
+   *  log('transformObjectFor')
+   */
+
+  if (isObject(properties)) {
+    return (
+      Object
+        .entries(properties)
+        .reduce(getReducePropertiesEntriesFor(hash, parentUri), {})
+    )
+  }
+
+  return {}
+}
+
+/**
+ *  @param {HashType} hash
  *  @param {SchemaType} schema
  *  @param {string} parentUri
  *  @param {string} uri
  *  @returns {DocumentType | undefined}
  */
-export function transformNull (hash, schema, parentUri, uri) {
+export function transformString (hash, schema, parentUri, uri) {
   /*
-   *  log('transformNull')
+   *  log('transformString')
    */
 
   if (uri in hash) { // Reflect.has(hash, uri)) {
@@ -317,146 +323,33 @@ export function transformNull (hash, schema, parentUri, uri) {
     if (hasEnum(schema)) {
       const array = getEnum(schema)
 
-      if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-      return transformToValueFor(document, array)
+      if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+      return fromDocumentToValue(document, array)
     } else {
       if (hasAnyOf(schema)) {
         const array = getAnyOf(schema)
 
-        if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-        return transformToValueFor(document, array)
+        if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+        return fromDocumentToValue(document, array)
       } else {
         if (hasOneOf(schema)) {
           const array = getOneOf(schema)
 
-          if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-          return transformToValueFor(document, array)
+          if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+          return fromDocumentToValue(document, array)
         }
       }
     }
 
     try {
-      if (isArray(document)) return document.map(toNull)
-      return toNull(document)
+      if (isArray(document)) return document.map(toString)
+      return toString(document)
     } catch (e) {
       handleError(e)
     }
 
     return document
   }
-}
-
-/**
- *  @param {HashType} hash
- *  @param {SchemaType} schema
- *  @param {string} parentUri
- *  @param {string} uri
- *  @returns {DocumentType | undefined}
- */
-export function transformBoolean (hash, schema, parentUri, uri) {
-  /*
-   *  log('transformBoolean')
-   */
-
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
-
-    if (hasEnum(schema)) {
-      const array = getEnum(schema)
-
-      if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-      return transformToValueFor(document, array)
-    } else {
-      if (hasAnyOf(schema)) {
-        const array = getAnyOf(schema)
-
-        if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-        return transformToValueFor(document, array)
-      } else {
-        if (hasOneOf(schema)) {
-          const array = getOneOf(schema)
-
-          if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-          return transformToValueFor(document, array)
-        }
-      }
-    }
-
-    try {
-      if (isArray(document)) return document.map(toBoolean)
-      return toBoolean(document)
-    } catch (e) {
-      handleError(e)
-    }
-
-    return document
-  }
-}
-
-/**
- *  @param {HashType} hash
- *  @param {SchemaType} schema
- *  @param {string} parentUri
- *  @param {string} uri
- *  @returns {DocumentType | undefined}
- */
-export function transformObject (hash, schema, parentUri, uri) {
-  /*
-   *  log('transformObject')
-   */
-
-  if (hasEnum(schema)) {
-    const array = getEnum(schema)
-
-    return getArrayFor(hash, array, uri)
-  } else {
-    if (hasAnyOf(schema)) {
-      const array = getAnyOf(schema)
-
-      return getArrayFor(hash, array, uri)
-    } else {
-      if (hasOneOf(schema)) {
-        const array = getOneOf(schema)
-
-        return getArrayFor(hash, array, uri)
-      }
-    }
-  }
-
-  return transformObjectFor(hash, schema, parentUri) // , uri)
-}
-
-/**
- *  @param {HashType} hash
- *  @param {SchemaType} schema
- *  @param {string} parentUri
- *  @param {string} uri
- *  @returns {DocumentType | undefined}
- */
-export function transformArray (hash, schema, parentUri, uri) {
-  /*
-   *  log('transformArray')
-   */
-
-  if (hasEnum(schema)) {
-    const array = getEnum(schema)
-
-    return getArrayFor(hash, array, uri)
-  } else {
-    if (hasAnyOf(schema)) {
-      const array = getAnyOf(schema)
-
-      return getArrayFor(hash, array, uri)
-    } else {
-      if (hasOneOf(schema)) {
-        const array = getOneOf(schema)
-
-        return getArrayFor(hash, array, uri)
-      }
-    }
-  }
-
-  return transformArrayFor(hash, schema, parentUri, uri)
 }
 
 /**
@@ -477,20 +370,20 @@ export function transformNumber (hash, schema, parentUri, uri) {
     if (hasEnum(schema)) {
       const array = getEnum(schema)
 
-      if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-      return transformToValueFor(document, array)
+      if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+      return fromDocumentToValue(document, array)
     } else {
       if (hasAnyOf(schema)) {
         const array = getAnyOf(schema)
 
-        if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-        return transformToValueFor(document, array)
+        if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+        return fromDocumentToValue(document, array)
       } else {
         if (hasOneOf(schema)) {
           const array = getOneOf(schema)
 
-          if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-          return transformToValueFor(document, array)
+          if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+          return fromDocumentToValue(document, array)
         }
       }
     }
@@ -513,9 +406,99 @@ export function transformNumber (hash, schema, parentUri, uri) {
  *  @param {string} uri
  *  @returns {DocumentType | undefined}
  */
-export function transformString (hash, schema, parentUri, uri) {
+export function transformArray (hash, schema, parentUri, uri) {
   /*
-   *  log('transformString')
+   *  log('transformArray')
+   */
+
+  if (hasEnum(schema)) {
+    const array = getEnum(schema)
+
+    return (
+      transformToValue(
+        fromHashToArray(hash, uri, array)
+      )
+    )
+  } else {
+    if (hasAnyOf(schema)) {
+      const array = getAnyOf(schema)
+
+      return (
+        transformToValue(
+          fromHashToArray(hash, uri, array)
+        )
+      )
+    } else {
+      if (hasOneOf(schema)) {
+        const array = getOneOf(schema)
+
+        return (
+          transformToValue(
+            fromHashToArray(hash, uri, array)
+          )
+        )
+      }
+    }
+  }
+
+  return transformArrayFor(hash, schema, parentUri, uri)
+}
+
+/**
+ *  @param {HashType} hash
+ *  @param {SchemaType} schema
+ *  @param {string} parentUri
+ *  @param {string} uri
+ *  @returns {DocumentType | undefined}
+ */
+export function transformObject (hash, schema, parentUri, uri) {
+  /*
+   *  log('transformObject')
+   */
+
+  if (hasEnum(schema)) {
+    const array = getEnum(schema)
+
+    return (
+      transformToValue(
+        fromHashToArray(hash, uri, array)
+      )
+    )
+  } else {
+    if (hasAnyOf(schema)) {
+      const array = getAnyOf(schema)
+
+      return (
+        transformToValue(
+          fromHashToArray(hash, uri, array)
+        )
+      )
+    } else {
+      if (hasOneOf(schema)) {
+        const array = getOneOf(schema)
+
+        return (
+          transformToValue(
+            fromHashToArray(hash, uri, array)
+          )
+        )
+      }
+    }
+  }
+
+  return transformObjectFor(hash, schema, parentUri) // , uri)
+}
+
+/**
+ *  @param {HashType} hash
+ *  @param {SchemaType} schema
+ *  @param {string} parentUri
+ *  @param {string} uri
+ *  @returns {DocumentType | undefined}
+ */
+export function transformBoolean (hash, schema, parentUri, uri) {
+  /*
+   *  log('transformBoolean')
    */
 
   if (uri in hash) { // Reflect.has(hash, uri)) {
@@ -524,27 +507,74 @@ export function transformString (hash, schema, parentUri, uri) {
     if (hasEnum(schema)) {
       const array = getEnum(schema)
 
-      if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-      return transformToValueFor(document, array)
+      if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+      return fromDocumentToValue(document, array)
     } else {
       if (hasAnyOf(schema)) {
         const array = getAnyOf(schema)
 
-        if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-        return transformToValueFor(document, array)
+        if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+        return fromDocumentToValue(document, array)
       } else {
         if (hasOneOf(schema)) {
           const array = getOneOf(schema)
 
-          if (isArray(document)) return document.map((v) => transformToValueFor(v, array))
-          return transformToValueFor(document, array)
+          if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+          return fromDocumentToValue(document, array)
         }
       }
     }
 
     try {
-      if (isArray(document)) return document.map(toString)
-      return toString(document)
+      if (isArray(document)) return document.map(toBoolean)
+      return toBoolean(document)
+    } catch (e) {
+      handleError(e)
+    }
+
+    return document
+  }
+}
+
+/**
+ *  @param {HashType} hash
+ *  @param {SchemaType} schema
+ *  @param {string} parentUri
+ *  @param {string} uri
+ *  @returns {DocumentType | undefined}
+ */
+export function transformNull (hash, schema, parentUri, uri) {
+  /*
+   *  log('transformNull')
+   */
+
+  if (uri in hash) { // Reflect.has(hash, uri)) {
+    const document = hash[uri] // Reflect.get(hash, uri)
+
+    if (hasEnum(schema)) {
+      const array = getEnum(schema)
+
+      if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+      return fromDocumentToValue(document, array)
+    } else {
+      if (hasAnyOf(schema)) {
+        const array = getAnyOf(schema)
+
+        if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+        return fromDocumentToValue(document, array)
+      } else {
+        if (hasOneOf(schema)) {
+          const array = getOneOf(schema)
+
+          if (isArray(document)) return document.map((v) => fromDocumentToValue(v, array))
+          return fromDocumentToValue(document, array)
+        }
+      }
+    }
+
+    try {
+      if (isArray(document)) return document.map(toNull)
+      return toNull(document)
     } catch (e) {
       handleError(e)
     }

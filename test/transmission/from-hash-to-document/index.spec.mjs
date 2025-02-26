@@ -313,9 +313,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
         /**
          *  While this is valid, it's not clear what we would do with it
          */
-        it.only('transforms `array` type schemas with `enum`', () => {
+        it('transforms `array` type schemas with `enum`', () => {
           const hash = {
-            '#/': []
+            '#/': '0'
           }
 
           /**
@@ -339,12 +339,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        /**
-         *  Valid schema and document but invalid hash
-         */
-        xit('transforms `array` type schemas with `anyOf`', () => {
+        it('transforms `array` type schemas with `anyOf`', () => {
           const hash = {
-            '#/': []
+            '#/': '1'
           }
 
           /**
@@ -382,12 +379,9 @@ describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
             .to.eql(document)
         })
 
-        /**
-         *  Valid schema and document but invalid hash
-         */
-        xit('transforms `array` type schemas with `oneOf`', () => {
+        it('transforms `array` type schemas with `oneOf`', () => {
           const hash = {
-            '#/': []
+            '#/': '1'
           }
 
           /**

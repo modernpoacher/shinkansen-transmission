@@ -359,10 +359,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
       })
     })
 
-    describe.only('Transforming `array` type schemas', () => {
-      /**
-       *  While this is valid, it's not clear what we would do with it
-       */
+    describe('Transforming `array` type schemas', () => {
       it('transforms `array` type schemas with `enum`', () => {
         /**
          *  @type {ArrayLiteralType}
@@ -382,17 +379,14 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': []
+          '#/': '0'
         }
 
         return expect(transform(document, schema))
           .to.eql(hash)
       })
 
-      /**
-       *  Valid schema and document but invalid hash
-       */
-      xit('transforms `array` type schemas with `anyOf`', () => {
+      it('transforms `array` type schemas with `anyOf`', () => {
         /**
          *  @type {ArrayLiteralType}
          */
@@ -425,17 +419,14 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': []
+          '#/': '1'
         }
 
         expect(transform(document, schema))
           .to.eql(hash)
       })
 
-      /**
-       *  Valid schema and document but invalid hash
-       */
-      xit('transforms `array` type schemas with `oneOf`', () => {
+      it('transforms `array` type schemas with `oneOf`', () => {
         /**
          *  @type {ArrayLiteralType}
          */
@@ -468,7 +459,7 @@ describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
         }
 
         const hash = {
-          '#/': []
+          '#/': '1'
         }
 
         expect(transform(document, schema))

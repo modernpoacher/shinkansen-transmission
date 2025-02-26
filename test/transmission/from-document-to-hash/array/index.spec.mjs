@@ -55,9 +55,6 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
           .to.eql(hash)
       })
 
-      /**
-       *  While this is valid, it's not clear what we would do with it
-       */
       it('transforms `array` type schemas with `enum`', () => {
         /**
          *  @type {ArrayLiteralType}
@@ -77,10 +74,129 @@ describe('shinkansen-transmission/transmission/from-document-to-hash/array', () 
         }
 
         const hash = {
-          '#/': []
+          '#/': '0'
         }
 
         return expect(transformArraySchema(document, schema))
+          .to.eql(hash)
+      })
+
+      it('transforms `array` type schemas with `anyOf`', () => {
+        /**
+         *  @type {ArrayLiteralType}
+         */
+        const document = [
+          2
+        ]
+
+        /**
+         *  @type {SchemaType}
+         */
+        const schema = {
+          type: 'array',
+          anyOf: [
+            {
+              const: [
+                1
+              ]
+            },
+            {
+              const: [
+                2
+              ]
+            },
+            {
+              const: [
+                3
+              ]
+            }
+          ]
+        }
+
+        const hash = {
+          '#/': '1'
+        }
+
+        expect(transformArraySchema(document, schema))
+          .to.eql(hash)
+      })
+
+      it('transforms `array` type schemas with `oneOf`', () => {
+        /**
+         *  @type {ArrayLiteralType}
+         */
+        const document = [
+          2
+        ]
+
+        /**
+         *  @type {SchemaType}
+         */
+        const schema = {
+          type: 'array',
+          oneOf: [
+            {
+              const: [
+                1
+              ]
+            },
+            {
+              const: [
+                2
+              ]
+            },
+            {
+              const: [
+                3
+              ]
+            }
+          ]
+        }
+
+        const hash = {
+          '#/': '1'
+        }
+
+        expect(transformArraySchema(document, schema))
+          .to.eql(hash)
+      })
+
+      /**
+       *  All valid
+       */
+      it('transforms `array` type schemas with `allOf`', () => {
+        /**
+         *  @type {ArrayLiteralType}
+         */
+        const document = [
+          1,
+          2,
+          3
+        ]
+
+        /**
+         *  @type {SchemaType}
+         */
+        const schema = {
+          type: 'array',
+          allOf: [
+            {
+              const: [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        }
+
+        const hash = {
+          '#/0': '1',
+          '#/1': '2',
+          '#/2': '3'
+        }
+
+        expect(transformArraySchema(document, schema))
           .to.eql(hash)
       })
 
