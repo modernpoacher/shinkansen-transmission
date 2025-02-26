@@ -4,6 +4,7 @@ export type ArrayLiteralType = TransmissionTypes.ArrayLiteralType
 export type ArrayType = TransmissionTypes.ArrayType
 
 export type SchemaType = TransmissionTypes.SchemaType
+export type ParamsType = TransmissionTypes.ParamsType
 export type DocumentType = TransmissionTypes.DocumentType
 export type HashType = TransmissionTypes.HashType
 
@@ -28,5 +29,8 @@ export function transformObject (hash: HashType, schema: SchemaType, parentUri: 
 export function transformArray (hash: HashType, schema: SchemaType, parentUri: string, uri: string): ArrayLiteralType | ArrayType
 export function transformNumber (hash: HashType, schema: SchemaType, parentUri: string, uri: string): number | undefined
 export function transformString (hash: HashType, schema: SchemaType, parentUri: string, uri: string): string | undefined
+
+export function transformArraySchema (v?: HashType, schema?: SchemaType, params?: ParamsType): DocumentType | undefined
+export function transformObjectSchema (v?: HashType, schema?: SchemaType, params?: ParamsType): DocumentType | undefined
 
 export default function transform (hash?: HashType, rootSchema?: SchemaType, parentUri?: string, uri?: string): DocumentType | undefined

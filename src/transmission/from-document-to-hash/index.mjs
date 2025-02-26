@@ -49,24 +49,6 @@ function getReduceArrayFor (schema, parentUri) {
 }
 
 /**
- *  @param {SchemaType} schema
- *  @param {string} parentUri
- *  @returns {(hash: HashType, entry: [key: string, document: DocumentType]) => HashType}
- */
-function getReduceObjectFor (schema, parentUri) {
-  /**
-   *  @param {HashType} hash
-   *  @param {[key: string, document: DocumentType]} entry
-   *  @returns {HashType}
-   */
-  return function reduce (hash, [key, document]) {
-    const schemaUri = getUri(parentUri, key)
-
-    return transform(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
-  }
-}
-
-/**
  *  @param {Array<DocumentType>} document
  *  @param {SchemaType} schema
  *  @param {HashType} hash
@@ -81,24 +63,6 @@ export function transformArrayFor (document, schema, hash, parentUri) { // }, ur
   return (
     document
       .reduce(getReduceArrayFor(schema, parentUri), hash)
-  )
-}
-
-/**
- *  @param {Record<string, DocumentType>} document
- *  @param {SchemaType} schema
- *  @param {HashType} hash
- *  @param {string} parentUri
- *  @returns {HashType}
- */
-export function transformObjectFor (document, schema, hash, parentUri) { // }, uri) {
-  /*
-   *  log('transformObjectFor')
-   */
-
-  return (
-    Object.entries(document)
-      .reduce(getReduceObjectFor(schema, parentUri), hash)
   )
 }
 
@@ -149,6 +113,73 @@ export function transformArray (document, schema, hash, parentUri, uri) {
 }
 
 /**
+ *  Document can be `undefined`
+ *
+ *  @param {DocumentType} [document]
+ *  @param {SchemaType} [schema]
+ *  @param {HashType} [hash]
+ *  @param {string} [parentUri]
+ *  @param {string} [uri]
+ *  @returns {HashType}
+ */
+export function transformArraySchema (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
+  log('transformArraySchema')
+
+  /*
+   *  Is `document` an array?
+   */
+  if (isArray(document)) {
+    /*
+     *  Yes, `document` is an array
+     */
+    return transformArray(document, schema, hash, parentUri, uri)
+  }
+
+  /*
+   *  The hash should contain only strings
+   */
+  hash[uri] = toString(document)
+
+  return hash
+}
+
+/**
+ *  @param {SchemaType} schema
+ *  @param {string} parentUri
+ *  @returns {(hash: HashType, entry: [key: string, document: DocumentType]) => HashType}
+ */
+function getReduceObjectFor (schema, parentUri) {
+  /**
+   *  @param {HashType} hash
+   *  @param {[key: string, document: DocumentType]} entry
+   *  @returns {HashType}
+   */
+  return function reduce (hash, [key, document]) {
+    const schemaUri = getUri(parentUri, key)
+
+    return transform(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+  }
+}
+
+/**
+ *  @param {Record<string, DocumentType>} document
+ *  @param {SchemaType} schema
+ *  @param {HashType} hash
+ *  @param {string} parentUri
+ *  @returns {HashType}
+ */
+export function transformObjectFor (document, schema, hash, parentUri) { // }, uri) {
+  /*
+   *  log('transformObjectFor')
+   */
+
+  return (
+    Object.entries(document)
+      .reduce(getReduceObjectFor(schema, parentUri), hash)
+  )
+}
+
+/**
  *  @param {Record<string, DocumentType>} document
  *  @param {SchemaType} schema
  *  @param {HashType} hash
@@ -196,6 +227,37 @@ export function transformObject (document, schema, hash, parentUri, uri) {
    *  Transform schema
    */
   return transformObjectFor(document, schema, hash, parentUri) // , uri)
+}
+
+/**
+ *  Document can be `undefined`
+ *
+ *  @param {DocumentType} [document]
+ *  @param {SchemaType} [schema]
+ *  @param {HashType} [hash]
+ *  @param {string} [parentUri]
+ *  @param {string} [uri]
+ *  @returns {HashType}
+ */
+export function transformObjectSchema (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
+  log('transformObjectSchema')
+
+  /*
+   *  Is `document` an object?
+   */
+  if (isObject(document)) {
+    /*
+     *  Yes, `document` is an object
+     */
+    return transformObject(document, schema, hash, parentUri, uri)
+  }
+
+  /*
+   *  The hash should contain only strings
+   */
+  hash[uri] = toString(document)
+
+  return hash
 }
 
 /**

@@ -6,9 +6,9 @@ import {
 
 import {
   toNull
-} from 'shinkansen-transmission/transmission/from-hash-to-document'
+} from 'shinkansen-transmission/transmission/common/transform'
 
-describe('shinkansen-transmission/transmission/from-hash-to-document/to-null', () => {
+describe('shinkansen-transmission/transmission/common/transform', () => {
   before(() => {
     const {
       env: {
