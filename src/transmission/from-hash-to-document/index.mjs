@@ -54,12 +54,12 @@ export { transformToValue }
 
 /**
  *  @param {HashType} hash
- *  @param {SchemaType[]} items
+ *  @param {SchemaType[]} itemSchemas
  *  @param {string} parentUri
  *  @param {string} uri
  *  @returns {(document: ArrayLiteralType | ArrayType, key: string) => ArrayLiteralType | ArrayType}
  */
-function getReduceItemsArrayFor (hash, items, parentUri, uri) {
+function getReduceItemsArrayFor (hash, itemSchemas, parentUri, uri) {
   /**
    *  @param {ArrayLiteralType | ArrayType} document
    *  @param {string} key
@@ -72,7 +72,7 @@ function getReduceItemsArrayFor (hash, items, parentUri, uri) {
     if (!isNaN(i)) {
       const schemaUri = getUri(parentUri, i)
 
-      document[i] = transform(hash, items[i], schemaUri, schemaUri) // items
+      document[i] = fromHashToDocument(hash, itemSchemas[i], schemaUri, schemaUri) // items
     }
 
     return document
@@ -81,12 +81,12 @@ function getReduceItemsArrayFor (hash, items, parentUri, uri) {
 
 /**
  *  @param {HashType} hash
- *  @param {SchemaType} items
+ *  @param {SchemaType} itemSchema
  *  @param {string} parentUri
  *  @param {string} uri
  *  @returns {(document: ArrayLiteralType | ArrayType, key: string) => ArrayLiteralType | ArrayType}
  */
-function getReduceItemsObjectFor (hash, items, parentUri, uri) {
+function getReduceItemsObjectFor (hash, itemSchema, parentUri, uri) {
   /**
    *  @param {ArrayLiteralType | ArrayType} document
    *  @param {string} key
@@ -99,7 +99,7 @@ function getReduceItemsObjectFor (hash, items, parentUri, uri) {
     if (!isNaN(i)) {
       const schemaUri = getUri(parentUri, i)
 
-      document[i] = transform(hash, items, schemaUri, schemaUri) // items
+      document[i] = fromHashToDocument(hash, itemSchema, schemaUri, schemaUri) // items
     }
 
     return document
@@ -108,12 +108,12 @@ function getReduceItemsObjectFor (hash, items, parentUri, uri) {
 
 /**
  *  @param {HashType} hash
- *  @param {SchemaType[]} [items]
+ *  @param {SchemaType[]} [itemSchemas]
  *  @param {string} parentUri
  *  @param {string} uri
  *  @returns {DocumentType}
  */
-export function transformItemsArrayFor (hash, items = [], parentUri = '#', uri = getUri(parentUri)) {
+export function transformItemsArrayFor (hash, itemSchemas = [], parentUri = '#', uri = getUri(parentUri)) {
   /*
    *  log('transformItemsArrayFor')
    */
@@ -122,7 +122,7 @@ export function transformItemsArrayFor (hash, items = [], parentUri = '#', uri =
     const document = hash[uri] // Reflect.get(hash, uri)
 
     if (isArray(document)) {
-      return items.map((item, i) => transform(hash, item, uri, getUri(uri, i)))
+      return itemSchemas.map((itemSchema, i) => fromHashToDocument(hash, itemSchema, uri, getUri(uri, i)))
     }
   }
 
@@ -130,18 +130,18 @@ export function transformItemsArrayFor (hash, items = [], parentUri = '#', uri =
     Object
       .keys(hash)
       .filter((key) => key.startsWith(uri))
-      .reduce(getReduceItemsArrayFor(hash, items, parentUri, uri), [])
+      .reduce(getReduceItemsArrayFor(hash, itemSchemas, parentUri, uri), [])
   )
 }
 
 /**
  *  @param {HashType} hash
- *  @param {SchemaType} [items]
+ *  @param {SchemaType} [itemSchema]
  *  @param {string} parentUri
  *  @param {string} uri
  *  @returns {DocumentType | undefined}
  */
-export function transformItemsObjectFor (hash, items = {}, parentUri = '#', uri = getUri(parentUri)) {
+export function transformItemsObjectFor (hash, itemSchema = {}, parentUri = '#', uri = getUri(parentUri)) {
   /*
    *  log('transformItemsObjectFor')
    */
@@ -150,7 +150,7 @@ export function transformItemsObjectFor (hash, items = {}, parentUri = '#', uri 
     const document = hash[uri] // Reflect.get(hash, uri)
 
     if (isArray(document)) {
-      return transform(hash, items, uri, uri)
+      return fromHashToDocument(hash, itemSchema, uri, uri)
     }
   }
 
@@ -158,7 +158,7 @@ export function transformItemsObjectFor (hash, items = {}, parentUri = '#', uri 
     Object
       .keys(hash)
       .filter((key) => key.startsWith(uri))
-      .reduce(getReduceItemsObjectFor(hash, items, parentUri, uri), [])
+      .reduce(getReduceItemsObjectFor(hash, itemSchema, parentUri, uri), [])
   )
 }
 
@@ -272,7 +272,7 @@ function getReducePropertiesEntriesFor (hash, parentUri) {
   return function reduce (document, [key, schema]) {
     const schemaUri = getUri(parentUri, key)
 
-    document[key] = transform(hash, schema, schemaUri, schemaUri)
+    document[key] = fromHashToDocument(hash, schema, schemaUri, schemaUri)
 
     return document
   }
@@ -382,7 +382,7 @@ export function transformObjectSchema (hash = {}, schema = {}, params = {}) {
  *  @param {string} [uri]
  *  @returns {DocumentType | undefined}
  */
-export default function transform (hash = {}, schema = {}, parentUri = '#', uri = getUri(parentUri)) {
+export default function fromHashToDocument (hash = {}, schema = {}, parentUri = '#', uri = getUri(parentUri)) {
   log('fromHashToDocument')
 
   const {

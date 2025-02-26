@@ -44,7 +44,7 @@ function getReduceArrayFor (schema, parentUri) {
   return function reduce (hash, document, index) {
     const schemaUri = getUri(parentUri, index)
 
-    return transform(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+    return fromDocumentToHash(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
   }
 }
 
@@ -157,7 +157,7 @@ function getReduceObjectFor (schema, parentUri) {
   return function reduce (hash, [key, document]) {
     const schemaUri = getUri(parentUri, key)
 
-    return transform(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+    return fromDocumentToHash(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
   }
 }
 
@@ -266,7 +266,7 @@ export function transformObjectSchema (document, schema = {}, hash = {}, parentU
  *  @param {string} [uri]
  *  @returns {HashType}
  */
-export default function transform (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
+export default function fromDocumentToHash (document, schema = {}, hash = {}, parentUri = '#', uri = getUri(parentUri)) {
   log('fromDocumentToHash')
 
   /*
