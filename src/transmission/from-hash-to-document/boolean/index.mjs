@@ -51,8 +51,8 @@ export function transformBoolean (hash, schema, parentUri, uri) {
    *  log('transformBoolean')
    */
 
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
+  if (uri in hash) {
+    const document = hash[uri]
 
     if (hasEnum(schema)) {
       const array = getEnum(schema)

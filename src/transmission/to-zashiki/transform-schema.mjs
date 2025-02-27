@@ -375,8 +375,8 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
         parentUri = '#/'
       } = params
 
-      if (parentUri in values) { // Reflect.has(values, parentUri)) {
-        const value = values[parentUri] // Reflect.get(values, parentUri)
+      if (parentUri in values) {
+        const value = values[parentUri]
 
         if (isPrimitive(value)) {
           const {
@@ -404,8 +404,8 @@ export function getTransformByIndex (schema, rootSchema, values, params) {
             index = 0
           } = params
 
-          if (index in value) { // Reflect.has(value, index)) {
-            const v = value[index] // Reflect.get(value, index)
+          if (index in value) {
+            const v = value[index]
 
             const uri = getUri(parentUri, index)
 

@@ -8,7 +8,8 @@ import debug from 'debug'
 
 import {
   toString,
-  getSchema,
+  getSchemaFromItems,
+  getSchemaFromProperties,
   isObject,
   isArray,
   hasEnum,
@@ -44,7 +45,7 @@ function getReduceArrayFor (schema, parentUri) {
   return function reduce (hash, document, index) {
     const schemaUri = getUri(parentUri, index)
 
-    return fromDocumentToHash(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+    return fromDocumentToHash(document, getSchemaFromItems(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
   }
 }
 
@@ -160,7 +161,7 @@ function getReduceObjectFor (schema, parentUri) {
   return function reduce (hash, [key, document]) {
     const schemaUri = getUri(parentUri, key)
 
-    return fromDocumentToHash(document, getSchema(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
+    return fromDocumentToHash(document, getSchemaFromProperties(schema, parentUri, schemaUri), hash, schemaUri, schemaUri)
   }
 }
 

@@ -130,8 +130,8 @@ function transformItemsArrayFor (hash, itemSchemas = [], parentUri = '#', uri = 
    *  log('transformItemsArrayFor')
    */
 
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
+  if (uri in hash) {
+    const document = hash[uri]
 
     if (isArray(document)) {
       return itemSchemas.map((itemSchema, i) => fromHashToDocument(hash, itemSchema, uri, getUri(uri, i)))
@@ -158,8 +158,8 @@ function transformItemsObjectFor (hash, itemSchema = {}, parentUri = '#', uri = 
    *  log('transformItemsObjectFor')
    */
 
-  if (uri in hash) { // Reflect.has(hash, uri)) {
-    const document = hash[uri] // Reflect.get(hash, uri)
+  if (uri in hash) {
+    const document = hash[uri]
 
     if (isArray(document)) {
       return fromHashToDocument(hash, itemSchema, uri, uri)
