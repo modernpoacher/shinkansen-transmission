@@ -5,8 +5,6 @@
  *  @typedef {TransmissionTypes.HashType} HashType
  */
 
-import debug from 'debug'
-
 import {
   expect
 } from 'chai'
@@ -14,16 +12,6 @@ import {
 import transform from 'shinkansen-transmission/transmission/from-document-to-hash'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash', () => {
-  before(() => {
-    const {
-      env: {
-        DEBUG
-      }
-    } = process
-
-    if (DEBUG) debug.enable(DEBUG)
-  })
-
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')

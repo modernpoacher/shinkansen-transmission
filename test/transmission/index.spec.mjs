@@ -1,5 +1,3 @@
-import debug from 'debug'
-
 import {
   expect
 } from 'chai'
@@ -12,16 +10,6 @@ import {
 } from 'shinkansen-transmission'
 
 describe('shinkansen-transmission', () => {
-  before(() => {
-    const {
-      env: {
-        DEBUG
-      }
-    } = process
-
-    if (DEBUG) debug.enable(DEBUG)
-  })
-
   describe('`common`', () => {
     it('is a module', () => {
       expect(common)

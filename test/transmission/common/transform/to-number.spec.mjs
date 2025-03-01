@@ -1,5 +1,3 @@
-import debug from 'debug'
-
 import {
   expect
 } from 'chai'
@@ -9,16 +7,6 @@ import {
 } from 'shinkansen-transmission/transmission/common/transform'
 
 describe('shinkansen-transmission/transmission/common/transform', () => {
-  before(() => {
-    const {
-      env: {
-        DEBUG
-      }
-    } = process
-
-    if (DEBUG) debug.enable(DEBUG)
-  })
-
   it('is a function', () => {
     expect(toNumber)
       .to.be.a('function')

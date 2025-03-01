@@ -5,8 +5,6 @@
  *  @typedef {TransmissionTypes.HashType} HashType
  */
 
-import debug from 'debug'
-
 import {
   expect
 } from 'chai'
@@ -87,16 +85,6 @@ import {
 } from 'shinkansen-transmission/transmission/common'
 
 describe('shinkansen-transmission/transmission/common', () => {
-  before(() => {
-    const {
-      env: {
-        DEBUG
-      }
-    } = process
-
-    if (DEBUG) debug.enable(DEBUG)
-  })
-
   describe('`isArray`', () => {
     it('is a function', () => {
       expect(isArray)

@@ -5,8 +5,6 @@
  *  @typedef {TransmissionTypes.HashType} HashType
  */
 
-import debug from 'debug'
-
 import {
   expect
 } from 'chai'
@@ -14,16 +12,6 @@ import {
 import transformBooleanSchema from 'shinkansen-transmission/transmission/from-document-to-hash/boolean'
 
 describe('shinkansen-transmission/transmission/from-document-to-hash/boolean', () => {
-  before(() => {
-    const {
-      env: {
-        DEBUG
-      }
-    } = process
-
-    if (DEBUG) debug.enable(DEBUG)
-  })
-
   it('is a function', () => {
     expect(transformBooleanSchema)
       .to.be.a('function')

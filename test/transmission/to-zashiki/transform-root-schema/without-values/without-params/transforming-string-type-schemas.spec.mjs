@@ -2,8 +2,6 @@
  *  @typedef {TransmissionTypes.SchemaType} SchemaType
  */
 
-import debug from 'debug'
-
 import {
   expect
 } from 'chai'
@@ -11,16 +9,6 @@ import {
 import transform from 'shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
 
 describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema', () => {
-  before(() => {
-    const {
-      env: {
-        DEBUG
-      }
-    } = process
-
-    if (DEBUG) debug.enable(DEBUG)
-  })
-
   describe('Without values', () => {
     describe('Without params', () => {
       describe('Transforming `string` type schemas', () => {
