@@ -4,9 +4,9 @@ import {
 
 import {
   toBoolean
-} from 'shinkansen-transmission/transmission/common/transform'
+} from '#transmission/transmission/common/transform'
 
-describe('shinkansen-transmission/transmission/transmission/common/transform', () => {
+describe('#transmission/transmission/transmission/common/transform', () => {
   it('is a function', () => {
     expect(toBoolean)
       .to.be.a('function')

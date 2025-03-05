@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",
-    "@babel/eslint-parser": "^7.26.8",
     "@babel/preset-env": "^7.26.9",
     "@babel/register": "^7.25.9",
     "@sequencemedia/eslint-config-standard": "^0.2.41",
@@ -60,7 +59,10 @@
     "mocha": "^11.1.0"
   },
   "imports": {
-    "#transmission": "./src/index.mjs",
+    "#transmission": {
+      "require": "./src/index.cjs",
+      "import": "./src/index.mjs"
+    },
     "#transmission/transmission": "./src/transmission/index.mjs",
     "#transmission/transmission/*": "./src/transmission/*/index.mjs",
     "#transmission/transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",

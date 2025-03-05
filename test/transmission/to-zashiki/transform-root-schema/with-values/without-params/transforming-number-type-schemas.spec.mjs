@@ -6,9 +6,9 @@ import {
   expect
 } from 'chai'
 
-import transform from 'shinkansen-transmission/transmission/to-zashiki/transform-root-schema'
+import transform from '#transmission/transmission/to-zashiki/transform-root-schema'
 
-describe('shinkansen-transmission/transmission/to-zashiki/transform-root-schema', () => {
+describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
   describe('With values', () => {
     describe('Without params', () => {
       describe('Transforming `number` type schemas', () => {

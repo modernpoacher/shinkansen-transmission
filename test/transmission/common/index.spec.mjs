@@ -39,7 +39,6 @@ import {
   toString,
   getSchemaFromItems,
   getSchemaFromProperties,
-  getSchema,
   transformIndexToValueByFindValue,
   findIndexByValue,
   transformIndexToValueByFindEqual,
@@ -82,9 +81,9 @@ import {
   getIsExclusiveMax,
   getPattern,
   getStep
-} from 'shinkansen-transmission/transmission/common'
+} from '#transmission/transmission/common'
 
-describe('shinkansen-transmission/transmission/common', () => {
+describe('#transmission/transmission/common', () => {
   describe('`isArray`', () => {
     it('is a function', () => {
       expect(isArray)
@@ -284,13 +283,6 @@ describe('shinkansen-transmission/transmission/common', () => {
   describe('`getSchemaFromProperties`', () => {
     it('is a function', () => {
       expect(getSchemaFromProperties)
-        .to.be.a('function')
-    })
-  })
-
-  describe('`getSchema`', () => {
-    it('is a function', () => {
-      expect(getSchema)
         .to.be.a('function')
     })
   })

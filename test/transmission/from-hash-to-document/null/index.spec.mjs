@@ -9,9 +9,9 @@ import {
   expect
 } from 'chai'
 
-import transformNullSchema from 'shinkansen-transmission/transmission/from-hash-to-document/null'
+import transformNullSchema from '#transmission/transmission/from-hash-to-document/null'
 
-describe('shinkansen-transmission/transmission/from-hash-to-document/null', () => {
+describe('#transmission/transmission/from-hash-to-document/null', () => {
   it('is a function', () => {
     expect(transformNullSchema)
       .to.be.a('function')

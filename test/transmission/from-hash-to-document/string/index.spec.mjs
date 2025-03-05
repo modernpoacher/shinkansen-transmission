@@ -9,9 +9,9 @@ import {
   expect
 } from 'chai'
 
-import transformStringSchema from 'shinkansen-transmission/transmission/from-hash-to-document/string'
+import transformStringSchema from '#transmission/transmission/from-hash-to-document/string'
 
-describe('shinkansen-transmission/transmission/from-hash-to-document/string', () => {
+describe('#transmission/transmission/from-hash-to-document/string', () => {
   it('is a function', () => {
     expect(transformStringSchema)
       .to.be.a('function')

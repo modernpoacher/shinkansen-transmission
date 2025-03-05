@@ -4,9 +4,9 @@ import {
 
 import {
   toNumber
-} from 'shinkansen-transmission/transmission/common/transform'
+} from '#transmission/transmission/common/transform'
 
-describe('shinkansen-transmission/transmission/common/transform', () => {
+describe('#transmission/transmission/common/transform', () => {
   it('is a function', () => {
     expect(toNumber)
       .to.be.a('function')

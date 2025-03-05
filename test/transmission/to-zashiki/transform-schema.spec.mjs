@@ -113,9 +113,9 @@ import transform, {
 
   transformByKey,
   transformByIndex
-} from 'shinkansen-transmission/transmission/to-zashiki/transform-schema'
+} from '#transmission/transmission/to-zashiki/transform-schema'
 
-describe('shinkansen-transmission/transmission/to-zashiki', () => {
+describe('#transmission/transmission/to-zashiki', () => {
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')

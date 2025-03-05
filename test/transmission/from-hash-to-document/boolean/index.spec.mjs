@@ -9,9 +9,9 @@ import {
   expect
 } from 'chai'
 
-import transformBooleanSchema from 'shinkansen-transmission/transmission/from-hash-to-document/boolean'
+import transformBooleanSchema from '#transmission/transmission/from-hash-to-document/boolean'
 
-describe('shinkansen-transmission/transmission/from-hash-to-document/boolean', () => {
+describe('#transmission/transmission/from-hash-to-document/boolean', () => {
   it('is a function', () => {
     expect(transformBooleanSchema)
       .to.be.a('function')

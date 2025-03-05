@@ -19,21 +19,21 @@ export function transformObjectSchema (hash?: HashType, schema?: SchemaType, par
 export {
   transformString,
   default as transformStringSchema
-} from './string/index.mjs'
+} from '#transmission/transmission/from-hash-to-document/string'
 
 export {
   transformNumber,
   default as transformNumberSchema
-} from './number/index.mjs'
+} from '#transmission/transmission/from-hash-to-document/number'
 
 export {
   transformBoolean,
   default as transformBooleanSchema
-} from './boolean/index.mjs'
+} from '#transmission/transmission/from-hash-to-document/boolean'
 
 export {
   transformNull,
   default as transformNullSchema
-} from './null/index.mjs'
+} from '#transmission/transmission/from-hash-to-document/null'
 
 export default function fromHashToDocument (hash?: HashType, rootSchema?: SchemaType, parentUri?: string, uri?: string): DocumentType | undefined

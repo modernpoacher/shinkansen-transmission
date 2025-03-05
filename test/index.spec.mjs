@@ -7,9 +7,9 @@ import {
   fromDocumentToHash,
   fromHashToDocument,
   toZashiki
-} from '#transmission/transmission'
+} from '#transmission'
 
-describe('#transmission/transmission', () => {
+describe('#transmission', () => {
   describe('`common`', () => {
     it('is a module', () => {
       expect(common)

@@ -9,7 +9,7 @@ import {
   expect
 } from 'chai'
 
-import transformObjectSchema from 'shinkansen-transmission/transmission/from-hash-to-document/object'
+import transformObjectSchema from '#transmission/transmission/from-hash-to-document/object'
 
 /**
  *  `transformObjectSchema` is an entry point to `fromHashToDocument`
@@ -19,7 +19,7 @@ import transformObjectSchema from 'shinkansen-transmission/transmission/from-has
  *  Otherwise the behaviour is identical (as are these tests)
  */
 
-describe('shinkansen-transmission/transmission/from-hash-to-document/object', () => {
+describe('#transmission/transmission/from-hash-to-document/object', () => {
   it('is a function', () => {
     expect(transformObjectSchema)
       .to.be.a('function')

@@ -8,6 +8,7 @@
  *
  *  @typedef {TransmissionTypes.DocumentType} DocumentType
  *  @typedef {TransmissionTypes.SchemaType} SchemaType
+ *  @typedef {TransmissionTypes.ParamsType} ParamsType
  *  @typedef {TransmissionTypes.HashType} HashType
  */
 
@@ -246,7 +247,7 @@ export function transformArray (hash, schema, parentUri, uri) {
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
- *  @returns {DocumentType}
+ *  @returns {DocumentType | undefined}
  */
 export function transformArraySchema (hash = {}, schema = {}, params = {}) {
   log('transformArraySchema')
@@ -361,7 +362,7 @@ export function transformObject (hash, schema, parentUri, uri) {
  *  @param {HashType} [hash]
  *  @param {SchemaType} [schema]
  *  @param {ParamsType} [params]
- *  @returns {DocumentType}
+ *  @returns {DocumentType | undefined}
  */
 export function transformObjectSchema (hash = {}, schema = {}, params = {}) {
   log('transformObjectSchema')

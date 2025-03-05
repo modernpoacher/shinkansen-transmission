@@ -4,15 +4,30 @@
     "target": "ESNext",
     "allowJs": true,
     "checkJs": true,
-    "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "strict": true,
-    "isolatedModules": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "#transmission": [
+        "src/index.cjs",
+        "src/index.mjs"
+      ],
+      "#transmission/transmission": [
+        "src/transmission/index.mjs"
+      ],
+      "#transmission/transmission/*": [
+        "src/transmission/*/index.mjs"
+      ],
+      "#transmission/transmission/to-zashiki/transform-root-schema": [
+        "src/transmission/to-zashiki/transform-root-schema.mjs"
+      ],
+      "#transmission/transmission/to-zashiki/transform-schema": [
+        "src/transmission/to-zashiki/transform-schema.mjs"
+      ]
+    }
   },
   "include": [
-    ".",
-    "src/**/*"
+    "."
   ],
   "exclude": [
     "test/**/*"

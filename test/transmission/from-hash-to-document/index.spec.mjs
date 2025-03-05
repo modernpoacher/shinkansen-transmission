@@ -11,9 +11,9 @@ import {
   expect
 } from 'chai'
 
-import transform from 'shinkansen-transmission/transmission/from-hash-to-document'
+import transform from '#transmission/transmission/from-hash-to-document'
 
-describe('shinkansen-transmission/transmission/from-hash-to-document', () => {
+describe('#transmission/transmission/from-hash-to-document', () => {
   it('is a function', () => {
     expect(transform)
       .to.be.a('function')

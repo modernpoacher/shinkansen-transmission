@@ -1,19 +1,19 @@
-import {
-  expect
-} from 'chai'
+const {
+  expect // @ts-expect-error
+} = require('chai')
 
-import {
+const {
   common,
   fromDocumentToHash,
   fromHashToDocument,
   toZashiki
-} from '#transmission/transmission'
+} = require('#transmission')
 
-describe('#transmission/transmission', () => {
+describe('#transmission', () => {
   describe('`common`', () => {
-    it('is a module', () => {
+    it('is an object', () => {
       expect(common)
-        .to.be.a('module')
+        .to.be.an('object')
     })
   })
 

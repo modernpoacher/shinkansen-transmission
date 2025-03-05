@@ -74,27 +74,6 @@ export function toString (value?: MemberType): string
 export function getSchemaFromItems (schema?: { items?: SchemaType | SchemaType[] }, parentUri?: string, uri?: string): SchemaType | undefined
 export function getSchemaFromProperties (schema?: { properties?: Record<string, SchemaType> }, parentUri?: string, uri?: string): SchemaType | undefined
 
-declare function getSchema (
-  schema: (
-    StringSchemaType |
-    NumberSchemaType |
-    ArraySchemaType |
-    ObjectSchemaType |
-    BooleanSchemaType |
-    NullSchemaType
-  ),
-  parentUri?: string,
-  uri?: string
-): SchemaType | undefined
-
-declare function getSchema (
-  schema?: ObjectLiteralType | ObjectType,
-  parentUri?: string,
-  uri?: string
-): SchemaType | undefined
-
-export { getSchema }
-
 export function transformIndexToValueByFindValue (array: MemberArrayType, value?: MemberType): string
 export function transformIndexToValueByFindEqual (array: MemberArrayType, value?: MemberType): string
 

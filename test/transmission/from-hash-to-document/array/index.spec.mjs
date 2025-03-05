@@ -9,9 +9,9 @@ import {
   expect
 } from 'chai'
 
-import transformArraySchema from 'shinkansen-transmission/transmission/from-hash-to-document/array'
+import transformArraySchema from '#transmission/transmission/from-hash-to-document/array'
 
-describe('shinkansen-transmission/transmission/from-hash-to-document/array', () => {
+describe('#transmission/transmission/from-hash-to-document/array', () => {
   it('is a function', () => {
     expect(transformArraySchema)
       .to.be.a('function')

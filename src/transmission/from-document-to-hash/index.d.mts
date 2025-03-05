@@ -10,9 +10,9 @@ export function transformObjectFor (document: Record<string, DocumentType>, sche
 export function transformObject (document: Record<string, DocumentType>, schema: SchemaType, hash: HashType, parentUri: string, uri: string): HashType
 export function transformObjectSchema (document?: DocumentType, schema?: SchemaType, hash?: HashType, parentUri?: string, uri?: string): HashType
 
-export { default as transformStringSchema } from './string/index.mjs'
-export { default as transformNumberSchema } from './number/index.mjs'
-export { default as transformBooleanSchema } from './boolean/index.mjs'
-export { default as transformNullSchema } from './null/index.mjs'
+export { default as transformStringSchema } from '#transmission/transmission/from-document-to-hash/string'
+export { default as transformNumberSchema } from '#transmission/transmission/from-document-to-hash/number'
+export { default as transformBooleanSchema } from '#transmission/transmission/from-document-to-hash/boolean'
+export { default as transformNullSchema } from '#transmission/transmission/from-document-to-hash/null'
 
 export default function fromDocumentToHash (document?: DocumentType, schema?: SchemaType, hash?: HashType, parentUri?: string, uri?: string): HashType

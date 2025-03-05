@@ -30,12 +30,12 @@ const log = debug('shinkansen-transmission/from-hash-to-document/boolean')
 log('`shinkansen` is awake')
 
 /**
- * @overload
- * @param {unknown} error
- * @returns {void}
+ *  @overload
+ *  @param {unknown} error
+ *  @returns {void}
  *
- * @param {{ message?: string }} error
- * @returns {void}
+ *  @param {{ message?: string }} error
+ *  @returns {void}
  */
 function handleError ({ message = 'No error message defined' }) { log(message) }
 

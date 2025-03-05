@@ -456,46 +456,6 @@ export function getSchemaFromProperties ({ properties /* object */ }, parentUri,
 }
 
 /**
- *  @deprecated
- *
- *  @overload
- *  @param {(
- *    StringSchemaType |
- *    NumberSchemaType |
- *    ArraySchemaType |
- *    ObjectSchemaType |
- *    BooleanSchemaType |
- *    NullSchemaType
- *  )} schema
- *  @param {string} [parentUri]
- *  @param {string} [uri]
- *  @returns {SchemaType | undefined}
- *
- *
- *  @param {*} schema
- *  @param {string} parentUri
- *  @param {string} uri
- *  @returns {* | undefined}
- */
-export function getSchema (schema, parentUri, uri) {
-  /*
-   *  log('getSchema')
-   */
-
-  const {
-    type
-  } = schema
-
-  switch (type) {
-    case 'array':
-      return getSchemaFromItems(schema, parentUri, uri)
-
-    case 'object':
-      return getSchemaFromProperties(schema, parentUri, uri)
-  }
-}
-
-/**
  *  @param {MemberArrayType} array
  *  @param {MemberType} [value]
  *  @returns {string}
@@ -551,7 +511,7 @@ export function transformIndexToValueByFindEqual (array, value) {
 /**
  *  @param {MemberArrayType} array
  *  @param {MemberType} [value]
- *  @returns {string}
+ *  @returns {MemberType}
  */
 export function findIndexByEqual (array, value) {
   /*
