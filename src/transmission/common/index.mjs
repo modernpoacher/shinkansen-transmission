@@ -55,7 +55,7 @@ export const isArray = (v) => Array.isArray(v)
  *  @param {unknown} [v]
  *  @returns {v is (Record<PropertyKey, MemberType | MemberArrayType> | Record<PropertyKey, never>)}
  */
-export const isObject = (v) => (v || false) instanceof Object && !isArray(v)
+export const isObject = (v) => typeof (v || false) === 'object' && !isArray(v)
 
 /**
  *  @param {unknown} [v]
