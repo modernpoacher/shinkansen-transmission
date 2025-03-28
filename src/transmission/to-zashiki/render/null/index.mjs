@@ -345,9 +345,9 @@ export function renderNullElementsFieldForOneOf (field, params, uri) {
 
 /**
  *  @param {ObjectLiteralType | ObjectType} field
- *  @param {ParamsType} params
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
+ *  @param {ParamsType} params
  *  @param {string} uri
  *  @returns {ObjectLiteralType | ObjectType}
  */
@@ -370,9 +370,9 @@ export function getNullElementsFieldForAllOf (field, schema, values, params, uri
 
 /**
  *  @param {ObjectLiteralType | ObjectType} field
- *  @param {ParamsType} params
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
+ *  @param {ParamsType} params
  *  @param {string} uri
  *  @returns {FieldType}
  */
@@ -413,9 +413,9 @@ export function renderNullElementsFieldForAllOf (field, schema, values, params, 
 
 /**
  *  @param {ObjectLiteralType | ObjectType} field
- *  @param {ParamsType} params
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
+ *  @param {ParamsType} params
  *  @param {string} uri
  *  @returns {ObjectLiteralType | ObjectType}
  */
@@ -438,9 +438,9 @@ export function getNullElementsField (field, schema, values, params, uri) {
 
 /**
  *  @param {ObjectLiteralType | ObjectType} field
- *  @param {ParamsType} params
  *  @param {SchemaType} schema
  *  @param {ValuesType} values
+ *  @param {ParamsType} params
  *  @param {string} uri
  *  @returns {FieldType}
  */
