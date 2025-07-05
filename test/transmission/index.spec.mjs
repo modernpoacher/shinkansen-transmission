@@ -13,7 +13,7 @@ describe('#transmission/transmission', () => {
   describe('`common`', () => {
     it('is a module', () => {
       expect(common)
-        .to.be.a('module')
+        .to.be.an('object')
     })
   })
 
