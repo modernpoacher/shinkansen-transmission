@@ -11,7 +11,7 @@ import {
 
 describe('#transmission', () => {
   describe('`common`', () => {
-    it('is a module', () => {
+    it('is an object', () => {
       expect(common)
         .to.be.an('object')
     })
