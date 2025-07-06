@@ -43,6 +43,10 @@ module.exports = (api) => {
   if (api) api.cache.using(env)
 
   return {
+    generatorOpts: {
+      compact: false,
+      minified: false
+    },
     presets,
     ignore: [
       /node_modules\/(?!shinkansen|@modernpoacher)/
