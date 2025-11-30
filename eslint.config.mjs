@@ -62,7 +62,8 @@ export default [
         {
           max: 5
         }
-      ]
+      ],
+      '@typescript-eslint/no-redundant-type-constituents': 'off'
     }
   }),
   {
@@ -70,7 +71,7 @@ export default [
       'src/**/*.d.{mts,cts}'
     ],
     rules: {
-      'no-redeclare': 'off'
+      'no-redeclare': 'off', '@typescript-eslint/no-redundant-type-constituents': 'off'
     }
   }
 ]
