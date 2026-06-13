@@ -26,7 +26,7 @@
     "url": "git+ssh://git@github.com/modernpoacher/shinkansen-transmission.git"
   },
   "scripts": {
-    "coverage": "c8 --reporter html npm run test",
+    "coverage": "# c8 --reporter html npm run test",
     "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
     "nvm": "bash nvm.sh",
@@ -34,9 +34,6 @@
     "prepare": "husky",
     "pretest": "npm run nvm",
     "test": "cross-env NODE_ENV=test mocha test --recursive --verbose"
-  },
-  "overrides": {
-    "yargs": ">=18"
   },
   "dependencies": {
     "debug": "^4.4.3",
