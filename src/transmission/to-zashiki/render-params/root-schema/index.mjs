@@ -42,7 +42,6 @@ export function getRenderParamsForEnum (rootSchema, params) {
     selectedItems,
     items
   })
-
   const elements = {
     enum: Object.assign(getElementsFieldPropsForEnum(params, uri), {
       selectedItems,
@@ -82,7 +81,6 @@ export function getRenderParamsForAnyOf (rootSchema, params) {
     selectedItems,
     items
   })
-
   const elements = {
     anyOf: Object.assign(getElementsFieldPropsForAnyOf(params, uri), {
       selectedItems,
@@ -122,7 +120,6 @@ export function getRenderParamsForOneOf (rootSchema, params) {
     selectedItems,
     items
   })
-
   const elements = {
     oneOf: Object.assign(getElementsFieldPropsForOneOf(params, uri), {
       selectedItems,
@@ -158,7 +155,6 @@ export function getRenderParamsForAllOf (rootSchema, params) {
   const meta = Object.assign(getMetaProps(params, uri), {
     schema: rootSchema
   })
-
   const elements = {
     field: getElementsFieldPropsForAllOf(params, uri)
   }
@@ -194,7 +190,6 @@ export function getRenderParams (rootSchema, params) {
     parentUri: normaliseUri(parentUri),
     uri
   })
-
   const elements = Object.assign(getElementsProps(params, uri), {
     fields
   })
