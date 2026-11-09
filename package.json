@@ -78,5 +78,8 @@
     "./transmission/*": "./src/transmission/*/index.mjs",
     "./transmission/to-zashiki/transform-root-schema": "./src/transmission/to-zashiki/transform-root-schema.mjs",
     "./transmission/to-zashiki/transform-schema": "./src/transmission/to-zashiki/transform-schema.mjs"
+  },
+  "allowScripts": {
+    "core-js@3.51.0": true
   }
 }
