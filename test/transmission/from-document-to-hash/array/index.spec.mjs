@@ -813,8 +813,7 @@ describe('#transmission/transmission/from-document-to-hash/array', () => {
       })
 
       it('transforms `array` type schemas (`items` is an array of `string` type and `number` type with `enum`)', () => {
-        const document = ['string (3)', 3
-        ]
+        const document = ['string (3)', 3]
 
         /**
          *  @type {SchemaType}

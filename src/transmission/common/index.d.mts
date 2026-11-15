@@ -40,14 +40,14 @@ export function isArray (v?: unknown): v is (MemberArrayType)
 export function isPrimitive (v?: unknown): v is string | number | boolean | null
 
 export function isSchema (v?: SchemaType | object): v is SchemaType
-export function isStringSchema (schema?: SchemaType): schema is StringSchemaType
-export function isNumberSchema (schema?: SchemaType): schema is NumberSchemaType
-export function isArraySchema (schema?: SchemaType): schema is ArraySchemaType
-export function isObjectSchema (schema?: SchemaType): schema is ObjectSchemaType
-export function isBooleanSchema (schema?: SchemaType): schema is BooleanSchemaType
-export function isNullSchema (schema?: SchemaType): schema is NullSchemaType
+  export function isStringSchema (schema?: SchemaType): schema is StringSchemaType
+    export function isNumberSchema (schema?: SchemaType): schema is NumberSchemaType
+      export function isArraySchema (schema?: SchemaType): schema is ArraySchemaType
+        export function isObjectSchema (schema?: SchemaType): schema is ObjectSchemaType
+          export function isBooleanSchema (schema?: SchemaType): schema is BooleanSchemaType
+            export function isNullSchema (schema?: SchemaType): schema is NullSchemaType
 
-export function getTitle (schema?: SchemaType): { title: string } | ObjectLiteralType
+              export function getTitle (schema?: SchemaType): { title: string } | ObjectLiteralType
 export function getDescription (schema?: SchemaType): { description: string } | ObjectLiteralType
 export function getIsReadOnly (schema?: SchemaType): { readOnly: boolean } | ObjectLiteralType
 export function getIsWriteOnly (schema?: SchemaType): { writeOnly: boolean } | ObjectLiteralType

@@ -71,7 +71,8 @@ export default [
       'src/**/*.d.{mts,cts}'
     ],
     rules: {
-      'no-redeclare': 'off', '@typescript-eslint/no-redundant-type-constituents': 'off'
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redundant-type-constituents': 'off'
     }
   }
 ]
