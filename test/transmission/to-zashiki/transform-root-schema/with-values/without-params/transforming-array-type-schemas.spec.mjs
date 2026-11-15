@@ -1291,7 +1291,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                               'string (3)'
                             ],
                             selectedItems: [
-                              0, 2
+                              0,
+                              2
                             ]
                           },
                           elements: {
@@ -1303,7 +1304,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                 'string (3)'
                               ],
                               selectedItems: [
-                                0, 2
+                                0,
+                                2
                               ]
                             }
                           }
@@ -1406,7 +1408,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/0',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (1)'
                                 },
@@ -1414,7 +1417,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   }
@@ -1431,7 +1435,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/1',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (2)'
                                 },
@@ -1439,7 +1444,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   }
@@ -1456,7 +1462,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/2',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (3)'
                                 },
@@ -1464,7 +1471,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   }
@@ -1472,7 +1480,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                               }
                             ],
                             selectedItems: [
-                              0, 2
+                              0,
+                              2
                             ]
                           },
                           elements: {
@@ -1490,7 +1499,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   },
@@ -1498,7 +1508,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (1)'
                                     }
@@ -1515,7 +1526,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   },
@@ -1523,7 +1535,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/1',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (2)'
                                     }
@@ -1540,7 +1553,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   },
@@ -1548,7 +1562,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/2',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (3)'
                                     }
@@ -1556,7 +1571,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                 }
                               ],
                               selectedItems: [
-                                0, 2
+                                0,
+                                2
                               ]
                             }
                           }
@@ -1659,7 +1675,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/0',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (1)'
                                 },
@@ -1667,7 +1684,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   }
@@ -1684,7 +1702,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/1',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (2)'
                                 },
@@ -1692,7 +1711,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   }
@@ -1709,7 +1729,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/2',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (3)'
                                 },
@@ -1717,7 +1738,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   }
@@ -1725,7 +1747,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                               }
                             ],
                             selectedItems: [
-                              0, 2
+                              0,
+                              2
                             ]
                           },
                           elements: {
@@ -1743,7 +1766,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   },
@@ -1751,7 +1775,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (1)'
                                     }
@@ -1768,7 +1793,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   },
@@ -1776,7 +1802,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/1',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (2)'
                                     }
@@ -1793,7 +1820,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   },
@@ -1801,7 +1829,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/2',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (3)'
                                     }
@@ -1809,7 +1838,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                 }
                               ],
                               selectedItems: [
-                                0, 2
+                                0,
+                                2
                               ]
                             }
                           }
@@ -6659,7 +6689,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                               'string (3)'
                             ],
                             selectedItems: [
-                              0, 2
+                              0,
+                              2
                             ]
                           },
                           elements: {
@@ -6671,7 +6702,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                 'string (3)'
                               ],
                               selectedItems: [
-                                0, 2
+                                0,
+                                2
                               ]
                             }
                           }
@@ -6772,7 +6804,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/0',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (1)'
                                 },
@@ -6780,7 +6813,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   }
@@ -6797,7 +6831,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/1',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (2)'
                                 },
@@ -6805,7 +6840,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   }
@@ -6822,7 +6858,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/2',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (3)'
                                 },
@@ -6830,7 +6867,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   }
@@ -6838,7 +6876,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                               }
                             ],
                             selectedItems: [
-                              0, 2
+                              0,
+                              2
                             ]
                           },
                           elements: {
@@ -6856,7 +6895,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   },
@@ -6864,7 +6904,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (1)'
                                     }
@@ -6881,7 +6922,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   },
@@ -6889,7 +6931,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/1',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (2)'
                                     }
@@ -6906,7 +6949,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   },
@@ -6914,7 +6958,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/2',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (3)'
                                     }
@@ -6922,7 +6967,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                 }
                               ],
                               selectedItems: [
-                                0, 2
+                                0,
+                                2
                               ]
                             }
                           }
@@ -7023,7 +7069,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/0',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (1)'
                                 },
@@ -7031,7 +7078,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   }
@@ -7048,7 +7096,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/1',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (2)'
                                 },
@@ -7056,7 +7105,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   }
@@ -7073,7 +7123,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   parentUri: '#/0/0',
                                   uri: '#/0/0/2',
                                   selectedItems: [
-                                    0, 2
+                                    0,
+                                    2
                                   ],
                                   value: 'string (3)'
                                 },
@@ -7081,7 +7132,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                   field: {
                                     id: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   }
@@ -7089,7 +7141,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                               }
                             ],
                             selectedItems: [
-                              0, 2
+                              0,
+                              2
                             ]
                           },
                           elements: {
@@ -7107,7 +7160,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/0',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (1)'
                                   },
@@ -7115,7 +7169,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/0',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (1)'
                                     }
@@ -7132,7 +7187,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/1',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (2)'
                                   },
@@ -7140,7 +7196,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/1',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (2)'
                                     }
@@ -7157,7 +7214,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     parentUri: '#/0/0',
                                     uri: '#/0/0/2',
                                     selectedItems: [
-                                      0, 2
+                                      0,
+                                      2
                                     ],
                                     value: 'string (3)'
                                   },
@@ -7165,7 +7223,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                     field: {
                                       id: '#/0/0/2',
                                       selectedItems: [
-                                        0, 2
+                                        0,
+                                        2
                                       ],
                                       value: 'string (3)'
                                     }
@@ -7173,7 +7232,8 @@ describe('#transmission/transmission/to-zashiki/transform-root-schema', () => {
                                 }
                               ],
                               selectedItems: [
-                                0, 2
+                                0,
+                                2
                               ]
                             }
                           }

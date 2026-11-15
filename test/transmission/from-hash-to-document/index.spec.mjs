@@ -968,8 +968,7 @@ describe('#transmission/transmission/from-hash-to-document', () => {
           }
 
           const document = [
-            ['mock array type index string type', 1
-            ]
+            ['mock array type index string type', 1]
           ]
 
           return expect(transform(hash, schema))
@@ -1582,8 +1581,7 @@ describe('#transmission/transmission/from-hash-to-document', () => {
           }
 
           const document = [
-            ['mock array type index string type', 1
-            ]
+            ['mock array type index string type', 1]
           ]
 
           return expect(transform(hash, schema))
