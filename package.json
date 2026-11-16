@@ -26,7 +26,7 @@
     "url": "git+ssh://git@github.com/modernpoacher/shinkansen-transmission.git"
   },
   "scripts": {
-    "coverage": "# c8 --reporter html npm run test",
+    "coverage": "c8 --reporter html npm run test",
     "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
     "nvm": "bash nvm.sh",
