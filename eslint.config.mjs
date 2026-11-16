@@ -19,18 +19,6 @@ export default [
       globals: {
         ...globals.node
       }
-    },
-    rules: {
-      '@stylistic/object-curly-newline': [
-        'error',
-        {
-          ImportDeclaration: 'always',
-          ExportDeclaration: {
-            multiline: true,
-            minProperties: 2
-          }
-        }
-      ]
     }
   }),
   standard({
